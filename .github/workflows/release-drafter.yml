@@ -1,0 +1,47 @@
+name: Release drafter
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  draft-a-release:
+    name: Draft a release
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - id: get_data
+        run: |
+          echo "approvers=$(cat .github/CODEOWNERS | grep @ | tr -d '* ' | sed 's/@/,/g' | sed 's/,//1')" >> $GITHUB_OUTPUT
+          echo "version=$(cat gradle.properties | grep "systemProp.version" | cut -d'=' -f2)" >> $GITHUB_OUTPUT
+      - uses: trstringer/manual-approval@fa642940caf8412403569b28b2db4a1df08a83a3 # v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: ${{ steps.get_data.outputs.approvers }}
+          minimum-approvals: 1
+          issue-title: 'Release opensearch-java : ${{ steps.get_data.outputs.version }}'
+          issue-body: "Please approve or deny the release of opensearch-java. **VERSION**: ${{ steps.get_data.outputs.version }} **TAG**: ${{ github.ref_name }}  **COMMIT**: ${{ github.sha }}"
+          exclude-workflow-initiator-as-approver: true
+      - name: Set up JDK 21
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'gradle'
+      - name: Build with Gradle
+        run: |
+          export VERSION=`cat gradle.properties | grep "systemProp.version" | tr -d " " | cut -d '=' -f2`
+          echo Building the version: $VERSION
+          ./gradlew --no-daemon publishPublishMavenPublicationToLocalRepoRepository && tar -C build -cvf artifacts.tar.gz repository
+      - name: Draft a release
+        uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd
+        with:
+          immutableCreate: true
+          generateReleaseNotes: true
+          artifacts: "artifacts.tar.gz"
+          prerelease: true

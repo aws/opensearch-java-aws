@@ -1,0 +1,16 @@
+lib = library(identifier: 'jenkins@13.0.1', retriever: modernSCM([
+    $class: 'GitSCMSource',
+    remote: 'https://github.com/opensearch-project/opensearch-build-libraries.git',
+]))
+
+standardReleasePipelineWithGenericTrigger(
+    overrideDockerImage: 'opensearchstaging/ci-runner:release-centos7-clients-v4',
+    tokenIdCredential: 'jenkins-opensearch-java-generic-webhook-token',
+    causeString: 'A tag was cut on opensearch-project/opensearch-java repository causing this workflow to run',
+    downloadReleaseAsset: true) {
+        publishToMaven(
+            signingArtifactsPath: "$WORKSPACE/repository/",
+            mavenArtifactsPath: "$WORKSPACE/repository/",
+            autoPublish: true
+        )
+    }
