@@ -20,9 +20,8 @@ import org.junit.Assume;
 import org.junit.Test;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
-import software.amazon.awssdk.opensearch.client.aos.OpenSearchAosClient;
+import software.amazon.awssdk.opensearch.client.aos.OpenSearchClient;
 import software.amazon.awssdk.opensearch.client.aos.core.InfoResponse;
-import software.amazon.awssdk.opensearch.client.aoss.OpenSearchAossClient;
 import software.amazon.awssdk.opensearch.client.aoss.core.SearchResponse;
 import software.amazon.awssdk.opensearch.client.transport.httpclient5.ApacheHttpClient5Transport;
 import software.amazon.awssdk.opensearch.client.transport.httpclient5.ApacheHttpClient5TransportBuilder;
@@ -52,7 +51,7 @@ public class AwsDistributionClientRealResourceIT {
                 .setHttpClientConfigCallback(builder -> builder.setDefaultCredentialsProvider(credentials))
                 .build()
         ) {
-            OpenSearchAosClient client = new OpenSearchAosClient(transport);
+            OpenSearchClient client = new OpenSearchClient(transport);
             InfoResponse response = client.info();
             assertNotNull(response.clusterName());
             assertTrue(response.version().number().startsWith("3."));
@@ -65,7 +64,8 @@ public class AwsDistributionClientRealResourceIT {
         Assume.assumeNotNull(endpoint);
 
         try (SdkHttpClient httpClient = UrlConnectionHttpClient.builder().build()) {
-            OpenSearchAossClient client = OpenSearchAossClient.create(httpClient, endpoint, Region.US_EAST_1, null);
+            software.amazon.awssdk.opensearch.client.aoss.OpenSearchClient client =
+                software.amazon.awssdk.opensearch.client.aoss.OpenSearchClient.create(httpClient, endpoint, Region.US_EAST_1, null);
             SearchResponse<Map> response = client.search(request -> request, Map.class);
             assertNotNull(response.hits());
         }

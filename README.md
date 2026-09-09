@@ -19,14 +19,14 @@ software.amazon.awssdk.opensearch.client.aoss
 
 | Service | Synchronous client | Asynchronous client | SigV4 service name |
 | --- | --- | --- | --- |
-| AOS | `OpenSearchAosClient` | `OpenSearchAosAsyncClient` | `es` |
-| AOSS | `OpenSearchAossClient` | `OpenSearchAossAsyncClient` | `aoss` |
+| AOS | `aos.OpenSearchClient` | `aos.OpenSearchAsyncClient` | `es` |
+| AOSS | `aoss.OpenSearchClient` | `aoss.OpenSearchAsyncClient` | `aoss` |
 
 Use these imports:
 
 ```java
-import software.amazon.awssdk.opensearch.client.aos.OpenSearchAosClient;
-import software.amazon.awssdk.opensearch.client.aoss.OpenSearchAossClient;
+import software.amazon.awssdk.opensearch.client.aos.OpenSearchClient;
+// Or: software.amazon.awssdk.opensearch.client.aoss.OpenSearchClient
 ```
 
 The clients use the AWS SDK default credentials provider chain unless a
@@ -81,12 +81,12 @@ with the AOS SigV4 service name `es`.
 import java.util.Map;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
-import software.amazon.awssdk.opensearch.client.aos.OpenSearchAosClient;
+import software.amazon.awssdk.opensearch.client.aos.OpenSearchClient;
 import software.amazon.awssdk.opensearch.client.aos.core.SearchResponse;
 import software.amazon.awssdk.regions.Region;
 
 try (SdkHttpClient httpClient = UrlConnectionHttpClient.builder().build()) {
-    OpenSearchAosClient client = OpenSearchAosClient.create(
+    OpenSearchClient client = OpenSearchClient.create(
         httpClient,
         System.getenv("AOS_ENDPOINT"),
         Region.US_EAST_1,
@@ -111,12 +111,12 @@ The AOSS client signs requests with the SigV4 service name `aoss`.
 import java.util.Map;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
-import software.amazon.awssdk.opensearch.client.aoss.OpenSearchAossClient;
+import software.amazon.awssdk.opensearch.client.aoss.OpenSearchClient;
 import software.amazon.awssdk.opensearch.client.aoss.core.SearchResponse;
 import software.amazon.awssdk.regions.Region;
 
 try (SdkHttpClient httpClient = UrlConnectionHttpClient.builder().build()) {
-    OpenSearchAossClient client = OpenSearchAossClient.create(
+    OpenSearchClient client = OpenSearchClient.create(
         httpClient,
         System.getenv("AOSS_ENDPOINT"),
         Region.US_EAST_1,
@@ -141,11 +141,10 @@ overlap:
 
 ```java
 import java.util.Map;
-import software.amazon.awssdk.opensearch.client.aos.OpenSearchAosClient;
-import software.amazon.awssdk.opensearch.client.aoss.OpenSearchAossClient;
-
-OpenSearchAosClient aosClient = /* create AOS client */;
-OpenSearchAossClient aossClient = /* create AOSS client */;
+software.amazon.awssdk.opensearch.client.aos.OpenSearchClient aosClient =
+    /* create AOS client */;
+software.amazon.awssdk.opensearch.client.aoss.OpenSearchClient aossClient =
+    /* create AOSS client */;
 
 software.amazon.awssdk.opensearch.client.aos.core.SearchResponse<Map> aosResponse =
     aosClient.search(request -> request.index("aos-index"), Map.class);
@@ -168,14 +167,14 @@ import org.opensearch.client.opensearch.core.SearchResponse;
 For AOS, change the imports to:
 
 ```java
-import software.amazon.awssdk.opensearch.client.aos.OpenSearchAosClient;
+import software.amazon.awssdk.opensearch.client.aos.OpenSearchClient;
 import software.amazon.awssdk.opensearch.client.aos.core.SearchResponse;
 ```
 
 For AOSS, use:
 
 ```java
-import software.amazon.awssdk.opensearch.client.aoss.OpenSearchAossClient;
+import software.amazon.awssdk.opensearch.client.aoss.OpenSearchClient;
 import software.amazon.awssdk.opensearch.client.aoss.core.SearchResponse;
 ```
 
@@ -229,9 +228,9 @@ secrets.
 
 ## Current limitations
 
-- Hand-written APIs from upstream `opensearch-java`, including specialized
-  `Bulk`, `Index`, `Create`, `Update`, `Mget`, `Msearch`, and `Termvectors`
-  implementations, have not all been ported to the AWS package variants.
+- The specialized `Bulk`, `Index`, `Create`, `Update`, `Mget`, and `Msearch`
+  APIs are available in both packages. `Termvectors` is available only in AOS
+  because it is excluded from the AOSS API surface.
 - The final Maven coordinate, publication metadata, and release process remain
   open decisions.
 - AOS and AOSS models are separate types even when their API shapes match.
