@@ -84,6 +84,71 @@ tasks.named<JavaExec>("run") {
     )
 }
 
+val distributionSpecsDir = providers.gradleProperty("distributionSpecsDir")
+    .orElse(rootProject.file("../opensearch-api-docs/build").absolutePath)
+
+fun registerDistributionClientTask(
+    taskName: String,
+    distribution: String,
+    specificationFileName: String,
+    modelPackage: String,
+    clientName: String
+) {
+    tasks.register<JavaExec>(taskName) {
+        group = "code generation"
+        description = "Generates the $distribution Java client into the java-codegen build directory."
+        dependsOn("classes")
+
+        mainClass.set(application.mainClass)
+        classpath = sourceSets["main"].runtimeClasspath
+
+        val specificationFile = file("${distributionSpecsDir.get()}/$specificationFileName")
+        val outputDirectory = project(":java-client").layout.projectDirectory.dir("src/generated/$distribution/java")
+
+        inputs.file(specificationFile)
+        outputs.dir(outputDirectory)
+
+        doFirst {
+            check(specificationFile.isFile) {
+                "Distribution specification not found: $specificationFile. " +
+                    "Generate it in opensearch-api-docs or pass -PdistributionSpecsDir=<directory>."
+            }
+        }
+
+        args = listOf(
+            "--input", specificationFile.toURI().toString(),
+            "--eclipse-config", "$rootDir/buildSrc/formatterConfig-generated.xml",
+            "--output", outputDirectory.asFile.absolutePath,
+            "--distribution", distribution,
+            "--runtime-package", "software.amazon.awssdk.opensearch.client",
+            "--model-package", modelPackage,
+            "--client-name", clientName
+        )
+    }
+}
+
+registerDistributionClientTask(
+    "generateAosClient",
+    "aos",
+    "opensearch-openapi-aos-full.yaml",
+    "software.amazon.awssdk.opensearch.client.aos",
+    "OpenSearchAos"
+)
+
+registerDistributionClientTask(
+    "generateAossClient",
+    "aoss",
+    "opensearch-openapi-aoss-full.yaml",
+    "software.amazon.awssdk.opensearch.client.aoss",
+    "OpenSearchAoss"
+)
+
+tasks.register("generateClients") {
+    group = "code generation"
+    description = "Generates both AOS and AOSS Java clients."
+    dependsOn("generateAosClient", "generateAossClient")
+}
+
 tasks.withType<ProcessResources> {
     expand(mapOf(
         "version" to version,

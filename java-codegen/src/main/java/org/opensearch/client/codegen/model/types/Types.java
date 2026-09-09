@@ -11,6 +11,7 @@ package org.opensearch.client.codegen.model.types;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
+import org.opensearch.client.codegen.CodegenSettings;
 
 public final class Types {
     private static Map<String, Object> TYPES_MAP;
@@ -146,7 +147,7 @@ public final class Types {
     }
 
     public static final class Client {
-        public static final String PACKAGE = "org.opensearch.client";
+        public static final String PACKAGE = CodegenSettings.runtimePackage();
 
         public static Type ApiClient(Type transport, Type client) {
             return ApiClient.withTypeParameters(transport, client);
@@ -180,14 +181,15 @@ public final class Types {
         }
 
         public static final class OpenSearch {
-            public static final String PACKAGE = Client.PACKAGE + ".opensearch";
+            public static final String PACKAGE = CodegenSettings.modelPackage();
 
             public static final class _Types {
                 public static final String PACKAGE = OpenSearch.PACKAGE + "._types";
+                private static final String ERRORS_PACKAGE = Client.PACKAGE + ".errors";
 
-                public static final Type ErrorResponse = type(PACKAGE, "ErrorResponse");
+                public static final Type ErrorResponse = type(ERRORS_PACKAGE, "ErrorResponse");
                 public static final Type FieldValue = type(PACKAGE, "FieldValue");
-                public static final Type OpenSearchException = type(PACKAGE, "OpenSearchException");
+                public static final Type OpenSearchException = type(ERRORS_PACKAGE, "OpenSearchException");
                 public static final Type RequestBase = type(PACKAGE, "RequestBase");
                 public static final Type Time = type(PACKAGE, "Time");
 

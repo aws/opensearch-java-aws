@@ -18,7 +18,10 @@ public final class ExtendsAllOfRewritingVisitor extends OpenApiVisitorBase {
     public OpenApiSchema visitSchemaEnd(@Nonnull OpenApiSchema schema) {
         if (schema.hasAllOf()) {
             var allOf = schema.getAllOf().orElseThrow();
-            if (allOf.size() == 2 && allOf.get(0).has$ref()) {
+            if (allOf.size() == 1 && allOf.get(0).has$ref()) {
+                schema.setAllOf(null);
+                schema.set$extends(allOf.get(0));
+            } else if (allOf.size() == 2 && allOf.get(0).has$ref()) {
                 String title = schema.getTitle().orElse(null);
                 String description = schema.getDescription().orElse(null);
                 schema = allOf.get(1);

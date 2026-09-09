@@ -59,12 +59,6 @@ plugins {
 apply(plugin = "opensearch.repositories")
 apply(plugin = "org.owasp.dependencycheck")
 
-configurations {
-    all {
-        exclude(group = "software.amazon.awssdk", module = "third-party-jackson-core")
-    }
-}
-
 val runtimeJavaVersion = (System.getProperty("runtime.java")?.toInt())?.let(JavaVersion::toVersion) ?: JavaVersion.current()
 logger.quiet("=======================================")
 logger.quiet("  Runtime JDK Version   : " + runtimeJavaVersion)
@@ -94,6 +88,88 @@ sourceSets {
             srcDir("src/generated/java")
         }
     }
+}
+
+val awsRuntimeSourceSet = sourceSets.create("awsRuntime") {
+    java {
+        srcDir("src/aws/java")
+        exclude("software/amazon/awssdk/opensearch/client/aos/**")
+        exclude("software/amazon/awssdk/opensearch/client/aoss/**")
+    }
+}
+
+val aosSourceSet = sourceSets.create("aos") {
+    java {
+        srcDir("src/aws/java")
+        srcDir("src/generated/aos/java")
+        include("software/amazon/awssdk/opensearch/client/aos/**")
+    }
+    compileClasspath += awsRuntimeSourceSet.output
+    runtimeClasspath += awsRuntimeSourceSet.output
+}
+
+val aossSourceSet = sourceSets.create("aoss") {
+    java {
+        srcDir("src/aws/java")
+        srcDir("src/generated/aoss/java")
+        include("software/amazon/awssdk/opensearch/client/aoss/**")
+    }
+    compileClasspath += awsRuntimeSourceSet.output
+    runtimeClasspath += awsRuntimeSourceSet.output
+}
+
+configurations[awsRuntimeSourceSet.implementationConfigurationName].extendsFrom(configurations["implementation"])
+configurations[awsRuntimeSourceSet.compileOnlyConfigurationName].extendsFrom(
+    configurations["compileOnly"],
+    configurations["awsSdk2SupportCompileOnly"]
+)
+configurations[aosSourceSet.implementationConfigurationName].extendsFrom(configurations["implementation"])
+configurations[aosSourceSet.compileOnlyConfigurationName].extendsFrom(
+    configurations["compileOnly"],
+    configurations["awsSdk2SupportCompileOnly"]
+)
+configurations[aossSourceSet.implementationConfigurationName].extendsFrom(configurations["implementation"])
+configurations[aossSourceSet.compileOnlyConfigurationName].extendsFrom(
+    configurations["compileOnly"],
+    configurations["awsSdk2SupportCompileOnly"]
+)
+
+sourceSets.test {
+    compileClasspath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
+    runtimeClasspath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
+}
+
+tasks.named("compileAosJava") {
+    dependsOn("compileAwsRuntimeJava")
+}
+
+tasks.named("compileAossJava") {
+    dependsOn("compileAwsRuntimeJava")
+}
+
+tasks.named("compileTestJava") {
+    dependsOn("compileAwsRuntimeJava", "compileAosJava", "compileAossJava")
+}
+
+tasks.named<Jar>("jar") {
+    dependsOn("awsRuntimeClasses", "aosClasses", "aossClasses")
+    exclude("org/opensearch/client/**")
+    from(awsRuntimeSourceSet.output, aosSourceSet.output, aossSourceSet.output)
+}
+
+tasks.named<Jar>("sourcesJar") {
+    exclude("org/opensearch/client/**")
+    from(awsRuntimeSourceSet.allSource, aosSourceSet.allSource, aossSourceSet.allSource)
+}
+
+tasks.named<Javadoc>("javadoc") {
+    dependsOn("compileAwsRuntimeJava")
+    setSource(files(awsRuntimeSourceSet.allJava, aosSourceSet.allJava, aossSourceSet.allJava))
+    classpath = files(
+        awsRuntimeSourceSet.compileClasspath,
+        aosSourceSet.compileClasspath,
+        aossSourceSet.compileClasspath
+    )
 }
 
 tasks.withType<ProcessResources> {
@@ -149,20 +225,19 @@ val opensearchDockerVersion = opensearchVersion.removeSuffix("-SNAPSHOT")
 tasks.test {
     systemProperty("tests.security.manager", "false")
 
-    systemProperty("tests.security.manager", "false")
     // Basic auth settings for integration test
     systemProperty("https", System.getProperty("https", "true"))
     systemProperty("user", System.getProperty("user", "admin"))
     systemProperty("password", System.getProperty("password", "admin"))
 }
 
-val unitTest = task<Test>("unitTest") {
+val unitTest = tasks.register<Test>("unitTest") {
     filter {
         excludeTestsMatching("org.opensearch.client.opensearch.integTest.*")
     }
 }
 
-val integrationTest = task<Test>("integrationTest") {
+val integrationTest = tasks.register<Test>("integrationTest") {
     filter {
         includeTestsMatching("org.opensearch.client.opensearch.integTest.*")
     }
@@ -422,4 +497,9 @@ if (runtimeJavaVersion >= JavaVersion.VERSION_21) {
     testClassesDirs += java21.output.classesDirs + sourceSets.test.get().output.classesDirs
     classpath = sourceSets["java21"].runtimeClasspath
  }
+}
+
+tasks.withType<Test>().configureEach {
+    dependsOn("awsRuntimeClasses", "aosClasses", "aossClasses")
+    classpath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
 }

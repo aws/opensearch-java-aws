@@ -1,72 +1,252 @@
-[![Build](https://github.com/opensearch-project/opensearch-java/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/opensearch-project/opensearch-java/actions/workflows/build.yml)
-[![Integration Tests](https://github.com/opensearch-project/opensearch-java/actions/workflows/test-integration.yml/badge.svg?branch=main)](https://github.com/opensearch-project/opensearch-java/actions/workflows/test-integration.yml)
-![Maven Central](https://img.shields.io/maven-central/v/org.opensearch.client/opensearch-java)
-[![Chat](https://img.shields.io/badge/chat-on%20forums-blue)](https://discuss.opendistrocommunity.dev/c/clients/)
-![PRs welcome!](https://img.shields.io/badge/PRs-welcome!-success)
+# AWS OpenSearch Java Data Client
 
-![OpenSearch logo](OpenSearch.svg)
+This repository provides typed Java data-plane clients for:
 
-OpenSearch Java Client
+- Amazon OpenSearch Service (AOS)
+- Amazon OpenSearch Serverless (AOSS)
 
-- [Welcome!](#welcome)
-- [Sample Code](#sample-code)
-- [Project Resources](#project-resources)
-- [Code of Conduct](#code-of-conduct)
-- [User Guide](#user-guide)
-- [Snapshot Builds](#snapshot-builds)
-- [Compatibility with OpenSearch](#compatibility-with-opensearch)
-- [Security](#security)
-- [License](#license)
-- [Copyright](#copyright)
+Both clients are shipped in the same JAR and use separate Java packages:
 
-## Welcome!
+```text
+software.amazon.awssdk.opensearch.client.aos
+software.amazon.awssdk.opensearch.client.aoss
+```
 
-**opensearch-java** is [a community-driven, open source fork](https://aws.amazon.com/blogs/opensource/introducing-opensearch/) of elasticsearch-java licensed under the [Apache v2.0 License](LICENSE.txt).
-For more information, see [opensearch.org](https://opensearch.org/).
-This client is meant to replace the existing [OpenSearch Java High Level REST Client](https://opensearch.org/docs/latest/clients/java-rest-high-level/).
+> Project status: prototype. The final Maven group ID, artifact ID, POM metadata,
+> and release process have not yet been approved.
 
-## Sample Code
+## Client packages
 
-Please see the [USER_GUIDE](USER_GUIDE.md) for code snippets.
+| Service | Synchronous client | Asynchronous client | SigV4 service name |
+| --- | --- | --- | --- |
+| AOS | `OpenSearchAosClient` | `OpenSearchAosAsyncClient` | `es` |
+| AOSS | `OpenSearchAossClient` | `OpenSearchAossAsyncClient` | `aoss` |
 
-## Project Resources
+Use these imports:
 
-* [Project Website](https://opensearch.org/)
-* [Documentation](https://opensearch.org/docs/latest/clients/java/)
-* [JavaDoc](https://www.javadoc.io/doc/org.opensearch.client/opensearch-java/latest/index.html)
-* [Maven Central](https://search.maven.org/artifact/org.opensearch.client/opensearch-java)
-* [Snapshot Builds](#snapshot-builds)
-* Need help? Try [Forums](https://discuss.opendistrocommunity.dev/)
-* [Project Principles](https://opensearch.org/#principles)
-* [Contributing to OpenSearch](CONTRIBUTING.md)
-* [Maintainer Responsibilities](MAINTAINERS.md)
-* [Release Management](RELEASING.md)
-* [Admin Responsibilities](ADMINS.md)
-* [Security](SECURITY.md)
+```java
+import software.amazon.awssdk.opensearch.client.aos.OpenSearchAosClient;
+import software.amazon.awssdk.opensearch.client.aoss.OpenSearchAossClient;
+```
 
-## Code of Conduct
+The clients use the AWS SDK default credentials provider chain unless a
+credentials provider is supplied explicitly.
 
-This project has adopted the [Amazon Open Source Code of Conduct](CODE_OF_CONDUCT.md). For more information see the [Code of Conduct FAQ](https://aws.github.io/code-of-conduct-faq), or contact [opensource-codeofconduct@amazon.com](mailto:opensource-codeofconduct@amazon.com) with any additional questions or comments.
+## Build the client
 
-## User Guide
+Clone the repository and build the JAR:
 
-See [User Guide](USER_GUIDE.md).
+```bash
+git clone <repository-url>
+cd opensearch-java-aws
+./gradlew --no-daemon --max-workers=1 :java-client:jar
+```
 
-## Snapshot Builds
-The [snapshots builds](https://ci.opensearch.org/ci/dbc/snapshots/maven/org/opensearch/client/opensearch-java/maven-metadata.xml) are published to sonatype using [publish-snapshots.yml](./.github/workflows/publish-snapshots.yml) workflow. Each `push` event to the main branch triggers this workflow.
+The generated local artifact is:
 
-## Compatibility with OpenSearch
+```text
+java-client/build/libs/java-client-4.0.0-SNAPSHOT.jar
+```
 
-See [Compatibility](COMPATIBILITY.md).
+Until the artifact is published, another Gradle project can use the local JAR
+for prototype testing:
+
+```kotlin
+dependencies {
+    implementation(files("libs/java-client-4.0.0-SNAPSHOT.jar"))
+
+    implementation(platform("software.amazon.awssdk:bom:<aws-sdk-version>"))
+    implementation("software.amazon.awssdk:sdk-core")
+    implementation("software.amazon.awssdk:auth")
+    implementation("software.amazon.awssdk:http-auth-aws")
+    implementation("software.amazon.awssdk:url-connection-client")
+}
+```
+
+Raw file dependencies do not include transitive dependency metadata. The
+consuming project must also provide the runtime dependencies declared in
+`java-client/build.gradle.kts`; the example above shows the additional AWS SDK
+dependencies needed by the SigV4 transport.
+
+`software.amazon.awssdk:opensearch-data-client` is only a proposed Maven
+coordinate. Do not publish or depend on it until the package metadata is
+finalized.
+
+## Quick start: AOS
+
+The endpoint may be a full HTTPS URL or a bare host. The client signs requests
+with the AOS SigV4 service name `es`.
+
+```java
+import java.util.Map;
+import software.amazon.awssdk.http.SdkHttpClient;
+import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
+import software.amazon.awssdk.opensearch.client.aos.OpenSearchAosClient;
+import software.amazon.awssdk.opensearch.client.aos.core.SearchResponse;
+import software.amazon.awssdk.regions.Region;
+
+try (SdkHttpClient httpClient = UrlConnectionHttpClient.builder().build()) {
+    OpenSearchAosClient client = OpenSearchAosClient.create(
+        httpClient,
+        System.getenv("AOS_ENDPOINT"),
+        Region.US_EAST_1,
+        null
+    );
+
+    SearchResponse<Map> response =
+        client.search(request -> request.index("books"), Map.class);
+
+    response.hits().hits().forEach(hit -> System.out.println(hit.source()));
+}
+```
+
+For an AOS domain configured with basic authentication, construct the client
+with the Apache HTTP Client 5 transport and a basic credentials provider.
+
+## Quick start: AOSS
+
+The AOSS client signs requests with the SigV4 service name `aoss`.
+
+```java
+import java.util.Map;
+import software.amazon.awssdk.http.SdkHttpClient;
+import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
+import software.amazon.awssdk.opensearch.client.aoss.OpenSearchAossClient;
+import software.amazon.awssdk.opensearch.client.aoss.core.SearchResponse;
+import software.amazon.awssdk.regions.Region;
+
+try (SdkHttpClient httpClient = UrlConnectionHttpClient.builder().build()) {
+    OpenSearchAossClient client = OpenSearchAossClient.create(
+        httpClient,
+        System.getenv("AOSS_ENDPOINT"),
+        Region.US_EAST_1,
+        null
+    );
+
+    SearchResponse<Map> response =
+        client.search(request -> request.index("books"), Map.class);
+
+    response.hits().hits().forEach(hit -> System.out.println(hit.source()));
+}
+```
+
+The caller's IAM principal must also be allowed by the collection's network,
+encryption, and data access policies.
+
+## Use AOS and AOSS in the same application
+
+Both clients can be used in the same source file. Their generated model types
+are intentionally isolated, so use fully qualified names when class names
+overlap:
+
+```java
+import java.util.Map;
+import software.amazon.awssdk.opensearch.client.aos.OpenSearchAosClient;
+import software.amazon.awssdk.opensearch.client.aoss.OpenSearchAossClient;
+
+OpenSearchAosClient aosClient = /* create AOS client */;
+OpenSearchAossClient aossClient = /* create AOSS client */;
+
+software.amazon.awssdk.opensearch.client.aos.core.SearchResponse<Map> aosResponse =
+    aosClient.search(request -> request.index("aos-index"), Map.class);
+
+software.amazon.awssdk.opensearch.client.aoss.core.SearchResponse<Map> aossResponse =
+    aossClient.search(request -> request.index("aoss-index"), Map.class);
+```
+
+Do not pass request or response model objects from one package to the other.
+
+## Migrate from `opensearch-java`
+
+Existing OpenSearch Java client code typically starts with:
+
+```java
+import org.opensearch.client.opensearch.OpenSearchClient;
+import org.opensearch.client.opensearch.core.SearchResponse;
+```
+
+For AOS, change the imports to:
+
+```java
+import software.amazon.awssdk.opensearch.client.aos.OpenSearchAosClient;
+import software.amazon.awssdk.opensearch.client.aos.core.SearchResponse;
+```
+
+For AOSS, use:
+
+```java
+import software.amazon.awssdk.opensearch.client.aoss.OpenSearchAossClient;
+import software.amazon.awssdk.opensearch.client.aoss.core.SearchResponse;
+```
+
+The new factories configure the correct SigV4 service name, so callers do not
+manually select `es` or `aoss`.
+
+## Code generation
+
+The clients are generated independently from the OpenSearch API specification:
+
+```text
+OpenSearch API specification
+├── AOS overlays and filters  -> AOS full specification  -> aos package
+└── AOSS overlays/allowlist   -> AOSS full specification -> aoss package
+```
+
+Generated source directories:
+
+```text
+java-client/src/generated/aos
+java-client/src/generated/aoss
+```
+
+Regenerate both clients with:
+
+```bash
+./gradlew --no-daemon --max-workers=1 :java-client:generateAwsClients
+```
+
+Do not manually edit files under `java-client/src/generated`. Change the API
+specification, overlay, allowlist, or generator instead.
+
+## Testing
+
+Run the code generation, unit, formatting, and artifact checks:
+
+```bash
+./gradlew --no-daemon --max-workers=1 \
+  :java-codegen:test \
+  :java-client:unitTest \
+  :java-client:spotlessJavaCheck \
+  :java-codegen:spotlessJavaCheck \
+  :java-client:jar \
+  :java-client:sourcesJar \
+  :java-client:javadocJar
+```
+
+Real-resource integration tests are opt-in. Configure endpoints and AWS
+credentials outside the repository; never commit credentials or resource
+secrets.
+
+## Current limitations
+
+- Hand-written APIs from upstream `opensearch-java`, including specialized
+  `Bulk`, `Index`, `Create`, `Update`, `Mget`, `Msearch`, and `Termvectors`
+  implementations, have not all been ported to the AWS package variants.
+- The final Maven coordinate, publication metadata, and release process remain
+  open decisions.
+- AOS and AOSS models are separate types even when their API shapes match.
 
 ## Security
 
-If you discover a potential security issue in this project we ask that you notify AWS/Amazon Security via our [vulnerability reporting page](http://aws.amazon.com/security/vulnerability-reporting/) or directly via email to aws-security@amazon.com. Please do **not** create a public GitHub issue.
+See [AWS Security](https://aws.amazon.com/security/) for information about
+reporting security issues. Do not disclose credentials in issues, examples,
+logs, or test fixtures.
 
 ## License
 
-This project is licensed under the [Apache v2.0 License](LICENSE.txt).
+This project is licensed under the Apache License 2.0. See
+[LICENSE.txt](LICENSE.txt).
 
 ## Copyright
 
-Copyright OpenSearch Contributors. See [NOTICE](NOTICE.txt) for details.
+Copyright OpenSearch Contributors. See [NOTICE.txt](NOTICE.txt).

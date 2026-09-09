@@ -113,6 +113,10 @@ public class Overrides {
                 .with(schema("_common.aggregations", "Aggregate"), so -> so.withShouldGenerate(ShouldGenerate.Always))
                 .with(schema("_common.aggregations", "Aggregation"), so -> so.withClassName("AggregationBase"))
                 .with(
+                    schema("_common.aggregations", "FilterAggregationFields"),
+                    so -> so.withMappedType(Types.Client.OpenSearch._Types.QueryDsl.Query)
+                )
+                .with(
                     schema("_common.aggregations", "AggregationContainer"),
                     so -> so.withClassName("Aggregation").withShouldGenerate(ShouldGenerate.Always)
                 )

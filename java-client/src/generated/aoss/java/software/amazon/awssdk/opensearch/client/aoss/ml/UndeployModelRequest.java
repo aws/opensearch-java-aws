@@ -1,0 +1,313 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ */
+
+//----------------------------------------------------
+// THIS CODE IS GENERATED. MANUAL EDITS WILL BE LOST.
+//----------------------------------------------------
+
+package software.amazon.awssdk.opensearch.client.aoss.ml;
+
+import jakarta.json.stream.JsonGenerator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
+import javax.annotation.Generated;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import software.amazon.awssdk.opensearch.client.aoss._types.RequestBase;
+import software.amazon.awssdk.opensearch.client.errors.ErrorResponse;
+import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
+import software.amazon.awssdk.opensearch.client.json.JsonpDeserializer;
+import software.amazon.awssdk.opensearch.client.json.JsonpMapper;
+import software.amazon.awssdk.opensearch.client.json.ObjectBuilderDeserializer;
+import software.amazon.awssdk.opensearch.client.json.ObjectDeserializer;
+import software.amazon.awssdk.opensearch.client.json.PlainJsonSerializable;
+import software.amazon.awssdk.opensearch.client.transport.Endpoint;
+import software.amazon.awssdk.opensearch.client.transport.endpoints.SimpleEndpoint;
+import software.amazon.awssdk.opensearch.client.util.ApiTypeHelper;
+import software.amazon.awssdk.opensearch.client.util.CopyableBuilder;
+import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
+import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
+
+// typedef: ml.undeploy_model.Request
+
+/**
+ * Undeploys a model.
+ */
+@JsonpDeserializable
+@Generated("org.opensearch.client.codegen.CodeGenerator")
+public final class UndeployModelRequest extends RequestBase
+    implements
+        PlainJsonSerializable,
+        ToCopyableBuilder<UndeployModelRequest.Builder, UndeployModelRequest> {
+
+    @Nonnull
+    private final String modelId;
+
+    @Nonnull
+    private final List<String> modelIds;
+
+    @Nonnull
+    private final List<String> nodeIds;
+
+    // ---------------------------------------------------------------------------------------------
+
+    private UndeployModelRequest(Builder builder) {
+        super(builder);
+        this.modelId = ApiTypeHelper.requireNonNull(builder.modelId, this, "modelId");
+        this.modelIds = ApiTypeHelper.unmodifiable(builder.modelIds);
+        this.nodeIds = ApiTypeHelper.unmodifiable(builder.nodeIds);
+    }
+
+    public static UndeployModelRequest of(Function<UndeployModelRequest.Builder, ObjectBuilder<UndeployModelRequest>> fn) {
+        return fn.apply(new Builder()).build();
+    }
+
+    /**
+     * Required - API name: {@code model_id}
+     */
+    @Nonnull
+    public final String modelId() {
+        return this.modelId;
+    }
+
+    /**
+     * API name: {@code model_ids}
+     */
+    @Nonnull
+    public final List<String> modelIds() {
+        return this.modelIds;
+    }
+
+    /**
+     * API name: {@code node_ids}
+     */
+    @Nonnull
+    public final List<String> nodeIds() {
+        return this.nodeIds;
+    }
+
+    /**
+     * Serialize this object to JSON.
+     */
+    @Override
+    public void serialize(JsonGenerator generator, JsonpMapper mapper) {
+        generator.writeStartObject();
+        serializeInternal(generator, mapper);
+        generator.writeEnd();
+    }
+
+    protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
+        if (ApiTypeHelper.isDefined(this.modelIds)) {
+            generator.writeKey("model_ids");
+            generator.writeStartArray();
+            for (String item0 : this.modelIds) {
+                generator.write(item0);
+            }
+            generator.writeEnd();
+        }
+
+        if (ApiTypeHelper.isDefined(this.nodeIds)) {
+            generator.writeKey("node_ids");
+            generator.writeStartArray();
+            for (String item0 : this.nodeIds) {
+                generator.write(item0);
+            }
+            generator.writeEnd();
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    @Override
+    @Nonnull
+    public Builder toBuilder() {
+        return new Builder(this);
+    }
+
+    @Nonnull
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    /**
+     * Builder for {@link UndeployModelRequest}.
+     */
+    public static class Builder extends RequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, UndeployModelRequest> {
+        private String modelId;
+        @Nullable
+        private List<String> modelIds;
+        @Nullable
+        private List<String> nodeIds;
+
+        public Builder() {}
+
+        private Builder(UndeployModelRequest o) {
+            super(o);
+            this.modelId = o.modelId;
+            this.modelIds = _listCopy(o.modelIds);
+            this.nodeIds = _listCopy(o.nodeIds);
+        }
+
+        private Builder(Builder o) {
+            super(o);
+            this.modelId = o.modelId;
+            this.modelIds = _listCopy(o.modelIds);
+            this.nodeIds = _listCopy(o.nodeIds);
+        }
+
+        @Override
+        @Nonnull
+        public Builder copy() {
+            return new Builder(this);
+        }
+
+        @Override
+        @Nonnull
+        protected Builder self() {
+            return this;
+        }
+
+        /**
+         * Required - API name: {@code model_id}
+         */
+        @Nonnull
+        public final Builder modelId(String value) {
+            this.modelId = value;
+            return this;
+        }
+
+        /**
+         * API name: {@code model_ids}
+         *
+         * <p>
+         * Adds all elements of <code>list</code> to <code>modelIds</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder modelIds(List<String> list) {
+            this.modelIds = _listAddAll(this.modelIds, list);
+            return this;
+        }
+
+        /**
+         * API name: {@code model_ids}
+         *
+         * <p>
+         * Adds one or more values to <code>modelIds</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder modelIds(String value, String... values) {
+            this.modelIds = _listAdd(this.modelIds, value, values);
+            return this;
+        }
+
+        /**
+         * API name: {@code node_ids}
+         *
+         * <p>
+         * Adds all elements of <code>list</code> to <code>nodeIds</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder nodeIds(List<String> list) {
+            this.nodeIds = _listAddAll(this.nodeIds, list);
+            return this;
+        }
+
+        /**
+         * API name: {@code node_ids}
+         *
+         * <p>
+         * Adds one or more values to <code>nodeIds</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder nodeIds(String value, String... values) {
+            this.nodeIds = _listAdd(this.nodeIds, value, values);
+            return this;
+        }
+
+        /**
+         * Builds a {@link UndeployModelRequest}.
+         *
+         * @throws NullPointerException if some of the required fields are null.
+         */
+        @Override
+        @Nonnull
+        public UndeployModelRequest build() {
+            _checkSingleUse();
+
+            return new UndeployModelRequest(this);
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Json deserializer for {@link UndeployModelRequest}
+     */
+    public static final JsonpDeserializer<UndeployModelRequest> _DESERIALIZER = ObjectBuilderDeserializer.lazy(
+        Builder::new,
+        UndeployModelRequest::setupUndeployModelRequestDeserializer
+    );
+
+    protected static void setupUndeployModelRequestDeserializer(ObjectDeserializer<UndeployModelRequest.Builder> op) {
+        op.add(Builder::modelIds, JsonpDeserializer.arrayDeserializer(JsonpDeserializer.stringDeserializer()), "model_ids");
+        op.add(Builder::nodeIds, JsonpDeserializer.arrayDeserializer(JsonpDeserializer.stringDeserializer()), "node_ids");
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Endpoint "{@code ml.undeploy_model}".
+     */
+    public static final Endpoint<UndeployModelRequest, UndeployModelResponse, ErrorResponse> _ENDPOINT = new SimpleEndpoint<>(
+        // Request method
+        request -> "POST",
+        // Request path
+        request -> {
+            StringBuilder buf = new StringBuilder();
+            buf.append("/_plugins/_ml/models/");
+            SimpleEndpoint.pathEncode(request.modelId, buf);
+            buf.append("/_undeploy");
+            return buf.toString();
+        },
+        // Request parameters
+        request -> {
+            Map<String, String> params = new HashMap<>();
+            request.applyQueryParameters(params);
+            return params;
+        },
+        SimpleEndpoint.emptyMap(),
+        true,
+        UndeployModelResponse._DESERIALIZER
+    );
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + this.modelId.hashCode();
+        result = 31 * result + Objects.hashCode(this.modelIds);
+        result = 31 * result + Objects.hashCode(this.nodeIds);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
+        UndeployModelRequest other = (UndeployModelRequest) o;
+        return this.modelId.equals(other.modelId)
+            && Objects.equals(this.modelIds, other.modelIds)
+            && Objects.equals(this.nodeIds, other.nodeIds);
+    }
+}
