@@ -35,6 +35,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Use protocol version from response (rather than request) ([#2118](https://github.com/opensearch-project/opensearch-java/pull/2118))
 
 ### Changed
+- Limit the active Gradle build and automatic CI to the AWS AOS/AOSS clients; detach inherited OSS client, gRPC, sample, and integration-test paths.
 - Remove the unsupported `refresh` parameter from AOSS multi-get requests.
 - Updated API spec download URL to `https://api-spec.opensearch.org` ([#2116](https://github.com/opensearch-project/opensearch-java/pull/2116))
 

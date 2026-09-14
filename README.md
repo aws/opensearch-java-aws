@@ -34,6 +34,8 @@ credentials provider is supplied explicitly.
 
 ## Build the client
 
+Requires JDK 17 or newer.
+
 Clone the repository and build the JAR:
 
 ```bash
@@ -229,6 +231,12 @@ Run the code generation, unit, formatting, and artifact checks:
 Real-resource integration tests are opt-in. Configure endpoints and AWS
 credentials outside the repository; never commit credentials or resource
 secrets.
+
+Run them explicitly with:
+
+```bash
+./gradlew --no-daemon --max-workers=1 :java-client:realResourceTest
+```
 
 ## Current limitations
 
