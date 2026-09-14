@@ -45,6 +45,24 @@ public class AwsHandwrittenApiTests {
     }
 
     @Test
+    public void aossHandwrittenRequestsDoNotExposeRefresh() {
+        assertFalse(hasMethod(software.amazon.awssdk.opensearch.client.aoss.core.BulkRequest.Builder.class, "refresh"));
+        assertFalse(hasMethod(software.amazon.awssdk.opensearch.client.aoss.core.CreateRequest.Builder.class, "refresh"));
+        assertFalse(hasMethod(software.amazon.awssdk.opensearch.client.aoss.core.IndexRequest.Builder.class, "refresh"));
+        assertFalse(hasMethod(software.amazon.awssdk.opensearch.client.aoss.core.MgetRequest.Builder.class, "refresh"));
+        assertFalse(hasMethod(software.amazon.awssdk.opensearch.client.aoss.core.UpdateRequest.Builder.class, "refresh"));
+    }
+
+    @Test
+    public void aosHandwrittenRequestsRetainRefresh() {
+        assertTrue(hasMethod(software.amazon.awssdk.opensearch.client.aos.core.BulkRequest.Builder.class, "refresh"));
+        assertTrue(hasMethod(software.amazon.awssdk.opensearch.client.aos.core.CreateRequest.Builder.class, "refresh"));
+        assertTrue(hasMethod(software.amazon.awssdk.opensearch.client.aos.core.IndexRequest.Builder.class, "refresh"));
+        assertTrue(hasMethod(software.amazon.awssdk.opensearch.client.aos.core.MgetRequest.Builder.class, "refresh"));
+        assertTrue(hasMethod(software.amazon.awssdk.opensearch.client.aos.core.UpdateRequest.Builder.class, "refresh"));
+    }
+
+    @Test
     public void bulkRequestUsesNdJson() throws Exception {
         BulkOperation operation = new BulkOperation.Builder().index(
             new IndexOperation.Builder<>().index("books").id("1").document(Collections.singletonMap("title", "OpenSearch")).build()

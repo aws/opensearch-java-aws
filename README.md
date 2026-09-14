@@ -201,8 +201,12 @@ java-client/src/generated/aoss
 Regenerate both clients with:
 
 ```bash
-./gradlew --no-daemon --max-workers=1 :java-client:generateAwsClients
+./gradlew --no-daemon --max-workers=1 :java-codegen:generateClients
 ```
+
+By default, the generator reads distribution specifications from the sibling
+`../opensearch-api-docs/build` directory. Use
+`-PdistributionSpecsDir=<directory>` to provide another location.
 
 Do not manually edit files under `java-client/src/generated`. Change the API
 specification, overlay, allowlist, or generator instead.

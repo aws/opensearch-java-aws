@@ -84,9 +84,6 @@ public class MgetRequest extends RequestBase implements PlainJsonSerializable {
     private final Boolean realtime;
 
     @Nullable
-    private final Boolean refresh;
-
-    @Nullable
     private final String routing;
 
     private final List<String> storedFields;
@@ -103,7 +100,6 @@ public class MgetRequest extends RequestBase implements PlainJsonSerializable {
         this.index = builder.index;
         this.preference = builder.preference;
         this.realtime = builder.realtime;
-        this.refresh = builder.refresh;
         this.routing = builder.routing;
         this.storedFields = ApiTypeHelper.unmodifiable(builder.storedFields);
 
@@ -188,16 +184,6 @@ public class MgetRequest extends RequestBase implements PlainJsonSerializable {
     }
 
     /**
-     * Refresh the shard containing the document before performing the operation
-     * <p>
-     * API name: {@code refresh}
-     */
-    @Nullable
-    public final Boolean refresh() {
-        return this.refresh;
-    }
-
-    /**
      * Specific routing value
      * <p>
      * API name: {@code routing}
@@ -259,7 +245,6 @@ public class MgetRequest extends RequestBase implements PlainJsonSerializable {
             .index(index)
             .preference(preference)
             .realtime(realtime)
-            .refresh(refresh)
             .routing(routing)
             .storedFields(storedFields);
     }
@@ -294,9 +279,6 @@ public class MgetRequest extends RequestBase implements PlainJsonSerializable {
 
         @Nullable
         private Boolean realtime;
-
-        @Nullable
-        private Boolean refresh;
 
         @Nullable
         private String routing;
@@ -454,16 +436,6 @@ public class MgetRequest extends RequestBase implements PlainJsonSerializable {
         }
 
         /**
-         * Refresh the shard containing the document before performing the operation
-         * <p>
-         * API name: {@code refresh}
-         */
-        public final Builder refresh(@Nullable Boolean value) {
-            this.refresh = value;
-            return this;
-        }
-
-        /**
          * Specific routing value
          * <p>
          * API name: {@code routing}
@@ -578,9 +550,6 @@ public class MgetRequest extends RequestBase implements PlainJsonSerializable {
             }
             if (request.preference != null) {
                 params.put("preference", request.preference);
-            }
-            if (request.refresh != null) {
-                params.put("refresh", String.valueOf(request.refresh));
             }
             if (request.source != null) {
                 params.put("_source", request.source._toJsonString());
