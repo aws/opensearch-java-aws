@@ -1,22 +1,7 @@
 # CHANGELOG
 Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## [Unreleased]
-### Added
-
-### Dependencies
-
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
-
-## [0.1.0]
+## [Unreleased 0.1.0]
 Initial release of the AWS OpenSearch Java data client, providing typed
 data-plane clients for Amazon OpenSearch Service (AOS) and Amazon OpenSearch
 Serverless (AOSS).
@@ -26,11 +11,19 @@ Serverless (AOSS).
 - Handwritten AOS and AOSS APIs and shared AWS runtime (SigV4 transport, JSON model support).
 - `Build Distributions` CI workflow that compiles the AOS and AOSS clients and runs their unit tests across JDK 21 and 25.
 
+### Dependencies
+
 ### Changed
 - Set the `java-client` compile target to Java 8 to match upstream opensearch-java, so the published client runs on any JVM >= 8 while building with a JDK 17/21 toolchain.
 - Moved the code generator to `software.amazon.awssdk.opensearch.client.codegen`, so the emitted `@Generated(...)` marker references a class that exists in this fork.
 - Removed the unsupported `refresh` parameter from AOSS multi-get requests.
 
+### Deprecated
+
 ### Removed
 - Inherited OpenSearch OSS client sources under `org.opensearch.client.opensearch` and the generated OSS output in `src/generated/java`, which this fork does not ship.
 - The gRPC transport module (`java-client-grpc`), its samples, and the gRPC integration-test path.
+
+### Fixed
+
+### Security
