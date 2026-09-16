@@ -1,2 +1,3 @@
-# This should match the team set up in https://github.com/orgs/opensearch-project/teams and include any additional contributors
-*   @reta @Bukhtawar @szczepanczykd @madhusudhankonda @saratvemulapalli @VachaShah @Xtansia
+# This repo is owned by the amazon-opensearch-clients team in the aws GitHub org.
+# https://github.com/orgs/aws/teams/amazon-opensearch-clients
+*   @aws/amazon-opensearch-clients
