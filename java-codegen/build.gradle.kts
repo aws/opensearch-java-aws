@@ -59,7 +59,7 @@ java {
 }
 
 application {
-    mainClass.set("org.opensearch.client.codegen.CodeGenerator")
+    mainClass.set("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
     applicationDefaultJvmArgs = listOf(
         "--add-exports", "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
         "--add-exports", "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
