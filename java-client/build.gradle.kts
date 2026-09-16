@@ -66,8 +66,8 @@ logger.quiet("  Gradle JDK Version    : " + JavaVersion.current())
 logger.quiet("=======================================")
 
 java {
-    targetCompatibility = JavaVersion.VERSION_17
-    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_8
 
     withJavadocJar()
     withSourcesJar()
@@ -89,7 +89,7 @@ sourceSets.main {
 
 val awsRuntimeSourceSet = sourceSets.create("awsRuntime") {
     java {
-        srcDir("src/aws/java")
+        srcDir("src/java")
         exclude("software/amazon/awssdk/opensearch/client/aos/**")
         exclude("software/amazon/awssdk/opensearch/client/aoss/**")
     }
@@ -97,7 +97,7 @@ val awsRuntimeSourceSet = sourceSets.create("awsRuntime") {
 
 val aosSourceSet = sourceSets.create("aos") {
     java {
-        srcDir("src/aws/java")
+        srcDir("src/java")
         srcDir("src/generated/aos/java")
         include("software/amazon/awssdk/opensearch/client/aos/**")
     }
@@ -107,7 +107,7 @@ val aosSourceSet = sourceSets.create("aos") {
 
 val aossSourceSet = sourceSets.create("aoss") {
     java {
-        srcDir("src/aws/java")
+        srcDir("src/java")
         srcDir("src/generated/aoss/java")
         include("software/amazon/awssdk/opensearch/client/aoss/**")
     }
