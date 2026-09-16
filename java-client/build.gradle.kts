@@ -59,12 +59,6 @@ plugins {
 apply(plugin = "opensearch.repositories")
 apply(plugin = "org.owasp.dependencycheck")
 
-configurations {
-    all {
-        exclude(group = "software.amazon.awssdk", module = "third-party-jackson-core")
-    }
-}
-
 val runtimeJavaVersion = (System.getProperty("runtime.java")?.toInt())?.let(JavaVersion::toVersion) ?: JavaVersion.current()
 logger.quiet("=======================================")
 logger.quiet("  Runtime JDK Version   : " + runtimeJavaVersion)
@@ -72,8 +66,8 @@ logger.quiet("  Gradle JDK Version    : " + JavaVersion.current())
 logger.quiet("=======================================")
 
 java {
-    targetCompatibility = JavaVersion.VERSION_1_8
-    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
 
     withJavadocJar()
     withSourcesJar()
@@ -88,12 +82,95 @@ java {
     }
 }
 
-sourceSets {
-    main {
-        java {
-            srcDir("src/generated/java")
-        }
+sourceSets.main {
+    java.setSrcDirs(emptyList<String>())
+    resources.setSrcDirs(emptyList<String>())
+}
+
+val awsRuntimeSourceSet = sourceSets.create("awsRuntime") {
+    java {
+        srcDir("src/aws/java")
+        exclude("software/amazon/awssdk/opensearch/client/aos/**")
+        exclude("software/amazon/awssdk/opensearch/client/aoss/**")
     }
+}
+
+val aosSourceSet = sourceSets.create("aos") {
+    java {
+        srcDir("src/aws/java")
+        srcDir("src/generated/aos/java")
+        include("software/amazon/awssdk/opensearch/client/aos/**")
+    }
+    compileClasspath += awsRuntimeSourceSet.output
+    runtimeClasspath += awsRuntimeSourceSet.output
+}
+
+val aossSourceSet = sourceSets.create("aoss") {
+    java {
+        srcDir("src/aws/java")
+        srcDir("src/generated/aoss/java")
+        include("software/amazon/awssdk/opensearch/client/aoss/**")
+    }
+    compileClasspath += awsRuntimeSourceSet.output
+    runtimeClasspath += awsRuntimeSourceSet.output
+}
+
+configurations[awsRuntimeSourceSet.implementationConfigurationName].extendsFrom(configurations["implementation"])
+configurations[awsRuntimeSourceSet.compileOnlyConfigurationName].extendsFrom(
+    configurations["compileOnly"],
+    configurations["awsSdk2SupportCompileOnly"]
+)
+configurations[aosSourceSet.implementationConfigurationName].extendsFrom(configurations["implementation"])
+configurations[aosSourceSet.compileOnlyConfigurationName].extendsFrom(
+    configurations["compileOnly"],
+    configurations["awsSdk2SupportCompileOnly"]
+)
+configurations[aossSourceSet.implementationConfigurationName].extendsFrom(configurations["implementation"])
+configurations[aossSourceSet.compileOnlyConfigurationName].extendsFrom(
+    configurations["compileOnly"],
+    configurations["awsSdk2SupportCompileOnly"]
+)
+
+sourceSets.test {
+    java {
+        setSrcDirs(listOf("src/test/java"))
+        include("software/amazon/awssdk/opensearch/client/**")
+    }
+    compileClasspath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
+    runtimeClasspath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
+}
+
+tasks.named("compileAosJava") {
+    dependsOn("compileAwsRuntimeJava")
+}
+
+tasks.named("compileAossJava") {
+    dependsOn("compileAwsRuntimeJava")
+}
+
+tasks.named("compileTestJava") {
+    dependsOn("compileAwsRuntimeJava", "compileAosJava", "compileAossJava")
+}
+
+tasks.named<Jar>("jar") {
+    dependsOn("awsRuntimeClasses", "aosClasses", "aossClasses")
+    exclude("org/opensearch/client/**")
+    from(awsRuntimeSourceSet.output, aosSourceSet.output, aossSourceSet.output)
+}
+
+tasks.named<Jar>("sourcesJar") {
+    exclude("org/opensearch/client/**")
+    from(awsRuntimeSourceSet.allSource, aosSourceSet.allSource, aossSourceSet.allSource)
+}
+
+tasks.named<Javadoc>("javadoc") {
+    dependsOn("compileAwsRuntimeJava")
+    setSource(files(awsRuntimeSourceSet.allJava, aosSourceSet.allJava, aossSourceSet.allJava))
+    classpath = files(
+        awsRuntimeSourceSet.compileClasspath,
+        aosSourceSet.compileClasspath,
+        aossSourceSet.compileClasspath
+    )
 }
 
 tasks.withType<ProcessResources> {
@@ -127,9 +204,9 @@ tasks.withType<Jar> {
     }
 
     manifest {
-        attributes["Implementation-Title"] = "OpenSearch Java client"
-        attributes["Implementation-Vendor"] = "OpenSearch"
-        attributes["Implementation-URL"] = "https://github.com/opensearch-project/opensearch-java/"
+        attributes["Implementation-Title"] = "AWS OpenSearch Java Data Client"
+        attributes["Implementation-Vendor"] = "Amazon Web Services"
+        attributes["Implementation-URL"] = "https://github.com/aws/opensearch-java-aws/"
         attributes["Build-Date"] = rootProject.extra["buildTime"]
     }
 
@@ -143,50 +220,29 @@ tasks.build {
     dependsOn("spotlessJavaCheck")
 }
 
-val opensearchVersion = "3.9.0-SNAPSHOT"
-val opensearchDockerVersion = opensearchVersion.removeSuffix("-SNAPSHOT")
-
 tasks.test {
     systemProperty("tests.security.manager", "false")
-
-    systemProperty("tests.security.manager", "false")
-    // Basic auth settings for integration test
-    systemProperty("https", System.getProperty("https", "true"))
-    systemProperty("user", System.getProperty("user", "admin"))
-    systemProperty("password", System.getProperty("password", "admin"))
+    exclude("**/*RealResourceIT.class")
 }
 
-val unitTest = task<Test>("unitTest") {
-    filter {
-        excludeTestsMatching("org.opensearch.client.opensearch.integTest.*")
-    }
+val unitTest = tasks.register<Test>("unitTest") {
+    description = "Runs the AWS AOS/AOSS client unit tests."
+    group = "verification"
+    testClassesDirs = sourceSets.test.get().output.classesDirs
+    classpath = sourceSets.test.get().runtimeClasspath
+    include("software/amazon/awssdk/opensearch/client/**/*Test.class")
+    include("software/amazon/awssdk/opensearch/client/**/*Tests.class")
+    exclude("**/*RealResourceIT.class")
+    systemProperty("tests.security.manager", "false")
 }
 
-val integrationTest = task<Test>("integrationTest") {
-    filter {
-        includeTestsMatching("org.opensearch.client.opensearch.integTest.*")
-    }
+tasks.register<Test>("realResourceTest") {
+    description = "Runs opt-in tests against configured AOS and AOSS resources."
+    group = "verification"
+    testClassesDirs = sourceSets.test.get().output.classesDirs
+    classpath = sourceSets.test.get().runtimeClasspath
+    include("**/*RealResourceIT.class")
     systemProperty("tests.security.manager", "false")
-    // Basic auth settings for integration test
-    systemProperty("https", System.getProperty("https", "true"))
-    systemProperty("user", System.getProperty("user", "admin"))
-    systemProperty("password", System.getProperty("password", "admin"))
-    systemProperty(
-        "tests.opensearch.testcontainers.enabled",
-        System.getProperty("tests.opensearch.testcontainers.enabled", "true")
-    )
-    systemProperty(
-        "tests.opensearch.version",
-        System.getProperty("tests.opensearch.version", opensearchDockerVersion)
-    )
-    System.getProperty("tests.rest.cluster")?.let { systemProperty("tests.rest.cluster", it) }
-    System.getProperty("tests.opensearch.image")?.let { systemProperty("tests.opensearch.image", it) }
-    systemProperty("tests.awsSdk2support.domainHost",
-            System.getProperty("tests.awsSdk2support.domainHost", null))
-    systemProperty("tests.awsSdk2support.serviceName",
-            System.getProperty("tests.awsSdk2support.serviceName", "es"))
-    systemProperty("tests.awsSdk2support.domainRegion",
-            System.getProperty("tests.awsSdk2support.domainRegion", "us-east-1"))
 }
 
 dependencies {
@@ -197,12 +253,7 @@ dependencies {
 
     // Apache 2.0
     api("commons-logging:commons-logging:1.4.0")
-    compileOnly("org.opensearch.client", "opensearch-rest-client", opensearchVersion)
     testImplementation("org.hamcrest:hamcrest:3.0")
-    testImplementation("com.carrotsearch.randomizedtesting:randomizedtesting-runner:2.9.1") {
-        exclude(group = "junit")
-    }
-    testImplementation("org.opensearch.client", "opensearch-rest-client", opensearchVersion)
 
     api("org.apache.httpcomponents.client5:httpclient5:5.6.4") {
       exclude(group = "org.apache.httpcomponents.core5")
@@ -274,7 +325,6 @@ dependencies {
 
 licenseReport {
     renderers = arrayOf(SpdxReporter(rootProject.layout.buildDirectory.file("release/dependencies.csv").get().getAsFile()))
-    excludeGroups = arrayOf("org.opensearch.client")
 }
 
 class SpdxReporter(val dest: File) : ReportRenderer {
@@ -354,15 +404,15 @@ publishing {
         create<MavenPublication>("publishMaven") {
             from(components["java"])
             pom {
-                name.set("OpenSearch Java Client")
+                name.set("AWS OpenSearch Java Data Client")
                 packaging = "jar"
                 artifactId = "opensearch-java"
-                description.set("High level OpenSearch Java Client.")
-                url.set("https://github.com/opensearch-project/opensearch-java/")
+                description.set("Typed Java data-plane clients for Amazon OpenSearch Service and OpenSearch Serverless.")
+                url.set("https://github.com/aws/opensearch-java-aws/")
                 scm {
-                    connection.set("scm:git@github.com:opensearch-project/opensearch-java.git")
-                    developerConnection.set("scm:git@github.com:opensearch-project/opensearch-java.git")
-                    url.set("git@github.com:opensearch-project/opensearch-java.git")
+                    connection.set("scm:git@github.com:aws/opensearch-java-aws.git")
+                    developerConnection.set("scm:git@github.com:aws/opensearch-java-aws.git")
+                    url.set("git@github.com:aws/opensearch-java-aws.git")
                 }
                 licenses {
                     license {
@@ -372,9 +422,9 @@ publishing {
                 }
                 developers {
                     developer {
-                        name.set("opensearch-project")
-                        url.set("https://www.opensearch.org")
-                        inceptionYear.set("2021")
+                        name.set("Amazon Web Services")
+                        url.set("https://aws.amazon.com/opensearch-service/")
+                        inceptionYear.set("2026")
                     }
                 }
             }
@@ -382,44 +432,8 @@ publishing {
     }
 }
 
-if (runtimeJavaVersion >= JavaVersion.VERSION_21) {
-  val java21: SourceSet = sourceSets.create("java21") {
-    java {
-      compileClasspath += sourceSets.main.get().output + sourceSets.test.get().output
-      runtimeClasspath += sourceSets.main.get().output + sourceSets.test.get().output
-      srcDir("src/test/java11")
-      srcDir("src/test/java21")
-    }
-  }
 
-  configurations[java21.implementationConfigurationName].extendsFrom(configurations.testImplementation.get())
-  configurations[java21.runtimeOnlyConfigurationName].extendsFrom(configurations.testRuntimeOnly.get())
-
-  dependencies {
-    testImplementation("org.opensearch.test", "framework", opensearchVersion) {
-      exclude(group = "org.hamcrest")
-    }
-    testImplementation("org.opensearch:opensearch-testcontainers:4.1.0")
-    testImplementation("org.testcontainers:testcontainers:2.0.5")
-  }
-
-  tasks.named<JavaCompile>("compileJava21Java") {
-    targetCompatibility = JavaVersion.VERSION_21.toString()
-    sourceCompatibility = JavaVersion.VERSION_21.toString()
-  }
-  
-  tasks.named<JavaCompile>("compileTestJava") {
-    targetCompatibility = JavaVersion.VERSION_21.toString()
-    sourceCompatibility = JavaVersion.VERSION_21.toString()
- }
-  
-  tasks.named<Test>("integrationTest") {
-    testClassesDirs += java21.output.classesDirs
-    classpath = sourceSets["java21"].runtimeClasspath
- }
-  
-  tasks.named<Test>("unitTest") {
-    testClassesDirs += java21.output.classesDirs + sourceSets.test.get().output.classesDirs
-    classpath = sourceSets["java21"].runtimeClasspath
- }
+tasks.withType<Test>().configureEach {
+    dependsOn("awsRuntimeClasses", "aosClasses", "aossClasses")
+    classpath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
 }

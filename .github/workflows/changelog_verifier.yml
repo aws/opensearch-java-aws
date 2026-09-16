@@ -3,6 +3,10 @@ on:
   pull_request:
     types: [opened, edited, review_requested, synchronize, reopened, ready_for_review, labeled, unlabeled]
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   # Enforces the update of a changelog file on every pull request
   verify-changelog:

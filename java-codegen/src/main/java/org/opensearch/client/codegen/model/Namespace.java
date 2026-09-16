@@ -18,6 +18,7 @@ import java.util.TreeMap;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.opensearch.client.codegen.CodegenSettings;
 import org.opensearch.client.codegen.exceptions.RenderException;
 import org.opensearch.client.codegen.model.types.Type;
 import org.opensearch.client.codegen.model.types.TypeParameterDefinition;
@@ -34,17 +35,30 @@ public class Namespace {
 
     private final Namespace parent;
     private final String name;
+    private final String rootPackageName;
+    private final String rootClientName;
     private final Map<String, Namespace> children = new TreeMap<>();
     private final Map<String, RequestShape> operations = new TreeMap<>();
     private final List<Shape> shapes = new ArrayList<>();
 
     public Namespace() {
-        this(null, "");
+        this(CodegenSettings.DEFAULT_MODEL_PACKAGE, CodegenSettings.DEFAULT_ROOT_CLIENT_NAME);
     }
 
-    private Namespace(Namespace parent, String name) {
+    public Namespace(String rootPackageName, String rootClientName) {
+        this(
+            null,
+            "",
+            CodegenSettings.requireJavaPackage(rootPackageName, "root package"),
+            CodegenSettings.requireJavaTypePrefix(rootClientName, "root client name")
+        );
+    }
+
+    private Namespace(Namespace parent, String name, String rootPackageName, String rootClientName) {
         this.parent = parent;
         this.name = name;
+        this.rootPackageName = rootPackageName;
+        this.rootClientName = rootClientName;
     }
 
     public void addOperation(RequestShape operation) {
@@ -57,7 +71,7 @@ public class Namespace {
     }
 
     public String getPackageName() {
-        return parent != null ? parent.getPackageName() + "." + getName() : "org.opensearch.client.opensearch";
+        return parent != null ? parent.getPackageName() + "." + getName() : rootPackageName;
     }
 
     @Nonnull
@@ -75,7 +89,7 @@ public class Namespace {
         var childName = idx >= 0 ? name.substring(0, idx) : name;
         var grandChildName = idx >= 0 ? name.substring(idx + 1) : null;
 
-        Namespace child = children.computeIfAbsent(childName, n -> new Namespace(this, n));
+        Namespace child = children.computeIfAbsent(childName, n -> new Namespace(this, n, rootPackageName, rootClientName));
         return grandChildName == null ? child : child.child(grandChildName);
     }
 
@@ -103,8 +117,9 @@ public class Namespace {
         return ("".equals(name) ? child("core") : this).operations.values();
     }
 
-    private String getClientClassName(boolean async, boolean base) {
-        return "OpenSearch" + Strings.toPascalCase(name) + (async ? "Async" : "") + "Client" + (base ? "Base" : "");
+    String getClientClassName(boolean async, boolean base) {
+        var classNamePrefix = name.isEmpty() ? rootClientName : "OpenSearch" + Strings.toPascalCase(name);
+        return classNamePrefix + (async ? "Async" : "") + "Client" + (base ? "Base" : "");
     }
 
     private Type getClientType(boolean async) {

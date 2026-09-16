@@ -29,6 +29,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.opensearch.client.codegen.CodegenSettings;
 import org.opensearch.client.codegen.model.ArrayShape;
 import org.opensearch.client.codegen.model.DelegatedShape;
 import org.opensearch.client.codegen.model.Deprecation;
@@ -76,14 +77,24 @@ public class SpecTransformer {
     @Nonnull
     private final TypeMapper typeMapper;
     @Nonnull
-    private final Namespace root = new Namespace();
+    private final Namespace root;
     @Nonnull
     private final Map<OpenApiSchema, Shape> visitedSchemas = new ConcurrentHashMap<>();
 
     public SpecTransformer(@Nonnull Matcher<OperationGroup> matcher, @Nonnull Overrides overrides) {
+        this(matcher, overrides, CodegenSettings.DEFAULT_MODEL_PACKAGE, CodegenSettings.DEFAULT_ROOT_CLIENT_NAME);
+    }
+
+    public SpecTransformer(
+        @Nonnull Matcher<OperationGroup> matcher,
+        @Nonnull Overrides overrides,
+        @Nonnull String rootPackageName,
+        @Nonnull String rootClientName
+    ) {
         this.matcher = Objects.requireNonNull(matcher, "matcher must not be null");
         this.overrides = Objects.requireNonNull(overrides, "overrides must not be null");
         this.typeMapper = new TypeMapper(this, overrides);
+        this.root = new Namespace(rootPackageName, rootClientName);
     }
 
     @Nonnull

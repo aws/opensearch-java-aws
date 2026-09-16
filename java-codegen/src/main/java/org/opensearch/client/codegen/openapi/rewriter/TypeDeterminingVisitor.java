@@ -58,6 +58,8 @@ public final class TypeDeterminingVisitor extends OpenApiVisitorBase {
                     .flatMap(s -> s.getTypes().orElseThrow().stream())
                     .collect(Collectors.toSet())
             );
+        } else if (schema.has$extends()) {
+            return walker.walkSchema(schema.get$extends().orElseThrow(), this).getTypes();
         } else {
             return Optional.of(OpenApiSchemaType.ALL_TYPES);
         }

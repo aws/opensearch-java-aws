@@ -126,11 +126,45 @@ public class CodeGenerator {
             .hasArg()
             .required()
             .build();
+        var distributionOpt = Option.builder()
+            .longOpt("distribution")
+            .desc("The target distribution identifier")
+            .argName("DISTRIBUTION")
+            .hasArg()
+            .build();
+        var runtimePackageOpt = Option.builder()
+            .longOpt("runtime-package")
+            .desc("The Java package containing the shared client runtime")
+            .argName("PACKAGE")
+            .hasArg()
+            .build();
+        var modelPackageOpt = Option.builder()
+            .longOpt("model-package")
+            .desc("The root Java package for generated API clients and models")
+            .argName("PACKAGE")
+            .hasArg()
+            .build();
+        var clientNameOpt = Option.builder()
+            .longOpt("client-name")
+            .desc("The generated root client class prefix, without Client or AsyncClient")
+            .argName("NAME")
+            .hasArg()
+            .build();
         var helpOpt = Option.builder("h").longOpt("help").desc("Print this help information").build();
         final var usageString =
-            "CodeGenerator.class --input https://.../opensearch-openapi.yaml --eclipse-config ./buildSrc/formatterConfig.xml --output ./java-client/src/generated/java";
+            "CodeGenerator.class --input https://.../opensearch-openapi.yaml --eclipse-config ./buildSrc/formatterConfig.xml "
+                + "--output ./java-client/src/generated/java [--distribution aos] "
+                + "[--runtime-package software.amazon.awssdk.opensearch.client] "
+                + "[--model-package software.amazon.awssdk.opensearch.client.aos] [--client-name OpenSearchAos]";
 
-        var options = new Options().addOption(inputOpt).addOption(eclipseConfigOpt).addOption(outputOpt).addOption(helpOpt);
+        var options = new Options().addOption(inputOpt)
+            .addOption(eclipseConfigOpt)
+            .addOption(outputOpt)
+            .addOption(distributionOpt)
+            .addOption(runtimePackageOpt)
+            .addOption(modelPackageOpt)
+            .addOption(clientNameOpt)
+            .addOption(helpOpt);
 
         var cliParser = new DefaultParser();
 
@@ -146,11 +180,30 @@ public class CodeGenerator {
             var specLocation = new URI(cli.getOptionValue(inputOpt));
             var eclipseConfig = new File(cli.getOptionValue(eclipseConfigOpt));
             var outputDir = new File(cli.getOptionValue(outputOpt));
+            var distribution = cli.getOptionValue(distributionOpt, CodegenSettings.DEFAULT_DISTRIBUTION);
+            var runtimePackage = CodegenSettings.requireJavaPackage(
+                cli.getOptionValue(runtimePackageOpt, CodegenSettings.DEFAULT_RUNTIME_PACKAGE),
+                "runtime package"
+            );
+            var modelPackage = CodegenSettings.requireJavaPackage(
+                cli.getOptionValue(modelPackageOpt, runtimePackage + ".opensearch"),
+                "model package"
+            );
+            var rootClientName = CodegenSettings.requireJavaTypePrefix(
+                cli.getOptionValue(clientNameOpt, CodegenSettings.DEFAULT_ROOT_CLIENT_NAME),
+                "root client name"
+            );
+            CodegenSettings.configureTypePackages(runtimePackage, modelPackage);
+
             LOGGER.info("Specification Location: {}", specLocation);
             LOGGER.info("Eclipse Configuration: {}", eclipseConfig);
             LOGGER.info("Output Directory: {}", outputDir);
+            LOGGER.info("Distribution: {}", distribution);
+            LOGGER.info("Runtime Package: {}", runtimePackage);
+            LOGGER.info("Model Package: {}", modelPackage);
+            LOGGER.info("Root Client Name: {}", rootClientName);
 
-            Namespace root = parseSpec(specLocation);
+            Namespace root = parseSpec(specLocation, modelPackage, rootClientName);
 
             cleanDirectory(outputDir);
 
@@ -178,10 +231,10 @@ public class CodeGenerator {
         }
     }
 
-    private static Namespace parseSpec(URI location) throws ApiSpecificationParseException {
+    private static Namespace parseSpec(URI location, String modelPackage, String rootClientName) throws ApiSpecificationParseException {
         var spec = OpenApiSpecification.retrieve(location);
         spec = SpecificationRewriter.rewrite(spec, Overrides.OVERRIDES);
-        var transformer = new SpecTransformer(OPERATION_MATCHER, Overrides.OVERRIDES);
+        var transformer = new SpecTransformer(OPERATION_MATCHER, Overrides.OVERRIDES, modelPackage, rootClientName);
         transformer.visit(spec);
         return transformer.getRoot();
     }
