@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ism.ExplainPolicy
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ExplainPolicy implements PlainJsonSerializable, ToCopyableBuilder<ExplainPolicy.Builder, ExplainPolicy> {
 
     @Nullable

@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.aggregations.MovingAverageAggregation
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class MovingAverageAggregation
     implements
         TaggedUnion<MovingAverageAggregation.Kind, MovingAverageAggregationVariant>,

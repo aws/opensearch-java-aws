@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Result of a <code>terms</code> aggregation when the field is unmapped. <code>buckets</code> is always empty.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class UnmappedTermsAggregate extends TermsAggregateBase<JsonData>
     implements
         AggregateVariant,

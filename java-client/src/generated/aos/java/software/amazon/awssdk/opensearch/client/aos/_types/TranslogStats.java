@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The statistics about translog operations.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TranslogStats implements PlainJsonSerializable, ToCopyableBuilder<TranslogStats.Builder, TranslogStats> {
 
     private final long earliestLastModifiedAge;

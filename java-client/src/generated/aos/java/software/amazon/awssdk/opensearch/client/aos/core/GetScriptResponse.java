@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.get_script.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GetScriptResponse implements PlainJsonSerializable, ToCopyableBuilder<GetScriptResponse.Builder, GetScriptResponse> {
 
     private final boolean found;

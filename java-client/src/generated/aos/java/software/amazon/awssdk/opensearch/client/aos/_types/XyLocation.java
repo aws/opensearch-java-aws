@@ -49,7 +49,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * </ul>
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class XyLocation implements TaggedUnion<XyLocation.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link XyLocation} variant kinds.

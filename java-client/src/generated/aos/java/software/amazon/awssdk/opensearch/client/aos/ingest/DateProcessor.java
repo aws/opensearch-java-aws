@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ingest.DateProcessor
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DateProcessor extends ProcessorBase implements ProcessorVariant, ToCopyableBuilder<DateProcessor.Builder, DateProcessor> {
 
     @Nonnull

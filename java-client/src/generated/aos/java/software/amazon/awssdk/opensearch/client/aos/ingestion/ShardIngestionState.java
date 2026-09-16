@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ingestion.ShardIngestionState
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardIngestionState implements PlainJsonSerializable, ToCopyableBuilder<ShardIngestionState.Builder, ShardIngestionState> {
 
     @Nullable

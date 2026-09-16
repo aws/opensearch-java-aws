@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.stats.ClusterProcessor
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ClusterProcessor implements PlainJsonSerializable, ToCopyableBuilder<ClusterProcessor.Builder, ClusterProcessor> {
 
     private final long count;

@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.analysis.SimpleAnalyzer
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SimpleAnalyzer implements AnalyzerVariant, PlainJsonSerializable, ToCopyableBuilder<SimpleAnalyzer.Builder, SimpleAnalyzer> {
 
     @Nullable

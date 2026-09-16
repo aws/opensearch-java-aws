@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The configuration for initial shard recovery.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexRoutingAllocationInitialRecovery
     implements
         PlainJsonSerializable,

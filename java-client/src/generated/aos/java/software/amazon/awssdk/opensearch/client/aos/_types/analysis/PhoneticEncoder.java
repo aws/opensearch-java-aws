@@ -49,7 +49,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
 // typedef: _types.analysis.PhoneticEncoder
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum PhoneticEncoder implements JsonEnum {
     BeiderMorse("beider_morse"),
 

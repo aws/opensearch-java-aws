@@ -49,7 +49,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
 // typedef: core.search.HighlighterTagsSchema
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum HighlighterTagsSchema implements JsonEnum {
     Default("default"),
 

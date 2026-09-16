@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The result of a close index operation.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CloseIndexResult implements PlainJsonSerializable, ToCopyableBuilder<CloseIndexResult.Builder, CloseIndexResult> {
 
     private final boolean closed;

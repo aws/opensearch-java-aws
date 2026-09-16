@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.FiltersBucket
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FiltersBucket extends MultiBucketBase implements ToCopyableBuilder<FiltersBucket.Builder, FiltersBucket> {
 
     // ---------------------------------------------------------------------------------------------

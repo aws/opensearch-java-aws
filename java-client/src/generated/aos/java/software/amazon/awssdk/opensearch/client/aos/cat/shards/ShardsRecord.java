@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.shards.ShardsRecord
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardsRecord implements PlainJsonSerializable, ToCopyableBuilder<ShardsRecord.Builder, ShardsRecord> {
 
     @Nullable

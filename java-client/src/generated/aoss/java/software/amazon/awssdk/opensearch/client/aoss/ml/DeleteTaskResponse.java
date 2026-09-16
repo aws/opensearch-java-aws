@@ -33,7 +33,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.delete_task.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DeleteTaskResponse extends WriteResponseBase implements ToCopyableBuilder<DeleteTaskResponse.Builder, DeleteTaskResponse> {
 
     // ---------------------------------------------------------------------------------------------

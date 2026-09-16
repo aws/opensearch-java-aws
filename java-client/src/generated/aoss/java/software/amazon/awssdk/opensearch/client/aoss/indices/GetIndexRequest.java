@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns information about one or more indexes.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetIndexRequest extends RequestBase implements ToCopyableBuilder<GetIndexRequest.Builder, GetIndexRequest> {
 
     @Nullable

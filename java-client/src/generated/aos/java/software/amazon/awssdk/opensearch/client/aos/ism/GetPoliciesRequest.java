@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Retrieves the policies.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetPoliciesRequest extends RequestBase implements ToCopyableBuilder<GetPoliciesRequest.Builder, GetPoliciesRequest> {
 
     // ---------------------------------------------------------------------------------------------

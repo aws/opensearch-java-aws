@@ -49,7 +49,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
 // typedef: _types.analysis.IcuNormalizationMode
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum IcuNormalizationMode implements JsonEnum {
     Compose("compose"),
 

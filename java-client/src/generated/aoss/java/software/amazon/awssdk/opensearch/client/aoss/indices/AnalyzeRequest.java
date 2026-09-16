@@ -75,7 +75,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Performs the analysis process on a text and return the tokens breakdown of the text.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class AnalyzeRequest extends RequestBase
     implements
         PlainJsonSerializable,

@@ -58,7 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cold.search.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SearchResponse<TDocument> extends SearchResult<TDocument>
     implements
         ToCopyableBuilder<SearchResponse.Builder<TDocument>, SearchResponse<TDocument>> {

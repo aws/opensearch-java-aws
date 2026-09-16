@@ -38,7 +38,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.DataAsMap
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DataAsMap implements PlainJsonSerializable, ToCopyableBuilder<DataAsMap.Builder, DataAsMap> {
 
     @Nullable

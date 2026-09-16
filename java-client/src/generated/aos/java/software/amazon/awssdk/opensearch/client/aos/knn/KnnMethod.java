@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: knn.KnnMethod
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class KnnMethod implements PlainJsonSerializable, ToCopyableBuilder<KnnMethod.Builder, KnnMethod> {
 
     @Nullable

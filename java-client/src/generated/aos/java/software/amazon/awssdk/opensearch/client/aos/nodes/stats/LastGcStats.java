@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.LastGcStats
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class LastGcStats implements PlainJsonSerializable, ToCopyableBuilder<LastGcStats.Builder, LastGcStats> {
 
     @Nullable

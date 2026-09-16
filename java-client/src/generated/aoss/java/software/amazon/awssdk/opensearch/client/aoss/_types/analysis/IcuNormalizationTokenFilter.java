@@ -59,7 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.analysis.IcuNormalizationTokenFilter
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IcuNormalizationTokenFilter extends TokenFilterBase
     implements
         TokenFilterDefinitionVariant,

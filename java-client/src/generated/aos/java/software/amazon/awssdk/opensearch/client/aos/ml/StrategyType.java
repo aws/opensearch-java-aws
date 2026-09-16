@@ -28,7 +28,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
  * The strategy type.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum StrategyType implements JsonEnum {
     Semantic("SEMANTIC"),
 

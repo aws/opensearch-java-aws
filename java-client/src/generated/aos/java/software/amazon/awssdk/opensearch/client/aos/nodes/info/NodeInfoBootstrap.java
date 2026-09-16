@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The bootstrap configuration settings for the node.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoBootstrap implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoBootstrap.Builder, NodeInfoBootstrap> {
 
     @Nonnull

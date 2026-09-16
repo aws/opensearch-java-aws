@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.TTestAggregation
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TTestAggregation implements PlainJsonSerializable, ToCopyableBuilder<TTestAggregation.Builder, TTestAggregation> {
 
     @Nullable

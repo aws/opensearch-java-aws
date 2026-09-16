@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns information about any matching indexes, aliases, and data streams.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ResolveIndexRequest extends RequestBase implements ToCopyableBuilder<ResolveIndexRequest.Builder, ResolveIndexRequest> {
 
     @Nonnull

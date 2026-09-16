@@ -42,7 +42,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * <strong>Minimum version:</strong> <code>1.3</code>
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteTaskRequest extends RequestBase implements ToCopyableBuilder<DeleteTaskRequest.Builder, DeleteTaskRequest> {
 
     @Nonnull

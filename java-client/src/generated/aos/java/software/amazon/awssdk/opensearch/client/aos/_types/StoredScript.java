@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The definition of a stored script.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class StoredScript implements PlainJsonSerializable, ToCopyableBuilder<StoredScript.Builder, StoredScript> {
 
     @Nonnull

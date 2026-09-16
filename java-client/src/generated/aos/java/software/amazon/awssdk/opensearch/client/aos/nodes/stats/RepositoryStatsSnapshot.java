@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Statistics snapshot about a repository.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RepositoryStatsSnapshot
     implements
         PlainJsonSerializable,

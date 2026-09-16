@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: search_pipeline.ResponseProcessor
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ResponseProcessor implements TaggedUnion<ResponseProcessor.Kind, ResponseProcessorVariant>, PlainJsonSerializable {
     /**
      * {@link ResponseProcessor} variant kinds.

@@ -55,7 +55,7 @@ import software.amazon.awssdk.opensearch.client.util.ApiTypeHelper;
 
 // typedef: _types.analysis.CompoundWordTokenFilterBase
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class CompoundWordTokenFilterBase extends TokenFilterBase {
 
     @Nullable

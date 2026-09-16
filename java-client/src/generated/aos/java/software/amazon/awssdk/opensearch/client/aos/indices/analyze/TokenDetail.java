@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The token filter or tokenizer results.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TokenDetail implements PlainJsonSerializable, ToCopyableBuilder<TokenDetail.Builder, TokenDetail> {
 
     @Nonnull

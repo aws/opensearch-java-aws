@@ -37,7 +37,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Delete an agent.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteAgentRequest extends RequestBase implements ToCopyableBuilder<DeleteAgentRequest.Builder, DeleteAgentRequest> {
 
     @Nonnull

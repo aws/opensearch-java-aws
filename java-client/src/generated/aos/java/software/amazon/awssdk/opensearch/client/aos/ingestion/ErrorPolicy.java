@@ -49,7 +49,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
 // typedef: ingestion.ErrorPolicy
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum ErrorPolicy implements JsonEnum {
     Block("BLOCK"),
 

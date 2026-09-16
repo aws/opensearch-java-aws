@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.RoleMapping
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RoleMapping implements PlainJsonSerializable, ToCopyableBuilder<RoleMapping.Builder, RoleMapping> {
 
     @Nonnull

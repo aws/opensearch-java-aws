@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.mapping.TextProperty
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TextProperty extends CorePropertyBase implements PropertyVariant, ToCopyableBuilder<TextProperty.Builder, TextProperty> {
 
     @Nullable

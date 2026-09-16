@@ -47,7 +47,7 @@ import software.amazon.awssdk.opensearch.client.json.ObjectDeserializer;
 
 // typedef: _types.aggregations.RangeAggregateBase
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class RangeAggregateBase extends MultiBucketAggregateBase<RangeBucket> {
 
     // ---------------------------------------------------------------------------------------------

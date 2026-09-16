@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Deletes a policy.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeletePolicyRequest extends RequestBase implements ToCopyableBuilder<DeletePolicyRequest.Builder, DeletePolicyRequest> {
 
     @Nonnull

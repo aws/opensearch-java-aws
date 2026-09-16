@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The item level HTTP response status code during indexing.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DocStatus implements PlainJsonSerializable, ToCopyableBuilder<DocStatus.Builder, DocStatus> {
 
     @Nullable

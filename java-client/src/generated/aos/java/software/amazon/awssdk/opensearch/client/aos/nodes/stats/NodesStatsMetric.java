@@ -49,7 +49,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
 // typedef: nodes.stats.Metric
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum NodesStatsMetric implements JsonEnum {
     AdaptiveSelection("adaptive_selection"),
 

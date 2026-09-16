@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.search_template.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SearchTemplateResponse<TDocument> extends SearchResult<TDocument>
     implements
         ToCopyableBuilder<SearchTemplateResponse.Builder<TDocument>, SearchTemplateResponse<TDocument>> {

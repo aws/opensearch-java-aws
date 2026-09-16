@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.TopHitsAggregation
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TopHitsAggregation extends MetricAggregationBase implements ToCopyableBuilder<TopHitsAggregation.Builder, TopHitsAggregation> {
 
     @Nonnull

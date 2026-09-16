@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ism.IncludeState
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IncludeState implements PlainJsonSerializable, ToCopyableBuilder<IncludeState.Builder, IncludeState> {
 
     @Nullable

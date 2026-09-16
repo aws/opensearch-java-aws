@@ -55,7 +55,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 // typedef: ingest.get_pipeline.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GetPipelineResponse extends DictionaryResponse<String, Pipeline> {
     // ---------------------------------------------------------------------------------------------
 

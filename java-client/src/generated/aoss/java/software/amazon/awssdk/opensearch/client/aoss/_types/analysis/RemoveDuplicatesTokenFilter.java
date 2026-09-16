@@ -58,7 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.analysis.RemoveDuplicatesTokenFilter
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RemoveDuplicatesTokenFilter extends TokenFilterBase
     implements
         TokenFilterDefinitionVariant,

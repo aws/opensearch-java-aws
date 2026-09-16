@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 // typedef: cluster.remote_info.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RemoteInfoResponse extends DictionaryResponse<String, ClusterRemoteInfo> {
     // ---------------------------------------------------------------------------------------------
 

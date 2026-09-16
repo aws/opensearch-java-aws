@@ -69,7 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * <strong>Minimum version:</strong> <code>2.11</code>
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetIp2geoDatasourceRequest extends RequestBase
     implements
         ToCopyableBuilder<GetIp2geoDatasourceRequest.Builder, GetIp2geoDatasourceRequest> {

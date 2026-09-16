@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.DistinguishedNames
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DistinguishedNames implements PlainJsonSerializable, ToCopyableBuilder<DistinguishedNames.Builder, DistinguishedNames> {
 
     @Nonnull

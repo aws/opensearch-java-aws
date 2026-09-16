@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Lists all of the snapshots stored in a specific repository.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class SnapshotsRequest extends CatRequestBase implements ToCopyableBuilder<SnapshotsRequest.Builder, SnapshotsRequest> {
 
     @Nullable

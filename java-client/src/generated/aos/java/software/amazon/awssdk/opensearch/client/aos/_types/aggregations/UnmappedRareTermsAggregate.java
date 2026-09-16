@@ -59,7 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Result of a <code>rare_terms</code> aggregation when the field is unmapped. <code>buckets</code> is always empty.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class UnmappedRareTermsAggregate extends MultiBucketAggregateBase<Void>
     implements
         AggregateVariant,

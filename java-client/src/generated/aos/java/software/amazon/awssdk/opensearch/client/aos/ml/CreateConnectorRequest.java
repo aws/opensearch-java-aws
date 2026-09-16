@@ -48,7 +48,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Creates a standalone connector.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class CreateConnectorRequest extends RequestBase
     implements
         PlainJsonSerializable,

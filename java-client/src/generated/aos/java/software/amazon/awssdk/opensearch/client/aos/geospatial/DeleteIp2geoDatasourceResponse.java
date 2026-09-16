@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: geospatial.delete_ip2geo_datasource.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DeleteIp2geoDatasourceResponse extends AcknowledgedResponseBase
     implements
         ToCopyableBuilder<DeleteIp2geoDatasourceResponse.Builder, DeleteIp2geoDatasourceResponse> {

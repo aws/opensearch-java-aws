@@ -38,7 +38,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.LLM
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class LLM implements PlainJsonSerializable, ToCopyableBuilder<LLM.Builder, LLM> {
 
     @Nullable

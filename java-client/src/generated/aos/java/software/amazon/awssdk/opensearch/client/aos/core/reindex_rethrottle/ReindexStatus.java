@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.reindex_rethrottle.ReindexStatus
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ReindexStatus implements PlainJsonSerializable, ToCopyableBuilder<ReindexStatus.Builder, ReindexStatus> {
 
     private final long batches;

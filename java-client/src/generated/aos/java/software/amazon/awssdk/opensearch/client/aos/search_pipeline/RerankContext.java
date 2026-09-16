@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: search_pipeline.RerankContext
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RerankContext implements PlainJsonSerializable, ToCopyableBuilder<RerankContext.Builder, RerankContext> {
 
     @Nonnull

@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.search.ShardProfile
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardProfile implements PlainJsonSerializable, ToCopyableBuilder<ShardProfile.Builder, ShardProfile> {
 
     @Nonnull

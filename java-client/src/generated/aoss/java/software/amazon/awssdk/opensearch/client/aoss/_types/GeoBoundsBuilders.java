@@ -53,7 +53,7 @@ import javax.annotation.Generated;
  * dedicated class. Use {@link GeoBounds}'s builder for these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GeoBoundsBuilders {
     private GeoBoundsBuilders() {}
 

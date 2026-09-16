@@ -58,7 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.analysis.UppercaseTokenFilter
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class UppercaseTokenFilter extends TokenFilterBase
     implements
         TokenFilterDefinitionVariant,

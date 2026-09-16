@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.health.ShardHealthStats
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardHealthStats implements PlainJsonSerializable, ToCopyableBuilder<ShardHealthStats.Builder, ShardHealthStats> {
 
     private final int activeShards;

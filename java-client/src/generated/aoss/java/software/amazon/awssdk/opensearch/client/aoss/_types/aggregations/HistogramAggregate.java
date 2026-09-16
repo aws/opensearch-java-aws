@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.HistogramAggregate
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class HistogramAggregate extends MultiBucketAggregateBase<HistogramBucket>
     implements
         AggregateVariant,

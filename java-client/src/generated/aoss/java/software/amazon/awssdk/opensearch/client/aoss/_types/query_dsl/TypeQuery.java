@@ -59,7 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.query_dsl.TypeQuery
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TypeQuery extends QueryBase implements QueryVariant, ToCopyableBuilder<TypeQuery.Builder, TypeQuery> {
 
     @Nonnull

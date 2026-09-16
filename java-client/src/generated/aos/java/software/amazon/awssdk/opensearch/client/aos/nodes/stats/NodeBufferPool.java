@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.NodeBufferPool
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeBufferPool implements PlainJsonSerializable, ToCopyableBuilder<NodeBufferPool.Builder, NodeBufferPool> {
 
     @Nullable

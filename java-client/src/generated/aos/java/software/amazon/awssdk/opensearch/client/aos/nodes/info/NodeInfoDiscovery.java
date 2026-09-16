@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The node discovery configuration.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoDiscovery implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoDiscovery.Builder, NodeInfoDiscovery> {
 
     @Nullable

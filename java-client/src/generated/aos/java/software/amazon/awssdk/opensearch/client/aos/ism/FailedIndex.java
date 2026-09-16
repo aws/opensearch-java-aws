@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ism.FailedIndex
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FailedIndex implements PlainJsonSerializable, ToCopyableBuilder<FailedIndex.Builder, FailedIndex> {
 
     @Nullable

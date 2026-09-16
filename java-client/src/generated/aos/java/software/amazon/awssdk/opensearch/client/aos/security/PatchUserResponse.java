@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.patch_user.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PatchUserResponse implements PlainJsonSerializable, ToCopyableBuilder<PatchUserResponse.Builder, PatchUserResponse> {
 
     @Nullable

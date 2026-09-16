@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.pending_tasks.PendingTasksRecord
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PendingTasksRecord implements PlainJsonSerializable, ToCopyableBuilder<PendingTasksRecord.Builder, PendingTasksRecord> {
 
     @Nullable

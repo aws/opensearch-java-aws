@@ -73,7 +73,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Task status information can vary wildly from task to task.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Status implements PlainJsonSerializable, ToCopyableBuilder<Status.Builder, Status> {
 
     @Nullable

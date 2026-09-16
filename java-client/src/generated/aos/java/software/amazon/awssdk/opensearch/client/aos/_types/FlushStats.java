@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The statistics about flush operations.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FlushStats implements PlainJsonSerializable, ToCopyableBuilder<FlushStats.Builder, FlushStats> {
 
     private final long periodic;

@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.delete_template.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DeleteTemplateResponse extends AcknowledgedResponseBase
     implements
         ToCopyableBuilder<DeleteTemplateResponse.Builder, DeleteTemplateResponse> {

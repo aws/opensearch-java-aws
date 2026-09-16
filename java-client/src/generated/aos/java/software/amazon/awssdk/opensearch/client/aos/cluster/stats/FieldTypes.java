@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.stats.FieldTypes
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FieldTypes implements PlainJsonSerializable, ToCopyableBuilder<FieldTypes.Builder, FieldTypes> {
 
     private final int count;

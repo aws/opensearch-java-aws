@@ -40,7 +40,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.query_dsl.XyShapeQueryField
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class XyShapeQueryField implements PlainJsonSerializable, ToCopyableBuilder<XyShapeQueryField.Builder, XyShapeQueryField> {
 
     @Nullable

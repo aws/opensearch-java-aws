@@ -32,7 +32,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 
 // typedef: ml.execute_agent_stream.Response
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ExecuteAgentStreamResponse
     implements
         PlainJsonSerializable,

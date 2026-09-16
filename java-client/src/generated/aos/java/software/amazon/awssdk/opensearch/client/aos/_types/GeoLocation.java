@@ -74,7 +74,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * </ul>
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GeoLocation implements TaggedUnion<GeoLocation.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link GeoLocation} variant kinds.

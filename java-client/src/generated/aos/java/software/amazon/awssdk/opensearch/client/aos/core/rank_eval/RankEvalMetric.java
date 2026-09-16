@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.rank_eval.RankEvalMetric
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RankEvalMetric implements PlainJsonSerializable, ToCopyableBuilder<RankEvalMetric.Builder, RankEvalMetric> {
 
     @Nullable

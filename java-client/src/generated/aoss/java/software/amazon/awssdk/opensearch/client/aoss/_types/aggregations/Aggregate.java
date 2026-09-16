@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 
 // typedef: _types.aggregations.Aggregate
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Aggregate implements TaggedUnion<Aggregate.Kind, AggregateVariant>, PlainJsonSerializable {
     /**
      * {@link Aggregate} variant kinds.

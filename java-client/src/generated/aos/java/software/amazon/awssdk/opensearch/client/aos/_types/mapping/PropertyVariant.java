@@ -48,7 +48,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpSerializable;
 /**
  * Base interface for {@link Property} variants.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public interface PropertyVariant extends JsonpSerializable {
     Property.Kind _propertyKind();
 

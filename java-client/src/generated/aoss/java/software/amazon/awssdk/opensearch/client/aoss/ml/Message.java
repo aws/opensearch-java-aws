@@ -42,7 +42,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.Message
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Message implements PlainJsonSerializable, ToCopyableBuilder<Message.Builder, Message> {
 
     @Nonnull

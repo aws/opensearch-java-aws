@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.search.InnerHitsResult
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class InnerHitsResult implements PlainJsonSerializable, ToCopyableBuilder<InnerHitsResult.Builder, InnerHitsResult> {
 
     @Nonnull

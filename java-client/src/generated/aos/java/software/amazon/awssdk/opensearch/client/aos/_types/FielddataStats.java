@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The statistics about field data memory usage.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FielddataStats implements PlainJsonSerializable, ToCopyableBuilder<FielddataStats.Builder, FielddataStats> {
 
     @Nullable

@@ -48,7 +48,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpSerializable;
 /**
  * Base interface for {@link ClusterRemoteInfo} variants.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public interface ClusterRemoteInfoVariant extends JsonpSerializable {
     ClusterRemoteInfo.Kind _clusterRemoteInfoKind();
 

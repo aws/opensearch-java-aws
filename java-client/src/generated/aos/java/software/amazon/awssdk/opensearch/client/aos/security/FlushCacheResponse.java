@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.flush_cache.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FlushCacheResponse implements PlainJsonSerializable, ToCopyableBuilder<FlushCacheResponse.Builder, FlushCacheResponse> {
 
     @Nullable

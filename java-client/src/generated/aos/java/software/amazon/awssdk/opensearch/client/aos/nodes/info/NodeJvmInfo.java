@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Provides JVM-specific information for the node.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeJvmInfo implements PlainJsonSerializable, ToCopyableBuilder<NodeJvmInfo.Builder, NodeJvmInfo> {
 
     private final boolean bundledJdk;

@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * The transport layer type configuration.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoSettingsTransportType implements TaggedUnion<NodeInfoSettingsTransportType.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link NodeInfoSettingsTransportType} variant kinds.

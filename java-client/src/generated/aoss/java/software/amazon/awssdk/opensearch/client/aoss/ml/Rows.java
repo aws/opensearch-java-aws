@@ -40,7 +40,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.Rows
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Rows implements PlainJsonSerializable, ToCopyableBuilder<Rows.Builder, Rows> {
 
     @Nonnull

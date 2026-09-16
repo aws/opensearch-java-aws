@@ -52,7 +52,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
  * The options for shard allocation control.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum IndexRoutingAllocationOptions implements JsonEnum {
     /**
      * Allows shard allocation for all shards.

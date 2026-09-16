@@ -59,7 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Result of the <code>rare_terms</code> aggregation when the field is a string.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class StringRareTermsAggregate extends MultiBucketAggregateBase<StringRareTermsBucket>
     implements
         AggregateVariant,

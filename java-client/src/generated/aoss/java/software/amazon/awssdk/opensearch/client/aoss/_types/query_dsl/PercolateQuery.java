@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.query_dsl.PercolateQuery
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PercolateQuery extends QueryBase implements QueryVariant, ToCopyableBuilder<PercolateQuery.Builder, PercolateQuery> {
 
     @Nullable

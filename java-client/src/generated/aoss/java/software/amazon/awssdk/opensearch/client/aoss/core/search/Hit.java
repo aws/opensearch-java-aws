@@ -69,7 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 
 // typedef: core.search.Hit
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Hit<TDocument> implements PlainJsonSerializable, ToCopyableBuilder<Hit.Builder<TDocument>, Hit<TDocument>> {
 
     @Nullable

@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The statistics about indexing operations.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexingStats implements PlainJsonSerializable, ToCopyableBuilder<IndexingStats.Builder, IndexingStats> {
 
     private final long deleteCurrent;

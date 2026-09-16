@@ -32,7 +32,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the ml namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, OpenSearchMlAsyncClient> {
     public OpenSearchMlAsyncClient(OpenSearchTransport transport) {
         super(transport, null);

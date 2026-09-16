@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.usage.NodeUsage
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeUsage implements PlainJsonSerializable, ToCopyableBuilder<NodeUsage.Builder, NodeUsage> {
 
     @Nonnull

@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.HdrPercentilesAggregate
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class HdrPercentilesAggregate extends PercentilesAggregateBase
     implements
         AggregateVariant,

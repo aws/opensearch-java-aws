@@ -54,7 +54,7 @@ import software.amazon.awssdk.opensearch.client.aoss._types.GeoLocation;
  * builder for these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ContextBuilders {
     private ContextBuilders() {}
 

@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.CgroupCpuStat
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CgroupCpuStat implements PlainJsonSerializable, ToCopyableBuilder<CgroupCpuStat.Builder, CgroupCpuStat> {
 
     @Nullable

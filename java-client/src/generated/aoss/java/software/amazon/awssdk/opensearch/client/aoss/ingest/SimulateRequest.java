@@ -73,7 +73,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Simulates an ingest pipeline with example documents.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class SimulateRequest extends RequestBase
     implements
         PlainJsonSerializable,

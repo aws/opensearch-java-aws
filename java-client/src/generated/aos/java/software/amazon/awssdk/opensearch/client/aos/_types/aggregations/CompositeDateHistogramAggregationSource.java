@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.CompositeDateHistogramAggregationSource
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CompositeDateHistogramAggregationSource extends CompositeValuesSource
     implements
         ToCopyableBuilder<CompositeDateHistogramAggregationSource.Builder, CompositeDateHistogramAggregationSource> {

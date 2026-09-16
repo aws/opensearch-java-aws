@@ -33,7 +33,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.delete_agent.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DeleteAgentResponse extends WriteResponseBase implements ToCopyableBuilder<DeleteAgentResponse.Builder, DeleteAgentResponse> {
 
     // ---------------------------------------------------------------------------------------------

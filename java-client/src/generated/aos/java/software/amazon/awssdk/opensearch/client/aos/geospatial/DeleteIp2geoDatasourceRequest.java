@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * <strong>Minimum version:</strong> <code>2.11</code>
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteIp2geoDatasourceRequest extends RequestBase
     implements
         ToCopyableBuilder<DeleteIp2geoDatasourceRequest.Builder, DeleteIp2geoDatasourceRequest> {

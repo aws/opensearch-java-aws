@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.Script
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Script implements TaggedUnion<Script.Kind, Object>, IntervalsFilterVariant, ProcessorVariant, PlainJsonSerializable {
     /**
      * {@link Script} variant kinds.

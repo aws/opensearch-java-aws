@@ -54,7 +54,7 @@ import javax.annotation.Generated;
  * these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CharFilterDefinitionBuilders {
     private CharFilterDefinitionBuilders() {}
 

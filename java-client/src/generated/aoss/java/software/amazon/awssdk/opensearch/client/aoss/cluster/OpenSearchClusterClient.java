@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the cluster namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, OpenSearchClusterClient> {
     public OpenSearchClusterClient(OpenSearchTransport transport) {
         super(transport, null);

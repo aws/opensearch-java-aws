@@ -55,7 +55,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the ism namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchIsmClient extends ApiClient<OpenSearchTransport, OpenSearchIsmClient> {
     public OpenSearchIsmClient(OpenSearchTransport transport) {
         super(transport, null);

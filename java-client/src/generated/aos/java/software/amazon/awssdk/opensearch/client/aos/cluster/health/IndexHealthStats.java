@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.health.IndexHealthStats
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexHealthStats implements PlainJsonSerializable, ToCopyableBuilder<IndexHealthStats.Builder, IndexHealthStats> {
 
     private final int activePrimaryShards;

@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.search.FetchProfile
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FetchProfile implements PlainJsonSerializable, ToCopyableBuilder<FetchProfile.Builder, FetchProfile> {
 
     @Nonnull

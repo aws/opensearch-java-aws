@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ism.IsmTemplate
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IsmTemplate implements PlainJsonSerializable, ToCopyableBuilder<IsmTemplate.Builder, IsmTemplate> {
 
     @Nonnull

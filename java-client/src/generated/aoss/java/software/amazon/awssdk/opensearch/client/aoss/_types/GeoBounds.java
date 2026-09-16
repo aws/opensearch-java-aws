@@ -73,7 +73,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * </ul>
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GeoBounds implements TaggedUnion<GeoBounds.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link GeoBounds} variant kinds.

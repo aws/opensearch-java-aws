@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 
 // typedef: _types.aggregations.PercentageScoreHeuristic
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PercentageScoreHeuristic
     implements
         PlainJsonSerializable,

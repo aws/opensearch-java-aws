@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.IpRangeBucket
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IpRangeBucket extends MultiBucketBase implements ToCopyableBuilder<IpRangeBucket.Builder, IpRangeBucket> {
 
     @Nullable

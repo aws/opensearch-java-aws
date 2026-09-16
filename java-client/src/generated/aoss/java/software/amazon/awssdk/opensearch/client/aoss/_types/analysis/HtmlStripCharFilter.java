@@ -58,7 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.analysis.HtmlStripCharFilter
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class HtmlStripCharFilter extends CharFilterBase
     implements
         CharFilterDefinitionVariant,

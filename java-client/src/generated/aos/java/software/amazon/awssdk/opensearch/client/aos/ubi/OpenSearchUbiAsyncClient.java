@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the ubi namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchUbiAsyncClient extends ApiClient<OpenSearchTransport, OpenSearchUbiAsyncClient> {
     public OpenSearchUbiAsyncClient(OpenSearchTransport transport) {
         super(transport, null);

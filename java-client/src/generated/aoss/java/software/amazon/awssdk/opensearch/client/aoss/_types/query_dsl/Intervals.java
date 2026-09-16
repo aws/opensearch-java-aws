@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.query_dsl.IntervalsContainer
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Intervals implements TaggedUnion<Intervals.Kind, IntervalsVariant>, IntervalsFilterVariant, PlainJsonSerializable {
     /**
      * {@link Intervals} variant kinds.

@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns a document.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetRequest extends RequestBase implements ToCopyableBuilder<GetRequest.Builder, GetRequest> {
 
     @Nonnull

@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.ComponentTemplate
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ComponentTemplate implements PlainJsonSerializable, ToCopyableBuilder<ComponentTemplate.Builder, ComponentTemplate> {
 
     @Nonnull

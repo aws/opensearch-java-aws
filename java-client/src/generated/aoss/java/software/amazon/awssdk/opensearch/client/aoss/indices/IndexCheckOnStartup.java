@@ -52,7 +52,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
  * The type of check to perform when starting an index.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum IndexCheckOnStartup implements JsonEnum {
     Checksum("checksum"),
 

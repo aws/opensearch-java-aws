@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Aggregate cache statistics across all nodes.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CacheAllStats implements PlainJsonSerializable, ToCopyableBuilder<CacheAllStats.Builder, CacheAllStats> {
 
     @Nullable

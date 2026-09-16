@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.search.PhraseSuggest
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PhraseSuggest extends SuggestBase implements SuggestVariant, ToCopyableBuilder<PhraseSuggest.Builder, PhraseSuggest> {
 
     @Nonnull

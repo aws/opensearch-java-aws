@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.MovingPercentilesAggregation
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class MovingPercentilesAggregation extends PipelineAggregationBase
     implements
         ToCopyableBuilder<MovingPercentilesAggregation.Builder, MovingPercentilesAggregation> {

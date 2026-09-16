@@ -25,7 +25,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
 // typedef: ml.MlStatName
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum MlStatName implements JsonEnum {
     MlConfigIndexStatus("ml_config_index_status"),
 

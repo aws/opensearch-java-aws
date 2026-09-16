@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Deletes an index.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteIndexRequest extends RequestBase implements ToCopyableBuilder<DeleteIndexRequest.Builder, DeleteIndexRequest> {
 
     @Nullable

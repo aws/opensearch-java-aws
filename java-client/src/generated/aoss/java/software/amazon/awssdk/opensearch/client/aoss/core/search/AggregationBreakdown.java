@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.search.AggregationBreakdown
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class AggregationBreakdown implements PlainJsonSerializable, ToCopyableBuilder<AggregationBreakdown.Builder, AggregationBreakdown> {
 
     private final long buildAggregation;

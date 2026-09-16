@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * Defines how to fetch a source. Fetching can be disabled entirely, or the source can be filtered.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SourceConfig implements TaggedUnion<SourceConfig.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link SourceConfig} variant kinds.

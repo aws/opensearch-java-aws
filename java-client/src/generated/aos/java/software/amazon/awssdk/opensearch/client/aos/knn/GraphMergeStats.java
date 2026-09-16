@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: knn.GraphMergeStats
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GraphMergeStats implements PlainJsonSerializable, ToCopyableBuilder<GraphMergeStats.Builder, GraphMergeStats> {
 
     @Nullable

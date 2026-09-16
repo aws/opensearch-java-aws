@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ism.put_policies.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PutPoliciesResponse extends Metadata implements ToCopyableBuilder<PutPoliciesResponse.Builder, PutPoliciesResponse> {
 
     @Nullable

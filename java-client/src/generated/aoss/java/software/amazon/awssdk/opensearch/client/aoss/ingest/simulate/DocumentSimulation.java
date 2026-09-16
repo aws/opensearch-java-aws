@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ingest.simulate.DocumentSimulation
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DocumentSimulation implements PlainJsonSerializable, ToCopyableBuilder<DocumentSimulation.Builder, DocumentSimulation> {
 
     @Nonnull

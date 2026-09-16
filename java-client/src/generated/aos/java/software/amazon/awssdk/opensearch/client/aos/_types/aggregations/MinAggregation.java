@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.MinAggregation
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class MinAggregation extends FormatMetricAggregationBase implements ToCopyableBuilder<MinAggregation.Builder, MinAggregation> {
 
     @Nullable

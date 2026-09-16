@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.CgroupMemoryStats
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CgroupMemoryStats implements PlainJsonSerializable, ToCopyableBuilder<CgroupMemoryStats.Builder, CgroupMemoryStats> {
 
     @Nullable

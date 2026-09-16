@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns the source of a document.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetSourceRequest extends RequestBase implements ToCopyableBuilder<GetSourceRequest.Builder, GetSourceRequest> {
 
     @Nonnull

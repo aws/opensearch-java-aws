@@ -40,7 +40,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.get_task.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GetTaskResponse implements PlainJsonSerializable, ToCopyableBuilder<GetTaskResponse.Builder, GetTaskResponse> {
 
     @Nullable

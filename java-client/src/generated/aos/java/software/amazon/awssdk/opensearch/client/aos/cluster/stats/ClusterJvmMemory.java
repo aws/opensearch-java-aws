@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.stats.ClusterJvmMemory
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ClusterJvmMemory implements PlainJsonSerializable, ToCopyableBuilder<ClusterJvmMemory.Builder, ClusterJvmMemory> {
 
     @Nullable

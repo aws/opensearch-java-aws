@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The policy defines how an index is managed throughout its lifetime.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.Builder, Policy> {
 
     @Nullable

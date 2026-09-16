@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The status at the start of recovery.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RecoveryStartStatus implements PlainJsonSerializable, ToCopyableBuilder<RecoveryStartStatus.Builder, RecoveryStartStatus> {
 
     @Nullable

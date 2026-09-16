@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The statistics for a data stream.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DataStreamStats implements PlainJsonSerializable, ToCopyableBuilder<DataStreamStats.Builder, DataStreamStats> {
 
     private final int backingIndices;

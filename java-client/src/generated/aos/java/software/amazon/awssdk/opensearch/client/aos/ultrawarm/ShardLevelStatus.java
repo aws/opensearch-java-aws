@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Per-shard migration counters.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardLevelStatus implements PlainJsonSerializable, ToCopyableBuilder<ShardLevelStatus.Builder, ShardLevelStatus> {
 
     @Nullable

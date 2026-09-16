@@ -37,7 +37,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Retrieves a task.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetTaskRequest extends RequestBase implements ToCopyableBuilder<GetTaskRequest.Builder, GetTaskRequest> {
 
     @Nonnull

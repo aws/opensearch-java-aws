@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.NodeIndicesStats
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeIndicesStats extends IndexStatsBase implements ToCopyableBuilder<NodeIndicesStats.Builder, NodeIndicesStats> {
 
     @Nonnull

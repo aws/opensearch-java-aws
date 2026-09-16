@@ -70,7 +70,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Lists information related to indexes, that is, how much disk space they are using, how many shards they have, their health status, and so
  * on.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class IndicesRequest extends CatRequestBase implements ToCopyableBuilder<IndicesRequest.Builder, IndicesRequest> {
 
     @Nullable

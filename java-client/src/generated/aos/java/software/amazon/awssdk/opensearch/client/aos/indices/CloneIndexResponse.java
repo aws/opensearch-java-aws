@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.clone.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CloneIndexResponse extends AcknowledgedResponseBase
     implements
         ToCopyableBuilder<CloneIndexResponse.Builder, CloneIndexResponse> {

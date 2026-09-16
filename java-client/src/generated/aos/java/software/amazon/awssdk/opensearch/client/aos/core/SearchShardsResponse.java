@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.search_shards.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SearchShardsResponse implements PlainJsonSerializable, ToCopyableBuilder<SearchShardsResponse.Builder, SearchShardsResponse> {
 
     @Nonnull

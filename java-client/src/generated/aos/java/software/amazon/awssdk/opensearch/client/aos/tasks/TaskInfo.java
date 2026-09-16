@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: tasks.TaskInfo
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TaskInfo extends TaskInfoBase implements ToCopyableBuilder<TaskInfo.Builder, TaskInfo> {
 
     // ---------------------------------------------------------------------------------------------

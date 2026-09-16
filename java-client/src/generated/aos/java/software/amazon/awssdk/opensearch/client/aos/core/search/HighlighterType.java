@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: core.search.HighlighterType
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class HighlighterType implements TaggedUnion<HighlighterType.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link HighlighterType} variant kinds.

@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.pit.DeletedPit
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DeletedPit implements PlainJsonSerializable, ToCopyableBuilder<DeletedPit.Builder, DeletedPit> {
 
     @Nonnull

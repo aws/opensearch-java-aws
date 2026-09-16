@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The statistics for all indexes.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class AllIndicesStats implements PlainJsonSerializable, ToCopyableBuilder<AllIndicesStats.Builder, AllIndicesStats> {
 
     @Nonnull

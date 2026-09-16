@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: core.search.FieldSuggester
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FieldSuggester implements TaggedUnion<FieldSuggester.Kind, FieldSuggesterVariant>, PlainJsonSerializable {
     /**
      * {@link FieldSuggester} variant kinds.

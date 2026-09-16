@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The commit information for a shard.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardCommit implements PlainJsonSerializable, ToCopyableBuilder<ShardCommit.Builder, ShardCommit> {
 
     private final int generation;

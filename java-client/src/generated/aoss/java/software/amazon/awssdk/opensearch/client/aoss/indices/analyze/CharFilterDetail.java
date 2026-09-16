@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The character filter results.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CharFilterDetail implements PlainJsonSerializable, ToCopyableBuilder<CharFilterDetail.Builder, CharFilterDetail> {
 
     @Nonnull

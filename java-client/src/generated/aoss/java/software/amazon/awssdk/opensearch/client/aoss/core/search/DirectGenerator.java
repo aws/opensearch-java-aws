@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.search.DirectGenerator
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DirectGenerator implements PlainJsonSerializable, ToCopyableBuilder<DirectGenerator.Builder, DirectGenerator> {
 
     @Nonnull

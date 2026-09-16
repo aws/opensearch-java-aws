@@ -38,7 +38,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.PredictRequestStats
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PredictRequestStats implements PlainJsonSerializable, ToCopyableBuilder<PredictRequestStats.Builder, PredictRequestStats> {
 
     @Nullable

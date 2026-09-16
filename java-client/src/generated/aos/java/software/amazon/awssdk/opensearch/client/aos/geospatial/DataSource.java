@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: geospatial.DataSource
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DataSource implements PlainJsonSerializable, ToCopyableBuilder<DataSource.Builder, DataSource> {
 
     @Nonnull

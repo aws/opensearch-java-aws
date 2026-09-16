@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.create_pit.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CreatePitResponse implements PlainJsonSerializable, ToCopyableBuilder<CreatePitResponse.Builder, CreatePitResponse> {
 
     private final long creationTime;

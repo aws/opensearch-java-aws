@@ -52,7 +52,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
  * The nodes metrics to retrieve.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum NodesInfoMetric implements JsonEnum {
     /**
      * Returns aggregation information.

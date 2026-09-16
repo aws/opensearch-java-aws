@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.BulkByScrollTaskStatusOrException
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class BulkByScrollTaskStatusOrException
     implements
         TaggedUnion<BulkByScrollTaskStatusOrException.Kind, Object>,

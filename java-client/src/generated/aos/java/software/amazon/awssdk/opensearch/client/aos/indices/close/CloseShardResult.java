@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The result of closing shards in an index.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CloseShardResult implements PlainJsonSerializable, ToCopyableBuilder<CloseShardResult.Builder, CloseShardResult> {
 
     @Nonnull

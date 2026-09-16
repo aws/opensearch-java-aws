@@ -55,7 +55,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilderBase;
 
 // typedef: nodes.stats.CacheStatsBase
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class CacheStatsBase implements PlainJsonSerializable {
 
     @Nullable

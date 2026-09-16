@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Result of a <code>terms</code> aggregation when the field is some kind of whole number like a integer, long, or a date.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class LongTermsAggregate extends TermsAggregateBase<JsonData>
     implements
         AggregateVariant,

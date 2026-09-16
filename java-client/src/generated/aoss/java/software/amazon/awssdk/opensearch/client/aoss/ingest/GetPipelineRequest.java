@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns an ingest pipeline.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetPipelineRequest extends RequestBase implements ToCopyableBuilder<GetPipelineRequest.Builder, GetPipelineRequest> {
 
     @Nullable

@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.TermsPartition
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TermsPartition implements PlainJsonSerializable, ToCopyableBuilder<TermsPartition.Builder, TermsPartition> {
 
     private final int numPartitions;

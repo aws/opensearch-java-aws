@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Checks for the existence of a policy.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ExistsPolicyRequest extends RequestBase implements ToCopyableBuilder<ExistsPolicyRequest.Builder, ExistsPolicyRequest> {
 
     @Nonnull

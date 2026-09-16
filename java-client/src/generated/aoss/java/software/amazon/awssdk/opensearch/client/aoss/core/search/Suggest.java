@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 
 // typedef: core.search.Suggest
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Suggest<TDocument> implements TaggedUnion<Suggest.Kind, SuggestVariant>, PlainJsonSerializable {
     /**
      * {@link Suggest} variant kinds.

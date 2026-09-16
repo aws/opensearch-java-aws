@@ -55,7 +55,7 @@ import software.amazon.awssdk.opensearch.client.aos._types.Script;
  * don't have a dedicated class. Use {@link IntervalsFilter}'s builder for these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IntervalsFilterBuilders {
     private IntervalsFilterBuilders() {}
 

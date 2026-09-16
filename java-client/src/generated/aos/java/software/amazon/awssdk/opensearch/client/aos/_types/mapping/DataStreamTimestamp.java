@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.mapping.DataStreamTimestamp
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DataStreamTimestamp implements PlainJsonSerializable, ToCopyableBuilder<DataStreamTimestamp.Builder, DataStreamTimestamp> {
 
     private final boolean enabled;

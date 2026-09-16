@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: indices.StorageType
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class StorageType implements TaggedUnion<StorageType.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link StorageType} variant kinds.

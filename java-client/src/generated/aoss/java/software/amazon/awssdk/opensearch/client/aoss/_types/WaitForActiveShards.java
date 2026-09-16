@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * Waits until the specified number of shards is active before returning a response. Use <code>all</code> for all shards.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class WaitForActiveShards implements TaggedUnion<WaitForActiveShards.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link WaitForActiveShards} variant kinds.

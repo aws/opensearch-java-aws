@@ -54,7 +54,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilderBase;
 
 // typedef: core.search.SuggestBase
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class SuggestBase implements PlainJsonSerializable {
 
     private final int length;

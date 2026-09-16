@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.analysis.StopAnalyzer
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class StopAnalyzer implements AnalyzerVariant, PlainJsonSerializable, ToCopyableBuilder<StopAnalyzer.Builder, StopAnalyzer> {
 
     @Nonnull

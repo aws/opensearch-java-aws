@@ -53,7 +53,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
  * <a href="https://docs.opensearch.org/latest/api-reference/units/">Supported units</a>.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum TimeUnit implements JsonEnum {
     Days("d"),
 

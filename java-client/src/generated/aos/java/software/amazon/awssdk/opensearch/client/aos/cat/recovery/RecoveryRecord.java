@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.recovery.RecoveryRecord
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RecoveryRecord implements PlainJsonSerializable, ToCopyableBuilder<RecoveryRecord.Builder, RecoveryRecord> {
 
     @Nullable

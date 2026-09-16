@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Response from GET /_ultrawarm/migration/{index}/_status. Contains the current migration state wrapped in a migration_status object.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GetMigrationStatusResponse
     implements
         PlainJsonSerializable,

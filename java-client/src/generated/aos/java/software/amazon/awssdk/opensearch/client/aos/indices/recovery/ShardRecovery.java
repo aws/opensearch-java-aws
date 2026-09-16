@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The recovery status of a shard.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardRecovery implements PlainJsonSerializable, ToCopyableBuilder<ShardRecovery.Builder, ShardRecovery> {
 
     private final int id;

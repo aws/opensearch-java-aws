@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Represents a failure to search on a specific shard. Used in search responses.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardSearchFailure implements PlainJsonSerializable, ToCopyableBuilder<ShardSearchFailure.Builder, ShardSearchFailure> {
 
     @Nullable

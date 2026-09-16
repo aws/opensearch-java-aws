@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: snapshot.SnapshotShardFailure
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SnapshotShardFailure implements PlainJsonSerializable, ToCopyableBuilder<SnapshotShardFailure.Builder, SnapshotShardFailure> {
 
     @Nullable

@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.allocation_explain.ReservedSize
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ReservedSize implements PlainJsonSerializable, ToCopyableBuilder<ReservedSize.Builder, ReservedSize> {
 
     @Nonnull

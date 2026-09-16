@@ -68,7 +68,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The node-specific configuration settings.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoSettingsNode implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoSettingsNode.Builder, NodeInfoSettingsNode> {
 
     @Nonnull

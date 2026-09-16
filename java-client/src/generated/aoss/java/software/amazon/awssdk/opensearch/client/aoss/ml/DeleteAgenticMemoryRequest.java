@@ -37,7 +37,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Delete a specific memory by its type and ID.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteAgenticMemoryRequest extends RequestBase
     implements
         ToCopyableBuilder<DeleteAgenticMemoryRequest.Builder, DeleteAgenticMemoryRequest> {

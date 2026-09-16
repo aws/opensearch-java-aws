@@ -54,7 +54,7 @@ import javax.annotation.Generated;
  * not available here as they don't have a dedicated class. Use {@link ResponseProcessor}'s builder for these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ResponseProcessorBuilders {
     private ResponseProcessorBuilders() {}
 

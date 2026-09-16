@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 // typedef: ltr.get_featureset.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GetFeaturesetResponse extends DictionaryResponse<String, JsonData> {
     // ---------------------------------------------------------------------------------------------
 

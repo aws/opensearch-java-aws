@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The settings for the snapshot repository.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RepositorySettings implements PlainJsonSerializable, ToCopyableBuilder<RepositorySettings.Builder, RepositorySettings> {
 
     @Nullable

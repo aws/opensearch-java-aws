@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The configuration for indexing slow log.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexingSlowlog implements PlainJsonSerializable, ToCopyableBuilder<IndexingSlowlog.Builder, IndexingSlowlog> {
 
     @Nullable

@@ -37,7 +37,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Deploys a model.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeployModelRequest extends RequestBase implements ToCopyableBuilder<DeployModelRequest.Builder, DeployModelRequest> {
 
     @Nonnull

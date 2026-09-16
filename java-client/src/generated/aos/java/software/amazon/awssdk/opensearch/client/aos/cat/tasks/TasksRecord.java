@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.tasks.TasksRecord
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TasksRecord implements PlainJsonSerializable, ToCopyableBuilder<TasksRecord.Builder, TasksRecord> {
 
     @Nullable

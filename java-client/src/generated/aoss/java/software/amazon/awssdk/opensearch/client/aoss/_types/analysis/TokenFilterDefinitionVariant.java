@@ -48,7 +48,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpSerializable;
 /**
  * Base interface for {@link TokenFilterDefinition} variants.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public interface TokenFilterDefinitionVariant extends JsonpSerializable {
     TokenFilterDefinition.Kind _tokenFilterDefinitionKind();
 

@@ -58,7 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the search_relevance namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTransport, OpenSearchSearchRelevanceClient> {
     public OpenSearchSearchRelevanceClient(OpenSearchTransport transport) {
         super(transport, null);

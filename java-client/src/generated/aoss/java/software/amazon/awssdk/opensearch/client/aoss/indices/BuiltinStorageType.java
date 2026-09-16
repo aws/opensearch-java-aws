@@ -52,7 +52,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
  * The type of storage implementation.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum BuiltinStorageType implements JsonEnum {
     /**
      * Uses the default file system implementation.

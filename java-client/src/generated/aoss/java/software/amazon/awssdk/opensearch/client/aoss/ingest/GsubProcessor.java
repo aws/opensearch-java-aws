@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ingest.GsubProcessor
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GsubProcessor extends ProcessorBase implements ProcessorVariant, ToCopyableBuilder<GsubProcessor.Builder, GsubProcessor> {
 
     @Nonnull

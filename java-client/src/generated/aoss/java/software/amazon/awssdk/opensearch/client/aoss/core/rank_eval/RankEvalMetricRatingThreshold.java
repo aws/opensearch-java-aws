@@ -53,7 +53,7 @@ import software.amazon.awssdk.opensearch.client.json.ObjectDeserializer;
 
 // typedef: core.rank_eval.RankEvalMetricRatingThreshold
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class RankEvalMetricRatingThreshold extends RankEvalMetricBase {
 
     @Nullable

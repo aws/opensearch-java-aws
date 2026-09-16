@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The sequence number information for a shard.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardSequenceNumber implements PlainJsonSerializable, ToCopyableBuilder<ShardSequenceNumber.Builder, ShardSequenceNumber> {
 
     private final long globalCheckpoint;

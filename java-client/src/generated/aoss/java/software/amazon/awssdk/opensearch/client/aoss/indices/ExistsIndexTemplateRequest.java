@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns information about whether a particular index template exists.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ExistsIndexTemplateRequest extends RequestBase
     implements
         ToCopyableBuilder<ExistsIndexTemplateRequest.Builder, ExistsIndexTemplateRequest> {

@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ism.remove_policy.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RemovePolicyResponse implements PlainJsonSerializable, ToCopyableBuilder<RemovePolicyResponse.Builder, RemovePolicyResponse> {
 
     @Nonnull

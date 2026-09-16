@@ -53,7 +53,7 @@ import javax.annotation.Generated;
  * <code>script</code> are not available here as they don't have a dedicated class. Use {@link RequestProcessor}'s builder for these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RequestProcessorBuilders {
     private RequestProcessorBuilders() {}
 

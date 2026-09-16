@@ -74,7 +74,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Creates an index with optional settings and mappings.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class CreateIndexRequest extends RequestBase
     implements
         PlainJsonSerializable,

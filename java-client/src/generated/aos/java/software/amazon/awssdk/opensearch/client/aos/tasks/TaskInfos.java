@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: tasks.TaskInfos
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TaskInfos implements TaggedUnion<TaskInfos.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link TaskInfos} variant kinds.

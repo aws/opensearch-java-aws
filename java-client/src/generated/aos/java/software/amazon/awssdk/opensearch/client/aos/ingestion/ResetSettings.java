@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ingestion.ResetSettings
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ResetSettings implements PlainJsonSerializable, ToCopyableBuilder<ResetSettings.Builder, ResetSettings> {
 
     @Nonnull

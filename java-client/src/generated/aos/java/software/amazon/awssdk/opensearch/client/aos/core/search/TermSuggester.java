@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.search.TermSuggester
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TermSuggester extends SuggesterBase implements FieldSuggesterVariant, ToCopyableBuilder<TermSuggester.Builder, TermSuggester> {
 
     @Nullable

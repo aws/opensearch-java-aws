@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.MaxBucketAggregation
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class MaxBucketAggregation extends PipelineAggregationBase
     implements
         ToCopyableBuilder<MaxBucketAggregation.Builder, MaxBucketAggregation> {

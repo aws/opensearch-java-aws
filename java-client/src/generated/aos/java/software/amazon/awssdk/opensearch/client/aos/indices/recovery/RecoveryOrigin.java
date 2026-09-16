@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The source or target of a recovery operation.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RecoveryOrigin implements PlainJsonSerializable, ToCopyableBuilder<RecoveryOrigin.Builder, RecoveryOrigin> {
 
     @Nullable

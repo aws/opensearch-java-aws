@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * The policy configuration for segment merging.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexSettingsMergePolicy implements TaggedUnion<IndexSettingsMergePolicy.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link IndexSettingsMergePolicy} variant kinds.

@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ingest.GrokProcessor
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GrokProcessor extends ProcessorBase implements ProcessorVariant, ToCopyableBuilder<GrokProcessor.Builder, GrokProcessor> {
 
     @Nonnull

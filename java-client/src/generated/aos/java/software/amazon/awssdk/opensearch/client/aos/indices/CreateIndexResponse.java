@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.create.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CreateIndexResponse implements PlainJsonSerializable, ToCopyableBuilder<CreateIndexResponse.Builder, CreateIndexResponse> {
 
     private final boolean acknowledged;

@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The transport layer information.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoTransport implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoTransport.Builder, NodeInfoTransport> {
 
     @Nonnull

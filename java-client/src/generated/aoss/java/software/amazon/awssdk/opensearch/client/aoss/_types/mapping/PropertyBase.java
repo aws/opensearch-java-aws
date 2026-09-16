@@ -59,7 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilderBase;
 
 // typedef: _types.mapping.PropertyBase
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class PropertyBase implements PlainJsonSerializable {
 
     @Nullable

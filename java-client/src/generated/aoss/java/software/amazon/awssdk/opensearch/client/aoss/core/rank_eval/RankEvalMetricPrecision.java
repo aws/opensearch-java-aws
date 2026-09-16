@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.rank_eval.RankEvalMetricPrecision
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RankEvalMetricPrecision extends RankEvalMetricRatingThreshold
     implements
         ToCopyableBuilder<RankEvalMetricPrecision.Builder, RankEvalMetricPrecision> {

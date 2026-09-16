@@ -75,7 +75,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Returns information about why a specific document matches (or doesn't match) a query.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ExplainRequest extends RequestBase
     implements
         PlainJsonSerializable,

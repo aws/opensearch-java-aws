@@ -52,7 +52,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
  * The state of shard routing.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum ShardRoutingState implements JsonEnum {
     Initializing("INITIALIZING"),
 

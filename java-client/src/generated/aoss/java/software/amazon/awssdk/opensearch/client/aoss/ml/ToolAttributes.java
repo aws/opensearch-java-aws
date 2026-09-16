@@ -42,7 +42,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.ToolAttributes
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ToolAttributes implements PlainJsonSerializable, ToCopyableBuilder<ToolAttributes.Builder, ToolAttributes> {
 
     @Nonnull

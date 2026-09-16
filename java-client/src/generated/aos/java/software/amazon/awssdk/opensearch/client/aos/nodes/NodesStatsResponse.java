@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The response containing node statistics.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodesStatsResponse extends NodesResponseBase implements ToCopyableBuilder<NodesStatsResponse.Builder, NodesStatsResponse> {
 
     @Nullable

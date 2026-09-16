@@ -59,7 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * The delete action configuration.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ActionDelete implements PlainJsonSerializable, ToCopyableBuilder<ActionDelete.Builder, ActionDelete> {
 
     // ---------------------------------------------------------------------------------------------

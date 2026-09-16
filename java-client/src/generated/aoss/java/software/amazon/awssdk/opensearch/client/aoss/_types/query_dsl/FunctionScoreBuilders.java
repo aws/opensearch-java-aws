@@ -53,7 +53,7 @@ import javax.annotation.Generated;
  * <code>script_score</code> are not available here as they don't have a dedicated class. Use {@link FunctionScore}'s builder for these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FunctionScoreBuilders {
     private FunctionScoreBuilders() {}
 

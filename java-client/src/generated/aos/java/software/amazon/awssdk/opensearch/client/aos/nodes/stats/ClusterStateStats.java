@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.ClusterStateStats
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ClusterStateStats implements PlainJsonSerializable, ToCopyableBuilder<ClusterStateStats.Builder, ClusterStateStats> {
 
     @Nullable

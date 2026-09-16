@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The statistics related to remote segment store operations.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RemoteStoreStats implements PlainJsonSerializable, ToCopyableBuilder<RemoteStoreStats.Builder, RemoteStoreStats> {
 
     @Nonnull

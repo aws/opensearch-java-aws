@@ -68,7 +68,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns information about whether a document source exists in an index.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ExistsSourceRequest extends RequestBase implements ToCopyableBuilder<ExistsSourceRequest.Builder, ExistsSourceRequest> {
 
     @Nonnull

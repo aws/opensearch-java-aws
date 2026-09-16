@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.stats.ClusterShardMetrics
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ClusterShardMetrics implements PlainJsonSerializable, ToCopyableBuilder<ClusterShardMetrics.Builder, ClusterShardMetrics> {
 
     private final double avg;

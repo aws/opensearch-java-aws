@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.stats.IndicesVersions
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndicesVersions implements PlainJsonSerializable, ToCopyableBuilder<IndicesVersions.Builder, IndicesVersions> {
 
     private final int indexCount;

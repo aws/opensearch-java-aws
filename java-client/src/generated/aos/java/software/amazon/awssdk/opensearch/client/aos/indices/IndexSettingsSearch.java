@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The configuration for search operations.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexSettingsSearch implements PlainJsonSerializable, ToCopyableBuilder<IndexSettingsSearch.Builder, IndexSettingsSearch> {
 
     @Nullable

@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.rank_eval.UnratedDocument
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class UnratedDocument implements PlainJsonSerializable, ToCopyableBuilder<UnratedDocument.Builder, UnratedDocument> {
 
     @Nonnull

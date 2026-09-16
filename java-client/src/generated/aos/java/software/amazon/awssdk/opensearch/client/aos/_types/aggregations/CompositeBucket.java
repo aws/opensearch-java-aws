@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.CompositeBucket
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CompositeBucket extends MultiBucketBase implements ToCopyableBuilder<CompositeBucket.Builder, CompositeBucket> {
 
     @Nonnull

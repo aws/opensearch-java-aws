@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The statistics about resource usage.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ResourceStats implements PlainJsonSerializable, ToCopyableBuilder<ResourceStats.Builder, ResourceStats> {
 
     @Nonnull

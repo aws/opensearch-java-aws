@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.AverageBucketAggregation
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class AverageBucketAggregation extends PipelineAggregationBase
     implements
         ToCopyableBuilder<AverageBucketAggregation.Builder, AverageBucketAggregation> {

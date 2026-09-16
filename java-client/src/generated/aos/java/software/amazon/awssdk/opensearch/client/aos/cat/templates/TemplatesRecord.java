@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.templates.TemplatesRecord
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TemplatesRecord implements PlainJsonSerializable, ToCopyableBuilder<TemplatesRecord.Builder, TemplatesRecord> {
 
     @Nullable

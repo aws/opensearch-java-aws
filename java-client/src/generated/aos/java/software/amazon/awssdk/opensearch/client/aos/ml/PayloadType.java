@@ -28,7 +28,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
  * The type of payload.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum PayloadType implements JsonEnum {
     Conversational("conversational"),
 

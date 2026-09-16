@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: snapshot.SnapshotIndexStats
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SnapshotIndexStats implements PlainJsonSerializable, ToCopyableBuilder<SnapshotIndexStats.Builder, SnapshotIndexStats> {
 
     @Nonnull

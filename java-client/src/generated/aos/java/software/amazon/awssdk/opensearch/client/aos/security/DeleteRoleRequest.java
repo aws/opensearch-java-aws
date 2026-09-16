@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * <strong>Minimum version:</strong> <code>1.0</code>
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteRoleRequest extends RequestBase implements ToCopyableBuilder<DeleteRoleRequest.Builder, DeleteRoleRequest> {
 
     @Nonnull

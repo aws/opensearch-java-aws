@@ -69,7 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns information about whether a particular index exists.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ExistsRequest extends RequestBase implements ToCopyableBuilder<ExistsRequest.Builder, ExistsRequest> {
 
     @Nullable

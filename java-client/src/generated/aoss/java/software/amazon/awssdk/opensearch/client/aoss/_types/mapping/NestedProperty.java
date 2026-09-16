@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.mapping.NestedProperty
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NestedProperty extends CorePropertyBase implements PropertyVariant, ToCopyableBuilder<NestedProperty.Builder, NestedProperty> {
 
     @Nullable

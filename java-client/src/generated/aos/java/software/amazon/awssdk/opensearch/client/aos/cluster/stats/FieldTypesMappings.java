@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.stats.FieldTypesMappings
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FieldTypesMappings implements PlainJsonSerializable, ToCopyableBuilder<FieldTypesMappings.Builder, FieldTypesMappings> {
 
     @Nonnull

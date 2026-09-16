@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The statistics about request cache operations.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RequestCacheStats implements PlainJsonSerializable, ToCopyableBuilder<RequestCacheStats.Builder, RequestCacheStats> {
 
     private final long evictions;

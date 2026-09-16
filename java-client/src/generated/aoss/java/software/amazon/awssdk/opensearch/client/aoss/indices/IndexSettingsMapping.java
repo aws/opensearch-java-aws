@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The mapping configuration for the index.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexSettingsMapping implements PlainJsonSerializable, ToCopyableBuilder<IndexSettingsMapping.Builder, IndexSettingsMapping> {
 
     @Nullable

@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.allocation_explain.ClusterInfo
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ClusterInfo implements PlainJsonSerializable, ToCopyableBuilder<ClusterInfo.Builder, ClusterInfo> {
 
     @Nonnull

@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.cluster_manager.ClusterManagerRecord
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ClusterManagerRecord implements PlainJsonSerializable, ToCopyableBuilder<ClusterManagerRecord.Builder, ClusterManagerRecord> {
 
     @Nullable

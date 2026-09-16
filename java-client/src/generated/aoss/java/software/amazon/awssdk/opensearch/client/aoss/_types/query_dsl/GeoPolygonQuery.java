@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.query_dsl.GeoPolygonQuery
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GeoPolygonQuery extends QueryBase implements QueryVariant, ToCopyableBuilder<GeoPolygonQuery.Builder, GeoPolygonQuery> {
 
     @Nonnull

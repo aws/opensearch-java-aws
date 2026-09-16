@@ -72,7 +72,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The text analysis configuration.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexSettingsAnalysis
     implements
         PlainJsonSerializable,

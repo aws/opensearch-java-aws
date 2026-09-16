@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.query_dsl.ParentIdQuery
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ParentIdQuery extends QueryBase implements QueryVariant, ToCopyableBuilder<ParentIdQuery.Builder, ParentIdQuery> {
 
     @Nullable

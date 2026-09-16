@@ -55,7 +55,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilderBase;
 
 // typedef: nodes.stats.MemoryStatsBase
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class MemoryStatsBase implements PlainJsonSerializable {
 
     @Nullable

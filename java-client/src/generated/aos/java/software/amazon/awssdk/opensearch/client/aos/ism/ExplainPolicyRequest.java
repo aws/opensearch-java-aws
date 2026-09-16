@@ -71,7 +71,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Retrieves the currently applied policy on the specified indexes.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ExplainPolicyRequest extends RequestBase
     implements
         PlainJsonSerializable,

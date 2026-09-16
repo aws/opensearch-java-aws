@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.analysis.CharFilterDefinition
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CharFilterDefinition implements TaggedUnion<CharFilterDefinition.Kind, CharFilterDefinitionVariant>, PlainJsonSerializable {
     /**
      * {@link CharFilterDefinition} variant kinds.

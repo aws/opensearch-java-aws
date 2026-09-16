@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: knn.delete_model.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DeleteModelResponse implements PlainJsonSerializable, ToCopyableBuilder<DeleteModelResponse.Builder, DeleteModelResponse> {
 
     @Nonnull

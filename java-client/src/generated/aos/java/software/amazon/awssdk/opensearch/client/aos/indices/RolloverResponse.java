@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.rollover.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RolloverResponse extends AcknowledgedResponseBase implements ToCopyableBuilder<RolloverResponse.Builder, RolloverResponse> {
 
     @Nonnull

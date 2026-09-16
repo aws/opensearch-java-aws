@@ -25,7 +25,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
 // typedef: ml.ModelFormat
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum ModelFormat implements JsonEnum {
     Onnx("ONNX"),
 

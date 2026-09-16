@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: cluster.remote_info.ClusterRemoteInfo
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ClusterRemoteInfo implements TaggedUnion<ClusterRemoteInfo.Kind, ClusterRemoteInfoVariant>, PlainJsonSerializable {
     /**
      * {@link ClusterRemoteInfo} variant kinds.

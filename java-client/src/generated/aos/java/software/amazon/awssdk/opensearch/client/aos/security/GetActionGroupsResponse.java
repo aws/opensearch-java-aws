@@ -55,7 +55,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 // typedef: security.get_action_groups.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GetActionGroupsResponse extends DictionaryResponse<String, ActionGroup> {
     // ---------------------------------------------------------------------------------------------
 

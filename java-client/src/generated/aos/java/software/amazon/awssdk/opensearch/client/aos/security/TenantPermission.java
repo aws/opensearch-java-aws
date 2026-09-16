@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.TenantPermission
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TenantPermission implements PlainJsonSerializable, ToCopyableBuilder<TenantPermission.Builder, TenantPermission> {
 
     @Nonnull

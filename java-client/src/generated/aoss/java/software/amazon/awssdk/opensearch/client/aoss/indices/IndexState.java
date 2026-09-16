@@ -68,7 +68,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The state configuration of an index.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexState implements PlainJsonSerializable, ToCopyableBuilder<IndexState.Builder, IndexState> {
 
     @Nonnull

@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The configuration for overlapping index templates.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Overlapping implements PlainJsonSerializable, ToCopyableBuilder<Overlapping.Builder, Overlapping> {
 
     @Nonnull

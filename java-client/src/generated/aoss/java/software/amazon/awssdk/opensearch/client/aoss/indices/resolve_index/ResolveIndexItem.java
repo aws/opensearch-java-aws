@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The resolved information for an index.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ResolveIndexItem implements PlainJsonSerializable, ToCopyableBuilder<ResolveIndexItem.Builder, ResolveIndexItem> {
 
     @Nonnull

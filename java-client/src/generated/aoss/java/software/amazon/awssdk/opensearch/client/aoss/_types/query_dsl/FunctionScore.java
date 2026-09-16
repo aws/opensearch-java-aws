@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.query_dsl.FunctionScoreContainer
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FunctionScore implements TaggedUnion<FunctionScore.Kind, FunctionScoreVariant>, PlainJsonSerializable {
     /**
      * {@link FunctionScore} variant kinds.

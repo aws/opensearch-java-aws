@@ -48,7 +48,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpSerializable;
 /**
  * Base interface for {@link Normalizer} variants.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public interface NormalizerVariant extends JsonpSerializable {
     Normalizer.Kind _normalizerKind();
 

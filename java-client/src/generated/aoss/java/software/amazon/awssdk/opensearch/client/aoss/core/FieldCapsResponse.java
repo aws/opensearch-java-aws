@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.field_caps.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FieldCapsResponse implements PlainJsonSerializable, ToCopyableBuilder<FieldCapsResponse.Builder, FieldCapsResponse> {
 
     @Nonnull

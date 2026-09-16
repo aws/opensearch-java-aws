@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.ChiSquareHeuristic
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ChiSquareHeuristic implements PlainJsonSerializable, ToCopyableBuilder<ChiSquareHeuristic.Builder, ChiSquareHeuristic> {
 
     private final boolean backgroundIsSuperset;

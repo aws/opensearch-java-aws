@@ -58,7 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 
 // typedef: core.search.CompletionSuggest
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CompletionSuggest<TDocument> extends SuggestBase
     implements
         SuggestVariant,

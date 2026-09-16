@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ism.PolicyWithMetadata
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PolicyWithMetadata implements PlainJsonSerializable, ToCopyableBuilder<PolicyWithMetadata.Builder, PolicyWithMetadata> {
 
     @Nullable

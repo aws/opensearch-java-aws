@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.ScriptStats
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ScriptStats extends ScriptStatsBase implements ToCopyableBuilder<ScriptStats.Builder, ScriptStats> {
 
     // ---------------------------------------------------------------------------------------------

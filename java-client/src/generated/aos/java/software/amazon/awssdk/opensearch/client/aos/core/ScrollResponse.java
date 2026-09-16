@@ -58,7 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.scroll.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ScrollResponse<TDocument> extends SearchResult<TDocument>
     implements
         ToCopyableBuilder<ScrollResponse.Builder<TDocument>, ScrollResponse<TDocument>> {

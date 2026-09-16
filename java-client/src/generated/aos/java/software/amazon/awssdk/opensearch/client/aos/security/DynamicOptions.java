@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.DynamicOptions
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DynamicOptions implements PlainJsonSerializable, ToCopyableBuilder<DynamicOptions.Builder, DynamicOptions> {
 
     @Nonnull

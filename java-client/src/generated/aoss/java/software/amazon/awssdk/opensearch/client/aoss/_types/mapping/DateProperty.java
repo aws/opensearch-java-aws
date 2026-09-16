@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.mapping.DateProperty
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DateProperty extends DocValuesPropertyBase implements PropertyVariant, ToCopyableBuilder<DateProperty.Builder, DateProperty> {
 
     @Nullable

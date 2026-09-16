@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The configuration for an index alias.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class AliasDefinition implements PlainJsonSerializable, ToCopyableBuilder<AliasDefinition.Builder, AliasDefinition> {
 
     @Nullable

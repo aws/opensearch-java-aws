@@ -47,7 +47,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Update a memory container.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class UpdateMemoryContainerRequest extends RequestBase
     implements
         PlainJsonSerializable,

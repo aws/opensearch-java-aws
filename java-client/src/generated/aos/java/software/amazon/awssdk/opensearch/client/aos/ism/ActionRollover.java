@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ism.ActionRollover
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ActionRollover implements PlainJsonSerializable, ToCopyableBuilder<ActionRollover.Builder, ActionRollover> {
 
     @Nullable

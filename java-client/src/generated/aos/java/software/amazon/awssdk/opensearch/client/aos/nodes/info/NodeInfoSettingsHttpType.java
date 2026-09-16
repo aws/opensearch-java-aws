@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * The HTTP server type configuration.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoSettingsHttpType implements TaggedUnion<NodeInfoSettingsHttpType.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link NodeInfoSettingsHttpType} variant kinds.

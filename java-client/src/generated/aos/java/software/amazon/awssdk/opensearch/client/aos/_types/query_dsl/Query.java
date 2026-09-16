@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.query_dsl.QueryContainer
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Query implements TaggedUnion<Query.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link Query} variant kinds.

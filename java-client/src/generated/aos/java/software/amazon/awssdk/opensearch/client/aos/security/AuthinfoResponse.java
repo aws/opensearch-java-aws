@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.authinfo.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class AuthinfoResponse implements PlainJsonSerializable, ToCopyableBuilder<AuthinfoResponse.Builder, AuthinfoResponse> {
 
     @Nonnull

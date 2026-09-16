@@ -47,7 +47,7 @@ import javax.annotation.Generated;
 /**
  * Base interface for {@link SpanQuery} variants.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public interface SpanQueryVariant {
     SpanQuery.Kind _spanQueryKind();
 

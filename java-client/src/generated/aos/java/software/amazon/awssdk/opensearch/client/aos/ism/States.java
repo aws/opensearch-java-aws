@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The list of actions to perform and transitions to enter a new state.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class States implements PlainJsonSerializable, ToCopyableBuilder<States.Builder, States> {
 
     @Nonnull

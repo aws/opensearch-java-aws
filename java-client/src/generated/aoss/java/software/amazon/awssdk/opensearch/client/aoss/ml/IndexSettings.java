@@ -42,7 +42,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.IndexSettings
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<IndexSettings.Builder, IndexSettings> {
 
     @Nullable

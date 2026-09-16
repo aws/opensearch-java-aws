@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.KeyedProcessor
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class KeyedProcessor implements PlainJsonSerializable, ToCopyableBuilder<KeyedProcessor.Builder, KeyedProcessor> {
 
     @Nullable

@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.cache_stats.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CacheStatsResponse extends NodesResponseBase implements ToCopyableBuilder<CacheStatsResponse.Builder, CacheStatsResponse> {
 
     @Nullable

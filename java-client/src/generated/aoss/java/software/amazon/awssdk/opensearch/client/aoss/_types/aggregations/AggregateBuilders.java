@@ -65,7 +65,7 @@ import javax.annotation.Generated;
  * as they don't have a dedicated class. Use {@link Aggregate}'s builder for these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class AggregateBuilders {
     private AggregateBuilders() {}
 

@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Provides CPU information for the node.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoOSCPU implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoOSCPU.Builder, NodeInfoOSCPU> {
 
     @Nonnull

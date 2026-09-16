@@ -59,7 +59,7 @@ import software.amazon.awssdk.opensearch.client.aos._types.Script;
  * <code>user_agent</code> are not available here as they don't have a dedicated class. Use {@link Processor}'s builder for these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ProcessorBuilders {
     private ProcessorBuilders() {}
 

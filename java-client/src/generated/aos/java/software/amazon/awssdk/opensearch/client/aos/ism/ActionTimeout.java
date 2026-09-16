@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ism.ActionTimeout
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ActionTimeout implements PlainJsonSerializable, ToCopyableBuilder<ActionTimeout.Builder, ActionTimeout> {
 
     @Nonnull

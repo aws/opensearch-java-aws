@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * &quot;1km&quot; or &quot;10m&quot;.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GeoHashPrecision implements TaggedUnion<GeoHashPrecision.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link GeoHashPrecision} variant kinds.

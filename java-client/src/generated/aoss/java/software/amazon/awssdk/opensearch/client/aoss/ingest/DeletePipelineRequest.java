@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Deletes an ingest pipeline.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeletePipelineRequest extends RequestBase
     implements
         ToCopyableBuilder<DeletePipelineRequest.Builder, DeletePipelineRequest> {

@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ism.ActionRetry
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ActionRetry implements PlainJsonSerializable, ToCopyableBuilder<ActionRetry.Builder, ActionRetry> {
 
     @Nullable

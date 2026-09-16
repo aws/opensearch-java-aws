@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.modify_data_stream.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ModifyDataStreamResponse extends AcknowledgedResponseBase
     implements
         ToCopyableBuilder<ModifyDataStreamResponse.Builder, ModifyDataStreamResponse> {

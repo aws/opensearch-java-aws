@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * Text or location that we want similar documents for or a lookup to a document's field for the text.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Context implements TaggedUnion<Context.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link Context} variant kinds.

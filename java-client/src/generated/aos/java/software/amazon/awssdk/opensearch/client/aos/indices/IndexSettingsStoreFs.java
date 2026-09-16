@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The filesystem storage configuration.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexSettingsStoreFs implements PlainJsonSerializable, ToCopyableBuilder<IndexSettingsStoreFs.Builder, IndexSettingsStoreFs> {
 
     @Nullable

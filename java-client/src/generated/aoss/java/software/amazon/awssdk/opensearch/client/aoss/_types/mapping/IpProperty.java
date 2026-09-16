@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.mapping.IpProperty
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IpProperty extends DocValuesPropertyBase implements PropertyVariant, ToCopyableBuilder<IpProperty.Builder, IpProperty> {
 
     @Nullable

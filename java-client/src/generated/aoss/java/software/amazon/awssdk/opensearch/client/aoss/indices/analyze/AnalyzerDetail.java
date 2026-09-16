@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The analyzer results.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class AnalyzerDetail implements PlainJsonSerializable, ToCopyableBuilder<AnalyzerDetail.Builder, AnalyzerDetail> {
 
     @Nonnull

@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The details of a recovered file.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FileDetails implements PlainJsonSerializable, ToCopyableBuilder<FileDetails.Builder, FileDetails> {
 
     private final long length;

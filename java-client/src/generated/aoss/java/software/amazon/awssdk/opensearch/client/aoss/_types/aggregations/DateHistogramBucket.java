@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.DateHistogramBucket
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DateHistogramBucket extends MultiBucketBase implements ToCopyableBuilder<DateHistogramBucket.Builder, DateHistogramBucket> {
 
     private final long key;

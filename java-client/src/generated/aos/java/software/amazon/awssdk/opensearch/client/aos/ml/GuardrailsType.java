@@ -28,7 +28,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
  * The guardrails type.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum GuardrailsType implements JsonEnum {
     LocalRegex("local_regex"),
 

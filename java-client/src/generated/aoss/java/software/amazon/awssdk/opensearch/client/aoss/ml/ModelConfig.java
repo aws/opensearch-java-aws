@@ -38,7 +38,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.ModelConfig
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ModelConfig implements PlainJsonSerializable, ToCopyableBuilder<ModelConfig.Builder, ModelConfig> {
 
     @Nullable

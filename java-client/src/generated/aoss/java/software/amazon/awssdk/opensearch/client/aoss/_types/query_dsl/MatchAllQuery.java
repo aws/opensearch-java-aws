@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.query_dsl.MatchAllQuery
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class MatchAllQuery extends QueryBase implements QueryVariant, ToCopyableBuilder<MatchAllQuery.Builder, MatchAllQuery> {
 
     // ---------------------------------------------------------------------------------------------

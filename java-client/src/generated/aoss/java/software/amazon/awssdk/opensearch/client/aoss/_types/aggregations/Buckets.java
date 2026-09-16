@@ -69,7 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * Aggregation buckets. By default they are returned as an array, but if the aggregation has keys configured for the different buckets, the
  * result is a dictionary.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Buckets<TBucket> implements TaggedUnion<Buckets.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link Buckets} variant kinds.

@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.termvectors.FieldStatistics
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FieldStatistics implements PlainJsonSerializable, ToCopyableBuilder<FieldStatistics.Builder, FieldStatistics> {
 
     private final int docCount;

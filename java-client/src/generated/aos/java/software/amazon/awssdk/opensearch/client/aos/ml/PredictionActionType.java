@@ -28,7 +28,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
  * The action type for model prediction.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum PredictionActionType implements JsonEnum {
     BatchPredict("batch_predict"),
 

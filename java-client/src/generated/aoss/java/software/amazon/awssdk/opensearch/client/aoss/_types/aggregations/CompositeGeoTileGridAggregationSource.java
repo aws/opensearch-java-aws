@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.CompositeGeoTileGridAggregationSource
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CompositeGeoTileGridAggregationSource extends CompositeValuesSource
     implements
         ToCopyableBuilder<CompositeGeoTileGridAggregationSource.Builder, CompositeGeoTileGridAggregationSource> {

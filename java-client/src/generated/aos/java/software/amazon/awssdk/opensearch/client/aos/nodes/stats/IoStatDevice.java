@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.IoStatDevice
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IoStatDevice implements PlainJsonSerializable, ToCopyableBuilder<IoStatDevice.Builder, IoStatDevice> {
 
     @Nullable

@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The geographical bounds specified using coordinate values.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CoordsGeoBounds implements PlainJsonSerializable, ToCopyableBuilder<CoordsGeoBounds.Builder, CoordsGeoBounds> {
 
     private final double bottom;

@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the nodes namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class OpenSearchNodesAsyncClientBase<Self extends OpenSearchNodesAsyncClientBase<Self>> extends ApiClient<
     OpenSearchTransport,
     Self> {

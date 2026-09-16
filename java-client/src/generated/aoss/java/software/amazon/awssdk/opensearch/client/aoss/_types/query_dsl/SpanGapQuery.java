@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Can only be used as a clause in a <code>span_near</code> query.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SpanGapQuery implements SpanQueryVariant, PlainJsonSerializable, ToCopyableBuilder<SpanGapQuery.Builder, SpanGapQuery> {
 
     @Nonnull

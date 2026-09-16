@@ -47,7 +47,7 @@ import javax.annotation.Generated;
 /**
  * Base interface for {@link FieldSuggester} variants.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public interface FieldSuggesterVariant {
     FieldSuggester.Kind _fieldSuggesterKind();
 

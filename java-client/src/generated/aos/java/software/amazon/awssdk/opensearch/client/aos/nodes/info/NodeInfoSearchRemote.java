@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The remote search connection configuration.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoSearchRemote implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoSearchRemote.Builder, NodeInfoSearchRemote> {
 
     @Nonnull

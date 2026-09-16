@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Lists the names, patterns, order numbers, and version numbers of index templates.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class TemplatesRequest extends CatRequestBase implements ToCopyableBuilder<TemplatesRequest.Builder, TemplatesRequest> {
 
     @Nullable

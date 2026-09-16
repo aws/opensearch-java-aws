@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.query_dsl.MatchPhraseQuery
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class MatchPhraseQuery extends QueryBase implements QueryVariant, ToCopyableBuilder<MatchPhraseQuery.Builder, MatchPhraseQuery> {
 
     @Nullable

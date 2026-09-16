@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.query_dsl.SpanQuery
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SpanQuery implements TaggedUnion<SpanQuery.Kind, SpanQueryVariant>, PlainJsonSerializable {
     /**
      * {@link SpanQuery} variant kinds.

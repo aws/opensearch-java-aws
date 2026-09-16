@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.query_dsl.FuzzyQuery
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FuzzyQuery extends QueryBase implements QueryVariant, ToCopyableBuilder<FuzzyQuery.Builder, FuzzyQuery> {
 
     @Nonnull

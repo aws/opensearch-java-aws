@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * The action to perform on the backing indexes of a data stream.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Action implements TaggedUnion<Action.Kind, ActionVariant>, PlainJsonSerializable {
     /**
      * {@link Action} variant kinds.

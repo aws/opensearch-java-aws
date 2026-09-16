@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Any statistics about CPU and memory usage.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ResourceStat implements PlainJsonSerializable, ToCopyableBuilder<ResourceStat.Builder, ResourceStat> {
 
     private final long cpuTimeInNanos;

@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.query_dsl.CommonTermsQuery
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CommonTermsQuery extends QueryBase implements QueryVariant, ToCopyableBuilder<CommonTermsQuery.Builder, CommonTermsQuery> {
 
     @Nullable

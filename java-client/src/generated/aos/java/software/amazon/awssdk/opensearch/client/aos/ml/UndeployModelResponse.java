@@ -31,7 +31,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 // typedef: ml.undeploy_model.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class UndeployModelResponse extends DictionaryResponse<String, UndeployModelNode> {
     // ---------------------------------------------------------------------------------------------
 

@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * A single entry in the cluster-wide migration status list.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class MigrationStatusEntry implements PlainJsonSerializable, ToCopyableBuilder<MigrationStatusEntry.Builder, MigrationStatusEntry> {
 
     @Nullable

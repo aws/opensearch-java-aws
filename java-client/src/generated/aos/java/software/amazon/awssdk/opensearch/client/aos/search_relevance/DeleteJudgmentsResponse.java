@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: search_relevance.delete_judgments.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DeleteJudgmentsResponse extends WriteResponseBase
     implements
         ToCopyableBuilder<DeleteJudgmentsResponse.Builder, DeleteJudgmentsResponse> {

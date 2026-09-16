@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns an index template.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetIndexTemplateRequest extends RequestBase
     implements
         ToCopyableBuilder<GetIndexTemplateRequest.Builder, GetIndexTemplateRequest> {

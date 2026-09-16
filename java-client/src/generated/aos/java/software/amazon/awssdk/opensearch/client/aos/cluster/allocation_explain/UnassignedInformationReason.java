@@ -49,7 +49,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
 // typedef: cluster.allocation_explain.UnassignedInformationReason
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum UnassignedInformationReason implements JsonEnum {
     AllocationFailed("ALLOCATION_FAILED"),
 

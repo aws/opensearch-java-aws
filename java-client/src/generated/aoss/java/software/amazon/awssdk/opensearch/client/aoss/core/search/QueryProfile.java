@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.search.QueryProfile
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class QueryProfile implements PlainJsonSerializable, ToCopyableBuilder<QueryProfile.Builder, QueryProfile> {
 
     @Nonnull

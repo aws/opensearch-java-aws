@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilderBase;
 /**
  * Provides base response structure for node-related operations.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class NodesResponseBase implements PlainJsonSerializable {
 
     @Nullable

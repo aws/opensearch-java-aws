@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.put_settings.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PutIndicesSettingsResponse extends AcknowledgedResponseBase
     implements
         ToCopyableBuilder<PutIndicesSettingsResponse.Builder, PutIndicesSettingsResponse> {

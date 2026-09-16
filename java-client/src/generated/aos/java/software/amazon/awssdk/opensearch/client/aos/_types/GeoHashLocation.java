@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The geographical location specified using a geohash.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GeoHashLocation implements PlainJsonSerializable, ToCopyableBuilder<GeoHashLocation.Builder, GeoHashLocation> {
 
     @Nonnull

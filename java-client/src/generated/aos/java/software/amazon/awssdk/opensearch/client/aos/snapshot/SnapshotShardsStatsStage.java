@@ -49,7 +49,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
 // typedef: snapshot.SnapshotShardsStatsStage
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum SnapshotShardsStatsStage implements JsonEnum {
     /**
      * The number of shards in the snapshot that were successfully stored in the repository.

@@ -55,7 +55,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 // typedef: security.get_role_mappings.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GetRoleMappingsResponse extends DictionaryResponse<String, RoleMapping> {
     // ---------------------------------------------------------------------------------------------
 

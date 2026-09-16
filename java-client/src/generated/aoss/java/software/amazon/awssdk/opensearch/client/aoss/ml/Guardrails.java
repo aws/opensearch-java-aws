@@ -42,7 +42,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.Guardrails
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Guardrails implements PlainJsonSerializable, ToCopyableBuilder<Guardrails.Builder, Guardrails> {
 
     @Nullable

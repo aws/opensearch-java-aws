@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The routing information for a shard.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardRouting implements PlainJsonSerializable, ToCopyableBuilder<ShardRouting.Builder, ShardRouting> {
 
     @Nonnull

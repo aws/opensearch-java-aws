@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.search_shards.ShardStoreIndex
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardStoreIndex implements PlainJsonSerializable, ToCopyableBuilder<ShardStoreIndex.Builder, ShardStoreIndex> {
 
     @Nonnull

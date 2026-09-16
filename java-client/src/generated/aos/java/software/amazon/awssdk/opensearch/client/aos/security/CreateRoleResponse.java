@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.create_role.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CreateRoleResponse implements PlainJsonSerializable, ToCopyableBuilder<CreateRoleResponse.Builder, CreateRoleResponse> {
 
     @Nullable

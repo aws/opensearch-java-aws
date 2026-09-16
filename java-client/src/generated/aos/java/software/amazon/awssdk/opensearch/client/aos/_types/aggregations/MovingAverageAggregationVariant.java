@@ -48,7 +48,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpSerializable;
 /**
  * Base interface for {@link MovingAverageAggregation} variants.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public interface MovingAverageAggregationVariant extends JsonpSerializable {
     MovingAverageAggregation.Kind _movingAverageAggregationKind();
 

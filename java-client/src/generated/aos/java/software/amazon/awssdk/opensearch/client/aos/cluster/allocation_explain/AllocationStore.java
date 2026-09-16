@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.allocation_explain.AllocationStore
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class AllocationStore implements PlainJsonSerializable, ToCopyableBuilder<AllocationStore.Builder, AllocationStore> {
 
     @Nonnull

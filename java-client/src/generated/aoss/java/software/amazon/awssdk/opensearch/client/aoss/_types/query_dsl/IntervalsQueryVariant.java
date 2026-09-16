@@ -47,7 +47,7 @@ import javax.annotation.Generated;
 /**
  * Base interface for {@link IntervalsQuery} variants.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public interface IntervalsQueryVariant {
     IntervalsQuery.Kind _intervalsQueryKind();
 }

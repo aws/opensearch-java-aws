@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.allocation.AllocationRecord
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class AllocationRecord implements PlainJsonSerializable, ToCopyableBuilder<AllocationRecord.Builder, AllocationRecord> {
 
     @Nullable

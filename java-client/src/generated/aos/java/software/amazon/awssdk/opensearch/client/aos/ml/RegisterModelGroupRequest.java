@@ -48,7 +48,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Registers a model group.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class RegisterModelGroupRequest extends RequestBase
     implements
         PlainJsonSerializable,

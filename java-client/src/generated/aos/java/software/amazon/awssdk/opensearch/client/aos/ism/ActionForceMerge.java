@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ism.ActionForceMerge
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ActionForceMerge implements PlainJsonSerializable, ToCopyableBuilder<ActionForceMerge.Builder, ActionForceMerge> {
 
     @Nullable

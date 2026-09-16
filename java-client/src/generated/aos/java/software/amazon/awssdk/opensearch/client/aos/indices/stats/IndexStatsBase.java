@@ -75,7 +75,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilderBase;
 /**
  * The base statistics for an index.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class IndexStatsBase implements PlainJsonSerializable {
 
     @Nullable

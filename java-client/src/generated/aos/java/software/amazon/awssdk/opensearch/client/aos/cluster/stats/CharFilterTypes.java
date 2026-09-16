@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.stats.CharFilterTypes
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CharFilterTypes implements PlainJsonSerializable, ToCopyableBuilder<CharFilterTypes.Builder, CharFilterTypes> {
 
     @Nonnull

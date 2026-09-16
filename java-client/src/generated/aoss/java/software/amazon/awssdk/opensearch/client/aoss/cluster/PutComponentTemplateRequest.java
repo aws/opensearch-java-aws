@@ -74,7 +74,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Creates or updates a component template.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class PutComponentTemplateRequest extends RequestBase
     implements
         PlainJsonSerializable,

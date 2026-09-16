@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.clear_cache.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ClearCacheResponse implements PlainJsonSerializable, ToCopyableBuilder<ClearCacheResponse.Builder, ClearCacheResponse> {
 
     @Nullable

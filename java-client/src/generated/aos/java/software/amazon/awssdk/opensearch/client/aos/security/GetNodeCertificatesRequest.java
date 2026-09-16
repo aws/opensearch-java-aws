@@ -69,7 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * <strong>Minimum version:</strong> <code>2.15</code>
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetNodeCertificatesRequest extends RequestBase
     implements
         ToCopyableBuilder<GetNodeCertificatesRequest.Builder, GetNodeCertificatesRequest> {

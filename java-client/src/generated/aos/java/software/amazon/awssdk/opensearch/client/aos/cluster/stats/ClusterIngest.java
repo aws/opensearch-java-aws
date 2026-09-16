@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.stats.ClusterIngest
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ClusterIngest implements PlainJsonSerializable, ToCopyableBuilder<ClusterIngest.Builder, ClusterIngest> {
 
     private final int numberOfPipelines;

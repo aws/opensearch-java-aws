@@ -75,7 +75,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Returns the information about the capabilities of fields among multiple indexes.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class FieldCapsRequest extends RequestBase
     implements
         PlainJsonSerializable,

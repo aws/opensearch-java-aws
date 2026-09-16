@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The conditions that trigger an index rollover.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RolloverConditions implements PlainJsonSerializable, ToCopyableBuilder<RolloverConditions.Builder, RolloverConditions> {
 
     @Nullable

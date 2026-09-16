@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns settings for one or more indexes.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetIndicesSettingsRequest extends RequestBase
     implements
         ToCopyableBuilder<GetIndicesSettingsRequest.Builder, GetIndicesSettingsRequest> {

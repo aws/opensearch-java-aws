@@ -69,7 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The pull-based ingestion settings controlling how data is read from streaming sources.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IngestionSource implements PlainJsonSerializable, ToCopyableBuilder<IngestionSource.Builder, IngestionSource> {
 
     @Nullable

@@ -53,7 +53,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
  * example, byte/short/integer/long all map to long).
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum ValueType implements JsonEnum {
     Boolean("boolean"),
 

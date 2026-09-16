@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.ShardSearchBackpressureTaskResourceTrackerCpuUsageTrackerStats
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardSearchBackpressureTaskResourceTrackerCpuUsageTrackerStats
     implements
         PlainJsonSerializable,

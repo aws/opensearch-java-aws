@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The configuration for a data stream's backing index.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DataStreamIndex implements PlainJsonSerializable, ToCopyableBuilder<DataStreamIndex.Builder, DataStreamIndex> {
 
     @Nullable

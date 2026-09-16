@@ -55,7 +55,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the geospatial namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, OpenSearchGeospatialClient> {
     public OpenSearchGeospatialClient(OpenSearchTransport transport) {
         super(transport, null);

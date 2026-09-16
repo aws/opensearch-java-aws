@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: snapshot.restore.SnapshotRestore
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SnapshotRestore implements PlainJsonSerializable, ToCopyableBuilder<SnapshotRestore.Builder, SnapshotRestore> {
 
     @Nonnull

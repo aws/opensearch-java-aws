@@ -55,7 +55,7 @@ import javax.annotation.Generated;
  * <code>whitespace</code> are not available here as they don't have a dedicated class. Use {@link Analyzer}'s builder for these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class AnalyzerBuilders {
     private AnalyzerBuilders() {}
 

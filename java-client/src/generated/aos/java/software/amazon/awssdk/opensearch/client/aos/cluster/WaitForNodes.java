@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * <code>lt(N)</code> notation.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class WaitForNodes implements TaggedUnion<WaitForNodes.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link WaitForNodes} variant kinds.

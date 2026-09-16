@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilderBase;
 
 // typedef: core.get.GetResultBase
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class GetResultBase<TDocument> implements PlainJsonSerializable {
 
     @Nonnull

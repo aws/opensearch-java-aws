@@ -74,7 +74,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Creates or updates an alias.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class PutAliasRequest extends RequestBase
     implements
         PlainJsonSerializable,

@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The file-level recovery statistics.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RecoveryFiles implements PlainJsonSerializable, ToCopyableBuilder<RecoveryFiles.Builder, RecoveryFiles> {
 
     @Nonnull

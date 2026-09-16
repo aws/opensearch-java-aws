@@ -58,7 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.search_models.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SearchModelsResponse extends SearchResult<JsonData>
     implements
         ToCopyableBuilder<SearchModelsResponse.Builder, SearchModelsResponse> {

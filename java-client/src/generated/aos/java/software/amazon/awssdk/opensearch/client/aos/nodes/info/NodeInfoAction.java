@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The action-related configuration settings.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoAction implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoAction.Builder, NodeInfoAction> {
 
     @Nonnull

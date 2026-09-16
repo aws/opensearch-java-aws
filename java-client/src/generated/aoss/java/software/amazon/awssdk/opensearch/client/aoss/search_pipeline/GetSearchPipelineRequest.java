@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Retrieves information about a specified search pipeline.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetSearchPipelineRequest extends RequestBase
     implements
         ToCopyableBuilder<GetSearchPipelineRequest.Builder, GetSearchPipelineRequest> {

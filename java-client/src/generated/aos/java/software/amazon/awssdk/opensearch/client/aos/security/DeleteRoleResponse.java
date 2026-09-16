@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.delete_role.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DeleteRoleResponse implements PlainJsonSerializable, ToCopyableBuilder<DeleteRoleResponse.Builder, DeleteRoleResponse> {
 
     @Nullable

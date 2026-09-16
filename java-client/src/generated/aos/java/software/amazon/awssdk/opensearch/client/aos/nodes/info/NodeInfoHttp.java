@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Provides HTTP connection information for the node.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoHttp implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoHttp.Builder, NodeInfoHttp> {
 
     @Nonnull

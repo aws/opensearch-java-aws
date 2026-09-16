@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.stats.NodePackagingType
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodePackagingType implements PlainJsonSerializable, ToCopyableBuilder<NodePackagingType.Builder, NodePackagingType> {
 
     private final int count;

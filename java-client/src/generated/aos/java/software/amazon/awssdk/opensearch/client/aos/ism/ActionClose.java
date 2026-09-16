@@ -59,7 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * The close action configuration.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ActionClose implements PlainJsonSerializable, ToCopyableBuilder<ActionClose.Builder, ActionClose> {
 
     // ---------------------------------------------------------------------------------------------

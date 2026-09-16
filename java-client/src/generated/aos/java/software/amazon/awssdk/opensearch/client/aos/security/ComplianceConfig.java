@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.ComplianceConfig
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ComplianceConfig implements PlainJsonSerializable, ToCopyableBuilder<ComplianceConfig.Builder, ComplianceConfig> {
 
     @Nullable

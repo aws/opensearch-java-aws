@@ -68,7 +68,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns information about whether a particular alias exists.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ExistsAliasRequest extends RequestBase implements ToCopyableBuilder<ExistsAliasRequest.Builder, ExistsAliasRequest> {
 
     @Nullable

@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The status of a block operation on an index.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndicesBlockStatus implements PlainJsonSerializable, ToCopyableBuilder<IndicesBlockStatus.Builder, IndicesBlockStatus> {
 
     private final boolean blocked;

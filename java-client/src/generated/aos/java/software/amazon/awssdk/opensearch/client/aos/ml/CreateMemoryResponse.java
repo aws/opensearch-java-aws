@@ -37,7 +37,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.create_memory.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CreateMemoryResponse implements PlainJsonSerializable, ToCopyableBuilder<CreateMemoryResponse.Builder, CreateMemoryResponse> {
 
     @Nonnull

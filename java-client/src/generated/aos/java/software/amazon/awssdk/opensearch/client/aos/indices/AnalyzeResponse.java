@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.analyze.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class AnalyzeResponse implements PlainJsonSerializable, ToCopyableBuilder<AnalyzeResponse.Builder, AnalyzeResponse> {
 
     @Nullable

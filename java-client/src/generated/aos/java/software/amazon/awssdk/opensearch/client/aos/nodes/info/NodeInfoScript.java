@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The script execution configuration.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoScript implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoScript.Builder, NodeInfoScript> {
 
     @Nonnull

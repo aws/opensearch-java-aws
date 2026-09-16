@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.rank_eval.RankEvalMetricRecall
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RankEvalMetricRecall extends RankEvalMetricRatingThreshold
     implements
         ToCopyableBuilder<RankEvalMetricRecall.Builder, RankEvalMetricRecall> {

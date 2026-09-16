@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.stats.ClusterJvmVersion
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ClusterJvmVersion implements PlainJsonSerializable, ToCopyableBuilder<ClusterJvmVersion.Builder, ClusterJvmVersion> {
 
     private final boolean bundledJdk;

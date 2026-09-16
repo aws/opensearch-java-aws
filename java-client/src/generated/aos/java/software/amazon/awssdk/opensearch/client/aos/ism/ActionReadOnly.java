@@ -59,7 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * The read-only action configuration.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ActionReadOnly implements PlainJsonSerializable, ToCopyableBuilder<ActionReadOnly.Builder, ActionReadOnly> {
 
     // ---------------------------------------------------------------------------------------------

@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.PressureMemory
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PressureMemory implements PlainJsonSerializable, ToCopyableBuilder<PressureMemory.Builder, PressureMemory> {
 
     @Nullable

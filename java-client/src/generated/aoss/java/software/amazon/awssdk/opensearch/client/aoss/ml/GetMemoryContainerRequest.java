@@ -37,7 +37,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Get a memory container.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetMemoryContainerRequest extends RequestBase
     implements
         ToCopyableBuilder<GetMemoryContainerRequest.Builder, GetMemoryContainerRequest> {

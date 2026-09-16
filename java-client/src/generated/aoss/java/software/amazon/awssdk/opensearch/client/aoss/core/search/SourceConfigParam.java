@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * <code>_source_includes</code> and <code>_source_excludes</code> parameters.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SourceConfigParam implements TaggedUnion<SourceConfigParam.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link SourceConfigParam} variant kinds.

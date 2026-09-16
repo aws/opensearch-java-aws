@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.query_dsl.KnnQueryRescore
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class KnnQueryRescore implements TaggedUnion<KnnQueryRescore.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link KnnQueryRescore} variant kinds.

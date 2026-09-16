@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The index verification status.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class VerifyIndex implements PlainJsonSerializable, ToCopyableBuilder<VerifyIndex.Builder, VerifyIndex> {
 
     @Nullable

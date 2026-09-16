@@ -68,7 +68,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * each aggregation's documentation to know what buckets path forms they accept.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class BucketsPath implements TaggedUnion<BucketsPath.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link BucketsPath} variant kinds.

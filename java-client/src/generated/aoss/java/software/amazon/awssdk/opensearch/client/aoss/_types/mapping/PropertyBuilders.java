@@ -61,7 +61,7 @@ import javax.annotation.Generated;
  * <code>xy_shape</code> are not available here as they don't have a dedicated class. Use {@link Property}'s builder for these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PropertyBuilders {
     private PropertyBuilders() {}
 

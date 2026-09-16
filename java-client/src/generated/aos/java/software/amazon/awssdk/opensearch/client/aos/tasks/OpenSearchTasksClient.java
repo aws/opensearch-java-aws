@@ -55,7 +55,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the tasks namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchTasksClient extends ApiClient<OpenSearchTransport, OpenSearchTasksClient> {
     public OpenSearchTasksClient(OpenSearchTransport transport) {
         super(transport, null);

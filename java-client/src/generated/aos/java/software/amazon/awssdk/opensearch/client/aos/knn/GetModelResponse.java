@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 
 // typedef: knn.get_model.Response
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GetModelResponse implements PlainJsonSerializable, ToCopyableBuilder<GetModelResponse.Builder, GetModelResponse> {
 
     // ---------------------------------------------------------------------------------------------

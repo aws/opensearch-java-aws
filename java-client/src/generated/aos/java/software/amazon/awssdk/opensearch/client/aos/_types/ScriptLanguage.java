@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.ScriptLanguage
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ScriptLanguage implements TaggedUnion<ScriptLanguage.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link ScriptLanguage} variant kinds.

@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.mapping.KnnVectorMethod
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class KnnVectorMethod implements PlainJsonSerializable, ToCopyableBuilder<KnnVectorMethod.Builder, KnnVectorMethod> {
 
     @Nullable

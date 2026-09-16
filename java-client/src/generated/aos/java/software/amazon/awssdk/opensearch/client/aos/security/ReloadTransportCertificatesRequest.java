@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * <strong>Minimum version:</strong> <code>2.8</code>
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ReloadTransportCertificatesRequest extends RequestBase
     implements
         ToCopyableBuilder<ReloadTransportCertificatesRequest.Builder, ReloadTransportCertificatesRequest> {

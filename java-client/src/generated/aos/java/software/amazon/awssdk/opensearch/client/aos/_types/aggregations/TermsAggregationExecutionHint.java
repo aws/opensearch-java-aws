@@ -49,7 +49,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
 // typedef: _types.aggregations.TermsAggregationExecutionHint
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum TermsAggregationExecutionHint implements JsonEnum {
     GlobalOrdinals("global_ordinals"),
 

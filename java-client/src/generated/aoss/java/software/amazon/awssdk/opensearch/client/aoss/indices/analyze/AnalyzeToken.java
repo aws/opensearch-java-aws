@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The basic token information.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class AnalyzeToken implements PlainJsonSerializable, ToCopyableBuilder<AnalyzeToken.Builder, AnalyzeToken> {
 
     private final int endOffset;

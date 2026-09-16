@@ -72,7 +72,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Updates the managed index policy to a new policy.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ChangePolicyRequest extends RequestBase
     implements
         PlainJsonSerializable,

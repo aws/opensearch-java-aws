@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Deletes an index template.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteIndexTemplateRequest extends RequestBase
     implements
         ToCopyableBuilder<DeleteIndexTemplateRequest.Builder, DeleteIndexTemplateRequest> {

@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.CertificateTypes
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CertificateTypes implements PlainJsonSerializable, ToCopyableBuilder<CertificateTypes.Builder, CertificateTypes> {
 
     @Nonnull

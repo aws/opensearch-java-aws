@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ism.ActionSnapshot
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ActionSnapshot implements PlainJsonSerializable, ToCopyableBuilder<ActionSnapshot.Builder, ActionSnapshot> {
 
     @Nullable

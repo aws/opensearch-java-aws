@@ -41,7 +41,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Delete a memory container.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteMemoryContainerRequest extends RequestBase
     implements
         ToCopyableBuilder<DeleteMemoryContainerRequest.Builder, DeleteMemoryContainerRequest> {

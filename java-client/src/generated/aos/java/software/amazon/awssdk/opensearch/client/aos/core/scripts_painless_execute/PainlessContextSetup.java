@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.scripts_painless_execute.PainlessContextSetup
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PainlessContextSetup implements PlainJsonSerializable, ToCopyableBuilder<PainlessContextSetup.Builder, PainlessContextSetup> {
 
     @Nonnull

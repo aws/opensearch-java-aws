@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.aggregations.TermsExclude
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TermsExclude implements TaggedUnion<TermsExclude.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link TermsExclude} variant kinds.

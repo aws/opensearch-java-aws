@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.IngestTotal
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IngestTotal implements PlainJsonSerializable, ToCopyableBuilder<IngestTotal.Builder, IngestTotal> {
 
     @Nullable

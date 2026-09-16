@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * A date range limit, represented either as a DateMath expression or a number expressed according to the target field's precision.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FieldDateMath implements TaggedUnion<FieldDateMath.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link FieldDateMath} variant kinds.

@@ -28,7 +28,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpDeserializable;
  * The model group access mode.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public enum ModelGroupAccessMode implements JsonEnum {
     Private("private"),
 

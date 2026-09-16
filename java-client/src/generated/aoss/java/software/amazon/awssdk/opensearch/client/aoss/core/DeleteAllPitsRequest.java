@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Deletes all active point in time searches.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteAllPitsRequest extends RequestBase
     implements
         ToCopyableBuilder<DeleteAllPitsRequest.Builder, DeleteAllPitsRequest> {

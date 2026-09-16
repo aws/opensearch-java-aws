@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 
 // typedef: cold.catalog.Response
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CatalogResponse implements PlainJsonSerializable, ToCopyableBuilder<CatalogResponse.Builder, CatalogResponse> {
 
     // ---------------------------------------------------------------------------------------------

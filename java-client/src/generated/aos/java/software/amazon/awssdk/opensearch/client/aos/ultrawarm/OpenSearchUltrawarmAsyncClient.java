@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the ultrawarm namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchUltrawarmAsyncClient extends ApiClient<OpenSearchTransport, OpenSearchUltrawarmAsyncClient> {
     public OpenSearchUltrawarmAsyncClient(OpenSearchTransport transport) {
         super(transport, null);

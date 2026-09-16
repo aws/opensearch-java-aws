@@ -70,7 +70,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Deletes one or more point in time searches based on the IDs passed.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeletePitRequest extends RequestBase
     implements
         PlainJsonSerializable,

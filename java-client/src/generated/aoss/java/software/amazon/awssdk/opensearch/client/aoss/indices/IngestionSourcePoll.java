@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.IngestionSourcePoll
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IngestionSourcePoll implements PlainJsonSerializable, ToCopyableBuilder<IngestionSourcePoll.Builder, IngestionSourcePoll> {
 
     @Nullable

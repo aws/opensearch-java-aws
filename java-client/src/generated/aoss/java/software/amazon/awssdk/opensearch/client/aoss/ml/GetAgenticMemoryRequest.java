@@ -37,7 +37,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Get a specific memory by its type and ID.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetAgenticMemoryRequest extends RequestBase
     implements
         ToCopyableBuilder<GetAgenticMemoryRequest.Builder, GetAgenticMemoryRequest> {

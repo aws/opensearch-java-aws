@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.query_dsl.TermsQueryField
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TermsQueryField implements TaggedUnion<TermsQueryField.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link TermsQueryField} variant kinds.

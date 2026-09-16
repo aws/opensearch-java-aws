@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * <code>false</code>, the response does not include the total number of hits matching the query. Default is <code>10,000</code> hits.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TrackHits implements TaggedUnion<TrackHits.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link TrackHits} variant kinds.

@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.search.CompletionContext
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CompletionContext implements PlainJsonSerializable, ToCopyableBuilder<CompletionContext.Builder, CompletionContext> {
 
     @Nullable

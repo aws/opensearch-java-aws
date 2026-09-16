@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.search.FieldCollapse
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FieldCollapse implements PlainJsonSerializable, ToCopyableBuilder<FieldCollapse.Builder, FieldCollapse> {
 
     @Nonnull

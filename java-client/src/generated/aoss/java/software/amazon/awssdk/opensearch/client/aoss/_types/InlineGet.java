@@ -69,7 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * The result of an inline get operation.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class InlineGet<TDocument> implements PlainJsonSerializable, ToCopyableBuilder<InlineGet.Builder<TDocument>, InlineGet<TDocument>> {
 
     @Nonnull

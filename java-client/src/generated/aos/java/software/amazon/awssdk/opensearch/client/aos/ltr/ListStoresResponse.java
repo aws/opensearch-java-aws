@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.list_stores.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ListStoresResponse implements PlainJsonSerializable, ToCopyableBuilder<ListStoresResponse.Builder, ListStoresResponse> {
 
     @Nonnull

@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.delete_tenant.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DeleteTenantResponse implements PlainJsonSerializable, ToCopyableBuilder<DeleteTenantResponse.Builder, DeleteTenantResponse> {
 
     @Nullable

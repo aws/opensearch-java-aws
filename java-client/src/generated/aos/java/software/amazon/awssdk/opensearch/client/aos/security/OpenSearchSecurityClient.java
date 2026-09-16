@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the security namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchSecurityClient extends ApiClient<OpenSearchTransport, OpenSearchSecurityClient> {
     public OpenSearchSecurityClient(OpenSearchTransport transport) {
         super(transport, null);

@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.mtermvectors.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class MtermvectorsResponse implements PlainJsonSerializable, ToCopyableBuilder<MtermvectorsResponse.Builder, MtermvectorsResponse> {
 
     @Nonnull

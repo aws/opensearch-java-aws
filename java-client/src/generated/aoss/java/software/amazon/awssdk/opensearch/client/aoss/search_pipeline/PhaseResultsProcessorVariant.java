@@ -47,7 +47,7 @@ import javax.annotation.Generated;
 /**
  * Base interface for {@link PhaseResultsProcessor} variants.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public interface PhaseResultsProcessorVariant {
     PhaseResultsProcessor.Kind _phaseResultsProcessorKind();
 

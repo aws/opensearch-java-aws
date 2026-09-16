@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: search_relevance.put_judgments.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PutJudgmentsResponse implements PlainJsonSerializable, ToCopyableBuilder<PutJudgmentsResponse.Builder, PutJudgmentsResponse> {
 
     @Nullable

@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.allocation_explain.NodeDiskUsage
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeDiskUsage implements PlainJsonSerializable, ToCopyableBuilder<NodeDiskUsage.Builder, NodeDiskUsage> {
 
     @Nonnull

@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.WeightedAverageValue
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class WeightedAverageValue implements PlainJsonSerializable, ToCopyableBuilder<WeightedAverageValue.Builder, WeightedAverageValue> {
 
     @Nullable

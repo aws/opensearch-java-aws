@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.PatchOperation
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PatchOperation implements PlainJsonSerializable, ToCopyableBuilder<PatchOperation.Builder, PatchOperation> {
 
     @Nonnull

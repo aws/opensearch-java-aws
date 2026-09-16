@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: geospatial.UploadStatsMetric
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class UploadStatsMetric implements PlainJsonSerializable, ToCopyableBuilder<UploadStatsMetric.Builder, UploadStatsMetric> {
 
     private final long duration;

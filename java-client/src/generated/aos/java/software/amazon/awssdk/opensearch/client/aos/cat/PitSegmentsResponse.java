@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.pit_segments.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PitSegmentsResponse implements PlainJsonSerializable, ToCopyableBuilder<PitSegmentsResponse.Builder, PitSegmentsResponse> {
 
     @Nonnull

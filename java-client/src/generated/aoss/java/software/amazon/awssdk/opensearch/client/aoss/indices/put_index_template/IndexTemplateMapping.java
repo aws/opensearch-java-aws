@@ -68,7 +68,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.put_index_template.IndexTemplateMapping
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexTemplateMapping implements PlainJsonSerializable, ToCopyableBuilder<IndexTemplateMapping.Builder, IndexTemplateMapping> {
 
     @Nonnull

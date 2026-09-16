@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The wrapper containing store information for a shard.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardStoreWrapper implements PlainJsonSerializable, ToCopyableBuilder<ShardStoreWrapper.Builder, ShardStoreWrapper> {
 
     @Nonnull

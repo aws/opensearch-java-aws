@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The <code>filesystem</code> path configurations for the node.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoPath implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoPath.Builder, NodeInfoPath> {
 
     @Nonnull

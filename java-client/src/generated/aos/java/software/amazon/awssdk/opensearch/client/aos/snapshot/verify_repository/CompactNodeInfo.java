@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: snapshot.verify_repository.CompactNodeInfo
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CompactNodeInfo implements PlainJsonSerializable, ToCopyableBuilder<CompactNodeInfo.Builder, CompactNodeInfo> {
 
     @Nonnull

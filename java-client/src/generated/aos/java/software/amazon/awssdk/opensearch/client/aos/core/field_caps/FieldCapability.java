@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.field_caps.FieldCapability
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FieldCapability implements PlainJsonSerializable, ToCopyableBuilder<FieldCapability.Builder, FieldCapability> {
 
     private final boolean aggregatable;

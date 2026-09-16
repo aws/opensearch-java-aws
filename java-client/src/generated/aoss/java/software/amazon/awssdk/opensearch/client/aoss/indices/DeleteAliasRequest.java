@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Deletes an alias.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteAliasRequest extends RequestBase implements ToCopyableBuilder<DeleteAliasRequest.Builder, DeleteAliasRequest> {
 
     @Nullable

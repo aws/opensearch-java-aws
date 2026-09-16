@@ -59,7 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * An empty object with no properties.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class EmptyObject implements PlainJsonSerializable, ToCopyableBuilder<EmptyObject.Builder, EmptyObject> {
 
     // ---------------------------------------------------------------------------------------------

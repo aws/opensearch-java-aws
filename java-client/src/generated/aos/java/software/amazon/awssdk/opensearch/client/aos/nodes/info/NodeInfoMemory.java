@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Provides memory information for the node.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoMemory implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoMemory.Builder, NodeInfoMemory> {
 
     @Nonnull

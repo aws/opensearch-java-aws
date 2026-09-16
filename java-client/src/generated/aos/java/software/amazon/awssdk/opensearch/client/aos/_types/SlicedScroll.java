@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The configuration for a sliced scroll request.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SlicedScroll implements PlainJsonSerializable, ToCopyableBuilder<SlicedScroll.Builder, SlicedScroll> {
 
     @Nullable

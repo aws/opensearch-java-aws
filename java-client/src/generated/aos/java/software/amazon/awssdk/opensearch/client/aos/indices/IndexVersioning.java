@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The versioning information for the index.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexVersioning implements PlainJsonSerializable, ToCopyableBuilder<IndexVersioning.Builder, IndexVersioning> {
 
     @Nullable

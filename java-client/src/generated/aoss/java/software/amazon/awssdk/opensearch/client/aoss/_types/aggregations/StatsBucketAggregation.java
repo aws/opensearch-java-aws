@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.StatsBucketAggregation
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class StatsBucketAggregation extends PipelineAggregationBase
     implements
         ToCopyableBuilder<StatsBucketAggregation.Builder, StatsBucketAggregation> {

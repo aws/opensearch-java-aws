@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ingest.GeoIpProcessor
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GeoIpProcessor extends ProcessorBase implements ProcessorVariant, ToCopyableBuilder<GeoIpProcessor.Builder, GeoIpProcessor> {
 
     @Nullable

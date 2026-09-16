@@ -41,7 +41,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.query_dsl.XyShape
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class XyShape implements PlainJsonSerializable, ToCopyableBuilder<XyShape.Builder, XyShape> {
 
     @Nonnull

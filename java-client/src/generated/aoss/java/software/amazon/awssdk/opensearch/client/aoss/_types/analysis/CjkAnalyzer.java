@@ -40,7 +40,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.analysis.CjkAnalyzer
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CjkAnalyzer implements AnalyzerVariant, PlainJsonSerializable, ToCopyableBuilder<CjkAnalyzer.Builder, CjkAnalyzer> {
 
     @Nonnull

@@ -75,7 +75,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Creates or updates an index template.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class PutIndexTemplateRequest extends RequestBase
     implements
         PlainJsonSerializable,

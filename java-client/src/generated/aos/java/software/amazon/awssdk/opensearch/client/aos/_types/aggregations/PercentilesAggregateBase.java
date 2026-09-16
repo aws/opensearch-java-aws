@@ -53,7 +53,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 
 // typedef: _types.aggregations.PercentilesAggregateBase
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class PercentilesAggregateBase extends AggregateBase {
 
     @Nonnull

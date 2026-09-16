@@ -53,7 +53,7 @@ import software.amazon.awssdk.opensearch.client.json.ObjectDeserializer;
 
 // typedef: _types.aggregations.FormatMetricAggregationBase
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class FormatMetricAggregationBase extends MetricAggregationBase {
 
     @Nullable

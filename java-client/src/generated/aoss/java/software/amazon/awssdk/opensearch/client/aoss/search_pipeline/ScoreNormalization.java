@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: search_pipeline.ScoreNormalization
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ScoreNormalization implements PlainJsonSerializable, ToCopyableBuilder<ScoreNormalization.Builder, ScoreNormalization> {
 
     @Nullable

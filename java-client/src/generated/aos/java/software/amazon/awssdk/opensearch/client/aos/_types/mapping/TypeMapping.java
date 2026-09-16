@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.mapping.TypeMapping
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TypeMapping implements PlainJsonSerializable, ToCopyableBuilder<TypeMapping.Builder, TypeMapping> {
 
     @Nullable

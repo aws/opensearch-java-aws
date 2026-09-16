@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.TransportUsageStats
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TransportUsageStats implements PlainJsonSerializable, ToCopyableBuilder<TransportUsageStats.Builder, TransportUsageStats> {
 
     @Nonnull

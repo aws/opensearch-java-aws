@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.thread_pool.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ThreadPoolResponse implements PlainJsonSerializable, ToCopyableBuilder<ThreadPoolResponse.Builder, ThreadPoolResponse> {
 
     @Nonnull

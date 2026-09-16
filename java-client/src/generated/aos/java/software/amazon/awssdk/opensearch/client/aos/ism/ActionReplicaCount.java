@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ism.ActionReplicaCount
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ActionReplicaCount implements PlainJsonSerializable, ToCopyableBuilder<ActionReplicaCount.Builder, ActionReplicaCount> {
 
     @Nullable

@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.create_featureset.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CreateFeaturesetResponse extends WriteResponseBase
     implements
         ToCopyableBuilder<CreateFeaturesetResponse.Builder, CreateFeaturesetResponse> {

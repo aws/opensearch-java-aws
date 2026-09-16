@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.create_model_from_set.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CreateModelFromSetResponse extends WriteResponseBase
     implements
         ToCopyableBuilder<CreateModelFromSetResponse.Builder, CreateModelFromSetResponse> {

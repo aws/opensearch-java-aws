@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The size information for shard files.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardFileSizeInfo implements PlainJsonSerializable, ToCopyableBuilder<ShardFileSizeInfo.Builder, ShardFileSizeInfo> {
 
     @Nullable

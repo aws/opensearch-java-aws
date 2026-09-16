@@ -48,7 +48,7 @@ import software.amazon.awssdk.opensearch.client.json.JsonpSerializable;
 /**
  * Base interface for {@link CharFilterDefinition} variants.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public interface CharFilterDefinitionVariant extends JsonpSerializable {
     CharFilterDefinition.Kind _charFilterDefinitionKind();
 

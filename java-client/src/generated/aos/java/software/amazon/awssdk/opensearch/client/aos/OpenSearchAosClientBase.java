@@ -139,7 +139,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBase<Self>> extends ApiClient<OpenSearchTransport, Self> {
     public OpenSearchAosClientBase(OpenSearchTransport transport, @Nullable TransportOptions transportOptions) {
         super(transport, transportOptions);

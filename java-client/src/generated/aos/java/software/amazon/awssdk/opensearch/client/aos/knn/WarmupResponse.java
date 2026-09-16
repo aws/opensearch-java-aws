@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: knn.warmup.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class WarmupResponse extends ShardsOperationResponseBase implements ToCopyableBuilder<WarmupResponse.Builder, WarmupResponse> {
 
     // ---------------------------------------------------------------------------------------------

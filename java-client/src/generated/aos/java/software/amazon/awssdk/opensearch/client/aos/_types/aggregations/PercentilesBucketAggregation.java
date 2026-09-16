@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.PercentilesBucketAggregation
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PercentilesBucketAggregation extends PipelineAggregationBase
     implements
         ToCopyableBuilder<PercentilesBucketAggregation.Builder, PercentilesBucketAggregation> {

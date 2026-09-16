@@ -58,7 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the cold namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchColdClient extends ApiClient<OpenSearchTransport, OpenSearchColdClient> {
     public OpenSearchColdClient(OpenSearchTransport transport) {
         super(transport, null);

@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.put_alias.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PutAliasResponse extends AcknowledgedResponseBase implements ToCopyableBuilder<PutAliasResponse.Builder, PutAliasResponse> {
 
     // ---------------------------------------------------------------------------------------------

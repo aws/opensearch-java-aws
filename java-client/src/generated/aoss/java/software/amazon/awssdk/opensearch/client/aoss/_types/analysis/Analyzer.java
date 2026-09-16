@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.analysis.Analyzer
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Analyzer implements TaggedUnion<Analyzer.Kind, AnalyzerVariant>, PlainJsonSerializable {
     /**
      * {@link Analyzer} variant kinds.

@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The repository configuration information.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoRepositories implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoRepositories.Builder, NodeInfoRepositories> {
 
     @Nonnull

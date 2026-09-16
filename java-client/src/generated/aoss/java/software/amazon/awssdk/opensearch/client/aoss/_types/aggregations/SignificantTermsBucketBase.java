@@ -52,7 +52,7 @@ import software.amazon.awssdk.opensearch.client.util.ApiTypeHelper;
 
 // typedef: _types.aggregations.SignificantTermsBucketBase
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class SignificantTermsBucketBase extends MultiBucketBase {
 
     private final long bgCount;

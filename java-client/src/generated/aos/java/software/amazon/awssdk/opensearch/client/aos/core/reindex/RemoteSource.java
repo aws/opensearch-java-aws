@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.reindex.RemoteSource
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RemoteSource implements PlainJsonSerializable, ToCopyableBuilder<RemoteSource.Builder, RemoteSource> {
 
     @Nullable

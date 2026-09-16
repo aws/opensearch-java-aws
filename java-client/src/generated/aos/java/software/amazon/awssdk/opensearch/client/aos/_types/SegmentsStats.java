@@ -68,7 +68,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The statistics about segments.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SegmentsStats implements PlainJsonSerializable, ToCopyableBuilder<SegmentsStats.Builder, SegmentsStats> {
 
     private final int count;

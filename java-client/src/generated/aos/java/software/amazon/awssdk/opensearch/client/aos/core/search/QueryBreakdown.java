@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.search.QueryBreakdown
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class QueryBreakdown implements PlainJsonSerializable, ToCopyableBuilder<QueryBreakdown.Builder, QueryBreakdown> {
 
     private final long advance;

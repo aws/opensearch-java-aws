@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * The base response for index operations.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class IndicesResponseBase extends AcknowledgedResponseBase {
 
     @Nullable

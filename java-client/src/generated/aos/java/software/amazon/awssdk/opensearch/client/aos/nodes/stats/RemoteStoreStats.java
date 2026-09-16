@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.RemoteStoreStats
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RemoteStoreStats implements PlainJsonSerializable, ToCopyableBuilder<RemoteStoreStats.Builder, RemoteStoreStats> {
 
     @Nullable

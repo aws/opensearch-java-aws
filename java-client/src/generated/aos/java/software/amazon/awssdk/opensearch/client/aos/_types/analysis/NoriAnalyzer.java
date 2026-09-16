@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.analysis.NoriAnalyzer
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NoriAnalyzer implements AnalyzerVariant, PlainJsonSerializable, ToCopyableBuilder<NoriAnalyzer.Builder, NoriAnalyzer> {
 
     @Nullable

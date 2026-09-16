@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The geographical location specified using latitude and longitude.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class LatLonGeoLocation implements PlainJsonSerializable, ToCopyableBuilder<LatLonGeoLocation.Builder, LatLonGeoLocation> {
 
     private final double lat;

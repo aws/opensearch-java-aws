@@ -53,7 +53,7 @@ import javax.annotation.Generated;
  * Use {@link Action}'s builder for these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ActionBuilders {
     private ActionBuilders() {}
 

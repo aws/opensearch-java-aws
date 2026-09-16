@@ -68,7 +68,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: tasks.TaskResponse
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TaskResponse implements PlainJsonSerializable, ToCopyableBuilder<TaskResponse.Builder, TaskResponse> {
 
     private final int batches;

@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.LongRareTermsBucket
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class LongRareTermsBucket extends MultiBucketBase implements ToCopyableBuilder<LongRareTermsBucket.Builder, LongRareTermsBucket> {
 
     private final long key;

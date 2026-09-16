@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.get_allowlist.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GetAllowlistResponse implements PlainJsonSerializable, ToCopyableBuilder<GetAllowlistResponse.Builder, GetAllowlistResponse> {
 
     @Nullable

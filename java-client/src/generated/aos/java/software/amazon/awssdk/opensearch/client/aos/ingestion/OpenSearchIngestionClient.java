@@ -55,7 +55,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the ingestion namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchIngestionClient extends ApiClient<OpenSearchTransport, OpenSearchIngestionClient> {
     public OpenSearchIngestionClient(OpenSearchTransport transport) {
         super(transport, null);

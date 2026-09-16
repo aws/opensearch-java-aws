@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.mapping.TextIndexPrefixes
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TextIndexPrefixes implements PlainJsonSerializable, ToCopyableBuilder<TextIndexPrefixes.Builder, TextIndexPrefixes> {
 
     private final int maxChars;

@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 // typedef: indices.get_alias.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GetAliasResponse extends DictionaryResponse<String, IndexAliases> {
     // ---------------------------------------------------------------------------------------------
 

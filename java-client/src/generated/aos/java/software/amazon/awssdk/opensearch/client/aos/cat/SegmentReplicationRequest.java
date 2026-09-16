@@ -74,7 +74,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * <strong>Minimum version:</strong> <code>2.6</code>
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class SegmentReplicationRequest extends CatRequestBase
     implements
         ToCopyableBuilder<SegmentReplicationRequest.Builder, SegmentReplicationRequest> {

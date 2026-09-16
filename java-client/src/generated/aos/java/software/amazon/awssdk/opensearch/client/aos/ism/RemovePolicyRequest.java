@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Removes a policy from an index.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class RemovePolicyRequest extends RequestBase implements ToCopyableBuilder<RemovePolicyRequest.Builder, RemovePolicyRequest> {
 
     @Nonnull

@@ -54,7 +54,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 
 // typedef: _types.aggregations.MultiBucketAggregateBase
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class MultiBucketAggregateBase<TBucket> extends AggregateBase {
 
     @Nonnull

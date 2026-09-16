@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Shows information about aliases currently configured to indexes, including filter and routing information.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class AliasesRequest extends CatRequestBase implements ToCopyableBuilder<AliasesRequest.Builder, AliasesRequest> {
 
     @Nonnull

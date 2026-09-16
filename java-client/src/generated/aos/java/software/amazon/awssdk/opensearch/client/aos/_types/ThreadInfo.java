@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The information about thread usage.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ThreadInfo implements PlainJsonSerializable, ToCopyableBuilder<ThreadInfo.Builder, ThreadInfo> {
 
     @Nonnull

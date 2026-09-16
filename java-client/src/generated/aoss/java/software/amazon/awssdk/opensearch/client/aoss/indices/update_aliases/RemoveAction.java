@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The configuration for removing an alias.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RemoveAction implements ActionVariant, PlainJsonSerializable, ToCopyableBuilder<RemoveAction.Builder, RemoveAction> {
 
     @Nullable

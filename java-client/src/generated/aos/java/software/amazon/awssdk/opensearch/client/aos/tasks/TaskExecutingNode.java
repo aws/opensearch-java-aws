@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: tasks.TaskExecutingNode
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TaskExecutingNode extends BaseNode implements ToCopyableBuilder<TaskExecutingNode.Builder, TaskExecutingNode> {
 
     @Nonnull

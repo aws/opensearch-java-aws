@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.ActionGroup
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ActionGroup implements PlainJsonSerializable, ToCopyableBuilder<ActionGroup.Builder, ActionGroup> {
 
     @Nonnull

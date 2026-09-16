@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The HTTP server configuration.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoSettingsHttp implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoSettingsHttp.Builder, NodeInfoSettingsHttp> {
 
     @Nullable

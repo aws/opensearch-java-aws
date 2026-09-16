@@ -37,7 +37,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.delete_memory.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DeleteMemoryResponse implements PlainJsonSerializable, ToCopyableBuilder<DeleteMemoryResponse.Builder, DeleteMemoryResponse> {
 
     private final boolean success;

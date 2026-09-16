@@ -38,7 +38,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.MemoryIndexSettings
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class MemoryIndexSettings implements PlainJsonSerializable, ToCopyableBuilder<MemoryIndexSettings.Builder, MemoryIndexSettings> {
 
     @Nullable

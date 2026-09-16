@@ -59,7 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * The open action configuration.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ActionOpen implements PlainJsonSerializable, ToCopyableBuilder<ActionOpen.Builder, ActionOpen> {
 
     // ---------------------------------------------------------------------------------------------

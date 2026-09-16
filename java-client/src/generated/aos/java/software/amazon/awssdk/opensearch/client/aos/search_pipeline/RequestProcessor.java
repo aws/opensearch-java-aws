@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: search_pipeline.RequestProcessor
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RequestProcessor implements TaggedUnion<RequestProcessor.Kind, RequestProcessorVariant>, PlainJsonSerializable {
     /**
      * {@link RequestProcessor} variant kinds.

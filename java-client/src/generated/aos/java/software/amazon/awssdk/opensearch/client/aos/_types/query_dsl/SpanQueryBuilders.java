@@ -54,7 +54,7 @@ import javax.annotation.Generated;
  * <code>span_within</code> are not available here as they don't have a dedicated class. Use {@link SpanQuery}'s builder for these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SpanQueryBuilders {
     private SpanQueryBuilders() {}
 

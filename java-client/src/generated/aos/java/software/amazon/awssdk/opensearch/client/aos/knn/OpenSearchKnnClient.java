@@ -55,7 +55,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the knn namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchKnnClient extends ApiClient<OpenSearchTransport, OpenSearchKnnClient> {
     public OpenSearchKnnClient(OpenSearchTransport transport) {
         super(transport, null);

@@ -68,7 +68,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * <strong>Minimum version:</strong> <code>2.9</code>
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetSearchPipelineRequest extends RequestBase
     implements
         ToCopyableBuilder<GetSearchPipelineRequest.Builder, GetSearchPipelineRequest> {

@@ -37,7 +37,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Deletes a model group.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteModelGroupRequest extends RequestBase
     implements
         ToCopyableBuilder<DeleteModelGroupRequest.Builder, DeleteModelGroupRequest> {

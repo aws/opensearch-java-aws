@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The retention lease information for a shard.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ShardRetentionLeases implements PlainJsonSerializable, ToCopyableBuilder<ShardRetentionLeases.Builder, ShardRetentionLeases> {
 
     @Nonnull

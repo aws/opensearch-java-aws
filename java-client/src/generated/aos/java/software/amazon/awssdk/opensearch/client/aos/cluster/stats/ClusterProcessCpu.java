@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.stats.ClusterProcessCpu
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ClusterProcessCpu implements PlainJsonSerializable, ToCopyableBuilder<ClusterProcessCpu.Builder, ClusterProcessCpu> {
 
     private final double percent;

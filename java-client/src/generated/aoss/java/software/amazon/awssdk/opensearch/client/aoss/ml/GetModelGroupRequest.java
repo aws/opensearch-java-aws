@@ -37,7 +37,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Retrieves a model group.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetModelGroupRequest extends RequestBase
     implements
         ToCopyableBuilder<GetModelGroupRequest.Builder, GetModelGroupRequest> {

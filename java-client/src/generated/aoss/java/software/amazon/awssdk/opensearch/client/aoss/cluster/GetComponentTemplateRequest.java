@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns one or more component templates.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetComponentTemplateRequest extends RequestBase
     implements
         ToCopyableBuilder<GetComponentTemplateRequest.Builder, GetComponentTemplateRequest> {

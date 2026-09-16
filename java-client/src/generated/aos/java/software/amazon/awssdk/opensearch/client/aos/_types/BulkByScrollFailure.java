@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.BulkByScrollFailure
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class BulkByScrollFailure implements PlainJsonSerializable, ToCopyableBuilder<BulkByScrollFailure.Builder, BulkByScrollFailure> {
 
     @Nullable

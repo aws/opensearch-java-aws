@@ -70,7 +70,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The mapping configuration for a template.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TemplateMapping implements PlainJsonSerializable, ToCopyableBuilder<TemplateMapping.Builder, TemplateMapping> {
 
     @Nonnull

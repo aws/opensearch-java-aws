@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.get_all_certificates.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class GetAllCertificatesResponse extends NodesResponseBase
     implements
         ToCopyableBuilder<GetAllCertificatesResponse.Builder, GetAllCertificatesResponse> {

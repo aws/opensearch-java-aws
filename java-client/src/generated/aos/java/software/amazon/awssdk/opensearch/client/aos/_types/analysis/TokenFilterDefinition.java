@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.analysis.TokenFilterDefinition
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TokenFilterDefinition implements TaggedUnion<TokenFilterDefinition.Kind, TokenFilterDefinitionVariant>, PlainJsonSerializable {
     /**
      * {@link TokenFilterDefinition} variant kinds.

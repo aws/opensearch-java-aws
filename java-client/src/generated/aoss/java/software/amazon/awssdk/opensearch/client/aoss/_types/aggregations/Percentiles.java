@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.aggregations.Percentiles
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Percentiles implements TaggedUnion<Percentiles.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link Percentiles} variant kinds.

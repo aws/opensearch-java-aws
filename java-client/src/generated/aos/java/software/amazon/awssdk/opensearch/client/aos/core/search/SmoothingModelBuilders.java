@@ -53,7 +53,7 @@ import javax.annotation.Generated;
  * dedicated class. Use {@link SmoothingModel}'s builder for these.
  * </p>
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SmoothingModelBuilders {
     private SmoothingModelBuilders() {}
 

@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.NestedSortValue
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NestedSortValue implements PlainJsonSerializable, ToCopyableBuilder<NestedSortValue.Builder, NestedSortValue> {
 
     @Nullable

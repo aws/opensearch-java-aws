@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The geographical bounds specified using Well-Known Text (WKT) format.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class WktGeoBounds implements PlainJsonSerializable, ToCopyableBuilder<WktGeoBounds.Builder, WktGeoBounds> {
 
     @Nonnull

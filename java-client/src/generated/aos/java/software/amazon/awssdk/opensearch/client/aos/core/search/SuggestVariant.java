@@ -47,7 +47,7 @@ import javax.annotation.Generated;
 /**
  * Base interface for {@link Suggest} variants.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public interface SuggestVariant {
     Suggest.Kind _suggestKind();
 

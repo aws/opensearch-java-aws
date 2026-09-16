@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.AdaptiveSelection
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class AdaptiveSelection implements PlainJsonSerializable, ToCopyableBuilder<AdaptiveSelection.Builder, AdaptiveSelection> {
 
     @Nullable

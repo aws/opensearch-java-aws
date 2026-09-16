@@ -41,7 +41,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.UndeployModelNode
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class UndeployModelNode implements PlainJsonSerializable, ToCopyableBuilder<UndeployModelNode.Builder, UndeployModelNode> {
 
     @Nonnull

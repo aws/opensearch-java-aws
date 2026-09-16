@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The retention configuration for soft deletes.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SoftDeletesRetention implements PlainJsonSerializable, ToCopyableBuilder<SoftDeletesRetention.Builder, SoftDeletesRetention> {
 
     @Nullable

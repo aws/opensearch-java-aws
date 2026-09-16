@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns an alias.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetAliasRequest extends RequestBase implements ToCopyableBuilder<GetAliasRequest.Builder, GetAliasRequest> {
 
     @Nullable

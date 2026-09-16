@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Returns mappings for one or more indexes.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetMappingRequest extends RequestBase implements ToCopyableBuilder<GetMappingRequest.Builder, GetMappingRequest> {
 
     @Nullable

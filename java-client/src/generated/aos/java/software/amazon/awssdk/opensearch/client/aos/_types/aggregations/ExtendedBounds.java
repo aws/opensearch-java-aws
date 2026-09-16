@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 
 // typedef: _types.aggregations.ExtendedBounds
 
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ExtendedBounds<T> implements PlainJsonSerializable, ToCopyableBuilder<ExtendedBounds.Builder<T>, ExtendedBounds<T>> {
 
     @Nonnull

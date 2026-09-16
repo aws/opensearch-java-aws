@@ -40,7 +40,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.NodeStatsDetails
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class NodeStatsDetails implements PlainJsonSerializable, ToCopyableBuilder<NodeStatsDetails.Builder, NodeStatsDetails> {
 
     @Nonnull

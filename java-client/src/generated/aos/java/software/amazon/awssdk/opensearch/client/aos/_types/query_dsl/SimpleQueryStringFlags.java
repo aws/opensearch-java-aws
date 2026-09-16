@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * Query flags can be either a single flag or a combination of flags (e.g. <code>OR|AND|PREFIX</code>).
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SimpleQueryStringFlags implements TaggedUnion<SimpleQueryStringFlags.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link SimpleQueryStringFlags} variant kinds.

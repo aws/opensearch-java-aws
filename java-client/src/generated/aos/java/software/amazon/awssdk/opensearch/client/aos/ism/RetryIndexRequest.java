@@ -72,7 +72,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Retries the failed action for an index.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class RetryIndexRequest extends RequestBase
     implements
         PlainJsonSerializable,

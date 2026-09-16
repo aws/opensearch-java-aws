@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Result of a <code>terms</code> aggregation when the field is a string.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class StringTermsAggregate extends TermsAggregateBase<JsonData>
     implements
         AggregateVariant,

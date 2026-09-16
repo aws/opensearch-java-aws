@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Migration status for a single index.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class MigrationStatus implements PlainJsonSerializable, ToCopyableBuilder<MigrationStatus.Builder, MigrationStatus> {
 
     @Nullable

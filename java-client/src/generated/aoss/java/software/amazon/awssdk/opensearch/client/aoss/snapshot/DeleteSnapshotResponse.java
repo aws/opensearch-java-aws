@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: snapshot.delete.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DeleteSnapshotResponse extends AcknowledgedResponseBase
     implements
         ToCopyableBuilder<DeleteSnapshotResponse.Builder, DeleteSnapshotResponse> {

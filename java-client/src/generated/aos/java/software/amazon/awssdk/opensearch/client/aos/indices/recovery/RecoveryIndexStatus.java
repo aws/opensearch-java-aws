@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The index recovery status.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class RecoveryIndexStatus implements PlainJsonSerializable, ToCopyableBuilder<RecoveryIndexStatus.Builder, RecoveryIndexStatus> {
 
     @Nullable

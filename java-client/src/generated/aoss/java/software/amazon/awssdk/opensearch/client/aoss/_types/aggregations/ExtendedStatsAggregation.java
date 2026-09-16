@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.ExtendedStatsAggregation
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ExtendedStatsAggregation extends FormatMetricAggregationBase
     implements
         ToCopyableBuilder<ExtendedStatsAggregation.Builder, ExtendedStatsAggregation> {

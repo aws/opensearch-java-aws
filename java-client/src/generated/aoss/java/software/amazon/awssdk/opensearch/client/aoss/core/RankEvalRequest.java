@@ -77,7 +77,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Allows to evaluate the quality of ranked search results over a set of typical search queries.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class RankEvalRequest extends RequestBase
     implements
         PlainJsonSerializable,

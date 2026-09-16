@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The routing configuration for index operations.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class IndexRouting implements PlainJsonSerializable, ToCopyableBuilder<IndexRouting.Builder, IndexRouting> {
 
     @Nullable

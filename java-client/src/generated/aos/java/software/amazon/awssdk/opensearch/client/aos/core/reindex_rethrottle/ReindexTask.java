@@ -66,7 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: core.reindex_rethrottle.ReindexTask
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class ReindexTask implements PlainJsonSerializable, ToCopyableBuilder<ReindexTask.Builder, ReindexTask> {
 
     @Nonnull

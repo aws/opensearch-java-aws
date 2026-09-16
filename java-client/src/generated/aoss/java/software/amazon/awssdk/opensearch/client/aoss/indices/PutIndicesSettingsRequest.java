@@ -73,7 +73,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Updates the index settings.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class PutIndicesSettingsRequest extends RequestBase
     implements
         PlainJsonSerializable,

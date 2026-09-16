@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.snapshots.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class SnapshotsResponse implements PlainJsonSerializable, ToCopyableBuilder<SnapshotsResponse.Builder, SnapshotsResponse> {
 
     @Nonnull

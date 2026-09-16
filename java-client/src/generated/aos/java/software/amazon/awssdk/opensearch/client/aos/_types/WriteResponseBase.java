@@ -61,7 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilderBase;
 /**
  * The base response for write operations.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public abstract class WriteResponseBase implements PlainJsonSerializable {
 
     @Nullable

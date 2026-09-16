@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Removes a document from the index.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteRequest extends RequestBase implements ToCopyableBuilder<DeleteRequest.Builder, DeleteRequest> {
 
     @Nonnull

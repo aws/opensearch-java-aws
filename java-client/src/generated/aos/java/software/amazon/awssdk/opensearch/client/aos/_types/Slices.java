@@ -65,7 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
  * The slice configuration used to parallelize a process.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Slices implements TaggedUnion<Slices.Kind, Object>, PlainJsonSerializable {
     /**
      * {@link Slices} variant kinds.

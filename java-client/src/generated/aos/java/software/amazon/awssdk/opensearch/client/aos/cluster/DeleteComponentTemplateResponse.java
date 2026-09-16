@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.delete_component_template.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class DeleteComponentTemplateResponse extends AcknowledgedResponseBase
     implements
         ToCopyableBuilder<DeleteComponentTemplateResponse.Builder, DeleteComponentTemplateResponse> {

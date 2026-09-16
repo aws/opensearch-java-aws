@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the search_pipeline namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchSearchPipelineAsyncClient extends ApiClient<OpenSearchTransport, OpenSearchSearchPipelineAsyncClient> {
     public OpenSearchSearchPipelineAsyncClient(OpenSearchTransport transport) {
         super(transport, null);

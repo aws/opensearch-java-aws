@@ -67,7 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Creates point in time context.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class CreatePitRequest extends RequestBase implements ToCopyableBuilder<CreatePitRequest.Builder, CreatePitRequest> {
 
     @Nullable

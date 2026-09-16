@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The details of a task failure.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class TaskFailure implements PlainJsonSerializable, ToCopyableBuilder<TaskFailure.Builder, TaskFailure> {
 
     @Nonnull

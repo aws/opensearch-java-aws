@@ -63,7 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.TaggedUnionUtils;
 // typedef: _types.mapping.Property
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Property implements TaggedUnion<Property.Kind, PropertyVariant>, PlainJsonSerializable {
     /**
      * {@link Property} variant kinds.

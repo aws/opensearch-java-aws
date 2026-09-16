@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the snapshot namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport, OpenSearchSnapshotAsyncClient> {
     public OpenSearchSnapshotAsyncClient(OpenSearchTransport transport) {
         super(transport, null);

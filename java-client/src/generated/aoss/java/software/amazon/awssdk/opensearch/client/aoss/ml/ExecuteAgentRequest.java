@@ -47,7 +47,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Execute an agent.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ExecuteAgentRequest extends RequestBase
     implements
         PlainJsonSerializable,

@@ -56,7 +56,7 @@ import software.amazon.awssdk.opensearch.client.util.ObjectBuilder;
 /**
  * Client for the ltr namespace.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, OpenSearchLtrAsyncClient> {
     public OpenSearchLtrAsyncClient(OpenSearchTransport transport) {
         super(transport, null);

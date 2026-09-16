@@ -37,7 +37,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 /**
  * Get an agent.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetAgentRequest extends RequestBase implements ToCopyableBuilder<GetAgentRequest.Builder, GetAgentRequest> {
 
     @Nonnull

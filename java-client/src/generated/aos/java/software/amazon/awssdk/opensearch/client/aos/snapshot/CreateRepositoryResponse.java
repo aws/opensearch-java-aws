@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: snapshot.create_repository.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class CreateRepositoryResponse extends AcknowledgedResponseBase
     implements
         ToCopyableBuilder<CreateRepositoryResponse.Builder, CreateRepositoryResponse> {

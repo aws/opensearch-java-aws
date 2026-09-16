@@ -62,7 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ultrawarm.migrate_to_hot.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class MigrateToHotResponse implements PlainJsonSerializable, ToCopyableBuilder<MigrateToHotResponse.Builder, MigrateToHotResponse> {
 
     @Nullable

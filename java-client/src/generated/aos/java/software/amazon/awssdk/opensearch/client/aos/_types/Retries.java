@@ -64,7 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * The retry statistics for bulk and search operations.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class Retries implements PlainJsonSerializable, ToCopyableBuilder<Retries.Builder, Retries> {
 
     private final long bulk;

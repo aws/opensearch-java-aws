@@ -81,7 +81,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * </p>
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class RolloverRequest extends RequestBase
     implements
         PlainJsonSerializable,

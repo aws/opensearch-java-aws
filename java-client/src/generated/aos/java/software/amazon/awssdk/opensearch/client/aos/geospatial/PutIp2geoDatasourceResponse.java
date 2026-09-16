@@ -57,7 +57,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: geospatial.put_ip2geo_datasource.Response
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class PutIp2geoDatasourceResponse extends AcknowledgedResponseBase
     implements
         ToCopyableBuilder<PutIp2geoDatasourceResponse.Builder, PutIp2geoDatasourceResponse> {

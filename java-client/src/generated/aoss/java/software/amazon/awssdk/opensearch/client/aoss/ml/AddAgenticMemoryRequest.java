@@ -49,7 +49,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Add agentic memory to a memory container.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class AddAgenticMemoryRequest extends RequestBase
     implements
         PlainJsonSerializable,

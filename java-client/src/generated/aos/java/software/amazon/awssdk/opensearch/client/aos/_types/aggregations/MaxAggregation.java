@@ -60,7 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _types.aggregations.MaxAggregation
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class MaxAggregation extends FormatMetricAggregationBase implements ToCopyableBuilder<MaxAggregation.Builder, MaxAggregation> {
 
     @Nullable

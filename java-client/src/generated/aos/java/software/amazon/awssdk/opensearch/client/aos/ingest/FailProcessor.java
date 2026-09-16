@@ -59,7 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ingest.FailProcessor
 
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public class FailProcessor extends ProcessorBase implements ProcessorVariant, ToCopyableBuilder<FailProcessor.Builder, FailProcessor> {
 
     @Nonnull

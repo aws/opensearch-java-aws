@@ -47,7 +47,7 @@ import javax.annotation.Generated;
 /**
  * Base interface for {@link FunctionScore} variants.
  */
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public interface FunctionScoreVariant {
     FunctionScore.Kind _functionScoreKind();
 

@@ -74,7 +74,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * Updates index aliases.
  */
 @JsonpDeserializable
-@Generated("org.opensearch.client.codegen.CodeGenerator")
+@Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class UpdateAliasesRequest extends RequestBase
     implements
         PlainJsonSerializable,
