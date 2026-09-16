@@ -89,7 +89,7 @@ sourceSets.main {
 
 val awsRuntimeSourceSet = sourceSets.create("awsRuntime") {
     java {
-        srcDir("src/aws/java")
+        srcDir("src/java")
         exclude("software/amazon/awssdk/opensearch/client/aos/**")
         exclude("software/amazon/awssdk/opensearch/client/aoss/**")
     }
@@ -97,7 +97,7 @@ val awsRuntimeSourceSet = sourceSets.create("awsRuntime") {
 
 val aosSourceSet = sourceSets.create("aos") {
     java {
-        srcDir("src/aws/java")
+        srcDir("src/java")
         srcDir("src/generated/aos/java")
         include("software/amazon/awssdk/opensearch/client/aos/**")
     }
@@ -107,7 +107,7 @@ val aosSourceSet = sourceSets.create("aos") {
 
 val aossSourceSet = sourceSets.create("aoss") {
     java {
-        srcDir("src/aws/java")
+        srcDir("src/java")
         srcDir("src/generated/aoss/java")
         include("software/amazon/awssdk/opensearch/client/aoss/**")
     }
