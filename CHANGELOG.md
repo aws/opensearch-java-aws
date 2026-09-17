@@ -17,6 +17,7 @@ Serverless (AOSS).
 - Set the `java-client` compile target to Java 8 to match upstream opensearch-java, so the published client runs on any JVM >= 8 while building with a JDK 17/21 toolchain.
 - Moved the code generator to `software.amazon.awssdk.opensearch.client.codegen`, so the emitted `@Generated(...)` marker references a class that exists in this fork.
 - Removed the unsupported `refresh` parameter from AOSS multi-get requests.
+- Consolidated the handwritten sources into the standard `src/main/java` layout (from `src/java`) and moved `version.properties` to its package resource path, updating the `awsRuntime`/`aos`/`aoss` source sets to match.
 
 ### Deprecated
 
@@ -25,5 +26,6 @@ Serverless (AOSS).
 - The gRPC transport module (`java-client-grpc`), its samples, and the gRPC integration-test path.
 
 ### Fixed
+- Pointed the inherited open-source metadata (CODEOWNERS, MAINTAINERS, ADMINS, NOTICE, SECURITY) at the `aws/amazon-opensearch-clients` owning team and AWS vulnerability reporting.
 
 ### Security
