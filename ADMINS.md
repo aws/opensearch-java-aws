@@ -1,8 +1,8 @@
 ## Admins
 
-| Admin                    | GitHub ID                               | Affiliation |
-| -------------------------| --------------------------------------- | ----------- |
-| Charlotte Henkle         | [CEHENKLE](https://github.com/cehenkle) | Amazon |
-| Henri Yandell            | [hyandell](https://github.com/hyandell) | Amazon |
+Repository administration is handled by the **amazon-opensearch-clients** team in the
+[aws GitHub organization](https://github.com/orgs/aws/teams/amazon-opensearch-clients).
+Admin access is managed through Amazon's internal tooling (Abacus → GitHub team sync).
 
-[This document](https://github.com/opensearch-project/.github/blob/main/ADMINS.md) explains what admins do in this repo. and how they should be doing it. If you're interested in becoming a maintainer, see [MAINTAINERS](MAINTAINERS.md). If you're interested in contributing, see [CONTRIBUTING](CONTRIBUTING.md).
+If you're interested in becoming a maintainer, see [MAINTAINERS](MAINTAINERS.md).
+If you're interested in contributing, see [CONTRIBUTING](CONTRIBUTING.md).
