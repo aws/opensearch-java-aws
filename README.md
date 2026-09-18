@@ -47,7 +47,7 @@ cd opensearch-java-aws
 The generated local artifact is:
 
 ```text
-java-client/build/libs/java-client-4.0.0-SNAPSHOT.jar
+java-client/build/libs/java-client-0.1.0-SNAPSHOT.jar
 ```
 
 Until the artifact is published, another Gradle project can use the local JAR
@@ -55,7 +55,7 @@ for prototype testing:
 
 ```kotlin
 dependencies {
-    implementation(files("libs/java-client-4.0.0-SNAPSHOT.jar"))
+    implementation(files("libs/java-client-0.1.0-SNAPSHOT.jar"))
 
     implementation(platform("software.amazon.awssdk:bom:<aws-sdk-version>"))
     implementation("software.amazon.awssdk:sdk-core")
