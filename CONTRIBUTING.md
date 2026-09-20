@@ -5,6 +5,7 @@
   - [Feature Requests](#feature-requests)
   - [Contributing Code](#contributing-code)
 - [Developer Certificate of Origin](#developer-certificate-of-origin)
+- [Scanning for Secrets](#scanning-for-secrets)
 - [Changelog](#changelog)
   - [Adding Changes](#adding-changes)
 - [Review Process](#review-process)
@@ -81,6 +82,36 @@ Signed-off-by: Jane Smith <jane.smith@email.com>
 ```
 
 You may type this line on your own when writing your commit messages. However, if your user.name and user.email are set in your git configs, you can use `-s` or `– – signoff` to add the `Signed-off-by` line to the end of the commit message.
+
+## Scanning for Secrets
+
+Never commit credentials, API keys, private keys, or other secrets to this repository. In addition to GitHub secret scanning (enabled on this repository) and the CI secret scan that runs on every pull request, we ask contributors to install [git-secrets](https://github.com/awslabs/git-secrets) locally so leaks are caught **before** a commit is created.
+
+Install the tool once:
+
+```
+# macOS
+brew install git-secrets
+
+# Linux / from source
+git clone https://github.com/awslabs/git-secrets.git
+cd git-secrets && sudo make install
+```
+
+Then, from the root of your clone of this repository, install the commit hooks and register the secret patterns:
+
+```
+git secrets --install
+git secrets --register-aws
+```
+
+`git secrets --install` adds `pre-commit`, `commit-msg`, and `prepare-commit-msg` hooks so every commit is scanned automatically. `git secrets --register-aws` loads the AWS access-key / secret-key / account-id patterns. To scan the existing history on demand:
+
+```
+git secrets --scan-history
+```
+
+If the scanner flags a false positive, add a narrowly scoped allowed pattern with `git secrets --add --allowed '<regex>'` rather than disabling the hook.
 
 ## Changelog
 
