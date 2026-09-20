@@ -1,0 +1,4 @@
+# git-secrets allowlist. Patterns here are treated as false positives.
+# The secret-scan workflow defines detection patterns as literal strings, so
+# those lines match themselves; allow the workflow's own pattern definitions.
+git secrets --add.*PRIVATE KEY
