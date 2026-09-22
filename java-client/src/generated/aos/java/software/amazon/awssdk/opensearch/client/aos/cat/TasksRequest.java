@@ -62,12 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.tasks.Request
 
 /**
- * <p>
  * Lists the progress of all tasks currently running on the cluster.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class TasksRequest extends CatRequestBase implements ToCopyableBuilder<TasksRequest.Builder, TasksRequest> {

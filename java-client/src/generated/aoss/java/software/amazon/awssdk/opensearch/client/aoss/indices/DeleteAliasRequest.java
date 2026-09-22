@@ -74,6 +74,10 @@ public final class DeleteAliasRequest extends RequestBase implements ToCopyableB
     @Nonnull
     private final List<String> index;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final List<String> name;
 
@@ -86,6 +90,7 @@ public final class DeleteAliasRequest extends RequestBase implements ToCopyableB
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.index = ApiTypeHelper.unmodifiableRequired(builder.index, this, "index");
+        this.masterTimeout = builder.masterTimeout;
         this.name = ApiTypeHelper.unmodifiableRequired(builder.name, this, "name");
         this.timeout = builder.timeout;
     }
@@ -114,6 +119,19 @@ public final class DeleteAliasRequest extends RequestBase implements ToCopyableB
     @Nonnull
     public final List<String> index() {
         return this.index;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -159,6 +177,8 @@ public final class DeleteAliasRequest extends RequestBase implements ToCopyableB
         @Nullable
         private Time clusterManagerTimeout;
         private List<String> index;
+        @Nullable
+        private Time masterTimeout;
         private List<String> name;
         @Nullable
         private Time timeout;
@@ -169,6 +189,7 @@ public final class DeleteAliasRequest extends RequestBase implements ToCopyableB
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.name = _listCopy(o.name);
             this.timeout = o.timeout;
         }
@@ -177,6 +198,7 @@ public final class DeleteAliasRequest extends RequestBase implements ToCopyableB
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.name = _listCopy(o.name);
             this.timeout = o.timeout;
         }
@@ -246,6 +268,33 @@ public final class DeleteAliasRequest extends RequestBase implements ToCopyableB
         public final Builder index(String value, String... values) {
             this.index = _listAdd(this.index, value, values);
             return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -327,6 +376,9 @@ public final class DeleteAliasRequest extends RequestBase implements ToCopyableB
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -363,6 +415,7 @@ public final class DeleteAliasRequest extends RequestBase implements ToCopyableB
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + this.index.hashCode();
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + this.name.hashCode();
         result = 31 * result + Objects.hashCode(this.timeout);
         return result;
@@ -375,6 +428,7 @@ public final class DeleteAliasRequest extends RequestBase implements ToCopyableB
         DeleteAliasRequest other = (DeleteAliasRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && this.index.equals(other.index)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && this.name.equals(other.name)
             && Objects.equals(this.timeout, other.timeout);
     }

@@ -70,12 +70,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.put_settings.Request
 
 /**
- * <p>
  * Updates the cluster settings.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -89,6 +84,10 @@ public final class PutClusterSettingsRequest extends RequestBase
 
     @Nullable
     private final Boolean flatSettings;
+
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
 
     @Nonnull
     private final Map<String, JsonData> persistent;
@@ -105,6 +104,7 @@ public final class PutClusterSettingsRequest extends RequestBase
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.flatSettings = builder.flatSettings;
+        this.masterTimeout = builder.masterTimeout;
         this.persistent = ApiTypeHelper.unmodifiable(builder.persistent);
         this.timeout = builder.timeout;
         this.transient_ = ApiTypeHelper.unmodifiable(builder.transient_);
@@ -137,6 +137,20 @@ public final class PutClusterSettingsRequest extends RequestBase
     @Nullable
     public final Boolean flatSettings() {
         return this.flatSettings;
+    }
+
+    /**
+     * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+     * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+     * <code>-1</code> to indicate an unspecified value.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -224,6 +238,8 @@ public final class PutClusterSettingsRequest extends RequestBase
         @Nullable
         private Boolean flatSettings;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Map<String, JsonData> persistent;
         @Nullable
         private Time timeout;
@@ -236,6 +252,7 @@ public final class PutClusterSettingsRequest extends RequestBase
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.flatSettings = o.flatSettings;
+            this.masterTimeout = o.masterTimeout;
             this.persistent = _mapCopy(o.persistent);
             this.timeout = o.timeout;
             this.transient_ = _mapCopy(o.transient_);
@@ -245,6 +262,7 @@ public final class PutClusterSettingsRequest extends RequestBase
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.flatSettings = o.flatSettings;
+            this.masterTimeout = o.masterTimeout;
             this.persistent = _mapCopy(o.persistent);
             this.timeout = o.timeout;
             this.transient_ = _mapCopy(o.transient_);
@@ -299,6 +317,35 @@ public final class PutClusterSettingsRequest extends RequestBase
         public final Builder flatSettings(@Nullable Boolean value) {
             this.flatSettings = value;
             return this;
+        }
+
+        /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -420,6 +467,9 @@ public final class PutClusterSettingsRequest extends RequestBase
         if (this.flatSettings != null) {
             params.put("flat_settings", String.valueOf(this.flatSettings));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -449,6 +499,7 @@ public final class PutClusterSettingsRequest extends RequestBase
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.flatSettings);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.persistent);
         result = 31 * result + Objects.hashCode(this.timeout);
         result = 31 * result + Objects.hashCode(this.transient_);
@@ -462,6 +513,7 @@ public final class PutClusterSettingsRequest extends RequestBase
         PutClusterSettingsRequest other = (PutClusterSettingsRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.flatSettings, other.flatSettings)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.persistent, other.persistent)
             && Objects.equals(this.timeout, other.timeout)
             && Objects.equals(this.transient_, other.transient_);

@@ -62,12 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: tasks.cancel.Request
 
 /**
- * <p>
  * Cancels a task, if it can be cancelled through an API.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class CancelRequest extends RequestBase implements ToCopyableBuilder<CancelRequest.Builder, CancelRequest> {

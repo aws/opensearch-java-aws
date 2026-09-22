@@ -77,9 +77,6 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * <li>When type is <code>geo_shape</code>, all geometry types are allowed (Point, MultiPoint, LineString, MultiLineString, Polygon,
  * MultiPolygon, GeometryCollection, Envelope).</li>
  * </ul>
- * <p>
- * <strong>Minimum version:</strong> <code>2.11</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

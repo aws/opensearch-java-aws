@@ -72,6 +72,10 @@ public final class DeleteIndexTemplateRequest extends RequestBase
     @Nullable
     private final Time clusterManagerTimeout;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final String name;
 
@@ -83,6 +87,7 @@ public final class DeleteIndexTemplateRequest extends RequestBase
     private DeleteIndexTemplateRequest(Builder builder) {
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
+        this.masterTimeout = builder.masterTimeout;
         this.name = ApiTypeHelper.requireNonNull(builder.name, this, "name");
         this.timeout = builder.timeout;
     }
@@ -102,6 +107,19 @@ public final class DeleteIndexTemplateRequest extends RequestBase
     @Nullable
     public final Time clusterManagerTimeout() {
         return this.clusterManagerTimeout;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -147,6 +165,8 @@ public final class DeleteIndexTemplateRequest extends RequestBase
             CopyableBuilder<Builder, DeleteIndexTemplateRequest> {
         @Nullable
         private Time clusterManagerTimeout;
+        @Nullable
+        private Time masterTimeout;
         private String name;
         @Nullable
         private Time timeout;
@@ -156,6 +176,7 @@ public final class DeleteIndexTemplateRequest extends RequestBase
         private Builder(DeleteIndexTemplateRequest o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
             this.timeout = o.timeout;
         }
@@ -163,6 +184,7 @@ public final class DeleteIndexTemplateRequest extends RequestBase
         private Builder(Builder o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
             this.timeout = o.timeout;
         }
@@ -200,6 +222,33 @@ public final class DeleteIndexTemplateRequest extends RequestBase
         @Nonnull
         public final Builder clusterManagerTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
             return clusterManagerTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -259,6 +308,9 @@ public final class DeleteIndexTemplateRequest extends RequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -292,6 +344,7 @@ public final class DeleteIndexTemplateRequest extends RequestBase
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + this.name.hashCode();
         result = 31 * result + Objects.hashCode(this.timeout);
         return result;
@@ -303,6 +356,7 @@ public final class DeleteIndexTemplateRequest extends RequestBase
         if (o == null || this.getClass() != o.getClass()) return false;
         DeleteIndexTemplateRequest other = (DeleteIndexTemplateRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && this.name.equals(other.name)
             && Objects.equals(this.timeout, other.timeout);
     }

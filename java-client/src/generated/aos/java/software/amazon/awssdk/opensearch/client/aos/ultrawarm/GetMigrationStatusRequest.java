@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ultrawarm.get_migration_status.Request
 
 /**
- * <p>
  * AOS only. Returns the migration status for a specific index. Returns HTTP 400 when no migration is currently active for the index.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>7.1</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetMigrationStatusRequest extends RequestBase

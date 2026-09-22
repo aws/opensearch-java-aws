@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.delete_distinguished_name.Request
 
 /**
- * <p>
  * Deletes all distinguished names in the specified cluster or node allowlist. Requires super admin or REST API permissions.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteDistinguishedNameRequest extends RequestBase

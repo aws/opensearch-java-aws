@@ -73,24 +73,14 @@ public class OpenSearchSearchPipelineClient extends ApiClient<OpenSearchTranspor
     // ----- Endpoint: search_pipeline.delete
 
     /**
-     * <p>
      * Deletes the specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      */
     public DeleteSearchPipelineResponse delete(DeleteSearchPipelineRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteSearchPipelineRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes the specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteSearchPipelineRequest}
      */
@@ -103,24 +93,14 @@ public class OpenSearchSearchPipelineClient extends ApiClient<OpenSearchTranspor
     // ----- Endpoint: search_pipeline.get
 
     /**
-     * <p>
      * Retrieves information about a specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      */
     public GetSearchPipelineResponse get(GetSearchPipelineRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetSearchPipelineRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Retrieves information about a specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetSearchPipelineRequest}
      */
@@ -130,12 +110,7 @@ public class OpenSearchSearchPipelineClient extends ApiClient<OpenSearchTranspor
     }
 
     /**
-     * <p>
      * Retrieves information about a specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      */
     public final GetSearchPipelineResponse get() throws IOException, OpenSearchException {
         return get(new GetSearchPipelineRequest.Builder().build());
@@ -144,24 +119,14 @@ public class OpenSearchSearchPipelineClient extends ApiClient<OpenSearchTranspor
     // ----- Endpoint: search_pipeline.put
 
     /**
-     * <p>
      * Creates or replaces the specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      */
     public PutSearchPipelineResponse put(PutSearchPipelineRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutSearchPipelineRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates or replaces the specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutSearchPipelineRequest}
      */

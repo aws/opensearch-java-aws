@@ -35,12 +35,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.get_agent.Request
 
 /**
- * <p>
  * Get an agent.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.13</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetAgentRequest extends RequestBase implements ToCopyableBuilder<GetAgentRequest.Builder, GetAgentRequest> {

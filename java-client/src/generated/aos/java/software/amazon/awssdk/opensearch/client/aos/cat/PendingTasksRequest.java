@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.pending_tasks.Request
 
 /**
- * <p>
  * Returns a concise representation of the cluster's pending tasks.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class PendingTasksRequest extends CatRequestBase
@@ -76,6 +71,10 @@ public final class PendingTasksRequest extends CatRequestBase
     @Nullable
     private final Time clusterManagerTimeout;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final TimeUnit time;
 
@@ -84,6 +83,7 @@ public final class PendingTasksRequest extends CatRequestBase
     private PendingTasksRequest(Builder builder) {
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
+        this.masterTimeout = builder.masterTimeout;
         this.time = builder.time;
     }
 
@@ -100,6 +100,18 @@ public final class PendingTasksRequest extends CatRequestBase
     @Nullable
     public final Time clusterManagerTimeout() {
         return this.clusterManagerTimeout;
+    }
+
+    /**
+     * The amount of time allowed to establish a connection to the cluster manager node.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -134,6 +146,8 @@ public final class PendingTasksRequest extends CatRequestBase
         @Nullable
         private Time clusterManagerTimeout;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private TimeUnit time;
 
         public Builder() {}
@@ -141,12 +155,14 @@ public final class PendingTasksRequest extends CatRequestBase
         private Builder(PendingTasksRequest o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.time = o.time;
         }
 
         private Builder(Builder o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.time = o.time;
         }
 
@@ -186,6 +202,31 @@ public final class PendingTasksRequest extends CatRequestBase
         }
 
         /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Specifies the time units, for example, <code>5d</code> or <code>7h</code>. For more information, see
          * <a href="https://docs.opensearch.org/latest/api-reference/units/">Supported units</a>.
          * <p>
@@ -220,6 +261,9 @@ public final class PendingTasksRequest extends CatRequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.time != null) {
             params.put("time", this.time.jsonValue());
         }
@@ -248,6 +292,7 @@ public final class PendingTasksRequest extends CatRequestBase
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.time);
         return result;
     }
@@ -257,6 +302,8 @@ public final class PendingTasksRequest extends CatRequestBase
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         PendingTasksRequest other = (PendingTasksRequest) o;
-        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout) && Objects.equals(this.time, other.time);
+        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
+            && Objects.equals(this.time, other.time);
     }
 }

@@ -67,13 +67,8 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.indices.Request
 
 /**
- * <p>
  * Lists information related to indexes, that is, how much disk space they are using, how many shards they have, their health status, and so
  * on.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class IndicesRequest extends CatRequestBase implements ToCopyableBuilder<IndicesRequest.Builder, IndicesRequest> {
@@ -96,6 +91,10 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
     @Nonnull
     private final List<String> index;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final Boolean pri;
 
@@ -112,6 +111,7 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
         this.health = builder.health;
         this.includeUnloadedSegments = builder.includeUnloadedSegments;
         this.index = ApiTypeHelper.unmodifiable(builder.index);
+        this.masterTimeout = builder.masterTimeout;
         this.pri = builder.pri;
         this.time = builder.time;
     }
@@ -188,6 +188,18 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
     }
 
     /**
+     * The amount of time allowed to establish a connection to the cluster manager node.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
      * When <code>true</code>, returns information only from the primary shards.
      * <p>
      * API name: {@code pri}
@@ -239,6 +251,8 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
         @Nullable
         private List<String> index;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Boolean pri;
         @Nullable
         private TimeUnit time;
@@ -253,6 +267,7 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
             this.health = o.health;
             this.includeUnloadedSegments = o.includeUnloadedSegments;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.pri = o.pri;
             this.time = o.time;
         }
@@ -265,6 +280,7 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
             this.health = o.health;
             this.includeUnloadedSegments = o.includeUnloadedSegments;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.pri = o.pri;
             this.time = o.time;
         }
@@ -407,6 +423,31 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
         }
 
         /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * When <code>true</code>, returns information only from the primary shards.
          * <p>
          * API name: {@code pri}
@@ -464,6 +505,9 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
         if (this.includeUnloadedSegments != null) {
             params.put("include_unloaded_segments", String.valueOf(this.includeUnloadedSegments));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.pri != null) {
             params.put("pri", String.valueOf(this.pri));
         }
@@ -518,6 +562,7 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
         result = 31 * result + Objects.hashCode(this.health);
         result = 31 * result + Objects.hashCode(this.includeUnloadedSegments);
         result = 31 * result + Objects.hashCode(this.index);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.pri);
         result = 31 * result + Objects.hashCode(this.time);
         return result;
@@ -534,6 +579,7 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
             && Objects.equals(this.health, other.health)
             && Objects.equals(this.includeUnloadedSegments, other.includeUnloadedSegments)
             && Objects.equals(this.index, other.index)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.pri, other.pri)
             && Objects.equals(this.time, other.time);
     }

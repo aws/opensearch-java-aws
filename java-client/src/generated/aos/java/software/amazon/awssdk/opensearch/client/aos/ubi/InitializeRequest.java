@@ -60,12 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ubi.initialize.Request
 
 /**
- * <p>
  * Initializes the UBI indexes.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class InitializeRequest extends RequestBase implements ToCopyableBuilder<InitializeRequest.Builder, InitializeRequest> {

@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.create_store.Request
 
 /**
- * <p>
  * Creates a new feature store with the specified name.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.17.1</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class CreateStoreRequest extends RequestBase implements ToCopyableBuilder<CreateStoreRequest.Builder, CreateStoreRequest> {

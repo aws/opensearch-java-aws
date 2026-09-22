@@ -65,12 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.get_settings.Request
 
 /**
- * <p>
  * Returns settings for one or more indexes.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetIndicesSettingsRequest extends RequestBase
@@ -101,6 +96,10 @@ public final class GetIndicesSettingsRequest extends RequestBase
     @Nullable
     private final Boolean local;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final List<String> name;
 
@@ -116,6 +115,7 @@ public final class GetIndicesSettingsRequest extends RequestBase
         this.includeDefaults = builder.includeDefaults;
         this.index = ApiTypeHelper.unmodifiable(builder.index);
         this.local = builder.local;
+        this.masterTimeout = builder.masterTimeout;
         this.name = ApiTypeHelper.unmodifiable(builder.name);
     }
 
@@ -217,6 +217,19 @@ public final class GetIndicesSettingsRequest extends RequestBase
     }
 
     /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
      * A comma-separated list or wildcard expression of settings to retrieve.
      * <p>
      * API name: {@code name}
@@ -263,6 +276,8 @@ public final class GetIndicesSettingsRequest extends RequestBase
         @Nullable
         private Boolean local;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private List<String> name;
 
         public Builder() {}
@@ -277,6 +292,7 @@ public final class GetIndicesSettingsRequest extends RequestBase
             this.includeDefaults = o.includeDefaults;
             this.index = _listCopy(o.index);
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.name = _listCopy(o.name);
         }
 
@@ -290,6 +306,7 @@ public final class GetIndicesSettingsRequest extends RequestBase
             this.includeDefaults = o.includeDefaults;
             this.index = _listCopy(o.index);
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.name = _listCopy(o.name);
         }
 
@@ -460,6 +477,33 @@ public final class GetIndicesSettingsRequest extends RequestBase
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * A comma-separated list or wildcard expression of settings to retrieve.
          * <p>
          * API name: {@code name}
@@ -531,6 +575,9 @@ public final class GetIndicesSettingsRequest extends RequestBase
         if (this.local != null) {
             params.put("local", String.valueOf(this.local));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
     }
 
     /**
@@ -595,6 +642,7 @@ public final class GetIndicesSettingsRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.includeDefaults);
         result = 31 * result + Objects.hashCode(this.index);
         result = 31 * result + Objects.hashCode(this.local);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.name);
         return result;
     }
@@ -612,6 +660,7 @@ public final class GetIndicesSettingsRequest extends RequestBase
             && Objects.equals(this.includeDefaults, other.includeDefaults)
             && Objects.equals(this.index, other.index)
             && Objects.equals(this.local, other.local)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.name, other.name);
     }
 }

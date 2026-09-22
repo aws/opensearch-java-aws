@@ -63,12 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.snapshots.Request
 
 /**
- * <p>
  * Lists all of the snapshots stored in a specific repository.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class SnapshotsRequest extends CatRequestBase implements ToCopyableBuilder<SnapshotsRequest.Builder, SnapshotsRequest> {
@@ -78,6 +73,10 @@ public final class SnapshotsRequest extends CatRequestBase implements ToCopyable
 
     @Nullable
     private final Boolean ignoreUnavailable;
+
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
 
     @Nonnull
     private final List<String> repository;
@@ -91,6 +90,7 @@ public final class SnapshotsRequest extends CatRequestBase implements ToCopyable
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.ignoreUnavailable = builder.ignoreUnavailable;
+        this.masterTimeout = builder.masterTimeout;
         this.repository = ApiTypeHelper.unmodifiable(builder.repository);
         this.time = builder.time;
     }
@@ -119,6 +119,18 @@ public final class SnapshotsRequest extends CatRequestBase implements ToCopyable
     @Nullable
     public final Boolean ignoreUnavailable() {
         return this.ignoreUnavailable;
+    }
+
+    /**
+     * The amount of time allowed to establish a connection to the cluster manager node.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -167,6 +179,8 @@ public final class SnapshotsRequest extends CatRequestBase implements ToCopyable
         @Nullable
         private Boolean ignoreUnavailable;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private List<String> repository;
         @Nullable
         private TimeUnit time;
@@ -177,6 +191,7 @@ public final class SnapshotsRequest extends CatRequestBase implements ToCopyable
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.ignoreUnavailable = o.ignoreUnavailable;
+            this.masterTimeout = o.masterTimeout;
             this.repository = _listCopy(o.repository);
             this.time = o.time;
         }
@@ -185,6 +200,7 @@ public final class SnapshotsRequest extends CatRequestBase implements ToCopyable
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.ignoreUnavailable = o.ignoreUnavailable;
+            this.masterTimeout = o.masterTimeout;
             this.repository = _listCopy(o.repository);
             this.time = o.time;
         }
@@ -234,6 +250,31 @@ public final class SnapshotsRequest extends CatRequestBase implements ToCopyable
         public final Builder ignoreUnavailable(@Nullable Boolean value) {
             this.ignoreUnavailable = value;
             return this;
+        }
+
+        /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -308,6 +349,9 @@ public final class SnapshotsRequest extends CatRequestBase implements ToCopyable
         if (this.ignoreUnavailable != null) {
             params.put("ignore_unavailable", String.valueOf(this.ignoreUnavailable));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.time != null) {
             params.put("time", this.time.jsonValue());
         }
@@ -355,6 +399,7 @@ public final class SnapshotsRequest extends CatRequestBase implements ToCopyable
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.repository);
         result = 31 * result + Objects.hashCode(this.time);
         return result;
@@ -367,6 +412,7 @@ public final class SnapshotsRequest extends CatRequestBase implements ToCopyable
         SnapshotsRequest other = (SnapshotsRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.repository, other.repository)
             && Objects.equals(this.time, other.time);
     }

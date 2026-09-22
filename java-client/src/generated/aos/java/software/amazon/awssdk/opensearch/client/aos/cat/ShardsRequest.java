@@ -64,12 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.shards.Request
 
 /**
- * <p>
  * Lists the states of all primary and replica shards and how they are distributed.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ShardsRequest extends CatRequestBase implements ToCopyableBuilder<ShardsRequest.Builder, ShardsRequest> {
@@ -83,6 +78,10 @@ public final class ShardsRequest extends CatRequestBase implements ToCopyableBui
     @Nonnull
     private final List<String> index;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final TimeUnit time;
 
@@ -93,6 +92,7 @@ public final class ShardsRequest extends CatRequestBase implements ToCopyableBui
         this.bytes = builder.bytes;
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.index = ApiTypeHelper.unmodifiable(builder.index);
+        this.masterTimeout = builder.masterTimeout;
         this.time = builder.time;
     }
 
@@ -135,6 +135,18 @@ public final class ShardsRequest extends CatRequestBase implements ToCopyableBui
     }
 
     /**
+     * The amount of time allowed to establish a connection to the cluster manager node.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
      * Specifies the time units, for example, <code>5d</code> or <code>7h</code>. For more information, see
      * <a href="https://docs.opensearch.org/latest/api-reference/units/">Supported units</a>.
      * <p>
@@ -170,6 +182,8 @@ public final class ShardsRequest extends CatRequestBase implements ToCopyableBui
         @Nullable
         private List<String> index;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private TimeUnit time;
 
         public Builder() {}
@@ -179,6 +193,7 @@ public final class ShardsRequest extends CatRequestBase implements ToCopyableBui
             this.bytes = o.bytes;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.time = o.time;
         }
 
@@ -187,6 +202,7 @@ public final class ShardsRequest extends CatRequestBase implements ToCopyableBui
             this.bytes = o.bytes;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.time = o.time;
         }
 
@@ -272,6 +288,31 @@ public final class ShardsRequest extends CatRequestBase implements ToCopyableBui
         }
 
         /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Specifies the time units, for example, <code>5d</code> or <code>7h</code>. For more information, see
          * <a href="https://docs.opensearch.org/latest/api-reference/units/">Supported units</a>.
          * <p>
@@ -308,6 +349,9 @@ public final class ShardsRequest extends CatRequestBase implements ToCopyableBui
         }
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
+        }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
         }
         if (this.time != null) {
             params.put("time", this.time.jsonValue());
@@ -357,6 +401,7 @@ public final class ShardsRequest extends CatRequestBase implements ToCopyableBui
         result = 31 * result + Objects.hashCode(this.bytes);
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.index);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.time);
         return result;
     }
@@ -369,6 +414,7 @@ public final class ShardsRequest extends CatRequestBase implements ToCopyableBui
         return Objects.equals(this.bytes, other.bytes)
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.index, other.index)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.time, other.time);
     }
 }

@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.get_tenants.Request
 
 /**
- * <p>
  * Retrieves all tenants.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetTenantsRequest extends RequestBase implements ToCopyableBuilder<GetTenantsRequest.Builder, GetTenantsRequest> {

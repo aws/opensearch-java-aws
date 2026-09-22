@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.delete_by_query_rethrottle.Request
 
 /**
- * <p>
  * Changes the number of requests per second for a particular Delete By Query operation.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteByQueryRethrottleRequest extends RequestBase

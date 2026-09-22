@@ -69,12 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: snapshot.create_repository.Request
 
 /**
- * <p>
  * Creates a snapshot repository.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -85,6 +80,10 @@ public final class CreateRepositoryRequest extends RequestBase
 
     @Nullable
     private final Time clusterManagerTimeout;
+
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
 
     @Nonnull
     private final String name;
@@ -109,6 +108,7 @@ public final class CreateRepositoryRequest extends RequestBase
     private CreateRepositoryRequest(Builder builder) {
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
+        this.masterTimeout = builder.masterTimeout;
         this.name = ApiTypeHelper.requireNonNull(builder.name, this, "name");
         this.repository = builder.repository;
         this.settings = ApiTypeHelper.requireNonNull(builder.settings, this, "settings");
@@ -131,6 +131,18 @@ public final class CreateRepositoryRequest extends RequestBase
     @Nullable
     public final Time clusterManagerTimeout() {
         return this.clusterManagerTimeout;
+    }
+
+    /**
+     * Explicit operation timeout for connection to cluster-manager node
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -232,6 +244,8 @@ public final class CreateRepositoryRequest extends RequestBase
     public static class Builder extends RequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, CreateRepositoryRequest> {
         @Nullable
         private Time clusterManagerTimeout;
+        @Nullable
+        private Time masterTimeout;
         private String name;
         @Nullable
         private Repository repository;
@@ -247,6 +261,7 @@ public final class CreateRepositoryRequest extends RequestBase
         private Builder(CreateRepositoryRequest o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
             this.repository = o.repository;
             this.settings = o.settings;
@@ -258,6 +273,7 @@ public final class CreateRepositoryRequest extends RequestBase
         private Builder(Builder o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
             this.repository = o.repository;
             this.settings = o.settings;
@@ -301,6 +317,31 @@ public final class CreateRepositoryRequest extends RequestBase
         @Nonnull
         public final Builder clusterManagerTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
             return clusterManagerTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
+         * Explicit operation timeout for connection to cluster-manager node
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Explicit operation timeout for connection to cluster-manager node
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -431,6 +472,9 @@ public final class CreateRepositoryRequest extends RequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -467,6 +511,7 @@ public final class CreateRepositoryRequest extends RequestBase
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + this.name.hashCode();
         result = 31 * result + Objects.hashCode(this.repository);
         result = 31 * result + this.settings.hashCode();
@@ -482,6 +527,7 @@ public final class CreateRepositoryRequest extends RequestBase
         if (o == null || this.getClass() != o.getClass()) return false;
         CreateRepositoryRequest other = (CreateRepositoryRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && this.name.equals(other.name)
             && Objects.equals(this.repository, other.repository)
             && this.settings.equals(other.settings)

@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.get_all_certificates.Request
 
 /**
- * <p>
  * Retrieves the cluster security certificates.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.15</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetAllCertificatesRequest extends RequestBase

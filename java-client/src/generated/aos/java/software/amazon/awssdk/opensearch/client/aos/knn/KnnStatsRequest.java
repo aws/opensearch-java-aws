@@ -64,12 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: knn.stats.Request
 
 /**
- * <p>
  * Provides information about the current status of the k-NN plugin.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class KnnStatsRequest extends RequestBase implements ToCopyableBuilder<KnnStatsRequest.Builder, KnnStatsRequest> {

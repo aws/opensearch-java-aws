@@ -74,12 +74,7 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     // ----- Endpoint: snapshot.cleanup_repository
 
     /**
-     * <p>
      * Removes any stale data from a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<CleanupRepositoryResponse> cleanupRepository(CleanupRepositoryRequest request) throws IOException,
         OpenSearchException {
@@ -87,12 +82,7 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     }
 
     /**
-     * <p>
      * Removes any stale data from a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CleanupRepositoryRequest}
      */
@@ -105,24 +95,14 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     // ----- Endpoint: snapshot.clone
 
     /**
-     * <p>
      * Creates a clone of all or part of a snapshot in the same repository as the original snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<CloneSnapshotResponse> clone(CloneSnapshotRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CloneSnapshotRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates a clone of all or part of a snapshot in the same repository as the original snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CloneSnapshotRequest}
      */
@@ -135,24 +115,14 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     // ----- Endpoint: snapshot.create
 
     /**
-     * <p>
      * Creates a snapshot within an existing repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<CreateSnapshotResponse> create(CreateSnapshotRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CreateSnapshotRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates a snapshot within an existing repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateSnapshotRequest}
      */
@@ -165,12 +135,7 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     // ----- Endpoint: snapshot.create_repository
 
     /**
-     * <p>
      * Creates a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<CreateRepositoryResponse> createRepository(CreateRepositoryRequest request) throws IOException,
         OpenSearchException {
@@ -178,12 +143,7 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     }
 
     /**
-     * <p>
      * Creates a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateRepositoryRequest}
      */
@@ -196,24 +156,14 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     // ----- Endpoint: snapshot.delete
 
     /**
-     * <p>
      * Deletes a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeleteSnapshotResponse> delete(DeleteSnapshotRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteSnapshotRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteSnapshotRequest}
      */
@@ -226,12 +176,7 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     // ----- Endpoint: snapshot.delete_repository
 
     /**
-     * <p>
      * Deletes a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeleteRepositoryResponse> deleteRepository(DeleteRepositoryRequest request) throws IOException,
         OpenSearchException {
@@ -239,12 +184,7 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     }
 
     /**
-     * <p>
      * Deletes a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteRepositoryRequest}
      */
@@ -257,24 +197,14 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     // ----- Endpoint: snapshot.get
 
     /**
-     * <p>
      * Returns information about a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetSnapshotResponse> get(GetSnapshotRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetSnapshotRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetSnapshotRequest}
      */
@@ -286,24 +216,14 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     // ----- Endpoint: snapshot.get_repository
 
     /**
-     * <p>
      * Returns information about a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetRepositoryResponse> getRepository(GetRepositoryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetRepositoryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetRepositoryRequest}
      */
@@ -314,12 +234,7 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     }
 
     /**
-     * <p>
      * Returns information about a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<GetRepositoryResponse> getRepository() throws IOException, OpenSearchException {
         return getRepository(new GetRepositoryRequest.Builder().build());
@@ -328,24 +243,14 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     // ----- Endpoint: snapshot.restore
 
     /**
-     * <p>
      * Restores a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<RestoreSnapshotResponse> restore(RestoreSnapshotRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, RestoreSnapshotRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Restores a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RestoreSnapshotRequest}
      */
@@ -358,24 +263,14 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     // ----- Endpoint: snapshot.status
 
     /**
-     * <p>
      * Returns information about the status of a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<SnapshotStatusResponse> status(SnapshotStatusRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, SnapshotStatusRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about the status of a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SnapshotStatusRequest}
      */
@@ -386,12 +281,7 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     }
 
     /**
-     * <p>
      * Returns information about the status of a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<SnapshotStatusResponse> status() throws IOException, OpenSearchException {
         return status(new SnapshotStatusRequest.Builder().build());
@@ -400,12 +290,7 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     // ----- Endpoint: snapshot.verify_repository
 
     /**
-     * <p>
      * Verifies a repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<VerifyRepositoryResponse> verifyRepository(VerifyRepositoryRequest request) throws IOException,
         OpenSearchException {
@@ -413,12 +298,7 @@ public class OpenSearchSnapshotAsyncClient extends ApiClient<OpenSearchTransport
     }
 
     /**
-     * <p>
      * Verifies a repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link VerifyRepositoryRequest}
      */

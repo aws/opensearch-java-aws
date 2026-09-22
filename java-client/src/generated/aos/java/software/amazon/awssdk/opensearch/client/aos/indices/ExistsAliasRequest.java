@@ -66,12 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.exists_alias.Request
 
 /**
- * <p>
  * Returns information about whether a particular alias exists.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ExistsAliasRequest extends RequestBase implements ToCopyableBuilder<ExistsAliasRequest.Builder, ExistsAliasRequest> {

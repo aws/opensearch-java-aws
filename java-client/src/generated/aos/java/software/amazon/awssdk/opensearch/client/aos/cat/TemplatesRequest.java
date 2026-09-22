@@ -60,18 +60,17 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.templates.Request
 
 /**
- * <p>
  * Lists the names, patterns, order numbers, and version numbers of index templates.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class TemplatesRequest extends CatRequestBase implements ToCopyableBuilder<TemplatesRequest.Builder, TemplatesRequest> {
 
     @Nullable
     private final Time clusterManagerTimeout;
+
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
 
     @Nullable
     private final String name;
@@ -81,6 +80,7 @@ public final class TemplatesRequest extends CatRequestBase implements ToCopyable
     private TemplatesRequest(Builder builder) {
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
+        this.masterTimeout = builder.masterTimeout;
         this.name = builder.name;
     }
 
@@ -97,6 +97,18 @@ public final class TemplatesRequest extends CatRequestBase implements ToCopyable
     @Nullable
     public final Time clusterManagerTimeout() {
         return this.clusterManagerTimeout;
+    }
+
+    /**
+     * The amount of time allowed to establish a connection to the cluster manager node.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -130,6 +142,8 @@ public final class TemplatesRequest extends CatRequestBase implements ToCopyable
         @Nullable
         private Time clusterManagerTimeout;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private String name;
 
         public Builder() {}
@@ -137,12 +151,14 @@ public final class TemplatesRequest extends CatRequestBase implements ToCopyable
         private Builder(TemplatesRequest o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
         }
 
         private Builder(Builder o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
         }
 
@@ -182,6 +198,31 @@ public final class TemplatesRequest extends CatRequestBase implements ToCopyable
         }
 
         /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * The name of the template to return. Accepts wildcard expressions. If omitted, all templates are returned.
          * <p>
          * API name: {@code name}
@@ -214,6 +255,9 @@ public final class TemplatesRequest extends CatRequestBase implements ToCopyable
         super.applyQueryParameters(params);
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
+        }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
         }
     }
 
@@ -258,6 +302,7 @@ public final class TemplatesRequest extends CatRequestBase implements ToCopyable
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.name);
         return result;
     }
@@ -267,6 +312,8 @@ public final class TemplatesRequest extends CatRequestBase implements ToCopyable
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         TemplatesRequest other = (TemplatesRequest) o;
-        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout) && Objects.equals(this.name, other.name);
+        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
+            && Objects.equals(this.name, other.name);
     }
 }

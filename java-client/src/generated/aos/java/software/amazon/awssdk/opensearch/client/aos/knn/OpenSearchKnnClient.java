@@ -73,24 +73,14 @@ public class OpenSearchKnnClient extends ApiClient<OpenSearchTransport, OpenSear
     // ----- Endpoint: knn.delete_model
 
     /**
-     * <p>
      * Used to delete a particular model in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeleteModelResponse deleteModel(DeleteModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Used to delete a particular model in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteModelRequest}
      */
@@ -102,24 +92,14 @@ public class OpenSearchKnnClient extends ApiClient<OpenSearchTransport, OpenSear
     // ----- Endpoint: knn.get_model
 
     /**
-     * <p>
      * Used to retrieve information about models present in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetModelResponse getModel(GetModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Used to retrieve information about models present in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetModelRequest}
      */
@@ -131,24 +111,14 @@ public class OpenSearchKnnClient extends ApiClient<OpenSearchTransport, OpenSear
     // ----- Endpoint: knn.search_models
 
     /**
-     * <p>
      * Use an OpenSearch query to search for models in the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public SearchModelsResponse searchModels(SearchModelsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, SearchModelsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Use an OpenSearch query to search for models in the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SearchModelsRequest}
      */
@@ -158,12 +128,7 @@ public class OpenSearchKnnClient extends ApiClient<OpenSearchTransport, OpenSear
     }
 
     /**
-     * <p>
      * Use an OpenSearch query to search for models in the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final SearchModelsResponse searchModels() throws IOException, OpenSearchException {
         return searchModels(new SearchModelsRequest.Builder().build());
@@ -172,24 +137,14 @@ public class OpenSearchKnnClient extends ApiClient<OpenSearchTransport, OpenSear
     // ----- Endpoint: knn.stats
 
     /**
-     * <p>
      * Provides information about the current status of the k-NN plugin.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public KnnStatsResponse stats(KnnStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, KnnStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Provides information about the current status of the k-NN plugin.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link KnnStatsRequest}
      */
@@ -199,12 +154,7 @@ public class OpenSearchKnnClient extends ApiClient<OpenSearchTransport, OpenSear
     }
 
     /**
-     * <p>
      * Provides information about the current status of the k-NN plugin.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final KnnStatsResponse stats() throws IOException, OpenSearchException {
         return stats(new KnnStatsRequest.Builder().build());
@@ -213,24 +163,14 @@ public class OpenSearchKnnClient extends ApiClient<OpenSearchTransport, OpenSear
     // ----- Endpoint: knn.train_model
 
     /**
-     * <p>
      * Create and train a model that can be used for initializing k-NN native library indexes during indexing.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public TrainModelResponse trainModel(TrainModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, TrainModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Create and train a model that can be used for initializing k-NN native library indexes during indexing.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link TrainModelRequest}
      */
@@ -242,24 +182,14 @@ public class OpenSearchKnnClient extends ApiClient<OpenSearchTransport, OpenSear
     // ----- Endpoint: knn.warmup
 
     /**
-     * <p>
      * Preloads native library files into memory, reducing initial search latency for specified indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public WarmupResponse warmup(WarmupRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, WarmupRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Preloads native library files into memory, reducing initial search latency for specified indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link WarmupRequest}
      */

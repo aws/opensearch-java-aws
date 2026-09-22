@@ -69,12 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.create_allowlist.Request
 
 /**
- * <p>
  * Creates or replaces APIs permitted for users on the allow list. Requires a super admin certificate or REST API permissions.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.1</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

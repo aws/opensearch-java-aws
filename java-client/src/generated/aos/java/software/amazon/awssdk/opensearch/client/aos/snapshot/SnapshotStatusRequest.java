@@ -63,12 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: snapshot.status.Request
 
 /**
- * <p>
  * Returns information about the status of a snapshot.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class SnapshotStatusRequest extends RequestBase
@@ -80,6 +75,10 @@ public final class SnapshotStatusRequest extends RequestBase
 
     @Nullable
     private final Boolean ignoreUnavailable;
+
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
 
     @Nullable
     private final String repository;
@@ -93,6 +92,7 @@ public final class SnapshotStatusRequest extends RequestBase
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.ignoreUnavailable = builder.ignoreUnavailable;
+        this.masterTimeout = builder.masterTimeout;
         this.repository = builder.repository;
         this.snapshot = ApiTypeHelper.unmodifiable(builder.snapshot);
     }
@@ -122,6 +122,18 @@ public final class SnapshotStatusRequest extends RequestBase
     @Nullable
     public final Boolean ignoreUnavailable() {
         return this.ignoreUnavailable;
+    }
+
+    /**
+     * Explicit operation timeout for connection to cluster-manager node
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -168,6 +180,8 @@ public final class SnapshotStatusRequest extends RequestBase
         @Nullable
         private Boolean ignoreUnavailable;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private String repository;
         @Nullable
         private List<String> snapshot;
@@ -178,6 +192,7 @@ public final class SnapshotStatusRequest extends RequestBase
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.ignoreUnavailable = o.ignoreUnavailable;
+            this.masterTimeout = o.masterTimeout;
             this.repository = o.repository;
             this.snapshot = _listCopy(o.snapshot);
         }
@@ -186,6 +201,7 @@ public final class SnapshotStatusRequest extends RequestBase
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.ignoreUnavailable = o.ignoreUnavailable;
+            this.masterTimeout = o.masterTimeout;
             this.repository = o.repository;
             this.snapshot = _listCopy(o.snapshot);
         }
@@ -237,6 +253,31 @@ public final class SnapshotStatusRequest extends RequestBase
         public final Builder ignoreUnavailable(@Nullable Boolean value) {
             this.ignoreUnavailable = value;
             return this;
+        }
+
+        /**
+         * Explicit operation timeout for connection to cluster-manager node
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Explicit operation timeout for connection to cluster-manager node
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -308,6 +349,9 @@ public final class SnapshotStatusRequest extends RequestBase
         if (this.ignoreUnavailable != null) {
             params.put("ignore_unavailable", String.valueOf(this.ignoreUnavailable));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
     }
 
     /**
@@ -364,6 +408,7 @@ public final class SnapshotStatusRequest extends RequestBase
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.repository);
         result = 31 * result + Objects.hashCode(this.snapshot);
         return result;
@@ -376,6 +421,7 @@ public final class SnapshotStatusRequest extends RequestBase
         SnapshotStatusRequest other = (SnapshotStatusRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.repository, other.repository)
             && Objects.equals(this.snapshot, other.snapshot);
     }

@@ -62,12 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.fielddata.Request
 
 /**
- * <p>
  * Shows how much heap memory is currently being used by field data on every data node in the cluster.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class FielddataRequest extends CatRequestBase implements ToCopyableBuilder<FielddataRequest.Builder, FielddataRequest> {

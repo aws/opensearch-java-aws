@@ -74,24 +74,14 @@ public class OpenSearchTasksAsyncClient extends ApiClient<OpenSearchTransport, O
     // ----- Endpoint: tasks.cancel
 
     /**
-     * <p>
      * Cancels a task, if it can be cancelled through an API.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<CancelResponse> cancel(CancelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CancelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Cancels a task, if it can be cancelled through an API.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CancelRequest}
      */
@@ -101,12 +91,7 @@ public class OpenSearchTasksAsyncClient extends ApiClient<OpenSearchTransport, O
     }
 
     /**
-     * <p>
      * Cancels a task, if it can be cancelled through an API.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<CancelResponse> cancel() throws IOException, OpenSearchException {
         return cancel(new CancelRequest.Builder().build());
@@ -115,24 +100,14 @@ public class OpenSearchTasksAsyncClient extends ApiClient<OpenSearchTransport, O
     // ----- Endpoint: tasks.delete
 
     /**
-     * <p>
      * Deletes a stored completed task result.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.9</code>
-     * </p>
      */
     public CompletableFuture<DeleteTasksResponse> delete(DeleteTasksRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteTasksRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a stored completed task result.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.9</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteTasksRequest}
      */
@@ -144,24 +119,14 @@ public class OpenSearchTasksAsyncClient extends ApiClient<OpenSearchTransport, O
     // ----- Endpoint: tasks.get
 
     /**
-     * <p>
      * Returns information about a task.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetTasksResponse> get(GetTasksRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetTasksRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about a task.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetTasksRequest}
      */
@@ -173,24 +138,14 @@ public class OpenSearchTasksAsyncClient extends ApiClient<OpenSearchTransport, O
     // ----- Endpoint: tasks.list
 
     /**
-     * <p>
      * Returns a list of tasks.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<ListResponse> list(ListRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ListRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns a list of tasks.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ListRequest}
      */
@@ -200,12 +155,7 @@ public class OpenSearchTasksAsyncClient extends ApiClient<OpenSearchTransport, O
     }
 
     /**
-     * <p>
      * Returns a list of tasks.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<ListResponse> list() throws IOException, OpenSearchException {
         return list(new ListRequest.Builder().build());

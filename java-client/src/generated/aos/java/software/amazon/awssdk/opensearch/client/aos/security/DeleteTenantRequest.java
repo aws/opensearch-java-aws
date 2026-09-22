@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.delete_tenant.Request
 
 /**
- * <p>
  * Deletes the specified tenant.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteTenantRequest extends RequestBase implements ToCopyableBuilder<DeleteTenantRequest.Builder, DeleteTenantRequest> {

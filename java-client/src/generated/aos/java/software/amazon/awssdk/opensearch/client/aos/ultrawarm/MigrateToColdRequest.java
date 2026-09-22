@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ultrawarm.migrate_to_cold.Request
 
 /**
- * <p>
  * AOS only. Migrates an index from UltraWarm (warm) storage to Cold storage. The operation is asynchronous.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>7.10</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class MigrateToColdRequest extends RequestBase

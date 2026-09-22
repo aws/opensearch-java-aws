@@ -71,12 +71,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.modify_data_stream.Request
 
 /**
- * <p>
  * Adds or removes backing indexes of a data stream with metadata-only actions. This is an experimental API.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.8</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

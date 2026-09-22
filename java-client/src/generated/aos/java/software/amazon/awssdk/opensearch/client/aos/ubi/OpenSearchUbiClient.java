@@ -74,24 +74,14 @@ public class OpenSearchUbiClient extends ApiClient<OpenSearchTransport, OpenSear
     // ----- Endpoint: ubi.initialize
 
     /**
-     * <p>
      * Initializes the UBI indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public BooleanResponse initialize(InitializeRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, InitializeRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Initializes the UBI indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link InitializeRequest}
      */
@@ -101,12 +91,7 @@ public class OpenSearchUbiClient extends ApiClient<OpenSearchTransport, OpenSear
     }
 
     /**
-     * <p>
      * Initializes the UBI indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final BooleanResponse initialize() throws IOException, OpenSearchException {
         return initialize(new InitializeRequest.Builder().build());

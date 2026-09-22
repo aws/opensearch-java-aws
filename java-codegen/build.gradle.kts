@@ -85,7 +85,7 @@ tasks.named<JavaExec>("run") {
 }
 
 val distributionSpecsDir = providers.gradleProperty("distributionSpecsDir")
-    .orElse(rootProject.file("../opensearch-api-docs/build").absolutePath)
+    .orElse(projectDir.absolutePath)
 
 fun registerDistributionClientTask(
     taskName: String,
@@ -111,7 +111,7 @@ fun registerDistributionClientTask(
         doFirst {
             check(specificationFile.isFile) {
                 "Distribution specification not found: $specificationFile. " +
-                    "Generate it in opensearch-api-docs or pass -PdistributionSpecsDir=<directory>."
+                    "Restore the bundled snapshot or pass -PdistributionSpecsDir=<directory>."
             }
         }
 

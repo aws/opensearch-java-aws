@@ -62,12 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ingest.delete_pipeline.Request
 
 /**
- * <p>
  * Deletes an ingest pipeline.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeletePipelineRequest extends RequestBase
@@ -80,6 +75,10 @@ public final class DeletePipelineRequest extends RequestBase
     @Nonnull
     private final String id;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final Time timeout;
 
@@ -89,6 +88,7 @@ public final class DeletePipelineRequest extends RequestBase
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.id = ApiTypeHelper.requireNonNull(builder.id, this, "id");
+        this.masterTimeout = builder.masterTimeout;
         this.timeout = builder.timeout;
     }
 
@@ -117,6 +117,19 @@ public final class DeletePipelineRequest extends RequestBase
     @Nonnull
     public final String id() {
         return this.id;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -151,6 +164,8 @@ public final class DeletePipelineRequest extends RequestBase
         private Time clusterManagerTimeout;
         private String id;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Time timeout;
 
         public Builder() {}
@@ -159,6 +174,7 @@ public final class DeletePipelineRequest extends RequestBase
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.id = o.id;
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
         }
 
@@ -166,6 +182,7 @@ public final class DeletePipelineRequest extends RequestBase
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.id = o.id;
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
         }
 
@@ -218,6 +235,33 @@ public final class DeletePipelineRequest extends RequestBase
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * The amount of time to wait for a response.
          * <p>
          * API name: {@code timeout}
@@ -262,6 +306,9 @@ public final class DeletePipelineRequest extends RequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -296,6 +343,7 @@ public final class DeletePipelineRequest extends RequestBase
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + this.id.hashCode();
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.timeout);
         return result;
     }
@@ -307,6 +355,7 @@ public final class DeletePipelineRequest extends RequestBase
         DeletePipelineRequest other = (DeletePipelineRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && this.id.equals(other.id)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.timeout, other.timeout);
     }
 }

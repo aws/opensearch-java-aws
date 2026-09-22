@@ -35,12 +35,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.get_message.Request
 
 /**
- * <p>
  * Get a message.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.12</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetMessageRequest extends RequestBase implements ToCopyableBuilder<GetMessageRequest.Builder, GetMessageRequest> {

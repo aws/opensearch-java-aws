@@ -35,12 +35,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.get_model.Request
 
 /**
- * <p>
  * Retrieves a model.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.3</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetModelRequest extends RequestBase implements ToCopyableBuilder<GetModelRequest.Builder, GetModelRequest> {

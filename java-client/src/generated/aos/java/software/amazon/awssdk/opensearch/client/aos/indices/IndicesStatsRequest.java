@@ -66,12 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.stats.Request
 
 /**
- * <p>
  * Provides statistics on operations happening in an index.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class IndicesStatsRequest extends RequestBase implements ToCopyableBuilder<IndicesStatsRequest.Builder, IndicesStatsRequest> {

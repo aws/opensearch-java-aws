@@ -65,12 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.shard_stores.Request
 
 /**
- * <p>
  * Provides store information for shard copies of indexes.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ShardStoresRequest extends RequestBase implements ToCopyableBuilder<ShardStoresRequest.Builder, ShardStoresRequest> {

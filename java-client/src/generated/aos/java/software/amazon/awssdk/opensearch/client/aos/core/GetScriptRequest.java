@@ -62,12 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.get_script.Request
 
 /**
- * <p>
  * Returns a script.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetScriptRequest extends RequestBase implements ToCopyableBuilder<GetScriptRequest.Builder, GetScriptRequest> {
@@ -78,12 +73,17 @@ public final class GetScriptRequest extends RequestBase implements ToCopyableBui
     @Nonnull
     private final String id;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     // ---------------------------------------------------------------------------------------------
 
     private GetScriptRequest(Builder builder) {
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.id = ApiTypeHelper.requireNonNull(builder.id, this, "id");
+        this.masterTimeout = builder.masterTimeout;
     }
 
     public static GetScriptRequest of(Function<GetScriptRequest.Builder, ObjectBuilder<GetScriptRequest>> fn) {
@@ -112,6 +112,18 @@ public final class GetScriptRequest extends RequestBase implements ToCopyableBui
         return this.id;
     }
 
+    /**
+     * Specify timeout for connection to master
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     @Override
@@ -132,6 +144,8 @@ public final class GetScriptRequest extends RequestBase implements ToCopyableBui
         @Nullable
         private Time clusterManagerTimeout;
         private String id;
+        @Nullable
+        private Time masterTimeout;
 
         public Builder() {}
 
@@ -139,12 +153,14 @@ public final class GetScriptRequest extends RequestBase implements ToCopyableBui
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.id = o.id;
+            this.masterTimeout = o.masterTimeout;
         }
 
         private Builder(Builder o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.id = o.id;
+            this.masterTimeout = o.masterTimeout;
         }
 
         @Override
@@ -195,6 +211,31 @@ public final class GetScriptRequest extends RequestBase implements ToCopyableBui
         }
 
         /**
+         * Specify timeout for connection to master
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Specify timeout for connection to master
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Builds a {@link GetScriptRequest}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -215,6 +256,9 @@ public final class GetScriptRequest extends RequestBase implements ToCopyableBui
         super.applyQueryParameters(params);
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
+        }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
         }
     }
 
@@ -247,6 +291,7 @@ public final class GetScriptRequest extends RequestBase implements ToCopyableBui
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + this.id.hashCode();
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         return result;
     }
 
@@ -255,6 +300,8 @@ public final class GetScriptRequest extends RequestBase implements ToCopyableBui
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         GetScriptRequest other = (GetScriptRequest) o;
-        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout) && this.id.equals(other.id);
+        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && this.id.equals(other.id)
+            && Objects.equals(this.masterTimeout, other.masterTimeout);
     }
 }

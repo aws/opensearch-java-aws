@@ -35,12 +35,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.delete_model.Request
 
 /**
- * <p>
  * Deletes a model.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.3</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteModelRequest extends RequestBase implements ToCopyableBuilder<DeleteModelRequest.Builder, DeleteModelRequest> {

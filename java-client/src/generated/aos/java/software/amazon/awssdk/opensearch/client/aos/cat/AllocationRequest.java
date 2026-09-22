@@ -63,12 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.allocation.Request
 
 /**
- * <p>
  * Provides a snapshot of how many shards are allocated to each data node and how much disk space they are using.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class AllocationRequest extends CatRequestBase implements ToCopyableBuilder<AllocationRequest.Builder, AllocationRequest> {
@@ -79,6 +74,10 @@ public final class AllocationRequest extends CatRequestBase implements ToCopyabl
     @Nullable
     private final Time clusterManagerTimeout;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final List<String> nodeId;
 
@@ -88,6 +87,7 @@ public final class AllocationRequest extends CatRequestBase implements ToCopyabl
         super(builder);
         this.bytes = builder.bytes;
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
+        this.masterTimeout = builder.masterTimeout;
         this.nodeId = ApiTypeHelper.unmodifiable(builder.nodeId);
     }
 
@@ -115,6 +115,18 @@ public final class AllocationRequest extends CatRequestBase implements ToCopyabl
     @Nullable
     public final Time clusterManagerTimeout() {
         return this.clusterManagerTimeout;
+    }
+
+    /**
+     * A timeout for connection to the cluster manager node.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -150,6 +162,8 @@ public final class AllocationRequest extends CatRequestBase implements ToCopyabl
         @Nullable
         private Time clusterManagerTimeout;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private List<String> nodeId;
 
         public Builder() {}
@@ -158,6 +172,7 @@ public final class AllocationRequest extends CatRequestBase implements ToCopyabl
             super(o);
             this.bytes = o.bytes;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.nodeId = _listCopy(o.nodeId);
         }
 
@@ -165,6 +180,7 @@ public final class AllocationRequest extends CatRequestBase implements ToCopyabl
             super(o);
             this.bytes = o.bytes;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.nodeId = _listCopy(o.nodeId);
         }
 
@@ -213,6 +229,31 @@ public final class AllocationRequest extends CatRequestBase implements ToCopyabl
         @Nonnull
         public final Builder clusterManagerTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
             return clusterManagerTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
+         * A timeout for connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * A timeout for connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -272,6 +313,9 @@ public final class AllocationRequest extends CatRequestBase implements ToCopyabl
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
     }
 
     /**
@@ -316,6 +360,7 @@ public final class AllocationRequest extends CatRequestBase implements ToCopyabl
         int result = 17;
         result = 31 * result + Objects.hashCode(this.bytes);
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.nodeId);
         return result;
     }
@@ -327,6 +372,7 @@ public final class AllocationRequest extends CatRequestBase implements ToCopyabl
         AllocationRequest other = (AllocationRequest) o;
         return Objects.equals(this.bytes, other.bytes)
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.nodeId, other.nodeId);
     }
 }

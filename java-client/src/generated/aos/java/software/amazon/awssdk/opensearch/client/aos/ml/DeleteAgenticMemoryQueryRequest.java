@@ -45,12 +45,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.delete_agentic_memory_query.Request
 
 /**
- * <p>
  * Delete multiple memories using a query to match specific criteria.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.3</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

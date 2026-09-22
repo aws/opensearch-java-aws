@@ -68,12 +68,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: geospatial.put_ip2geo_datasource_settings.Request
 
 /**
- * <p>
  * Update a specific IP2Geo data source.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.11</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

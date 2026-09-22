@@ -74,12 +74,7 @@ public class OpenSearchSearchPipelineAsyncClient extends ApiClient<OpenSearchTra
     // ----- Endpoint: search_pipeline.delete
 
     /**
-     * <p>
      * Deletes the specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      */
     public CompletableFuture<DeleteSearchPipelineResponse> delete(DeleteSearchPipelineRequest request) throws IOException,
         OpenSearchException {
@@ -87,12 +82,7 @@ public class OpenSearchSearchPipelineAsyncClient extends ApiClient<OpenSearchTra
     }
 
     /**
-     * <p>
      * Deletes the specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteSearchPipelineRequest}
      */
@@ -105,24 +95,14 @@ public class OpenSearchSearchPipelineAsyncClient extends ApiClient<OpenSearchTra
     // ----- Endpoint: search_pipeline.get
 
     /**
-     * <p>
      * Retrieves information about a specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      */
     public CompletableFuture<GetSearchPipelineResponse> get(GetSearchPipelineRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetSearchPipelineRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Retrieves information about a specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetSearchPipelineRequest}
      */
@@ -133,12 +113,7 @@ public class OpenSearchSearchPipelineAsyncClient extends ApiClient<OpenSearchTra
     }
 
     /**
-     * <p>
      * Retrieves information about a specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      */
     public final CompletableFuture<GetSearchPipelineResponse> get() throws IOException, OpenSearchException {
         return get(new GetSearchPipelineRequest.Builder().build());
@@ -147,24 +122,14 @@ public class OpenSearchSearchPipelineAsyncClient extends ApiClient<OpenSearchTra
     // ----- Endpoint: search_pipeline.put
 
     /**
-     * <p>
      * Creates or replaces the specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      */
     public CompletableFuture<PutSearchPipelineResponse> put(PutSearchPipelineRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, PutSearchPipelineRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates or replaces the specified search pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutSearchPipelineRequest}
      */

@@ -74,26 +74,16 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: cluster.allocation_explain
 
     /**
-     * <p>
      * Explains how shards are allocated in the current cluster and provides an explanation for why unassigned shards can't be allocated to
      * a node.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public AllocationExplainResponse allocationExplain(AllocationExplainRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, AllocationExplainRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Explains how shards are allocated in the current cluster and provides an explanation for why unassigned shards can't be allocated to
      * a node.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link AllocationExplainRequest}
      */
@@ -104,13 +94,8 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Explains how shards are allocated in the current cluster and provides an explanation for why unassigned shards can't be allocated to
      * a node.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final AllocationExplainResponse allocationExplain() throws IOException, OpenSearchException {
         return allocationExplain(new AllocationExplainRequest.Builder().build());
@@ -119,12 +104,7 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: cluster.delete_component_template
 
     /**
-     * <p>
      * Deletes a component template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeleteComponentTemplateResponse deleteComponentTemplate(DeleteComponentTemplateRequest request) throws IOException,
         OpenSearchException {
@@ -132,12 +112,7 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Deletes a component template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteComponentTemplateRequest}
      */
@@ -150,24 +125,14 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: cluster.exists_component_template
 
     /**
-     * <p>
      * Returns information about whether a particular component template exist.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public BooleanResponse existsComponentTemplate(ExistsComponentTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ExistsComponentTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about whether a particular component template exist.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsComponentTemplateRequest}
      */
@@ -180,24 +145,14 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: cluster.get_component_template
 
     /**
-     * <p>
      * Returns one or more component templates.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetComponentTemplateResponse getComponentTemplate(GetComponentTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetComponentTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns one or more component templates.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetComponentTemplateRequest}
      */
@@ -208,12 +163,7 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Returns one or more component templates.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final GetComponentTemplateResponse getComponentTemplate() throws IOException, OpenSearchException {
         return getComponentTemplate(new GetComponentTemplateRequest.Builder().build());
@@ -222,24 +172,14 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: cluster.get_settings
 
     /**
-     * <p>
      * Returns cluster settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetClusterSettingsResponse getSettings(GetClusterSettingsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetClusterSettingsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns cluster settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetClusterSettingsRequest}
      */
@@ -250,12 +190,7 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Returns cluster settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final GetClusterSettingsResponse getSettings() throws IOException, OpenSearchException {
         return getSettings(new GetClusterSettingsRequest.Builder().build());
@@ -264,24 +199,14 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: cluster.health
 
     /**
-     * <p>
      * Returns basic information about the health of the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public HealthResponse health(HealthRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, HealthRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns basic information about the health of the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link HealthRequest}
      */
@@ -291,12 +216,7 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Returns basic information about the health of the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final HealthResponse health() throws IOException, OpenSearchException {
         return health(new HealthRequest.Builder().build());
@@ -305,24 +225,14 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: cluster.pending_tasks
 
     /**
-     * <p>
      * Returns a list of pending cluster-level tasks, such as index creation, mapping updates, or new allocations.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public PendingTasksResponse pendingTasks(PendingTasksRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PendingTasksRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns a list of pending cluster-level tasks, such as index creation, mapping updates, or new allocations.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PendingTasksRequest}
      */
@@ -332,12 +242,7 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Returns a list of pending cluster-level tasks, such as index creation, mapping updates, or new allocations.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final PendingTasksResponse pendingTasks() throws IOException, OpenSearchException {
         return pendingTasks(new PendingTasksRequest.Builder().build());
@@ -346,24 +251,14 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: cluster.put_component_template
 
     /**
-     * <p>
      * Creates or updates a component template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public PutComponentTemplateResponse putComponentTemplate(PutComponentTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutComponentTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates or updates a component template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutComponentTemplateRequest}
      */
@@ -376,24 +271,14 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: cluster.put_settings
 
     /**
-     * <p>
      * Updates the cluster settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public PutClusterSettingsResponse putSettings(PutClusterSettingsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutClusterSettingsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Updates the cluster settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutClusterSettingsRequest}
      */
@@ -404,12 +289,7 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Updates the cluster settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final PutClusterSettingsResponse putSettings() throws IOException, OpenSearchException {
         return putSettings(new PutClusterSettingsRequest.Builder().build());
@@ -418,24 +298,14 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: cluster.remote_info
 
     /**
-     * <p>
      * Returns the information about configured remote clusters.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public RemoteInfoResponse remoteInfo(RemoteInfoRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, RemoteInfoRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns the information about configured remote clusters.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RemoteInfoRequest}
      */
@@ -445,12 +315,7 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Returns the information about configured remote clusters.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final RemoteInfoResponse remoteInfo() throws IOException, OpenSearchException {
         return remoteInfo(new RemoteInfoRequest.Builder().build());
@@ -459,24 +324,14 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: cluster.state
 
     /**
-     * <p>
      * Returns comprehensive information about the state of the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public StateResponse state(StateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, StateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns comprehensive information about the state of the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link StateRequest}
      */
@@ -486,12 +341,7 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Returns comprehensive information about the state of the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final StateResponse state() throws IOException, OpenSearchException {
         return state(new StateRequest.Builder().build());
@@ -500,24 +350,14 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: cluster.stats
 
     /**
-     * <p>
      * Returns a high-level overview of cluster statistics.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public ClusterStatsResponse stats(ClusterStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ClusterStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns a high-level overview of cluster statistics.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ClusterStatsRequest}
      */
@@ -527,12 +367,7 @@ public class OpenSearchClusterClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Returns a high-level overview of cluster statistics.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final ClusterStatsResponse stats() throws IOException, OpenSearchException {
         return stats(new ClusterStatsRequest.Builder().build());

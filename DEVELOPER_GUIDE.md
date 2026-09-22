@@ -1,136 +1,75 @@
-- [Developer Guide](#developer-guide)
-  - [Getting Started](#getting-started)
-    - [Git Clone OpenSearch Repo](#git-clone-opensearch-repo)
-    - [Install Prerequisites](#install-prerequisites)
-      - [Docker](#docker)
-    - [Build](#build)
-    - [Run Tests](#run-tests)
-      - [Unit Tests](#unit-tests)
-      - [Integration Tests](#integration-tests)
-      - [AWS Transport Integration Tests](#aws-transport-integration-tests)
-  - [Use an Editor](#use-an-editor)
-    - [IntelliJ IDEA](#intellij-idea)
-    - [Visual Studio Code](#visual-studio-code)
-  - [Java Language Formatting Guidelines](#java-language-formatting-guidelines)
-  - [Submitting Changes](#submitting-changes)
-
 # Developer Guide
 
-So you want to contribute code to the OpenSearch Java client? Excellent! We're glad you're here. Here's what you need to do.
+This repository builds typed Java data-plane clients for Amazon OpenSearch Service (AOS) and Amazon OpenSearch Serverless (AOSS).
 
-## Getting Started
+## Prerequisites
 
-### Git Clone OpenSearch Repo
+- JDK 21 or newer to run the build; generated client bytecode targets Java 8
+- The repository-bundled AOS and AOSS OpenAPI snapshots are sufficient for the default build
+- Optional: a directory containing newly generated AOS and AOSS distribution specifications when refreshing the bundled snapshots
 
-Fork [opensearch-project/opensearch-java](https://github.com/opensearch-project/opensearch-java) and clone locally, e.g. `git clone https://github.com/[your username]/opensearch-java.git`.
+## Source layout
 
-### Install Prerequisites
+- java-client/src/main: shared AWS runtime and handwritten AOS/AOSS client entry points
+- java-client/src/generated/aos: generated AOS models and clients
+- java-client/src/generated/aoss: generated AOSS models and clients
+- java-codegen: the shared OpenAPI Java generator and AWS distribution generation tasks
 
-To run the full suite of tests, download and install [JDK 14](https://jdk.java.net/archive/). Any JDK >= 11 works.
+The repository does not contain or build the standalone OSS opensearch-java client.
 
-#### Docker
+## Generate clients
 
-Download and install [Docker](https://docs.docker.com/install/), required for running integration tests for the repo.
+By default, generation reads the bundled snapshots:
 
-### Build
+- java-codegen/opensearch-openapi-aos-full.yaml
+- java-codegen/opensearch-openapi-aoss-full.yaml
 
-To build the java-client:
+~~~bash
+./gradlew --no-daemon --max-workers=1 :java-codegen:generateClients
+~~~
 
-```
-./gradlew clean build -x test
-```
+To generate from refreshed specifications, provide the directory containing files with
+the same names:
 
-### Run Tests
+~~~bash
+./gradlew --no-daemon --max-workers=1 \
+  :java-codegen:generateClients \
+  -PdistributionSpecsDir=/path/to/opensearch-api-docs/build
+~~~
 
-#### Unit Tests
+Do not manually edit generated AOS or AOSS source files. Update the API specification, distribution overlays, allowlists, or generator instead.
 
-To run unit tests for the java-client:
+## Build and test
 
-```
-./gradlew clean unitTest
-```
+~~~bash
+./gradlew --no-daemon --max-workers=1 \
+  :java-codegen:test \
+  :java-client:unitTest \
+  :java-client:spotlessJavaCheck \
+  :java-codegen:spotlessJavaCheck \
+  :java-client:jar \
+  :java-client:sourcesJar \
+  :java-client:javadocJar
+~~~
 
-#### Integration Tests
+The build runs on JDK 21 or newer, while the generated Java client targets Java 8 bytecode.
 
-To run integration tests for the java-client:
+## Real-resource tests
 
-```
-./gradlew clean integrationTest
-```
+Real AOS and AOSS tests are opt-in:
 
-By default, the integration test task starts a single OpenSearch test container for the test JVM. To test against a specific OpenSearch image version, pass the OpenSearch version:
+~~~bash
+./gradlew --no-daemon --max-workers=1 :java-client:realResourceTest
+~~~
 
-```
-./gradlew clean integrationTest -Dtests.opensearch.version=3.2.0
-```
+Provide endpoints and credentials through environment variables or the AWS SDK default credential provider chain. Never commit credentials, passwords, endpoints intended to remain private, or temporary resource identifiers.
 
-To pass the full official OpenSearch image name, use:
+## Formatting
 
-```
-./gradlew clean integrationTest -Dtests.opensearch.image=opensearchproject/opensearch:3.2.0
-```
+~~~bash
+./gradlew :java-client:spotlessApply :java-codegen:spotlessApply
+~~~
 
-To run against an already running cluster, disable the test container and pass the cluster endpoint if it is not `localhost:9200`:
+## Submitting changes
 
-```
-./gradlew clean integrationTest -Dtests.opensearch.testcontainers.enabled=false -Dtests.rest.cluster=localhost:9200
-```
-
-#### AWS Transport Integration Tests
-
-To run integration tests for the AWS transport client, ensure working AWS credentials in `/.aws/credentials` and specify your OpenSearch domain and region as follows:
-
-```
-./gradlew integrationTest --tests "*AwsSdk2*" -Dtests.awsSdk2support.domainHost=search-...us-west-2.es.amazonaws.com -Dtests.awsSdk2support.domainRegion=us-west-2 -Dtests.awsSdk2support.serviceName=es
-```
-
-For OpenSearch Serverless, change the signing service name.
-
-```
-./gradlew integrationTest --tests "*AwsSdk2*" -Dtests.awsSdk2support.domainHost=....us-west-2.aoss.amazonaws.com -Dtests.awsSdk2support.domainRegion=us-west-2 -Dtests.awsSdk2support.serviceName=aoss
-```
-
-## Use an Editor
-
-### IntelliJ IDEA
-
-When importing into IntelliJ you will need to define an appropriate JDK. The convention is that **this SDK should be named "11"**, and the project import will detect it automatically. For more details on defining an SDK in IntelliJ please refer to [this documentation](https://www.jetbrains.com/help/idea/sdk.html#define-sdk). Note that SDK definitions are global, so you can add the JDK from any project, or after project import. Importing with a missing JDK will still work, IntelliJ will report a problem and will refuse to build until resolved.
-
-You can import the opensearch-java project into IntelliJ IDEA as follows:
-
-1. Select **File > Open**
-2. In the subsequent dialog navigate to the root `build.gradle.kts` file
-3. In the subsequent dialog select **Open as Project**
-
-### Visual Studio Code
-
-Follow links in the [Java Tutorial](https://code.visualstudio.com/docs/java/java-tutorial) to install the coding pack and extensions for Java, Gradle tasks, etc. Open the source code directory.
-
-## Java Language Formatting Guidelines
-
-Java files in the OpenSearch codebase are formatted with the Eclipse JDT formatter, using the [Spotless Gradle](https://github.com/diffplug/spotless/tree/master/plugin-gradle) plugin. This plugin is configured on a project-by-project basis, via `build.gradle.kts`. So long as at least one project is configured, the formatting check can be run explicitly with:
-
-    ./gradlew spotlessJavaCheck
-
-The code can be formatted with:
-
-    ./gradlew spotlessApply
-
-These tasks can also be run for specific subprojects, e.g.
-
-    ./gradlew :java-client:spotlessJavaCheck
-    ./gradlew :samples:spotlessJavaCheck
-
-Please follow these formatting guidelines:
-
-* Java indent is 4 spaces
-* Line width is 140 characters
-* Lines of code surrounded by `// tag::NAME` and `// end::NAME` comments are included in the documentation and should only be 76 characters wide not counting leading indentation. Such regions of code are not formatted automatically as it is not possible to change the line length rule of the formatter for part of a file. Please format such sections sympathetically with the rest of the code, while keeping lines to maximum length of 76 characters.
-* Wildcard imports (`import foo.bar.baz.*`) are forbidden and will cause the build to fail.
-* If *absolutely* necessary, you can disable formatting for regions of code with the `// tag::NAME` and `// end::NAME` directives, but note that these are intended for use in documentation, so please make it clear what you have done, and only do this where the benefit clearly outweighs the decrease in consistency.
-* Note that JavaDoc and block comments i.e. `/* ... */` are not formatted, but line comments i.e `// ...` are.
-* There is an implicit rule that negative boolean expressions should use the form `foo == false` instead of `!foo` for better readability of the code. While this isn't strictly enforced, if might get called out in PR reviews as something to change.
-
-## Submitting Changes
-
-See [CONTRIBUTING](CONTRIBUTING.md).
+See CONTRIBUTING.md. Commits must include a DCO sign-off.

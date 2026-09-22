@@ -107,6 +107,10 @@ public final class RestoreSnapshotRequest extends RequestBase
     @Nonnull
     private final List<String> indices;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final Boolean partial;
 
@@ -153,6 +157,7 @@ public final class RestoreSnapshotRequest extends RequestBase
         this.includeGlobalState = builder.includeGlobalState;
         this.indexSettings = builder.indexSettings;
         this.indices = ApiTypeHelper.unmodifiable(builder.indices);
+        this.masterTimeout = builder.masterTimeout;
         this.partial = builder.partial;
         this.renameAliasPattern = builder.renameAliasPattern;
         this.renameAliasReplacement = builder.renameAliasReplacement;
@@ -274,6 +279,18 @@ public final class RestoreSnapshotRequest extends RequestBase
     @Nonnull
     public final List<String> indices() {
         return this.indices;
+    }
+
+    /**
+     * Explicit operation timeout for connection to cluster-manager node
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -555,6 +572,8 @@ public final class RestoreSnapshotRequest extends RequestBase
         @Nullable
         private List<String> indices;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Boolean partial;
         @Nullable
         private String renameAliasPattern;
@@ -588,6 +607,7 @@ public final class RestoreSnapshotRequest extends RequestBase
             this.includeGlobalState = o.includeGlobalState;
             this.indexSettings = o.indexSettings;
             this.indices = _listCopy(o.indices);
+            this.masterTimeout = o.masterTimeout;
             this.partial = o.partial;
             this.renameAliasPattern = o.renameAliasPattern;
             this.renameAliasReplacement = o.renameAliasReplacement;
@@ -612,6 +632,7 @@ public final class RestoreSnapshotRequest extends RequestBase
             this.includeGlobalState = o.includeGlobalState;
             this.indexSettings = o.indexSettings;
             this.indices = _listCopy(o.indices);
+            this.masterTimeout = o.masterTimeout;
             this.partial = o.partial;
             this.renameAliasPattern = o.renameAliasPattern;
             this.renameAliasReplacement = o.renameAliasReplacement;
@@ -811,6 +832,31 @@ public final class RestoreSnapshotRequest extends RequestBase
         public final Builder indices(String value, String... values) {
             this.indices = _listAdd(this.indices, value, values);
             return this;
+        }
+
+        /**
+         * Explicit operation timeout for connection to cluster-manager node
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Explicit operation timeout for connection to cluster-manager node
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -1023,6 +1069,9 @@ public final class RestoreSnapshotRequest extends RequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.waitForCompletion != null) {
             params.put("wait_for_completion", String.valueOf(this.waitForCompletion));
         }
@@ -1067,6 +1116,7 @@ public final class RestoreSnapshotRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.includeGlobalState);
         result = 31 * result + Objects.hashCode(this.indexSettings);
         result = 31 * result + Objects.hashCode(this.indices);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.partial);
         result = 31 * result + Objects.hashCode(this.renameAliasPattern);
         result = 31 * result + Objects.hashCode(this.renameAliasReplacement);
@@ -1095,6 +1145,7 @@ public final class RestoreSnapshotRequest extends RequestBase
             && Objects.equals(this.includeGlobalState, other.includeGlobalState)
             && Objects.equals(this.indexSettings, other.indexSettings)
             && Objects.equals(this.indices, other.indices)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.partial, other.partial)
             && Objects.equals(this.renameAliasPattern, other.renameAliasPattern)
             && Objects.equals(this.renameAliasReplacement, other.renameAliasReplacement)

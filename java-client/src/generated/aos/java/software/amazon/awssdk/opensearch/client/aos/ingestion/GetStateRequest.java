@@ -62,12 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ingestion.get_state.Request
 
 /**
- * <p>
  * Use this API to retrieve the ingestion state for a given index.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.1</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetStateRequest extends RequestBase implements ToCopyableBuilder<GetStateRequest.Builder, GetStateRequest> {

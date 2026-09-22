@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.reload_http_certificates.Request
 
 /**
- * <p>
  * Reloads the HTTP communication certificates.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.8</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ReloadHttpCertificatesRequest extends RequestBase

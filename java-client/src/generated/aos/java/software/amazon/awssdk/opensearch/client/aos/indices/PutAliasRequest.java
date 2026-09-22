@@ -71,12 +71,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.put_alias.Request
 
 /**
- * <p>
  * Creates or updates an alias.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -106,6 +101,10 @@ public final class PutAliasRequest extends RequestBase
     @Nullable
     private final Boolean isWriteIndex;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final String name;
 
@@ -129,6 +128,7 @@ public final class PutAliasRequest extends RequestBase
         this.indexRouting = builder.indexRouting;
         this.isHidden = builder.isHidden;
         this.isWriteIndex = builder.isWriteIndex;
+        this.masterTimeout = builder.masterTimeout;
         this.name = builder.name;
         this.routing = builder.routing;
         this.searchRouting = builder.searchRouting;
@@ -209,6 +209,19 @@ public final class PutAliasRequest extends RequestBase
     @Nullable
     public final Boolean isWriteIndex() {
         return this.isWriteIndex;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -328,6 +341,8 @@ public final class PutAliasRequest extends RequestBase
         @Nullable
         private Boolean isWriteIndex;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private String name;
         @Nullable
         private String routing;
@@ -347,6 +362,7 @@ public final class PutAliasRequest extends RequestBase
             this.indexRouting = o.indexRouting;
             this.isHidden = o.isHidden;
             this.isWriteIndex = o.isWriteIndex;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
             this.routing = o.routing;
             this.searchRouting = o.searchRouting;
@@ -362,6 +378,7 @@ public final class PutAliasRequest extends RequestBase
             this.indexRouting = o.indexRouting;
             this.isHidden = o.isHidden;
             this.isWriteIndex = o.isWriteIndex;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
             this.routing = o.routing;
             this.searchRouting = o.searchRouting;
@@ -500,6 +517,33 @@ public final class PutAliasRequest extends RequestBase
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Alias to update. If the alias doesn't exist, the request creates it. Index alias names support date math.
          * <p>
          * API name: {@code name}
@@ -594,6 +638,9 @@ public final class PutAliasRequest extends RequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -663,6 +710,7 @@ public final class PutAliasRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.indexRouting);
         result = 31 * result + Objects.hashCode(this.isHidden);
         result = 31 * result + Objects.hashCode(this.isWriteIndex);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.name);
         result = 31 * result + Objects.hashCode(this.routing);
         result = 31 * result + Objects.hashCode(this.searchRouting);
@@ -682,6 +730,7 @@ public final class PutAliasRequest extends RequestBase
             && Objects.equals(this.indexRouting, other.indexRouting)
             && Objects.equals(this.isHidden, other.isHidden)
             && Objects.equals(this.isWriteIndex, other.isWriteIndex)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.name, other.name)
             && Objects.equals(this.routing, other.routing)
             && Objects.equals(this.searchRouting, other.searchRouting)

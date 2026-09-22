@@ -72,12 +72,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.put_index_template.Request
 
 /**
- * <p>
  * Creates or updates an index template.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -104,6 +99,10 @@ public final class PutIndexTemplateRequest extends RequestBase
     @Nonnull
     private final List<String> indexPatterns;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final Map<String, JsonData> meta;
 
@@ -129,6 +128,7 @@ public final class PutIndexTemplateRequest extends RequestBase
         this.create = builder.create;
         this.dataStream = builder.dataStream;
         this.indexPatterns = ApiTypeHelper.unmodifiable(builder.indexPatterns);
+        this.masterTimeout = builder.masterTimeout;
         this.meta = ApiTypeHelper.unmodifiable(builder.meta);
         this.name = ApiTypeHelper.requireNonNull(builder.name, this, "name");
         this.priority = builder.priority;
@@ -199,6 +199,18 @@ public final class PutIndexTemplateRequest extends RequestBase
     @Nonnull
     public final List<String> indexPatterns() {
         return this.indexPatterns;
+    }
+
+    /**
+     * Operation timeout for connection to cluster-manager node.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -339,6 +351,8 @@ public final class PutIndexTemplateRequest extends RequestBase
         @Nullable
         private List<String> indexPatterns;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Map<String, JsonData> meta;
         private String name;
         @Nullable
@@ -358,6 +372,7 @@ public final class PutIndexTemplateRequest extends RequestBase
             this.create = o.create;
             this.dataStream = o.dataStream;
             this.indexPatterns = _listCopy(o.indexPatterns);
+            this.masterTimeout = o.masterTimeout;
             this.meta = _mapCopy(o.meta);
             this.name = o.name;
             this.priority = o.priority;
@@ -373,6 +388,7 @@ public final class PutIndexTemplateRequest extends RequestBase
             this.create = o.create;
             this.dataStream = o.dataStream;
             this.indexPatterns = _listCopy(o.indexPatterns);
+            this.masterTimeout = o.masterTimeout;
             this.meta = _mapCopy(o.meta);
             this.name = o.name;
             this.priority = o.priority;
@@ -519,6 +535,31 @@ public final class PutIndexTemplateRequest extends RequestBase
         }
 
         /**
+         * Operation timeout for connection to cluster-manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Operation timeout for connection to cluster-manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * API name: {@code _meta}
          *
          * <p>
@@ -644,6 +685,9 @@ public final class PutIndexTemplateRequest extends RequestBase
         if (this.create != null) {
             params.put("create", String.valueOf(this.create));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
     }
 
     /**
@@ -679,6 +723,7 @@ public final class PutIndexTemplateRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.create);
         result = 31 * result + Objects.hashCode(this.dataStream);
         result = 31 * result + Objects.hashCode(this.indexPatterns);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.meta);
         result = 31 * result + this.name.hashCode();
         result = 31 * result + Objects.hashCode(this.priority);
@@ -698,6 +743,7 @@ public final class PutIndexTemplateRequest extends RequestBase
             && Objects.equals(this.create, other.create)
             && Objects.equals(this.dataStream, other.dataStream)
             && Objects.equals(this.indexPatterns, other.indexPatterns)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.meta, other.meta)
             && this.name.equals(other.name)
             && Objects.equals(this.priority, other.priority)

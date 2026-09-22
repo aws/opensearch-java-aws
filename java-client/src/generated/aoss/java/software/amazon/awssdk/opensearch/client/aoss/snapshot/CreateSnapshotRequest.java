@@ -95,6 +95,10 @@ public final class CreateSnapshotRequest extends RequestBase
     @Nonnull
     private final List<String> indices;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final Map<String, JsonData> metadata;
 
@@ -119,6 +123,7 @@ public final class CreateSnapshotRequest extends RequestBase
         this.ignoreUnavailable = builder.ignoreUnavailable;
         this.includeGlobalState = builder.includeGlobalState;
         this.indices = ApiTypeHelper.unmodifiable(builder.indices);
+        this.masterTimeout = builder.masterTimeout;
         this.metadata = ApiTypeHelper.unmodifiable(builder.metadata);
         this.partial = builder.partial;
         this.repository = ApiTypeHelper.requireNonNull(builder.repository, this, "repository");
@@ -187,6 +192,19 @@ public final class CreateSnapshotRequest extends RequestBase
     @Nonnull
     public final List<String> indices() {
         return this.indices;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -327,6 +345,8 @@ public final class CreateSnapshotRequest extends RequestBase
         @Nullable
         private List<String> indices;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Map<String, JsonData> metadata;
         @Nullable
         private Boolean partial;
@@ -344,6 +364,7 @@ public final class CreateSnapshotRequest extends RequestBase
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.includeGlobalState = o.includeGlobalState;
             this.indices = _listCopy(o.indices);
+            this.masterTimeout = o.masterTimeout;
             this.metadata = _mapCopy(o.metadata);
             this.partial = o.partial;
             this.repository = o.repository;
@@ -358,6 +379,7 @@ public final class CreateSnapshotRequest extends RequestBase
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.includeGlobalState = o.includeGlobalState;
             this.indices = _listCopy(o.indices);
+            this.masterTimeout = o.masterTimeout;
             this.metadata = _mapCopy(o.metadata);
             this.partial = o.partial;
             this.repository = o.repository;
@@ -494,6 +516,33 @@ public final class CreateSnapshotRequest extends RequestBase
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * API name: {@code metadata}
          *
          * <p>
@@ -611,6 +660,9 @@ public final class CreateSnapshotRequest extends RequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.waitForCompletion != null) {
             params.put("wait_for_completion", String.valueOf(this.waitForCompletion));
         }
@@ -650,6 +702,7 @@ public final class CreateSnapshotRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
         result = 31 * result + Objects.hashCode(this.includeGlobalState);
         result = 31 * result + Objects.hashCode(this.indices);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.metadata);
         result = 31 * result + Objects.hashCode(this.partial);
         result = 31 * result + this.repository.hashCode();
@@ -668,6 +721,7 @@ public final class CreateSnapshotRequest extends RequestBase
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
             && Objects.equals(this.includeGlobalState, other.includeGlobalState)
             && Objects.equals(this.indices, other.indices)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.metadata, other.metadata)
             && Objects.equals(this.partial, other.partial)
             && this.repository.equals(other.repository)

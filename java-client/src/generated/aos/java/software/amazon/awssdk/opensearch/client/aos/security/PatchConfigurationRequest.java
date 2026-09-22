@@ -65,12 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.patch_configuration.Request
 
 /**
- * <p>
  * Updates the existing security configuration using the REST API. Requires super admin or REST API permissions.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.10</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

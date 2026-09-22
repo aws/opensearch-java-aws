@@ -58,13 +58,8 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.who_am_i_protected.Request
 
 /**
- * <p>
  * Gets the identity information for the user currently logged in. To use this operation, you must have access to this endpoint when
  * authorization at REST layer is enabled.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.11</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class WhoAmIProtectedRequest extends RequestBase

@@ -66,12 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.state.Request
 
 /**
- * <p>
  * Returns comprehensive information about the state of the cluster.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class StateRequest extends RequestBase implements ToCopyableBuilder<StateRequest.Builder, StateRequest> {
@@ -97,6 +92,10 @@ public final class StateRequest extends RequestBase implements ToCopyableBuilder
     @Nullable
     private final Boolean local;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final List<ClusterStateMetric> metric;
 
@@ -117,6 +116,7 @@ public final class StateRequest extends RequestBase implements ToCopyableBuilder
         this.ignoreUnavailable = builder.ignoreUnavailable;
         this.index = ApiTypeHelper.unmodifiable(builder.index);
         this.local = builder.local;
+        this.masterTimeout = builder.masterTimeout;
         this.metric = ApiTypeHelper.unmodifiable(builder.metric);
         this.waitForMetadataVersion = builder.waitForMetadataVersion;
         this.waitForTimeout = builder.waitForTimeout;
@@ -209,6 +209,20 @@ public final class StateRequest extends RequestBase implements ToCopyableBuilder
     }
 
     /**
+     * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+     * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+     * <code>-1</code> to indicate an unspecified value.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
      * Limits the information returned to only the
      * <a href="https://docs.opensearch.org/latest/api-reference/cluster-api/cluster-stats/#metric-groups">specified metric groups</a>.
      * <p>
@@ -274,6 +288,8 @@ public final class StateRequest extends RequestBase implements ToCopyableBuilder
         @Nullable
         private Boolean local;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private List<ClusterStateMetric> metric;
         @Nullable
         private Long waitForMetadataVersion;
@@ -291,6 +307,7 @@ public final class StateRequest extends RequestBase implements ToCopyableBuilder
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.metric = _listCopy(o.metric);
             this.waitForMetadataVersion = o.waitForMetadataVersion;
             this.waitForTimeout = o.waitForTimeout;
@@ -305,6 +322,7 @@ public final class StateRequest extends RequestBase implements ToCopyableBuilder
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.metric = _listCopy(o.metric);
             this.waitForMetadataVersion = o.waitForMetadataVersion;
             this.waitForTimeout = o.waitForTimeout;
@@ -465,6 +483,35 @@ public final class StateRequest extends RequestBase implements ToCopyableBuilder
         }
 
         /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Limits the information returned to only the
          * <a href="https://docs.opensearch.org/latest/api-reference/cluster-api/cluster-stats/#metric-groups">specified metric groups</a>.
          * <p>
@@ -570,6 +617,9 @@ public final class StateRequest extends RequestBase implements ToCopyableBuilder
         if (this.local != null) {
             params.put("local", String.valueOf(this.local));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.waitForMetadataVersion != null) {
             params.put("wait_for_metadata_version", String.valueOf(this.waitForMetadataVersion));
         }
@@ -635,6 +685,7 @@ public final class StateRequest extends RequestBase implements ToCopyableBuilder
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
         result = 31 * result + Objects.hashCode(this.index);
         result = 31 * result + Objects.hashCode(this.local);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.metric);
         result = 31 * result + Objects.hashCode(this.waitForMetadataVersion);
         result = 31 * result + Objects.hashCode(this.waitForTimeout);
@@ -653,6 +704,7 @@ public final class StateRequest extends RequestBase implements ToCopyableBuilder
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
             && Objects.equals(this.index, other.index)
             && Objects.equals(this.local, other.local)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.metric, other.metric)
             && Objects.equals(this.waitForMetadataVersion, other.waitForMetadataVersion)
             && Objects.equals(this.waitForTimeout, other.waitForTimeout);

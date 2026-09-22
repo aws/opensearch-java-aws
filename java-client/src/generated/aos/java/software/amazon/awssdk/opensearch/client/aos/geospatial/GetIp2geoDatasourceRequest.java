@@ -62,12 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: geospatial.get_ip2geo_datasource.Request
 
 /**
- * <p>
  * Get one or more IP2Geo data sources, defaulting to returning all if no names specified.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.11</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetIp2geoDatasourceRequest extends RequestBase

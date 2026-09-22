@@ -63,12 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: snapshot.get_repository.Request
 
 /**
- * <p>
  * Returns information about a snapshot repository.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetRepositoryRequest extends RequestBase
@@ -81,6 +76,10 @@ public final class GetRepositoryRequest extends RequestBase
     @Nullable
     private final Boolean local;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final List<String> name;
 
@@ -90,6 +89,7 @@ public final class GetRepositoryRequest extends RequestBase
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.local = builder.local;
+        this.masterTimeout = builder.masterTimeout;
         this.name = ApiTypeHelper.unmodifiable(builder.name);
     }
 
@@ -118,6 +118,18 @@ public final class GetRepositoryRequest extends RequestBase
     @Nullable
     public final Boolean local() {
         return this.local;
+    }
+
+    /**
+     * Explicit operation timeout for connection to cluster-manager node
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -153,6 +165,8 @@ public final class GetRepositoryRequest extends RequestBase
         @Nullable
         private Boolean local;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private List<String> name;
 
         public Builder() {}
@@ -161,6 +175,7 @@ public final class GetRepositoryRequest extends RequestBase
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.name = _listCopy(o.name);
         }
 
@@ -168,6 +183,7 @@ public final class GetRepositoryRequest extends RequestBase
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.name = _listCopy(o.name);
         }
 
@@ -218,6 +234,31 @@ public final class GetRepositoryRequest extends RequestBase
         public final Builder local(@Nullable Boolean value) {
             this.local = value;
             return this;
+        }
+
+        /**
+         * Explicit operation timeout for connection to cluster-manager node
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Explicit operation timeout for connection to cluster-manager node
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -277,6 +318,9 @@ public final class GetRepositoryRequest extends RequestBase
         if (this.local != null) {
             params.put("local", String.valueOf(this.local));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
     }
 
     /**
@@ -321,6 +365,7 @@ public final class GetRepositoryRequest extends RequestBase
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.local);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.name);
         return result;
     }
@@ -332,6 +377,7 @@ public final class GetRepositoryRequest extends RequestBase
         GetRepositoryRequest other = (GetRepositoryRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.local, other.local)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.name, other.name);
     }
 }

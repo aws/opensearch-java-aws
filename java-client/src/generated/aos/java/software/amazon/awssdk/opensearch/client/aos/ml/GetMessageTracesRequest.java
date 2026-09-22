@@ -37,12 +37,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.get_message_traces.Request
 
 /**
- * <p>
  * Get a message traces.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.12</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetMessageTracesRequest extends RequestBase

@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: search_relevance.get_node_stats.Request
 
 /**
- * <p>
  * Gets stats by node.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.1</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetNodeStatsRequest extends RequestBase implements ToCopyableBuilder<GetNodeStatsRequest.Builder, GetNodeStatsRequest> {

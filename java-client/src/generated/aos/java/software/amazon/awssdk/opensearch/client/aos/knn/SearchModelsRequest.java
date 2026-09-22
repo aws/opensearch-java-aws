@@ -68,12 +68,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: knn.search_models.Request
 
 /**
- * <p>
  * Use an OpenSearch query to search for models in the index.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class SearchModelsRequest extends RequestBase implements ToCopyableBuilder<SearchModelsRequest.Builder, SearchModelsRequest> {

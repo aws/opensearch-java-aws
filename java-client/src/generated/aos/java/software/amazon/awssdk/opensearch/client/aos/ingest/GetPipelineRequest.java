@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ingest.get_pipeline.Request
 
 /**
- * <p>
  * Returns an ingest pipeline.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetPipelineRequest extends RequestBase implements ToCopyableBuilder<GetPipelineRequest.Builder, GetPipelineRequest> {
@@ -77,12 +72,17 @@ public final class GetPipelineRequest extends RequestBase implements ToCopyableB
     @Nullable
     private final String id;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     // ---------------------------------------------------------------------------------------------
 
     private GetPipelineRequest(Builder builder) {
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.id = builder.id;
+        this.masterTimeout = builder.masterTimeout;
     }
 
     public static GetPipelineRequest of(Function<GetPipelineRequest.Builder, ObjectBuilder<GetPipelineRequest>> fn) {
@@ -112,6 +112,19 @@ public final class GetPipelineRequest extends RequestBase implements ToCopyableB
         return this.id;
     }
 
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     @Override
@@ -133,6 +146,8 @@ public final class GetPipelineRequest extends RequestBase implements ToCopyableB
         private Time clusterManagerTimeout;
         @Nullable
         private String id;
+        @Nullable
+        private Time masterTimeout;
 
         public Builder() {}
 
@@ -140,12 +155,14 @@ public final class GetPipelineRequest extends RequestBase implements ToCopyableB
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.id = o.id;
+            this.masterTimeout = o.masterTimeout;
         }
 
         private Builder(Builder o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.id = o.id;
+            this.masterTimeout = o.masterTimeout;
         }
 
         @Override
@@ -197,6 +214,33 @@ public final class GetPipelineRequest extends RequestBase implements ToCopyableB
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Builds a {@link GetPipelineRequest}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -217,6 +261,9 @@ public final class GetPipelineRequest extends RequestBase implements ToCopyableB
         super.applyQueryParameters(params);
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
+        }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
         }
     }
 
@@ -262,6 +309,7 @@ public final class GetPipelineRequest extends RequestBase implements ToCopyableB
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.id);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         return result;
     }
 
@@ -270,6 +318,8 @@ public final class GetPipelineRequest extends RequestBase implements ToCopyableB
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         GetPipelineRequest other = (GetPipelineRequest) o;
-        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout) && Objects.equals(this.id, other.id);
+        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && Objects.equals(this.id, other.id)
+            && Objects.equals(this.masterTimeout, other.masterTimeout);
     }
 }

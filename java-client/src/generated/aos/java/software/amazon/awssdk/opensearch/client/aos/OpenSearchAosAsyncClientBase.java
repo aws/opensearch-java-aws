@@ -229,24 +229,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: clear_scroll
 
     /**
-     * <p>
      * Explicitly clears the search context for a scroll.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<ClearScrollResponse> clearScroll(ClearScrollRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ClearScrollRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Explicitly clears the search context for a scroll.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ClearScrollRequest}
      */
@@ -257,12 +247,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Explicitly clears the search context for a scroll.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<ClearScrollResponse> clearScroll() throws IOException, OpenSearchException {
         return clearScroll(new ClearScrollRequest.Builder().build());
@@ -271,24 +256,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: count
 
     /**
-     * <p>
      * Returns number of documents matching a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<CountResponse> count(CountRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CountRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns number of documents matching a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CountRequest}
      */
@@ -298,12 +273,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Returns number of documents matching a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<CountResponse> count() throws IOException, OpenSearchException {
         return count(new CountRequest.Builder().build());
@@ -312,24 +282,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: create_pit
 
     /**
-     * <p>
      * Creates point in time context.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public CompletableFuture<CreatePitResponse> createPit(CreatePitRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CreatePitRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates point in time context.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreatePitRequest}
      */
@@ -341,24 +301,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: delete
 
     /**
-     * <p>
      * Removes a document from the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeleteResponse> delete(DeleteRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Removes a document from the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteRequest}
      */
@@ -370,24 +320,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: delete_all_pits
 
     /**
-     * <p>
      * Deletes all active point in time searches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public CompletableFuture<DeleteAllPitsResponse> deleteAllPits(DeleteAllPitsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteAllPitsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes all active point in time searches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteAllPitsRequest}
      */
@@ -398,12 +338,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Deletes all active point in time searches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public final CompletableFuture<DeleteAllPitsResponse> deleteAllPits() throws IOException, OpenSearchException {
         return deleteAllPits(new DeleteAllPitsRequest.Builder().build());
@@ -412,24 +347,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: delete_by_query
 
     /**
-     * <p>
      * Deletes documents matching the provided query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeleteByQueryResponse> deleteByQuery(DeleteByQueryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteByQueryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes documents matching the provided query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteByQueryRequest}
      */
@@ -442,12 +367,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: delete_by_query_rethrottle
 
     /**
-     * <p>
      * Changes the number of requests per second for a particular Delete By Query operation.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeleteByQueryRethrottleResponse> deleteByQueryRethrottle(DeleteByQueryRethrottleRequest request)
         throws IOException, OpenSearchException {
@@ -455,12 +375,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Changes the number of requests per second for a particular Delete By Query operation.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteByQueryRethrottleRequest}
      */
@@ -473,24 +388,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: delete_pit
 
     /**
-     * <p>
      * Deletes one or more point in time searches based on the IDs passed.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public CompletableFuture<DeletePitResponse> deletePit(DeletePitRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeletePitRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes one or more point in time searches based on the IDs passed.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeletePitRequest}
      */
@@ -502,24 +407,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: delete_script
 
     /**
-     * <p>
      * Deletes a script.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeleteScriptResponse> deleteScript(DeleteScriptRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteScriptRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a script.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteScriptRequest}
      */
@@ -532,24 +427,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: exists
 
     /**
-     * <p>
      * Returns information about whether a document exists in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<BooleanResponse> exists(ExistsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ExistsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about whether a document exists in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsRequest}
      */
@@ -561,24 +446,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: exists_source
 
     /**
-     * <p>
      * Returns information about whether a document source exists in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<BooleanResponse> existsSource(ExistsSourceRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ExistsSourceRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about whether a document source exists in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsSourceRequest}
      */
@@ -591,12 +466,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: explain
 
     /**
-     * <p>
      * Returns information about why a specific document matches (or doesn't match) a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TDocument> CompletableFuture<ExplainResponse<TDocument>> explain(ExplainRequest request, Class<TDocument> tDocumentClass)
         throws IOException, OpenSearchException {
@@ -615,12 +485,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Returns information about why a specific document matches (or doesn't match) a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExplainRequest}
      */
@@ -634,24 +499,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: field_caps
 
     /**
-     * <p>
      * Returns the information about the capabilities of fields among multiple indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<FieldCapsResponse> fieldCaps(FieldCapsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, FieldCapsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns the information about the capabilities of fields among multiple indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link FieldCapsRequest}
      */
@@ -661,12 +516,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Returns the information about the capabilities of fields among multiple indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<FieldCapsResponse> fieldCaps() throws IOException, OpenSearchException {
         return fieldCaps(new FieldCapsRequest.Builder().build());
@@ -675,12 +525,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: get
 
     /**
-     * <p>
      * Returns a document.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TDocument> CompletableFuture<GetResponse<TDocument>> get(GetRequest request, Class<TDocument> tDocumentClass)
         throws IOException, OpenSearchException {
@@ -699,12 +544,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Returns a document.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetRequest}
      */
@@ -718,24 +558,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: get_all_pits
 
     /**
-     * <p>
      * Lists all active point in time searches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public CompletableFuture<GetAllPitsResponse> getAllPits(GetAllPitsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetAllPitsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Lists all active point in time searches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetAllPitsRequest}
      */
@@ -745,12 +575,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Lists all active point in time searches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public final CompletableFuture<GetAllPitsResponse> getAllPits() throws IOException, OpenSearchException {
         return getAllPits(new GetAllPitsRequest.Builder().build());
@@ -759,24 +584,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: get_script
 
     /**
-     * <p>
      * Returns a script.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetScriptResponse> getScript(GetScriptRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetScriptRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns a script.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetScriptRequest}
      */
@@ -788,12 +603,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: get_source
 
     /**
-     * <p>
      * Returns the source of a document.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TDocument> CompletableFuture<GetSourceResponse<TDocument>> getSource(GetSourceRequest request, Class<TDocument> tDocumentClass)
         throws IOException, OpenSearchException {
@@ -812,12 +622,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Returns the source of a document.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetSourceRequest}
      */
@@ -831,24 +636,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: info
 
     /**
-     * <p>
      * Returns basic information about the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<InfoResponse> info(InfoRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, InfoRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns basic information about the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link InfoRequest}
      */
@@ -858,12 +653,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Returns basic information about the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<InfoResponse> info() throws IOException, OpenSearchException {
         return info(new InfoRequest.Builder().build());
@@ -872,24 +662,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: mtermvectors
 
     /**
-     * <p>
      * Returns multiple termvectors in one request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<MtermvectorsResponse> mtermvectors(MtermvectorsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, MtermvectorsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns multiple termvectors in one request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link MtermvectorsRequest}
      */
@@ -900,12 +680,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Returns multiple termvectors in one request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<MtermvectorsResponse> mtermvectors() throws IOException, OpenSearchException {
         return mtermvectors(new MtermvectorsRequest.Builder().build());
@@ -914,24 +689,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: ping
 
     /**
-     * <p>
      * Returns whether the cluster is running.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<BooleanResponse> ping(PingRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, PingRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns whether the cluster is running.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PingRequest}
      */
@@ -941,12 +706,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Returns whether the cluster is running.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<BooleanResponse> ping() throws IOException, OpenSearchException {
         return ping(new PingRequest.Builder().build());
@@ -955,24 +715,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: put_script
 
     /**
-     * <p>
      * Creates or updates a script.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<PutScriptResponse> putScript(PutScriptRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, PutScriptRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates or updates a script.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutScriptRequest}
      */
@@ -984,24 +734,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: rank_eval
 
     /**
-     * <p>
      * Allows to evaluate the quality of ranked search results over a set of typical search queries.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<RankEvalResponse> rankEval(RankEvalRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, RankEvalRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Allows to evaluate the quality of ranked search results over a set of typical search queries.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RankEvalRequest}
      */
@@ -1013,26 +753,16 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: reindex
 
     /**
-     * <p>
      * Allows to copy documents from one index to another, optionally filtering the source documents by a query, changing the destination
      * index settings, or fetching the documents from a remote cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<ReindexResponse> reindex(ReindexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ReindexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Allows to copy documents from one index to another, optionally filtering the source documents by a query, changing the destination
      * index settings, or fetching the documents from a remote cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ReindexRequest}
      */
@@ -1044,12 +774,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: reindex_rethrottle
 
     /**
-     * <p>
      * Changes the number of requests per second for a particular reindex operation.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<ReindexRethrottleResponse> reindexRethrottle(ReindexRethrottleRequest request) throws IOException,
         OpenSearchException {
@@ -1057,12 +782,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Changes the number of requests per second for a particular reindex operation.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ReindexRethrottleRequest}
      */
@@ -1075,12 +795,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: render_search_template
 
     /**
-     * <p>
      * Allows to use the Mustache language to pre-render a search definition.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<RenderSearchTemplateResponse> renderSearchTemplate(RenderSearchTemplateRequest request) throws IOException,
         OpenSearchException {
@@ -1088,12 +803,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Allows to use the Mustache language to pre-render a search definition.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RenderSearchTemplateRequest}
      */
@@ -1104,12 +814,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Allows to use the Mustache language to pre-render a search definition.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<RenderSearchTemplateResponse> renderSearchTemplate() throws IOException, OpenSearchException {
         return renderSearchTemplate(new RenderSearchTemplateRequest.Builder().build());
@@ -1118,12 +823,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: scripts_painless_execute
 
     /**
-     * <p>
      * Allows an arbitrary script to be executed and a result to be returned.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TResult> CompletableFuture<ScriptsPainlessExecuteResponse<TResult>> scriptsPainlessExecute(
         ScriptsPainlessExecuteRequest request,
@@ -1144,12 +844,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Allows an arbitrary script to be executed and a result to be returned.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ScriptsPainlessExecuteRequest}
      */
@@ -1163,12 +858,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: scroll
 
     /**
-     * <p>
      * Allows to retrieve a large numbers of results from a single search request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TDocument> CompletableFuture<ScrollResponse<TDocument>> scroll(ScrollRequest request, Class<TDocument> tDocumentClass)
         throws IOException, OpenSearchException {
@@ -1187,12 +877,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Allows to retrieve a large numbers of results from a single search request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ScrollRequest}
      */
@@ -1206,12 +891,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: search
 
     /**
-     * <p>
      * Returns results matching a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TDocument> CompletableFuture<SearchResponse<TDocument>> search(SearchRequest request, Class<TDocument> tDocumentClass)
         throws IOException, OpenSearchException {
@@ -1230,12 +910,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Returns results matching a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SearchRequest}
      */
@@ -1249,24 +924,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: search_shards
 
     /**
-     * <p>
      * Returns information about the indexes and shards that a search request would be executed against.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<SearchShardsResponse> searchShards(SearchShardsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, SearchShardsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about the indexes and shards that a search request would be executed against.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SearchShardsRequest}
      */
@@ -1279,12 +944,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: search_template
 
     /**
-     * <p>
      * Allows to use the Mustache language to pre-render a search definition.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TDocument> CompletableFuture<SearchTemplateResponse<TDocument>> searchTemplate(
         SearchTemplateRequest request,
@@ -1305,12 +965,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Allows to use the Mustache language to pre-render a search definition.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SearchTemplateRequest}
      */
@@ -1324,24 +979,14 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: update_by_query
 
     /**
-     * <p>
      * Performs an update on every document in the index without changing the source, for example to pick up a mapping change.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<UpdateByQueryResponse> updateByQuery(UpdateByQueryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, UpdateByQueryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Performs an update on every document in the index without changing the source, for example to pick up a mapping change.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateByQueryRequest}
      */
@@ -1354,12 +999,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     // ----- Endpoint: update_by_query_rethrottle
 
     /**
-     * <p>
      * Changes the number of requests per second for a particular Update By Query operation.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<UpdateByQueryRethrottleResponse> updateByQueryRethrottle(UpdateByQueryRethrottleRequest request)
         throws IOException, OpenSearchException {
@@ -1367,12 +1007,7 @@ public abstract class OpenSearchAosAsyncClientBase<Self extends OpenSearchAosAsy
     }
 
     /**
-     * <p>
      * Changes the number of requests per second for a particular Update By Query operation.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateByQueryRethrottleRequest}
      */

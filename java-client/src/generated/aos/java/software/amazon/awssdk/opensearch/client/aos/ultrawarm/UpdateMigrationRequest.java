@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ultrawarm.update_migration.Request
 
 /**
- * <p>
  * AOS only. Updates the configuration of an in-progress UltraWarm migration.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>7.1</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class UpdateMigrationRequest extends RequestBase

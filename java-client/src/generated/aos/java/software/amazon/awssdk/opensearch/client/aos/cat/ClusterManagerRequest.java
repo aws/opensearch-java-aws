@@ -60,12 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.cluster_manager.Request
 
 /**
- * <p>
  * Returns information about the cluster-manager node.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ClusterManagerRequest extends CatRequestBase
@@ -75,11 +70,16 @@ public final class ClusterManagerRequest extends CatRequestBase
     @Nullable
     private final Time clusterManagerTimeout;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     // ---------------------------------------------------------------------------------------------
 
     private ClusterManagerRequest(Builder builder) {
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
+        this.masterTimeout = builder.masterTimeout;
     }
 
     public static ClusterManagerRequest of(Function<ClusterManagerRequest.Builder, ObjectBuilder<ClusterManagerRequest>> fn) {
@@ -95,6 +95,18 @@ public final class ClusterManagerRequest extends CatRequestBase
     @Nullable
     public final Time clusterManagerTimeout() {
         return this.clusterManagerTimeout;
+    }
+
+    /**
+     * A timeout for connection to the cluster manager node.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -116,17 +128,21 @@ public final class ClusterManagerRequest extends CatRequestBase
     public static class Builder extends CatRequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, ClusterManagerRequest> {
         @Nullable
         private Time clusterManagerTimeout;
+        @Nullable
+        private Time masterTimeout;
 
         public Builder() {}
 
         private Builder(ClusterManagerRequest o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
         }
 
         private Builder(Builder o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
         }
 
         @Override
@@ -165,6 +181,31 @@ public final class ClusterManagerRequest extends CatRequestBase
         }
 
         /**
+         * A timeout for connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * A timeout for connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Builds a {@link ClusterManagerRequest}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -185,6 +226,9 @@ public final class ClusterManagerRequest extends CatRequestBase
         super.applyQueryParameters(params);
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
+        }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
         }
     }
 
@@ -211,6 +255,7 @@ public final class ClusterManagerRequest extends CatRequestBase
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         return result;
     }
 
@@ -219,6 +264,7 @@ public final class ClusterManagerRequest extends CatRequestBase
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         ClusterManagerRequest other = (ClusterManagerRequest) o;
-        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout);
+        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && Objects.equals(this.masterTimeout, other.masterTimeout);
     }
 }

@@ -66,12 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.add_block.Request
 
 /**
- * <p>
  * Adds a block to an index.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class AddBlockRequest extends RequestBase implements ToCopyableBuilder<AddBlockRequest.Builder, AddBlockRequest> {
@@ -94,6 +89,10 @@ public final class AddBlockRequest extends RequestBase implements ToCopyableBuil
     @Nonnull
     private final List<String> index;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final Time timeout;
 
@@ -107,6 +106,7 @@ public final class AddBlockRequest extends RequestBase implements ToCopyableBuil
         this.expandWildcards = ApiTypeHelper.unmodifiable(builder.expandWildcards);
         this.ignoreUnavailable = builder.ignoreUnavailable;
         this.index = ApiTypeHelper.unmodifiableRequired(builder.index, this, "index");
+        this.masterTimeout = builder.masterTimeout;
         this.timeout = builder.timeout;
     }
 
@@ -182,6 +182,18 @@ public final class AddBlockRequest extends RequestBase implements ToCopyableBuil
     }
 
     /**
+     * Specify timeout for connection to cluster manager.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
      * Explicit operation timeout
      * <p>
      * API name: {@code timeout}
@@ -220,6 +232,8 @@ public final class AddBlockRequest extends RequestBase implements ToCopyableBuil
         private Boolean ignoreUnavailable;
         private List<String> index;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Time timeout;
 
         public Builder() {}
@@ -232,6 +246,7 @@ public final class AddBlockRequest extends RequestBase implements ToCopyableBuil
             this.expandWildcards = _listCopy(o.expandWildcards);
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
         }
 
@@ -243,6 +258,7 @@ public final class AddBlockRequest extends RequestBase implements ToCopyableBuil
             this.expandWildcards = _listCopy(o.expandWildcards);
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
         }
 
@@ -383,6 +399,31 @@ public final class AddBlockRequest extends RequestBase implements ToCopyableBuil
         }
 
         /**
+         * Specify timeout for connection to cluster manager.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Specify timeout for connection to cluster manager.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Explicit operation timeout
          * <p>
          * API name: {@code timeout}
@@ -436,6 +477,9 @@ public final class AddBlockRequest extends RequestBase implements ToCopyableBuil
         if (this.ignoreUnavailable != null) {
             params.put("ignore_unavailable", String.valueOf(this.ignoreUnavailable));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -476,6 +520,7 @@ public final class AddBlockRequest extends RequestBase implements ToCopyableBuil
         result = 31 * result + Objects.hashCode(this.expandWildcards);
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
         result = 31 * result + this.index.hashCode();
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.timeout);
         return result;
     }
@@ -491,6 +536,7 @@ public final class AddBlockRequest extends RequestBase implements ToCopyableBuil
             && Objects.equals(this.expandWildcards, other.expandWildcards)
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
             && this.index.equals(other.index)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.timeout, other.timeout);
     }
 }

@@ -60,12 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.validate.Request
 
 /**
- * <p>
  * Checks whether the v6 security configuration is valid and ready to be migrated to v7.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ValidateRequest extends RequestBase implements ToCopyableBuilder<ValidateRequest.Builder, ValidateRequest> {

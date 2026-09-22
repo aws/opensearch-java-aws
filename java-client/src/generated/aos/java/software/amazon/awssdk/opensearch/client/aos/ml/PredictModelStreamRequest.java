@@ -44,12 +44,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.predict_model_stream.Request
 
 /**
- * <p>
  * Predicts a model in streaming mode.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.3</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.tenant_info.Request
 
 /**
- * <p>
  * Retrieves the names of current tenants. Requires super admin or <code>kibanaserver</code> permissions.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class TenantInfoRequest extends RequestBase implements ToCopyableBuilder<TenantInfoRequest.Builder, TenantInfoRequest> {

@@ -44,12 +44,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.execute_tool.Request
 
 /**
- * <p>
  * Execute a tool.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.3</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

@@ -72,12 +72,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.put_template.Request
 
 /**
- * <p>
  * Creates or updates an index template.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -101,6 +96,10 @@ public final class PutTemplateRequest extends RequestBase
     @Nullable
     private final TypeMapping mappings;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final String name;
 
@@ -122,6 +121,7 @@ public final class PutTemplateRequest extends RequestBase
         this.create = builder.create;
         this.indexPatterns = ApiTypeHelper.unmodifiable(builder.indexPatterns);
         this.mappings = builder.mappings;
+        this.masterTimeout = builder.masterTimeout;
         this.name = ApiTypeHelper.requireNonNull(builder.name, this, "name");
         this.order = builder.order;
         this.settings = ApiTypeHelper.unmodifiable(builder.settings);
@@ -182,6 +182,19 @@ public final class PutTemplateRequest extends RequestBase
     @Nullable
     public final TypeMapping mappings() {
         return this.mappings;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -314,6 +327,8 @@ public final class PutTemplateRequest extends RequestBase
         private List<String> indexPatterns;
         @Nullable
         private TypeMapping mappings;
+        @Nullable
+        private Time masterTimeout;
         private String name;
         @Nullable
         private Integer order;
@@ -331,6 +346,7 @@ public final class PutTemplateRequest extends RequestBase
             this.create = o.create;
             this.indexPatterns = _listCopy(o.indexPatterns);
             this.mappings = o.mappings;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
             this.order = o.order;
             this.settings = _mapCopy(o.settings);
@@ -344,6 +360,7 @@ public final class PutTemplateRequest extends RequestBase
             this.create = o.create;
             this.indexPatterns = _listCopy(o.indexPatterns);
             this.mappings = o.mappings;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
             this.order = o.order;
             this.settings = _mapCopy(o.settings);
@@ -494,6 +511,33 @@ public final class PutTemplateRequest extends RequestBase
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Required - The name of the template
          * <p>
          * API name: {@code name}
@@ -608,6 +652,9 @@ public final class PutTemplateRequest extends RequestBase
         if (this.create != null) {
             params.put("create", String.valueOf(this.create));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
     }
 
     /**
@@ -642,6 +689,7 @@ public final class PutTemplateRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.create);
         result = 31 * result + Objects.hashCode(this.indexPatterns);
         result = 31 * result + Objects.hashCode(this.mappings);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + this.name.hashCode();
         result = 31 * result + Objects.hashCode(this.order);
         result = 31 * result + Objects.hashCode(this.settings);
@@ -659,6 +707,7 @@ public final class PutTemplateRequest extends RequestBase
             && Objects.equals(this.create, other.create)
             && Objects.equals(this.indexPatterns, other.indexPatterns)
             && Objects.equals(this.mappings, other.mappings)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && this.name.equals(other.name)
             && Objects.equals(this.order, other.order)
             && Objects.equals(this.settings, other.settings)

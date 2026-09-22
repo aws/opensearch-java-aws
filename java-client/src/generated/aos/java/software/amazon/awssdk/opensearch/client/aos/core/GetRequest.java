@@ -66,12 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.get.Request
 
 /**
- * <p>
  * Returns a document.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetRequest extends RequestBase implements ToCopyableBuilder<GetRequest.Builder, GetRequest> {

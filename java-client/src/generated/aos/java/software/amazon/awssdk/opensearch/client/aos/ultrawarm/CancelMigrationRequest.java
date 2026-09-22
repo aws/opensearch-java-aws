@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ultrawarm.cancel_migration.Request
 
 /**
- * <p>
  * AOS only. Cancels an in-progress UltraWarm index migration. Only one index can be cancelled per request.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>7.1</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class CancelMigrationRequest extends RequestBase

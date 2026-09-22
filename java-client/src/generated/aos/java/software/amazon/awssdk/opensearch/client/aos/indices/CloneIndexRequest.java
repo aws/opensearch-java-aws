@@ -71,12 +71,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.clone.Request
 
 /**
- * <p>
  * Clones an index.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -93,6 +88,10 @@ public final class CloneIndexRequest extends RequestBase
 
     @Nonnull
     private final String index;
+
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
 
     @Nonnull
     private final Map<String, JsonData> settings;
@@ -119,6 +118,7 @@ public final class CloneIndexRequest extends RequestBase
         this.aliases = ApiTypeHelper.unmodifiable(builder.aliases);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.index = ApiTypeHelper.requireNonNull(builder.index, this, "index");
+        this.masterTimeout = builder.masterTimeout;
         this.settings = ApiTypeHelper.unmodifiable(builder.settings);
         this.target = ApiTypeHelper.requireNonNull(builder.target, this, "target");
         this.taskExecutionTimeout = builder.taskExecutionTimeout;
@@ -162,6 +162,19 @@ public final class CloneIndexRequest extends RequestBase
     @Nonnull
     public final String index() {
         return this.index;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -286,6 +299,8 @@ public final class CloneIndexRequest extends RequestBase
         private Time clusterManagerTimeout;
         private String index;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Map<String, JsonData> settings;
         private String target;
         @Nullable
@@ -304,6 +319,7 @@ public final class CloneIndexRequest extends RequestBase
             this.aliases = _mapCopy(o.aliases);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.index = o.index;
+            this.masterTimeout = o.masterTimeout;
             this.settings = _mapCopy(o.settings);
             this.target = o.target;
             this.taskExecutionTimeout = o.taskExecutionTimeout;
@@ -317,6 +333,7 @@ public final class CloneIndexRequest extends RequestBase
             this.aliases = _mapCopy(o.aliases);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.index = o.index;
+            this.masterTimeout = o.masterTimeout;
             this.settings = _mapCopy(o.settings);
             this.target = o.target;
             this.taskExecutionTimeout = o.taskExecutionTimeout;
@@ -417,6 +434,33 @@ public final class CloneIndexRequest extends RequestBase
         public final Builder index(String value) {
             this.index = value;
             return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -583,6 +627,9 @@ public final class CloneIndexRequest extends RequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.taskExecutionTimeout != null) {
             params.put("task_execution_timeout", this.taskExecutionTimeout._toJsonString());
         }
@@ -629,6 +676,7 @@ public final class CloneIndexRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.aliases);
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + this.index.hashCode();
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.settings);
         result = 31 * result + this.target.hashCode();
         result = 31 * result + Objects.hashCode(this.taskExecutionTimeout);
@@ -646,6 +694,7 @@ public final class CloneIndexRequest extends RequestBase
         return Objects.equals(this.aliases, other.aliases)
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && this.index.equals(other.index)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.settings, other.settings)
             && this.target.equals(other.target)
             && Objects.equals(this.taskExecutionTimeout, other.taskExecutionTimeout)

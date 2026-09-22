@@ -45,12 +45,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.create_memory_container_session.Request
 
 /**
- * <p>
  * Create session in a memory container.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.3</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

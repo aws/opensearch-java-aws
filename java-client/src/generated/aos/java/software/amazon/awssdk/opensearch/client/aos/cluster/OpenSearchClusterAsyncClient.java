@@ -75,13 +75,8 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     // ----- Endpoint: cluster.allocation_explain
 
     /**
-     * <p>
      * Explains how shards are allocated in the current cluster and provides an explanation for why unassigned shards can't be allocated to
      * a node.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<AllocationExplainResponse> allocationExplain(AllocationExplainRequest request) throws IOException,
         OpenSearchException {
@@ -89,13 +84,8 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Explains how shards are allocated in the current cluster and provides an explanation for why unassigned shards can't be allocated to
      * a node.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link AllocationExplainRequest}
      */
@@ -106,13 +96,8 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Explains how shards are allocated in the current cluster and provides an explanation for why unassigned shards can't be allocated to
      * a node.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<AllocationExplainResponse> allocationExplain() throws IOException, OpenSearchException {
         return allocationExplain(new AllocationExplainRequest.Builder().build());
@@ -121,12 +106,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     // ----- Endpoint: cluster.delete_component_template
 
     /**
-     * <p>
      * Deletes a component template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeleteComponentTemplateResponse> deleteComponentTemplate(DeleteComponentTemplateRequest request)
         throws IOException, OpenSearchException {
@@ -134,12 +114,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Deletes a component template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteComponentTemplateRequest}
      */
@@ -152,12 +127,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     // ----- Endpoint: cluster.exists_component_template
 
     /**
-     * <p>
      * Returns information about whether a particular component template exist.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<BooleanResponse> existsComponentTemplate(ExistsComponentTemplateRequest request) throws IOException,
         OpenSearchException {
@@ -165,12 +135,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Returns information about whether a particular component template exist.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsComponentTemplateRequest}
      */
@@ -183,12 +148,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     // ----- Endpoint: cluster.get_component_template
 
     /**
-     * <p>
      * Returns one or more component templates.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetComponentTemplateResponse> getComponentTemplate(GetComponentTemplateRequest request) throws IOException,
         OpenSearchException {
@@ -196,12 +156,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Returns one or more component templates.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetComponentTemplateRequest}
      */
@@ -212,12 +167,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Returns one or more component templates.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<GetComponentTemplateResponse> getComponentTemplate() throws IOException, OpenSearchException {
         return getComponentTemplate(new GetComponentTemplateRequest.Builder().build());
@@ -226,12 +176,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     // ----- Endpoint: cluster.get_settings
 
     /**
-     * <p>
      * Returns cluster settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetClusterSettingsResponse> getSettings(GetClusterSettingsRequest request) throws IOException,
         OpenSearchException {
@@ -239,12 +184,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Returns cluster settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetClusterSettingsRequest}
      */
@@ -255,12 +195,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Returns cluster settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<GetClusterSettingsResponse> getSettings() throws IOException, OpenSearchException {
         return getSettings(new GetClusterSettingsRequest.Builder().build());
@@ -269,24 +204,14 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     // ----- Endpoint: cluster.health
 
     /**
-     * <p>
      * Returns basic information about the health of the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<HealthResponse> health(HealthRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, HealthRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns basic information about the health of the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link HealthRequest}
      */
@@ -296,12 +221,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Returns basic information about the health of the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<HealthResponse> health() throws IOException, OpenSearchException {
         return health(new HealthRequest.Builder().build());
@@ -310,24 +230,14 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     // ----- Endpoint: cluster.pending_tasks
 
     /**
-     * <p>
      * Returns a list of pending cluster-level tasks, such as index creation, mapping updates, or new allocations.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<PendingTasksResponse> pendingTasks(PendingTasksRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, PendingTasksRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns a list of pending cluster-level tasks, such as index creation, mapping updates, or new allocations.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PendingTasksRequest}
      */
@@ -338,12 +248,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Returns a list of pending cluster-level tasks, such as index creation, mapping updates, or new allocations.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<PendingTasksResponse> pendingTasks() throws IOException, OpenSearchException {
         return pendingTasks(new PendingTasksRequest.Builder().build());
@@ -352,12 +257,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     // ----- Endpoint: cluster.put_component_template
 
     /**
-     * <p>
      * Creates or updates a component template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<PutComponentTemplateResponse> putComponentTemplate(PutComponentTemplateRequest request) throws IOException,
         OpenSearchException {
@@ -365,12 +265,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Creates or updates a component template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutComponentTemplateRequest}
      */
@@ -383,12 +278,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     // ----- Endpoint: cluster.put_settings
 
     /**
-     * <p>
      * Updates the cluster settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<PutClusterSettingsResponse> putSettings(PutClusterSettingsRequest request) throws IOException,
         OpenSearchException {
@@ -396,12 +286,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Updates the cluster settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutClusterSettingsRequest}
      */
@@ -412,12 +297,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Updates the cluster settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<PutClusterSettingsResponse> putSettings() throws IOException, OpenSearchException {
         return putSettings(new PutClusterSettingsRequest.Builder().build());
@@ -426,24 +306,14 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     // ----- Endpoint: cluster.remote_info
 
     /**
-     * <p>
      * Returns the information about configured remote clusters.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<RemoteInfoResponse> remoteInfo(RemoteInfoRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, RemoteInfoRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns the information about configured remote clusters.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RemoteInfoRequest}
      */
@@ -453,12 +323,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Returns the information about configured remote clusters.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<RemoteInfoResponse> remoteInfo() throws IOException, OpenSearchException {
         return remoteInfo(new RemoteInfoRequest.Builder().build());
@@ -467,24 +332,14 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     // ----- Endpoint: cluster.state
 
     /**
-     * <p>
      * Returns comprehensive information about the state of the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<StateResponse> state(StateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, StateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns comprehensive information about the state of the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link StateRequest}
      */
@@ -494,12 +349,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Returns comprehensive information about the state of the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<StateResponse> state() throws IOException, OpenSearchException {
         return state(new StateRequest.Builder().build());
@@ -508,24 +358,14 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     // ----- Endpoint: cluster.stats
 
     /**
-     * <p>
      * Returns a high-level overview of cluster statistics.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<ClusterStatsResponse> stats(ClusterStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ClusterStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns a high-level overview of cluster statistics.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ClusterStatsRequest}
      */
@@ -535,12 +375,7 @@ public class OpenSearchClusterAsyncClient extends ApiClient<OpenSearchTransport,
     }
 
     /**
-     * <p>
      * Returns a high-level overview of cluster statistics.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<ClusterStatsResponse> stats() throws IOException, OpenSearchException {
         return stats(new ClusterStatsRequest.Builder().build());

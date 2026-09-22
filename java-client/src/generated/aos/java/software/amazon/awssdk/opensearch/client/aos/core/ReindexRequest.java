@@ -76,13 +76,8 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.reindex.Request
 
 /**
- * <p>
  * Allows to copy documents from one index to another, optionally filtering the source documents by a query, changing the destination index
  * settings, or fetching the documents from a remote cluster.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

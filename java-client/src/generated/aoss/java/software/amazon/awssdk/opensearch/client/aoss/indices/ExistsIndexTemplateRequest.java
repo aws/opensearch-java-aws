@@ -80,6 +80,10 @@ public final class ExistsIndexTemplateRequest extends RequestBase
     @Nullable
     private final Boolean local;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final String name;
 
@@ -90,6 +94,7 @@ public final class ExistsIndexTemplateRequest extends RequestBase
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.flatSettings = builder.flatSettings;
         this.local = builder.local;
+        this.masterTimeout = builder.masterTimeout;
         this.name = ApiTypeHelper.requireNonNull(builder.name, this, "name");
     }
 
@@ -133,6 +138,19 @@ public final class ExistsIndexTemplateRequest extends RequestBase
     }
 
     /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
      * Required - The name of the index template to check existence of. Wildcard (*) expressions are supported.
      * <p>
      * API name: {@code name}
@@ -168,6 +186,8 @@ public final class ExistsIndexTemplateRequest extends RequestBase
         private Boolean flatSettings;
         @Nullable
         private Boolean local;
+        @Nullable
+        private Time masterTimeout;
         private String name;
 
         public Builder() {}
@@ -177,6 +197,7 @@ public final class ExistsIndexTemplateRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.flatSettings = o.flatSettings;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
         }
 
@@ -185,6 +206,7 @@ public final class ExistsIndexTemplateRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.flatSettings = o.flatSettings;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
         }
 
@@ -248,6 +270,33 @@ public final class ExistsIndexTemplateRequest extends RequestBase
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Required - The name of the index template to check existence of. Wildcard (*) expressions are supported.
          * <p>
          * API name: {@code name}
@@ -287,6 +336,9 @@ public final class ExistsIndexTemplateRequest extends RequestBase
         if (this.local != null) {
             params.put("local", String.valueOf(this.local));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
     }
 
     /**
@@ -317,6 +369,7 @@ public final class ExistsIndexTemplateRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.flatSettings);
         result = 31 * result + Objects.hashCode(this.local);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + this.name.hashCode();
         return result;
     }
@@ -329,6 +382,7 @@ public final class ExistsIndexTemplateRequest extends RequestBase
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.flatSettings, other.flatSettings)
             && Objects.equals(this.local, other.local)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && this.name.equals(other.name);
     }
 }

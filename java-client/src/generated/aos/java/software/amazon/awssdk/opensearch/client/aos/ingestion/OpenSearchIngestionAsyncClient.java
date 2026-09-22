@@ -74,24 +74,14 @@ public class OpenSearchIngestionAsyncClient extends ApiClient<OpenSearchTranspor
     // ----- Endpoint: ingestion.get_state
 
     /**
-     * <p>
      * Use this API to retrieve the ingestion state for a given index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public CompletableFuture<GetStateResponse> getState(GetStateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetStateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Use this API to retrieve the ingestion state for a given index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetStateRequest}
      */
@@ -103,24 +93,14 @@ public class OpenSearchIngestionAsyncClient extends ApiClient<OpenSearchTranspor
     // ----- Endpoint: ingestion.pause
 
     /**
-     * <p>
      * Use this API to pause ingestion for a given index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public CompletableFuture<PauseResponse> pause(PauseRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, PauseRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Use this API to pause ingestion for a given index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PauseRequest}
      */
@@ -132,24 +112,14 @@ public class OpenSearchIngestionAsyncClient extends ApiClient<OpenSearchTranspor
     // ----- Endpoint: ingestion.resume
 
     /**
-     * <p>
      * Use this API to resume ingestion for the given index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public CompletableFuture<ResumeResponse> resume(ResumeRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ResumeRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Use this API to resume ingestion for the given index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ResumeRequest}
      */

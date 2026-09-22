@@ -67,12 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.stats.Request
 
 /**
- * <p>
  * Returns statistical information about nodes in the cluster.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class NodesStatsRequest extends RequestBase implements ToCopyableBuilder<NodesStatsRequest.Builder, NodesStatsRequest> {

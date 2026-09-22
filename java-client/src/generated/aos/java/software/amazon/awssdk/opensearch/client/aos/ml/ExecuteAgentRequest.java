@@ -44,12 +44,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.execute_agent.Request
 
 /**
- * <p>
  * Execute an agent.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.13</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

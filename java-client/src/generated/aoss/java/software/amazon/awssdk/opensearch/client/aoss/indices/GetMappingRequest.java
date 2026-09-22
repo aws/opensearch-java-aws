@@ -88,6 +88,10 @@ public final class GetMappingRequest extends RequestBase implements ToCopyableBu
     @Nullable
     private final Boolean local;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     // ---------------------------------------------------------------------------------------------
 
     private GetMappingRequest(Builder builder) {
@@ -98,6 +102,7 @@ public final class GetMappingRequest extends RequestBase implements ToCopyableBu
         this.ignoreUnavailable = builder.ignoreUnavailable;
         this.index = ApiTypeHelper.unmodifiable(builder.index);
         this.local = builder.local;
+        this.masterTimeout = builder.masterTimeout;
     }
 
     public static GetMappingRequest of(Function<GetMappingRequest.Builder, ObjectBuilder<GetMappingRequest>> fn) {
@@ -174,6 +179,19 @@ public final class GetMappingRequest extends RequestBase implements ToCopyableBu
         return this.local;
     }
 
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     @Override
@@ -203,6 +221,8 @@ public final class GetMappingRequest extends RequestBase implements ToCopyableBu
         private List<String> index;
         @Nullable
         private Boolean local;
+        @Nullable
+        private Time masterTimeout;
 
         public Builder() {}
 
@@ -214,6 +234,7 @@ public final class GetMappingRequest extends RequestBase implements ToCopyableBu
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
         }
 
         private Builder(Builder o) {
@@ -224,6 +245,7 @@ public final class GetMappingRequest extends RequestBase implements ToCopyableBu
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
         }
 
         @Override
@@ -369,6 +391,33 @@ public final class GetMappingRequest extends RequestBase implements ToCopyableBu
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Builds a {@link GetMappingRequest}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -401,6 +450,9 @@ public final class GetMappingRequest extends RequestBase implements ToCopyableBu
         }
         if (this.local != null) {
             params.put("local", String.valueOf(this.local));
+        }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
         }
     }
 
@@ -451,6 +503,7 @@ public final class GetMappingRequest extends RequestBase implements ToCopyableBu
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
         result = 31 * result + Objects.hashCode(this.index);
         result = 31 * result + Objects.hashCode(this.local);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         return result;
     }
 
@@ -464,6 +517,7 @@ public final class GetMappingRequest extends RequestBase implements ToCopyableBu
             && Objects.equals(this.expandWildcards, other.expandWildcards)
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
             && Objects.equals(this.index, other.index)
-            && Objects.equals(this.local, other.local);
+            && Objects.equals(this.local, other.local)
+            && Objects.equals(this.masterTimeout, other.masterTimeout);
     }
 }

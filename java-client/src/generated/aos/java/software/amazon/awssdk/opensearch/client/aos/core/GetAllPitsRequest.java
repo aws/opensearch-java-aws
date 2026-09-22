@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.get_all_pits.Request
 
 /**
- * <p>
  * Lists all active point in time searches.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.4</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetAllPitsRequest extends RequestBase implements ToCopyableBuilder<GetAllPitsRequest.Builder, GetAllPitsRequest> {

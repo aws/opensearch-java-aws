@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.who_am_i.Request
 
 /**
- * <p>
  * Gets the identity information for the user currently logged in.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class WhoAmIRequest extends RequestBase implements ToCopyableBuilder<WhoAmIRequest.Builder, WhoAmIRequest> {

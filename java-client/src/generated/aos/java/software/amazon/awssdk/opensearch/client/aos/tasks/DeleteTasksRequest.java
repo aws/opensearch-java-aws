@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: tasks.delete.Request
 
 /**
- * <p>
  * Deletes a stored completed task result.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.9</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteTasksRequest extends RequestBase implements ToCopyableBuilder<DeleteTasksRequest.Builder, DeleteTasksRequest> {

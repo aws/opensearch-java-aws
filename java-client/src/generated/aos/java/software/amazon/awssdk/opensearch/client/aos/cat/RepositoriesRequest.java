@@ -60,12 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.repositories.Request
 
 /**
- * <p>
  * Returns information about all snapshot repositories for a cluster.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class RepositoriesRequest extends CatRequestBase
@@ -75,11 +70,16 @@ public final class RepositoriesRequest extends CatRequestBase
     @Nullable
     private final Time clusterManagerTimeout;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     // ---------------------------------------------------------------------------------------------
 
     private RepositoriesRequest(Builder builder) {
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
+        this.masterTimeout = builder.masterTimeout;
     }
 
     public static RepositoriesRequest of(Function<RepositoriesRequest.Builder, ObjectBuilder<RepositoriesRequest>> fn) {
@@ -95,6 +95,18 @@ public final class RepositoriesRequest extends CatRequestBase
     @Nullable
     public final Time clusterManagerTimeout() {
         return this.clusterManagerTimeout;
+    }
+
+    /**
+     * The amount of time allowed to establish a connection to the cluster manager node.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -116,17 +128,21 @@ public final class RepositoriesRequest extends CatRequestBase
     public static class Builder extends CatRequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, RepositoriesRequest> {
         @Nullable
         private Time clusterManagerTimeout;
+        @Nullable
+        private Time masterTimeout;
 
         public Builder() {}
 
         private Builder(RepositoriesRequest o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
         }
 
         private Builder(Builder o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
         }
 
         @Override
@@ -165,6 +181,31 @@ public final class RepositoriesRequest extends CatRequestBase
         }
 
         /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Builds a {@link RepositoriesRequest}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -185,6 +226,9 @@ public final class RepositoriesRequest extends CatRequestBase
         super.applyQueryParameters(params);
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
+        }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
         }
     }
 
@@ -211,6 +255,7 @@ public final class RepositoriesRequest extends CatRequestBase
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         return result;
     }
 
@@ -219,6 +264,7 @@ public final class RepositoriesRequest extends CatRequestBase
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         RepositoriesRequest other = (RepositoriesRequest) o;
-        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout);
+        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && Objects.equals(this.masterTimeout, other.masterTimeout);
     }
 }

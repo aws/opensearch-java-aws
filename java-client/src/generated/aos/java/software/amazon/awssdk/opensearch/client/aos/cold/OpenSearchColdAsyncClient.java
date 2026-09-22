@@ -77,12 +77,7 @@ public class OpenSearchColdAsyncClient extends ApiClient<OpenSearchTransport, Op
     // ----- Endpoint: cold.cancel_migration
 
     /**
-     * <p>
      * AOS only. Cancels an ongoing cold tier migration for the specified index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<CancelMigrationResponse> cancelMigration(CancelMigrationRequest request) throws IOException,
         OpenSearchException {
@@ -90,12 +85,7 @@ public class OpenSearchColdAsyncClient extends ApiClient<OpenSearchTransport, Op
     }
 
     /**
-     * <p>
      * AOS only. Cancels an ongoing cold tier migration for the specified index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CancelMigrationRequest}
      */
@@ -108,24 +98,14 @@ public class OpenSearchColdAsyncClient extends ApiClient<OpenSearchTransport, Op
     // ----- Endpoint: cold.catalog
 
     /**
-     * <p>
      * AOS only. Returns the cold tier catalog listing all cold indices.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<CatalogResponse> catalog(CatalogRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CatalogRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * AOS only. Returns the cold tier catalog listing all cold indices.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CatalogRequest}
      */
@@ -135,12 +115,7 @@ public class OpenSearchColdAsyncClient extends ApiClient<OpenSearchTransport, Op
     }
 
     /**
-     * <p>
      * AOS only. Returns the cold tier catalog listing all cold indices.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<CatalogResponse> catalog() throws IOException, OpenSearchException {
         return catalog(new CatalogRequest.Builder().build());
@@ -149,12 +124,7 @@ public class OpenSearchColdAsyncClient extends ApiClient<OpenSearchTransport, Op
     // ----- Endpoint: cold.get_migration_status
 
     /**
-     * <p>
      * AOS only. Returns the cold tier migration status for a specific index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetMigrationStatusResponse> getMigrationStatus(GetMigrationStatusRequest request) throws IOException,
         OpenSearchException {
@@ -162,12 +132,7 @@ public class OpenSearchColdAsyncClient extends ApiClient<OpenSearchTransport, Op
     }
 
     /**
-     * <p>
      * AOS only. Returns the cold tier migration status for a specific index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetMigrationStatusRequest}
      */
@@ -180,12 +145,7 @@ public class OpenSearchColdAsyncClient extends ApiClient<OpenSearchTransport, Op
     // ----- Endpoint: cold.list_migration_status
 
     /**
-     * <p>
      * AOS only. Returns the cold tier migration status for all indices.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<ListMigrationStatusResponse> listMigrationStatus(ListMigrationStatusRequest request) throws IOException,
         OpenSearchException {
@@ -193,12 +153,7 @@ public class OpenSearchColdAsyncClient extends ApiClient<OpenSearchTransport, Op
     }
 
     /**
-     * <p>
      * AOS only. Returns the cold tier migration status for all indices.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ListMigrationStatusRequest}
      */
@@ -209,12 +164,7 @@ public class OpenSearchColdAsyncClient extends ApiClient<OpenSearchTransport, Op
     }
 
     /**
-     * <p>
      * AOS only. Returns the cold tier migration status for all indices.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<ListMigrationStatusResponse> listMigrationStatus() throws IOException, OpenSearchException {
         return listMigrationStatus(new ListMigrationStatusRequest.Builder().build());
@@ -223,24 +173,14 @@ public class OpenSearchColdAsyncClient extends ApiClient<OpenSearchTransport, Op
     // ----- Endpoint: cold.migrate_to_cold
 
     /**
-     * <p>
      * AOS only. Migrates an index from warm storage to cold storage.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<MigrateToColdResponse> migrateToCold(MigrateToColdRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, MigrateToColdRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * AOS only. Migrates an index from warm storage to cold storage.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link MigrateToColdRequest}
      */
@@ -253,24 +193,14 @@ public class OpenSearchColdAsyncClient extends ApiClient<OpenSearchTransport, Op
     // ----- Endpoint: cold.migrate_to_warm
 
     /**
-     * <p>
      * AOS only. Migrates an index from cold storage back to warm storage.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<MigrateToWarmResponse> migrateToWarm(MigrateToWarmRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, MigrateToWarmRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * AOS only. Migrates an index from cold storage back to warm storage.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link MigrateToWarmRequest}
      */
@@ -283,12 +213,7 @@ public class OpenSearchColdAsyncClient extends ApiClient<OpenSearchTransport, Op
     // ----- Endpoint: cold.search
 
     /**
-     * <p>
      * AOS only. Searches data stored in cold tier indices.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TDocument> CompletableFuture<SearchResponse<TDocument>> search(SearchRequest request, Class<TDocument> tDocumentClass)
         throws IOException, OpenSearchException {
@@ -307,12 +232,7 @@ public class OpenSearchColdAsyncClient extends ApiClient<OpenSearchTransport, Op
     }
 
     /**
-     * <p>
      * AOS only. Searches data stored in cold tier indices.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SearchRequest}
      */

@@ -74,12 +74,7 @@ public class OpenSearchUltrawarmAsyncClient extends ApiClient<OpenSearchTranspor
     // ----- Endpoint: ultrawarm.cancel_migration
 
     /**
-     * <p>
      * AOS only. Cancels an in-progress UltraWarm index migration. Only one index can be cancelled per request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
      */
     public CompletableFuture<CancelMigrationResponse> cancelMigration(CancelMigrationRequest request) throws IOException,
         OpenSearchException {
@@ -87,12 +82,7 @@ public class OpenSearchUltrawarmAsyncClient extends ApiClient<OpenSearchTranspor
     }
 
     /**
-     * <p>
      * AOS only. Cancels an in-progress UltraWarm index migration. Only one index can be cancelled per request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CancelMigrationRequest}
      */
@@ -105,12 +95,7 @@ public class OpenSearchUltrawarmAsyncClient extends ApiClient<OpenSearchTranspor
     // ----- Endpoint: ultrawarm.get_migration_status
 
     /**
-     * <p>
      * AOS only. Returns the migration status for a specific index. Returns HTTP 400 when no migration is currently active for the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
      */
     public CompletableFuture<GetMigrationStatusResponse> getMigrationStatus(GetMigrationStatusRequest request) throws IOException,
         OpenSearchException {
@@ -118,12 +103,7 @@ public class OpenSearchUltrawarmAsyncClient extends ApiClient<OpenSearchTranspor
     }
 
     /**
-     * <p>
      * AOS only. Returns the migration status for a specific index. Returns HTTP 400 when no migration is currently active for the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetMigrationStatusRequest}
      */
@@ -136,13 +116,8 @@ public class OpenSearchUltrawarmAsyncClient extends ApiClient<OpenSearchTranspor
     // ----- Endpoint: ultrawarm.list_migration_status
 
     /**
-     * <p>
      * AOS only. Returns the migration status for all indices currently undergoing UltraWarm migration. Equivalent to /_cat/ultrawarm but
      * returns JSON.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
      */
     public CompletableFuture<ListMigrationStatusResponse> listMigrationStatus(ListMigrationStatusRequest request) throws IOException,
         OpenSearchException {
@@ -150,13 +125,8 @@ public class OpenSearchUltrawarmAsyncClient extends ApiClient<OpenSearchTranspor
     }
 
     /**
-     * <p>
      * AOS only. Returns the migration status for all indices currently undergoing UltraWarm migration. Equivalent to /_cat/ultrawarm but
      * returns JSON.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ListMigrationStatusRequest}
      */
@@ -167,13 +137,8 @@ public class OpenSearchUltrawarmAsyncClient extends ApiClient<OpenSearchTranspor
     }
 
     /**
-     * <p>
      * AOS only. Returns the migration status for all indices currently undergoing UltraWarm migration. Equivalent to /_cat/ultrawarm but
      * returns JSON.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
      */
     public final CompletableFuture<ListMigrationStatusResponse> listMigrationStatus() throws IOException, OpenSearchException {
         return listMigrationStatus(new ListMigrationStatusRequest.Builder().build());
@@ -182,24 +147,14 @@ public class OpenSearchUltrawarmAsyncClient extends ApiClient<OpenSearchTranspor
     // ----- Endpoint: ultrawarm.migrate_to_cold
 
     /**
-     * <p>
      * AOS only. Migrates an index from UltraWarm (warm) storage to Cold storage. The operation is asynchronous.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.10</code>
-     * </p>
      */
     public CompletableFuture<MigrateToColdResponse> migrateToCold(MigrateToColdRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, MigrateToColdRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * AOS only. Migrates an index from UltraWarm (warm) storage to Cold storage. The operation is asynchronous.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.10</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link MigrateToColdRequest}
      */
@@ -212,24 +167,14 @@ public class OpenSearchUltrawarmAsyncClient extends ApiClient<OpenSearchTranspor
     // ----- Endpoint: ultrawarm.migrate_to_hot
 
     /**
-     * <p>
      * AOS only. Migrates an index from UltraWarm (warm) storage back to hot storage. The operation is asynchronous.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
      */
     public CompletableFuture<MigrateToHotResponse> migrateToHot(MigrateToHotRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, MigrateToHotRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * AOS only. Migrates an index from UltraWarm (warm) storage back to hot storage. The operation is asynchronous.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link MigrateToHotRequest}
      */
@@ -242,26 +187,16 @@ public class OpenSearchUltrawarmAsyncClient extends ApiClient<OpenSearchTranspor
     // ----- Endpoint: ultrawarm.migrate_to_warm
 
     /**
-     * <p>
      * AOS only. Migrates an index from hot storage to UltraWarm (warm) storage. The operation is asynchronous -- use GET
      * /_ultrawarm/migration/{index}/_status to poll migration progress.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
      */
     public CompletableFuture<MigrateToWarmResponse> migrateToWarm(MigrateToWarmRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, MigrateToWarmRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * AOS only. Migrates an index from hot storage to UltraWarm (warm) storage. The operation is asynchronous -- use GET
      * /_ultrawarm/migration/{index}/_status to poll migration progress.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link MigrateToWarmRequest}
      */
@@ -274,12 +209,7 @@ public class OpenSearchUltrawarmAsyncClient extends ApiClient<OpenSearchTranspor
     // ----- Endpoint: ultrawarm.update_migration
 
     /**
-     * <p>
      * AOS only. Updates the configuration of an in-progress UltraWarm migration.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
      */
     public CompletableFuture<UpdateMigrationResponse> updateMigration(UpdateMigrationRequest request) throws IOException,
         OpenSearchException {
@@ -287,12 +217,7 @@ public class OpenSearchUltrawarmAsyncClient extends ApiClient<OpenSearchTranspor
     }
 
     /**
-     * <p>
      * AOS only. Updates the configuration of an in-progress UltraWarm migration.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateMigrationRequest}
      */

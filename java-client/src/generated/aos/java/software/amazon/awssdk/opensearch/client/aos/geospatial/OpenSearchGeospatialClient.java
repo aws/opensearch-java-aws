@@ -73,12 +73,7 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
     // ----- Endpoint: geospatial.delete_ip2geo_datasource
 
     /**
-     * <p>
      * Delete a specific IP2Geo data source.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public DeleteIp2geoDatasourceResponse deleteIp2geoDatasource(DeleteIp2geoDatasourceRequest request) throws IOException,
         OpenSearchException {
@@ -86,12 +81,7 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
     }
 
     /**
-     * <p>
      * Delete a specific IP2Geo data source.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteIp2geoDatasourceRequest}
      */
@@ -112,9 +102,6 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
      * <li>When type is <code>geo_shape</code>, all geometry types are allowed (Point, MultiPoint, LineString, MultiLineString, Polygon,
      * MultiPolygon, GeometryCollection, Envelope).</li>
      * </ul>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public GeojsonUploadPostResponse geojsonUploadPost(GeojsonUploadPostRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GeojsonUploadPostRequest._ENDPOINT, this.transportOptions);
@@ -129,9 +116,6 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
      * <li>When type is <code>geo_shape</code>, all geometry types are allowed (Point, MultiPoint, LineString, MultiLineString, Polygon,
      * MultiPolygon, GeometryCollection, Envelope).</li>
      * </ul>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GeojsonUploadPostRequest}
      */
@@ -152,9 +136,6 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
      * <li>When type is <code>geo_shape</code>, all geometry types are allowed (Point, MultiPoint, LineString, MultiLineString, Polygon,
      * MultiPolygon, GeometryCollection, Envelope).</li>
      * </ul>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public GeojsonUploadPutResponse geojsonUploadPut(GeojsonUploadPutRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GeojsonUploadPutRequest._ENDPOINT, this.transportOptions);
@@ -169,9 +150,6 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
      * <li>When type is <code>geo_shape</code>, all geometry types are allowed (Point, MultiPoint, LineString, MultiLineString, Polygon,
      * MultiPolygon, GeometryCollection, Envelope).</li>
      * </ul>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GeojsonUploadPutRequest}
      */
@@ -184,24 +162,14 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
     // ----- Endpoint: geospatial.get_ip2geo_datasource
 
     /**
-     * <p>
      * Get one or more IP2Geo data sources, defaulting to returning all if no names specified.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public GetIp2geoDatasourceResponse getIp2geoDatasource(GetIp2geoDatasourceRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetIp2geoDatasourceRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Get one or more IP2Geo data sources, defaulting to returning all if no names specified.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetIp2geoDatasourceRequest}
      */
@@ -212,12 +180,7 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
     }
 
     /**
-     * <p>
      * Get one or more IP2Geo data sources, defaulting to returning all if no names specified.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public final GetIp2geoDatasourceResponse getIp2geoDatasource() throws IOException, OpenSearchException {
         return getIp2geoDatasource(new GetIp2geoDatasourceRequest.Builder().build());
@@ -226,24 +189,14 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
     // ----- Endpoint: geospatial.get_upload_stats
 
     /**
-     * <p>
      * Retrieves statistics for all geospatial uploads.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public GetUploadStatsResponse getUploadStats(GetUploadStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetUploadStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Retrieves statistics for all geospatial uploads.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetUploadStatsRequest}
      */
@@ -253,12 +206,7 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
     }
 
     /**
-     * <p>
      * Retrieves statistics for all geospatial uploads.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public final GetUploadStatsResponse getUploadStats() throws IOException, OpenSearchException {
         return getUploadStats(new GetUploadStatsRequest.Builder().build());
@@ -274,9 +222,6 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
      * <li><code>endpoint</code>: <code>&quot;https://geoip.maps.opensearch.org/v1/geolite2-city/manifest.json&quot;</code></li>
      * <li><code>update_interval_in_days</code>: 3.</li>
      * </ul>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public PutIp2geoDatasourceResponse putIp2geoDatasource(PutIp2geoDatasourceRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutIp2geoDatasourceRequest._ENDPOINT, this.transportOptions);
@@ -290,9 +235,6 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
      * <li><code>endpoint</code>: <code>&quot;https://geoip.maps.opensearch.org/v1/geolite2-city/manifest.json&quot;</code></li>
      * <li><code>update_interval_in_days</code>: 3.</li>
      * </ul>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutIp2geoDatasourceRequest}
      */
@@ -305,12 +247,7 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
     // ----- Endpoint: geospatial.put_ip2geo_datasource_settings
 
     /**
-     * <p>
      * Update a specific IP2Geo data source.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public PutIp2geoDatasourceSettingsResponse putIp2geoDatasourceSettings(PutIp2geoDatasourceSettingsRequest request) throws IOException,
         OpenSearchException {
@@ -318,12 +255,7 @@ public class OpenSearchGeospatialClient extends ApiClient<OpenSearchTransport, O
     }
 
     /**
-     * <p>
      * Update a specific IP2Geo data source.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutIp2geoDatasourceSettingsRequest}
      */

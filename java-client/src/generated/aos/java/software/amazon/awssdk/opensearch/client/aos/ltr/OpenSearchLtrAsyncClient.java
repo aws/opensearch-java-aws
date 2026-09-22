@@ -74,12 +74,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.add_features_to_set
 
     /**
-     * <p>
      * Add features to an existing feature set in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<AddFeaturesToSetResponse> addFeaturesToSet(AddFeaturesToSetRequest request) throws IOException,
         OpenSearchException {
@@ -87,12 +82,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Add features to an existing feature set in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link AddFeaturesToSetRequest}
      */
@@ -105,12 +95,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.add_features_to_set_by_query
 
     /**
-     * <p>
      * Add features to an existing feature set in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<AddFeaturesToSetByQueryResponse> addFeaturesToSetByQuery(AddFeaturesToSetByQueryRequest request)
         throws IOException, OpenSearchException {
@@ -118,12 +103,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Add features to an existing feature set in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link AddFeaturesToSetByQueryRequest}
      */
@@ -136,24 +116,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.cache_stats
 
     /**
-     * <p>
      * Retrieves cache statistics for all feature stores.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<CacheStatsResponse> cacheStats(CacheStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CacheStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Retrieves cache statistics for all feature stores.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CacheStatsRequest}
      */
@@ -163,12 +133,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Retrieves cache statistics for all feature stores.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public final CompletableFuture<CacheStatsResponse> cacheStats() throws IOException, OpenSearchException {
         return cacheStats(new CacheStatsRequest.Builder().build());
@@ -177,24 +142,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.clear_cache
 
     /**
-     * <p>
      * Clears the store caches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<ClearCacheResponse> clearCache(ClearCacheRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ClearCacheRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Clears the store caches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ClearCacheRequest}
      */
@@ -204,12 +159,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Clears the store caches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public final CompletableFuture<ClearCacheResponse> clearCache() throws IOException, OpenSearchException {
         return clearCache(new ClearCacheRequest.Builder().build());
@@ -218,12 +168,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.create_default_store
 
     /**
-     * <p>
      * Creates the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      */
     public CompletableFuture<CreateDefaultStoreResponse> createDefaultStore(CreateDefaultStoreRequest request) throws IOException,
         OpenSearchException {
@@ -231,12 +176,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Creates the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateDefaultStoreRequest}
      */
@@ -247,12 +187,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Creates the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      */
     public final CompletableFuture<CreateDefaultStoreResponse> createDefaultStore() throws IOException, OpenSearchException {
         return createDefaultStore(new CreateDefaultStoreRequest.Builder().build());
@@ -261,24 +196,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.create_feature
 
     /**
-     * <p>
      * Create or update a feature in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<CreateFeatureResponse> createFeature(CreateFeatureRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CreateFeatureRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Create or update a feature in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateFeatureRequest}
      */
@@ -291,12 +216,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.create_featureset
 
     /**
-     * <p>
      * Create or update a feature set in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<CreateFeaturesetResponse> createFeatureset(CreateFeaturesetRequest request) throws IOException,
         OpenSearchException {
@@ -304,12 +224,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Create or update a feature set in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateFeaturesetRequest}
      */
@@ -322,24 +237,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.create_model
 
     /**
-     * <p>
      * Create or update a model in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<CreateModelResponse> createModel(CreateModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CreateModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Create or update a model in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateModelRequest}
      */
@@ -352,12 +257,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.create_model_from_set
 
     /**
-     * <p>
      * Create a model from an existing feature set in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<CreateModelFromSetResponse> createModelFromSet(CreateModelFromSetRequest request) throws IOException,
         OpenSearchException {
@@ -365,12 +265,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Create a model from an existing feature set in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateModelFromSetRequest}
      */
@@ -383,24 +278,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.create_store
 
     /**
-     * <p>
      * Creates a new feature store with the specified name.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      */
     public CompletableFuture<CreateStoreResponse> createStore(CreateStoreRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CreateStoreRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates a new feature store with the specified name.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateStoreRequest}
      */
@@ -413,12 +298,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.delete_default_store
 
     /**
-     * <p>
      * Deletes the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      */
     public CompletableFuture<DeleteDefaultStoreResponse> deleteDefaultStore(DeleteDefaultStoreRequest request) throws IOException,
         OpenSearchException {
@@ -426,12 +306,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Deletes the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteDefaultStoreRequest}
      */
@@ -442,12 +317,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Deletes the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      */
     public final CompletableFuture<DeleteDefaultStoreResponse> deleteDefaultStore() throws IOException, OpenSearchException {
         return deleteDefaultStore(new DeleteDefaultStoreRequest.Builder().build());
@@ -456,24 +326,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.delete_feature
 
     /**
-     * <p>
      * Delete a feature from the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<DeleteFeatureResponse> deleteFeature(DeleteFeatureRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteFeatureRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Delete a feature from the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteFeatureRequest}
      */
@@ -486,12 +346,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.delete_featureset
 
     /**
-     * <p>
      * Delete a feature set from the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<DeleteFeaturesetResponse> deleteFeatureset(DeleteFeaturesetRequest request) throws IOException,
         OpenSearchException {
@@ -499,12 +354,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Delete a feature set from the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteFeaturesetRequest}
      */
@@ -517,24 +367,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.delete_model
 
     /**
-     * <p>
      * Delete a model from the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<DeleteModelResponse> deleteModel(DeleteModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Delete a model from the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteModelRequest}
      */
@@ -547,24 +387,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.delete_store
 
     /**
-     * <p>
      * Deletes a feature store with the specified name.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      */
     public CompletableFuture<DeleteStoreResponse> deleteStore(DeleteStoreRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteStoreRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a feature store with the specified name.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteStoreRequest}
      */
@@ -577,24 +407,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.get_feature
 
     /**
-     * <p>
      * Get a feature from the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<GetFeatureResponse> getFeature(GetFeatureRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetFeatureRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Get a feature from the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetFeatureRequest}
      */
@@ -606,24 +426,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.get_featureset
 
     /**
-     * <p>
      * Get a feature set from the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<GetFeaturesetResponse> getFeatureset(GetFeaturesetRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetFeaturesetRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Get a feature set from the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetFeaturesetRequest}
      */
@@ -636,24 +446,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.get_model
 
     /**
-     * <p>
      * Get a model from the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<GetModelResponse> getModel(GetModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Get a model from the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetModelRequest}
      */
@@ -665,24 +465,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.get_store
 
     /**
-     * <p>
      * Checks if a store exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      */
     public CompletableFuture<GetStoreResponse> getStore(GetStoreRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetStoreRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Checks if a store exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetStoreRequest}
      */
@@ -694,24 +484,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.list_stores
 
     /**
-     * <p>
      * Lists all available feature stores.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      */
     public CompletableFuture<ListStoresResponse> listStores(ListStoresRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ListStoresRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Lists all available feature stores.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ListStoresRequest}
      */
@@ -721,12 +501,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Lists all available feature stores.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.17.1</code>
-     * </p>
      */
     public final CompletableFuture<ListStoresResponse> listStores() throws IOException, OpenSearchException {
         return listStores(new ListStoresRequest.Builder().build());
@@ -735,24 +510,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.search_features
 
     /**
-     * <p>
      * Search for features in a feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<SearchFeaturesResponse> searchFeatures(SearchFeaturesRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, SearchFeaturesRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Search for features in a feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SearchFeaturesRequest}
      */
@@ -763,12 +528,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Search for features in a feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public final CompletableFuture<SearchFeaturesResponse> searchFeatures() throws IOException, OpenSearchException {
         return searchFeatures(new SearchFeaturesRequest.Builder().build());
@@ -777,12 +537,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.search_featuresets
 
     /**
-     * <p>
      * Search for feature sets in a feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<SearchFeaturesetsResponse> searchFeaturesets(SearchFeaturesetsRequest request) throws IOException,
         OpenSearchException {
@@ -790,12 +545,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Search for feature sets in a feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SearchFeaturesetsRequest}
      */
@@ -806,12 +556,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Search for feature sets in a feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public final CompletableFuture<SearchFeaturesetsResponse> searchFeaturesets() throws IOException, OpenSearchException {
         return searchFeaturesets(new SearchFeaturesetsRequest.Builder().build());
@@ -820,24 +565,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.search_models
 
     /**
-     * <p>
      * Search for models in a feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<SearchModelsResponse> searchModels(SearchModelsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, SearchModelsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Search for models in a feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SearchModelsRequest}
      */
@@ -848,12 +583,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Search for models in a feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public final CompletableFuture<SearchModelsResponse> searchModels() throws IOException, OpenSearchException {
         return searchModels(new SearchModelsRequest.Builder().build());
@@ -862,24 +592,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.stats
 
     /**
-     * <p>
      * Provides information about the current status of the LTR plugin.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<LtrStatsResponse> stats(LtrStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, LtrStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Provides information about the current status of the LTR plugin.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link LtrStatsRequest}
      */
@@ -889,12 +609,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Provides information about the current status of the LTR plugin.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public final CompletableFuture<LtrStatsResponse> stats() throws IOException, OpenSearchException {
         return stats(new LtrStatsRequest.Builder().build());
@@ -903,24 +618,14 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.update_feature
 
     /**
-     * <p>
      * Update a feature in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<UpdateFeatureResponse> updateFeature(UpdateFeatureRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, UpdateFeatureRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Update a feature in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateFeatureRequest}
      */
@@ -933,12 +638,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: ltr.update_featureset
 
     /**
-     * <p>
      * Update a feature set in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      */
     public CompletableFuture<UpdateFeaturesetResponse> updateFeatureset(UpdateFeaturesetRequest request) throws IOException,
         OpenSearchException {
@@ -946,12 +646,7 @@ public class OpenSearchLtrAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Update a feature set in the default feature store.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.19</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateFeaturesetRequest}
      */

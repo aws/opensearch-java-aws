@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.config_upgrade_check.Request
 
 /**
- * <p>
  * Checks whether or not an upgrade can be performed and which security resources can be updated.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.14</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ConfigUpgradeCheckRequest extends RequestBase

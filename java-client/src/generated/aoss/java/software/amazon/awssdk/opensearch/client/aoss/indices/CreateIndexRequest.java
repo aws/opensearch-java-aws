@@ -92,6 +92,10 @@ public final class CreateIndexRequest extends RequestBase
     @Nullable
     private final TypeMapping mappings;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final IndexSettings settings;
 
@@ -109,6 +113,7 @@ public final class CreateIndexRequest extends RequestBase
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.index = ApiTypeHelper.requireNonNull(builder.index, this, "index");
         this.mappings = builder.mappings;
+        this.masterTimeout = builder.masterTimeout;
         this.settings = builder.settings;
         this.timeout = builder.timeout;
         this.waitForActiveShards = builder.waitForActiveShards;
@@ -157,6 +162,19 @@ public final class CreateIndexRequest extends RequestBase
     @Nullable
     public final TypeMapping mappings() {
         return this.mappings;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -247,6 +265,8 @@ public final class CreateIndexRequest extends RequestBase
         @Nullable
         private TypeMapping mappings;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private IndexSettings settings;
         @Nullable
         private Time timeout;
@@ -261,6 +281,7 @@ public final class CreateIndexRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.index = o.index;
             this.mappings = o.mappings;
+            this.masterTimeout = o.masterTimeout;
             this.settings = o.settings;
             this.timeout = o.timeout;
             this.waitForActiveShards = o.waitForActiveShards;
@@ -272,6 +293,7 @@ public final class CreateIndexRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.index = o.index;
             this.mappings = o.mappings;
+            this.masterTimeout = o.masterTimeout;
             this.settings = o.settings;
             this.timeout = o.timeout;
             this.waitForActiveShards = o.waitForActiveShards;
@@ -389,6 +411,33 @@ public final class CreateIndexRequest extends RequestBase
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * API name: {@code settings}
          */
         @Nonnull
@@ -491,6 +540,9 @@ public final class CreateIndexRequest extends RequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -530,6 +582,7 @@ public final class CreateIndexRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + this.index.hashCode();
         result = 31 * result + Objects.hashCode(this.mappings);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.settings);
         result = 31 * result + Objects.hashCode(this.timeout);
         result = 31 * result + Objects.hashCode(this.waitForActiveShards);
@@ -545,6 +598,7 @@ public final class CreateIndexRequest extends RequestBase
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && this.index.equals(other.index)
             && Objects.equals(this.mappings, other.mappings)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.settings, other.settings)
             && Objects.equals(this.timeout, other.timeout)
             && Objects.equals(this.waitForActiveShards, other.waitForActiveShards);

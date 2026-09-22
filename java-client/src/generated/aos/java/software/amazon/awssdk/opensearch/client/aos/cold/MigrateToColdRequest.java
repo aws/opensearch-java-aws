@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cold.migrate_to_cold.Request
 
 /**
- * <p>
  * AOS only. Migrates an index from warm storage to cold storage.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class MigrateToColdRequest extends RequestBase

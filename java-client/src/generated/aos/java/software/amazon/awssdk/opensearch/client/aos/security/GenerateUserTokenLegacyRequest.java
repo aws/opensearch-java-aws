@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.generate_user_token_legacy.Request
 
 /**
- * <p>
  * Generates authorization token for the given user. Legacy API. Not Implemented.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.7</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GenerateUserTokenLegacyRequest extends RequestBase

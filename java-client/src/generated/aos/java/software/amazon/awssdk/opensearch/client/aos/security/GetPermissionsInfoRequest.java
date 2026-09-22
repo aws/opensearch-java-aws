@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.get_permissions_info.Request
 
 /**
- * <p>
  * Retrieves the evaluated REST API permissions for the currently logged in user.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetPermissionsInfoRequest extends RequestBase

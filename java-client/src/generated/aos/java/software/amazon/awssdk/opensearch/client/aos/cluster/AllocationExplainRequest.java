@@ -67,13 +67,8 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.allocation_explain.Request
 
 /**
- * <p>
  * Explains how shards are allocated in the current cluster and provides an explanation for why unassigned shards can't be allocated to a
  * node.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
