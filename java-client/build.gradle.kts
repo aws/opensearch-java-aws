@@ -144,11 +144,11 @@ sourceSets.test {
 }
 
 tasks.named("compileAosJava") {
-    dependsOn("compileAwsRuntimeJava", ":java-codegen:generateAosClient")
+    dependsOn("compileAwsRuntimeJava")
 }
 
 tasks.named("compileAossJava") {
-    dependsOn("compileAwsRuntimeJava", ":java-codegen:generateAossClient")
+    dependsOn("compileAwsRuntimeJava")
 }
 
 tasks.named("compileTestJava") {
@@ -162,21 +162,12 @@ tasks.named<Jar>("jar") {
 }
 
 tasks.named<Jar>("sourcesJar") {
-    dependsOn(":java-codegen:generateAosClient", ":java-codegen:generateAossClient")
     exclude("org/opensearch/client/**")
     from(awsRuntimeSourceSet.allSource, aosSourceSet.allSource, aossSourceSet.allSource)
 }
 
-tasks.named("spotlessJava") {
-    dependsOn(":java-codegen:generateAosClient", ":java-codegen:generateAossClient")
-}
-
 tasks.named<Javadoc>("javadoc") {
-    dependsOn(
-        "compileAwsRuntimeJava",
-        ":java-codegen:generateAosClient",
-        ":java-codegen:generateAossClient"
-    )
+    dependsOn("compileAwsRuntimeJava")
     setSource(files(awsRuntimeSourceSet.allJava, aosSourceSet.allJava, aossSourceSet.allJava))
     classpath = files(
         awsRuntimeSourceSet.compileClasspath,
