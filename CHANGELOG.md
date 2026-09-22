@@ -30,4 +30,5 @@ Serverless (AOSS).
 - Pointed the inherited open-source metadata (CODEOWNERS, MAINTAINERS, ADMINS, NOTICE, SECURITY) at the `aws/amazon-opensearch-clients` owning team and AWS vulnerability reporting.
 
 ### Security
+- Restricted default GitHub Actions token permissions to read-only for build and maintenance workflows.
 - Added a `git-secrets` CI workflow and documented the local pre-commit hook to prevent committing secrets.
