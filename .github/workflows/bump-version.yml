@@ -11,9 +11,6 @@ on:
         description: 'Version to bump to'
         required: true
 
-permissions:
-  contents: read
-
 jobs:
   bump-version-manual:
     name: Bump Version (Manual)

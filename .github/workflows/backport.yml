@@ -4,9 +4,6 @@ on:
   pull_request_target:
     types: [closed, labeled]
 
-permissions:
-  contents: read
-
 jobs:
   backport:
     if: github.repository == 'opensearch-project/opensearch-java'

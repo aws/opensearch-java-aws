@@ -3,9 +3,6 @@ name: Validate AWS Generated Sources
 on:
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
   validate:
     runs-on: ubuntu-latest
