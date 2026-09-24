@@ -19,7 +19,7 @@ Serverless (AOSS).
 - Moved the code generator to `software.amazon.awssdk.opensearch.client.codegen`, so the emitted `@Generated(...)` marker references a class that exists in this fork.
 - Removed the unsupported `refresh` parameter from AOSS multi-get requests.
 - Consolidated the handwritten sources into the standard `src/main/java` layout (from `src/java`) and moved `version.properties` to its package resource path, updating the `awsRuntime`/`aos`/`aoss` source sets to match.
-- Published the client under the Maven coordinate `software.amazon.awssdk:opensearch-java` (from the inherited `org.opensearch.client:opensearch-java`), removing the coordinate collision with the upstream community client, and set the build version to `0.1.0` to match the `[Unreleased 0.1.0]` release line.
+- Published the client under the Maven coordinate `software.amazon.opensearch:opensearch-java` (changing only the groupId from the inherited `org.opensearch.client:opensearch-java`), and set the build version to `0.1.0` to match the `[Unreleased 0.1.0]` release line.
 
 ### Deprecated
 

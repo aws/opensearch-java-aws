@@ -25,7 +25,7 @@ To start using the OpenSearch Java client, you need to provide a transport. The 
 
 ```
 <dependency>
-  <groupId>software.amazon.awssdk</groupId>
+  <groupId>software.amazon.opensearch</groupId>
   <artifactId>opensearch-java</artifactId>
   <version>0.1.0</version>
 </dependency>
@@ -35,7 +35,7 @@ If you’re using Gradle, add the following dependencies to your project:
 
 ```
 dependencies {
-  implementation 'software.amazon.awssdk:opensearch-java:0.1.0'
+  implementation 'software.amazon.opensearch:opensearch-java:0.1.0'
 }
 ```
 

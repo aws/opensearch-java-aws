@@ -31,7 +31,7 @@
  */
 
 allprojects {
-    group = "software.amazon.awssdk"
+    group = "software.amazon.opensearch"
 
     // Release manager provides a $VERSION. If not present, it's a local or CI snapshot build.
     version = System.getenv("VERSION") ?: System.getProperty("version") + "-SNAPSHOT"
