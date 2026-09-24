@@ -51,6 +51,7 @@ plugins {
     java
     `java-library`
     `maven-publish`
+    signing
     id("com.github.jk1.dependency-license-report") version "3.1.4"
     id("org.owasp.dependencycheck") version "13.0.0"
 
@@ -398,6 +399,14 @@ publishing {
                     sessionToken = System.getenv("AWS_SESSION_TOKEN")
                 }
             }
+        } else {
+            maven("https://aws.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                name = "SonatypeStaging"
+                credentials {
+                    username = (findProperty("mavenUsername") as String?) ?: ""
+                    password = (findProperty("mavenPassword") as String?) ?: ""
+                }
+            }
         }
         maven(rootProject.layout.buildDirectory.dir("repository")) {
             name = "localRepo"
@@ -439,4 +448,17 @@ publishing {
 tasks.withType<Test>().configureEach {
     dependsOn("awsRuntimeClasses", "aosClasses", "aossClasses")
     classpath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
+}
+
+signing {
+    val signingKey = findProperty("signingKey") as String?
+    val signingPassword = findProperty("signingPassword") as String?
+    val hasKeyring = findProperty("signing.keyId") != null
+    isRequired = signingKey != null || hasKeyring
+    if (signingKey != null) {
+        useInMemoryPgpKeys(signingKey, signingPassword)
+    }
+    if (isRequired) {
+        sign(publishing.publications["publishMaven"])
+    }
 }
