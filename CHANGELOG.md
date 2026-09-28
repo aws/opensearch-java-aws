@@ -13,6 +13,7 @@ Serverless (AOSS).
 - `Build Distributions` CI workflow that compiles the AOS and AOSS clients and runs their unit tests across JDK 21 and 25.
 
 ### Dependencies
+- Pinned the `opensearch-build/backport-pr.yml` reusable workflow to a commit SHA instead of `@main` ([#17](https://github.com/aws/opensearch-java-aws/pull/17)).
 
 ### Changed
 - Set the `java-client` compile target to Java 8 to match upstream opensearch-java, so the published client runs on any JVM >= 8 while building with JDK 21 or newer.
