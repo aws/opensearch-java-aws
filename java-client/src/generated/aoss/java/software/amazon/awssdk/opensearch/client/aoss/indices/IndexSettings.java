@@ -123,6 +123,9 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
     private final Map<String, JsonData> customSettings;
 
     @Nullable
+    private final Time dataRetention;
+
+    @Nullable
     private final String defaultPipeline;
 
     @Nullable
@@ -273,6 +276,9 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
     private final IndexSettingsStore store;
 
     @Nullable
+    private final String timestampField;
+
+    @Nullable
     private final Integer topMetricsMaxSize;
 
     @Nullable
@@ -293,6 +299,9 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
     @Nullable
     private final IndexVersioning version;
 
+    @Nullable
+    private final Time warmAfter;
+
     // ---------------------------------------------------------------------------------------------
 
     private IndexSettings(Builder builder) {
@@ -312,6 +321,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         this.creationDate = builder.creationDate;
         this.creationDateString = builder.creationDateString;
         this.customSettings = ApiTypeHelper.unmodifiable(builder.customSettings);
+        this.dataRetention = builder.dataRetention;
         this.defaultPipeline = builder.defaultPipeline;
         this.finalPipeline = builder.finalPipeline;
         this.format = builder.format;
@@ -362,6 +372,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         this.softDeletesRetentionLeasePeriod = builder.softDeletesRetentionLeasePeriod;
         this.sort = builder.sort;
         this.store = builder.store;
+        this.timestampField = builder.timestampField;
         this.topMetricsMaxSize = builder.topMetricsMaxSize;
         this.translog = builder.translog;
         this.translogDurability = builder.translogDurability;
@@ -369,6 +380,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         this.uuid = builder.uuid;
         this.verifiedBeforeClose = builder.verifiedBeforeClose;
         this.version = builder.version;
+        this.warmAfter = builder.warmAfter;
     }
 
     public static IndexSettings of(Function<IndexSettings.Builder, ObjectBuilder<IndexSettings>> fn) {
@@ -504,6 +516,17 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
     @Nonnull
     public final Map<String, JsonData> customSettings() {
         return this.customSettings;
+    }
+
+    /**
+     * Data-retention period for a V2 index (duration, e.g. <code>7d</code>).
+     * <p>
+     * API name: {@code data.retention}
+     * </p>
+     */
+    @Nullable
+    public final Time dataRetention() {
+        return this.dataRetention;
     }
 
     /**
@@ -910,6 +933,17 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
     }
 
     /**
+     * Document field holding the event timestamp that drives time-based lifecycle.
+     * <p>
+     * API name: {@code timestamp_field}
+     * </p>
+     */
+    @Nullable
+    public final String timestampField() {
+        return this.timestampField;
+    }
+
+    /**
      * API name: {@code top_metrics_max_size}
      */
     @Nullable
@@ -963,6 +997,17 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
     @Nullable
     public final IndexVersioning version() {
         return this.version;
+    }
+
+    /**
+     * Age after which an index migrates hot -&gt; warm (duration, e.g. <code>30d</code>).
+     * <p>
+     * API name: {@code warm.after}
+     * </p>
+     */
+    @Nullable
+    public final Time warmAfter() {
+        return this.warmAfter;
     }
 
     /**
@@ -1053,6 +1098,11 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         if (this.creationDateString != null) {
             generator.writeKey("creation_date_string");
             generator.write(this.creationDateString);
+        }
+
+        if (this.dataRetention != null) {
+            generator.writeKey("data.retention");
+            this.dataRetention.serialize(generator, mapper);
         }
 
         if (this.defaultPipeline != null) {
@@ -1309,6 +1359,11 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
             this.store.serialize(generator, mapper);
         }
 
+        if (this.timestampField != null) {
+            generator.writeKey("timestamp_field");
+            generator.write(this.timestampField);
+        }
+
         if (this.topMetricsMaxSize != null) {
             generator.writeKey("top_metrics_max_size");
             generator.write(this.topMetricsMaxSize);
@@ -1342,6 +1397,11 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         if (this.version != null) {
             generator.writeKey("version");
             this.version.serialize(generator, mapper);
+        }
+
+        if (this.warmAfter != null) {
+            generator.writeKey("warm.after");
+            this.warmAfter.serialize(generator, mapper);
         }
     }
 
@@ -1394,6 +1454,8 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         private String creationDateString;
         @Nullable
         private Map<String, JsonData> customSettings;
+        @Nullable
+        private Time dataRetention;
         @Nullable
         private String defaultPipeline;
         @Nullable
@@ -1495,6 +1557,8 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         @Nullable
         private IndexSettingsStore store;
         @Nullable
+        private String timestampField;
+        @Nullable
         private Integer topMetricsMaxSize;
         @Nullable
         private Translog translog;
@@ -1508,6 +1572,8 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         private Boolean verifiedBeforeClose;
         @Nullable
         private IndexVersioning version;
+        @Nullable
+        private Time warmAfter;
 
         public Builder() {}
 
@@ -1528,6 +1594,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
             this.creationDate = o.creationDate;
             this.creationDateString = o.creationDateString;
             this.customSettings = _mapCopy(o.customSettings);
+            this.dataRetention = o.dataRetention;
             this.defaultPipeline = o.defaultPipeline;
             this.finalPipeline = o.finalPipeline;
             this.format = o.format;
@@ -1578,6 +1645,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
             this.softDeletesRetentionLeasePeriod = o.softDeletesRetentionLeasePeriod;
             this.sort = o.sort;
             this.store = o.store;
+            this.timestampField = o.timestampField;
             this.topMetricsMaxSize = o.topMetricsMaxSize;
             this.translog = o.translog;
             this.translogDurability = o.translogDurability;
@@ -1585,6 +1653,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
             this.uuid = o.uuid;
             this.verifiedBeforeClose = o.verifiedBeforeClose;
             this.version = o.version;
+            this.warmAfter = o.warmAfter;
         }
 
         private Builder(Builder o) {
@@ -1604,6 +1673,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
             this.creationDate = o.creationDate;
             this.creationDateString = o.creationDateString;
             this.customSettings = _mapCopy(o.customSettings);
+            this.dataRetention = o.dataRetention;
             this.defaultPipeline = o.defaultPipeline;
             this.finalPipeline = o.finalPipeline;
             this.format = o.format;
@@ -1654,6 +1724,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
             this.softDeletesRetentionLeasePeriod = o.softDeletesRetentionLeasePeriod;
             this.sort = o.sort;
             this.store = o.store;
+            this.timestampField = o.timestampField;
             this.topMetricsMaxSize = o.topMetricsMaxSize;
             this.translog = o.translog;
             this.translogDurability = o.translogDurability;
@@ -1661,6 +1732,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
             this.uuid = o.uuid;
             this.verifiedBeforeClose = o.verifiedBeforeClose;
             this.version = o.version;
+            this.warmAfter = o.warmAfter;
         }
 
         @Override
@@ -1864,6 +1936,29 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         public final Builder customSettings(String key, JsonData value) {
             this.customSettings = _mapPut(this.customSettings, key, value);
             return this;
+        }
+
+        /**
+         * Data-retention period for a V2 index (duration, e.g. <code>7d</code>).
+         * <p>
+         * API name: {@code data.retention}
+         * </p>
+         */
+        @Nonnull
+        public final Builder dataRetention(@Nullable Time value) {
+            this.dataRetention = value;
+            return this;
+        }
+
+        /**
+         * Data-retention period for a V2 index (duration, e.g. <code>7d</code>).
+         * <p>
+         * API name: {@code data.retention}
+         * </p>
+         */
+        @Nonnull
+        public final Builder dataRetention(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return dataRetention(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -2505,6 +2600,18 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         }
 
         /**
+         * Document field holding the event timestamp that drives time-based lifecycle.
+         * <p>
+         * API name: {@code timestamp_field}
+         * </p>
+         */
+        @Nonnull
+        public final Builder timestampField(@Nullable String value) {
+            this.timestampField = value;
+            return this;
+        }
+
+        /**
          * API name: {@code top_metrics_max_size}
          */
         @Nonnull
@@ -2584,6 +2691,29 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         }
 
         /**
+         * Age after which an index migrates hot -&gt; warm (duration, e.g. <code>30d</code>).
+         * <p>
+         * API name: {@code warm.after}
+         * </p>
+         */
+        @Nonnull
+        public final Builder warmAfter(@Nullable Time value) {
+            this.warmAfter = value;
+            return this;
+        }
+
+        /**
+         * Age after which an index migrates hot -&gt; warm (duration, e.g. <code>30d</code>).
+         * <p>
+         * API name: {@code warm.after}
+         * </p>
+         */
+        @Nonnull
+        public final Builder warmAfter(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return warmAfter(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Builds a {@link IndexSettings}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -2638,6 +2768,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         );
         op.add(Builder::creationDate, JsonpDeserializer.longDeserializer(), "creation_date", "index.creation_date");
         op.add(Builder::creationDateString, JsonpDeserializer.stringDeserializer(), "creation_date_string", "index.creation_date_string");
+        op.add(Builder::dataRetention, Time._DESERIALIZER, "data.retention", "index.data.retention");
         op.add(Builder::defaultPipeline, JsonpDeserializer.stringDeserializer(), "default_pipeline", "index.default_pipeline");
         op.add(Builder::finalPipeline, JsonpDeserializer.stringDeserializer(), "final_pipeline", "index.final_pipeline");
         op.add(Builder::format, JsonpDeserializer.integerDeserializer(), "format", "index.format");
@@ -2748,6 +2879,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         );
         op.add(Builder::sort, IndexSegmentSort._DESERIALIZER, "sort", "index.sort");
         op.add(Builder::store, IndexSettingsStore._DESERIALIZER, "store", "index.store");
+        op.add(Builder::timestampField, JsonpDeserializer.stringDeserializer(), "timestamp_field", "index.timestamp_field");
         op.add(Builder::topMetricsMaxSize, JsonpDeserializer.integerDeserializer(), "top_metrics_max_size");
         op.add(Builder::translog, Translog._DESERIALIZER, "translog", "index.translog");
         op.add(Builder::translogDurability, TranslogDurability._DESERIALIZER, "translog.durability", "index.translog.durability");
@@ -2765,6 +2897,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
             "index.verified_before_close"
         );
         op.add(Builder::version, IndexVersioning._DESERIALIZER, "version", "index.version");
+        op.add(Builder::warmAfter, Time._DESERIALIZER, "warm.after", "index.warm.after");
         op.setUnknownFieldHandler((builder, name, parser, mapper) -> {
             if (builder.customSettings == null) {
                 builder.customSettings = new HashMap<>();
@@ -2792,6 +2925,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         result = 31 * result + Objects.hashCode(this.creationDate);
         result = 31 * result + Objects.hashCode(this.creationDateString);
         result = 31 * result + Objects.hashCode(this.customSettings);
+        result = 31 * result + Objects.hashCode(this.dataRetention);
         result = 31 * result + Objects.hashCode(this.defaultPipeline);
         result = 31 * result + Objects.hashCode(this.finalPipeline);
         result = 31 * result + Objects.hashCode(this.format);
@@ -2842,6 +2976,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         result = 31 * result + Objects.hashCode(this.softDeletesRetentionLeasePeriod);
         result = 31 * result + Objects.hashCode(this.sort);
         result = 31 * result + Objects.hashCode(this.store);
+        result = 31 * result + Objects.hashCode(this.timestampField);
         result = 31 * result + Objects.hashCode(this.topMetricsMaxSize);
         result = 31 * result + Objects.hashCode(this.translog);
         result = 31 * result + Objects.hashCode(this.translogDurability);
@@ -2849,6 +2984,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
         result = 31 * result + Objects.hashCode(this.uuid);
         result = 31 * result + Objects.hashCode(this.verifiedBeforeClose);
         result = 31 * result + Objects.hashCode(this.version);
+        result = 31 * result + Objects.hashCode(this.warmAfter);
         return result;
     }
 
@@ -2873,6 +3009,7 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
             && Objects.equals(this.creationDate, other.creationDate)
             && Objects.equals(this.creationDateString, other.creationDateString)
             && Objects.equals(this.customSettings, other.customSettings)
+            && Objects.equals(this.dataRetention, other.dataRetention)
             && Objects.equals(this.defaultPipeline, other.defaultPipeline)
             && Objects.equals(this.finalPipeline, other.finalPipeline)
             && Objects.equals(this.format, other.format)
@@ -2923,12 +3060,14 @@ public class IndexSettings implements PlainJsonSerializable, ToCopyableBuilder<I
             && Objects.equals(this.softDeletesRetentionLeasePeriod, other.softDeletesRetentionLeasePeriod)
             && Objects.equals(this.sort, other.sort)
             && Objects.equals(this.store, other.store)
+            && Objects.equals(this.timestampField, other.timestampField)
             && Objects.equals(this.topMetricsMaxSize, other.topMetricsMaxSize)
             && Objects.equals(this.translog, other.translog)
             && Objects.equals(this.translogDurability, other.translogDurability)
             && Objects.equals(this.translogFlushThresholdSize, other.translogFlushThresholdSize)
             && Objects.equals(this.uuid, other.uuid)
             && Objects.equals(this.verifiedBeforeClose, other.verifiedBeforeClose)
-            && Objects.equals(this.version, other.version);
+            && Objects.equals(this.version, other.version)
+            && Objects.equals(this.warmAfter, other.warmAfter);
     }
 }

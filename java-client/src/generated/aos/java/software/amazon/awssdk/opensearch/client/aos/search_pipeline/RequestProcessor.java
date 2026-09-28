@@ -72,6 +72,7 @@ public class RequestProcessor implements TaggedUnion<RequestProcessor.Kind, Requ
     public enum Kind implements JsonEnum {
         AgenticQueryTranslator("agentic_query_translator"),
         FilterQuery("filter_query"),
+        MlInference("ml_inference"),
         NeuralQueryEnricher("neural_query_enricher"),
         Oversample("oversample"),
         Script("script");
@@ -148,6 +149,22 @@ public class RequestProcessor implements TaggedUnion<RequestProcessor.Kind, Requ
     }
 
     /**
+     * Is this variant instance of kind {@code ml_inference}?
+     */
+    public boolean isMlInference() {
+        return _kind == Kind.MlInference;
+    }
+
+    /**
+     * Get the {@code ml_inference} variant value.
+     *
+     * @throws IllegalStateException if the current variant is not the {@code ml_inference} kind.
+     */
+    public MLInferenceRequestProcessor mlInference() {
+        return TaggedUnionUtils.get(this, Kind.MlInference);
+    }
+
+    /**
      * Is this variant instance of kind {@code neural_query_enricher}?
      */
     public boolean isNeuralQueryEnricher() {
@@ -209,6 +226,9 @@ public class RequestProcessor implements TaggedUnion<RequestProcessor.Kind, Requ
                 case FilterQuery:
                     ((FilterQueryRequestProcessor) this._value).serialize(generator, mapper);
                     break;
+                case MlInference:
+                    ((MLInferenceRequestProcessor) this._value).serialize(generator, mapper);
+                    break;
                 case NeuralQueryEnricher:
                     ((NeuralQueryEnricherRequestProcessor) this._value).serialize(generator, mapper);
                     break;
@@ -268,6 +288,18 @@ public class RequestProcessor implements TaggedUnion<RequestProcessor.Kind, Requ
             return this.filterQuery(fn.apply(new FilterQueryRequestProcessor.Builder()).build());
         }
 
+        public ObjectBuilder<RequestProcessor> mlInference(MLInferenceRequestProcessor v) {
+            this._kind = Kind.MlInference;
+            this._value = v;
+            return this;
+        }
+
+        public ObjectBuilder<RequestProcessor> mlInference(
+            Function<MLInferenceRequestProcessor.Builder, ObjectBuilder<MLInferenceRequestProcessor>> fn
+        ) {
+            return this.mlInference(fn.apply(new MLInferenceRequestProcessor.Builder()).build());
+        }
+
         public ObjectBuilder<RequestProcessor> neuralQueryEnricher(NeuralQueryEnricherRequestProcessor v) {
             this._kind = Kind.NeuralQueryEnricher;
             this._value = v;
@@ -314,6 +346,7 @@ public class RequestProcessor implements TaggedUnion<RequestProcessor.Kind, Requ
     protected static void setupRequestProcessorDeserializer(ObjectDeserializer<Builder> op) {
         op.add(Builder::agenticQueryTranslator, AgenticQueryTranslatorRequestProcessor._DESERIALIZER, "agentic_query_translator");
         op.add(Builder::filterQuery, FilterQueryRequestProcessor._DESERIALIZER, "filter_query");
+        op.add(Builder::mlInference, MLInferenceRequestProcessor._DESERIALIZER, "ml_inference");
         op.add(Builder::neuralQueryEnricher, NeuralQueryEnricherRequestProcessor._DESERIALIZER, "neural_query_enricher");
         op.add(Builder::oversample, OversampleRequestProcessor._DESERIALIZER, "oversample");
         op.add(Builder::script, SearchScriptRequestProcessor._DESERIALIZER, "script");

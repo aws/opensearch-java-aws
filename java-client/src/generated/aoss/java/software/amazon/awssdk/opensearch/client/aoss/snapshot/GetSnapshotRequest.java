@@ -155,7 +155,8 @@ public final class GetSnapshotRequest extends RequestBase
     }
 
     /**
-     * Required - A comma-separated list of snapshot repository names used to limit the request. Wildcard (*) expressions are supported.
+     * Required - On AOSS the snapshot repository is fixed: use <code>aoss-automated</code>. Custom repositories and wildcards are not
+     * supported.
      * <p>
      * API name: {@code repository}
      * </p>
@@ -184,9 +185,7 @@ public final class GetSnapshotRequest extends RequestBase
     }
 
     /**
-     * AOSS-only. The ID of the source collection whose snapshot repository to query. When set, the API lists snapshots from the source
-     * collection's S3 repository path instead of the target collection's path. Used for CCR preflight validation. Requires the CCR feature
-     * flag to be enabled for the account.
+     * Source collection whose snapshot repository to list; requires the CCR feature flag.
      * <p>
      * API name: {@code sourceCollectionId}
      * </p>
@@ -358,7 +357,8 @@ public final class GetSnapshotRequest extends RequestBase
         }
 
         /**
-         * Required - A comma-separated list of snapshot repository names used to limit the request. Wildcard (*) expressions are supported.
+         * Required - On AOSS the snapshot repository is fixed: use <code>aoss-automated</code>. Custom repositories and wildcards are not
+         * supported.
          * <p>
          * API name: {@code repository}
          * </p>
@@ -416,9 +416,7 @@ public final class GetSnapshotRequest extends RequestBase
         }
 
         /**
-         * AOSS-only. The ID of the source collection whose snapshot repository to query. When set, the API lists snapshots from the source
-         * collection's S3 repository path instead of the target collection's path. Used for CCR preflight validation. Requires the CCR
-         * feature flag to be enabled for the account.
+         * Source collection whose snapshot repository to list; requires the CCR feature flag.
          * <p>
          * API name: {@code sourceCollectionId}
          * </p>

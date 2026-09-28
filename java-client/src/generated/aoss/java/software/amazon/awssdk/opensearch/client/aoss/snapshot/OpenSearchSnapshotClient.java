@@ -70,44 +70,6 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
         return new OpenSearchSnapshotClient(this.transport, transportOptions);
     }
 
-    // ----- Endpoint: snapshot.create
-
-    /**
-     * Creates a snapshot within an existing repository.
-     */
-    public CreateSnapshotResponse create(CreateSnapshotRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, CreateSnapshotRequest._ENDPOINT, this.transportOptions);
-    }
-
-    /**
-     * Creates a snapshot within an existing repository.
-     *
-     * @param fn a function that initializes a builder to create the {@link CreateSnapshotRequest}
-     */
-    public final CreateSnapshotResponse create(Function<CreateSnapshotRequest.Builder, ObjectBuilder<CreateSnapshotRequest>> fn)
-        throws IOException, OpenSearchException {
-        return create(fn.apply(new CreateSnapshotRequest.Builder()).build());
-    }
-
-    // ----- Endpoint: snapshot.delete
-
-    /**
-     * Deletes a snapshot.
-     */
-    public DeleteSnapshotResponse delete(DeleteSnapshotRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, DeleteSnapshotRequest._ENDPOINT, this.transportOptions);
-    }
-
-    /**
-     * Deletes a snapshot.
-     *
-     * @param fn a function that initializes a builder to create the {@link DeleteSnapshotRequest}
-     */
-    public final DeleteSnapshotResponse delete(Function<DeleteSnapshotRequest.Builder, ObjectBuilder<DeleteSnapshotRequest>> fn)
-        throws IOException, OpenSearchException {
-        return delete(fn.apply(new DeleteSnapshotRequest.Builder()).build());
-    }
-
     // ----- Endpoint: snapshot.get
 
     /**

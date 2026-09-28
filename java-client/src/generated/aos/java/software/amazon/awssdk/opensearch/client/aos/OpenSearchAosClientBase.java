@@ -49,7 +49,6 @@ import javax.annotation.Nullable;
 import software.amazon.awssdk.opensearch.client.ApiClient;
 import software.amazon.awssdk.opensearch.client.aos.cat.OpenSearchCatClient;
 import software.amazon.awssdk.opensearch.client.aos.cluster.OpenSearchClusterClient;
-import software.amazon.awssdk.opensearch.client.aos.cold.OpenSearchColdClient;
 import software.amazon.awssdk.opensearch.client.aos.core.ClearScrollRequest;
 import software.amazon.awssdk.opensearch.client.aos.core.ClearScrollResponse;
 import software.amazon.awssdk.opensearch.client.aos.core.CountRequest;
@@ -125,7 +124,6 @@ import software.amazon.awssdk.opensearch.client.aos.search_relevance.OpenSearchS
 import software.amazon.awssdk.opensearch.client.aos.security.OpenSearchSecurityClient;
 import software.amazon.awssdk.opensearch.client.aos.snapshot.OpenSearchSnapshotClient;
 import software.amazon.awssdk.opensearch.client.aos.tasks.OpenSearchTasksClient;
-import software.amazon.awssdk.opensearch.client.aos.ubi.OpenSearchUbiClient;
 import software.amazon.awssdk.opensearch.client.aos.ultrawarm.OpenSearchUltrawarmClient;
 import software.amazon.awssdk.opensearch.client.errors.ErrorResponse;
 import software.amazon.awssdk.opensearch.client.errors.OpenSearchException;
@@ -153,10 +151,6 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
 
     public OpenSearchClusterClient cluster() {
         return new OpenSearchClusterClient(this.transport, this.transportOptions);
-    }
-
-    public OpenSearchColdClient cold() {
-        return new OpenSearchColdClient(this.transport, this.transportOptions);
     }
 
     public OpenSearchGeospatialClient geospatial() {
@@ -213,10 +207,6 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
 
     public OpenSearchTasksClient tasks() {
         return new OpenSearchTasksClient(this.transport, this.transportOptions);
-    }
-
-    public OpenSearchUbiClient ubi() {
-        return new OpenSearchUbiClient(this.transport, this.transportOptions);
     }
 
     public OpenSearchUltrawarmClient ultrawarm() {
@@ -653,14 +643,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: mtermvectors
 
     /**
-     * Returns multiple termvectors in one request.
+     * Returns multiple term vectors in one request.
      */
     public MtermvectorsResponse mtermvectors(MtermvectorsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, MtermvectorsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * Returns multiple termvectors in one request.
+     * Returns multiple term vectors in one request.
      *
      * @param fn a function that initializes a builder to create the {@link MtermvectorsRequest}
      */
@@ -670,7 +660,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * Returns multiple termvectors in one request.
+     * Returns multiple term vectors in one request.
      */
     public final MtermvectorsResponse mtermvectors() throws IOException, OpenSearchException {
         return mtermvectors(new MtermvectorsRequest.Builder().build());
@@ -926,6 +916,13 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     public final SearchShardsResponse searchShards(Function<SearchShardsRequest.Builder, ObjectBuilder<SearchShardsRequest>> fn)
         throws IOException, OpenSearchException {
         return searchShards(fn.apply(new SearchShardsRequest.Builder()).build());
+    }
+
+    /**
+     * Returns information about the indexes and shards that a search request would be executed against.
+     */
+    public final SearchShardsResponse searchShards() throws IOException, OpenSearchException {
+        return searchShards(new SearchShardsRequest.Builder().build());
     }
 
     // ----- Endpoint: search_template

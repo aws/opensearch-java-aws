@@ -105,7 +105,7 @@ public final class PutAliasRequest extends RequestBase
     @Nullable
     private final Time masterTimeout;
 
-    @Nullable
+    @Nonnull
     private final String name;
 
     @Nullable
@@ -124,12 +124,12 @@ public final class PutAliasRequest extends RequestBase
         this.alias = builder.alias;
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.filter = builder.filter;
-        this.index = ApiTypeHelper.unmodifiable(builder.index);
+        this.index = ApiTypeHelper.unmodifiableRequired(builder.index, this, "index");
         this.indexRouting = builder.indexRouting;
         this.isHidden = builder.isHidden;
         this.isWriteIndex = builder.isWriteIndex;
         this.masterTimeout = builder.masterTimeout;
-        this.name = builder.name;
+        this.name = ApiTypeHelper.requireNonNull(builder.name, this, "name");
         this.routing = builder.routing;
         this.searchRouting = builder.searchRouting;
         this.timeout = builder.timeout;
@@ -167,8 +167,8 @@ public final class PutAliasRequest extends RequestBase
     }
 
     /**
-     * A comma-separated list of data streams or indexes to add. Supports wildcards (<code>*</code>). Wildcard patterns that match both data
-     * streams and indexes return an error.
+     * Required - A comma-separated list of data streams or indexes to add. Supports wildcards (<code>*</code>). Wildcard patterns that
+     * match both data streams and indexes return an error.
      * <p>
      * API name: {@code index}
      * </p>
@@ -225,12 +225,12 @@ public final class PutAliasRequest extends RequestBase
     }
 
     /**
-     * Alias to update. If the alias doesn't exist, the request creates it. Index alias names support date math.
+     * Required - Alias to update. If the alias doesn't exist, the request creates it. Index alias names support date math.
      * <p>
      * API name: {@code name}
      * </p>
      */
-    @Nullable
+    @Nonnull
     public final String name() {
         return this.name;
     }
@@ -332,7 +332,6 @@ public final class PutAliasRequest extends RequestBase
         private Time clusterManagerTimeout;
         @Nullable
         private Query filter;
-        @Nullable
         private List<String> index;
         @Nullable
         private String indexRouting;
@@ -342,7 +341,6 @@ public final class PutAliasRequest extends RequestBase
         private Boolean isWriteIndex;
         @Nullable
         private Time masterTimeout;
-        @Nullable
         private String name;
         @Nullable
         private String routing;
@@ -447,8 +445,8 @@ public final class PutAliasRequest extends RequestBase
         }
 
         /**
-         * A comma-separated list of data streams or indexes to add. Supports wildcards (<code>*</code>). Wildcard patterns that match both
-         * data streams and indexes return an error.
+         * Required - A comma-separated list of data streams or indexes to add. Supports wildcards (<code>*</code>). Wildcard patterns that
+         * match both data streams and indexes return an error.
          * <p>
          * API name: {@code index}
          * </p>
@@ -464,8 +462,8 @@ public final class PutAliasRequest extends RequestBase
         }
 
         /**
-         * A comma-separated list of data streams or indexes to add. Supports wildcards (<code>*</code>). Wildcard patterns that match both
-         * data streams and indexes return an error.
+         * Required - A comma-separated list of data streams or indexes to add. Supports wildcards (<code>*</code>). Wildcard patterns that
+         * match both data streams and indexes return an error.
          * <p>
          * API name: {@code index}
          * </p>
@@ -544,13 +542,13 @@ public final class PutAliasRequest extends RequestBase
         }
 
         /**
-         * Alias to update. If the alias doesn't exist, the request creates it. Index alias names support date math.
+         * Required - Alias to update. If the alias doesn't exist, the request creates it. Index alias names support date math.
          * <p>
          * API name: {@code name}
          * </p>
          */
         @Nonnull
-        public final Builder name(@Nullable String value) {
+        public final Builder name(String value) {
             this.name = value;
             return this;
         }
@@ -654,40 +652,12 @@ public final class PutAliasRequest extends RequestBase
         request -> "PUT",
         // Request path
         request -> {
-            final int _index = 1 << 0;
-            final int _name = 1 << 1;
-
-            int propsSet = 0;
-
-            if (ApiTypeHelper.isDefined(request.index())) propsSet |= _index;
-            if (request.name() != null) propsSet |= _name;
-
-            if (propsSet == 0) {
-                return "/_alias";
-            }
-            if (propsSet == (_index)) {
-                StringBuilder buf = new StringBuilder();
-                buf.append("/");
-                SimpleEndpoint.pathEncode(String.join(",", request.index), buf);
-                buf.append("/_alias");
-                return buf.toString();
-            }
-            if (propsSet == (_index | _name)) {
-                StringBuilder buf = new StringBuilder();
-                buf.append("/");
-                SimpleEndpoint.pathEncode(String.join(",", request.index), buf);
-                buf.append("/_alias/");
-                SimpleEndpoint.pathEncode(request.name, buf);
-                return buf.toString();
-            }
-            if (propsSet == (_name)) {
-                StringBuilder buf = new StringBuilder();
-                buf.append("/_alias/");
-                SimpleEndpoint.pathEncode(request.name, buf);
-                return buf.toString();
-            }
-
-            throw SimpleEndpoint.noPathTemplateFound("path");
+            StringBuilder buf = new StringBuilder();
+            buf.append("/");
+            SimpleEndpoint.pathEncode(String.join(",", request.index), buf);
+            buf.append("/_alias/");
+            SimpleEndpoint.pathEncode(request.name, buf);
+            return buf.toString();
         },
         // Request parameters
         request -> {
@@ -706,12 +676,12 @@ public final class PutAliasRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.alias);
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.filter);
-        result = 31 * result + Objects.hashCode(this.index);
+        result = 31 * result + this.index.hashCode();
         result = 31 * result + Objects.hashCode(this.indexRouting);
         result = 31 * result + Objects.hashCode(this.isHidden);
         result = 31 * result + Objects.hashCode(this.isWriteIndex);
         result = 31 * result + Objects.hashCode(this.masterTimeout);
-        result = 31 * result + Objects.hashCode(this.name);
+        result = 31 * result + this.name.hashCode();
         result = 31 * result + Objects.hashCode(this.routing);
         result = 31 * result + Objects.hashCode(this.searchRouting);
         result = 31 * result + Objects.hashCode(this.timeout);
@@ -726,12 +696,12 @@ public final class PutAliasRequest extends RequestBase
         return Objects.equals(this.alias, other.alias)
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.filter, other.filter)
-            && Objects.equals(this.index, other.index)
+            && this.index.equals(other.index)
             && Objects.equals(this.indexRouting, other.indexRouting)
             && Objects.equals(this.isHidden, other.isHidden)
             && Objects.equals(this.isWriteIndex, other.isWriteIndex)
             && Objects.equals(this.masterTimeout, other.masterTimeout)
-            && Objects.equals(this.name, other.name)
+            && this.name.equals(other.name)
             && Objects.equals(this.routing, other.routing)
             && Objects.equals(this.searchRouting, other.searchRouting)
             && Objects.equals(this.timeout, other.timeout);

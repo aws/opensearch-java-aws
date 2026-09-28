@@ -607,13 +607,6 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
         return getSettings(fn.apply(new GetIndicesSettingsRequest.Builder()).build());
     }
 
-    /**
-     * Returns settings for one or more indexes.
-     */
-    public final CompletableFuture<GetIndicesSettingsResponse> getSettings() throws IOException, OpenSearchException {
-        return getSettings(new GetIndicesSettingsRequest.Builder().build());
-    }
-
     // ----- Endpoint: indices.get_template
 
     /**
@@ -877,6 +870,25 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     public final CompletableFuture<RolloverResponse> rollover(Function<RolloverRequest.Builder, ObjectBuilder<RolloverRequest>> fn)
         throws IOException, OpenSearchException {
         return rollover(fn.apply(new RolloverRequest.Builder()).build());
+    }
+
+    // ----- Endpoint: indices.segments
+
+    /**
+     * Provides low-level information about segments in a Lucene index.
+     */
+    public CompletableFuture<SegmentsResponse> segments(SegmentsRequest request) throws IOException, OpenSearchException {
+        return this.transport.performRequestAsync(request, SegmentsRequest._ENDPOINT, this.transportOptions);
+    }
+
+    /**
+     * Provides low-level information about segments in a Lucene index.
+     *
+     * @param fn a function that initializes a builder to create the {@link SegmentsRequest}
+     */
+    public final CompletableFuture<SegmentsResponse> segments(Function<SegmentsRequest.Builder, ObjectBuilder<SegmentsRequest>> fn)
+        throws IOException, OpenSearchException {
+        return segments(fn.apply(new SegmentsRequest.Builder()).build());
     }
 
     // ----- Endpoint: indices.shard_stores

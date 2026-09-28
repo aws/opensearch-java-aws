@@ -68,6 +68,9 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 public class AuditLogsConfig implements PlainJsonSerializable, ToCopyableBuilder<AuditLogsConfig.Builder, AuditLogsConfig> {
 
     @Nonnull
+    private final List<String> disabledCategories;
+
+    @Nonnull
     private final List<String> disabledRestCategories;
 
     @Nonnull
@@ -106,6 +109,7 @@ public class AuditLogsConfig implements PlainJsonSerializable, ToCopyableBuilder
     // ---------------------------------------------------------------------------------------------
 
     private AuditLogsConfig(Builder builder) {
+        this.disabledCategories = ApiTypeHelper.unmodifiable(builder.disabledCategories);
         this.disabledRestCategories = ApiTypeHelper.unmodifiable(builder.disabledRestCategories);
         this.disabledTransportCategories = ApiTypeHelper.unmodifiable(builder.disabledTransportCategories);
         this.enableRest = builder.enableRest;
@@ -122,6 +126,14 @@ public class AuditLogsConfig implements PlainJsonSerializable, ToCopyableBuilder
 
     public static AuditLogsConfig of(Function<AuditLogsConfig.Builder, ObjectBuilder<AuditLogsConfig>> fn) {
         return fn.apply(new Builder()).build();
+    }
+
+    /**
+     * API name: {@code disabled_categories}
+     */
+    @Nonnull
+    public final List<String> disabledCategories() {
+        return this.disabledCategories;
     }
 
     /**
@@ -231,6 +243,15 @@ public class AuditLogsConfig implements PlainJsonSerializable, ToCopyableBuilder
     }
 
     protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
+        if (ApiTypeHelper.isDefined(this.disabledCategories)) {
+            generator.writeKey("disabled_categories");
+            generator.writeStartArray();
+            for (String item0 : this.disabledCategories) {
+                generator.write(item0);
+            }
+            generator.writeEnd();
+        }
+
         if (ApiTypeHelper.isDefined(this.disabledRestCategories)) {
             generator.writeKey("disabled_rest_categories");
             generator.writeStartArray();
@@ -334,6 +355,8 @@ public class AuditLogsConfig implements PlainJsonSerializable, ToCopyableBuilder
      */
     public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, AuditLogsConfig> {
         @Nullable
+        private List<String> disabledCategories;
+        @Nullable
         private List<String> disabledRestCategories;
         @Nullable
         private List<String> disabledTransportCategories;
@@ -361,6 +384,7 @@ public class AuditLogsConfig implements PlainJsonSerializable, ToCopyableBuilder
         public Builder() {}
 
         private Builder(AuditLogsConfig o) {
+            this.disabledCategories = _listCopy(o.disabledCategories);
             this.disabledRestCategories = _listCopy(o.disabledRestCategories);
             this.disabledTransportCategories = _listCopy(o.disabledTransportCategories);
             this.enableRest = o.enableRest;
@@ -376,6 +400,7 @@ public class AuditLogsConfig implements PlainJsonSerializable, ToCopyableBuilder
         }
 
         private Builder(Builder o) {
+            this.disabledCategories = _listCopy(o.disabledCategories);
             this.disabledRestCategories = _listCopy(o.disabledRestCategories);
             this.disabledTransportCategories = _listCopy(o.disabledTransportCategories);
             this.enableRest = o.enableRest;
@@ -394,6 +419,32 @@ public class AuditLogsConfig implements PlainJsonSerializable, ToCopyableBuilder
         @Nonnull
         public Builder copy() {
             return new Builder(this);
+        }
+
+        /**
+         * API name: {@code disabled_categories}
+         *
+         * <p>
+         * Adds all elements of <code>list</code> to <code>disabledCategories</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder disabledCategories(List<String> list) {
+            this.disabledCategories = _listAddAll(this.disabledCategories, list);
+            return this;
+        }
+
+        /**
+         * API name: {@code disabled_categories}
+         *
+         * <p>
+         * Adds one or more values to <code>disabledCategories</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder disabledCategories(String value, String... values) {
+            this.disabledCategories = _listAdd(this.disabledCategories, value, values);
+            return this;
         }
 
         /**
@@ -632,6 +683,11 @@ public class AuditLogsConfig implements PlainJsonSerializable, ToCopyableBuilder
 
     protected static void setupAuditLogsConfigDeserializer(ObjectDeserializer<AuditLogsConfig.Builder> op) {
         op.add(
+            Builder::disabledCategories,
+            JsonpDeserializer.arrayDeserializer(JsonpDeserializer.stringDeserializer()),
+            "disabled_categories"
+        );
+        op.add(
             Builder::disabledRestCategories,
             JsonpDeserializer.arrayDeserializer(JsonpDeserializer.stringDeserializer()),
             "disabled_rest_categories"
@@ -656,6 +712,7 @@ public class AuditLogsConfig implements PlainJsonSerializable, ToCopyableBuilder
     @Override
     public int hashCode() {
         int result = 17;
+        result = 31 * result + Objects.hashCode(this.disabledCategories);
         result = 31 * result + Objects.hashCode(this.disabledRestCategories);
         result = 31 * result + Objects.hashCode(this.disabledTransportCategories);
         result = 31 * result + Objects.hashCode(this.enableRest);
@@ -676,7 +733,8 @@ public class AuditLogsConfig implements PlainJsonSerializable, ToCopyableBuilder
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         AuditLogsConfig other = (AuditLogsConfig) o;
-        return Objects.equals(this.disabledRestCategories, other.disabledRestCategories)
+        return Objects.equals(this.disabledCategories, other.disabledCategories)
+            && Objects.equals(this.disabledRestCategories, other.disabledRestCategories)
             && Objects.equals(this.disabledTransportCategories, other.disabledTransportCategories)
             && Objects.equals(this.enableRest, other.enableRest)
             && Objects.equals(this.enableTransport, other.enableTransport)

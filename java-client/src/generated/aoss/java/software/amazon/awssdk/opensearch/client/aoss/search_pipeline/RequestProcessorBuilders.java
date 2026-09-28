@@ -49,8 +49,9 @@ import javax.annotation.Generated;
  * Builders for {@link RequestProcessor} variants.
  * </p>
  * <p>
- * Variants <code>agentic_query_translator</code>, <code>filter_query</code>, <code>neural_query_enricher</code>, <code>oversample</code>,
- * <code>script</code> are not available here as they don't have a dedicated class. Use {@link RequestProcessor}'s builder for these.
+ * Variants <code>agentic_query_translator</code>, <code>filter_query</code>, <code>ml_inference</code>, <code>neural_query_enricher</code>,
+ * <code>oversample</code>, <code>script</code> are not available here as they don't have a dedicated class. Use {@link RequestProcessor}'s
+ * builder for these.
  * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -69,6 +70,13 @@ public class RequestProcessorBuilders {
      */
     public static FilterQueryRequestProcessor.Builder filterQuery() {
         return new FilterQueryRequestProcessor.Builder();
+    }
+
+    /**
+     * Creates a builder for the {@link MLInferenceRequestProcessor ml_inference} {@code RequestProcessor} variant.
+     */
+    public static MLInferenceRequestProcessor.Builder mlInference() {
+        return new MLInferenceRequestProcessor.Builder();
     }
 
     /**

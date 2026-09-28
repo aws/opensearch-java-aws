@@ -113,7 +113,7 @@ public final class GetIndicesSettingsRequest extends RequestBase
         this.flatSettings = builder.flatSettings;
         this.ignoreUnavailable = builder.ignoreUnavailable;
         this.includeDefaults = builder.includeDefaults;
-        this.index = ApiTypeHelper.unmodifiable(builder.index);
+        this.index = ApiTypeHelper.unmodifiableRequired(builder.index, this, "index");
         this.local = builder.local;
         this.masterTimeout = builder.masterTimeout;
         this.name = ApiTypeHelper.unmodifiable(builder.name);
@@ -193,8 +193,8 @@ public final class GetIndicesSettingsRequest extends RequestBase
     }
 
     /**
-     * A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (<code>*</code>). To
-     * target all data streams and indexes, omit this parameter or use <code>*</code> or <code>_all</code>.
+     * Required - A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards
+     * (<code>*</code>). To target all data streams and indexes, omit this parameter or use <code>*</code> or <code>_all</code>.
      * <p>
      * API name: {@code index}
      * </p>
@@ -271,7 +271,6 @@ public final class GetIndicesSettingsRequest extends RequestBase
         private Boolean ignoreUnavailable;
         @Nullable
         private Boolean includeDefaults;
-        @Nullable
         private List<String> index;
         @Nullable
         private Boolean local;
@@ -430,8 +429,8 @@ public final class GetIndicesSettingsRequest extends RequestBase
         }
 
         /**
-         * A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (<code>*</code>). To
-         * target all data streams and indexes, omit this parameter or use <code>*</code> or <code>_all</code>.
+         * Required - A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards
+         * (<code>*</code>). To target all data streams and indexes, omit this parameter or use <code>*</code> or <code>_all</code>.
          * <p>
          * API name: {@code index}
          * </p>
@@ -447,8 +446,8 @@ public final class GetIndicesSettingsRequest extends RequestBase
         }
 
         /**
-         * A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (<code>*</code>). To
-         * target all data streams and indexes, omit this parameter or use <code>*</code> or <code>_all</code>.
+         * Required - A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards
+         * (<code>*</code>). To target all data streams and indexes, omit this parameter or use <code>*</code> or <code>_all</code>.
          * <p>
          * API name: {@code index}
          * </p>
@@ -593,7 +592,7 @@ public final class GetIndicesSettingsRequest extends RequestBase
 
             int propsSet = 0;
 
-            if (ApiTypeHelper.isDefined(request.index())) propsSet |= _index;
+            propsSet |= _index;
             if (ApiTypeHelper.isDefined(request.name())) propsSet |= _name;
 
             if (propsSet == (_index)) {
@@ -607,12 +606,6 @@ public final class GetIndicesSettingsRequest extends RequestBase
                 StringBuilder buf = new StringBuilder();
                 buf.append("/");
                 SimpleEndpoint.pathEncode(String.join(",", request.index), buf);
-                buf.append("/_settings/");
-                SimpleEndpoint.pathEncode(String.join(",", request.name), buf);
-                return buf.toString();
-            }
-            if (propsSet == (_name)) {
-                StringBuilder buf = new StringBuilder();
                 buf.append("/_settings/");
                 SimpleEndpoint.pathEncode(String.join(",", request.name), buf);
                 return buf.toString();
@@ -640,7 +633,7 @@ public final class GetIndicesSettingsRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.flatSettings);
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
         result = 31 * result + Objects.hashCode(this.includeDefaults);
-        result = 31 * result + Objects.hashCode(this.index);
+        result = 31 * result + this.index.hashCode();
         result = 31 * result + Objects.hashCode(this.local);
         result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.name);
@@ -658,7 +651,7 @@ public final class GetIndicesSettingsRequest extends RequestBase
             && Objects.equals(this.flatSettings, other.flatSettings)
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
             && Objects.equals(this.includeDefaults, other.includeDefaults)
-            && Objects.equals(this.index, other.index)
+            && this.index.equals(other.index)
             && Objects.equals(this.local, other.local)
             && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.name, other.name);

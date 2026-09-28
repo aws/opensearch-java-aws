@@ -744,32 +744,6 @@ public class OpenSearchSecurityClient extends ApiClient<OpenSearchTransport, Ope
         return getAuditConfiguration(new GetAuditConfigurationRequest.Builder().build());
     }
 
-    // ----- Endpoint: security.get_certificates
-
-    /**
-     * Retrieves the cluster security certificates.
-     */
-    public GetCertificatesResponse getCertificates(GetCertificatesRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, GetCertificatesRequest._ENDPOINT, this.transportOptions);
-    }
-
-    /**
-     * Retrieves the cluster security certificates.
-     *
-     * @param fn a function that initializes a builder to create the {@link GetCertificatesRequest}
-     */
-    public final GetCertificatesResponse getCertificates(Function<GetCertificatesRequest.Builder, ObjectBuilder<GetCertificatesRequest>> fn)
-        throws IOException, OpenSearchException {
-        return getCertificates(fn.apply(new GetCertificatesRequest.Builder()).build());
-    }
-
-    /**
-     * Retrieves the cluster security certificates.
-     */
-    public final GetCertificatesResponse getCertificates() throws IOException, OpenSearchException {
-        return getCertificates(new GetCertificatesRequest.Builder().build());
-    }
-
     // ----- Endpoint: security.get_configuration
 
     /**
@@ -1223,32 +1197,6 @@ public class OpenSearchSecurityClient extends ApiClient<OpenSearchTransport, Ope
         return health(new HealthRequest.Builder().build());
     }
 
-    // ----- Endpoint: security.migrate
-
-    /**
-     * Migrates the security configuration from v6 to v7.
-     */
-    public MigrateResponse migrate(MigrateRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, MigrateRequest._ENDPOINT, this.transportOptions);
-    }
-
-    /**
-     * Migrates the security configuration from v6 to v7.
-     *
-     * @param fn a function that initializes a builder to create the {@link MigrateRequest}
-     */
-    public final MigrateResponse migrate(Function<MigrateRequest.Builder, ObjectBuilder<MigrateRequest>> fn) throws IOException,
-        OpenSearchException {
-        return migrate(fn.apply(new MigrateRequest.Builder()).build());
-    }
-
-    /**
-     * Migrates the security configuration from v6 to v7.
-     */
-    public final MigrateResponse migrate() throws IOException, OpenSearchException {
-        return migrate(new MigrateRequest.Builder().build());
-    }
-
     // ----- Endpoint: security.patch_action_group
 
     /**
@@ -1327,26 +1275,6 @@ public class OpenSearchSecurityClient extends ApiClient<OpenSearchTransport, Ope
         Function<PatchAuditConfigurationRequest.Builder, ObjectBuilder<PatchAuditConfigurationRequest>> fn
     ) throws IOException, OpenSearchException {
         return patchAuditConfiguration(fn.apply(new PatchAuditConfigurationRequest.Builder()).build());
-    }
-
-    // ----- Endpoint: security.patch_configuration
-
-    /**
-     * Updates the existing security configuration using the REST API. Requires super admin or REST API permissions.
-     */
-    public PatchConfigurationResponse patchConfiguration(PatchConfigurationRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, PatchConfigurationRequest._ENDPOINT, this.transportOptions);
-    }
-
-    /**
-     * Updates the existing security configuration using the REST API. Requires super admin or REST API permissions.
-     *
-     * @param fn a function that initializes a builder to create the {@link PatchConfigurationRequest}
-     */
-    public final PatchConfigurationResponse patchConfiguration(
-        Function<PatchConfigurationRequest.Builder, ObjectBuilder<PatchConfigurationRequest>> fn
-    ) throws IOException, OpenSearchException {
-        return patchConfiguration(fn.apply(new PatchConfigurationRequest.Builder()).build());
     }
 
     // ----- Endpoint: security.patch_distinguished_name
@@ -1628,32 +1556,6 @@ public class OpenSearchSecurityClient extends ApiClient<OpenSearchTransport, Ope
         return reloadTransportCertificates(new ReloadTransportCertificatesRequest.Builder().build());
     }
 
-    // ----- Endpoint: security.tenant_info
-
-    /**
-     * Retrieves the names of current tenants. Requires super admin or <code>kibanaserver</code> permissions.
-     */
-    public TenantInfoResponse tenantInfo(TenantInfoRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, TenantInfoRequest._ENDPOINT, this.transportOptions);
-    }
-
-    /**
-     * Retrieves the names of current tenants. Requires super admin or <code>kibanaserver</code> permissions.
-     *
-     * @param fn a function that initializes a builder to create the {@link TenantInfoRequest}
-     */
-    public final TenantInfoResponse tenantInfo(Function<TenantInfoRequest.Builder, ObjectBuilder<TenantInfoRequest>> fn) throws IOException,
-        OpenSearchException {
-        return tenantInfo(fn.apply(new TenantInfoRequest.Builder()).build());
-    }
-
-    /**
-     * Retrieves the names of current tenants. Requires super admin or <code>kibanaserver</code> permissions.
-     */
-    public final TenantInfoResponse tenantInfo() throws IOException, OpenSearchException {
-        return tenantInfo(new TenantInfoRequest.Builder().build());
-    }
-
     // ----- Endpoint: security.update_audit_configuration
 
     /**
@@ -1682,33 +1584,6 @@ public class OpenSearchSecurityClient extends ApiClient<OpenSearchTransport, Ope
         return updateAuditConfiguration(new UpdateAuditConfigurationRequest.Builder().build());
     }
 
-    // ----- Endpoint: security.update_configuration
-
-    /**
-     * Updates the settings for an existing security configuration. Requires super admin or REST API permissions.
-     */
-    public UpdateConfigurationResponse updateConfiguration(UpdateConfigurationRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, UpdateConfigurationRequest._ENDPOINT, this.transportOptions);
-    }
-
-    /**
-     * Updates the settings for an existing security configuration. Requires super admin or REST API permissions.
-     *
-     * @param fn a function that initializes a builder to create the {@link UpdateConfigurationRequest}
-     */
-    public final UpdateConfigurationResponse updateConfiguration(
-        Function<UpdateConfigurationRequest.Builder, ObjectBuilder<UpdateConfigurationRequest>> fn
-    ) throws IOException, OpenSearchException {
-        return updateConfiguration(fn.apply(new UpdateConfigurationRequest.Builder()).build());
-    }
-
-    /**
-     * Updates the settings for an existing security configuration. Requires super admin or REST API permissions.
-     */
-    public final UpdateConfigurationResponse updateConfiguration() throws IOException, OpenSearchException {
-        return updateConfiguration(new UpdateConfigurationRequest.Builder().build());
-    }
-
     // ----- Endpoint: security.update_distinguished_name
 
     /**
@@ -1728,86 +1603,5 @@ public class OpenSearchSecurityClient extends ApiClient<OpenSearchTransport, Ope
         Function<UpdateDistinguishedNameRequest.Builder, ObjectBuilder<UpdateDistinguishedNameRequest>> fn
     ) throws IOException, OpenSearchException {
         return updateDistinguishedName(fn.apply(new UpdateDistinguishedNameRequest.Builder()).build());
-    }
-
-    // ----- Endpoint: security.validate
-
-    /**
-     * Checks whether the v6 security configuration is valid and ready to be migrated to v7.
-     */
-    public ValidateResponse validate(ValidateRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, ValidateRequest._ENDPOINT, this.transportOptions);
-    }
-
-    /**
-     * Checks whether the v6 security configuration is valid and ready to be migrated to v7.
-     *
-     * @param fn a function that initializes a builder to create the {@link ValidateRequest}
-     */
-    public final ValidateResponse validate(Function<ValidateRequest.Builder, ObjectBuilder<ValidateRequest>> fn) throws IOException,
-        OpenSearchException {
-        return validate(fn.apply(new ValidateRequest.Builder()).build());
-    }
-
-    /**
-     * Checks whether the v6 security configuration is valid and ready to be migrated to v7.
-     */
-    public final ValidateResponse validate() throws IOException, OpenSearchException {
-        return validate(new ValidateRequest.Builder().build());
-    }
-
-    // ----- Endpoint: security.who_am_i
-
-    /**
-     * Gets the identity information for the user currently logged in.
-     */
-    public WhoAmIResponse whoAmI(WhoAmIRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, WhoAmIRequest._ENDPOINT, this.transportOptions);
-    }
-
-    /**
-     * Gets the identity information for the user currently logged in.
-     *
-     * @param fn a function that initializes a builder to create the {@link WhoAmIRequest}
-     */
-    public final WhoAmIResponse whoAmI(Function<WhoAmIRequest.Builder, ObjectBuilder<WhoAmIRequest>> fn) throws IOException,
-        OpenSearchException {
-        return whoAmI(fn.apply(new WhoAmIRequest.Builder()).build());
-    }
-
-    /**
-     * Gets the identity information for the user currently logged in.
-     */
-    public final WhoAmIResponse whoAmI() throws IOException, OpenSearchException {
-        return whoAmI(new WhoAmIRequest.Builder().build());
-    }
-
-    // ----- Endpoint: security.who_am_i_protected
-
-    /**
-     * Gets the identity information for the user currently logged in. To use this operation, you must have access to this endpoint when
-     * authorization at REST layer is enabled.
-     */
-    public WhoAmIProtectedResponse whoAmIProtected(WhoAmIProtectedRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, WhoAmIProtectedRequest._ENDPOINT, this.transportOptions);
-    }
-
-    /**
-     * Gets the identity information for the user currently logged in. To use this operation, you must have access to this endpoint when
-     * authorization at REST layer is enabled.
-     *
-     * @param fn a function that initializes a builder to create the {@link WhoAmIProtectedRequest}
-     */
-    public final WhoAmIProtectedResponse whoAmIProtected(Function<WhoAmIProtectedRequest.Builder, ObjectBuilder<WhoAmIProtectedRequest>> fn)
-        throws IOException, OpenSearchException {
-        return whoAmIProtected(fn.apply(new WhoAmIProtectedRequest.Builder()).build());
-    }
-
-    /**
-     * Gets the identity information for the user currently logged in. To use this operation, you must have access to this endpoint when
-     * authorization at REST layer is enabled.
-     */
-    public final WhoAmIProtectedResponse whoAmIProtected() throws IOException, OpenSearchException {
-        return whoAmIProtected(new WhoAmIProtectedRequest.Builder().build());
     }
 }

@@ -176,9 +176,7 @@ public final class RestoreSnapshotRequest extends RequestBase
     }
 
     /**
-     * AOSS-only. When true, interprets rename_pattern and rename_replacement as regular expressions using Java Matcher.appendReplacement
-     * semantics, allowing capture-group back-references (e.g. $1). When false (default), the values are treated as plain strings, matching
-     * standard OSS behaviour.
+     * When true, rename_pattern/replacement use Java regex with capture groups (e.g. $1); false = plain strings.
      * <p>
      * API name: {@code allow_regex}
      * </p>
@@ -362,7 +360,8 @@ public final class RestoreSnapshotRequest extends RequestBase
     }
 
     /**
-     * Required - The name of the repository containing the snapshot
+     * Required - On AOSS the snapshot repository is fixed: use <code>aoss-automated</code>. Custom repositories and wildcards are not
+     * supported.
      * <p>
      * API name: {@code repository}
      * </p>
@@ -384,10 +383,8 @@ public final class RestoreSnapshotRequest extends RequestBase
     }
 
     /**
-     * AOSS-only. The ID of the source collection to restore the snapshot from. When set, the restore reads snapshot segment data from the
-     * source collection's S3 path ({accountId}/{sourceCollectionId}/) instead of the target collection's path, enabling cross-collection
-     * restore (CCR). The CCR feature flag must be enabled for the account; both collections must share the same type and KMS encryption
-     * context. Omitting this field restores from the same collection's own snapshot.
+     * Source collection to restore from (cross-collection restore); requires the CCR feature flag. Omit to restore from the same
+     * collection.
      * <p>
      * API name: {@code sourceCollectionId}
      * </p>
@@ -659,9 +656,7 @@ public final class RestoreSnapshotRequest extends RequestBase
         }
 
         /**
-         * AOSS-only. When true, interprets rename_pattern and rename_replacement as regular expressions using Java
-         * Matcher.appendReplacement semantics, allowing capture-group back-references (e.g. $1). When false (default), the values are
-         * treated as plain strings, matching standard OSS behaviour.
+         * When true, rename_pattern/replacement use Java regex with capture groups (e.g. $1); false = plain strings.
          * <p>
          * API name: {@code allow_regex}
          * </p>
@@ -933,7 +928,8 @@ public final class RestoreSnapshotRequest extends RequestBase
         }
 
         /**
-         * Required - The name of the repository containing the snapshot
+         * Required - On AOSS the snapshot repository is fixed: use <code>aoss-automated</code>. Custom repositories and wildcards are not
+         * supported.
          * <p>
          * API name: {@code repository}
          * </p>
@@ -957,10 +953,8 @@ public final class RestoreSnapshotRequest extends RequestBase
         }
 
         /**
-         * AOSS-only. The ID of the source collection to restore the snapshot from. When set, the restore reads snapshot segment data from
-         * the source collection's S3 path ({accountId}/{sourceCollectionId}/) instead of the target collection's path, enabling
-         * cross-collection restore (CCR). The CCR feature flag must be enabled for the account; both collections must share the same type
-         * and KMS encryption context. Omitting this field restores from the same collection's own snapshot.
+         * Source collection to restore from (cross-collection restore); requires the CCR feature flag. Omit to restore from the same
+         * collection.
          * <p>
          * API name: {@code sourceCollectionId}
          * </p>
