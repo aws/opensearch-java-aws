@@ -34,3 +34,4 @@ Serverless (AOSS).
 ### Security
 - Restricted default GitHub Actions token permissions to read-only for build and maintenance workflows ([#16](https://github.com/aws/opensearch-java-aws/pull/16)).
 - Added a `git-secrets` CI workflow and documented the local pre-commit hook to prevent committing secrets.
+- Added a `zizmor` CI workflow that statically scans the GitHub Actions workflows and uploads findings to the Security tab.
