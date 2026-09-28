@@ -69,12 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.pit_segments.Request
 
 /**
- * <p>
  * Lists one or several CAT point-in-time segments.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.4</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

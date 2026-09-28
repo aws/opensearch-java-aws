@@ -62,19 +62,18 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.thread_pool.Request
 
 /**
- * <p>
  * Returns cluster-wide thread pool statistics per node. By default the active, queued, and rejected statistics are returned for all thread
  * pools.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ThreadPoolRequest extends CatRequestBase implements ToCopyableBuilder<ThreadPoolRequest.Builder, ThreadPoolRequest> {
 
     @Nullable
     private final Time clusterManagerTimeout;
+
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
 
     @Nullable
     private final Integer size;
@@ -87,6 +86,7 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
     private ThreadPoolRequest(Builder builder) {
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
+        this.masterTimeout = builder.masterTimeout;
         this.size = builder.size;
         this.threadPoolPatterns = ApiTypeHelper.unmodifiable(builder.threadPoolPatterns);
     }
@@ -104,6 +104,18 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
     @Nullable
     public final Time clusterManagerTimeout() {
         return this.clusterManagerTimeout;
+    }
+
+    /**
+     * The amount of time allowed to establish a connection to the cluster manager node.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -148,6 +160,8 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
         @Nullable
         private Time clusterManagerTimeout;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Integer size;
         @Nullable
         private List<String> threadPoolPatterns;
@@ -157,6 +171,7 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
         private Builder(ThreadPoolRequest o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.size = o.size;
             this.threadPoolPatterns = _listCopy(o.threadPoolPatterns);
         }
@@ -164,6 +179,7 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
         private Builder(Builder o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.size = o.size;
             this.threadPoolPatterns = _listCopy(o.threadPoolPatterns);
         }
@@ -201,6 +217,31 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
         @Nonnull
         public final Builder clusterManagerTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
             return clusterManagerTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -269,6 +310,9 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.size != null) {
             params.put("size", String.valueOf(this.size));
         }
@@ -315,6 +359,7 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.size);
         result = 31 * result + Objects.hashCode(this.threadPoolPatterns);
         return result;
@@ -326,6 +371,7 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
         if (o == null || this.getClass() != o.getClass()) return false;
         ThreadPoolRequest other = (ThreadPoolRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.size, other.size)
             && Objects.equals(this.threadPoolPatterns, other.threadPoolPatterns);
     }

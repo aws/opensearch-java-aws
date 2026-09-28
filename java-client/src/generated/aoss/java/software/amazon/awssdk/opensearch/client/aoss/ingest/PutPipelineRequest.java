@@ -89,6 +89,10 @@ public final class PutPipelineRequest extends RequestBase
     @Nonnull
     private final String id;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final Map<String, JsonData> meta;
 
@@ -111,6 +115,7 @@ public final class PutPipelineRequest extends RequestBase
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.description = builder.description;
         this.id = ApiTypeHelper.requireNonNull(builder.id, this, "id");
+        this.masterTimeout = builder.masterTimeout;
         this.meta = ApiTypeHelper.unmodifiable(builder.meta);
         this.onFailure = ApiTypeHelper.unmodifiable(builder.onFailure);
         this.processors = ApiTypeHelper.unmodifiable(builder.processors);
@@ -153,6 +158,19 @@ public final class PutPipelineRequest extends RequestBase
     @Nonnull
     public final String id() {
         return this.id;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -279,6 +297,8 @@ public final class PutPipelineRequest extends RequestBase
         private String description;
         private String id;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Map<String, JsonData> meta;
         @Nullable
         private List<Processor> onFailure;
@@ -296,6 +316,7 @@ public final class PutPipelineRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.description = o.description;
             this.id = o.id;
+            this.masterTimeout = o.masterTimeout;
             this.meta = _mapCopy(o.meta);
             this.onFailure = _listCopy(o.onFailure);
             this.processors = _listCopy(o.processors);
@@ -308,6 +329,7 @@ public final class PutPipelineRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.description = o.description;
             this.id = o.id;
+            this.masterTimeout = o.masterTimeout;
             this.meta = _mapCopy(o.meta);
             this.onFailure = _listCopy(o.onFailure);
             this.processors = _listCopy(o.processors);
@@ -372,6 +394,33 @@ public final class PutPipelineRequest extends RequestBase
         public final Builder id(String value) {
             this.id = value;
             return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -572,6 +621,9 @@ public final class PutPipelineRequest extends RequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -607,6 +659,7 @@ public final class PutPipelineRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.description);
         result = 31 * result + this.id.hashCode();
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.meta);
         result = 31 * result + Objects.hashCode(this.onFailure);
         result = 31 * result + Objects.hashCode(this.processors);
@@ -623,6 +676,7 @@ public final class PutPipelineRequest extends RequestBase
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.description, other.description)
             && this.id.equals(other.id)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.meta, other.meta)
             && Objects.equals(this.onFailure, other.onFailure)
             && Objects.equals(this.processors, other.processors)

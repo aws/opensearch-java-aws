@@ -67,24 +67,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.add_block
 
     /**
-     * <p>
      * Adds a block to an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public AddBlockResponse addBlock(AddBlockRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, AddBlockRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Adds a block to an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link AddBlockRequest}
      */
@@ -96,24 +86,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.analyze
 
     /**
-     * <p>
      * Performs the analysis process on a text and return the tokens breakdown of the text.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public AnalyzeResponse analyze(AnalyzeRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, AnalyzeRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Performs the analysis process on a text and return the tokens breakdown of the text.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link AnalyzeRequest}
      */
@@ -123,12 +103,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Performs the analysis process on a text and return the tokens breakdown of the text.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final AnalyzeResponse analyze() throws IOException, OpenSearchException {
         return analyze(new AnalyzeRequest.Builder().build());
@@ -137,24 +112,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.clear_cache
 
     /**
-     * <p>
      * Clears all or specific caches for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public ClearCacheResponse clearCache(ClearCacheRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ClearCacheRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Clears all or specific caches for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ClearCacheRequest}
      */
@@ -166,24 +131,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.clone
 
     /**
-     * <p>
      * Clones an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CloneIndexResponse clone(CloneIndexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, CloneIndexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Clones an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CloneIndexRequest}
      */
@@ -195,24 +150,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.close
 
     /**
-     * <p>
      * Closes an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CloseIndexResponse close(CloseIndexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, CloseIndexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Closes an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CloseIndexRequest}
      */
@@ -224,24 +169,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.create
 
     /**
-     * <p>
      * Creates an index with optional settings and mappings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CreateIndexResponse create(CreateIndexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, CreateIndexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates an index with optional settings and mappings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateIndexRequest}
      */
@@ -253,24 +188,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.create_data_stream
 
     /**
-     * <p>
      * Creates or updates a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CreateDataStreamResponse createDataStream(CreateDataStreamRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, CreateDataStreamRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates or updates a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateDataStreamRequest}
      */
@@ -283,24 +208,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.data_streams_stats
 
     /**
-     * <p>
      * Provides statistics on operations happening in a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DataStreamsStatsResponse dataStreamsStats(DataStreamsStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DataStreamsStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Provides statistics on operations happening in a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DataStreamsStatsRequest}
      */
@@ -311,12 +226,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Provides statistics on operations happening in a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final DataStreamsStatsResponse dataStreamsStats() throws IOException, OpenSearchException {
         return dataStreamsStats(new DataStreamsStatsRequest.Builder().build());
@@ -325,24 +235,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.delete
 
     /**
-     * <p>
      * Deletes an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeleteIndexResponse delete(DeleteIndexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteIndexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteIndexRequest}
      */
@@ -354,24 +254,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.delete_alias
 
     /**
-     * <p>
      * Deletes an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeleteAliasResponse deleteAlias(DeleteAliasRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteAliasRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteAliasRequest}
      */
@@ -383,24 +273,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.delete_data_stream
 
     /**
-     * <p>
      * Deletes a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeleteDataStreamResponse deleteDataStream(DeleteDataStreamRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteDataStreamRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteDataStreamRequest}
      */
@@ -413,24 +293,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.delete_index_template
 
     /**
-     * <p>
      * Deletes an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeleteIndexTemplateResponse deleteIndexTemplate(DeleteIndexTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteIndexTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteIndexTemplateRequest}
      */
@@ -443,24 +313,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.delete_template
 
     /**
-     * <p>
      * Deletes an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeleteTemplateResponse deleteTemplate(DeleteTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteTemplateRequest}
      */
@@ -472,24 +332,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.exists
 
     /**
-     * <p>
      * Returns information about whether a particular index exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public BooleanResponse exists(ExistsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ExistsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about whether a particular index exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsRequest}
      */
@@ -501,24 +351,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.exists_alias
 
     /**
-     * <p>
      * Returns information about whether a particular alias exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public BooleanResponse existsAlias(ExistsAliasRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ExistsAliasRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about whether a particular alias exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsAliasRequest}
      */
@@ -530,24 +370,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.exists_index_template
 
     /**
-     * <p>
      * Returns information about whether a particular index template exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public BooleanResponse existsIndexTemplate(ExistsIndexTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ExistsIndexTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about whether a particular index template exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsIndexTemplateRequest}
      */
@@ -560,24 +390,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.exists_template
 
     /**
-     * <p>
      * Returns information about whether a particular index template exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public BooleanResponse existsTemplate(ExistsTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ExistsTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about whether a particular index template exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsTemplateRequest}
      */
@@ -589,24 +409,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.flush
 
     /**
-     * <p>
      * Performs the flush operation on one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public FlushResponse flush(FlushRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, FlushRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Performs the flush operation on one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link FlushRequest}
      */
@@ -616,12 +426,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Performs the flush operation on one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final FlushResponse flush() throws IOException, OpenSearchException {
         return flush(new FlushRequest.Builder().build());
@@ -630,24 +435,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.forcemerge
 
     /**
-     * <p>
      * Performs the force merge operation on one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public ForcemergeResponse forcemerge(ForcemergeRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ForcemergeRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Performs the force merge operation on one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ForcemergeRequest}
      */
@@ -659,24 +454,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.get
 
     /**
-     * <p>
      * Returns information about one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetIndexResponse get(GetIndexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetIndexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetIndexRequest}
      */
@@ -688,24 +473,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.get_alias
 
     /**
-     * <p>
      * Returns an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetAliasResponse getAlias(GetAliasRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetAliasRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetAliasRequest}
      */
@@ -715,12 +490,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Returns an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final GetAliasResponse getAlias() throws IOException, OpenSearchException {
         return getAlias(new GetAliasRequest.Builder().build());
@@ -729,24 +499,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.get_data_stream
 
     /**
-     * <p>
      * Returns data streams.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetDataStreamResponse getDataStream(GetDataStreamRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetDataStreamRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns data streams.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetDataStreamRequest}
      */
@@ -756,12 +516,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Returns data streams.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final GetDataStreamResponse getDataStream() throws IOException, OpenSearchException {
         return getDataStream(new GetDataStreamRequest.Builder().build());
@@ -770,24 +525,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.get_index_template
 
     /**
-     * <p>
      * Returns an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetIndexTemplateResponse getIndexTemplate(GetIndexTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetIndexTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetIndexTemplateRequest}
      */
@@ -798,12 +543,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Returns an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final GetIndexTemplateResponse getIndexTemplate() throws IOException, OpenSearchException {
         return getIndexTemplate(new GetIndexTemplateRequest.Builder().build());
@@ -812,24 +552,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.get_mapping
 
     /**
-     * <p>
      * Returns mappings for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetMappingResponse getMapping(GetMappingRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetMappingRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns mappings for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetMappingRequest}
      */
@@ -839,12 +569,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Returns mappings for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final GetMappingResponse getMapping() throws IOException, OpenSearchException {
         return getMapping(new GetMappingRequest.Builder().build());
@@ -853,24 +578,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.get_settings
 
     /**
-     * <p>
      * Returns settings for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetIndicesSettingsResponse getSettings(GetIndicesSettingsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetIndicesSettingsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns settings for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetIndicesSettingsRequest}
      */
@@ -880,39 +595,17 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
         return getSettings(fn.apply(new GetIndicesSettingsRequest.Builder()).build());
     }
 
-    /**
-     * <p>
-     * Returns settings for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
-     */
-    public final GetIndicesSettingsResponse getSettings() throws IOException, OpenSearchException {
-        return getSettings(new GetIndicesSettingsRequest.Builder().build());
-    }
-
     // ----- Endpoint: indices.get_template
 
     /**
-     * <p>
      * Returns an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetTemplateResponse getTemplate(GetTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetTemplateRequest}
      */
@@ -922,12 +615,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Returns an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final GetTemplateResponse getTemplate() throws IOException, OpenSearchException {
         return getTemplate(new GetTemplateRequest.Builder().build());
@@ -936,24 +624,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.modify_data_stream
 
     /**
-     * <p>
      * Adds or removes backing indexes of a data stream with metadata-only actions. This is an experimental API.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.8</code>
-     * </p>
      */
     public ModifyDataStreamResponse modifyDataStream(ModifyDataStreamRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ModifyDataStreamRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Adds or removes backing indexes of a data stream with metadata-only actions. This is an experimental API.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.8</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ModifyDataStreamRequest}
      */
@@ -966,24 +644,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.open
 
     /**
-     * <p>
      * Opens an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public OpenResponse open(OpenRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, OpenRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Opens an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link OpenRequest}
      */
@@ -994,24 +662,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.put_alias
 
     /**
-     * <p>
      * Creates or updates an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public PutAliasResponse putAlias(PutAliasRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutAliasRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates or updates an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutAliasRequest}
      */
@@ -1021,12 +679,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Creates or updates an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final PutAliasResponse putAlias() throws IOException, OpenSearchException {
         return putAlias(new PutAliasRequest.Builder().build());
@@ -1035,24 +688,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.put_index_template
 
     /**
-     * <p>
      * Creates or updates an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public PutIndexTemplateResponse putIndexTemplate(PutIndexTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutIndexTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates or updates an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutIndexTemplateRequest}
      */
@@ -1065,24 +708,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.put_mapping
 
     /**
-     * <p>
      * Updates the index mappings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public PutMappingResponse putMapping(PutMappingRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutMappingRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Updates the index mappings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutMappingRequest}
      */
@@ -1094,24 +727,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.put_settings
 
     /**
-     * <p>
      * Updates the index settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public PutIndicesSettingsResponse putSettings(PutIndicesSettingsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutIndicesSettingsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Updates the index settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutIndicesSettingsRequest}
      */
@@ -1124,24 +747,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.put_template
 
     /**
-     * <p>
      * Creates or updates an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public PutTemplateResponse putTemplate(PutTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates or updates an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutTemplateRequest}
      */
@@ -1153,24 +766,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.recovery
 
     /**
-     * <p>
      * Returns information about ongoing index shard recoveries.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public RecoveryResponse recovery(RecoveryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, RecoveryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about ongoing index shard recoveries.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RecoveryRequest}
      */
@@ -1180,12 +783,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Returns information about ongoing index shard recoveries.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final RecoveryResponse recovery() throws IOException, OpenSearchException {
         return recovery(new RecoveryRequest.Builder().build());
@@ -1194,24 +792,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.refresh
 
     /**
-     * <p>
      * Performs the refresh operation in one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public RefreshResponse refresh(RefreshRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, RefreshRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Performs the refresh operation in one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RefreshRequest}
      */
@@ -1221,12 +809,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Performs the refresh operation in one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final RefreshResponse refresh() throws IOException, OpenSearchException {
         return refresh(new RefreshRequest.Builder().build());
@@ -1235,24 +818,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.resolve_index
 
     /**
-     * <p>
      * Returns information about any matching indexes, aliases, and data streams.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public ResolveIndexResponse resolveIndex(ResolveIndexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ResolveIndexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about any matching indexes, aliases, and data streams.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ResolveIndexRequest}
      */
@@ -1264,24 +837,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.rollover
 
     /**
-     * <p>
      * Updates an alias to point to a new index when the existing index is considered to be too large or too old.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public RolloverResponse rollover(RolloverRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, RolloverRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Updates an alias to point to a new index when the existing index is considered to be too large or too old.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RolloverRequest}
      */
@@ -1290,27 +853,36 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
         return rollover(fn.apply(new RolloverRequest.Builder()).build());
     }
 
+    // ----- Endpoint: indices.segments
+
+    /**
+     * Provides low-level information about segments in a Lucene index.
+     */
+    public SegmentsResponse segments(SegmentsRequest request) throws IOException, OpenSearchException {
+        return this.transport.performRequest(request, SegmentsRequest._ENDPOINT, this.transportOptions);
+    }
+
+    /**
+     * Provides low-level information about segments in a Lucene index.
+     *
+     * @param fn a function that initializes a builder to create the {@link SegmentsRequest}
+     */
+    public final SegmentsResponse segments(Function<SegmentsRequest.Builder, ObjectBuilder<SegmentsRequest>> fn) throws IOException,
+        OpenSearchException {
+        return segments(fn.apply(new SegmentsRequest.Builder()).build());
+    }
+
     // ----- Endpoint: indices.shard_stores
 
     /**
-     * <p>
      * Provides store information for shard copies of indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public ShardStoresResponse shardStores(ShardStoresRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ShardStoresRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Provides store information for shard copies of indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ShardStoresRequest}
      */
@@ -1320,12 +892,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Provides store information for shard copies of indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final ShardStoresResponse shardStores() throws IOException, OpenSearchException {
         return shardStores(new ShardStoresRequest.Builder().build());
@@ -1334,24 +901,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.shrink
 
     /**
-     * <p>
      * Allow to shrink an existing index into a new index with fewer primary shards.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public ShrinkResponse shrink(ShrinkRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ShrinkRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Allow to shrink an existing index into a new index with fewer primary shards.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ShrinkRequest}
      */
@@ -1363,12 +920,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.simulate_index_template
 
     /**
-     * <p>
      * Simulate matching the given index name against the index templates in the system.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public SimulateIndexTemplateResponse simulateIndexTemplate(SimulateIndexTemplateRequest request) throws IOException,
         OpenSearchException {
@@ -1376,12 +928,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Simulate matching the given index name against the index templates in the system.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SimulateIndexTemplateRequest}
      */
@@ -1394,24 +941,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.simulate_template
 
     /**
-     * <p>
      * Simulate resolving the given template name or body.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public SimulateTemplateResponse simulateTemplate(SimulateTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, SimulateTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Simulate resolving the given template name or body.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SimulateTemplateRequest}
      */
@@ -1424,24 +961,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.split
 
     /**
-     * <p>
      * Allows you to split an existing index into a new index with more primary shards.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public SplitResponse split(SplitRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, SplitRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Allows you to split an existing index into a new index with more primary shards.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SplitRequest}
      */
@@ -1453,24 +980,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.stats
 
     /**
-     * <p>
      * Provides statistics on operations happening in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public IndicesStatsResponse stats(IndicesStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, IndicesStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Provides statistics on operations happening in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link IndicesStatsRequest}
      */
@@ -1480,12 +997,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Provides statistics on operations happening in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final IndicesStatsResponse stats() throws IOException, OpenSearchException {
         return stats(new IndicesStatsRequest.Builder().build());
@@ -1494,24 +1006,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.update_aliases
 
     /**
-     * <p>
      * Updates index aliases.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public UpdateAliasesResponse updateAliases(UpdateAliasesRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, UpdateAliasesRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Updates index aliases.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateAliasesRequest}
      */
@@ -1521,12 +1023,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Updates index aliases.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final UpdateAliasesResponse updateAliases() throws IOException, OpenSearchException {
         return updateAliases(new UpdateAliasesRequest.Builder().build());
@@ -1535,24 +1032,14 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     // ----- Endpoint: indices.validate_query
 
     /**
-     * <p>
      * Allows a user to validate a potentially expensive query without executing it.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public ValidateQueryResponse validateQuery(ValidateQueryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ValidateQueryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Allows a user to validate a potentially expensive query without executing it.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ValidateQueryRequest}
      */
@@ -1562,12 +1049,7 @@ public abstract class OpenSearchIndicesClientBase<Self extends OpenSearchIndices
     }
 
     /**
-     * <p>
      * Allows a user to validate a potentially expensive query without executing it.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final ValidateQueryResponse validateQuery() throws IOException, OpenSearchException {
         return validateQuery(new ValidateQueryRequest.Builder().build());

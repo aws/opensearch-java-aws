@@ -64,12 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.exists_component_template.Request
 
 /**
- * <p>
  * Returns information about whether a particular component template exist.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ExistsComponentTemplateRequest extends RequestBase
@@ -82,6 +77,10 @@ public final class ExistsComponentTemplateRequest extends RequestBase
     @Nullable
     private final Boolean local;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final String name;
 
@@ -91,6 +90,7 @@ public final class ExistsComponentTemplateRequest extends RequestBase
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.local = builder.local;
+        this.masterTimeout = builder.masterTimeout;
         this.name = ApiTypeHelper.requireNonNull(builder.name, this, "name");
     }
 
@@ -122,6 +122,20 @@ public final class ExistsComponentTemplateRequest extends RequestBase
     @Nullable
     public final Boolean local() {
         return this.local;
+    }
+
+    /**
+     * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+     * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+     * <code>-1</code> to indicate an unspecified value.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -158,6 +172,8 @@ public final class ExistsComponentTemplateRequest extends RequestBase
         private Time clusterManagerTimeout;
         @Nullable
         private Boolean local;
+        @Nullable
+        private Time masterTimeout;
         private String name;
 
         public Builder() {}
@@ -166,6 +182,7 @@ public final class ExistsComponentTemplateRequest extends RequestBase
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
         }
 
@@ -173,6 +190,7 @@ public final class ExistsComponentTemplateRequest extends RequestBase
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
         }
 
@@ -227,6 +245,35 @@ public final class ExistsComponentTemplateRequest extends RequestBase
         }
 
         /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Required - The name of the component template. Wildcard (*) expressions are supported.
          * <p>
          * API name: {@code name}
@@ -263,6 +310,9 @@ public final class ExistsComponentTemplateRequest extends RequestBase
         if (this.local != null) {
             params.put("local", String.valueOf(this.local));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
     }
 
     /**
@@ -292,6 +342,7 @@ public final class ExistsComponentTemplateRequest extends RequestBase
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.local);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + this.name.hashCode();
         return result;
     }
@@ -303,6 +354,7 @@ public final class ExistsComponentTemplateRequest extends RequestBase
         ExistsComponentTemplateRequest other = (ExistsComponentTemplateRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.local, other.local)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && this.name.equals(other.name);
     }
 }

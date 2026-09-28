@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.create_default_store.Request
 
 /**
- * <p>
  * Creates the default feature store.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.17.1</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class CreateDefaultStoreRequest extends RequestBase

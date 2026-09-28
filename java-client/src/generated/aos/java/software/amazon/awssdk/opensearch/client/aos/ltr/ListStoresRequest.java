@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.list_stores.Request
 
 /**
- * <p>
  * Lists all available feature stores.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.17.1</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ListStoresRequest extends RequestBase implements ToCopyableBuilder<ListStoresRequest.Builder, ListStoresRequest> {

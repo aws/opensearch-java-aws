@@ -64,12 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.get_alias.Request
 
 /**
- * <p>
  * Returns an alias.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetAliasRequest extends RequestBase implements ToCopyableBuilder<GetAliasRequest.Builder, GetAliasRequest> {

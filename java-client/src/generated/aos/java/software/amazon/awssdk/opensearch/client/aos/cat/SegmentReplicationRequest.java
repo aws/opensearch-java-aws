@@ -66,13 +66,8 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.segment_replication.Request
 
 /**
- * <p>
  * Returns information about active and last-completed segment replication events on each replica shard, including related shard-level
  * metrics. These metrics provide information about how far behind the primary shard the replicas are lagging.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.6</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class SegmentReplicationRequest extends CatRequestBase

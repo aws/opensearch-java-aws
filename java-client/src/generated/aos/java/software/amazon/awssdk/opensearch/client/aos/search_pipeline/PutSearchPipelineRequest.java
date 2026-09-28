@@ -70,12 +70,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: search_pipeline.put.Request
 
 /**
- * <p>
  * Creates or replaces the specified search pipeline.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.9</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

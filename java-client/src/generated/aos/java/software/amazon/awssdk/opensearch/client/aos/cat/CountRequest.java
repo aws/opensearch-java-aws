@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.count.Request
 
 /**
- * <p>
  * Provides quick access to the document count of the entire cluster or of an individual index.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class CountRequest extends CatRequestBase implements ToCopyableBuilder<CountRequest.Builder, CountRequest> {

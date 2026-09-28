@@ -50,12 +50,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.add_agentic_memory
 
     /**
-     * <p>
      * Add agentic memory to a memory container.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      */
     public CompletableFuture<AddAgenticMemoryResponse> addAgenticMemory(AddAgenticMemoryRequest request) throws IOException,
         OpenSearchException {
@@ -63,12 +58,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Add agentic memory to a memory container.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link AddAgenticMemoryRequest}
      */
@@ -102,12 +92,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.create_controller
 
     /**
-     * <p>
      * Creates a controller.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<CreateControllerResponse> createController(CreateControllerRequest request) throws IOException,
         OpenSearchException {
@@ -115,12 +100,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Creates a controller.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateControllerRequest}
      */
@@ -133,24 +113,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.create_memory
 
     /**
-     * <p>
      * Create a memory.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<CreateMemoryResponse> createMemory(CreateMemoryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CreateMemoryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Create a memory.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateMemoryRequest}
      */
@@ -161,12 +131,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Create a memory.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public final CompletableFuture<CreateMemoryResponse> createMemory() throws IOException, OpenSearchException {
         return createMemory(new CreateMemoryRequest.Builder().build());
@@ -175,12 +140,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.create_memory_container
 
     /**
-     * <p>
      * Create a memory container.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      */
     public CompletableFuture<CreateMemoryContainerResponse> createMemoryContainer(CreateMemoryContainerRequest request) throws IOException,
         OpenSearchException {
@@ -188,12 +148,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Create a memory container.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateMemoryContainerRequest}
      */
@@ -206,12 +161,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.create_memory_container_session
 
     /**
-     * <p>
      * Create session in a memory container.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      */
     public CompletableFuture<CreateMemoryContainerSessionResponse> createMemoryContainerSession(CreateMemoryContainerSessionRequest request)
         throws IOException, OpenSearchException {
@@ -219,12 +169,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Create session in a memory container.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateMemoryContainerSessionRequest}
      */
@@ -237,24 +182,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.create_message
 
     /**
-     * <p>
      * Create a message.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<CreateMessageResponse> createMessage(CreateMessageRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CreateMessageRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Create a message.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateMessageRequest}
      */
@@ -264,27 +199,40 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
         return createMessage(fn.apply(new CreateMessageRequest.Builder()).build());
     }
 
+    // ----- Endpoint: ml.create_model_meta
+
+    /**
+     * Registers model metadata.
+     */
+    @Deprecated
+    public CompletableFuture<CreateModelMetaResponse> createModelMeta(CreateModelMetaRequest request) throws IOException,
+        OpenSearchException {
+        return this.transport.performRequestAsync(request, CreateModelMetaRequest._ENDPOINT, this.transportOptions);
+    }
+
+    /**
+     * Registers model metadata.
+     *
+     * @param fn a function that initializes a builder to create the {@link CreateModelMetaRequest}
+     */
+    @Deprecated
+    public final CompletableFuture<CreateModelMetaResponse> createModelMeta(
+        Function<CreateModelMetaRequest.Builder, ObjectBuilder<CreateModelMetaRequest>> fn
+    ) throws IOException, OpenSearchException {
+        return createModelMeta(fn.apply(new CreateModelMetaRequest.Builder()).build());
+    }
+
     // ----- Endpoint: ml.delete_agent
 
     /**
-     * <p>
      * Delete an agent.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.13</code>
-     * </p>
      */
     public CompletableFuture<DeleteAgentResponse> deleteAgent(DeleteAgentRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteAgentRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Delete an agent.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.13</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteAgentRequest}
      */
@@ -297,12 +245,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.delete_agentic_memory
 
     /**
-     * <p>
      * Delete a specific memory by its type and ID.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      */
     public CompletableFuture<DeleteAgenticMemoryResponse> deleteAgenticMemory(DeleteAgenticMemoryRequest request) throws IOException,
         OpenSearchException {
@@ -310,12 +253,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Delete a specific memory by its type and ID.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteAgenticMemoryRequest}
      */
@@ -328,12 +266,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.delete_agentic_memory_query
 
     /**
-     * <p>
      * Delete multiple memories using a query to match specific criteria.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      */
     public CompletableFuture<DeleteAgenticMemoryQueryResponse> deleteAgenticMemoryQuery(DeleteAgenticMemoryQueryRequest request)
         throws IOException, OpenSearchException {
@@ -341,12 +274,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Delete multiple memories using a query to match specific criteria.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteAgenticMemoryQueryRequest}
      */
@@ -380,12 +308,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.delete_controller
 
     /**
-     * <p>
      * Deletes a controller.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<DeleteControllerResponse> deleteController(DeleteControllerRequest request) throws IOException,
         OpenSearchException {
@@ -393,12 +316,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Deletes a controller.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteControllerRequest}
      */
@@ -411,24 +329,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.delete_memory
 
     /**
-     * <p>
      * Delete a memory.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<DeleteMemoryResponse> deleteMemory(DeleteMemoryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteMemoryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Delete a memory.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteMemoryRequest}
      */
@@ -441,12 +349,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.delete_memory_container
 
     /**
-     * <p>
      * Delete a memory container.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      */
     public CompletableFuture<DeleteMemoryContainerResponse> deleteMemoryContainer(DeleteMemoryContainerRequest request) throws IOException,
         OpenSearchException {
@@ -454,12 +357,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Delete a memory container.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteMemoryContainerRequest}
      */
@@ -472,24 +370,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.delete_model
 
     /**
-     * <p>
      * Deletes a model.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.3</code>
-     * </p>
      */
     public CompletableFuture<DeleteModelResponse> deleteModel(DeleteModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a model.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteModelRequest}
      */
@@ -523,24 +411,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.delete_task
 
     /**
-     * <p>
      * Deletes a task.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.3</code>
-     * </p>
      */
     public CompletableFuture<DeleteTaskResponse> deleteTask(DeleteTaskRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteTaskRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a task.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteTaskRequest}
      */
@@ -552,24 +430,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.deploy_model
 
     /**
-     * <p>
      * Deploys a model.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.7</code>
-     * </p>
      */
     public CompletableFuture<DeployModelResponse> deployModel(DeployModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeployModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deploys a model.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.7</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeployModelRequest}
      */
@@ -582,24 +450,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.execute_agent
 
     /**
-     * <p>
      * Execute an agent.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.13</code>
-     * </p>
      */
     public CompletableFuture<ExecuteAgentResponse> executeAgent(ExecuteAgentRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ExecuteAgentRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Execute an agent.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.13</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExecuteAgentRequest}
      */
@@ -612,12 +470,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.execute_agent_stream
 
     /**
-     * <p>
      * Execute an agent in streaming mode.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      */
     public CompletableFuture<ExecuteAgentStreamResponse> executeAgentStream(ExecuteAgentStreamRequest request) throws IOException,
         OpenSearchException {
@@ -625,12 +478,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Execute an agent in streaming mode.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExecuteAgentStreamRequest}
      */
@@ -643,24 +491,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.execute_tool
 
     /**
-     * <p>
      * Execute a tool.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      */
     public CompletableFuture<ExecuteToolResponse> executeTool(ExecuteToolRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ExecuteToolRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Execute a tool.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExecuteToolRequest}
      */
@@ -673,24 +511,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_agent
 
     /**
-     * <p>
      * Get an agent.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.13</code>
-     * </p>
      */
     public CompletableFuture<GetAgentResponse> getAgent(GetAgentRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetAgentRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Get an agent.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.13</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetAgentRequest}
      */
@@ -702,12 +530,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_agentic_memory
 
     /**
-     * <p>
      * Get a specific memory by its type and ID.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      */
     public CompletableFuture<GetAgenticMemoryResponse> getAgenticMemory(GetAgenticMemoryRequest request) throws IOException,
         OpenSearchException {
@@ -715,12 +538,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Get a specific memory by its type and ID.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetAgenticMemoryRequest}
      */
@@ -733,24 +551,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_all_memories
 
     /**
-     * <p>
      * Get all memories.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<GetAllMemoriesResponse> getAllMemories(GetAllMemoriesRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetAllMemoriesRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Get all memories.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetAllMemoriesRequest}
      */
@@ -761,12 +569,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Get all memories.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public final CompletableFuture<GetAllMemoriesResponse> getAllMemories() throws IOException, OpenSearchException {
         return getAllMemories(new GetAllMemoriesRequest.Builder().build());
@@ -775,24 +578,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_all_messages
 
     /**
-     * <p>
      * Get all messages in a memory.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<GetAllMessagesResponse> getAllMessages(GetAllMessagesRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetAllMessagesRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Get all messages in a memory.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetAllMessagesRequest}
      */
@@ -805,24 +598,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_all_tools
 
     /**
-     * <p>
      * Get tools.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<GetAllToolsResponse> getAllTools(GetAllToolsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetAllToolsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Get tools.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetAllToolsRequest}
      */
@@ -833,12 +616,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Get tools.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public final CompletableFuture<GetAllToolsResponse> getAllTools() throws IOException, OpenSearchException {
         return getAllTools(new GetAllToolsRequest.Builder().build());
@@ -847,24 +625,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_connector
 
     /**
-     * <p>
      * Retrieves a standalone connector.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public CompletableFuture<GetConnectorResponse> getConnector(GetConnectorRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetConnectorRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Retrieves a standalone connector.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetConnectorRequest}
      */
@@ -877,24 +645,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_controller
 
     /**
-     * <p>
      * Retrieves a controller.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<GetControllerResponse> getController(GetControllerRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetControllerRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Retrieves a controller.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetControllerRequest}
      */
@@ -907,24 +665,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_memory
 
     /**
-     * <p>
      * Get a memory.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<GetMemoryResponse> getMemory(GetMemoryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetMemoryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Get a memory.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetMemoryRequest}
      */
@@ -936,12 +684,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_memory_container
 
     /**
-     * <p>
      * Get a memory container.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      */
     public CompletableFuture<GetMemoryContainerResponse> getMemoryContainer(GetMemoryContainerRequest request) throws IOException,
         OpenSearchException {
@@ -949,12 +692,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Get a memory container.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetMemoryContainerRequest}
      */
@@ -967,24 +705,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_message
 
     /**
-     * <p>
      * Get a message.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<GetMessageResponse> getMessage(GetMessageRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetMessageRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Get a message.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetMessageRequest}
      */
@@ -996,12 +724,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_message_traces
 
     /**
-     * <p>
      * Get a message traces.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<GetMessageTracesResponse> getMessageTraces(GetMessageTracesRequest request) throws IOException,
         OpenSearchException {
@@ -1009,12 +732,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Get a message traces.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetMessageTracesRequest}
      */
@@ -1027,24 +745,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_model
 
     /**
-     * <p>
      * Retrieves a model.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.3</code>
-     * </p>
      */
     public CompletableFuture<GetModelResponse> getModel(GetModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Retrieves a model.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetModelRequest}
      */
@@ -1076,24 +784,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_profile
 
     /**
-     * <p>
      * Get a profile.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public CompletableFuture<GetProfileResponse> getProfile(GetProfileRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetProfileRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Get a profile.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetProfileRequest}
      */
@@ -1103,12 +801,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Get a profile.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public final CompletableFuture<GetProfileResponse> getProfile() throws IOException, OpenSearchException {
         return getProfile(new GetProfileRequest.Builder().build());
@@ -1117,12 +810,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_profile_models
 
     /**
-     * <p>
      * Get a profile models.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public CompletableFuture<GetProfileModelsResponse> getProfileModels(GetProfileModelsRequest request) throws IOException,
         OpenSearchException {
@@ -1130,12 +818,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Get a profile models.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetProfileModelsRequest}
      */
@@ -1146,12 +829,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Get a profile models.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public final CompletableFuture<GetProfileModelsResponse> getProfileModels() throws IOException, OpenSearchException {
         return getProfileModels(new GetProfileModelsRequest.Builder().build());
@@ -1160,12 +838,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_profile_tasks
 
     /**
-     * <p>
      * Get a profile tasks.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public CompletableFuture<GetProfileTasksResponse> getProfileTasks(GetProfileTasksRequest request) throws IOException,
         OpenSearchException {
@@ -1173,12 +846,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Get a profile tasks.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetProfileTasksRequest}
      */
@@ -1189,12 +857,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Get a profile tasks.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public final CompletableFuture<GetProfileTasksResponse> getProfileTasks() throws IOException, OpenSearchException {
         return getProfileTasks(new GetProfileTasksRequest.Builder().build());
@@ -1203,24 +866,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_stats
 
     /**
-     * <p>
      * Get stats.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.3</code>
-     * </p>
      */
     public CompletableFuture<GetStatsResponse> getStats(GetStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Get stats.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetStatsRequest}
      */
@@ -1230,12 +883,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Get stats.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.3</code>
-     * </p>
      */
     public final CompletableFuture<GetStatsResponse> getStats() throws IOException, OpenSearchException {
         return getStats(new GetStatsRequest.Builder().build());
@@ -1244,24 +892,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_task
 
     /**
-     * <p>
      * Retrieves a task.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.3</code>
-     * </p>
      */
     public CompletableFuture<GetTaskResponse> getTask(GetTaskRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetTaskRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Retrieves a task.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetTaskRequest}
      */
@@ -1273,24 +911,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.get_tool
 
     /**
-     * <p>
      * Get tools.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<GetToolResponse> getTool(GetToolRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetToolRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Get tools.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetToolRequest}
      */
@@ -1299,15 +927,31 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
         return getTool(fn.apply(new GetToolRequest.Builder()).build());
     }
 
+    // ----- Endpoint: ml.load_model
+
+    /**
+     * Deploys a model.
+     */
+    @Deprecated
+    public CompletableFuture<LoadModelResponse> loadModel(LoadModelRequest request) throws IOException, OpenSearchException {
+        return this.transport.performRequestAsync(request, LoadModelRequest._ENDPOINT, this.transportOptions);
+    }
+
+    /**
+     * Deploys a model.
+     *
+     * @param fn a function that initializes a builder to create the {@link LoadModelRequest}
+     */
+    @Deprecated
+    public final CompletableFuture<LoadModelResponse> loadModel(Function<LoadModelRequest.Builder, ObjectBuilder<LoadModelRequest>> fn)
+        throws IOException, OpenSearchException {
+        return loadModel(fn.apply(new LoadModelRequest.Builder()).build());
+    }
+
     // ----- Endpoint: ml.predict_model_stream
 
     /**
-     * <p>
      * Predicts a model in streaming mode.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      */
     public CompletableFuture<PredictModelStreamResponse> predictModelStream(PredictModelStreamRequest request) throws IOException,
         OpenSearchException {
@@ -1315,12 +959,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Predicts a model in streaming mode.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PredictModelStreamRequest}
      */
@@ -1333,24 +972,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.register_agents
 
     /**
-     * <p>
      * Register an agent.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.13</code>
-     * </p>
      */
     public CompletableFuture<RegisterAgentsResponse> registerAgents(RegisterAgentsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, RegisterAgentsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Register an agent.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.13</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RegisterAgentsRequest}
      */
@@ -1363,24 +992,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.register_model
 
     /**
-     * <p>
      * Registers a model.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.7</code>
-     * </p>
      */
     public CompletableFuture<RegisterModelResponse> registerModel(RegisterModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, RegisterModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Registers a model.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.7</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RegisterModelRequest}
      */
@@ -1414,12 +1033,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.register_model_meta
 
     /**
-     * <p>
      * Registers model metadata.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.7</code>
-     * </p>
      */
     public CompletableFuture<RegisterModelMetaResponse> registerModelMeta(RegisterModelMetaRequest request) throws IOException,
         OpenSearchException {
@@ -1427,12 +1041,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Registers model metadata.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.7</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RegisterModelMetaRequest}
      */
@@ -1445,24 +1054,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.undeploy_model
 
     /**
-     * <p>
      * Undeploys a model.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.7</code>
-     * </p>
      */
     public CompletableFuture<UndeployModelResponse> undeployModel(UndeployModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, UndeployModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Undeploys a model.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.7</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UndeployModelRequest}
      */
@@ -1473,26 +1072,46 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Undeploys a model.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.7</code>
-     * </p>
      */
     public final CompletableFuture<UndeployModelResponse> undeployModel() throws IOException, OpenSearchException {
         return undeployModel(new UndeployModelRequest.Builder().build());
     }
 
+    // ----- Endpoint: ml.unload_model
+
+    /**
+     * Unloads a model.
+     */
+    @Deprecated
+    public CompletableFuture<UnloadModelResponse> unloadModel(UnloadModelRequest request) throws IOException, OpenSearchException {
+        return this.transport.performRequestAsync(request, UnloadModelRequest._ENDPOINT, this.transportOptions);
+    }
+
+    /**
+     * Unloads a model.
+     *
+     * @param fn a function that initializes a builder to create the {@link UnloadModelRequest}
+     */
+    @Deprecated
+    public final CompletableFuture<UnloadModelResponse> unloadModel(
+        Function<UnloadModelRequest.Builder, ObjectBuilder<UnloadModelRequest>> fn
+    ) throws IOException, OpenSearchException {
+        return unloadModel(fn.apply(new UnloadModelRequest.Builder()).build());
+    }
+
+    /**
+     * Unloads a model.
+     */
+    @Deprecated
+    public final CompletableFuture<UnloadModelResponse> unloadModel() throws IOException, OpenSearchException {
+        return unloadModel(new UnloadModelRequest.Builder().build());
+    }
+
     // ----- Endpoint: ml.update_agentic_memory
 
     /**
-     * <p>
      * Update a specific memory by its type and ID.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      */
     public CompletableFuture<UpdateAgenticMemoryResponse> updateAgenticMemory(UpdateAgenticMemoryRequest request) throws IOException,
         OpenSearchException {
@@ -1500,12 +1119,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Update a specific memory by its type and ID.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateAgenticMemoryRequest}
      */
@@ -1518,12 +1132,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.update_connector
 
     /**
-     * <p>
      * Updates a standalone connector.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<UpdateConnectorResponse> updateConnector(UpdateConnectorRequest request) throws IOException,
         OpenSearchException {
@@ -1531,12 +1140,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Updates a standalone connector.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateConnectorRequest}
      */
@@ -1549,12 +1153,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.update_controller
 
     /**
-     * <p>
      * Updates a controller.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<UpdateControllerResponse> updateController(UpdateControllerRequest request) throws IOException,
         OpenSearchException {
@@ -1562,12 +1161,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Updates a controller.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateControllerRequest}
      */
@@ -1580,24 +1174,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.update_memory
 
     /**
-     * <p>
      * Update a memory.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<UpdateMemoryResponse> updateMemory(UpdateMemoryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, UpdateMemoryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Update a memory.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateMemoryRequest}
      */
@@ -1610,12 +1194,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.update_memory_container
 
     /**
-     * <p>
      * Update a memory container.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      */
     public CompletableFuture<UpdateMemoryContainerResponse> updateMemoryContainer(UpdateMemoryContainerRequest request) throws IOException,
         OpenSearchException {
@@ -1623,12 +1202,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Update a memory container.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.3</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateMemoryContainerRequest}
      */
@@ -1641,24 +1215,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.update_message
 
     /**
-     * <p>
      * Update a message.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<UpdateMessageResponse> updateMessage(UpdateMessageRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, UpdateMessageRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Update a message.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateMessageRequest}
      */
@@ -1671,24 +1235,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.update_model
 
     /**
-     * <p>
      * Updates a model.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      */
     public CompletableFuture<UpdateModelResponse> updateModel(UpdateModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, UpdateModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Updates a model.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.12</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateModelRequest}
      */
@@ -1701,12 +1255,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.update_model_group
 
     /**
-     * <p>
      * Updates a model group.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      */
     public CompletableFuture<UpdateModelGroupResponse> updateModelGroup(UpdateModelGroupRequest request) throws IOException,
         OpenSearchException {
@@ -1714,12 +1263,7 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     }
 
     /**
-     * <p>
      * Updates a model group.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.9</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateModelGroupRequest}
      */
@@ -1732,24 +1276,14 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
     // ----- Endpoint: ml.upload_chunk
 
     /**
-     * <p>
      * Uploads model chunk.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.7</code>
-     * </p>
      */
     public CompletableFuture<UploadChunkResponse> uploadChunk(UploadChunkRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, UploadChunkRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Uploads model chunk.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.7</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UploadChunkRequest}
      */
@@ -1757,5 +1291,27 @@ public class OpenSearchMlAsyncClient extends ApiClient<OpenSearchTransport, Open
         Function<UploadChunkRequest.Builder, ObjectBuilder<UploadChunkRequest>> fn
     ) throws IOException, OpenSearchException {
         return uploadChunk(fn.apply(new UploadChunkRequest.Builder()).build());
+    }
+
+    // ----- Endpoint: ml.upload_model
+
+    /**
+     * Registers a model.
+     */
+    @Deprecated
+    public CompletableFuture<UploadModelResponse> uploadModel(UploadModelRequest request) throws IOException, OpenSearchException {
+        return this.transport.performRequestAsync(request, UploadModelRequest._ENDPOINT, this.transportOptions);
+    }
+
+    /**
+     * Registers a model.
+     *
+     * @param fn a function that initializes a builder to create the {@link UploadModelRequest}
+     */
+    @Deprecated
+    public final CompletableFuture<UploadModelResponse> uploadModel(
+        Function<UploadModelRequest.Builder, ObjectBuilder<UploadModelRequest>> fn
+    ) throws IOException, OpenSearchException {
+        return uploadModel(fn.apply(new UploadModelRequest.Builder()).build());
     }
 }

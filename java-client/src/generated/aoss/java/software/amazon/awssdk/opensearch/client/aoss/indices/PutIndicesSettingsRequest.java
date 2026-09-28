@@ -97,6 +97,10 @@ public final class PutIndicesSettingsRequest extends RequestBase
     @Nonnull
     private final List<String> index;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final Boolean preserveExisting;
 
@@ -116,6 +120,7 @@ public final class PutIndicesSettingsRequest extends RequestBase
         this.flatSettings = builder.flatSettings;
         this.ignoreUnavailable = builder.ignoreUnavailable;
         this.index = ApiTypeHelper.unmodifiable(builder.index);
+        this.masterTimeout = builder.masterTimeout;
         this.preserveExisting = builder.preserveExisting;
         this.settings = ApiTypeHelper.requireNonNull(builder.settings, this, "settings");
         this.timeout = builder.timeout;
@@ -196,6 +201,19 @@ public final class PutIndicesSettingsRequest extends RequestBase
     }
 
     /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
      * If <code>true</code>, existing index settings remain unchanged.
      * <p>
      * API name: {@code preserve_existing}
@@ -265,6 +283,8 @@ public final class PutIndicesSettingsRequest extends RequestBase
         @Nullable
         private List<String> index;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Boolean preserveExisting;
         private IndexSettings settings;
         @Nullable
@@ -280,6 +300,7 @@ public final class PutIndicesSettingsRequest extends RequestBase
             this.flatSettings = o.flatSettings;
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.preserveExisting = o.preserveExisting;
             this.settings = o.settings;
             this.timeout = o.timeout;
@@ -293,6 +314,7 @@ public final class PutIndicesSettingsRequest extends RequestBase
             this.flatSettings = o.flatSettings;
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.preserveExisting = o.preserveExisting;
             this.settings = o.settings;
             this.timeout = o.timeout;
@@ -441,6 +463,33 @@ public final class PutIndicesSettingsRequest extends RequestBase
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * If <code>true</code>, existing index settings remain unchanged.
          * <p>
          * API name: {@code preserve_existing}
@@ -538,6 +587,9 @@ public final class PutIndicesSettingsRequest extends RequestBase
         if (this.ignoreUnavailable != null) {
             params.put("ignore_unavailable", String.valueOf(this.ignoreUnavailable));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.preserveExisting != null) {
             params.put("preserve_existing", String.valueOf(this.preserveExisting));
         }
@@ -593,6 +645,7 @@ public final class PutIndicesSettingsRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.flatSettings);
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
         result = 31 * result + Objects.hashCode(this.index);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.preserveExisting);
         result = 31 * result + this.settings.hashCode();
         result = 31 * result + Objects.hashCode(this.timeout);
@@ -610,6 +663,7 @@ public final class PutIndicesSettingsRequest extends RequestBase
             && Objects.equals(this.flatSettings, other.flatSettings)
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
             && Objects.equals(this.index, other.index)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.preserveExisting, other.preserveExisting)
             && this.settings.equals(other.settings)
             && Objects.equals(this.timeout, other.timeout);

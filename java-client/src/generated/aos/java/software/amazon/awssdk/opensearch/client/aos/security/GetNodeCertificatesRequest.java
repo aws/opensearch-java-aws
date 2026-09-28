@@ -62,12 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.get_node_certificates.Request
 
 /**
- * <p>
  * Retrieves the specified node's security certificates.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.15</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetNodeCertificatesRequest extends RequestBase

@@ -74,6 +74,12 @@ public class ShardSearchPipelineStats
     private final Map<String, ShardSearchPipelinePerPipelineStats> pipelines;
 
     @Nullable
+    private final ShardSearchPipelineSystemGeneratedFactories systemGeneratedFactories;
+
+    @Nullable
+    private final ShardSearchPipelineSystemGeneratedProcessors systemGeneratedProcessors;
+
+    @Nullable
     private final ShardSearchPipelineOperationStats totalRequest;
 
     @Nullable
@@ -83,6 +89,8 @@ public class ShardSearchPipelineStats
 
     private ShardSearchPipelineStats(Builder builder) {
         this.pipelines = ApiTypeHelper.unmodifiable(builder.pipelines);
+        this.systemGeneratedFactories = builder.systemGeneratedFactories;
+        this.systemGeneratedProcessors = builder.systemGeneratedProcessors;
         this.totalRequest = builder.totalRequest;
         this.totalResponse = builder.totalResponse;
     }
@@ -97,6 +105,22 @@ public class ShardSearchPipelineStats
     @Nonnull
     public final Map<String, ShardSearchPipelinePerPipelineStats> pipelines() {
         return this.pipelines;
+    }
+
+    /**
+     * API name: {@code system_generated_factories}
+     */
+    @Nullable
+    public final ShardSearchPipelineSystemGeneratedFactories systemGeneratedFactories() {
+        return this.systemGeneratedFactories;
+    }
+
+    /**
+     * API name: {@code system_generated_processors}
+     */
+    @Nullable
+    public final ShardSearchPipelineSystemGeneratedProcessors systemGeneratedProcessors() {
+        return this.systemGeneratedProcessors;
     }
 
     /**
@@ -136,6 +160,16 @@ public class ShardSearchPipelineStats
             generator.writeEnd();
         }
 
+        if (this.systemGeneratedFactories != null) {
+            generator.writeKey("system_generated_factories");
+            this.systemGeneratedFactories.serialize(generator, mapper);
+        }
+
+        if (this.systemGeneratedProcessors != null) {
+            generator.writeKey("system_generated_processors");
+            this.systemGeneratedProcessors.serialize(generator, mapper);
+        }
+
         if (this.totalRequest != null) {
             generator.writeKey("total_request");
             this.totalRequest.serialize(generator, mapper);
@@ -167,6 +201,10 @@ public class ShardSearchPipelineStats
         @Nullable
         private Map<String, ShardSearchPipelinePerPipelineStats> pipelines;
         @Nullable
+        private ShardSearchPipelineSystemGeneratedFactories systemGeneratedFactories;
+        @Nullable
+        private ShardSearchPipelineSystemGeneratedProcessors systemGeneratedProcessors;
+        @Nullable
         private ShardSearchPipelineOperationStats totalRequest;
         @Nullable
         private ShardSearchPipelineOperationStats totalResponse;
@@ -175,12 +213,16 @@ public class ShardSearchPipelineStats
 
         private Builder(ShardSearchPipelineStats o) {
             this.pipelines = _mapCopy(o.pipelines);
+            this.systemGeneratedFactories = o.systemGeneratedFactories;
+            this.systemGeneratedProcessors = o.systemGeneratedProcessors;
             this.totalRequest = o.totalRequest;
             this.totalResponse = o.totalResponse;
         }
 
         private Builder(Builder o) {
             this.pipelines = _mapCopy(o.pipelines);
+            this.systemGeneratedFactories = o.systemGeneratedFactories;
+            this.systemGeneratedProcessors = o.systemGeneratedProcessors;
             this.totalRequest = o.totalRequest;
             this.totalResponse = o.totalResponse;
         }
@@ -230,6 +272,44 @@ public class ShardSearchPipelineStats
             Function<ShardSearchPipelinePerPipelineStats.Builder, ObjectBuilder<ShardSearchPipelinePerPipelineStats>> fn
         ) {
             return pipelines(key, fn.apply(new ShardSearchPipelinePerPipelineStats.Builder()).build());
+        }
+
+        /**
+         * API name: {@code system_generated_factories}
+         */
+        @Nonnull
+        public final Builder systemGeneratedFactories(@Nullable ShardSearchPipelineSystemGeneratedFactories value) {
+            this.systemGeneratedFactories = value;
+            return this;
+        }
+
+        /**
+         * API name: {@code system_generated_factories}
+         */
+        @Nonnull
+        public final Builder systemGeneratedFactories(
+            Function<ShardSearchPipelineSystemGeneratedFactories.Builder, ObjectBuilder<ShardSearchPipelineSystemGeneratedFactories>> fn
+        ) {
+            return systemGeneratedFactories(fn.apply(new ShardSearchPipelineSystemGeneratedFactories.Builder()).build());
+        }
+
+        /**
+         * API name: {@code system_generated_processors}
+         */
+        @Nonnull
+        public final Builder systemGeneratedProcessors(@Nullable ShardSearchPipelineSystemGeneratedProcessors value) {
+            this.systemGeneratedProcessors = value;
+            return this;
+        }
+
+        /**
+         * API name: {@code system_generated_processors}
+         */
+        @Nonnull
+        public final Builder systemGeneratedProcessors(
+            Function<ShardSearchPipelineSystemGeneratedProcessors.Builder, ObjectBuilder<ShardSearchPipelineSystemGeneratedProcessors>> fn
+        ) {
+            return systemGeneratedProcessors(fn.apply(new ShardSearchPipelineSystemGeneratedProcessors.Builder()).build());
         }
 
         /**
@@ -296,6 +376,12 @@ public class ShardSearchPipelineStats
 
     protected static void setupShardSearchPipelineStatsDeserializer(ObjectDeserializer<ShardSearchPipelineStats.Builder> op) {
         op.add(Builder::pipelines, JsonpDeserializer.stringMapDeserializer(ShardSearchPipelinePerPipelineStats._DESERIALIZER), "pipelines");
+        op.add(Builder::systemGeneratedFactories, ShardSearchPipelineSystemGeneratedFactories._DESERIALIZER, "system_generated_factories");
+        op.add(
+            Builder::systemGeneratedProcessors,
+            ShardSearchPipelineSystemGeneratedProcessors._DESERIALIZER,
+            "system_generated_processors"
+        );
         op.add(Builder::totalRequest, ShardSearchPipelineOperationStats._DESERIALIZER, "total_request");
         op.add(Builder::totalResponse, ShardSearchPipelineOperationStats._DESERIALIZER, "total_response");
     }
@@ -304,6 +390,8 @@ public class ShardSearchPipelineStats
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.pipelines);
+        result = 31 * result + Objects.hashCode(this.systemGeneratedFactories);
+        result = 31 * result + Objects.hashCode(this.systemGeneratedProcessors);
         result = 31 * result + Objects.hashCode(this.totalRequest);
         result = 31 * result + Objects.hashCode(this.totalResponse);
         return result;
@@ -315,6 +403,8 @@ public class ShardSearchPipelineStats
         if (o == null || this.getClass() != o.getClass()) return false;
         ShardSearchPipelineStats other = (ShardSearchPipelineStats) o;
         return Objects.equals(this.pipelines, other.pipelines)
+            && Objects.equals(this.systemGeneratedFactories, other.systemGeneratedFactories)
+            && Objects.equals(this.systemGeneratedProcessors, other.systemGeneratedProcessors)
             && Objects.equals(this.totalRequest, other.totalRequest)
             && Objects.equals(this.totalResponse, other.totalResponse);
     }

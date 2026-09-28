@@ -39,12 +39,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.get_stats.Request
 
 /**
- * <p>
  * Get stats.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.3</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetStatsRequest extends RequestBase implements ToCopyableBuilder<GetStatsRequest.Builder, GetStatsRequest> {

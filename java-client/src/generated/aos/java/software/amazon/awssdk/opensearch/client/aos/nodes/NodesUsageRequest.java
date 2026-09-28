@@ -65,12 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.usage.Request
 
 /**
- * <p>
  * Returns low-level information about REST actions usage on nodes.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class NodesUsageRequest extends RequestBase implements ToCopyableBuilder<NodesUsageRequest.Builder, NodesUsageRequest> {

@@ -71,12 +71,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.mtermvectors.Request
 
 /**
- * <p>
- * Returns multiple termvectors in one request.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
+ * Returns multiple term vectors in one request.
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

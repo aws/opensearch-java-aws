@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: knn.get_model.Request
 
 /**
- * <p>
  * Used to retrieve information about models present in the cluster.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetModelRequest extends RequestBase implements ToCopyableBuilder<GetModelRequest.Builder, GetModelRequest> {

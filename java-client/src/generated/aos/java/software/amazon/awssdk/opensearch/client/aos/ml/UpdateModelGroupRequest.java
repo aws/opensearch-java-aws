@@ -45,12 +45,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.update_model_group.Request
 
 /**
- * <p>
  * Updates a model group.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.9</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

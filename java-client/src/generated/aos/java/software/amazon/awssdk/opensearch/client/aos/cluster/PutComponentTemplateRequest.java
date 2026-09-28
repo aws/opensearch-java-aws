@@ -71,12 +71,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.put_component_template.Request
 
 /**
- * <p>
  * Creates or updates a component template.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -93,6 +88,10 @@ public final class PutComponentTemplateRequest extends RequestBase
 
     @Nullable
     private final Boolean create;
+
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
 
     @Nonnull
     private final Map<String, JsonData> meta;
@@ -116,6 +115,7 @@ public final class PutComponentTemplateRequest extends RequestBase
         this.allowAutoCreate = builder.allowAutoCreate;
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.create = builder.create;
+        this.masterTimeout = builder.masterTimeout;
         this.meta = ApiTypeHelper.unmodifiable(builder.meta);
         this.name = ApiTypeHelper.requireNonNull(builder.name, this, "name");
         this.template = ApiTypeHelper.requireNonNull(builder.template, this, "template");
@@ -163,6 +163,20 @@ public final class PutComponentTemplateRequest extends RequestBase
     @Nullable
     public final Boolean create() {
         return this.create;
+    }
+
+    /**
+     * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+     * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+     * <code>-1</code> to indicate an unspecified value.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -280,6 +294,8 @@ public final class PutComponentTemplateRequest extends RequestBase
         @Nullable
         private Boolean create;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Map<String, JsonData> meta;
         private String name;
         private IndexState template;
@@ -295,6 +311,7 @@ public final class PutComponentTemplateRequest extends RequestBase
             this.allowAutoCreate = o.allowAutoCreate;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.create = o.create;
+            this.masterTimeout = o.masterTimeout;
             this.meta = _mapCopy(o.meta);
             this.name = o.name;
             this.template = o.template;
@@ -307,6 +324,7 @@ public final class PutComponentTemplateRequest extends RequestBase
             this.allowAutoCreate = o.allowAutoCreate;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.create = o.create;
+            this.masterTimeout = o.masterTimeout;
             this.meta = _mapCopy(o.meta);
             this.name = o.name;
             this.template = o.template;
@@ -375,6 +393,35 @@ public final class PutComponentTemplateRequest extends RequestBase
         public final Builder create(@Nullable Boolean value) {
             this.create = value;
             return this;
+        }
+
+        /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -516,6 +563,9 @@ public final class PutComponentTemplateRequest extends RequestBase
         if (this.create != null) {
             params.put("create", String.valueOf(this.create));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -551,6 +601,7 @@ public final class PutComponentTemplateRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.allowAutoCreate);
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.create);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.meta);
         result = 31 * result + this.name.hashCode();
         result = 31 * result + this.template.hashCode();
@@ -567,6 +618,7 @@ public final class PutComponentTemplateRequest extends RequestBase
         return Objects.equals(this.allowAutoCreate, other.allowAutoCreate)
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.create, other.create)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.meta, other.meta)
             && this.name.equals(other.name)
             && this.template.equals(other.template)

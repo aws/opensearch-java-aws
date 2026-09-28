@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.flush_cache.Request
 
 /**
- * <p>
  * Flushes the Security plugin's user, authentication, and authorization cache.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class FlushCacheRequest extends RequestBase implements ToCopyableBuilder<FlushCacheRequest.Builder, FlushCacheRequest> {

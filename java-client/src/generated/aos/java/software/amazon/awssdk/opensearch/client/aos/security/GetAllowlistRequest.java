@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.get_allowlist.Request
 
 /**
- * <p>
  * Retrieves the current list of allowed APIs accessible to a normal user.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.1</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetAllowlistRequest extends RequestBase implements ToCopyableBuilder<GetAllowlistRequest.Builder, GetAllowlistRequest> {

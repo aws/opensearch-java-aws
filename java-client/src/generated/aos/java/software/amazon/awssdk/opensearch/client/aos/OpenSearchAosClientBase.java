@@ -49,7 +49,6 @@ import javax.annotation.Nullable;
 import software.amazon.awssdk.opensearch.client.ApiClient;
 import software.amazon.awssdk.opensearch.client.aos.cat.OpenSearchCatClient;
 import software.amazon.awssdk.opensearch.client.aos.cluster.OpenSearchClusterClient;
-import software.amazon.awssdk.opensearch.client.aos.cold.OpenSearchColdClient;
 import software.amazon.awssdk.opensearch.client.aos.core.ClearScrollRequest;
 import software.amazon.awssdk.opensearch.client.aos.core.ClearScrollResponse;
 import software.amazon.awssdk.opensearch.client.aos.core.CountRequest;
@@ -125,7 +124,6 @@ import software.amazon.awssdk.opensearch.client.aos.search_relevance.OpenSearchS
 import software.amazon.awssdk.opensearch.client.aos.security.OpenSearchSecurityClient;
 import software.amazon.awssdk.opensearch.client.aos.snapshot.OpenSearchSnapshotClient;
 import software.amazon.awssdk.opensearch.client.aos.tasks.OpenSearchTasksClient;
-import software.amazon.awssdk.opensearch.client.aos.ubi.OpenSearchUbiClient;
 import software.amazon.awssdk.opensearch.client.aos.ultrawarm.OpenSearchUltrawarmClient;
 import software.amazon.awssdk.opensearch.client.errors.ErrorResponse;
 import software.amazon.awssdk.opensearch.client.errors.OpenSearchException;
@@ -153,10 +151,6 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
 
     public OpenSearchClusterClient cluster() {
         return new OpenSearchClusterClient(this.transport, this.transportOptions);
-    }
-
-    public OpenSearchColdClient cold() {
-        return new OpenSearchColdClient(this.transport, this.transportOptions);
     }
 
     public OpenSearchGeospatialClient geospatial() {
@@ -215,10 +209,6 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
         return new OpenSearchTasksClient(this.transport, this.transportOptions);
     }
 
-    public OpenSearchUbiClient ubi() {
-        return new OpenSearchUbiClient(this.transport, this.transportOptions);
-    }
-
     public OpenSearchUltrawarmClient ultrawarm() {
         return new OpenSearchUltrawarmClient(this.transport, this.transportOptions);
     }
@@ -226,24 +216,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: clear_scroll
 
     /**
-     * <p>
      * Explicitly clears the search context for a scroll.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public ClearScrollResponse clearScroll(ClearScrollRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ClearScrollRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Explicitly clears the search context for a scroll.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ClearScrollRequest}
      */
@@ -253,12 +233,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Explicitly clears the search context for a scroll.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final ClearScrollResponse clearScroll() throws IOException, OpenSearchException {
         return clearScroll(new ClearScrollRequest.Builder().build());
@@ -267,24 +242,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: count
 
     /**
-     * <p>
      * Returns number of documents matching a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CountResponse count(CountRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, CountRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns number of documents matching a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CountRequest}
      */
@@ -294,12 +259,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Returns number of documents matching a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CountResponse count() throws IOException, OpenSearchException {
         return count(new CountRequest.Builder().build());
@@ -308,24 +268,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: create_pit
 
     /**
-     * <p>
      * Creates point in time context.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public CreatePitResponse createPit(CreatePitRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, CreatePitRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates point in time context.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreatePitRequest}
      */
@@ -337,24 +287,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: delete
 
     /**
-     * <p>
      * Removes a document from the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeleteResponse delete(DeleteRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Removes a document from the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteRequest}
      */
@@ -366,24 +306,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: delete_all_pits
 
     /**
-     * <p>
      * Deletes all active point in time searches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public DeleteAllPitsResponse deleteAllPits(DeleteAllPitsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteAllPitsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes all active point in time searches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteAllPitsRequest}
      */
@@ -393,12 +323,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Deletes all active point in time searches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public final DeleteAllPitsResponse deleteAllPits() throws IOException, OpenSearchException {
         return deleteAllPits(new DeleteAllPitsRequest.Builder().build());
@@ -407,24 +332,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: delete_by_query
 
     /**
-     * <p>
      * Deletes documents matching the provided query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeleteByQueryResponse deleteByQuery(DeleteByQueryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteByQueryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes documents matching the provided query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteByQueryRequest}
      */
@@ -436,12 +351,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: delete_by_query_rethrottle
 
     /**
-     * <p>
      * Changes the number of requests per second for a particular Delete By Query operation.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeleteByQueryRethrottleResponse deleteByQueryRethrottle(DeleteByQueryRethrottleRequest request) throws IOException,
         OpenSearchException {
@@ -449,12 +359,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Changes the number of requests per second for a particular Delete By Query operation.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteByQueryRethrottleRequest}
      */
@@ -467,24 +372,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: delete_pit
 
     /**
-     * <p>
      * Deletes one or more point in time searches based on the IDs passed.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public DeletePitResponse deletePit(DeletePitRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeletePitRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes one or more point in time searches based on the IDs passed.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeletePitRequest}
      */
@@ -496,24 +391,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: delete_script
 
     /**
-     * <p>
      * Deletes a script.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeleteScriptResponse deleteScript(DeleteScriptRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteScriptRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a script.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteScriptRequest}
      */
@@ -525,24 +410,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: exists
 
     /**
-     * <p>
      * Returns information about whether a document exists in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public BooleanResponse exists(ExistsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ExistsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about whether a document exists in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsRequest}
      */
@@ -554,24 +429,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: exists_source
 
     /**
-     * <p>
      * Returns information about whether a document source exists in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public BooleanResponse existsSource(ExistsSourceRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ExistsSourceRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about whether a document source exists in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsSourceRequest}
      */
@@ -583,12 +448,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: explain
 
     /**
-     * <p>
      * Returns information about why a specific document matches (or doesn't match) a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TDocument> ExplainResponse<TDocument> explain(ExplainRequest request, Class<TDocument> tDocumentClass) throws IOException,
         OpenSearchException {
@@ -607,12 +467,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Returns information about why a specific document matches (or doesn't match) a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExplainRequest}
      */
@@ -626,24 +481,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: field_caps
 
     /**
-     * <p>
      * Returns the information about the capabilities of fields among multiple indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public FieldCapsResponse fieldCaps(FieldCapsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, FieldCapsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns the information about the capabilities of fields among multiple indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link FieldCapsRequest}
      */
@@ -653,12 +498,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Returns the information about the capabilities of fields among multiple indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final FieldCapsResponse fieldCaps() throws IOException, OpenSearchException {
         return fieldCaps(new FieldCapsRequest.Builder().build());
@@ -667,12 +507,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: get
 
     /**
-     * <p>
      * Returns a document.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TDocument> GetResponse<TDocument> get(GetRequest request, Class<TDocument> tDocumentClass) throws IOException,
         OpenSearchException {
@@ -691,12 +526,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Returns a document.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetRequest}
      */
@@ -710,24 +540,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: get_all_pits
 
     /**
-     * <p>
      * Lists all active point in time searches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public GetAllPitsResponse getAllPits(GetAllPitsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetAllPitsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Lists all active point in time searches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetAllPitsRequest}
      */
@@ -737,12 +557,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Lists all active point in time searches.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.4</code>
-     * </p>
      */
     public final GetAllPitsResponse getAllPits() throws IOException, OpenSearchException {
         return getAllPits(new GetAllPitsRequest.Builder().build());
@@ -751,24 +566,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: get_script
 
     /**
-     * <p>
      * Returns a script.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetScriptResponse getScript(GetScriptRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetScriptRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns a script.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetScriptRequest}
      */
@@ -780,12 +585,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: get_source
 
     /**
-     * <p>
      * Returns the source of a document.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TDocument> GetSourceResponse<TDocument> getSource(GetSourceRequest request, Class<TDocument> tDocumentClass) throws IOException,
         OpenSearchException {
@@ -804,12 +604,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Returns the source of a document.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetSourceRequest}
      */
@@ -823,24 +618,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: info
 
     /**
-     * <p>
      * Returns basic information about the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public InfoResponse info(InfoRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, InfoRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns basic information about the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link InfoRequest}
      */
@@ -849,12 +634,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Returns basic information about the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final InfoResponse info() throws IOException, OpenSearchException {
         return info(new InfoRequest.Builder().build());
@@ -863,24 +643,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: mtermvectors
 
     /**
-     * <p>
-     * Returns multiple termvectors in one request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
+     * Returns multiple term vectors in one request.
      */
     public MtermvectorsResponse mtermvectors(MtermvectorsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, MtermvectorsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
-     * Returns multiple termvectors in one request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
+     * Returns multiple term vectors in one request.
      *
      * @param fn a function that initializes a builder to create the {@link MtermvectorsRequest}
      */
@@ -890,12 +660,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
-     * Returns multiple termvectors in one request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
+     * Returns multiple term vectors in one request.
      */
     public final MtermvectorsResponse mtermvectors() throws IOException, OpenSearchException {
         return mtermvectors(new MtermvectorsRequest.Builder().build());
@@ -904,24 +669,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: ping
 
     /**
-     * <p>
      * Returns whether the cluster is running.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public BooleanResponse ping(PingRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PingRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns whether the cluster is running.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PingRequest}
      */
@@ -931,12 +686,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Returns whether the cluster is running.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final BooleanResponse ping() throws IOException, OpenSearchException {
         return ping(new PingRequest.Builder().build());
@@ -945,24 +695,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: put_script
 
     /**
-     * <p>
      * Creates or updates a script.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public PutScriptResponse putScript(PutScriptRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutScriptRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates or updates a script.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutScriptRequest}
      */
@@ -974,24 +714,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: rank_eval
 
     /**
-     * <p>
      * Allows to evaluate the quality of ranked search results over a set of typical search queries.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public RankEvalResponse rankEval(RankEvalRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, RankEvalRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Allows to evaluate the quality of ranked search results over a set of typical search queries.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RankEvalRequest}
      */
@@ -1003,26 +733,16 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: reindex
 
     /**
-     * <p>
      * Allows to copy documents from one index to another, optionally filtering the source documents by a query, changing the destination
      * index settings, or fetching the documents from a remote cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public ReindexResponse reindex(ReindexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ReindexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Allows to copy documents from one index to another, optionally filtering the source documents by a query, changing the destination
      * index settings, or fetching the documents from a remote cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ReindexRequest}
      */
@@ -1034,24 +754,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: reindex_rethrottle
 
     /**
-     * <p>
      * Changes the number of requests per second for a particular reindex operation.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public ReindexRethrottleResponse reindexRethrottle(ReindexRethrottleRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ReindexRethrottleRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Changes the number of requests per second for a particular reindex operation.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ReindexRethrottleRequest}
      */
@@ -1064,24 +774,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: render_search_template
 
     /**
-     * <p>
      * Allows to use the Mustache language to pre-render a search definition.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public RenderSearchTemplateResponse renderSearchTemplate(RenderSearchTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, RenderSearchTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Allows to use the Mustache language to pre-render a search definition.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RenderSearchTemplateRequest}
      */
@@ -1092,12 +792,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Allows to use the Mustache language to pre-render a search definition.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final RenderSearchTemplateResponse renderSearchTemplate() throws IOException, OpenSearchException {
         return renderSearchTemplate(new RenderSearchTemplateRequest.Builder().build());
@@ -1106,12 +801,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: scripts_painless_execute
 
     /**
-     * <p>
      * Allows an arbitrary script to be executed and a result to be returned.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TResult> ScriptsPainlessExecuteResponse<TResult> scriptsPainlessExecute(
         ScriptsPainlessExecuteRequest request,
@@ -1132,12 +822,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Allows an arbitrary script to be executed and a result to be returned.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ScriptsPainlessExecuteRequest}
      */
@@ -1151,12 +836,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: scroll
 
     /**
-     * <p>
      * Allows to retrieve a large numbers of results from a single search request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TDocument> ScrollResponse<TDocument> scroll(ScrollRequest request, Class<TDocument> tDocumentClass) throws IOException,
         OpenSearchException {
@@ -1175,12 +855,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Allows to retrieve a large numbers of results from a single search request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ScrollRequest}
      */
@@ -1194,12 +869,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: search
 
     /**
-     * <p>
      * Returns results matching a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TDocument> SearchResponse<TDocument> search(SearchRequest request, Class<TDocument> tDocumentClass) throws IOException,
         OpenSearchException {
@@ -1218,12 +888,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Returns results matching a query.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SearchRequest}
      */
@@ -1237,24 +902,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: search_shards
 
     /**
-     * <p>
      * Returns information about the indexes and shards that a search request would be executed against.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public SearchShardsResponse searchShards(SearchShardsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, SearchShardsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about the indexes and shards that a search request would be executed against.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SearchShardsRequest}
      */
@@ -1263,15 +918,17 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
         return searchShards(fn.apply(new SearchShardsRequest.Builder()).build());
     }
 
+    /**
+     * Returns information about the indexes and shards that a search request would be executed against.
+     */
+    public final SearchShardsResponse searchShards() throws IOException, OpenSearchException {
+        return searchShards(new SearchShardsRequest.Builder().build());
+    }
+
     // ----- Endpoint: search_template
 
     /**
-     * <p>
      * Allows to use the Mustache language to pre-render a search definition.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public <TDocument> SearchTemplateResponse<TDocument> searchTemplate(SearchTemplateRequest request, Class<TDocument> tDocumentClass)
         throws IOException, OpenSearchException {
@@ -1290,12 +947,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Allows to use the Mustache language to pre-render a search definition.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SearchTemplateRequest}
      */
@@ -1309,24 +961,14 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: update_by_query
 
     /**
-     * <p>
      * Performs an update on every document in the index without changing the source, for example to pick up a mapping change.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public UpdateByQueryResponse updateByQuery(UpdateByQueryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, UpdateByQueryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Performs an update on every document in the index without changing the source, for example to pick up a mapping change.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateByQueryRequest}
      */
@@ -1338,12 +980,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     // ----- Endpoint: update_by_query_rethrottle
 
     /**
-     * <p>
      * Changes the number of requests per second for a particular Update By Query operation.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public UpdateByQueryRethrottleResponse updateByQueryRethrottle(UpdateByQueryRethrottleRequest request) throws IOException,
         OpenSearchException {
@@ -1351,12 +988,7 @@ public abstract class OpenSearchAosClientBase<Self extends OpenSearchAosClientBa
     }
 
     /**
-     * <p>
      * Changes the number of requests per second for a particular Update By Query operation.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateByQueryRethrottleRequest}
      */

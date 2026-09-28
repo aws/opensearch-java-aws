@@ -60,12 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.clear_cache.Request
 
 /**
- * <p>
  * Clears the store caches.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.19</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ClearCacheRequest extends RequestBase implements ToCopyableBuilder<ClearCacheRequest.Builder, ClearCacheRequest> {

@@ -74,12 +74,7 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: geospatial.delete_ip2geo_datasource
 
     /**
-     * <p>
      * Delete a specific IP2Geo data source.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public CompletableFuture<DeleteIp2geoDatasourceResponse> deleteIp2geoDatasource(DeleteIp2geoDatasourceRequest request)
         throws IOException, OpenSearchException {
@@ -87,12 +82,7 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Delete a specific IP2Geo data source.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteIp2geoDatasourceRequest}
      */
@@ -113,9 +103,6 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
      * <li>When type is <code>geo_shape</code>, all geometry types are allowed (Point, MultiPoint, LineString, MultiLineString, Polygon,
      * MultiPolygon, GeometryCollection, Envelope).</li>
      * </ul>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public CompletableFuture<GeojsonUploadPostResponse> geojsonUploadPost(GeojsonUploadPostRequest request) throws IOException,
         OpenSearchException {
@@ -131,9 +118,6 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
      * <li>When type is <code>geo_shape</code>, all geometry types are allowed (Point, MultiPoint, LineString, MultiLineString, Polygon,
      * MultiPolygon, GeometryCollection, Envelope).</li>
      * </ul>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GeojsonUploadPostRequest}
      */
@@ -154,9 +138,6 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
      * <li>When type is <code>geo_shape</code>, all geometry types are allowed (Point, MultiPoint, LineString, MultiLineString, Polygon,
      * MultiPolygon, GeometryCollection, Envelope).</li>
      * </ul>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public CompletableFuture<GeojsonUploadPutResponse> geojsonUploadPut(GeojsonUploadPutRequest request) throws IOException,
         OpenSearchException {
@@ -172,9 +153,6 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
      * <li>When type is <code>geo_shape</code>, all geometry types are allowed (Point, MultiPoint, LineString, MultiLineString, Polygon,
      * MultiPolygon, GeometryCollection, Envelope).</li>
      * </ul>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GeojsonUploadPutRequest}
      */
@@ -187,12 +165,7 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: geospatial.get_ip2geo_datasource
 
     /**
-     * <p>
      * Get one or more IP2Geo data sources, defaulting to returning all if no names specified.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public CompletableFuture<GetIp2geoDatasourceResponse> getIp2geoDatasource(GetIp2geoDatasourceRequest request) throws IOException,
         OpenSearchException {
@@ -200,12 +173,7 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Get one or more IP2Geo data sources, defaulting to returning all if no names specified.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetIp2geoDatasourceRequest}
      */
@@ -216,12 +184,7 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Get one or more IP2Geo data sources, defaulting to returning all if no names specified.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public final CompletableFuture<GetIp2geoDatasourceResponse> getIp2geoDatasource() throws IOException, OpenSearchException {
         return getIp2geoDatasource(new GetIp2geoDatasourceRequest.Builder().build());
@@ -230,24 +193,14 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: geospatial.get_upload_stats
 
     /**
-     * <p>
      * Retrieves statistics for all geospatial uploads.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public CompletableFuture<GetUploadStatsResponse> getUploadStats(GetUploadStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetUploadStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Retrieves statistics for all geospatial uploads.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetUploadStatsRequest}
      */
@@ -258,12 +211,7 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Retrieves statistics for all geospatial uploads.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public final CompletableFuture<GetUploadStatsResponse> getUploadStats() throws IOException, OpenSearchException {
         return getUploadStats(new GetUploadStatsRequest.Builder().build());
@@ -279,9 +227,6 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
      * <li><code>endpoint</code>: <code>&quot;https://geoip.maps.opensearch.org/v1/geolite2-city/manifest.json&quot;</code></li>
      * <li><code>update_interval_in_days</code>: 3.</li>
      * </ul>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public CompletableFuture<PutIp2geoDatasourceResponse> putIp2geoDatasource(PutIp2geoDatasourceRequest request) throws IOException,
         OpenSearchException {
@@ -296,9 +241,6 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
      * <li><code>endpoint</code>: <code>&quot;https://geoip.maps.opensearch.org/v1/geolite2-city/manifest.json&quot;</code></li>
      * <li><code>update_interval_in_days</code>: 3.</li>
      * </ul>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutIp2geoDatasourceRequest}
      */
@@ -311,12 +253,7 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: geospatial.put_ip2geo_datasource_settings
 
     /**
-     * <p>
      * Update a specific IP2Geo data source.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      */
     public CompletableFuture<PutIp2geoDatasourceSettingsResponse> putIp2geoDatasourceSettings(PutIp2geoDatasourceSettingsRequest request)
         throws IOException, OpenSearchException {
@@ -324,12 +261,7 @@ public class OpenSearchGeospatialAsyncClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Update a specific IP2Geo data source.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>2.11</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutIp2geoDatasourceSettingsRequest}
      */

@@ -69,12 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.update_distinguished_name.Request
 
 /**
- * <p>
  * Adds or updates the specified distinguished names in the cluster or node allowlist. Requires super admin or REST API permissions.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

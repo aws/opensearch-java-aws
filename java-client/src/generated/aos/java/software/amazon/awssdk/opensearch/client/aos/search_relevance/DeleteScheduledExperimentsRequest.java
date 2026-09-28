@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: search_relevance.delete_scheduled_experiments.Request
 
 /**
- * <p>
  * Deletes a specified scheduled experiment.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.4</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteScheduledExperimentsRequest extends RequestBase

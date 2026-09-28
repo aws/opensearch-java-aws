@@ -62,12 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ingestion.pause.Request
 
 /**
- * <p>
  * Use this API to pause ingestion for a given index.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.1</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class PauseRequest extends RequestBase implements ToCopyableBuilder<PauseRequest.Builder, PauseRequest> {

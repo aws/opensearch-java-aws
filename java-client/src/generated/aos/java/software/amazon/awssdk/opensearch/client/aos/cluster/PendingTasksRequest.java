@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.pending_tasks.Request
 
 /**
- * <p>
  * Returns a list of pending cluster-level tasks, such as index creation, mapping updates, or new allocations.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class PendingTasksRequest extends RequestBase implements ToCopyableBuilder<PendingTasksRequest.Builder, PendingTasksRequest> {
@@ -77,12 +72,17 @@ public final class PendingTasksRequest extends RequestBase implements ToCopyable
     @Nullable
     private final Boolean local;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     // ---------------------------------------------------------------------------------------------
 
     private PendingTasksRequest(Builder builder) {
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.local = builder.local;
+        this.masterTimeout = builder.masterTimeout;
     }
 
     public static PendingTasksRequest of(Function<PendingTasksRequest.Builder, ObjectBuilder<PendingTasksRequest>> fn) {
@@ -113,6 +113,20 @@ public final class PendingTasksRequest extends RequestBase implements ToCopyable
         return this.local;
     }
 
+    /**
+     * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+     * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+     * <code>-1</code> to indicate an unspecified value.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     @Override
@@ -134,6 +148,8 @@ public final class PendingTasksRequest extends RequestBase implements ToCopyable
         private Time clusterManagerTimeout;
         @Nullable
         private Boolean local;
+        @Nullable
+        private Time masterTimeout;
 
         public Builder() {}
 
@@ -141,12 +157,14 @@ public final class PendingTasksRequest extends RequestBase implements ToCopyable
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
         }
 
         private Builder(Builder o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
         }
 
         @Override
@@ -200,6 +218,35 @@ public final class PendingTasksRequest extends RequestBase implements ToCopyable
         }
 
         /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Builds a {@link PendingTasksRequest}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -223,6 +270,9 @@ public final class PendingTasksRequest extends RequestBase implements ToCopyable
         }
         if (this.local != null) {
             params.put("local", String.valueOf(this.local));
+        }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
         }
     }
 
@@ -250,6 +300,7 @@ public final class PendingTasksRequest extends RequestBase implements ToCopyable
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.local);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         return result;
     }
 
@@ -258,6 +309,8 @@ public final class PendingTasksRequest extends RequestBase implements ToCopyable
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         PendingTasksRequest other = (PendingTasksRequest) o;
-        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout) && Objects.equals(this.local, other.local);
+        return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && Objects.equals(this.local, other.local)
+            && Objects.equals(this.masterTimeout, other.masterTimeout);
     }
 }

@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: knn.delete_model.Request
 
 /**
- * <p>
  * Used to delete a particular model in the cluster.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteModelRequest extends RequestBase implements ToCopyableBuilder<DeleteModelRequest.Builder, DeleteModelRequest> {

@@ -107,6 +107,10 @@ public final class RestoreSnapshotRequest extends RequestBase
     @Nonnull
     private final List<String> indices;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final Boolean partial;
 
@@ -153,6 +157,7 @@ public final class RestoreSnapshotRequest extends RequestBase
         this.includeGlobalState = builder.includeGlobalState;
         this.indexSettings = builder.indexSettings;
         this.indices = ApiTypeHelper.unmodifiable(builder.indices);
+        this.masterTimeout = builder.masterTimeout;
         this.partial = builder.partial;
         this.renameAliasPattern = builder.renameAliasPattern;
         this.renameAliasReplacement = builder.renameAliasReplacement;
@@ -171,9 +176,7 @@ public final class RestoreSnapshotRequest extends RequestBase
     }
 
     /**
-     * AOSS-only. When true, interprets rename_pattern and rename_replacement as regular expressions using Java Matcher.appendReplacement
-     * semantics, allowing capture-group back-references (e.g. $1). When false (default), the values are treated as plain strings, matching
-     * standard OSS behaviour.
+     * When true, rename_pattern/replacement use Java regex with capture groups (e.g. $1); false = plain strings.
      * <p>
      * API name: {@code allow_regex}
      * </p>
@@ -277,6 +280,18 @@ public final class RestoreSnapshotRequest extends RequestBase
     }
 
     /**
+     * Explicit operation timeout for connection to cluster-manager node
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
      * How the restore operation will behave if indexes in the snapshot do not have all primary shards available. When <code>false</code>,
      * the entire restore operation fails if any indexes in the snapshot do not have all primary shards available. When <code>true</code>,
      * allows the restoration of a partial snapshot of indexes with unavailable shards. Only shards that were successfully included in the
@@ -345,7 +360,8 @@ public final class RestoreSnapshotRequest extends RequestBase
     }
 
     /**
-     * Required - The name of the repository containing the snapshot
+     * Required - On AOSS the snapshot repository is fixed: use <code>aoss-automated</code>. Custom repositories and wildcards are not
+     * supported.
      * <p>
      * API name: {@code repository}
      * </p>
@@ -367,10 +383,8 @@ public final class RestoreSnapshotRequest extends RequestBase
     }
 
     /**
-     * AOSS-only. The ID of the source collection to restore the snapshot from. When set, the restore reads snapshot segment data from the
-     * source collection's S3 path ({accountId}/{sourceCollectionId}/) instead of the target collection's path, enabling cross-collection
-     * restore (CCR). The CCR feature flag must be enabled for the account; both collections must share the same type and KMS encryption
-     * context. Omitting this field restores from the same collection's own snapshot.
+     * Source collection to restore from (cross-collection restore); requires the CCR feature flag. Omit to restore from the same
+     * collection.
      * <p>
      * API name: {@code sourceCollectionId}
      * </p>
@@ -555,6 +569,8 @@ public final class RestoreSnapshotRequest extends RequestBase
         @Nullable
         private List<String> indices;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Boolean partial;
         @Nullable
         private String renameAliasPattern;
@@ -588,6 +604,7 @@ public final class RestoreSnapshotRequest extends RequestBase
             this.includeGlobalState = o.includeGlobalState;
             this.indexSettings = o.indexSettings;
             this.indices = _listCopy(o.indices);
+            this.masterTimeout = o.masterTimeout;
             this.partial = o.partial;
             this.renameAliasPattern = o.renameAliasPattern;
             this.renameAliasReplacement = o.renameAliasReplacement;
@@ -612,6 +629,7 @@ public final class RestoreSnapshotRequest extends RequestBase
             this.includeGlobalState = o.includeGlobalState;
             this.indexSettings = o.indexSettings;
             this.indices = _listCopy(o.indices);
+            this.masterTimeout = o.masterTimeout;
             this.partial = o.partial;
             this.renameAliasPattern = o.renameAliasPattern;
             this.renameAliasReplacement = o.renameAliasReplacement;
@@ -638,9 +656,7 @@ public final class RestoreSnapshotRequest extends RequestBase
         }
 
         /**
-         * AOSS-only. When true, interprets rename_pattern and rename_replacement as regular expressions using Java
-         * Matcher.appendReplacement semantics, allowing capture-group back-references (e.g. $1). When false (default), the values are
-         * treated as plain strings, matching standard OSS behaviour.
+         * When true, rename_pattern/replacement use Java regex with capture groups (e.g. $1); false = plain strings.
          * <p>
          * API name: {@code allow_regex}
          * </p>
@@ -814,6 +830,31 @@ public final class RestoreSnapshotRequest extends RequestBase
         }
 
         /**
+         * Explicit operation timeout for connection to cluster-manager node
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Explicit operation timeout for connection to cluster-manager node
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * How the restore operation will behave if indexes in the snapshot do not have all primary shards available. When
          * <code>false</code>, the entire restore operation fails if any indexes in the snapshot do not have all primary shards available.
          * When <code>true</code>, allows the restoration of a partial snapshot of indexes with unavailable shards. Only shards that were
@@ -887,7 +928,8 @@ public final class RestoreSnapshotRequest extends RequestBase
         }
 
         /**
-         * Required - The name of the repository containing the snapshot
+         * Required - On AOSS the snapshot repository is fixed: use <code>aoss-automated</code>. Custom repositories and wildcards are not
+         * supported.
          * <p>
          * API name: {@code repository}
          * </p>
@@ -911,10 +953,8 @@ public final class RestoreSnapshotRequest extends RequestBase
         }
 
         /**
-         * AOSS-only. The ID of the source collection to restore the snapshot from. When set, the restore reads snapshot segment data from
-         * the source collection's S3 path ({accountId}/{sourceCollectionId}/) instead of the target collection's path, enabling
-         * cross-collection restore (CCR). The CCR feature flag must be enabled for the account; both collections must share the same type
-         * and KMS encryption context. Omitting this field restores from the same collection's own snapshot.
+         * Source collection to restore from (cross-collection restore); requires the CCR feature flag. Omit to restore from the same
+         * collection.
          * <p>
          * API name: {@code sourceCollectionId}
          * </p>
@@ -1023,6 +1063,9 @@ public final class RestoreSnapshotRequest extends RequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.waitForCompletion != null) {
             params.put("wait_for_completion", String.valueOf(this.waitForCompletion));
         }
@@ -1067,6 +1110,7 @@ public final class RestoreSnapshotRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.includeGlobalState);
         result = 31 * result + Objects.hashCode(this.indexSettings);
         result = 31 * result + Objects.hashCode(this.indices);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.partial);
         result = 31 * result + Objects.hashCode(this.renameAliasPattern);
         result = 31 * result + Objects.hashCode(this.renameAliasReplacement);
@@ -1095,6 +1139,7 @@ public final class RestoreSnapshotRequest extends RequestBase
             && Objects.equals(this.includeGlobalState, other.includeGlobalState)
             && Objects.equals(this.indexSettings, other.indexSettings)
             && Objects.equals(this.indices, other.indices)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.partial, other.partial)
             && Objects.equals(this.renameAliasPattern, other.renameAliasPattern)
             && Objects.equals(this.renameAliasReplacement, other.renameAliasReplacement)

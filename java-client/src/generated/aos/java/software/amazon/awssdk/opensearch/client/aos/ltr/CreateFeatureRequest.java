@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.create_feature.Request
 
 /**
- * <p>
  * Create or update a feature in the default feature store.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.19</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class CreateFeatureRequest extends RequestBase

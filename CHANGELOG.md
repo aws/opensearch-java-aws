@@ -7,6 +7,7 @@ data-plane clients for Amazon OpenSearch Service (AOS) and Amazon OpenSearch
 Serverless (AOSS).
 
 ### Added
+- Bundled AOS and AOSS OpenAPI snapshots as the default inputs for distribution client generation ([#14](https://github.com/aws/opensearch-java-aws/pull/14)).
 - Typed AOS and AOSS data-plane clients under `software.amazon.awssdk.opensearch.client`, generated per distribution into `src/generated/aos` and `src/generated/aoss`.
 - Handwritten AOS and AOSS APIs and shared AWS runtime (SigV4 transport, JSON model support).
 - `Build Distributions` CI workflow that compiles the AOS and AOSS clients and runs their unit tests across JDK 21 and 25.
@@ -14,7 +15,7 @@ Serverless (AOSS).
 ### Dependencies
 
 ### Changed
-- Set the `java-client` compile target to Java 8 to match upstream opensearch-java, so the published client runs on any JVM >= 8 while building with a JDK 17/21 toolchain.
+- Set the `java-client` compile target to Java 8 to match upstream opensearch-java, so the published client runs on any JVM >= 8 while building with JDK 21 or newer.
 - Moved the code generator to `software.amazon.awssdk.opensearch.client.codegen`, so the emitted `@Generated(...)` marker references a class that exists in this fork.
 - Removed the unsupported `refresh` parameter from AOSS multi-get requests.
 - Consolidated the handwritten sources into the standard `src/main/java` layout (from `src/java`) and moved `version.properties` to its package resource path, updating the `awsRuntime`/`aos`/`aoss` source sets to match.

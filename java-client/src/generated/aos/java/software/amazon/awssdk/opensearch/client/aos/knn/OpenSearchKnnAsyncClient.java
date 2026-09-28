@@ -74,24 +74,14 @@ public class OpenSearchKnnAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: knn.delete_model
 
     /**
-     * <p>
      * Used to delete a particular model in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeleteModelResponse> deleteModel(DeleteModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Used to delete a particular model in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteModelRequest}
      */
@@ -104,24 +94,14 @@ public class OpenSearchKnnAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: knn.get_model
 
     /**
-     * <p>
      * Used to retrieve information about models present in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetModelResponse> getModel(GetModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Used to retrieve information about models present in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetModelRequest}
      */
@@ -133,24 +113,14 @@ public class OpenSearchKnnAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: knn.search_models
 
     /**
-     * <p>
      * Use an OpenSearch query to search for models in the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<SearchModelsResponse> searchModels(SearchModelsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, SearchModelsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Use an OpenSearch query to search for models in the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SearchModelsRequest}
      */
@@ -161,12 +131,7 @@ public class OpenSearchKnnAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Use an OpenSearch query to search for models in the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<SearchModelsResponse> searchModels() throws IOException, OpenSearchException {
         return searchModels(new SearchModelsRequest.Builder().build());
@@ -175,24 +140,14 @@ public class OpenSearchKnnAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: knn.stats
 
     /**
-     * <p>
      * Provides information about the current status of the k-NN plugin.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<KnnStatsResponse> stats(KnnStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, KnnStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Provides information about the current status of the k-NN plugin.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link KnnStatsRequest}
      */
@@ -202,12 +157,7 @@ public class OpenSearchKnnAsyncClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Provides information about the current status of the k-NN plugin.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<KnnStatsResponse> stats() throws IOException, OpenSearchException {
         return stats(new KnnStatsRequest.Builder().build());
@@ -216,24 +166,14 @@ public class OpenSearchKnnAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: knn.train_model
 
     /**
-     * <p>
      * Create and train a model that can be used for initializing k-NN native library indexes during indexing.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<TrainModelResponse> trainModel(TrainModelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, TrainModelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Create and train a model that can be used for initializing k-NN native library indexes during indexing.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link TrainModelRequest}
      */
@@ -245,24 +185,14 @@ public class OpenSearchKnnAsyncClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: knn.warmup
 
     /**
-     * <p>
      * Preloads native library files into memory, reducing initial search latency for specified indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<WarmupResponse> warmup(WarmupRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, WarmupRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Preloads native library files into memory, reducing initial search latency for specified indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link WarmupRequest}
      */

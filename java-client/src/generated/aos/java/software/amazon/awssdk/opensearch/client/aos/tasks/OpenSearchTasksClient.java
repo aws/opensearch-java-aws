@@ -73,24 +73,14 @@ public class OpenSearchTasksClient extends ApiClient<OpenSearchTransport, OpenSe
     // ----- Endpoint: tasks.cancel
 
     /**
-     * <p>
      * Cancels a task, if it can be cancelled through an API.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CancelResponse cancel(CancelRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, CancelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Cancels a task, if it can be cancelled through an API.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CancelRequest}
      */
@@ -100,12 +90,7 @@ public class OpenSearchTasksClient extends ApiClient<OpenSearchTransport, OpenSe
     }
 
     /**
-     * <p>
      * Cancels a task, if it can be cancelled through an API.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CancelResponse cancel() throws IOException, OpenSearchException {
         return cancel(new CancelRequest.Builder().build());
@@ -114,24 +99,14 @@ public class OpenSearchTasksClient extends ApiClient<OpenSearchTransport, OpenSe
     // ----- Endpoint: tasks.delete
 
     /**
-     * <p>
      * Deletes a stored completed task result.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.9</code>
-     * </p>
      */
     public DeleteTasksResponse delete(DeleteTasksRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteTasksRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a stored completed task result.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.9</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteTasksRequest}
      */
@@ -143,24 +118,14 @@ public class OpenSearchTasksClient extends ApiClient<OpenSearchTransport, OpenSe
     // ----- Endpoint: tasks.get
 
     /**
-     * <p>
      * Returns information about a task.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetTasksResponse get(GetTasksRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetTasksRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about a task.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetTasksRequest}
      */
@@ -172,24 +137,14 @@ public class OpenSearchTasksClient extends ApiClient<OpenSearchTransport, OpenSe
     // ----- Endpoint: tasks.list
 
     /**
-     * <p>
      * Returns a list of tasks.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public ListResponse list(ListRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ListRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns a list of tasks.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ListRequest}
      */
@@ -198,12 +153,7 @@ public class OpenSearchTasksClient extends ApiClient<OpenSearchTransport, OpenSe
     }
 
     /**
-     * <p>
      * Returns a list of tasks.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final ListResponse list() throws IOException, OpenSearchException {
         return list(new ListRequest.Builder().build());

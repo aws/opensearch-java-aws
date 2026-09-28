@@ -81,6 +81,9 @@ public class GetMessageResponse implements PlainJsonSerializable, ToCopyableBuil
     @Nullable
     private final Long traceNumber;
 
+    @Nullable
+    private final String updatedTime;
+
     // ---------------------------------------------------------------------------------------------
 
     private GetMessageResponse(Builder builder) {
@@ -96,6 +99,7 @@ public class GetMessageResponse implements PlainJsonSerializable, ToCopyableBuil
         this.response = builder.response;
         this.role = builder.role;
         this.traceNumber = builder.traceNumber;
+        this.updatedTime = builder.updatedTime;
     }
 
     public static GetMessageResponse of(Function<GetMessageResponse.Builder, ObjectBuilder<GetMessageResponse>> fn) {
@@ -223,6 +227,17 @@ public class GetMessageResponse implements PlainJsonSerializable, ToCopyableBuil
     }
 
     /**
+     * The time the message was last updated.
+     * <p>
+     * API name: {@code updated_time}
+     * </p>
+     */
+    @Nullable
+    public final String updatedTime() {
+        return this.updatedTime;
+    }
+
+    /**
      * Serialize this object to JSON.
      */
     @Override
@@ -301,6 +316,11 @@ public class GetMessageResponse implements PlainJsonSerializable, ToCopyableBuil
             generator.writeKey("trace_number");
             generator.write(this.traceNumber);
         }
+
+        if (this.updatedTime != null) {
+            generator.writeKey("updated_time");
+            generator.write(this.updatedTime);
+        }
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -344,6 +364,8 @@ public class GetMessageResponse implements PlainJsonSerializable, ToCopyableBuil
         private String role;
         @Nullable
         private Long traceNumber;
+        @Nullable
+        private String updatedTime;
 
         public Builder() {}
 
@@ -360,6 +382,7 @@ public class GetMessageResponse implements PlainJsonSerializable, ToCopyableBuil
             this.response = o.response;
             this.role = o.role;
             this.traceNumber = o.traceNumber;
+            this.updatedTime = o.updatedTime;
         }
 
         private Builder(Builder o) {
@@ -375,6 +398,7 @@ public class GetMessageResponse implements PlainJsonSerializable, ToCopyableBuil
             this.response = o.response;
             this.role = o.role;
             this.traceNumber = o.traceNumber;
+            this.updatedTime = o.updatedTime;
         }
 
         @Override
@@ -562,6 +586,18 @@ public class GetMessageResponse implements PlainJsonSerializable, ToCopyableBuil
         }
 
         /**
+         * The time the message was last updated.
+         * <p>
+         * API name: {@code updated_time}
+         * </p>
+         */
+        @Nonnull
+        public final Builder updatedTime(@Nullable String value) {
+            this.updatedTime = value;
+            return this;
+        }
+
+        /**
          * Builds a {@link GetMessageResponse}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -598,6 +634,7 @@ public class GetMessageResponse implements PlainJsonSerializable, ToCopyableBuil
         op.add(Builder::response, JsonpDeserializer.stringDeserializer(), "response");
         op.add(Builder::role, JsonpDeserializer.stringDeserializer(), "role");
         op.add(Builder::traceNumber, JsonpDeserializer.longDeserializer(), "trace_number");
+        op.add(Builder::updatedTime, JsonpDeserializer.stringDeserializer(), "updated_time");
     }
 
     @Override
@@ -615,6 +652,7 @@ public class GetMessageResponse implements PlainJsonSerializable, ToCopyableBuil
         result = 31 * result + Objects.hashCode(this.response);
         result = 31 * result + Objects.hashCode(this.role);
         result = 31 * result + Objects.hashCode(this.traceNumber);
+        result = 31 * result + Objects.hashCode(this.updatedTime);
         return result;
     }
 
@@ -634,6 +672,7 @@ public class GetMessageResponse implements PlainJsonSerializable, ToCopyableBuil
             && Objects.equals(this.promptTemplate, other.promptTemplate)
             && Objects.equals(this.response, other.response)
             && Objects.equals(this.role, other.role)
-            && Objects.equals(this.traceNumber, other.traceNumber);
+            && Objects.equals(this.traceNumber, other.traceNumber)
+            && Objects.equals(this.updatedTime, other.updatedTime);
     }
 }

@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.delete_store.Request
 
 /**
- * <p>
  * Deletes a feature store with the specified name.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.17.1</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteStoreRequest extends RequestBase implements ToCopyableBuilder<DeleteStoreRequest.Builder, DeleteStoreRequest> {

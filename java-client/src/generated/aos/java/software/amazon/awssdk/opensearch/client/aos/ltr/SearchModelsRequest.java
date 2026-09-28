@@ -60,12 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.search_models.Request
 
 /**
- * <p>
  * Search for models in a feature store.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.19</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class SearchModelsRequest extends RequestBase implements ToCopyableBuilder<SearchModelsRequest.Builder, SearchModelsRequest> {

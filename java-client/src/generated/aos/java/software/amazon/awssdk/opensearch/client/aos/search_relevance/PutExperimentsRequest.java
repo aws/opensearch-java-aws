@@ -68,12 +68,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: search_relevance.put_experiments.Request
 
 /**
- * <p>
  * Creates an experiment.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.1</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

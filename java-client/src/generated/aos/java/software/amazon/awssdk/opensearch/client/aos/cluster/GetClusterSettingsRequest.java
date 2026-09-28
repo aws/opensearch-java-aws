@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.get_settings.Request
 
 /**
- * <p>
  * Returns cluster settings.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetClusterSettingsRequest extends RequestBase
@@ -82,6 +77,10 @@ public final class GetClusterSettingsRequest extends RequestBase
     @Nullable
     private final Boolean includeDefaults;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final Time timeout;
 
@@ -92,6 +91,7 @@ public final class GetClusterSettingsRequest extends RequestBase
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.flatSettings = builder.flatSettings;
         this.includeDefaults = builder.includeDefaults;
+        this.masterTimeout = builder.masterTimeout;
         this.timeout = builder.timeout;
     }
 
@@ -140,6 +140,20 @@ public final class GetClusterSettingsRequest extends RequestBase
      * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
      * <code>-1</code> to indicate an unspecified value.
      * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
+     * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+     * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+     * <code>-1</code> to indicate an unspecified value.
+     * <p>
      * API name: {@code timeout}
      * </p>
      */
@@ -174,6 +188,8 @@ public final class GetClusterSettingsRequest extends RequestBase
         @Nullable
         private Boolean includeDefaults;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Time timeout;
 
         public Builder() {}
@@ -183,6 +199,7 @@ public final class GetClusterSettingsRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.flatSettings = o.flatSettings;
             this.includeDefaults = o.includeDefaults;
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
         }
 
@@ -191,6 +208,7 @@ public final class GetClusterSettingsRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.flatSettings = o.flatSettings;
             this.includeDefaults = o.includeDefaults;
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
         }
 
@@ -262,6 +280,35 @@ public final class GetClusterSettingsRequest extends RequestBase
          * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
          * <code>-1</code> to indicate an unspecified value.
          * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
          * API name: {@code timeout}
          * </p>
          */
@@ -312,6 +359,9 @@ public final class GetClusterSettingsRequest extends RequestBase
         if (this.includeDefaults != null) {
             params.put("include_defaults", String.valueOf(this.includeDefaults));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -342,6 +392,7 @@ public final class GetClusterSettingsRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.flatSettings);
         result = 31 * result + Objects.hashCode(this.includeDefaults);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.timeout);
         return result;
     }
@@ -354,6 +405,7 @@ public final class GetClusterSettingsRequest extends RequestBase
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.flatSettings, other.flatSettings)
             && Objects.equals(this.includeDefaults, other.includeDefaults)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.timeout, other.timeout);
     }
 }

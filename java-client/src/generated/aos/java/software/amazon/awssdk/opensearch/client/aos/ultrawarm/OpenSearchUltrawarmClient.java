@@ -70,225 +70,124 @@ public class OpenSearchUltrawarmClient extends ApiClient<OpenSearchTransport, Op
         return new OpenSearchUltrawarmClient(this.transport, transportOptions);
     }
 
-    // ----- Endpoint: ultrawarm.cancel_migration
+    // ----- Endpoint: ultrawarm.cancel
 
     /**
-     * <p>
-     * AOS only. Cancels an in-progress UltraWarm index migration. Only one index can be cancelled per request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
+     * Cancel an in-progress UltraWarm migration.
      */
-    public CancelMigrationResponse cancelMigration(CancelMigrationRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, CancelMigrationRequest._ENDPOINT, this.transportOptions);
+    public CancelResponse cancel(CancelRequest request) throws IOException, OpenSearchException {
+        return this.transport.performRequest(request, CancelRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
-     * AOS only. Cancels an in-progress UltraWarm index migration. Only one index can be cancelled per request.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
+     * Cancel an in-progress UltraWarm migration.
      *
-     * @param fn a function that initializes a builder to create the {@link CancelMigrationRequest}
+     * @param fn a function that initializes a builder to create the {@link CancelRequest}
      */
-    public final CancelMigrationResponse cancelMigration(Function<CancelMigrationRequest.Builder, ObjectBuilder<CancelMigrationRequest>> fn)
-        throws IOException, OpenSearchException {
-        return cancelMigration(fn.apply(new CancelMigrationRequest.Builder()).build());
+    public final CancelResponse cancel(Function<CancelRequest.Builder, ObjectBuilder<CancelRequest>> fn) throws IOException,
+        OpenSearchException {
+        return cancel(fn.apply(new CancelRequest.Builder()).build());
     }
 
-    // ----- Endpoint: ultrawarm.get_migration_status
+    // ----- Endpoint: ultrawarm.get_status
 
     /**
-     * <p>
-     * AOS only. Returns the migration status for a specific index. Returns HTTP 400 when no migration is currently active for the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
+     * Migration status for a single index.
      */
-    public GetMigrationStatusResponse getMigrationStatus(GetMigrationStatusRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, GetMigrationStatusRequest._ENDPOINT, this.transportOptions);
+    public GetStatusResponse getStatus(GetStatusRequest request) throws IOException, OpenSearchException {
+        return this.transport.performRequest(request, GetStatusRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
-     * AOS only. Returns the migration status for a specific index. Returns HTTP 400 when no migration is currently active for the index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
+     * Migration status for a single index.
      *
-     * @param fn a function that initializes a builder to create the {@link GetMigrationStatusRequest}
+     * @param fn a function that initializes a builder to create the {@link GetStatusRequest}
      */
-    public final GetMigrationStatusResponse getMigrationStatus(
-        Function<GetMigrationStatusRequest.Builder, ObjectBuilder<GetMigrationStatusRequest>> fn
-    ) throws IOException, OpenSearchException {
-        return getMigrationStatus(fn.apply(new GetMigrationStatusRequest.Builder()).build());
+    public final GetStatusResponse getStatus(Function<GetStatusRequest.Builder, ObjectBuilder<GetStatusRequest>> fn) throws IOException,
+        OpenSearchException {
+        return getStatus(fn.apply(new GetStatusRequest.Builder()).build());
     }
 
-    // ----- Endpoint: ultrawarm.list_migration_status
+    // ----- Endpoint: ultrawarm.list_status
 
     /**
-     * <p>
-     * AOS only. Returns the migration status for all indices currently undergoing UltraWarm migration. Equivalent to /_cat/ultrawarm but
-     * returns JSON.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
+     * List all in-progress UltraWarm migrations.
      */
-    public ListMigrationStatusResponse listMigrationStatus(ListMigrationStatusRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, ListMigrationStatusRequest._ENDPOINT, this.transportOptions);
+    public ListStatusResponse listStatus(ListStatusRequest request) throws IOException, OpenSearchException {
+        return this.transport.performRequest(request, ListStatusRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
-     * AOS only. Returns the migration status for all indices currently undergoing UltraWarm migration. Equivalent to /_cat/ultrawarm but
-     * returns JSON.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
+     * List all in-progress UltraWarm migrations.
      *
-     * @param fn a function that initializes a builder to create the {@link ListMigrationStatusRequest}
+     * @param fn a function that initializes a builder to create the {@link ListStatusRequest}
      */
-    public final ListMigrationStatusResponse listMigrationStatus(
-        Function<ListMigrationStatusRequest.Builder, ObjectBuilder<ListMigrationStatusRequest>> fn
-    ) throws IOException, OpenSearchException {
-        return listMigrationStatus(fn.apply(new ListMigrationStatusRequest.Builder()).build());
+    public final ListStatusResponse listStatus(Function<ListStatusRequest.Builder, ObjectBuilder<ListStatusRequest>> fn) throws IOException,
+        OpenSearchException {
+        return listStatus(fn.apply(new ListStatusRequest.Builder()).build());
     }
 
     /**
-     * <p>
-     * AOS only. Returns the migration status for all indices currently undergoing UltraWarm migration. Equivalent to /_cat/ultrawarm but
-     * returns JSON.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
+     * List all in-progress UltraWarm migrations.
      */
-    public final ListMigrationStatusResponse listMigrationStatus() throws IOException, OpenSearchException {
-        return listMigrationStatus(new ListMigrationStatusRequest.Builder().build());
+    public final ListStatusResponse listStatus() throws IOException, OpenSearchException {
+        return listStatus(new ListStatusRequest.Builder().build());
     }
 
-    // ----- Endpoint: ultrawarm.migrate_to_cold
+    // ----- Endpoint: ultrawarm.to_cold
 
     /**
-     * <p>
-     * AOS only. Migrates an index from UltraWarm (warm) storage to Cold storage. The operation is asynchronous.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.10</code>
-     * </p>
+     * Migrate a warm index to cold storage. Requires start_time and end_time query parameters bounding the index's data.
      */
-    public MigrateToColdResponse migrateToCold(MigrateToColdRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, MigrateToColdRequest._ENDPOINT, this.transportOptions);
+    public ToColdResponse toCold(ToColdRequest request) throws IOException, OpenSearchException {
+        return this.transport.performRequest(request, ToColdRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
-     * AOS only. Migrates an index from UltraWarm (warm) storage to Cold storage. The operation is asynchronous.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.10</code>
-     * </p>
+     * Migrate a warm index to cold storage. Requires start_time and end_time query parameters bounding the index's data.
      *
-     * @param fn a function that initializes a builder to create the {@link MigrateToColdRequest}
+     * @param fn a function that initializes a builder to create the {@link ToColdRequest}
      */
-    public final MigrateToColdResponse migrateToCold(Function<MigrateToColdRequest.Builder, ObjectBuilder<MigrateToColdRequest>> fn)
-        throws IOException, OpenSearchException {
-        return migrateToCold(fn.apply(new MigrateToColdRequest.Builder()).build());
+    public final ToColdResponse toCold(Function<ToColdRequest.Builder, ObjectBuilder<ToColdRequest>> fn) throws IOException,
+        OpenSearchException {
+        return toCold(fn.apply(new ToColdRequest.Builder()).build());
     }
 
-    // ----- Endpoint: ultrawarm.migrate_to_hot
+    // ----- Endpoint: ultrawarm.to_hot
 
     /**
-     * <p>
-     * AOS only. Migrates an index from UltraWarm (warm) storage back to hot storage. The operation is asynchronous.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
+     * Migrate an index from warm back to hot storage.
      */
-    public MigrateToHotResponse migrateToHot(MigrateToHotRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, MigrateToHotRequest._ENDPOINT, this.transportOptions);
+    public ToHotResponse toHot(ToHotRequest request) throws IOException, OpenSearchException {
+        return this.transport.performRequest(request, ToHotRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
-     * AOS only. Migrates an index from UltraWarm (warm) storage back to hot storage. The operation is asynchronous.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
+     * Migrate an index from warm back to hot storage.
      *
-     * @param fn a function that initializes a builder to create the {@link MigrateToHotRequest}
+     * @param fn a function that initializes a builder to create the {@link ToHotRequest}
      */
-    public final MigrateToHotResponse migrateToHot(Function<MigrateToHotRequest.Builder, ObjectBuilder<MigrateToHotRequest>> fn)
-        throws IOException, OpenSearchException {
-        return migrateToHot(fn.apply(new MigrateToHotRequest.Builder()).build());
+    public final ToHotResponse toHot(Function<ToHotRequest.Builder, ObjectBuilder<ToHotRequest>> fn) throws IOException,
+        OpenSearchException {
+        return toHot(fn.apply(new ToHotRequest.Builder()).build());
     }
 
-    // ----- Endpoint: ultrawarm.migrate_to_warm
+    // ----- Endpoint: ultrawarm.to_warm
 
     /**
-     * <p>
-     * AOS only. Migrates an index from hot storage to UltraWarm (warm) storage. The operation is asynchronous -- use GET
-     * /_ultrawarm/migration/{index}/_status to poll migration progress.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
+     * Migrate an index from hot to warm storage.
      */
-    public MigrateToWarmResponse migrateToWarm(MigrateToWarmRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, MigrateToWarmRequest._ENDPOINT, this.transportOptions);
+    public ToWarmResponse toWarm(ToWarmRequest request) throws IOException, OpenSearchException {
+        return this.transport.performRequest(request, ToWarmRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
-     * AOS only. Migrates an index from hot storage to UltraWarm (warm) storage. The operation is asynchronous -- use GET
-     * /_ultrawarm/migration/{index}/_status to poll migration progress.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
+     * Migrate an index from hot to warm storage.
      *
-     * @param fn a function that initializes a builder to create the {@link MigrateToWarmRequest}
+     * @param fn a function that initializes a builder to create the {@link ToWarmRequest}
      */
-    public final MigrateToWarmResponse migrateToWarm(Function<MigrateToWarmRequest.Builder, ObjectBuilder<MigrateToWarmRequest>> fn)
-        throws IOException, OpenSearchException {
-        return migrateToWarm(fn.apply(new MigrateToWarmRequest.Builder()).build());
-    }
-
-    // ----- Endpoint: ultrawarm.update_migration
-
-    /**
-     * <p>
-     * AOS only. Updates the configuration of an in-progress UltraWarm migration.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
-     */
-    public UpdateMigrationResponse updateMigration(UpdateMigrationRequest request) throws IOException, OpenSearchException {
-        return this.transport.performRequest(request, UpdateMigrationRequest._ENDPOINT, this.transportOptions);
-    }
-
-    /**
-     * <p>
-     * AOS only. Updates the configuration of an in-progress UltraWarm migration.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>7.1</code>
-     * </p>
-     *
-     * @param fn a function that initializes a builder to create the {@link UpdateMigrationRequest}
-     */
-    public final UpdateMigrationResponse updateMigration(Function<UpdateMigrationRequest.Builder, ObjectBuilder<UpdateMigrationRequest>> fn)
-        throws IOException, OpenSearchException {
-        return updateMigration(fn.apply(new UpdateMigrationRequest.Builder()).build());
+    public final ToWarmResponse toWarm(Function<ToWarmRequest.Builder, ObjectBuilder<ToWarmRequest>> fn) throws IOException,
+        OpenSearchException {
+        return toWarm(fn.apply(new ToWarmRequest.Builder()).build());
     }
 }

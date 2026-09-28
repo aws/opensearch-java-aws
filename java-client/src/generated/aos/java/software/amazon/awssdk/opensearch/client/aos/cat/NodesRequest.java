@@ -62,12 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.nodes.Request
 
 /**
- * <p>
  * Returns basic statistics about the performance of cluster nodes.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class NodesRequest extends CatRequestBase implements ToCopyableBuilder<NodesRequest.Builder, NodesRequest> {
@@ -81,6 +76,10 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
     @Nullable
     private final Boolean fullId;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final TimeUnit time;
 
@@ -91,6 +90,7 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
         this.bytes = builder.bytes;
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.fullId = builder.fullId;
+        this.masterTimeout = builder.masterTimeout;
         this.time = builder.time;
     }
 
@@ -132,6 +132,18 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
     }
 
     /**
+     * The amount of time allowed to establish a connection to the cluster manager node.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
      * Specifies the time units, for example, <code>5d</code> or <code>7h</code>. For more information, see
      * <a href="https://docs.opensearch.org/latest/api-reference/units/">Supported units</a>.
      * <p>
@@ -167,6 +179,8 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
         @Nullable
         private Boolean fullId;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private TimeUnit time;
 
         public Builder() {}
@@ -176,6 +190,7 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
             this.bytes = o.bytes;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.fullId = o.fullId;
+            this.masterTimeout = o.masterTimeout;
             this.time = o.time;
         }
 
@@ -184,6 +199,7 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
             this.bytes = o.bytes;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.fullId = o.fullId;
+            this.masterTimeout = o.masterTimeout;
             this.time = o.time;
         }
 
@@ -247,6 +263,31 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
         }
 
         /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Specifies the time units, for example, <code>5d</code> or <code>7h</code>. For more information, see
          * <a href="https://docs.opensearch.org/latest/api-reference/units/">Supported units</a>.
          * <p>
@@ -287,6 +328,9 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
         if (this.fullId != null) {
             params.put("full_id", String.valueOf(this.fullId));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.time != null) {
             params.put("time", this.time.jsonValue());
         }
@@ -317,6 +361,7 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
         result = 31 * result + Objects.hashCode(this.bytes);
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.fullId);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.time);
         return result;
     }
@@ -329,6 +374,7 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
         return Objects.equals(this.bytes, other.bytes)
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.fullId, other.fullId)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.time, other.time);
     }
 }

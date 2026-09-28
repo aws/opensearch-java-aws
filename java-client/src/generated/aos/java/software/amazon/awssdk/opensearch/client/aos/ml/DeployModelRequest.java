@@ -35,12 +35,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.deploy_model.Request
 
 /**
- * <p>
  * Deploys a model.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.7</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeployModelRequest extends RequestBase implements ToCopyableBuilder<DeployModelRequest.Builder, DeployModelRequest> {

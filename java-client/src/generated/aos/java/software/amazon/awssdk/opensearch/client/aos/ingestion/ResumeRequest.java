@@ -70,12 +70,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ingestion.resume.Request
 
 /**
- * <p>
  * Use this API to resume ingestion for the given index.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.1</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

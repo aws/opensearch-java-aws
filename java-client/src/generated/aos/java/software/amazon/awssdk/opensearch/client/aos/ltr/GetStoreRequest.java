@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.get_store.Request
 
 /**
- * <p>
  * Checks if a store exists.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.17.1</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetStoreRequest extends RequestBase implements ToCopyableBuilder<GetStoreRequest.Builder, GetStoreRequest> {

@@ -63,12 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: tasks.list.Request
 
 /**
- * <p>
  * Returns a list of tasks.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class ListRequest extends RequestBase implements ToCopyableBuilder<ListRequest.Builder, ListRequest> {

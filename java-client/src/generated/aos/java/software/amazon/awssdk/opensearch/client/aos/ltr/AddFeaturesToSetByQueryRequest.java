@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.add_features_to_set_by_query.Request
 
 /**
- * <p>
  * Add features to an existing feature set in the default feature store.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.19</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class AddFeaturesToSetByQueryRequest extends RequestBase

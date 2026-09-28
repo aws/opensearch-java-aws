@@ -60,12 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: knn.warmup.Request
 
 /**
- * <p>
  * Preloads native library files into memory, reducing initial search latency for specified indexes.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class WarmupRequest extends RequestBase implements ToCopyableBuilder<WarmupRequest.Builder, WarmupRequest> {

@@ -64,12 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.flush.Request
 
 /**
- * <p>
  * Performs the flush operation on one or more indexes.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class FlushRequest extends RequestBase implements ToCopyableBuilder<FlushRequest.Builder, FlushRequest> {

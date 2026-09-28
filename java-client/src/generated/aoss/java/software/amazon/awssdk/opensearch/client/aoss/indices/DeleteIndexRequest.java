@@ -85,6 +85,10 @@ public final class DeleteIndexRequest extends RequestBase implements ToCopyableB
     @Nonnull
     private final List<String> index;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final Time timeout;
 
@@ -97,6 +101,7 @@ public final class DeleteIndexRequest extends RequestBase implements ToCopyableB
         this.expandWildcards = ApiTypeHelper.unmodifiable(builder.expandWildcards);
         this.ignoreUnavailable = builder.ignoreUnavailable;
         this.index = ApiTypeHelper.unmodifiableRequired(builder.index, this, "index");
+        this.masterTimeout = builder.masterTimeout;
         this.timeout = builder.timeout;
     }
 
@@ -165,6 +170,19 @@ public final class DeleteIndexRequest extends RequestBase implements ToCopyableB
     }
 
     /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
      * Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * <p>
      * API name: {@code timeout}
@@ -202,6 +220,8 @@ public final class DeleteIndexRequest extends RequestBase implements ToCopyableB
         private Boolean ignoreUnavailable;
         private List<String> index;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Time timeout;
 
         public Builder() {}
@@ -213,6 +233,7 @@ public final class DeleteIndexRequest extends RequestBase implements ToCopyableB
             this.expandWildcards = _listCopy(o.expandWildcards);
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
         }
 
@@ -223,6 +244,7 @@ public final class DeleteIndexRequest extends RequestBase implements ToCopyableB
             this.expandWildcards = _listCopy(o.expandWildcards);
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
         }
 
@@ -359,6 +381,33 @@ public final class DeleteIndexRequest extends RequestBase implements ToCopyableB
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
          * <p>
          * API name: {@code timeout}
@@ -412,6 +461,9 @@ public final class DeleteIndexRequest extends RequestBase implements ToCopyableB
         if (this.ignoreUnavailable != null) {
             params.put("ignore_unavailable", String.valueOf(this.ignoreUnavailable));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -449,6 +501,7 @@ public final class DeleteIndexRequest extends RequestBase implements ToCopyableB
         result = 31 * result + Objects.hashCode(this.expandWildcards);
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
         result = 31 * result + this.index.hashCode();
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.timeout);
         return result;
     }
@@ -463,6 +516,7 @@ public final class DeleteIndexRequest extends RequestBase implements ToCopyableB
             && Objects.equals(this.expandWildcards, other.expandWildcards)
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
             && this.index.equals(other.index)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.timeout, other.timeout);
     }
 }

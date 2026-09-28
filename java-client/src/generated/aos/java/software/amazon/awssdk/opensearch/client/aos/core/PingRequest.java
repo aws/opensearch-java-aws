@@ -60,12 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.ping.Request
 
 /**
- * <p>
  * Returns whether the cluster is running.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class PingRequest extends RequestBase implements ToCopyableBuilder<PingRequest.Builder, PingRequest> {

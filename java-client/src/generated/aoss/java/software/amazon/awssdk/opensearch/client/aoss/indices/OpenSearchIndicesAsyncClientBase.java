@@ -375,13 +375,6 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
         return putAlias(fn.apply(new PutAliasRequest.Builder()).build());
     }
 
-    /**
-     * Creates or updates an alias.
-     */
-    public final CompletableFuture<PutAliasResponse> putAlias() throws IOException, OpenSearchException {
-        return putAlias(new PutAliasRequest.Builder().build());
-    }
-
     // ----- Endpoint: indices.put_index_template
 
     /**

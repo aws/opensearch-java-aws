@@ -69,12 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cluster.health.Request
 
 /**
- * <p>
  * Returns basic information about the health of the cluster.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class HealthRequest extends RequestBase implements ToCopyableBuilder<HealthRequest.Builder, HealthRequest> {
@@ -96,6 +91,10 @@ public final class HealthRequest extends RequestBase implements ToCopyableBuilde
 
     @Nullable
     private final Boolean local;
+
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
 
     @Nullable
     private final Time timeout;
@@ -128,6 +127,7 @@ public final class HealthRequest extends RequestBase implements ToCopyableBuilde
         this.index = ApiTypeHelper.unmodifiable(builder.index);
         this.level = builder.level;
         this.local = builder.local;
+        this.masterTimeout = builder.masterTimeout;
         this.timeout = builder.timeout;
         this.waitForActiveShards = builder.waitForActiveShards;
         this.waitForEvents = builder.waitForEvents;
@@ -208,6 +208,20 @@ public final class HealthRequest extends RequestBase implements ToCopyableBuilde
     @Nullable
     public final Boolean local() {
         return this.local;
+    }
+
+    /**
+     * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+     * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+     * <code>-1</code> to indicate an unspecified value.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -320,6 +334,8 @@ public final class HealthRequest extends RequestBase implements ToCopyableBuilde
         @Nullable
         private Boolean local;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Time timeout;
         @Nullable
         private WaitForActiveShards waitForActiveShards;
@@ -344,6 +360,7 @@ public final class HealthRequest extends RequestBase implements ToCopyableBuilde
             this.index = _listCopy(o.index);
             this.level = o.level;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
             this.waitForActiveShards = o.waitForActiveShards;
             this.waitForEvents = o.waitForEvents;
@@ -361,6 +378,7 @@ public final class HealthRequest extends RequestBase implements ToCopyableBuilde
             this.index = _listCopy(o.index);
             this.level = o.level;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
             this.waitForActiveShards = o.waitForActiveShards;
             this.waitForEvents = o.waitForEvents;
@@ -508,6 +526,35 @@ public final class HealthRequest extends RequestBase implements ToCopyableBuilde
         public final Builder local(@Nullable Boolean value) {
             this.local = value;
             return this;
+        }
+
+        /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * A duration. Units can be <code>nanos</code>, <code>micros</code>, <code>ms</code> (milliseconds), <code>s</code> (seconds),
+         * <code>m</code> (minutes), <code>h</code> (hours) and <code>d</code> (days). Also accepts <code>0</code> without a unit and
+         * <code>-1</code> to indicate an unspecified value.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -667,6 +714,9 @@ public final class HealthRequest extends RequestBase implements ToCopyableBuilde
         if (this.local != null) {
             params.put("local", String.valueOf(this.local));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -736,6 +786,7 @@ public final class HealthRequest extends RequestBase implements ToCopyableBuilde
         result = 31 * result + Objects.hashCode(this.index);
         result = 31 * result + Objects.hashCode(this.level);
         result = 31 * result + Objects.hashCode(this.local);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.timeout);
         result = 31 * result + Objects.hashCode(this.waitForActiveShards);
         result = 31 * result + Objects.hashCode(this.waitForEvents);
@@ -757,6 +808,7 @@ public final class HealthRequest extends RequestBase implements ToCopyableBuilde
             && Objects.equals(this.index, other.index)
             && Objects.equals(this.level, other.level)
             && Objects.equals(this.local, other.local)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.timeout, other.timeout)
             && Objects.equals(this.waitForActiveShards, other.waitForActiveShards)
             && Objects.equals(this.waitForEvents, other.waitForEvents)

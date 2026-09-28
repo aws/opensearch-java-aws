@@ -76,24 +76,14 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.delete_experiments
 
     /**
-     * <p>
      * Deletes a specified experiment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public DeleteExperimentsResponse deleteExperiments(DeleteExperimentsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteExperimentsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a specified experiment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteExperimentsRequest}
      */
@@ -106,24 +96,14 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.delete_judgments
 
     /**
-     * <p>
      * Deletes a specified judgment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public DeleteJudgmentsResponse deleteJudgments(DeleteJudgmentsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteJudgmentsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a specified judgment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteJudgmentsRequest}
      */
@@ -135,24 +115,14 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.delete_query_sets
 
     /**
-     * <p>
      * Deletes a query set.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public DeleteQuerySetsResponse deleteQuerySets(DeleteQuerySetsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteQuerySetsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a query set.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteQuerySetsRequest}
      */
@@ -164,12 +134,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.delete_scheduled_experiments
 
     /**
-     * <p>
      * Deletes a specified scheduled experiment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.4</code>
-     * </p>
      */
     public DeleteScheduledExperimentsResponse deleteScheduledExperiments(DeleteScheduledExperimentsRequest request) throws IOException,
         OpenSearchException {
@@ -177,12 +142,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Deletes a specified scheduled experiment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.4</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteScheduledExperimentsRequest}
      */
@@ -195,12 +155,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.delete_search_configurations
 
     /**
-     * <p>
      * Deletes a specified search configuration.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public DeleteSearchConfigurationsResponse deleteSearchConfigurations(DeleteSearchConfigurationsRequest request) throws IOException,
         OpenSearchException {
@@ -208,12 +163,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Deletes a specified search configuration.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteSearchConfigurationsRequest}
      */
@@ -226,12 +176,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.experiments_search
 
     /**
-     * <p>
      * Searches for experiments.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.5</code>
-     * </p>
      */
     public <TDocument> ExperimentsSearchResponse<TDocument> experimentsSearch(
         ExperimentsSearchRequest request,
@@ -252,12 +197,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Searches for experiments.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.5</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExperimentsSearchRequest}
      */
@@ -271,12 +211,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.get_experiments
 
     /**
-     * <p>
      * Gets experiments.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public <TDocument> GetExperimentsResponse<TDocument> getExperiments(GetExperimentsRequest request, Class<TDocument> tDocumentClass)
         throws IOException, OpenSearchException {
@@ -295,12 +230,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Gets experiments.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetExperimentsRequest}
      */
@@ -314,12 +244,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.get_judgments
 
     /**
-     * <p>
      * Gets judgments.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public <TDocument> GetJudgmentsResponse<TDocument> getJudgments(GetJudgmentsRequest request, Class<TDocument> tDocumentClass)
         throws IOException, OpenSearchException {
@@ -338,12 +263,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Gets judgments.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetJudgmentsRequest}
      */
@@ -357,24 +277,14 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.get_node_stats
 
     /**
-     * <p>
      * Gets stats by node.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public GetNodeStatsResponse getNodeStats(GetNodeStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetNodeStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Gets stats by node.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetNodeStatsRequest}
      */
@@ -386,12 +296,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.get_query_sets
 
     /**
-     * <p>
      * Lists the current query sets available.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public <TDocument> GetQuerySetsResponse<TDocument> getQuerySets(GetQuerySetsRequest request, Class<TDocument> tDocumentClass)
         throws IOException, OpenSearchException {
@@ -410,12 +315,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Lists the current query sets available.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetQuerySetsRequest}
      */
@@ -429,12 +329,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.get_scheduled_experiments
 
     /**
-     * <p>
      * Gets the scheduled experiments.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.4</code>
-     * </p>
      */
     public <TDocument> GetScheduledExperimentsResponse<TDocument> getScheduledExperiments(
         GetScheduledExperimentsRequest request,
@@ -455,12 +350,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Gets the scheduled experiments.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.4</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetScheduledExperimentsRequest}
      */
@@ -474,12 +364,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.get_search_configurations
 
     /**
-     * <p>
      * Gets the search configurations.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public <TDocument> GetSearchConfigurationsResponse<TDocument> getSearchConfigurations(
         GetSearchConfigurationsRequest request,
@@ -500,12 +385,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Gets the search configurations.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetSearchConfigurationsRequest}
      */
@@ -519,24 +399,14 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.get_stats
 
     /**
-     * <p>
      * Gets stats.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public GetStatsResponse getStats(GetStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Gets stats.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetStatsRequest}
      */
@@ -546,12 +416,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Gets stats.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public final GetStatsResponse getStats() throws IOException, OpenSearchException {
         return getStats(new GetStatsRequest.Builder().build());
@@ -560,12 +425,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.judgments_search
 
     /**
-     * <p>
      * Searches for judgments.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.5</code>
-     * </p>
      */
     public <TDocument> JudgmentsSearchResponse<TDocument> judgmentsSearch(JudgmentsSearchRequest request, Class<TDocument> tDocumentClass)
         throws IOException, OpenSearchException {
@@ -584,12 +444,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Searches for judgments.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.5</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link JudgmentsSearchRequest}
      */
@@ -603,24 +458,14 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.post_query_sets
 
     /**
-     * <p>
      * Creates a new query set by sampling queries from the user behavior data.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public PostQuerySetsResponse postQuerySets(PostQuerySetsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PostQuerySetsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates a new query set by sampling queries from the user behavior data.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PostQuerySetsRequest}
      */
@@ -630,12 +475,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Creates a new query set by sampling queries from the user behavior data.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public final PostQuerySetsResponse postQuerySets() throws IOException, OpenSearchException {
         return postQuerySets(new PostQuerySetsRequest.Builder().build());
@@ -644,12 +484,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.post_scheduled_experiments
 
     /**
-     * <p>
      * Creates a scheduled experiment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.4</code>
-     * </p>
      */
     public PostScheduledExperimentsResponse postScheduledExperiments(PostScheduledExperimentsRequest request) throws IOException,
         OpenSearchException {
@@ -657,12 +492,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Creates a scheduled experiment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.4</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PostScheduledExperimentsRequest}
      */
@@ -673,12 +503,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Creates a scheduled experiment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.4</code>
-     * </p>
      */
     public final PostScheduledExperimentsResponse postScheduledExperiments() throws IOException, OpenSearchException {
         return postScheduledExperiments(new PostScheduledExperimentsRequest.Builder().build());
@@ -687,24 +512,14 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.put_experiments
 
     /**
-     * <p>
      * Creates an experiment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public PutExperimentsResponse putExperiments(PutExperimentsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutExperimentsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates an experiment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutExperimentsRequest}
      */
@@ -714,12 +529,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Creates an experiment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public final PutExperimentsResponse putExperiments() throws IOException, OpenSearchException {
         return putExperiments(new PutExperimentsRequest.Builder().build());
@@ -728,24 +538,14 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.put_judgments
 
     /**
-     * <p>
      * Creates a judgment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public PutJudgmentsResponse putJudgments(PutJudgmentsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutJudgmentsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates a judgment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutJudgmentsRequest}
      */
@@ -755,12 +555,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Creates a judgment.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public final PutJudgmentsResponse putJudgments() throws IOException, OpenSearchException {
         return putJudgments(new PutJudgmentsRequest.Builder().build());
@@ -769,24 +564,14 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.put_query_sets
 
     /**
-     * <p>
      * Creates a new query set by uploading manually.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public PutQuerySetsResponse putQuerySets(PutQuerySetsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutQuerySetsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates a new query set by uploading manually.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutQuerySetsRequest}
      */
@@ -796,12 +581,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Creates a new query set by uploading manually.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public final PutQuerySetsResponse putQuerySets() throws IOException, OpenSearchException {
         return putQuerySets(new PutQuerySetsRequest.Builder().build());
@@ -810,12 +590,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.put_search_configurations
 
     /**
-     * <p>
      * Creates a search configuration.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public PutSearchConfigurationsResponse putSearchConfigurations(PutSearchConfigurationsRequest request) throws IOException,
         OpenSearchException {
@@ -823,12 +598,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Creates a search configuration.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutSearchConfigurationsRequest}
      */
@@ -839,12 +609,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Creates a search configuration.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.1</code>
-     * </p>
      */
     public final PutSearchConfigurationsResponse putSearchConfigurations() throws IOException, OpenSearchException {
         return putSearchConfigurations(new PutSearchConfigurationsRequest.Builder().build());
@@ -853,12 +618,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.query_sets_search
 
     /**
-     * <p>
      * Searches for queries in the query sets.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.5</code>
-     * </p>
      */
     public <TDocument> QuerySetsSearchResponse<TDocument> querySetsSearch(QuerySetsSearchRequest request, Class<TDocument> tDocumentClass)
         throws IOException, OpenSearchException {
@@ -877,12 +637,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Searches for queries in the query sets.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.5</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link QuerySetsSearchRequest}
      */
@@ -896,12 +651,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     // ----- Endpoint: search_relevance.search_configurations_search
 
     /**
-     * <p>
      * Searches for search configurations.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.5</code>
-     * </p>
      */
     public <TDocument> SearchConfigurationsSearchResponse<TDocument> searchConfigurationsSearch(
         SearchConfigurationsSearchRequest request,
@@ -923,12 +673,7 @@ public class OpenSearchSearchRelevanceClient extends ApiClient<OpenSearchTranspo
     }
 
     /**
-     * <p>
      * Searches for search configurations.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.5</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SearchConfigurationsSearchRequest}
      */

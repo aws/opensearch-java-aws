@@ -67,12 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.simulate_template.Request
 
 /**
- * <p>
  * Simulate resolving the given template name or body.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -90,6 +85,10 @@ public final class SimulateTemplateRequest extends RequestBase
     @Nullable
     private final Boolean create;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final String name;
 
@@ -103,6 +102,7 @@ public final class SimulateTemplateRequest extends RequestBase
         this.cause = builder.cause;
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.create = builder.create;
+        this.masterTimeout = builder.masterTimeout;
         this.name = builder.name;
         this.template = ApiTypeHelper.requireNonNull(builder.template, this, "template");
     }
@@ -144,6 +144,19 @@ public final class SimulateTemplateRequest extends RequestBase
     @Nullable
     public final Boolean create() {
         return this.create;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -198,6 +211,8 @@ public final class SimulateTemplateRequest extends RequestBase
         @Nullable
         private Boolean create;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private String name;
         private IndexTemplate template;
 
@@ -208,6 +223,7 @@ public final class SimulateTemplateRequest extends RequestBase
             this.cause = o.cause;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.create = o.create;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
             this.template = o.template;
         }
@@ -217,6 +233,7 @@ public final class SimulateTemplateRequest extends RequestBase
             this.cause = o.cause;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.create = o.create;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
             this.template = o.template;
         }
@@ -280,6 +297,33 @@ public final class SimulateTemplateRequest extends RequestBase
         public final Builder create(@Nullable Boolean value) {
             this.create = value;
             return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -352,6 +396,9 @@ public final class SimulateTemplateRequest extends RequestBase
         if (this.create != null) {
             params.put("create", String.valueOf(this.create));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
     }
 
     /**
@@ -397,6 +444,7 @@ public final class SimulateTemplateRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.cause);
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.create);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.name);
         result = 31 * result + this.template.hashCode();
         return result;
@@ -410,6 +458,7 @@ public final class SimulateTemplateRequest extends RequestBase
         return Objects.equals(this.cause, other.cause)
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.create, other.create)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.name, other.name)
             && this.template.equals(other.template);
     }

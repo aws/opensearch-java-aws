@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.cache_stats.Request
 
 /**
- * <p>
  * Retrieves cache statistics for all feature stores.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.19</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class CacheStatsRequest extends RequestBase implements ToCopyableBuilder<CacheStatsRequest.Builder, CacheStatsRequest> {

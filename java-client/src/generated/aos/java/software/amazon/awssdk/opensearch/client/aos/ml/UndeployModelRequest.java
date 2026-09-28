@@ -45,12 +45,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.undeploy_model.Request
 
 /**
- * <p>
  * Undeploys a model.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.7</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

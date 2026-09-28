@@ -67,24 +67,14 @@ public abstract class OpenSearchNodesAsyncClientBase<Self extends OpenSearchNode
     // ----- Endpoint: nodes.info
 
     /**
-     * <p>
      * Returns information about nodes in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<NodesInfoResponse> info(NodesInfoRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, NodesInfoRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about nodes in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link NodesInfoRequest}
      */
@@ -94,12 +84,7 @@ public abstract class OpenSearchNodesAsyncClientBase<Self extends OpenSearchNode
     }
 
     /**
-     * <p>
      * Returns information about nodes in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<NodesInfoResponse> info() throws IOException, OpenSearchException {
         return info(new NodesInfoRequest.Builder().build());
@@ -108,12 +93,7 @@ public abstract class OpenSearchNodesAsyncClientBase<Self extends OpenSearchNode
     // ----- Endpoint: nodes.reload_secure_settings
 
     /**
-     * <p>
      * Reloads secure settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<ReloadSecureSettingsResponse> reloadSecureSettings(ReloadSecureSettingsRequest request) throws IOException,
         OpenSearchException {
@@ -121,12 +101,7 @@ public abstract class OpenSearchNodesAsyncClientBase<Self extends OpenSearchNode
     }
 
     /**
-     * <p>
      * Reloads secure settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ReloadSecureSettingsRequest}
      */
@@ -137,12 +112,7 @@ public abstract class OpenSearchNodesAsyncClientBase<Self extends OpenSearchNode
     }
 
     /**
-     * <p>
      * Reloads secure settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<ReloadSecureSettingsResponse> reloadSecureSettings() throws IOException, OpenSearchException {
         return reloadSecureSettings(new ReloadSecureSettingsRequest.Builder().build());
@@ -151,24 +121,14 @@ public abstract class OpenSearchNodesAsyncClientBase<Self extends OpenSearchNode
     // ----- Endpoint: nodes.stats
 
     /**
-     * <p>
      * Returns statistical information about nodes in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<NodesStatsResponse> stats(NodesStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, NodesStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns statistical information about nodes in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link NodesStatsRequest}
      */
@@ -178,12 +138,7 @@ public abstract class OpenSearchNodesAsyncClientBase<Self extends OpenSearchNode
     }
 
     /**
-     * <p>
      * Returns statistical information about nodes in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<NodesStatsResponse> stats() throws IOException, OpenSearchException {
         return stats(new NodesStatsRequest.Builder().build());
@@ -192,24 +147,14 @@ public abstract class OpenSearchNodesAsyncClientBase<Self extends OpenSearchNode
     // ----- Endpoint: nodes.usage
 
     /**
-     * <p>
      * Returns low-level information about REST actions usage on nodes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<NodesUsageResponse> usage(NodesUsageRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, NodesUsageRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns low-level information about REST actions usage on nodes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link NodesUsageRequest}
      */
@@ -219,12 +164,7 @@ public abstract class OpenSearchNodesAsyncClientBase<Self extends OpenSearchNode
     }
 
     /**
-     * <p>
      * Returns low-level information about REST actions usage on nodes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<NodesUsageResponse> usage() throws IOException, OpenSearchException {
         return usage(new NodesUsageRequest.Builder().build());

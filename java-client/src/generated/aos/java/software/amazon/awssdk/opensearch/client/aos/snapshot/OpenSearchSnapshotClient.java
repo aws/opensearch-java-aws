@@ -73,24 +73,14 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: snapshot.cleanup_repository
 
     /**
-     * <p>
      * Removes any stale data from a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CleanupRepositoryResponse cleanupRepository(CleanupRepositoryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, CleanupRepositoryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Removes any stale data from a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CleanupRepositoryRequest}
      */
@@ -103,24 +93,14 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: snapshot.clone
 
     /**
-     * <p>
      * Creates a clone of all or part of a snapshot in the same repository as the original snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CloneSnapshotResponse clone(CloneSnapshotRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, CloneSnapshotRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates a clone of all or part of a snapshot in the same repository as the original snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CloneSnapshotRequest}
      */
@@ -132,24 +112,14 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: snapshot.create
 
     /**
-     * <p>
      * Creates a snapshot within an existing repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CreateSnapshotResponse create(CreateSnapshotRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, CreateSnapshotRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates a snapshot within an existing repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateSnapshotRequest}
      */
@@ -161,24 +131,14 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: snapshot.create_repository
 
     /**
-     * <p>
      * Creates a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CreateRepositoryResponse createRepository(CreateRepositoryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, CreateRepositoryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateRepositoryRequest}
      */
@@ -191,24 +151,14 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: snapshot.delete
 
     /**
-     * <p>
      * Deletes a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeleteSnapshotResponse delete(DeleteSnapshotRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteSnapshotRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteSnapshotRequest}
      */
@@ -220,24 +170,14 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: snapshot.delete_repository
 
     /**
-     * <p>
      * Deletes a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeleteRepositoryResponse deleteRepository(DeleteRepositoryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeleteRepositoryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteRepositoryRequest}
      */
@@ -250,24 +190,14 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: snapshot.get
 
     /**
-     * <p>
      * Returns information about a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetSnapshotResponse get(GetSnapshotRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetSnapshotRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetSnapshotRequest}
      */
@@ -279,24 +209,14 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: snapshot.get_repository
 
     /**
-     * <p>
      * Returns information about a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetRepositoryResponse getRepository(GetRepositoryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetRepositoryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetRepositoryRequest}
      */
@@ -306,12 +226,7 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Returns information about a snapshot repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final GetRepositoryResponse getRepository() throws IOException, OpenSearchException {
         return getRepository(new GetRepositoryRequest.Builder().build());
@@ -320,24 +235,14 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: snapshot.restore
 
     /**
-     * <p>
      * Restores a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public RestoreSnapshotResponse restore(RestoreSnapshotRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, RestoreSnapshotRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Restores a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RestoreSnapshotRequest}
      */
@@ -349,24 +254,14 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: snapshot.status
 
     /**
-     * <p>
      * Returns information about the status of a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public SnapshotStatusResponse status(SnapshotStatusRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, SnapshotStatusRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about the status of a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SnapshotStatusRequest}
      */
@@ -376,12 +271,7 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
     }
 
     /**
-     * <p>
      * Returns information about the status of a snapshot.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final SnapshotStatusResponse status() throws IOException, OpenSearchException {
         return status(new SnapshotStatusRequest.Builder().build());
@@ -390,24 +280,14 @@ public class OpenSearchSnapshotClient extends ApiClient<OpenSearchTransport, Ope
     // ----- Endpoint: snapshot.verify_repository
 
     /**
-     * <p>
      * Verifies a repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public VerifyRepositoryResponse verifyRepository(VerifyRepositoryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, VerifyRepositoryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Verifies a repository.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link VerifyRepositoryRequest}
      */

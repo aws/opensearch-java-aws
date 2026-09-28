@@ -65,12 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.create_pit.Request
 
 /**
- * <p>
  * Creates point in time context.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.4</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class CreatePitRequest extends RequestBase implements ToCopyableBuilder<CreatePitRequest.Builder, CreatePitRequest> {

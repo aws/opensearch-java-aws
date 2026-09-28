@@ -35,12 +35,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.delete_memory.Request
 
 /**
- * <p>
  * Delete a memory.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.12</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteMemoryRequest extends RequestBase implements ToCopyableBuilder<DeleteMemoryRequest.Builder, DeleteMemoryRequest> {

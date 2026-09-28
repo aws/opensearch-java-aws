@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.delete_all_pits.Request
 
 /**
- * <p>
  * Deletes all active point in time searches.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.4</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteAllPitsRequest extends RequestBase

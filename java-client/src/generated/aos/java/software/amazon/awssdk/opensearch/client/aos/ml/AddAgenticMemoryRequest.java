@@ -46,12 +46,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.add_agentic_memory.Request
 
 /**
- * <p>
  * Add agentic memory to a memory container.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.3</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

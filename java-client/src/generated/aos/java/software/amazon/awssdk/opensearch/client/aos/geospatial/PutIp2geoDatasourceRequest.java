@@ -75,9 +75,6 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
  * <li><code>endpoint</code>: <code>&quot;https://geoip.maps.opensearch.org/v1/geolite2-city/manifest.json&quot;</code></li>
  * <li><code>update_interval_in_days</code>: 3.</li>
  * </ul>
- * <p>
- * <strong>Minimum version:</strong> <code>2.11</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

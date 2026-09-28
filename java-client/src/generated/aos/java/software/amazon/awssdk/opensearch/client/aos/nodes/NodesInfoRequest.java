@@ -65,12 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: nodes.info.Request
 
 /**
- * <p>
  * Returns information about nodes in the cluster.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class NodesInfoRequest extends RequestBase implements ToCopyableBuilder<NodesInfoRequest.Builder, NodesInfoRequest> {

@@ -63,12 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.recovery.Request
 
 /**
- * <p>
  * Returns all completed and ongoing index and shard recoveries.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class RecoveryRequest extends CatRequestBase implements ToCopyableBuilder<RecoveryRequest.Builder, RecoveryRequest> {

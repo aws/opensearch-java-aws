@@ -64,12 +64,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.stats.Request
 
 /**
- * <p>
  * Provides information about the current status of the LTR plugin.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.19</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class LtrStatsRequest extends RequestBase implements ToCopyableBuilder<LtrStatsRequest.Builder, LtrStatsRequest> {

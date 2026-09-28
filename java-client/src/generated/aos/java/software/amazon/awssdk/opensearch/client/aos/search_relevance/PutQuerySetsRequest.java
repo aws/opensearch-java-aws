@@ -70,12 +70,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: search_relevance.put_query_sets.Request
 
 /**
- * <p>
  * Creates a new query set by uploading manually.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.1</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

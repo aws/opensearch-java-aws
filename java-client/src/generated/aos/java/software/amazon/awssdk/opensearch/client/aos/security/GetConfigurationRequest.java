@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.get_configuration.Request
 
 /**
- * <p>
  * Returns the current Security plugin configuration in a JSON format.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.10</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetConfigurationRequest extends RequestBase

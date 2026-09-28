@@ -35,12 +35,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.get_connector.Request
 
 /**
- * <p>
  * Retrieves a standalone connector.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.11</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetConnectorRequest extends RequestBase implements ToCopyableBuilder<GetConnectorRequest.Builder, GetConnectorRequest> {

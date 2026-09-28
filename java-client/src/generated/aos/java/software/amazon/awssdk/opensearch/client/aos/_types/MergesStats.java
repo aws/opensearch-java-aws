@@ -110,6 +110,9 @@ public class MergesStats implements PlainJsonSerializable, ToCopyableBuilder<Mer
     @Nullable
     private final Long unreferencedFileCleanupsPerformed;
 
+    @Nullable
+    private final MergesWarmerStats warmer;
+
     // ---------------------------------------------------------------------------------------------
 
     private MergesStats(Builder builder) {
@@ -134,6 +137,7 @@ public class MergesStats implements PlainJsonSerializable, ToCopyableBuilder<Mer
         this.totalTime = builder.totalTime;
         this.totalTimeInMillis = ApiTypeHelper.requireNonNull(builder.totalTimeInMillis, this, "totalTimeInMillis");
         this.unreferencedFileCleanupsPerformed = builder.unreferencedFileCleanupsPerformed;
+        this.warmer = builder.warmer;
     }
 
     public static MergesStats of(Function<MergesStats.Builder, ObjectBuilder<MergesStats>> fn) {
@@ -318,6 +322,14 @@ public class MergesStats implements PlainJsonSerializable, ToCopyableBuilder<Mer
     }
 
     /**
+     * API name: {@code warmer}
+     */
+    @Nullable
+    public final MergesWarmerStats warmer() {
+        return this.warmer;
+    }
+
+    /**
      * Serialize this object to JSON.
      */
     @Override
@@ -392,6 +404,11 @@ public class MergesStats implements PlainJsonSerializable, ToCopyableBuilder<Mer
             generator.writeKey("unreferenced_file_cleanups_performed");
             generator.write(this.unreferencedFileCleanupsPerformed);
         }
+
+        if (this.warmer != null) {
+            generator.writeKey("warmer");
+            this.warmer.serialize(generator, mapper);
+        }
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -435,6 +452,8 @@ public class MergesStats implements PlainJsonSerializable, ToCopyableBuilder<Mer
         private Long totalTimeInMillis;
         @Nullable
         private Long unreferencedFileCleanupsPerformed;
+        @Nullable
+        private MergesWarmerStats warmer;
 
         public Builder() {}
 
@@ -456,6 +475,7 @@ public class MergesStats implements PlainJsonSerializable, ToCopyableBuilder<Mer
             this.totalTime = o.totalTime;
             this.totalTimeInMillis = o.totalTimeInMillis;
             this.unreferencedFileCleanupsPerformed = o.unreferencedFileCleanupsPerformed;
+            this.warmer = o.warmer;
         }
 
         private Builder(Builder o) {
@@ -476,6 +496,7 @@ public class MergesStats implements PlainJsonSerializable, ToCopyableBuilder<Mer
             this.totalTime = o.totalTime;
             this.totalTimeInMillis = o.totalTimeInMillis;
             this.unreferencedFileCleanupsPerformed = o.unreferencedFileCleanupsPerformed;
+            this.warmer = o.warmer;
         }
 
         @Override
@@ -722,6 +743,23 @@ public class MergesStats implements PlainJsonSerializable, ToCopyableBuilder<Mer
         }
 
         /**
+         * API name: {@code warmer}
+         */
+        @Nonnull
+        public final Builder warmer(@Nullable MergesWarmerStats value) {
+            this.warmer = value;
+            return this;
+        }
+
+        /**
+         * API name: {@code warmer}
+         */
+        @Nonnull
+        public final Builder warmer(Function<MergesWarmerStats.Builder, ObjectBuilder<MergesWarmerStats>> fn) {
+            return warmer(fn.apply(new MergesWarmerStats.Builder()).build());
+        }
+
+        /**
          * Builds a {@link MergesStats}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -763,6 +801,7 @@ public class MergesStats implements PlainJsonSerializable, ToCopyableBuilder<Mer
         op.add(Builder::totalTime, Time._DESERIALIZER, "total_time");
         op.add(Builder::totalTimeInMillis, JsonpDeserializer.longDeserializer(), "total_time_in_millis");
         op.add(Builder::unreferencedFileCleanupsPerformed, JsonpDeserializer.longDeserializer(), "unreferenced_file_cleanups_performed");
+        op.add(Builder::warmer, MergesWarmerStats._DESERIALIZER, "warmer");
     }
 
     @Override
@@ -785,6 +824,7 @@ public class MergesStats implements PlainJsonSerializable, ToCopyableBuilder<Mer
         result = 31 * result + Objects.hashCode(this.totalTime);
         result = 31 * result + Long.hashCode(this.totalTimeInMillis);
         result = 31 * result + Objects.hashCode(this.unreferencedFileCleanupsPerformed);
+        result = 31 * result + Objects.hashCode(this.warmer);
         return result;
     }
 
@@ -809,6 +849,7 @@ public class MergesStats implements PlainJsonSerializable, ToCopyableBuilder<Mer
             && this.totalThrottledTimeInMillis == other.totalThrottledTimeInMillis
             && Objects.equals(this.totalTime, other.totalTime)
             && this.totalTimeInMillis == other.totalTimeInMillis
-            && Objects.equals(this.unreferencedFileCleanupsPerformed, other.unreferencedFileCleanupsPerformed);
+            && Objects.equals(this.unreferencedFileCleanupsPerformed, other.unreferencedFileCleanupsPerformed)
+            && Objects.equals(this.warmer, other.warmer);
     }
 }

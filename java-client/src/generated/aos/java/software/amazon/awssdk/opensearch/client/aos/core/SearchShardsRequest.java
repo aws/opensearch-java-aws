@@ -72,12 +72,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.search_shards.Request
 
 /**
- * <p>
  * Returns information about the indexes and shards that a search request would be executed against.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -117,7 +112,7 @@ public final class SearchShardsRequest extends RequestBase
         this.allowNoIndices = builder.allowNoIndices;
         this.expandWildcards = ApiTypeHelper.unmodifiable(builder.expandWildcards);
         this.ignoreUnavailable = builder.ignoreUnavailable;
-        this.index = ApiTypeHelper.unmodifiableRequired(builder.index, this, "index");
+        this.index = ApiTypeHelper.unmodifiable(builder.index);
         this.local = builder.local;
         this.preference = builder.preference;
         this.routing = ApiTypeHelper.unmodifiable(builder.routing);
@@ -166,7 +161,7 @@ public final class SearchShardsRequest extends RequestBase
     }
 
     /**
-     * Required - Returns the indexes and shards that a search request would be executed against.
+     * Returns the indexes and shards that a search request would be executed against.
      * <p>
      * API name: {@code index}
      * </p>
@@ -257,6 +252,7 @@ public final class SearchShardsRequest extends RequestBase
         private List<ExpandWildcard> expandWildcards;
         @Nullable
         private Boolean ignoreUnavailable;
+        @Nullable
         private List<String> index;
         @Nullable
         private Boolean local;
@@ -369,7 +365,7 @@ public final class SearchShardsRequest extends RequestBase
         }
 
         /**
-         * Required - Returns the indexes and shards that a search request would be executed against.
+         * Returns the indexes and shards that a search request would be executed against.
          * <p>
          * API name: {@code index}
          * </p>
@@ -385,7 +381,7 @@ public final class SearchShardsRequest extends RequestBase
         }
 
         /**
-         * Required - Returns the indexes and shards that a search request would be executed against.
+         * Returns the indexes and shards that a search request would be executed against.
          * <p>
          * API name: {@code index}
          * </p>
@@ -534,11 +530,24 @@ public final class SearchShardsRequest extends RequestBase
         request -> "POST",
         // Request path
         request -> {
-            StringBuilder buf = new StringBuilder();
-            buf.append("/");
-            SimpleEndpoint.pathEncode(String.join(",", request.index), buf);
-            buf.append("/_search_shards");
-            return buf.toString();
+            final int _index = 1 << 0;
+
+            int propsSet = 0;
+
+            if (ApiTypeHelper.isDefined(request.index())) propsSet |= _index;
+
+            if (propsSet == 0) {
+                return "/_search_shards";
+            }
+            if (propsSet == (_index)) {
+                StringBuilder buf = new StringBuilder();
+                buf.append("/");
+                SimpleEndpoint.pathEncode(String.join(",", request.index), buf);
+                buf.append("/_search_shards");
+                return buf.toString();
+            }
+
+            throw SimpleEndpoint.noPathTemplateFound("path");
         },
         // Request parameters
         request -> {
@@ -557,7 +566,7 @@ public final class SearchShardsRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.allowNoIndices);
         result = 31 * result + Objects.hashCode(this.expandWildcards);
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
-        result = 31 * result + this.index.hashCode();
+        result = 31 * result + Objects.hashCode(this.index);
         result = 31 * result + Objects.hashCode(this.local);
         result = 31 * result + Objects.hashCode(this.preference);
         result = 31 * result + Objects.hashCode(this.routing);
@@ -573,7 +582,7 @@ public final class SearchShardsRequest extends RequestBase
         return Objects.equals(this.allowNoIndices, other.allowNoIndices)
             && Objects.equals(this.expandWildcards, other.expandWildcards)
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
-            && this.index.equals(other.index)
+            && Objects.equals(this.index, other.index)
             && Objects.equals(this.local, other.local)
             && Objects.equals(this.preference, other.preference)
             && Objects.equals(this.routing, other.routing)

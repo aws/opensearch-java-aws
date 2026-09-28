@@ -68,24 +68,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.add_block
 
     /**
-     * <p>
      * Adds a block to an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<AddBlockResponse> addBlock(AddBlockRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, AddBlockRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Adds a block to an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link AddBlockRequest}
      */
@@ -97,24 +87,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.analyze
 
     /**
-     * <p>
      * Performs the analysis process on a text and return the tokens breakdown of the text.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<AnalyzeResponse> analyze(AnalyzeRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, AnalyzeRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Performs the analysis process on a text and return the tokens breakdown of the text.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link AnalyzeRequest}
      */
@@ -124,12 +104,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Performs the analysis process on a text and return the tokens breakdown of the text.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<AnalyzeResponse> analyze() throws IOException, OpenSearchException {
         return analyze(new AnalyzeRequest.Builder().build());
@@ -138,24 +113,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.clear_cache
 
     /**
-     * <p>
      * Clears all or specific caches for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<ClearCacheResponse> clearCache(ClearCacheRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ClearCacheRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Clears all or specific caches for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ClearCacheRequest}
      */
@@ -167,24 +132,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.clone
 
     /**
-     * <p>
      * Clones an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<CloneIndexResponse> clone(CloneIndexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CloneIndexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Clones an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CloneIndexRequest}
      */
@@ -196,24 +151,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.close
 
     /**
-     * <p>
      * Closes an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<CloseIndexResponse> close(CloseIndexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CloseIndexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Closes an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CloseIndexRequest}
      */
@@ -225,24 +170,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.create
 
     /**
-     * <p>
      * Creates an index with optional settings and mappings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<CreateIndexResponse> create(CreateIndexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, CreateIndexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates an index with optional settings and mappings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateIndexRequest}
      */
@@ -254,12 +189,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.create_data_stream
 
     /**
-     * <p>
      * Creates or updates a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<CreateDataStreamResponse> createDataStream(CreateDataStreamRequest request) throws IOException,
         OpenSearchException {
@@ -267,12 +197,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Creates or updates a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link CreateDataStreamRequest}
      */
@@ -285,12 +210,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.data_streams_stats
 
     /**
-     * <p>
      * Provides statistics on operations happening in a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DataStreamsStatsResponse> dataStreamsStats(DataStreamsStatsRequest request) throws IOException,
         OpenSearchException {
@@ -298,12 +218,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Provides statistics on operations happening in a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DataStreamsStatsRequest}
      */
@@ -314,12 +229,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Provides statistics on operations happening in a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<DataStreamsStatsResponse> dataStreamsStats() throws IOException, OpenSearchException {
         return dataStreamsStats(new DataStreamsStatsRequest.Builder().build());
@@ -328,24 +238,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.delete
 
     /**
-     * <p>
      * Deletes an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeleteIndexResponse> delete(DeleteIndexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteIndexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteIndexRequest}
      */
@@ -357,24 +257,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.delete_alias
 
     /**
-     * <p>
      * Deletes an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeleteAliasResponse> deleteAlias(DeleteAliasRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteAliasRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteAliasRequest}
      */
@@ -387,12 +277,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.delete_data_stream
 
     /**
-     * <p>
      * Deletes a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeleteDataStreamResponse> deleteDataStream(DeleteDataStreamRequest request) throws IOException,
         OpenSearchException {
@@ -400,12 +285,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Deletes a data stream.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteDataStreamRequest}
      */
@@ -418,12 +298,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.delete_index_template
 
     /**
-     * <p>
      * Deletes an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeleteIndexTemplateResponse> deleteIndexTemplate(DeleteIndexTemplateRequest request) throws IOException,
         OpenSearchException {
@@ -431,12 +306,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Deletes an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteIndexTemplateRequest}
      */
@@ -449,24 +319,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.delete_template
 
     /**
-     * <p>
      * Deletes an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeleteTemplateResponse> deleteTemplate(DeleteTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeleteTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeleteTemplateRequest}
      */
@@ -479,24 +339,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.exists
 
     /**
-     * <p>
      * Returns information about whether a particular index exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<BooleanResponse> exists(ExistsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ExistsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about whether a particular index exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsRequest}
      */
@@ -508,24 +358,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.exists_alias
 
     /**
-     * <p>
      * Returns information about whether a particular alias exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<BooleanResponse> existsAlias(ExistsAliasRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ExistsAliasRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about whether a particular alias exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsAliasRequest}
      */
@@ -537,12 +377,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.exists_index_template
 
     /**
-     * <p>
      * Returns information about whether a particular index template exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<BooleanResponse> existsIndexTemplate(ExistsIndexTemplateRequest request) throws IOException,
         OpenSearchException {
@@ -550,12 +385,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Returns information about whether a particular index template exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsIndexTemplateRequest}
      */
@@ -568,24 +398,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.exists_template
 
     /**
-     * <p>
      * Returns information about whether a particular index template exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<BooleanResponse> existsTemplate(ExistsTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ExistsTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about whether a particular index template exists.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ExistsTemplateRequest}
      */
@@ -598,24 +418,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.flush
 
     /**
-     * <p>
      * Performs the flush operation on one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<FlushResponse> flush(FlushRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, FlushRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Performs the flush operation on one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link FlushRequest}
      */
@@ -625,12 +435,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Performs the flush operation on one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<FlushResponse> flush() throws IOException, OpenSearchException {
         return flush(new FlushRequest.Builder().build());
@@ -639,24 +444,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.forcemerge
 
     /**
-     * <p>
      * Performs the force merge operation on one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<ForcemergeResponse> forcemerge(ForcemergeRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ForcemergeRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Performs the force merge operation on one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ForcemergeRequest}
      */
@@ -668,24 +463,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.get
 
     /**
-     * <p>
      * Returns information about one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetIndexResponse> get(GetIndexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetIndexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetIndexRequest}
      */
@@ -697,24 +482,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.get_alias
 
     /**
-     * <p>
      * Returns an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetAliasResponse> getAlias(GetAliasRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetAliasRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetAliasRequest}
      */
@@ -724,12 +499,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Returns an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<GetAliasResponse> getAlias() throws IOException, OpenSearchException {
         return getAlias(new GetAliasRequest.Builder().build());
@@ -738,24 +508,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.get_data_stream
 
     /**
-     * <p>
      * Returns data streams.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetDataStreamResponse> getDataStream(GetDataStreamRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetDataStreamRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns data streams.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetDataStreamRequest}
      */
@@ -766,12 +526,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Returns data streams.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<GetDataStreamResponse> getDataStream() throws IOException, OpenSearchException {
         return getDataStream(new GetDataStreamRequest.Builder().build());
@@ -780,12 +535,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.get_index_template
 
     /**
-     * <p>
      * Returns an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetIndexTemplateResponse> getIndexTemplate(GetIndexTemplateRequest request) throws IOException,
         OpenSearchException {
@@ -793,12 +543,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Returns an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetIndexTemplateRequest}
      */
@@ -809,12 +554,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Returns an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<GetIndexTemplateResponse> getIndexTemplate() throws IOException, OpenSearchException {
         return getIndexTemplate(new GetIndexTemplateRequest.Builder().build());
@@ -823,24 +563,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.get_mapping
 
     /**
-     * <p>
      * Returns mappings for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetMappingResponse> getMapping(GetMappingRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetMappingRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns mappings for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetMappingRequest}
      */
@@ -850,12 +580,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Returns mappings for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<GetMappingResponse> getMapping() throws IOException, OpenSearchException {
         return getMapping(new GetMappingRequest.Builder().build());
@@ -864,12 +589,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.get_settings
 
     /**
-     * <p>
      * Returns settings for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetIndicesSettingsResponse> getSettings(GetIndicesSettingsRequest request) throws IOException,
         OpenSearchException {
@@ -877,12 +597,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Returns settings for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetIndicesSettingsRequest}
      */
@@ -892,39 +607,17 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
         return getSettings(fn.apply(new GetIndicesSettingsRequest.Builder()).build());
     }
 
-    /**
-     * <p>
-     * Returns settings for one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
-     */
-    public final CompletableFuture<GetIndicesSettingsResponse> getSettings() throws IOException, OpenSearchException {
-        return getSettings(new GetIndicesSettingsRequest.Builder().build());
-    }
-
     // ----- Endpoint: indices.get_template
 
     /**
-     * <p>
      * Returns an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetTemplateResponse> getTemplate(GetTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetTemplateRequest}
      */
@@ -935,12 +628,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Returns an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<GetTemplateResponse> getTemplate() throws IOException, OpenSearchException {
         return getTemplate(new GetTemplateRequest.Builder().build());
@@ -949,12 +637,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.modify_data_stream
 
     /**
-     * <p>
      * Adds or removes backing indexes of a data stream with metadata-only actions. This is an experimental API.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.8</code>
-     * </p>
      */
     public CompletableFuture<ModifyDataStreamResponse> modifyDataStream(ModifyDataStreamRequest request) throws IOException,
         OpenSearchException {
@@ -962,12 +645,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Adds or removes backing indexes of a data stream with metadata-only actions. This is an experimental API.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>3.8</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ModifyDataStreamRequest}
      */
@@ -980,24 +658,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.open
 
     /**
-     * <p>
      * Opens an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<OpenResponse> open(OpenRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, OpenRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Opens an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link OpenRequest}
      */
@@ -1009,24 +677,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.put_alias
 
     /**
-     * <p>
      * Creates or updates an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<PutAliasResponse> putAlias(PutAliasRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, PutAliasRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates or updates an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutAliasRequest}
      */
@@ -1036,12 +694,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Creates or updates an alias.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<PutAliasResponse> putAlias() throws IOException, OpenSearchException {
         return putAlias(new PutAliasRequest.Builder().build());
@@ -1050,12 +703,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.put_index_template
 
     /**
-     * <p>
      * Creates or updates an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<PutIndexTemplateResponse> putIndexTemplate(PutIndexTemplateRequest request) throws IOException,
         OpenSearchException {
@@ -1063,12 +711,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Creates or updates an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutIndexTemplateRequest}
      */
@@ -1081,24 +724,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.put_mapping
 
     /**
-     * <p>
      * Updates the index mappings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<PutMappingResponse> putMapping(PutMappingRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, PutMappingRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Updates the index mappings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutMappingRequest}
      */
@@ -1110,12 +743,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.put_settings
 
     /**
-     * <p>
      * Updates the index settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<PutIndicesSettingsResponse> putSettings(PutIndicesSettingsRequest request) throws IOException,
         OpenSearchException {
@@ -1123,12 +751,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Updates the index settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutIndicesSettingsRequest}
      */
@@ -1141,24 +764,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.put_template
 
     /**
-     * <p>
      * Creates or updates an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<PutTemplateResponse> putTemplate(PutTemplateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, PutTemplateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates or updates an index template.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutTemplateRequest}
      */
@@ -1171,24 +784,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.recovery
 
     /**
-     * <p>
      * Returns information about ongoing index shard recoveries.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<RecoveryResponse> recovery(RecoveryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, RecoveryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about ongoing index shard recoveries.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RecoveryRequest}
      */
@@ -1198,12 +801,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Returns information about ongoing index shard recoveries.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<RecoveryResponse> recovery() throws IOException, OpenSearchException {
         return recovery(new RecoveryRequest.Builder().build());
@@ -1212,24 +810,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.refresh
 
     /**
-     * <p>
      * Performs the refresh operation in one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<RefreshResponse> refresh(RefreshRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, RefreshRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Performs the refresh operation in one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RefreshRequest}
      */
@@ -1239,12 +827,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Performs the refresh operation in one or more indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<RefreshResponse> refresh() throws IOException, OpenSearchException {
         return refresh(new RefreshRequest.Builder().build());
@@ -1253,24 +836,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.resolve_index
 
     /**
-     * <p>
      * Returns information about any matching indexes, aliases, and data streams.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<ResolveIndexResponse> resolveIndex(ResolveIndexRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ResolveIndexRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about any matching indexes, aliases, and data streams.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ResolveIndexRequest}
      */
@@ -1283,24 +856,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.rollover
 
     /**
-     * <p>
      * Updates an alias to point to a new index when the existing index is considered to be too large or too old.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<RolloverResponse> rollover(RolloverRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, RolloverRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Updates an alias to point to a new index when the existing index is considered to be too large or too old.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link RolloverRequest}
      */
@@ -1309,27 +872,36 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
         return rollover(fn.apply(new RolloverRequest.Builder()).build());
     }
 
+    // ----- Endpoint: indices.segments
+
+    /**
+     * Provides low-level information about segments in a Lucene index.
+     */
+    public CompletableFuture<SegmentsResponse> segments(SegmentsRequest request) throws IOException, OpenSearchException {
+        return this.transport.performRequestAsync(request, SegmentsRequest._ENDPOINT, this.transportOptions);
+    }
+
+    /**
+     * Provides low-level information about segments in a Lucene index.
+     *
+     * @param fn a function that initializes a builder to create the {@link SegmentsRequest}
+     */
+    public final CompletableFuture<SegmentsResponse> segments(Function<SegmentsRequest.Builder, ObjectBuilder<SegmentsRequest>> fn)
+        throws IOException, OpenSearchException {
+        return segments(fn.apply(new SegmentsRequest.Builder()).build());
+    }
+
     // ----- Endpoint: indices.shard_stores
 
     /**
-     * <p>
      * Provides store information for shard copies of indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<ShardStoresResponse> shardStores(ShardStoresRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ShardStoresRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Provides store information for shard copies of indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ShardStoresRequest}
      */
@@ -1340,12 +912,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Provides store information for shard copies of indexes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<ShardStoresResponse> shardStores() throws IOException, OpenSearchException {
         return shardStores(new ShardStoresRequest.Builder().build());
@@ -1354,24 +921,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.shrink
 
     /**
-     * <p>
      * Allow to shrink an existing index into a new index with fewer primary shards.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<ShrinkResponse> shrink(ShrinkRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ShrinkRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Allow to shrink an existing index into a new index with fewer primary shards.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ShrinkRequest}
      */
@@ -1383,12 +940,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.simulate_index_template
 
     /**
-     * <p>
      * Simulate matching the given index name against the index templates in the system.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<SimulateIndexTemplateResponse> simulateIndexTemplate(SimulateIndexTemplateRequest request) throws IOException,
         OpenSearchException {
@@ -1396,12 +948,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Simulate matching the given index name against the index templates in the system.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SimulateIndexTemplateRequest}
      */
@@ -1414,12 +961,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.simulate_template
 
     /**
-     * <p>
      * Simulate resolving the given template name or body.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<SimulateTemplateResponse> simulateTemplate(SimulateTemplateRequest request) throws IOException,
         OpenSearchException {
@@ -1427,12 +969,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Simulate resolving the given template name or body.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SimulateTemplateRequest}
      */
@@ -1445,24 +982,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.split
 
     /**
-     * <p>
      * Allows you to split an existing index into a new index with more primary shards.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<SplitResponse> split(SplitRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, SplitRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Allows you to split an existing index into a new index with more primary shards.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SplitRequest}
      */
@@ -1474,24 +1001,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.stats
 
     /**
-     * <p>
      * Provides statistics on operations happening in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<IndicesStatsResponse> stats(IndicesStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, IndicesStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Provides statistics on operations happening in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link IndicesStatsRequest}
      */
@@ -1501,12 +1018,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Provides statistics on operations happening in an index.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<IndicesStatsResponse> stats() throws IOException, OpenSearchException {
         return stats(new IndicesStatsRequest.Builder().build());
@@ -1515,24 +1027,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.update_aliases
 
     /**
-     * <p>
      * Updates index aliases.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<UpdateAliasesResponse> updateAliases(UpdateAliasesRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, UpdateAliasesRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Updates index aliases.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link UpdateAliasesRequest}
      */
@@ -1543,12 +1045,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Updates index aliases.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<UpdateAliasesResponse> updateAliases() throws IOException, OpenSearchException {
         return updateAliases(new UpdateAliasesRequest.Builder().build());
@@ -1557,24 +1054,14 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     // ----- Endpoint: indices.validate_query
 
     /**
-     * <p>
      * Allows a user to validate a potentially expensive query without executing it.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<ValidateQueryResponse> validateQuery(ValidateQueryRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, ValidateQueryRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Allows a user to validate a potentially expensive query without executing it.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ValidateQueryRequest}
      */
@@ -1585,12 +1072,7 @@ public abstract class OpenSearchIndicesAsyncClientBase<Self extends OpenSearchIn
     }
 
     /**
-     * <p>
      * Allows a user to validate a potentially expensive query without executing it.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<ValidateQueryResponse> validateQuery() throws IOException, OpenSearchException {
         return validateQuery(new ValidateQueryRequest.Builder().build());

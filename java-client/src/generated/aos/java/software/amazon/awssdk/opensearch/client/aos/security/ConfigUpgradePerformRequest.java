@@ -69,12 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.config_upgrade_perform.Request
 
 /**
- * <p>
  * Assists the cluster operator with upgrading missing default values and stale default definitions.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.14</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

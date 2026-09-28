@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.get_tenancy_config.Request
 
 /**
- * <p>
  * Retrieves the multi-tenancy configuration. Requires super admin or REST API permissions.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.7</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetTenancyConfigRequest extends RequestBase

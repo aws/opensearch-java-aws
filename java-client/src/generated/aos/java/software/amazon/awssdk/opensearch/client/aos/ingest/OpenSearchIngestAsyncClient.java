@@ -74,24 +74,14 @@ public class OpenSearchIngestAsyncClient extends ApiClient<OpenSearchTransport, 
     // ----- Endpoint: ingest.delete_pipeline
 
     /**
-     * <p>
      * Deletes an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<DeletePipelineResponse> deletePipeline(DeletePipelineRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, DeletePipelineRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeletePipelineRequest}
      */
@@ -104,24 +94,14 @@ public class OpenSearchIngestAsyncClient extends ApiClient<OpenSearchTransport, 
     // ----- Endpoint: ingest.get_pipeline
 
     /**
-     * <p>
      * Returns an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<GetPipelineResponse> getPipeline(GetPipelineRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, GetPipelineRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetPipelineRequest}
      */
@@ -132,12 +112,7 @@ public class OpenSearchIngestAsyncClient extends ApiClient<OpenSearchTransport, 
     }
 
     /**
-     * <p>
      * Returns an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<GetPipelineResponse> getPipeline() throws IOException, OpenSearchException {
         return getPipeline(new GetPipelineRequest.Builder().build());
@@ -146,24 +121,14 @@ public class OpenSearchIngestAsyncClient extends ApiClient<OpenSearchTransport, 
     // ----- Endpoint: ingest.put_pipeline
 
     /**
-     * <p>
      * Creates or updates an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<PutPipelineResponse> putPipeline(PutPipelineRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, PutPipelineRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates or updates an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutPipelineRequest}
      */
@@ -176,24 +141,14 @@ public class OpenSearchIngestAsyncClient extends ApiClient<OpenSearchTransport, 
     // ----- Endpoint: ingest.simulate
 
     /**
-     * <p>
      * Simulates an ingest pipeline with example documents.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public CompletableFuture<SimulateResponse> simulate(SimulateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequestAsync(request, SimulateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Simulates an ingest pipeline with example documents.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SimulateRequest}
      */
@@ -203,12 +158,7 @@ public class OpenSearchIngestAsyncClient extends ApiClient<OpenSearchTransport, 
     }
 
     /**
-     * <p>
      * Simulates an ingest pipeline with example documents.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final CompletableFuture<SimulateResponse> simulate() throws IOException, OpenSearchException {
         return simulate(new SimulateRequest.Builder().build());

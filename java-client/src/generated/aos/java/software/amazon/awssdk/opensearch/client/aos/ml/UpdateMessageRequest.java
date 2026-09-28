@@ -45,12 +45,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.update_message.Request
 
 /**
- * <p>
  * Update a message.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.12</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

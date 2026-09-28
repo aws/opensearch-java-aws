@@ -63,12 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: snapshot.get.Request
 
 /**
- * <p>
  * Returns information about a snapshot.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetSnapshotRequest extends RequestBase implements ToCopyableBuilder<GetSnapshotRequest.Builder, GetSnapshotRequest> {
@@ -78,6 +73,10 @@ public final class GetSnapshotRequest extends RequestBase implements ToCopyableB
 
     @Nullable
     private final Boolean ignoreUnavailable;
+
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
 
     @Nonnull
     private final String repository;
@@ -94,6 +93,7 @@ public final class GetSnapshotRequest extends RequestBase implements ToCopyableB
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.ignoreUnavailable = builder.ignoreUnavailable;
+        this.masterTimeout = builder.masterTimeout;
         this.repository = ApiTypeHelper.requireNonNull(builder.repository, this, "repository");
         this.snapshot = ApiTypeHelper.unmodifiableRequired(builder.snapshot, this, "snapshot");
         this.verbose = builder.verbose;
@@ -124,6 +124,19 @@ public final class GetSnapshotRequest extends RequestBase implements ToCopyableB
     @Nullable
     public final Boolean ignoreUnavailable() {
         return this.ignoreUnavailable;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -190,6 +203,8 @@ public final class GetSnapshotRequest extends RequestBase implements ToCopyableB
         private Time clusterManagerTimeout;
         @Nullable
         private Boolean ignoreUnavailable;
+        @Nullable
+        private Time masterTimeout;
         private String repository;
         private List<String> snapshot;
         @Nullable
@@ -201,6 +216,7 @@ public final class GetSnapshotRequest extends RequestBase implements ToCopyableB
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.ignoreUnavailable = o.ignoreUnavailable;
+            this.masterTimeout = o.masterTimeout;
             this.repository = o.repository;
             this.snapshot = _listCopy(o.snapshot);
             this.verbose = o.verbose;
@@ -210,6 +226,7 @@ public final class GetSnapshotRequest extends RequestBase implements ToCopyableB
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.ignoreUnavailable = o.ignoreUnavailable;
+            this.masterTimeout = o.masterTimeout;
             this.repository = o.repository;
             this.snapshot = _listCopy(o.snapshot);
             this.verbose = o.verbose;
@@ -262,6 +279,33 @@ public final class GetSnapshotRequest extends RequestBase implements ToCopyableB
         public final Builder ignoreUnavailable(@Nullable Boolean value) {
             this.ignoreUnavailable = value;
             return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -362,6 +406,9 @@ public final class GetSnapshotRequest extends RequestBase implements ToCopyableB
         if (this.ignoreUnavailable != null) {
             params.put("ignore_unavailable", String.valueOf(this.ignoreUnavailable));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.verbose != null) {
             params.put("verbose", String.valueOf(this.verbose));
         }
@@ -398,6 +445,7 @@ public final class GetSnapshotRequest extends RequestBase implements ToCopyableB
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + this.repository.hashCode();
         result = 31 * result + this.snapshot.hashCode();
         result = 31 * result + Objects.hashCode(this.verbose);
@@ -411,6 +459,7 @@ public final class GetSnapshotRequest extends RequestBase implements ToCopyableB
         GetSnapshotRequest other = (GetSnapshotRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && this.repository.equals(other.repository)
             && this.snapshot.equals(other.snapshot)
             && Objects.equals(this.verbose, other.verbose);

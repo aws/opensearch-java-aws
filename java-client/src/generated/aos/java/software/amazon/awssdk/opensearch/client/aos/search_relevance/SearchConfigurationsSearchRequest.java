@@ -71,12 +71,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: search_relevance.search_configurations_search.Request
 
 /**
- * <p>
  * Searches for search configurations.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.5</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

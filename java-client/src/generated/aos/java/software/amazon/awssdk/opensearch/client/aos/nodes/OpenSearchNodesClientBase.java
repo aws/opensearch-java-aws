@@ -64,24 +64,14 @@ public abstract class OpenSearchNodesClientBase<Self extends OpenSearchNodesClie
     // ----- Endpoint: nodes.info
 
     /**
-     * <p>
      * Returns information about nodes in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public NodesInfoResponse info(NodesInfoRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, NodesInfoRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns information about nodes in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link NodesInfoRequest}
      */
@@ -91,12 +81,7 @@ public abstract class OpenSearchNodesClientBase<Self extends OpenSearchNodesClie
     }
 
     /**
-     * <p>
      * Returns information about nodes in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final NodesInfoResponse info() throws IOException, OpenSearchException {
         return info(new NodesInfoRequest.Builder().build());
@@ -105,24 +90,14 @@ public abstract class OpenSearchNodesClientBase<Self extends OpenSearchNodesClie
     // ----- Endpoint: nodes.reload_secure_settings
 
     /**
-     * <p>
      * Reloads secure settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public ReloadSecureSettingsResponse reloadSecureSettings(ReloadSecureSettingsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, ReloadSecureSettingsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Reloads secure settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link ReloadSecureSettingsRequest}
      */
@@ -133,12 +108,7 @@ public abstract class OpenSearchNodesClientBase<Self extends OpenSearchNodesClie
     }
 
     /**
-     * <p>
      * Reloads secure settings.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final ReloadSecureSettingsResponse reloadSecureSettings() throws IOException, OpenSearchException {
         return reloadSecureSettings(new ReloadSecureSettingsRequest.Builder().build());
@@ -147,24 +117,14 @@ public abstract class OpenSearchNodesClientBase<Self extends OpenSearchNodesClie
     // ----- Endpoint: nodes.stats
 
     /**
-     * <p>
      * Returns statistical information about nodes in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public NodesStatsResponse stats(NodesStatsRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, NodesStatsRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns statistical information about nodes in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link NodesStatsRequest}
      */
@@ -174,12 +134,7 @@ public abstract class OpenSearchNodesClientBase<Self extends OpenSearchNodesClie
     }
 
     /**
-     * <p>
      * Returns statistical information about nodes in the cluster.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final NodesStatsResponse stats() throws IOException, OpenSearchException {
         return stats(new NodesStatsRequest.Builder().build());
@@ -188,24 +143,14 @@ public abstract class OpenSearchNodesClientBase<Self extends OpenSearchNodesClie
     // ----- Endpoint: nodes.usage
 
     /**
-     * <p>
      * Returns low-level information about REST actions usage on nodes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public NodesUsageResponse usage(NodesUsageRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, NodesUsageRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns low-level information about REST actions usage on nodes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link NodesUsageRequest}
      */
@@ -215,12 +160,7 @@ public abstract class OpenSearchNodesClientBase<Self extends OpenSearchNodesClie
     }
 
     /**
-     * <p>
      * Returns low-level information about REST actions usage on nodes.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final NodesUsageResponse usage() throws IOException, OpenSearchException {
         return usage(new NodesUsageRequest.Builder().build());

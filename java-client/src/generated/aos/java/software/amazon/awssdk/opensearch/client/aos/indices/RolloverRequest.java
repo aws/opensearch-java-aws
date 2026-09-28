@@ -73,12 +73,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.rollover.Request
 
 /**
- * <p>
  * Updates an alias to point to a new index when the existing index is considered to be too large or too old.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -105,6 +100,10 @@ public final class RolloverRequest extends RequestBase
     @Nullable
     private final TypeMapping mappings;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final String newIndex;
 
@@ -127,6 +126,7 @@ public final class RolloverRequest extends RequestBase
         this.conditions = builder.conditions;
         this.dryRun = builder.dryRun;
         this.mappings = builder.mappings;
+        this.masterTimeout = builder.masterTimeout;
         this.newIndex = builder.newIndex;
         this.settings = ApiTypeHelper.unmodifiable(builder.settings);
         this.timeout = builder.timeout;
@@ -195,6 +195,19 @@ public final class RolloverRequest extends RequestBase
     @Nullable
     public final TypeMapping mappings() {
         return this.mappings;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -313,6 +326,8 @@ public final class RolloverRequest extends RequestBase
         @Nullable
         private TypeMapping mappings;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private String newIndex;
         @Nullable
         private Map<String, JsonData> settings;
@@ -331,6 +346,7 @@ public final class RolloverRequest extends RequestBase
             this.conditions = o.conditions;
             this.dryRun = o.dryRun;
             this.mappings = o.mappings;
+            this.masterTimeout = o.masterTimeout;
             this.newIndex = o.newIndex;
             this.settings = _mapCopy(o.settings);
             this.timeout = o.timeout;
@@ -345,6 +361,7 @@ public final class RolloverRequest extends RequestBase
             this.conditions = o.conditions;
             this.dryRun = o.dryRun;
             this.mappings = o.mappings;
+            this.masterTimeout = o.masterTimeout;
             this.newIndex = o.newIndex;
             this.settings = _mapCopy(o.settings);
             this.timeout = o.timeout;
@@ -492,6 +509,33 @@ public final class RolloverRequest extends RequestBase
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * The name of the index to create. Supports date math. Data streams do not support this parameter.
          * <p>
          * API name: {@code new_index}
@@ -625,6 +669,9 @@ public final class RolloverRequest extends RequestBase
         if (this.dryRun != null) {
             params.put("dry_run", String.valueOf(this.dryRun));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -687,6 +734,7 @@ public final class RolloverRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.conditions);
         result = 31 * result + Objects.hashCode(this.dryRun);
         result = 31 * result + Objects.hashCode(this.mappings);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.newIndex);
         result = 31 * result + Objects.hashCode(this.settings);
         result = 31 * result + Objects.hashCode(this.timeout);
@@ -705,6 +753,7 @@ public final class RolloverRequest extends RequestBase
             && Objects.equals(this.conditions, other.conditions)
             && Objects.equals(this.dryRun, other.dryRun)
             && Objects.equals(this.mappings, other.mappings)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.newIndex, other.newIndex)
             && Objects.equals(this.settings, other.settings)
             && Objects.equals(this.timeout, other.timeout)

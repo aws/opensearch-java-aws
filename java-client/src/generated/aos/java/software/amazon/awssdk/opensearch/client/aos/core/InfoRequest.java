@@ -58,12 +58,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.info.Request
 
 /**
- * <p>
  * Returns basic information about the cluster.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class InfoRequest extends RequestBase implements ToCopyableBuilder<InfoRequest.Builder, InfoRequest> {

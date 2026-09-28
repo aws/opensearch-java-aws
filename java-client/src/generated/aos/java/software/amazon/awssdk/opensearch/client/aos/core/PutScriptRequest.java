@@ -70,12 +70,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.put_script.Request
 
 /**
- * <p>
  * Creates or updates a script.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -93,6 +88,10 @@ public final class PutScriptRequest extends RequestBase
     @Nonnull
     private final String id;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final StoredScript script;
 
@@ -106,6 +105,7 @@ public final class PutScriptRequest extends RequestBase
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.context = builder.context;
         this.id = ApiTypeHelper.requireNonNull(builder.id, this, "id");
+        this.masterTimeout = builder.masterTimeout;
         this.script = ApiTypeHelper.requireNonNull(builder.script, this, "script");
         this.timeout = builder.timeout;
     }
@@ -146,6 +146,19 @@ public final class PutScriptRequest extends RequestBase
     @Nonnull
     public final String id() {
         return this.id;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -204,6 +217,8 @@ public final class PutScriptRequest extends RequestBase
         @Nullable
         private String context;
         private String id;
+        @Nullable
+        private Time masterTimeout;
         private StoredScript script;
         @Nullable
         private Time timeout;
@@ -215,6 +230,7 @@ public final class PutScriptRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.context = o.context;
             this.id = o.id;
+            this.masterTimeout = o.masterTimeout;
             this.script = o.script;
             this.timeout = o.timeout;
         }
@@ -224,6 +240,7 @@ public final class PutScriptRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.context = o.context;
             this.id = o.id;
+            this.masterTimeout = o.masterTimeout;
             this.script = o.script;
             this.timeout = o.timeout;
         }
@@ -286,6 +303,33 @@ public final class PutScriptRequest extends RequestBase
         public final Builder id(String value) {
             this.id = value;
             return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -364,6 +408,9 @@ public final class PutScriptRequest extends RequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -419,6 +466,7 @@ public final class PutScriptRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.context);
         result = 31 * result + this.id.hashCode();
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + this.script.hashCode();
         result = 31 * result + Objects.hashCode(this.timeout);
         return result;
@@ -432,6 +480,7 @@ public final class PutScriptRequest extends RequestBase
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.context, other.context)
             && this.id.equals(other.id)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && this.script.equals(other.script)
             && Objects.equals(this.timeout, other.timeout);
     }

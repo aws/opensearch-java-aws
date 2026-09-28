@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: search_relevance.get_scheduled_experiments.Request
 
 /**
- * <p>
  * Gets the scheduled experiments.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.4</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetScheduledExperimentsRequest extends RequestBase

@@ -79,12 +79,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.put_mapping.Request
 
 /**
- * <p>
  * Updates the index mappings.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -123,6 +118,10 @@ public final class PutMappingRequest extends RequestBase
     @Nonnull
     private final List<String> index;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final Map<String, JsonData> meta;
 
@@ -158,6 +157,7 @@ public final class PutMappingRequest extends RequestBase
         this.fieldNames = builder.fieldNames;
         this.ignoreUnavailable = builder.ignoreUnavailable;
         this.index = ApiTypeHelper.unmodifiableRequired(builder.index, this, "index");
+        this.masterTimeout = builder.masterTimeout;
         this.meta = ApiTypeHelper.unmodifiable(builder.meta);
         this.numericDetection = builder.numericDetection;
         this.properties = ApiTypeHelper.unmodifiable(builder.properties);
@@ -278,6 +278,19 @@ public final class PutMappingRequest extends RequestBase
     @Nonnull
     public final List<String> index() {
         return this.index;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -479,6 +492,8 @@ public final class PutMappingRequest extends RequestBase
         private Boolean ignoreUnavailable;
         private List<String> index;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Map<String, JsonData> meta;
         @Nullable
         private Boolean numericDetection;
@@ -507,6 +522,7 @@ public final class PutMappingRequest extends RequestBase
             this.fieldNames = o.fieldNames;
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.meta = _mapCopy(o.meta);
             this.numericDetection = o.numericDetection;
             this.properties = _mapCopy(o.properties);
@@ -528,6 +544,7 @@ public final class PutMappingRequest extends RequestBase
             this.fieldNames = o.fieldNames;
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.meta = _mapCopy(o.meta);
             this.numericDetection = o.numericDetection;
             this.properties = _mapCopy(o.properties);
@@ -772,6 +789,33 @@ public final class PutMappingRequest extends RequestBase
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * API name: {@code _meta}
          *
          * <p>
@@ -1008,6 +1052,9 @@ public final class PutMappingRequest extends RequestBase
         if (this.ignoreUnavailable != null) {
             params.put("ignore_unavailable", String.valueOf(this.ignoreUnavailable));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -1054,6 +1101,7 @@ public final class PutMappingRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.fieldNames);
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
         result = 31 * result + this.index.hashCode();
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.meta);
         result = 31 * result + Objects.hashCode(this.numericDetection);
         result = 31 * result + Objects.hashCode(this.properties);
@@ -1079,6 +1127,7 @@ public final class PutMappingRequest extends RequestBase
             && Objects.equals(this.fieldNames, other.fieldNames)
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
             && this.index.equals(other.index)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.meta, other.meta)
             && Objects.equals(this.numericDetection, other.numericDetection)
             && Objects.equals(this.properties, other.properties)

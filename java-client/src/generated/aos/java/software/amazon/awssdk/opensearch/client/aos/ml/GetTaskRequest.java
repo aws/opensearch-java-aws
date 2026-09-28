@@ -35,12 +35,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.get_task.Request
 
 /**
- * <p>
  * Retrieves a task.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.3</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetTaskRequest extends RequestBase implements ToCopyableBuilder<GetTaskRequest.Builder, GetTaskRequest> {

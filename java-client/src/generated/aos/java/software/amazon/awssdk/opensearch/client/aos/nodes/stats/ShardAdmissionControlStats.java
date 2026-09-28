@@ -74,11 +74,15 @@ public class ShardAdmissionControlStats
     @Nullable
     private final UsageStats globalIoUsage;
 
+    @Nullable
+    private final UsageStats globalNativeMemoryUsage;
+
     // ---------------------------------------------------------------------------------------------
 
     private ShardAdmissionControlStats(Builder builder) {
         this.globalCpuUsage = builder.globalCpuUsage;
         this.globalIoUsage = builder.globalIoUsage;
+        this.globalNativeMemoryUsage = builder.globalNativeMemoryUsage;
     }
 
     public static ShardAdmissionControlStats of(
@@ -104,6 +108,14 @@ public class ShardAdmissionControlStats
     }
 
     /**
+     * API name: {@code global_native_memory_usage}
+     */
+    @Nullable
+    public final UsageStats globalNativeMemoryUsage() {
+        return this.globalNativeMemoryUsage;
+    }
+
+    /**
      * Serialize this object to JSON.
      */
     @Override
@@ -122,6 +134,11 @@ public class ShardAdmissionControlStats
         if (this.globalIoUsage != null) {
             generator.writeKey("global_io_usage");
             this.globalIoUsage.serialize(generator, mapper);
+        }
+
+        if (this.globalNativeMemoryUsage != null) {
+            generator.writeKey("global_native_memory_usage");
+            this.globalNativeMemoryUsage.serialize(generator, mapper);
         }
     }
 
@@ -146,17 +163,21 @@ public class ShardAdmissionControlStats
         private UsageStats globalCpuUsage;
         @Nullable
         private UsageStats globalIoUsage;
+        @Nullable
+        private UsageStats globalNativeMemoryUsage;
 
         public Builder() {}
 
         private Builder(ShardAdmissionControlStats o) {
             this.globalCpuUsage = o.globalCpuUsage;
             this.globalIoUsage = o.globalIoUsage;
+            this.globalNativeMemoryUsage = o.globalNativeMemoryUsage;
         }
 
         private Builder(Builder o) {
             this.globalCpuUsage = o.globalCpuUsage;
             this.globalIoUsage = o.globalIoUsage;
+            this.globalNativeMemoryUsage = o.globalNativeMemoryUsage;
         }
 
         @Override
@@ -200,6 +221,23 @@ public class ShardAdmissionControlStats
         }
 
         /**
+         * API name: {@code global_native_memory_usage}
+         */
+        @Nonnull
+        public final Builder globalNativeMemoryUsage(@Nullable UsageStats value) {
+            this.globalNativeMemoryUsage = value;
+            return this;
+        }
+
+        /**
+         * API name: {@code global_native_memory_usage}
+         */
+        @Nonnull
+        public final Builder globalNativeMemoryUsage(Function<UsageStats.Builder, ObjectBuilder<UsageStats>> fn) {
+            return globalNativeMemoryUsage(fn.apply(new UsageStats.Builder()).build());
+        }
+
+        /**
          * Builds a {@link ShardAdmissionControlStats}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -226,6 +264,7 @@ public class ShardAdmissionControlStats
     protected static void setupShardAdmissionControlStatsDeserializer(ObjectDeserializer<ShardAdmissionControlStats.Builder> op) {
         op.add(Builder::globalCpuUsage, UsageStats._DESERIALIZER, "global_cpu_usage");
         op.add(Builder::globalIoUsage, UsageStats._DESERIALIZER, "global_io_usage");
+        op.add(Builder::globalNativeMemoryUsage, UsageStats._DESERIALIZER, "global_native_memory_usage");
     }
 
     @Override
@@ -233,6 +272,7 @@ public class ShardAdmissionControlStats
         int result = 17;
         result = 31 * result + Objects.hashCode(this.globalCpuUsage);
         result = 31 * result + Objects.hashCode(this.globalIoUsage);
+        result = 31 * result + Objects.hashCode(this.globalNativeMemoryUsage);
         return result;
     }
 
@@ -241,6 +281,8 @@ public class ShardAdmissionControlStats
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         ShardAdmissionControlStats other = (ShardAdmissionControlStats) o;
-        return Objects.equals(this.globalCpuUsage, other.globalCpuUsage) && Objects.equals(this.globalIoUsage, other.globalIoUsage);
+        return Objects.equals(this.globalCpuUsage, other.globalCpuUsage)
+            && Objects.equals(this.globalIoUsage, other.globalIoUsage)
+            && Objects.equals(this.globalNativeMemoryUsage, other.globalNativeMemoryUsage);
     }
 }

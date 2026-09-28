@@ -60,12 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.authinfo.Request
 
 /**
- * <p>
  * Returns or updates authentication information for the currently authenticated user.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class AuthinfoRequest extends RequestBase implements ToCopyableBuilder<AuthinfoRequest.Builder, AuthinfoRequest> {

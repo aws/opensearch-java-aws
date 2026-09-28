@@ -65,12 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.patch_distinguished_names.Request
 
 /**
- * <p>
  * Bulk updates specified node distinguished names. Requires super admin or REST API permissions.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

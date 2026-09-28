@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.get_index_template.Request
 
 /**
- * <p>
  * Returns an index template.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetIndexTemplateRequest extends RequestBase
@@ -82,6 +77,10 @@ public final class GetIndexTemplateRequest extends RequestBase
     @Nullable
     private final Boolean local;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final String name;
 
@@ -92,6 +91,7 @@ public final class GetIndexTemplateRequest extends RequestBase
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.flatSettings = builder.flatSettings;
         this.local = builder.local;
+        this.masterTimeout = builder.masterTimeout;
         this.name = builder.name;
     }
 
@@ -134,6 +134,19 @@ public final class GetIndexTemplateRequest extends RequestBase
     }
 
     /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
      * The name of the index template to retrieve. Wildcard (*) expressions are supported.
      * <p>
      * API name: {@code name}
@@ -168,6 +181,8 @@ public final class GetIndexTemplateRequest extends RequestBase
         @Nullable
         private Boolean local;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private String name;
 
         public Builder() {}
@@ -177,6 +192,7 @@ public final class GetIndexTemplateRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.flatSettings = o.flatSettings;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
         }
 
@@ -185,6 +201,7 @@ public final class GetIndexTemplateRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.flatSettings = o.flatSettings;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.name = o.name;
         }
 
@@ -249,6 +266,33 @@ public final class GetIndexTemplateRequest extends RequestBase
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * The name of the index template to retrieve. Wildcard (*) expressions are supported.
          * <p>
          * API name: {@code name}
@@ -287,6 +331,9 @@ public final class GetIndexTemplateRequest extends RequestBase
         }
         if (this.local != null) {
             params.put("local", String.valueOf(this.local));
+        }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
         }
     }
 
@@ -333,6 +380,7 @@ public final class GetIndexTemplateRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.flatSettings);
         result = 31 * result + Objects.hashCode(this.local);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.name);
         return result;
     }
@@ -345,6 +393,7 @@ public final class GetIndexTemplateRequest extends RequestBase
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.flatSettings, other.flatSettings)
             && Objects.equals(this.local, other.local)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.name, other.name);
     }
 }

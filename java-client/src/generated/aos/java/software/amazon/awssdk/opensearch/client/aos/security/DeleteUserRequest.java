@@ -59,12 +59,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.delete_user.Request
 
 /**
- * <p>
  * Deletes the specified internal user.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteUserRequest extends RequestBase implements ToCopyableBuilder<DeleteUserRequest.Builder, DeleteUserRequest> {

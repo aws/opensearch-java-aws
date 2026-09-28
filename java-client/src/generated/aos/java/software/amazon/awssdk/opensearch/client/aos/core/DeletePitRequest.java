@@ -67,12 +67,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.delete_pit.Request
 
 /**
- * <p>
  * Deletes one or more point in time searches based on the IDs passed.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.4</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

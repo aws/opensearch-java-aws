@@ -65,12 +65,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: security.patch_allowlist.Request
 
 /**
- * <p>
  * Updates the current list of APIs accessible for users on the allow list.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.1</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

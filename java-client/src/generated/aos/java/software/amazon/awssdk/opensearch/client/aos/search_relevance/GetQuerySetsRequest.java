@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: search_relevance.get_query_sets.Request
 
 /**
- * <p>
  * Lists the current query sets available.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>3.1</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetQuerySetsRequest extends RequestBase implements ToCopyableBuilder<GetQuerySetsRequest.Builder, GetQuerySetsRequest> {

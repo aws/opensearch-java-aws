@@ -35,12 +35,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.delete_agent.Request
 
 /**
- * <p>
  * Delete an agent.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.13</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteAgentRequest extends RequestBase implements ToCopyableBuilder<DeleteAgentRequest.Builder, DeleteAgentRequest> {

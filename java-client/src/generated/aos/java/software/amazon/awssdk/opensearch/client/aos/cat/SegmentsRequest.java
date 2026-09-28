@@ -63,12 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.segments.Request
 
 /**
- * <p>
  * Provides low-level information about the segments in the shards of an index.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class SegmentsRequest extends CatRequestBase implements ToCopyableBuilder<SegmentsRequest.Builder, SegmentsRequest> {
@@ -82,6 +77,10 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
     @Nonnull
     private final List<String> index;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     // ---------------------------------------------------------------------------------------------
 
     private SegmentsRequest(Builder builder) {
@@ -89,6 +88,7 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
         this.bytes = builder.bytes;
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.index = ApiTypeHelper.unmodifiable(builder.index);
+        this.masterTimeout = builder.masterTimeout;
     }
 
     public static SegmentsRequest of(Function<SegmentsRequest.Builder, ObjectBuilder<SegmentsRequest>> fn) {
@@ -129,6 +129,18 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
         return this.index;
     }
 
+    /**
+     * The amount of time allowed to establish a connection to the cluster manager node.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     @Override
@@ -152,6 +164,8 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
         private Time clusterManagerTimeout;
         @Nullable
         private List<String> index;
+        @Nullable
+        private Time masterTimeout;
 
         public Builder() {}
 
@@ -160,6 +174,7 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
             this.bytes = o.bytes;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
         }
 
         private Builder(Builder o) {
@@ -167,6 +182,7 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
             this.bytes = o.bytes;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
         }
 
         @Override
@@ -251,6 +267,31 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
         }
 
         /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * The amount of time allowed to establish a connection to the cluster manager node.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Builds a {@link SegmentsRequest}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -274,6 +315,9 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
         }
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
+        }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
         }
     }
 
@@ -320,6 +364,7 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
         result = 31 * result + Objects.hashCode(this.bytes);
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.index);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         return result;
     }
 
@@ -330,6 +375,7 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
         SegmentsRequest other = (SegmentsRequest) o;
         return Objects.equals(this.bytes, other.bytes)
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
-            && Objects.equals(this.index, other.index);
+            && Objects.equals(this.index, other.index)
+            && Objects.equals(this.masterTimeout, other.masterTimeout);
     }
 }

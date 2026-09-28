@@ -73,24 +73,14 @@ public class OpenSearchIngestClient extends ApiClient<OpenSearchTransport, OpenS
     // ----- Endpoint: ingest.delete_pipeline
 
     /**
-     * <p>
      * Deletes an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public DeletePipelineResponse deletePipeline(DeletePipelineRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, DeletePipelineRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Deletes an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link DeletePipelineRequest}
      */
@@ -102,24 +92,14 @@ public class OpenSearchIngestClient extends ApiClient<OpenSearchTransport, OpenS
     // ----- Endpoint: ingest.get_pipeline
 
     /**
-     * <p>
      * Returns an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public GetPipelineResponse getPipeline(GetPipelineRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, GetPipelineRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Returns an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link GetPipelineRequest}
      */
@@ -129,12 +109,7 @@ public class OpenSearchIngestClient extends ApiClient<OpenSearchTransport, OpenS
     }
 
     /**
-     * <p>
      * Returns an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final GetPipelineResponse getPipeline() throws IOException, OpenSearchException {
         return getPipeline(new GetPipelineRequest.Builder().build());
@@ -143,24 +118,14 @@ public class OpenSearchIngestClient extends ApiClient<OpenSearchTransport, OpenS
     // ----- Endpoint: ingest.put_pipeline
 
     /**
-     * <p>
      * Creates or updates an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public PutPipelineResponse putPipeline(PutPipelineRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, PutPipelineRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Creates or updates an ingest pipeline.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link PutPipelineRequest}
      */
@@ -172,24 +137,14 @@ public class OpenSearchIngestClient extends ApiClient<OpenSearchTransport, OpenS
     // ----- Endpoint: ingest.simulate
 
     /**
-     * <p>
      * Simulates an ingest pipeline with example documents.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public SimulateResponse simulate(SimulateRequest request) throws IOException, OpenSearchException {
         return this.transport.performRequest(request, SimulateRequest._ENDPOINT, this.transportOptions);
     }
 
     /**
-     * <p>
      * Simulates an ingest pipeline with example documents.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      *
      * @param fn a function that initializes a builder to create the {@link SimulateRequest}
      */
@@ -199,12 +154,7 @@ public class OpenSearchIngestClient extends ApiClient<OpenSearchTransport, OpenS
     }
 
     /**
-     * <p>
      * Simulates an ingest pipeline with example documents.
-     * </p>
-     * <p>
-     * <strong>Minimum version:</strong> <code>1.0</code>
-     * </p>
      */
     public final SimulateResponse simulate() throws IOException, OpenSearchException {
         return simulate(new SimulateRequest.Builder().build());

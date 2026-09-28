@@ -34,12 +34,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.get_all_tools.Request
 
 /**
- * <p>
  * Get tools.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.12</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetAllToolsRequest extends RequestBase implements ToCopyableBuilder<GetAllToolsRequest.Builder, GetAllToolsRequest> {

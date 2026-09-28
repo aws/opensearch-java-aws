@@ -44,12 +44,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ml.register_model.Request
 
 /**
- * <p>
  * Registers a model.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.7</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")

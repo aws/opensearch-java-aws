@@ -94,6 +94,10 @@ public final class GetIndexRequest extends RequestBase implements ToCopyableBuil
     @Nullable
     private final Boolean local;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     // ---------------------------------------------------------------------------------------------
 
     private GetIndexRequest(Builder builder) {
@@ -106,6 +110,7 @@ public final class GetIndexRequest extends RequestBase implements ToCopyableBuil
         this.includeDefaults = builder.includeDefaults;
         this.index = ApiTypeHelper.unmodifiableRequired(builder.index, this, "index");
         this.local = builder.local;
+        this.masterTimeout = builder.masterTimeout;
     }
 
     public static GetIndexRequest of(Function<GetIndexRequest.Builder, ObjectBuilder<GetIndexRequest>> fn) {
@@ -205,6 +210,19 @@ public final class GetIndexRequest extends RequestBase implements ToCopyableBuil
         return this.local;
     }
 
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     @Override
@@ -237,6 +255,8 @@ public final class GetIndexRequest extends RequestBase implements ToCopyableBuil
         private List<String> index;
         @Nullable
         private Boolean local;
+        @Nullable
+        private Time masterTimeout;
 
         public Builder() {}
 
@@ -250,6 +270,7 @@ public final class GetIndexRequest extends RequestBase implements ToCopyableBuil
             this.includeDefaults = o.includeDefaults;
             this.index = _listCopy(o.index);
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
         }
 
         private Builder(Builder o) {
@@ -262,6 +283,7 @@ public final class GetIndexRequest extends RequestBase implements ToCopyableBuil
             this.includeDefaults = o.includeDefaults;
             this.index = _listCopy(o.index);
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
         }
 
         @Override
@@ -431,6 +453,33 @@ public final class GetIndexRequest extends RequestBase implements ToCopyableBuil
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Builds a {@link GetIndexRequest}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -470,6 +519,9 @@ public final class GetIndexRequest extends RequestBase implements ToCopyableBuil
         if (this.local != null) {
             params.put("local", String.valueOf(this.local));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
     }
 
     /**
@@ -507,6 +559,7 @@ public final class GetIndexRequest extends RequestBase implements ToCopyableBuil
         result = 31 * result + Objects.hashCode(this.includeDefaults);
         result = 31 * result + this.index.hashCode();
         result = 31 * result + Objects.hashCode(this.local);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         return result;
     }
 
@@ -522,6 +575,7 @@ public final class GetIndexRequest extends RequestBase implements ToCopyableBuil
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
             && Objects.equals(this.includeDefaults, other.includeDefaults)
             && this.index.equals(other.index)
-            && Objects.equals(this.local, other.local);
+            && Objects.equals(this.local, other.local)
+            && Objects.equals(this.masterTimeout, other.masterTimeout);
     }
 }

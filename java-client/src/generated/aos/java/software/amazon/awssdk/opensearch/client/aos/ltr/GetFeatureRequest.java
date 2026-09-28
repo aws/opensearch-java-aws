@@ -61,12 +61,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: ltr.get_feature.Request
 
 /**
- * <p>
  * Get a feature from the default feature store.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.19</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetFeatureRequest extends RequestBase implements ToCopyableBuilder<GetFeatureRequest.Builder, GetFeatureRequest> {

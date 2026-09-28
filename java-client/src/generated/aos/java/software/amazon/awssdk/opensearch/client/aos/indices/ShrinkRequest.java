@@ -71,12 +71,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.shrink.Request
 
 /**
- * <p>
  * Allow to shrink an existing index into a new index with fewer primary shards.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -96,6 +91,10 @@ public final class ShrinkRequest extends RequestBase
 
     @Nonnull
     private final String index;
+
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
 
     @Nonnull
     private final Map<String, JsonData> settings;
@@ -123,6 +122,7 @@ public final class ShrinkRequest extends RequestBase
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.copySettings = builder.copySettings;
         this.index = ApiTypeHelper.requireNonNull(builder.index, this, "index");
+        this.masterTimeout = builder.masterTimeout;
         this.settings = ApiTypeHelper.unmodifiable(builder.settings);
         this.target = ApiTypeHelper.requireNonNull(builder.target, this, "target");
         this.taskExecutionTimeout = builder.taskExecutionTimeout;
@@ -177,6 +177,19 @@ public final class ShrinkRequest extends RequestBase
     @Nonnull
     public final String index() {
         return this.index;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -303,6 +316,8 @@ public final class ShrinkRequest extends RequestBase
         private Boolean copySettings;
         private String index;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Map<String, JsonData> settings;
         private String target;
         @Nullable
@@ -322,6 +337,7 @@ public final class ShrinkRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.copySettings = o.copySettings;
             this.index = o.index;
+            this.masterTimeout = o.masterTimeout;
             this.settings = _mapCopy(o.settings);
             this.target = o.target;
             this.taskExecutionTimeout = o.taskExecutionTimeout;
@@ -336,6 +352,7 @@ public final class ShrinkRequest extends RequestBase
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.copySettings = o.copySettings;
             this.index = o.index;
+            this.masterTimeout = o.masterTimeout;
             this.settings = _mapCopy(o.settings);
             this.target = o.target;
             this.taskExecutionTimeout = o.taskExecutionTimeout;
@@ -448,6 +465,33 @@ public final class ShrinkRequest extends RequestBase
         public final Builder index(String value) {
             this.index = value;
             return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -617,6 +661,9 @@ public final class ShrinkRequest extends RequestBase
         if (this.copySettings != null) {
             params.put("copy_settings", String.valueOf(this.copySettings));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.taskExecutionTimeout != null) {
             params.put("task_execution_timeout", this.taskExecutionTimeout._toJsonString());
         }
@@ -664,6 +711,7 @@ public final class ShrinkRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.copySettings);
         result = 31 * result + this.index.hashCode();
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.settings);
         result = 31 * result + this.target.hashCode();
         result = 31 * result + Objects.hashCode(this.taskExecutionTimeout);
@@ -682,6 +730,7 @@ public final class ShrinkRequest extends RequestBase
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.copySettings, other.copySettings)
             && this.index.equals(other.index)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.settings, other.settings)
             && this.target.equals(other.target)
             && Objects.equals(this.taskExecutionTimeout, other.taskExecutionTimeout)

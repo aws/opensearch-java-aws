@@ -71,12 +71,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.update_aliases.Request
 
 /**
- * <p>
  * Updates index aliases.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -91,6 +86,10 @@ public final class UpdateAliasesRequest extends RequestBase
     @Nullable
     private final Time clusterManagerTimeout;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final Time timeout;
 
@@ -100,6 +99,7 @@ public final class UpdateAliasesRequest extends RequestBase
         super(builder);
         this.actions = ApiTypeHelper.unmodifiable(builder.actions);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
+        this.masterTimeout = builder.masterTimeout;
         this.timeout = builder.timeout;
     }
 
@@ -127,6 +127,19 @@ public final class UpdateAliasesRequest extends RequestBase
     @Nullable
     public final Time clusterManagerTimeout() {
         return this.clusterManagerTimeout;
+    }
+
+    /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -183,6 +196,8 @@ public final class UpdateAliasesRequest extends RequestBase
         @Nullable
         private Time clusterManagerTimeout;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Time timeout;
 
         public Builder() {}
@@ -191,6 +206,7 @@ public final class UpdateAliasesRequest extends RequestBase
             super(o);
             this.actions = _listCopy(o.actions);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
         }
 
@@ -198,6 +214,7 @@ public final class UpdateAliasesRequest extends RequestBase
             super(o);
             this.actions = _listCopy(o.actions);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
         }
 
@@ -284,6 +301,33 @@ public final class UpdateAliasesRequest extends RequestBase
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
          * <p>
          * API name: {@code timeout}
@@ -342,6 +386,9 @@ public final class UpdateAliasesRequest extends RequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -371,6 +418,7 @@ public final class UpdateAliasesRequest extends RequestBase
         int result = 17;
         result = 31 * result + Objects.hashCode(this.actions);
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.timeout);
         return result;
     }
@@ -382,6 +430,7 @@ public final class UpdateAliasesRequest extends RequestBase
         UpdateAliasesRequest other = (UpdateAliasesRequest) o;
         return Objects.equals(this.actions, other.actions)
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.timeout, other.timeout);
     }
 }

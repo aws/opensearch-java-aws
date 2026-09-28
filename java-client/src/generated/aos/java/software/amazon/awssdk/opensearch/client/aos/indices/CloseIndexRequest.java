@@ -66,12 +66,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.close.Request
 
 /**
- * <p>
  * Closes an index.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class CloseIndexRequest extends RequestBase implements ToCopyableBuilder<CloseIndexRequest.Builder, CloseIndexRequest> {
@@ -91,6 +86,10 @@ public final class CloseIndexRequest extends RequestBase implements ToCopyableBu
     @Nonnull
     private final List<String> index;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nullable
     private final Time timeout;
 
@@ -106,6 +105,7 @@ public final class CloseIndexRequest extends RequestBase implements ToCopyableBu
         this.expandWildcards = ApiTypeHelper.unmodifiable(builder.expandWildcards);
         this.ignoreUnavailable = builder.ignoreUnavailable;
         this.index = ApiTypeHelper.unmodifiableRequired(builder.index, this, "index");
+        this.masterTimeout = builder.masterTimeout;
         this.timeout = builder.timeout;
         this.waitForActiveShards = builder.waitForActiveShards;
     }
@@ -173,6 +173,19 @@ public final class CloseIndexRequest extends RequestBase implements ToCopyableBu
     }
 
     /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
      * Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * <p>
      * API name: {@code timeout}
@@ -222,6 +235,8 @@ public final class CloseIndexRequest extends RequestBase implements ToCopyableBu
         private Boolean ignoreUnavailable;
         private List<String> index;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private Time timeout;
         @Nullable
         private WaitForActiveShards waitForActiveShards;
@@ -235,6 +250,7 @@ public final class CloseIndexRequest extends RequestBase implements ToCopyableBu
             this.expandWildcards = _listCopy(o.expandWildcards);
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
             this.waitForActiveShards = o.waitForActiveShards;
         }
@@ -246,6 +262,7 @@ public final class CloseIndexRequest extends RequestBase implements ToCopyableBu
             this.expandWildcards = _listCopy(o.expandWildcards);
             this.ignoreUnavailable = o.ignoreUnavailable;
             this.index = _listCopy(o.index);
+            this.masterTimeout = o.masterTimeout;
             this.timeout = o.timeout;
             this.waitForActiveShards = o.waitForActiveShards;
         }
@@ -379,6 +396,33 @@ public final class CloseIndexRequest extends RequestBase implements ToCopyableBu
         }
 
         /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
          * Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
          * <p>
          * API name: {@code timeout}
@@ -457,6 +501,9 @@ public final class CloseIndexRequest extends RequestBase implements ToCopyableBu
         if (this.ignoreUnavailable != null) {
             params.put("ignore_unavailable", String.valueOf(this.ignoreUnavailable));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
         if (this.timeout != null) {
             params.put("timeout", this.timeout._toJsonString());
         }
@@ -498,6 +545,7 @@ public final class CloseIndexRequest extends RequestBase implements ToCopyableBu
         result = 31 * result + Objects.hashCode(this.expandWildcards);
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
         result = 31 * result + this.index.hashCode();
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.timeout);
         result = 31 * result + Objects.hashCode(this.waitForActiveShards);
         return result;
@@ -513,6 +561,7 @@ public final class CloseIndexRequest extends RequestBase implements ToCopyableBu
             && Objects.equals(this.expandWildcards, other.expandWildcards)
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)
             && this.index.equals(other.index)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.timeout, other.timeout)
             && Objects.equals(this.waitForActiveShards, other.waitForActiveShards);
     }

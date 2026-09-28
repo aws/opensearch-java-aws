@@ -62,12 +62,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: search_pipeline.delete.Request
 
 /**
- * <p>
  * Deletes the specified search pipeline.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.9</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class DeleteSearchPipelineRequest extends RequestBase

@@ -74,12 +74,16 @@ public class NodeIndicesStats extends IndexStatsBase implements ToCopyableBuilde
     @Nonnull
     private final Map<String, List<NodeIndexShardStats>> shards;
 
+    @Nullable
+    private final NodeIndicesStatusCounter statusCounter;
+
     // ---------------------------------------------------------------------------------------------
 
     private NodeIndicesStats(Builder builder) {
         super(builder);
         this.indices = ApiTypeHelper.unmodifiable(builder.indices);
         this.shards = ApiTypeHelper.unmodifiable(builder.shards);
+        this.statusCounter = builder.statusCounter;
     }
 
     public static NodeIndicesStats of(Function<NodeIndicesStats.Builder, ObjectBuilder<NodeIndicesStats>> fn) {
@@ -100,6 +104,14 @@ public class NodeIndicesStats extends IndexStatsBase implements ToCopyableBuilde
     @Nonnull
     public final Map<String, List<NodeIndexShardStats>> shards() {
         return this.shards;
+    }
+
+    /**
+     * API name: {@code status_counter}
+     */
+    @Nullable
+    public final NodeIndicesStatusCounter statusCounter() {
+        return this.statusCounter;
     }
 
     protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
@@ -129,6 +141,11 @@ public class NodeIndicesStats extends IndexStatsBase implements ToCopyableBuilde
             }
             generator.writeEnd();
         }
+
+        if (this.statusCounter != null) {
+            generator.writeKey("status_counter");
+            this.statusCounter.serialize(generator, mapper);
+        }
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -152,6 +169,8 @@ public class NodeIndicesStats extends IndexStatsBase implements ToCopyableBuilde
         private Map<String, IndexStats> indices;
         @Nullable
         private Map<String, List<NodeIndexShardStats>> shards;
+        @Nullable
+        private NodeIndicesStatusCounter statusCounter;
 
         public Builder() {}
 
@@ -159,12 +178,14 @@ public class NodeIndicesStats extends IndexStatsBase implements ToCopyableBuilde
             super(o);
             this.indices = _mapCopy(o.indices);
             this.shards = _mapCopy(o.shards);
+            this.statusCounter = o.statusCounter;
         }
 
         private Builder(Builder o) {
             super(o);
             this.indices = _mapCopy(o.indices);
             this.shards = _mapCopy(o.shards);
+            this.statusCounter = o.statusCounter;
         }
 
         @Override
@@ -244,6 +265,23 @@ public class NodeIndicesStats extends IndexStatsBase implements ToCopyableBuilde
         }
 
         /**
+         * API name: {@code status_counter}
+         */
+        @Nonnull
+        public final Builder statusCounter(@Nullable NodeIndicesStatusCounter value) {
+            this.statusCounter = value;
+            return this;
+        }
+
+        /**
+         * API name: {@code status_counter}
+         */
+        @Nonnull
+        public final Builder statusCounter(Function<NodeIndicesStatusCounter.Builder, ObjectBuilder<NodeIndicesStatusCounter>> fn) {
+            return statusCounter(fn.apply(new NodeIndicesStatusCounter.Builder()).build());
+        }
+
+        /**
          * Builds a {@link NodeIndicesStats}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -275,6 +313,7 @@ public class NodeIndicesStats extends IndexStatsBase implements ToCopyableBuilde
             JsonpDeserializer.stringMapDeserializer(JsonpDeserializer.arrayDeserializer(NodeIndexShardStats._DESERIALIZER)),
             "shards"
         );
+        op.add(Builder::statusCounter, NodeIndicesStatusCounter._DESERIALIZER, "status_counter");
     }
 
     @Override
@@ -282,6 +321,7 @@ public class NodeIndicesStats extends IndexStatsBase implements ToCopyableBuilde
         int result = super.hashCode();
         result = 31 * result + Objects.hashCode(this.indices);
         result = 31 * result + Objects.hashCode(this.shards);
+        result = 31 * result + Objects.hashCode(this.statusCounter);
         return result;
     }
 
@@ -293,6 +333,8 @@ public class NodeIndicesStats extends IndexStatsBase implements ToCopyableBuilde
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         NodeIndicesStats other = (NodeIndicesStats) o;
-        return Objects.equals(this.indices, other.indices) && Objects.equals(this.shards, other.shards);
+        return Objects.equals(this.indices, other.indices)
+            && Objects.equals(this.shards, other.shards)
+            && Objects.equals(this.statusCounter, other.statusCounter);
     }
 }

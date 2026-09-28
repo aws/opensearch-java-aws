@@ -69,12 +69,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: snapshot.clone.Request
 
 /**
- * <p>
  * Creates a clone of all or part of a snapshot in the same repository as the original snapshot.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @JsonpDeserializable
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
@@ -88,6 +83,10 @@ public final class CloneSnapshotRequest extends RequestBase
 
     @Nonnull
     private final String indices;
+
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
 
     @Nonnull
     private final String repository;
@@ -104,6 +103,7 @@ public final class CloneSnapshotRequest extends RequestBase
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.indices = ApiTypeHelper.requireNonNull(builder.indices, this, "indices");
+        this.masterTimeout = builder.masterTimeout;
         this.repository = ApiTypeHelper.requireNonNull(builder.repository, this, "repository");
         this.snapshot = ApiTypeHelper.requireNonNull(builder.snapshot, this, "snapshot");
         this.targetSnapshot = ApiTypeHelper.requireNonNull(builder.targetSnapshot, this, "targetSnapshot");
@@ -131,6 +131,18 @@ public final class CloneSnapshotRequest extends RequestBase
     @Nonnull
     public final String indices() {
         return this.indices;
+    }
+
+    /**
+     * Explicit operation timeout for connection to cluster-manager node
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
     }
 
     /**
@@ -201,6 +213,8 @@ public final class CloneSnapshotRequest extends RequestBase
         @Nullable
         private Time clusterManagerTimeout;
         private String indices;
+        @Nullable
+        private Time masterTimeout;
         private String repository;
         private String snapshot;
         private String targetSnapshot;
@@ -211,6 +225,7 @@ public final class CloneSnapshotRequest extends RequestBase
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.indices = o.indices;
+            this.masterTimeout = o.masterTimeout;
             this.repository = o.repository;
             this.snapshot = o.snapshot;
             this.targetSnapshot = o.targetSnapshot;
@@ -220,6 +235,7 @@ public final class CloneSnapshotRequest extends RequestBase
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.indices = o.indices;
+            this.masterTimeout = o.masterTimeout;
             this.repository = o.repository;
             this.snapshot = o.snapshot;
             this.targetSnapshot = o.targetSnapshot;
@@ -269,6 +285,31 @@ public final class CloneSnapshotRequest extends RequestBase
         public final Builder indices(String value) {
             this.indices = value;
             return this;
+        }
+
+        /**
+         * Explicit operation timeout for connection to cluster-manager node
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Explicit operation timeout for connection to cluster-manager node
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -343,6 +384,9 @@ public final class CloneSnapshotRequest extends RequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
     }
 
     /**
@@ -378,6 +422,7 @@ public final class CloneSnapshotRequest extends RequestBase
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + this.indices.hashCode();
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + this.repository.hashCode();
         result = 31 * result + this.snapshot.hashCode();
         result = 31 * result + this.targetSnapshot.hashCode();
@@ -391,6 +436,7 @@ public final class CloneSnapshotRequest extends RequestBase
         CloneSnapshotRequest other = (CloneSnapshotRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && this.indices.equals(other.indices)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && this.repository.equals(other.repository)
             && this.snapshot.equals(other.snapshot)
             && this.targetSnapshot.equals(other.targetSnapshot);

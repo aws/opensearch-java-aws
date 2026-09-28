@@ -78,6 +78,9 @@ public class MatchOnlyTextProperty
     @Nonnull
     private final Map<String, Property> fields;
 
+    @Nullable
+    private final Boolean index;
+
     @Nonnull
     private final Map<String, String> meta;
 
@@ -86,6 +89,7 @@ public class MatchOnlyTextProperty
     private MatchOnlyTextProperty(Builder builder) {
         this.copyTo = ApiTypeHelper.unmodifiable(builder.copyTo);
         this.fields = ApiTypeHelper.unmodifiable(builder.fields);
+        this.index = builder.index;
         this.meta = ApiTypeHelper.unmodifiable(builder.meta);
     }
 
@@ -119,6 +123,14 @@ public class MatchOnlyTextProperty
     @Nonnull
     public final Map<String, Property> fields() {
         return this.fields;
+    }
+
+    /**
+     * API name: {@code index}
+     */
+    @Nullable
+    public final Boolean index() {
+        return this.index;
     }
 
     /**
@@ -163,6 +175,11 @@ public class MatchOnlyTextProperty
             generator.writeEnd();
         }
 
+        if (this.index != null) {
+            generator.writeKey("index");
+            generator.write(this.index);
+        }
+
         if (ApiTypeHelper.isDefined(this.meta)) {
             generator.writeKey("meta");
             generator.writeStartObject();
@@ -196,6 +213,8 @@ public class MatchOnlyTextProperty
         @Nullable
         private Map<String, Property> fields;
         @Nullable
+        private Boolean index;
+        @Nullable
         private Map<String, String> meta;
 
         public Builder() {}
@@ -203,12 +222,14 @@ public class MatchOnlyTextProperty
         private Builder(MatchOnlyTextProperty o) {
             this.copyTo = _listCopy(o.copyTo);
             this.fields = _mapCopy(o.fields);
+            this.index = o.index;
             this.meta = _mapCopy(o.meta);
         }
 
         private Builder(Builder o) {
             this.copyTo = _listCopy(o.copyTo);
             this.fields = _mapCopy(o.fields);
+            this.index = o.index;
             this.meta = _mapCopy(o.meta);
         }
 
@@ -295,6 +316,15 @@ public class MatchOnlyTextProperty
         }
 
         /**
+         * API name: {@code index}
+         */
+        @Nonnull
+        public final Builder index(@Nullable Boolean value) {
+            this.index = value;
+            return this;
+        }
+
+        /**
          * Metadata about the field.
          * <p>
          * API name: {@code meta}
@@ -353,6 +383,7 @@ public class MatchOnlyTextProperty
     protected static void setupMatchOnlyTextPropertyDeserializer(ObjectDeserializer<MatchOnlyTextProperty.Builder> op) {
         op.add(Builder::copyTo, JsonpDeserializer.arrayDeserializer(JsonpDeserializer.stringDeserializer()), "copy_to");
         op.add(Builder::fields, JsonpDeserializer.stringMapDeserializer(Property._DESERIALIZER), "fields");
+        op.add(Builder::index, JsonpDeserializer.booleanDeserializer(), "index");
         op.add(Builder::meta, JsonpDeserializer.stringMapDeserializer(JsonpDeserializer.stringDeserializer()), "meta");
 
         op.ignore("type");
@@ -363,6 +394,7 @@ public class MatchOnlyTextProperty
         int result = 17;
         result = 31 * result + Objects.hashCode(this.copyTo);
         result = 31 * result + Objects.hashCode(this.fields);
+        result = 31 * result + Objects.hashCode(this.index);
         result = 31 * result + Objects.hashCode(this.meta);
         return result;
     }
@@ -374,6 +406,7 @@ public class MatchOnlyTextProperty
         MatchOnlyTextProperty other = (MatchOnlyTextProperty) o;
         return Objects.equals(this.copyTo, other.copyTo)
             && Objects.equals(this.fields, other.fields)
+            && Objects.equals(this.index, other.index)
             && Objects.equals(this.meta, other.meta);
     }
 }

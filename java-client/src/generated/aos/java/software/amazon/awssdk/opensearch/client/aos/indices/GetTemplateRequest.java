@@ -63,12 +63,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: indices.get_template.Request
 
 /**
- * <p>
  * Returns an index template.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>1.0</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class GetTemplateRequest extends RequestBase implements ToCopyableBuilder<GetTemplateRequest.Builder, GetTemplateRequest> {
@@ -82,6 +77,10 @@ public final class GetTemplateRequest extends RequestBase implements ToCopyableB
     @Nullable
     private final Boolean local;
 
+    @Deprecated
+    @Nullable
+    private final Time masterTimeout;
+
     @Nonnull
     private final List<String> name;
 
@@ -92,6 +91,7 @@ public final class GetTemplateRequest extends RequestBase implements ToCopyableB
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.flatSettings = builder.flatSettings;
         this.local = builder.local;
+        this.masterTimeout = builder.masterTimeout;
         this.name = ApiTypeHelper.unmodifiable(builder.name);
     }
 
@@ -133,6 +133,19 @@ public final class GetTemplateRequest extends RequestBase implements ToCopyableB
     }
 
     /**
+     * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails
+     * and returns an error.
+     * <p>
+     * API name: {@code master_timeout}
+     * </p>
+     */
+    @Deprecated
+    @Nullable
+    public final Time masterTimeout() {
+        return this.masterTimeout;
+    }
+
+    /**
      * A comma-separated list of index template names used to limit the request. Wildcard (<code>*</code>) expressions are supported. To
      * return all index templates, omit this parameter or use a value of <code>_all</code> or <code>*</code>.
      * <p>
@@ -168,6 +181,8 @@ public final class GetTemplateRequest extends RequestBase implements ToCopyableB
         @Nullable
         private Boolean local;
         @Nullable
+        private Time masterTimeout;
+        @Nullable
         private List<String> name;
 
         public Builder() {}
@@ -177,6 +192,7 @@ public final class GetTemplateRequest extends RequestBase implements ToCopyableB
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.flatSettings = o.flatSettings;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.name = _listCopy(o.name);
         }
 
@@ -185,6 +201,7 @@ public final class GetTemplateRequest extends RequestBase implements ToCopyableB
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.flatSettings = o.flatSettings;
             this.local = o.local;
+            this.masterTimeout = o.masterTimeout;
             this.name = _listCopy(o.name);
         }
 
@@ -245,6 +262,33 @@ public final class GetTemplateRequest extends RequestBase implements ToCopyableB
         public final Builder local(@Nullable Boolean value) {
             this.local = value;
             return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(@Nullable Time value) {
+            this.masterTimeout = value;
+            return this;
+        }
+
+        /**
+         * Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request
+         * fails and returns an error.
+         * <p>
+         * API name: {@code master_timeout}
+         * </p>
+         */
+        @Deprecated
+        @Nonnull
+        public final Builder masterTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return masterTimeout(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -309,6 +353,9 @@ public final class GetTemplateRequest extends RequestBase implements ToCopyableB
         if (this.local != null) {
             params.put("local", String.valueOf(this.local));
         }
+        if (this.masterTimeout != null) {
+            params.put("master_timeout", this.masterTimeout._toJsonString());
+        }
     }
 
     /**
@@ -354,6 +401,7 @@ public final class GetTemplateRequest extends RequestBase implements ToCopyableB
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.flatSettings);
         result = 31 * result + Objects.hashCode(this.local);
+        result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.name);
         return result;
     }
@@ -366,6 +414,7 @@ public final class GetTemplateRequest extends RequestBase implements ToCopyableB
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.flatSettings, other.flatSettings)
             && Objects.equals(this.local, other.local)
+            && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.name, other.name);
     }
 }

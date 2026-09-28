@@ -78,6 +78,9 @@ public class ShardResourceUsageStatsDetail
     private final String memoryUtilizationPercent;
 
     @Nullable
+    private final String nativeMemoryUtilizationPercent;
+
+    @Nullable
     private final Long timestamp;
 
     // ---------------------------------------------------------------------------------------------
@@ -86,6 +89,7 @@ public class ShardResourceUsageStatsDetail
         this.cpuUtilizationPercent = builder.cpuUtilizationPercent;
         this.ioUsageStats = builder.ioUsageStats;
         this.memoryUtilizationPercent = builder.memoryUtilizationPercent;
+        this.nativeMemoryUtilizationPercent = builder.nativeMemoryUtilizationPercent;
         this.timestamp = builder.timestamp;
     }
 
@@ -117,6 +121,14 @@ public class ShardResourceUsageStatsDetail
     @Nullable
     public final String memoryUtilizationPercent() {
         return this.memoryUtilizationPercent;
+    }
+
+    /**
+     * API name: {@code native_memory_utilization_percent}
+     */
+    @Nullable
+    public final String nativeMemoryUtilizationPercent() {
+        return this.nativeMemoryUtilizationPercent;
     }
 
     /**
@@ -153,6 +165,11 @@ public class ShardResourceUsageStatsDetail
             generator.write(this.memoryUtilizationPercent);
         }
 
+        if (this.nativeMemoryUtilizationPercent != null) {
+            generator.writeKey("native_memory_utilization_percent");
+            generator.write(this.nativeMemoryUtilizationPercent);
+        }
+
         if (this.timestamp != null) {
             generator.writeKey("timestamp");
             generator.write(this.timestamp);
@@ -183,6 +200,8 @@ public class ShardResourceUsageStatsDetail
         @Nullable
         private String memoryUtilizationPercent;
         @Nullable
+        private String nativeMemoryUtilizationPercent;
+        @Nullable
         private Long timestamp;
 
         public Builder() {}
@@ -191,6 +210,7 @@ public class ShardResourceUsageStatsDetail
             this.cpuUtilizationPercent = o.cpuUtilizationPercent;
             this.ioUsageStats = o.ioUsageStats;
             this.memoryUtilizationPercent = o.memoryUtilizationPercent;
+            this.nativeMemoryUtilizationPercent = o.nativeMemoryUtilizationPercent;
             this.timestamp = o.timestamp;
         }
 
@@ -198,6 +218,7 @@ public class ShardResourceUsageStatsDetail
             this.cpuUtilizationPercent = o.cpuUtilizationPercent;
             this.ioUsageStats = o.ioUsageStats;
             this.memoryUtilizationPercent = o.memoryUtilizationPercent;
+            this.nativeMemoryUtilizationPercent = o.nativeMemoryUtilizationPercent;
             this.timestamp = o.timestamp;
         }
 
@@ -245,6 +266,15 @@ public class ShardResourceUsageStatsDetail
         }
 
         /**
+         * API name: {@code native_memory_utilization_percent}
+         */
+        @Nonnull
+        public final Builder nativeMemoryUtilizationPercent(@Nullable String value) {
+            this.nativeMemoryUtilizationPercent = value;
+            return this;
+        }
+
+        /**
          * API name: {@code timestamp}
          */
         @Nonnull
@@ -281,6 +311,7 @@ public class ShardResourceUsageStatsDetail
         op.add(Builder::cpuUtilizationPercent, JsonpDeserializer.stringDeserializer(), "cpu_utilization_percent");
         op.add(Builder::ioUsageStats, ShardResourceUsageStatsIoUsageStats._DESERIALIZER, "io_usage_stats");
         op.add(Builder::memoryUtilizationPercent, JsonpDeserializer.stringDeserializer(), "memory_utilization_percent");
+        op.add(Builder::nativeMemoryUtilizationPercent, JsonpDeserializer.stringDeserializer(), "native_memory_utilization_percent");
         op.add(Builder::timestamp, JsonpDeserializer.longDeserializer(), "timestamp");
     }
 
@@ -290,6 +321,7 @@ public class ShardResourceUsageStatsDetail
         result = 31 * result + Objects.hashCode(this.cpuUtilizationPercent);
         result = 31 * result + Objects.hashCode(this.ioUsageStats);
         result = 31 * result + Objects.hashCode(this.memoryUtilizationPercent);
+        result = 31 * result + Objects.hashCode(this.nativeMemoryUtilizationPercent);
         result = 31 * result + Objects.hashCode(this.timestamp);
         return result;
     }
@@ -302,6 +334,7 @@ public class ShardResourceUsageStatsDetail
         return Objects.equals(this.cpuUtilizationPercent, other.cpuUtilizationPercent)
             && Objects.equals(this.ioUsageStats, other.ioUsageStats)
             && Objects.equals(this.memoryUtilizationPercent, other.memoryUtilizationPercent)
+            && Objects.equals(this.nativeMemoryUtilizationPercent, other.nativeMemoryUtilizationPercent)
             && Objects.equals(this.timestamp, other.timestamp);
     }
 }

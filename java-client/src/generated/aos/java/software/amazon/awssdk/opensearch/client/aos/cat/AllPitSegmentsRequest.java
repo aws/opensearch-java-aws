@@ -60,12 +60,7 @@ import software.amazon.awssdk.opensearch.client.util.ToCopyableBuilder;
 // typedef: cat.all_pit_segments.Request
 
 /**
- * <p>
  * Lists all active CAT point-in-time segments.
- * </p>
- * <p>
- * <strong>Minimum version:</strong> <code>2.4</code>
- * </p>
  */
 @Generated("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
 public final class AllPitSegmentsRequest extends CatRequestBase
