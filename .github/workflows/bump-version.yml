@@ -44,7 +44,7 @@ jobs:
 
   bump-version-auto:
     name: Bump Version On New Git Ref
-    if: github.event_name == 'create' && github.repository == 'opensearch-project/opensearch-java'
+    if: github.event_name == 'create' && github.repository == 'aws/opensearch-java-aws'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout .github/actions directory

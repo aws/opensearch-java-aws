@@ -178,7 +178,7 @@ tasks.withType<Jar> {
     manifest {
         attributes["Implementation-Title"] = "OpenSearch Java client code generator"
         attributes["Implementation-Vendor"] = "OpenSearch"
-        attributes["Implementation-URL"] = "https://github.com/opensearch-project/opensearch-java/"
+        attributes["Implementation-URL"] = "https://github.com/aws/opensearch-java-aws/"
         attributes["Build-Date"] = rootProject.extra["buildTime"]
     }
 
