@@ -1,0 +1,216 @@
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+//----------------------------------------------------
+// THIS CODE IS GENERATED. MANUAL EDITS WILL BE LOST.
+//----------------------------------------------------
+
+package software.amazon.opensearch.client.aoss.ml;
+
+import jakarta.json.stream.JsonGenerator;
+import java.util.Objects;
+import java.util.function.Function;
+import javax.annotation.Generated;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import software.amazon.opensearch.client.json.JsonpDeserializable;
+import software.amazon.opensearch.client.json.JsonpDeserializer;
+import software.amazon.opensearch.client.json.JsonpMapper;
+import software.amazon.opensearch.client.json.ObjectBuilderDeserializer;
+import software.amazon.opensearch.client.json.ObjectDeserializer;
+import software.amazon.opensearch.client.json.PlainJsonSerializable;
+import software.amazon.opensearch.client.util.CopyableBuilder;
+import software.amazon.opensearch.client.util.ObjectBuilder;
+import software.amazon.opensearch.client.util.ObjectBuilderBase;
+import software.amazon.opensearch.client.util.ToCopyableBuilder;
+
+// typedef: ml.add_agentic_memory.Response
+
+@JsonpDeserializable
+@Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
+public class AddAgenticMemoryResponse
+    implements
+        PlainJsonSerializable,
+        ToCopyableBuilder<AddAgenticMemoryResponse.Builder, AddAgenticMemoryResponse> {
+
+    @Nullable
+    private final String sessionId;
+
+    @Nullable
+    private final String workingMemoryId;
+
+    // ---------------------------------------------------------------------------------------------
+
+    private AddAgenticMemoryResponse(Builder builder) {
+        this.sessionId = builder.sessionId;
+        this.workingMemoryId = builder.workingMemoryId;
+    }
+
+    public static AddAgenticMemoryResponse of(Function<AddAgenticMemoryResponse.Builder, ObjectBuilder<AddAgenticMemoryResponse>> fn) {
+        return fn.apply(new Builder()).build();
+    }
+
+    /**
+     * Session ID associated with the memory.
+     * <p>
+     * API name: {@code session_id}
+     * </p>
+     */
+    @Nullable
+    public final String sessionId() {
+        return this.sessionId;
+    }
+
+    /**
+     * The ID for the creating working memory entry.
+     * <p>
+     * API name: {@code working_memory_id}
+     * </p>
+     */
+    @Nullable
+    public final String workingMemoryId() {
+        return this.workingMemoryId;
+    }
+
+    /**
+     * Serialize this object to JSON.
+     */
+    @Override
+    public void serialize(JsonGenerator generator, JsonpMapper mapper) {
+        generator.writeStartObject();
+        serializeInternal(generator, mapper);
+        generator.writeEnd();
+    }
+
+    protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
+        if (this.sessionId != null) {
+            generator.writeKey("session_id");
+            generator.write(this.sessionId);
+        }
+
+        if (this.workingMemoryId != null) {
+            generator.writeKey("working_memory_id");
+            generator.write(this.workingMemoryId);
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    @Override
+    @Nonnull
+    public Builder toBuilder() {
+        return new Builder(this);
+    }
+
+    @Nonnull
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    /**
+     * Builder for {@link AddAgenticMemoryResponse}.
+     */
+    public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, AddAgenticMemoryResponse> {
+        @Nullable
+        private String sessionId;
+        @Nullable
+        private String workingMemoryId;
+
+        public Builder() {}
+
+        private Builder(AddAgenticMemoryResponse o) {
+            this.sessionId = o.sessionId;
+            this.workingMemoryId = o.workingMemoryId;
+        }
+
+        private Builder(Builder o) {
+            this.sessionId = o.sessionId;
+            this.workingMemoryId = o.workingMemoryId;
+        }
+
+        @Override
+        @Nonnull
+        public Builder copy() {
+            return new Builder(this);
+        }
+
+        /**
+         * Session ID associated with the memory.
+         * <p>
+         * API name: {@code session_id}
+         * </p>
+         */
+        @Nonnull
+        public final Builder sessionId(@Nullable String value) {
+            this.sessionId = value;
+            return this;
+        }
+
+        /**
+         * The ID for the creating working memory entry.
+         * <p>
+         * API name: {@code working_memory_id}
+         * </p>
+         */
+        @Nonnull
+        public final Builder workingMemoryId(@Nullable String value) {
+            this.workingMemoryId = value;
+            return this;
+        }
+
+        /**
+         * Builds a {@link AddAgenticMemoryResponse}.
+         *
+         * @throws NullPointerException if some of the required fields are null.
+         */
+        @Override
+        @Nonnull
+        public AddAgenticMemoryResponse build() {
+            _checkSingleUse();
+
+            return new AddAgenticMemoryResponse(this);
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Json deserializer for {@link AddAgenticMemoryResponse}
+     */
+    public static final JsonpDeserializer<AddAgenticMemoryResponse> _DESERIALIZER = ObjectBuilderDeserializer.lazy(
+        Builder::new,
+        AddAgenticMemoryResponse::setupAddAgenticMemoryResponseDeserializer
+    );
+
+    protected static void setupAddAgenticMemoryResponseDeserializer(ObjectDeserializer<AddAgenticMemoryResponse.Builder> op) {
+        op.add(Builder::sessionId, JsonpDeserializer.stringDeserializer(), "session_id");
+        op.add(Builder::workingMemoryId, JsonpDeserializer.stringDeserializer(), "working_memory_id");
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + Objects.hashCode(this.sessionId);
+        result = 31 * result + Objects.hashCode(this.workingMemoryId);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
+        AddAgenticMemoryResponse other = (AddAgenticMemoryResponse) o;
+        return Objects.equals(this.sessionId, other.sessionId) && Objects.equals(this.workingMemoryId, other.workingMemoryId);
+    }
+}

@@ -1,0 +1,169 @@
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+//----------------------------------------------------
+// THIS CODE IS GENERATED. MANUAL EDITS WILL BE LOST.
+//----------------------------------------------------
+
+package software.amazon.opensearch.client.aos.ml;
+
+import jakarta.json.stream.JsonGenerator;
+import java.util.function.Function;
+import javax.annotation.Generated;
+import javax.annotation.Nonnull;
+import software.amazon.opensearch.client.json.JsonpDeserializable;
+import software.amazon.opensearch.client.json.JsonpDeserializer;
+import software.amazon.opensearch.client.json.JsonpMapper;
+import software.amazon.opensearch.client.json.ObjectBuilderDeserializer;
+import software.amazon.opensearch.client.json.ObjectDeserializer;
+import software.amazon.opensearch.client.json.PlainJsonSerializable;
+import software.amazon.opensearch.client.util.ApiTypeHelper;
+import software.amazon.opensearch.client.util.CopyableBuilder;
+import software.amazon.opensearch.client.util.ObjectBuilder;
+import software.amazon.opensearch.client.util.ObjectBuilderBase;
+import software.amazon.opensearch.client.util.ToCopyableBuilder;
+
+// typedef: ml.delete_memory.Response
+
+@JsonpDeserializable
+@Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
+public class DeleteMemoryResponse implements PlainJsonSerializable, ToCopyableBuilder<DeleteMemoryResponse.Builder, DeleteMemoryResponse> {
+
+    private final boolean success;
+
+    // ---------------------------------------------------------------------------------------------
+
+    private DeleteMemoryResponse(Builder builder) {
+        this.success = ApiTypeHelper.requireNonNull(builder.success, this, "success");
+    }
+
+    public static DeleteMemoryResponse of(Function<DeleteMemoryResponse.Builder, ObjectBuilder<DeleteMemoryResponse>> fn) {
+        return fn.apply(new Builder()).build();
+    }
+
+    /**
+     * Required - Whether the memory was deleted successfully.
+     * <p>
+     * API name: {@code success}
+     * </p>
+     */
+    public final boolean success() {
+        return this.success;
+    }
+
+    /**
+     * Serialize this object to JSON.
+     */
+    @Override
+    public void serialize(JsonGenerator generator, JsonpMapper mapper) {
+        generator.writeStartObject();
+        serializeInternal(generator, mapper);
+        generator.writeEnd();
+    }
+
+    protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
+        generator.writeKey("success");
+        generator.write(this.success);
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    @Override
+    @Nonnull
+    public Builder toBuilder() {
+        return new Builder(this);
+    }
+
+    @Nonnull
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    /**
+     * Builder for {@link DeleteMemoryResponse}.
+     */
+    public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, DeleteMemoryResponse> {
+        private Boolean success;
+
+        public Builder() {}
+
+        private Builder(DeleteMemoryResponse o) {
+            this.success = o.success;
+        }
+
+        private Builder(Builder o) {
+            this.success = o.success;
+        }
+
+        @Override
+        @Nonnull
+        public Builder copy() {
+            return new Builder(this);
+        }
+
+        /**
+         * Required - Whether the memory was deleted successfully.
+         * <p>
+         * API name: {@code success}
+         * </p>
+         */
+        @Nonnull
+        public final Builder success(boolean value) {
+            this.success = value;
+            return this;
+        }
+
+        /**
+         * Builds a {@link DeleteMemoryResponse}.
+         *
+         * @throws NullPointerException if some of the required fields are null.
+         */
+        @Override
+        @Nonnull
+        public DeleteMemoryResponse build() {
+            _checkSingleUse();
+
+            return new DeleteMemoryResponse(this);
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Json deserializer for {@link DeleteMemoryResponse}
+     */
+    public static final JsonpDeserializer<DeleteMemoryResponse> _DESERIALIZER = ObjectBuilderDeserializer.lazy(
+        Builder::new,
+        DeleteMemoryResponse::setupDeleteMemoryResponseDeserializer
+    );
+
+    protected static void setupDeleteMemoryResponseDeserializer(ObjectDeserializer<DeleteMemoryResponse.Builder> op) {
+        op.add(Builder::success, JsonpDeserializer.booleanDeserializer(), "success");
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + Boolean.hashCode(this.success);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
+        DeleteMemoryResponse other = (DeleteMemoryResponse) o;
+        return this.success == other.success;
+    }
+}

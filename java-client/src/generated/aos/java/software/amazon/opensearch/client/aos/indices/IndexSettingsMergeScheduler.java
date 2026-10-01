@@ -1,0 +1,306 @@
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
+/*
+ * Licensed to Elasticsearch B.V. under one or more contributor
+ * license agreements. See the NOTICE file distributed with
+ * this work for additional information regarding copyright
+ * ownership. Elasticsearch B.V. licenses this file to you under
+ * the Apache License, Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+/*
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
+ */
+//----------------------------------------------------
+// THIS CODE IS GENERATED. MANUAL EDITS WILL BE LOST.
+//----------------------------------------------------
+
+package software.amazon.opensearch.client.aos.indices;
+
+import jakarta.json.stream.JsonGenerator;
+import java.util.Objects;
+import java.util.function.Function;
+import javax.annotation.Generated;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import software.amazon.opensearch.client.json.JsonpDeserializable;
+import software.amazon.opensearch.client.json.JsonpDeserializer;
+import software.amazon.opensearch.client.json.JsonpMapper;
+import software.amazon.opensearch.client.json.ObjectBuilderDeserializer;
+import software.amazon.opensearch.client.json.ObjectDeserializer;
+import software.amazon.opensearch.client.json.PlainJsonSerializable;
+import software.amazon.opensearch.client.util.CopyableBuilder;
+import software.amazon.opensearch.client.util.ObjectBuilder;
+import software.amazon.opensearch.client.util.ObjectBuilderBase;
+import software.amazon.opensearch.client.util.ToCopyableBuilder;
+
+// typedef: indices.IndexSettingsMergeScheduler
+
+/**
+ * The configuration for merge scheduling.
+ */
+@JsonpDeserializable
+@Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
+public class IndexSettingsMergeScheduler
+    implements
+        PlainJsonSerializable,
+        ToCopyableBuilder<IndexSettingsMergeScheduler.Builder, IndexSettingsMergeScheduler> {
+
+    @Nullable
+    private final Boolean autoThrottle;
+
+    @Nullable
+    private final String maxForceMergeMbPerSec;
+
+    @Nullable
+    private final Integer maxMergeCount;
+
+    @Nullable
+    private final Integer maxThreadCount;
+
+    // ---------------------------------------------------------------------------------------------
+
+    private IndexSettingsMergeScheduler(Builder builder) {
+        this.autoThrottle = builder.autoThrottle;
+        this.maxForceMergeMbPerSec = builder.maxForceMergeMbPerSec;
+        this.maxMergeCount = builder.maxMergeCount;
+        this.maxThreadCount = builder.maxThreadCount;
+    }
+
+    public static IndexSettingsMergeScheduler of(
+        Function<IndexSettingsMergeScheduler.Builder, ObjectBuilder<IndexSettingsMergeScheduler>> fn
+    ) {
+        return fn.apply(new Builder()).build();
+    }
+
+    /**
+     * API name: {@code auto_throttle}
+     */
+    @Nullable
+    public final Boolean autoThrottle() {
+        return this.autoThrottle;
+    }
+
+    /**
+     * The maximum bytes-per-second merge throttle; may be <code>Infinity</code>.
+     * <p>
+     * API name: {@code max_force_merge_mb_per_sec}
+     * </p>
+     */
+    @Nullable
+    public final String maxForceMergeMbPerSec() {
+        return this.maxForceMergeMbPerSec;
+    }
+
+    /**
+     * API name: {@code max_merge_count}
+     */
+    @Nullable
+    public final Integer maxMergeCount() {
+        return this.maxMergeCount;
+    }
+
+    /**
+     * API name: {@code max_thread_count}
+     */
+    @Nullable
+    public final Integer maxThreadCount() {
+        return this.maxThreadCount;
+    }
+
+    /**
+     * Serialize this object to JSON.
+     */
+    @Override
+    public void serialize(JsonGenerator generator, JsonpMapper mapper) {
+        generator.writeStartObject();
+        serializeInternal(generator, mapper);
+        generator.writeEnd();
+    }
+
+    protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
+        if (this.autoThrottle != null) {
+            generator.writeKey("auto_throttle");
+            generator.write(this.autoThrottle);
+        }
+
+        if (this.maxForceMergeMbPerSec != null) {
+            generator.writeKey("max_force_merge_mb_per_sec");
+            generator.write(this.maxForceMergeMbPerSec);
+        }
+
+        if (this.maxMergeCount != null) {
+            generator.writeKey("max_merge_count");
+            generator.write(this.maxMergeCount);
+        }
+
+        if (this.maxThreadCount != null) {
+            generator.writeKey("max_thread_count");
+            generator.write(this.maxThreadCount);
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    @Override
+    @Nonnull
+    public Builder toBuilder() {
+        return new Builder(this);
+    }
+
+    @Nonnull
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    /**
+     * Builder for {@link IndexSettingsMergeScheduler}.
+     */
+    public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, IndexSettingsMergeScheduler> {
+        @Nullable
+        private Boolean autoThrottle;
+        @Nullable
+        private String maxForceMergeMbPerSec;
+        @Nullable
+        private Integer maxMergeCount;
+        @Nullable
+        private Integer maxThreadCount;
+
+        public Builder() {}
+
+        private Builder(IndexSettingsMergeScheduler o) {
+            this.autoThrottle = o.autoThrottle;
+            this.maxForceMergeMbPerSec = o.maxForceMergeMbPerSec;
+            this.maxMergeCount = o.maxMergeCount;
+            this.maxThreadCount = o.maxThreadCount;
+        }
+
+        private Builder(Builder o) {
+            this.autoThrottle = o.autoThrottle;
+            this.maxForceMergeMbPerSec = o.maxForceMergeMbPerSec;
+            this.maxMergeCount = o.maxMergeCount;
+            this.maxThreadCount = o.maxThreadCount;
+        }
+
+        @Override
+        @Nonnull
+        public Builder copy() {
+            return new Builder(this);
+        }
+
+        /**
+         * API name: {@code auto_throttle}
+         */
+        @Nonnull
+        public final Builder autoThrottle(@Nullable Boolean value) {
+            this.autoThrottle = value;
+            return this;
+        }
+
+        /**
+         * The maximum bytes-per-second merge throttle; may be <code>Infinity</code>.
+         * <p>
+         * API name: {@code max_force_merge_mb_per_sec}
+         * </p>
+         */
+        @Nonnull
+        public final Builder maxForceMergeMbPerSec(@Nullable String value) {
+            this.maxForceMergeMbPerSec = value;
+            return this;
+        }
+
+        /**
+         * API name: {@code max_merge_count}
+         */
+        @Nonnull
+        public final Builder maxMergeCount(@Nullable Integer value) {
+            this.maxMergeCount = value;
+            return this;
+        }
+
+        /**
+         * API name: {@code max_thread_count}
+         */
+        @Nonnull
+        public final Builder maxThreadCount(@Nullable Integer value) {
+            this.maxThreadCount = value;
+            return this;
+        }
+
+        /**
+         * Builds a {@link IndexSettingsMergeScheduler}.
+         *
+         * @throws NullPointerException if some of the required fields are null.
+         */
+        @Override
+        @Nonnull
+        public IndexSettingsMergeScheduler build() {
+            _checkSingleUse();
+
+            return new IndexSettingsMergeScheduler(this);
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Json deserializer for {@link IndexSettingsMergeScheduler}
+     */
+    public static final JsonpDeserializer<IndexSettingsMergeScheduler> _DESERIALIZER = ObjectBuilderDeserializer.lazy(
+        Builder::new,
+        IndexSettingsMergeScheduler::setupIndexSettingsMergeSchedulerDeserializer
+    );
+
+    protected static void setupIndexSettingsMergeSchedulerDeserializer(ObjectDeserializer<IndexSettingsMergeScheduler.Builder> op) {
+        op.add(Builder::autoThrottle, JsonpDeserializer.booleanDeserializer(), "auto_throttle");
+        op.add(Builder::maxForceMergeMbPerSec, JsonpDeserializer.stringDeserializer(), "max_force_merge_mb_per_sec");
+        op.add(Builder::maxMergeCount, JsonpDeserializer.integerDeserializer(), "max_merge_count");
+        op.add(Builder::maxThreadCount, JsonpDeserializer.integerDeserializer(), "max_thread_count");
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + Objects.hashCode(this.autoThrottle);
+        result = 31 * result + Objects.hashCode(this.maxForceMergeMbPerSec);
+        result = 31 * result + Objects.hashCode(this.maxMergeCount);
+        result = 31 * result + Objects.hashCode(this.maxThreadCount);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
+        IndexSettingsMergeScheduler other = (IndexSettingsMergeScheduler) o;
+        return Objects.equals(this.autoThrottle, other.autoThrottle)
+            && Objects.equals(this.maxForceMergeMbPerSec, other.maxForceMergeMbPerSec)
+            && Objects.equals(this.maxMergeCount, other.maxMergeCount)
+            && Objects.equals(this.maxThreadCount, other.maxThreadCount);
+    }
+}

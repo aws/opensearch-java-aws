@@ -91,8 +91,8 @@ sourceSets.main {
 val awsRuntimeSourceSet = sourceSets.create("awsRuntime") {
     java {
         srcDir("src/main/java")
-        exclude("software/amazon/awssdk/opensearch/client/aos/**")
-        exclude("software/amazon/awssdk/opensearch/client/aoss/**")
+        exclude("software/amazon/opensearch/client/aos/**")
+        exclude("software/amazon/opensearch/client/aoss/**")
     }
     resources {
         srcDir("src/main/resources")
@@ -103,7 +103,7 @@ val aosSourceSet = sourceSets.create("aos") {
     java {
         srcDir("src/main/java")
         srcDir("src/generated/aos/java")
-        include("software/amazon/awssdk/opensearch/client/aos/**")
+        include("software/amazon/opensearch/client/aos/**")
     }
     compileClasspath += awsRuntimeSourceSet.output
     runtimeClasspath += awsRuntimeSourceSet.output
@@ -113,7 +113,7 @@ val aossSourceSet = sourceSets.create("aoss") {
     java {
         srcDir("src/main/java")
         srcDir("src/generated/aoss/java")
-        include("software/amazon/awssdk/opensearch/client/aoss/**")
+        include("software/amazon/opensearch/client/aoss/**")
     }
     compileClasspath += awsRuntimeSourceSet.output
     runtimeClasspath += awsRuntimeSourceSet.output
@@ -138,7 +138,7 @@ configurations[aossSourceSet.compileOnlyConfigurationName].extendsFrom(
 sourceSets.test {
     java {
         setSrcDirs(listOf("src/test/java"))
-        include("software/amazon/awssdk/opensearch/client/**")
+        include("software/amazon/opensearch/client/**")
     }
     compileClasspath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
     runtimeClasspath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
@@ -234,8 +234,8 @@ val unitTest = tasks.register<Test>("unitTest") {
     group = "verification"
     testClassesDirs = sourceSets.test.get().output.classesDirs
     classpath = sourceSets.test.get().runtimeClasspath
-    include("software/amazon/awssdk/opensearch/client/**/*Test.class")
-    include("software/amazon/awssdk/opensearch/client/**/*Tests.class")
+    include("software/amazon/opensearch/client/**/*Test.class")
+    include("software/amazon/opensearch/client/**/*Tests.class")
     exclude("**/*RealResourceIT.class")
     systemProperty("tests.security.manager", "false")
 }
