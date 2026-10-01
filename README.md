@@ -8,8 +8,8 @@ This repository provides typed Java data-plane clients for:
 Both clients are shipped in the same JAR and use separate Java packages:
 
 ```text
-software.amazon.awssdk.opensearch.client.aos
-software.amazon.awssdk.opensearch.client.aoss
+software.amazon.opensearch.client.aos
+software.amazon.opensearch.client.aoss
 ```
 
 > Project status: prototype. The final Maven group ID, artifact ID, POM metadata,
@@ -25,8 +25,8 @@ software.amazon.awssdk.opensearch.client.aoss
 Use these imports:
 
 ```java
-import software.amazon.awssdk.opensearch.client.aos.OpenSearchClient;
-// Or: software.amazon.awssdk.opensearch.client.aoss.OpenSearchClient
+import software.amazon.opensearch.client.aos.OpenSearchClient;
+// Or: software.amazon.opensearch.client.aoss.OpenSearchClient
 ```
 
 The clients use the AWS SDK default credentials provider chain unless a
@@ -83,8 +83,8 @@ with the AOS SigV4 service name `es`.
 import java.util.Map;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
-import software.amazon.awssdk.opensearch.client.aos.OpenSearchClient;
-import software.amazon.awssdk.opensearch.client.aos.core.SearchResponse;
+import software.amazon.opensearch.client.aos.OpenSearchClient;
+import software.amazon.opensearch.client.aos.core.SearchResponse;
 import software.amazon.awssdk.regions.Region;
 
 try (SdkHttpClient httpClient = UrlConnectionHttpClient.builder().build()) {
@@ -113,8 +113,8 @@ The AOSS client signs requests with the SigV4 service name `aoss`.
 import java.util.Map;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
-import software.amazon.awssdk.opensearch.client.aoss.OpenSearchClient;
-import software.amazon.awssdk.opensearch.client.aoss.core.SearchResponse;
+import software.amazon.opensearch.client.aoss.OpenSearchClient;
+import software.amazon.opensearch.client.aoss.core.SearchResponse;
 import software.amazon.awssdk.regions.Region;
 
 try (SdkHttpClient httpClient = UrlConnectionHttpClient.builder().build()) {
@@ -143,15 +143,15 @@ overlap:
 
 ```java
 import java.util.Map;
-software.amazon.awssdk.opensearch.client.aos.OpenSearchClient aosClient =
+software.amazon.opensearch.client.aos.OpenSearchClient aosClient =
     /* create AOS client */;
-software.amazon.awssdk.opensearch.client.aoss.OpenSearchClient aossClient =
+software.amazon.opensearch.client.aoss.OpenSearchClient aossClient =
     /* create AOSS client */;
 
-software.amazon.awssdk.opensearch.client.aos.core.SearchResponse<Map> aosResponse =
+software.amazon.opensearch.client.aos.core.SearchResponse<Map> aosResponse =
     aosClient.search(request -> request.index("aos-index"), Map.class);
 
-software.amazon.awssdk.opensearch.client.aoss.core.SearchResponse<Map> aossResponse =
+software.amazon.opensearch.client.aoss.core.SearchResponse<Map> aossResponse =
     aossClient.search(request -> request.index("aoss-index"), Map.class);
 ```
 
@@ -169,15 +169,15 @@ import org.opensearch.client.opensearch.core.SearchResponse;
 For AOS, change the imports to:
 
 ```java
-import software.amazon.awssdk.opensearch.client.aos.OpenSearchClient;
-import software.amazon.awssdk.opensearch.client.aos.core.SearchResponse;
+import software.amazon.opensearch.client.aos.OpenSearchClient;
+import software.amazon.opensearch.client.aos.core.SearchResponse;
 ```
 
 For AOSS, use:
 
 ```java
-import software.amazon.awssdk.opensearch.client.aoss.OpenSearchClient;
-import software.amazon.awssdk.opensearch.client.aoss.core.SearchResponse;
+import software.amazon.opensearch.client.aoss.OpenSearchClient;
+import software.amazon.opensearch.client.aoss.core.SearchResponse;
 ```
 
 The new factories configure the correct SigV4 service name, so callers do not

@@ -59,7 +59,7 @@ java {
 }
 
 application {
-    mainClass.set("software.amazon.awssdk.opensearch.client.codegen.CodeGenerator")
+    mainClass.set("software.amazon.opensearch.client.codegen.CodeGenerator")
     applicationDefaultJvmArgs = listOf(
         "--add-exports", "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
         "--add-exports", "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
@@ -120,7 +120,7 @@ fun registerDistributionClientTask(
             "--eclipse-config", "$rootDir/buildSrc/formatterConfig-generated.xml",
             "--output", outputDirectory.asFile.absolutePath,
             "--distribution", distribution,
-            "--runtime-package", "software.amazon.awssdk.opensearch.client",
+            "--runtime-package", "software.amazon.opensearch.client",
             "--model-package", modelPackage,
             "--client-name", clientName
         )
@@ -131,7 +131,7 @@ registerDistributionClientTask(
     "generateAosClient",
     "aos",
     "opensearch-openapi-aos-full.yaml",
-    "software.amazon.awssdk.opensearch.client.aos",
+    "software.amazon.opensearch.client.aos",
     "OpenSearchAos"
 )
 
@@ -139,7 +139,7 @@ registerDistributionClientTask(
     "generateAossClient",
     "aoss",
     "opensearch-openapi-aoss-full.yaml",
-    "software.amazon.awssdk.opensearch.client.aoss",
+    "software.amazon.opensearch.client.aoss",
     "OpenSearchAoss"
 )
 

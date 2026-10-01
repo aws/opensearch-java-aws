@@ -1,0 +1,133 @@
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+package software.amazon.opensearch.client.codegen.renderer;
+
+import java.io.File;
+import java.util.Objects;
+import java.util.function.Function;
+import javax.annotation.Nonnull;
+import software.amazon.opensearch.client.codegen.utils.Strings;
+import software.amazon.opensearch.client.codegen.utils.builder.ObjectBuilderBase;
+
+public final class ShapeRenderingContext implements AutoCloseable {
+    @Nonnull
+    private final File outputDir;
+    @Nonnull
+    private final TemplateLoader templateLoader;
+    @Nonnull
+    private final JavaCodeFormatter javaCodeFormatter;
+    private final boolean ownedJavaCodeFormatter;
+
+    private ShapeRenderingContext(Builder builder) {
+        this.outputDir = Objects.requireNonNull(builder.outputDir, "outputDir must not be null");
+        this.templateLoader = Objects.requireNonNull(builder.templateLoader, "templateLoader must not be null");
+        this.javaCodeFormatter = Objects.requireNonNull(builder.javaCodeFormatter, "javaCodeFormatter must not be null");
+        this.ownedJavaCodeFormatter = builder.ownedJavaCodeFormatter;
+    }
+
+    @Nonnull
+    public ShapeRenderingContext forSubDir(@Nonnull String name) {
+        return builder().withOutputDir(new File(outputDir, Strings.requireNonBlank(name, "name must not be null")))
+            .withTemplateLoader(templateLoader)
+            .withJavaCodeFormatter(javaCodeFormatter)
+            .build();
+    }
+
+    @Nonnull
+    public File getOutputFile(@Nonnull String name) {
+        outputDir.mkdirs();
+        return new File(outputDir, Strings.requireNonBlank(name, "name must not be blank"));
+    }
+
+    @Nonnull
+    public TemplateRenderer getTemplateRenderer(
+        @Nonnull Function<TemplateValueFormatter.Builder, TemplateValueFormatter.Builder> valueFormatterConfigurator
+    ) {
+        return TemplateRenderer.builder()
+            .withValueFormatter(valueFormatterConfigurator)
+            .withTemplateLoader(templateLoader)
+            .withJavaCodeFormatter(javaCodeFormatter)
+            .build();
+    }
+
+    @Override
+    public void close() throws Exception {
+        if (ownedJavaCodeFormatter) {
+            javaCodeFormatter.close();
+        }
+    }
+
+    @Nonnull
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder extends ObjectBuilderBase<ShapeRenderingContext, Builder> {
+        private File outputDir;
+        private TemplateLoader templateLoader;
+        private JavaCodeFormatter javaCodeFormatter;
+        private boolean ownedJavaCodeFormatter;
+
+        private Builder() {}
+
+        @Nonnull
+        @Override
+        protected ShapeRenderingContext construct() {
+            return new ShapeRenderingContext(this);
+        }
+
+        @Nonnull
+        public Builder withOutputDir(@Nonnull File outputDir) {
+            this.outputDir = Objects.requireNonNull(outputDir, "outputDir must not be null");
+            return this;
+        }
+
+        @Nonnull
+        public Builder withTemplateLoader(@Nonnull TemplateLoader templateLoader) {
+            this.templateLoader = Objects.requireNonNull(templateLoader, "templateLoader must not be null");
+            return this;
+        }
+
+        @Nonnull
+        public Builder withTemplateLoader(@Nonnull Function<TemplateLoader.Builder, TemplateLoader.Builder> configurator) {
+            return withTemplateLoader(
+                Objects.requireNonNull(configurator, "configurator must not be null").apply(TemplateLoader.builder()).build()
+            );
+        }
+
+        @Nonnull
+        public Builder withJavaCodeFormatter(@Nonnull JavaCodeFormatter javaCodeFormatter, boolean owned) {
+            if (this.ownedJavaCodeFormatter && this.javaCodeFormatter != null) {
+                this.javaCodeFormatter.close();
+            }
+            this.javaCodeFormatter = Objects.requireNonNull(javaCodeFormatter, "javaCodeFormatter must not be null");
+            this.ownedJavaCodeFormatter = owned;
+            return this;
+        }
+
+        @Nonnull
+        public Builder withJavaCodeFormatter(@Nonnull JavaCodeFormatter javaCodeFormatter) {
+            return withJavaCodeFormatter(javaCodeFormatter, false);
+        }
+
+        @Nonnull
+        public Builder withJavaCodeFormatter(@Nonnull Function<JavaCodeFormatter.Builder, JavaCodeFormatter.Builder> configurator) {
+            return withJavaCodeFormatter(
+                Objects.requireNonNull(configurator, "configurator must not be null").apply(JavaCodeFormatter.builder()).build(),
+                true
+            );
+        }
+    }
+}

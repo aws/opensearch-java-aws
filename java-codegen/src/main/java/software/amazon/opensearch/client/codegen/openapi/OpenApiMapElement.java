@@ -1,0 +1,125 @@
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+package software.amazon.opensearch.client.codegen.openapi;
+
+import static software.amazon.opensearch.client.codegen.utils.Functional.ifNonnull;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Stream;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import software.amazon.opensearch.client.codegen.utils.Clone;
+import software.amazon.opensearch.client.codegen.utils.Maps;
+import software.amazon.opensearch.client.codegen.utils.json.JsonGenerator;
+
+public abstract class OpenApiMapElement<Self extends OpenApiMapElement<Self, Key, Value>, Key, Value extends OpenApiElement<Value>> extends
+    OpenApiElement<Self> {
+    @Nullable
+    private Map<Key, Value> values;
+
+    OpenApiMapElement(@Nonnull AbstractBuilder<Self, Key, Value, ?> builder) {
+        super(builder);
+        setValues(builder.values);
+    }
+
+    <Old> OpenApiMapElement(
+        @Nonnull Map<String, Old> values,
+        @Nonnull Function<String, Key> keyMapper,
+        @Nonnull Factory<Old, Value> factory
+    ) {
+        setValues(
+            Objects.requireNonNull(
+                children(
+                    Objects.requireNonNull(values, "value must not be null"),
+                    Objects.requireNonNull(keyMapper, "keyMapper must not be null"),
+                    Objects.requireNonNull(factory, "factory must not be null")
+                )
+            )
+        );
+    }
+
+    @Override
+    void initialize(@Nullable OpenApiElement<?> parent, @Nonnull JsonPointer pointer) {
+        super.initialize(parent, pointer);
+        initializeValues();
+    }
+
+    @Nonnull
+    public Optional<Value> get(@Nonnull Key key) {
+        return Maps.tryGet(values, Objects.requireNonNull(key, "key must not be null"));
+    }
+
+    public void set(@Nonnull Key key, @Nonnull Value value) {
+        if (values == null) {
+            values = new HashMap<>();
+        }
+        values.put(Objects.requireNonNull(key, "key must not be null"), Objects.requireNonNull(value, "value must not be null"));
+        value.initialize(this, getPointer().append(key.toString()));
+    }
+
+    @Nonnull
+    public Optional<Map<Key, Value>> getValues() {
+        return Maps.unmodifiableOpt(values);
+    }
+
+    public void setValues(@Nullable Map<Key, Value> values) {
+        this.values = values;
+        initializeValues();
+    }
+
+    private void initializeValues() {
+        if (values == null) {
+            return;
+        }
+        var ptr = getPointer();
+        values.forEach((key, value) -> value.initialize(this, ptr.append(key.toString())));
+    }
+
+    @Nonnull
+    public Stream<Map.Entry<Key, Value>> entries() {
+        return values != null ? values.entrySet().stream() : Stream.empty();
+    }
+
+    @Override
+    protected void toJsonInner(JsonGenerator generator) {
+        if (values != null) {
+            generator.writeMapInner(values);
+        }
+    }
+
+    <Builder extends AbstractBuilder<Self, Key, Value, Builder>> @Nonnull Builder toBuilder(@Nonnull Builder builder) {
+        return super.toBuilder(builder).withValues(ifNonnull(values, Clone::clone));
+    }
+
+    protected static abstract class AbstractBuilder<
+        Element extends OpenApiMapElement<Element, Key, Value>,
+        Key,
+        Value extends OpenApiElement<Value>,
+        Builder extends AbstractBuilder<Element, Key, Value, Builder>> extends OpenApiElement.AbstractBuilder<Element, Builder> {
+        private Map<Key, Value> values;
+
+        AbstractBuilder() {}
+
+        @Nonnull
+        public Builder withValues(@Nullable Map<Key, Value> values) {
+            this.values = values;
+            return self();
+        }
+    }
+}
