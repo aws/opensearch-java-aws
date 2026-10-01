@@ -69,21 +69,6 @@ application {
     )
 }
 
-val localSpecification = file("$projectDir/opensearch-openapi.yaml").toURI().toString()
-
-tasks.register<Download>("downloadLatestSpec") {
-    src("https://api-spec.opensearch.org/opensearch-openapi.yaml")
-    dest(localSpecification)
-}
-
-tasks.named<JavaExec>("run") {
-    args = listOf(
-        "--input", localSpecification,
-        "--eclipse-config", "$rootDir/buildSrc/formatterConfig-generated.xml",
-        "--output", "${project(":java-client").projectDir}/src/generated/java/"
-    )
-}
-
 val distributionSpecsDir = providers.gradleProperty("distributionSpecsDir")
     .orElse(projectDir.absolutePath)
 
@@ -130,7 +115,7 @@ fun registerDistributionClientTask(
 registerDistributionClientTask(
     "generateAosClient",
     "aos",
-    "opensearch-openapi-aos-full.yaml",
+    "opensearch-openapi-aos.yaml",
     "software.amazon.opensearch.client.aos",
     "OpenSearchAos"
 )
@@ -138,7 +123,7 @@ registerDistributionClientTask(
 registerDistributionClientTask(
     "generateAossClient",
     "aoss",
-    "opensearch-openapi-aoss-full.yaml",
+    "opensearch-openapi-aoss.yaml",
     "software.amazon.opensearch.client.aoss",
     "OpenSearchAoss"
 )
@@ -147,6 +132,23 @@ tasks.register("generateClients") {
     group = "code generation"
     description = "Generates both AOS and AOSS Java clients."
     dependsOn("generateAosClient", "generateAossClient")
+}
+
+// Refreshes the committed AOS/AOSS distribution specs from the published
+// OpenSearch API spec site. These downloaded files are the generator input;
+// run this task, then commit the updated specs via PR so the spec change is
+// reviewed before code is regenerated from it.
+tasks.register<Download>("downloadLatestSpecs") {
+    group = "code generation"
+    description = "Downloads the latest AOS and AOSS distribution specs into java-codegen."
+    src(
+        listOf(
+            "https://api-spec.opensearch.org/opensearch-openapi-aos.yaml",
+            "https://api-spec.opensearch.org/opensearch-openapi-aoss.yaml"
+        )
+    )
+    dest(projectDir)
+    overwrite(true)
 }
 
 tasks.withType<ProcessResources> {

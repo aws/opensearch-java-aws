@@ -21,8 +21,8 @@ The repository does not contain or build the standalone OSS opensearch-java clie
 
 By default, generation reads the bundled snapshots:
 
-- java-codegen/opensearch-openapi-aos-full.yaml
-- java-codegen/opensearch-openapi-aoss-full.yaml
+- java-codegen/opensearch-openapi-aos.yaml
+- java-codegen/opensearch-openapi-aoss.yaml
 
 ~~~bash
 ./gradlew --no-daemon --max-workers=1 :java-codegen:generateClients
