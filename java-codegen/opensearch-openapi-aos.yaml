@@ -40442,10 +40442,8 @@ components:
           type: string
           description: The roles of the node.
       required:
-        - attributes
         - ephemeral_id
         - name
-        - transport_address
     _common___NodeId:
       type: string
       description: The unique identifier of a node.
@@ -60901,15 +60899,12 @@ components:
           additionalProperties:
             type: string
       required:
-        - attributes
         - committed
-        - compound
         - deleted_docs
         - generation
         - num_docs
         - search
         - size_in_bytes
-        - version
     indices.segments___ShardSegmentRouting:
       description: The routing information for a shard segment.
       type: object

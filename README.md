@@ -61,7 +61,7 @@ dependencies {
     implementation("software.amazon.awssdk:sdk-core")
     implementation("software.amazon.awssdk:auth")
     implementation("software.amazon.awssdk:http-auth-aws")
-    implementation("software.amazon.awssdk:url-connection-client")
+    implementation("software.amazon.awssdk:aws-crt-client")
 }
 ```
 
@@ -82,12 +82,12 @@ with the AOS SigV4 service name `es`.
 ```java
 import java.util.Map;
 import software.amazon.awssdk.http.SdkHttpClient;
-import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
+import software.amazon.awssdk.http.crt.AwsCrtHttpClient;
 import software.amazon.opensearch.client.aos.OpenSearchClient;
 import software.amazon.opensearch.client.aos.core.SearchResponse;
 import software.amazon.awssdk.regions.Region;
 
-try (SdkHttpClient httpClient = UrlConnectionHttpClient.builder().build()) {
+try (SdkHttpClient httpClient = AwsCrtHttpClient.builder().build()) {
     OpenSearchClient client = OpenSearchClient.create(
         httpClient,
         System.getenv("AOS_ENDPOINT"),
@@ -112,12 +112,12 @@ The AOSS client signs requests with the SigV4 service name `aoss`.
 ```java
 import java.util.Map;
 import software.amazon.awssdk.http.SdkHttpClient;
-import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
+import software.amazon.awssdk.http.crt.AwsCrtHttpClient;
 import software.amazon.opensearch.client.aoss.OpenSearchClient;
 import software.amazon.opensearch.client.aoss.core.SearchResponse;
 import software.amazon.awssdk.regions.Region;
 
-try (SdkHttpClient httpClient = UrlConnectionHttpClient.builder().build()) {
+try (SdkHttpClient httpClient = AwsCrtHttpClient.builder().build()) {
     OpenSearchClient client = OpenSearchClient.create(
         httpClient,
         System.getenv("AOSS_ENDPOINT"),
@@ -134,6 +134,13 @@ try (SdkHttpClient httpClient = UrlConnectionHttpClient.builder().build()) {
 
 The caller's IAM principal must also be allowed by the collection's network,
 encryption, and data access policies.
+
+The SigV4 examples use AWS CRT because it preserves GET request bodies, including
+the optional `sourceCollectionId` body on AOSS snapshot requests. The generated
+snapshot request currently sends `{}` when that field is unset.
+`AwsSdk2Transport` rejects GET requests with a body when using
+`UrlConnectionHttpClient`, which would otherwise change the request method to
+POST. Use `AwsCrtHttpClient` for these APIs.
 
 ## Use AOS and AOSS in the same application
 
