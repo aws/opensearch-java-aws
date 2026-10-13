@@ -111,6 +111,14 @@ public class AwsSdk2Transport implements OpenSearchTransport {
         return httpClient instanceof SdkHttpClient && APACHE_HTTP_CLIENT_CLASS_NAMES.contains(httpClient.getClass().getName());
     }
 
+    /**
+     * Package-private to allow assertions in unit tests. Detects the concrete SDK implementation, not wrappers.
+     */
+    static boolean isAwsSdkUrlConnectionHttpClient(SdkAutoCloseable httpClient) {
+        return httpClient instanceof SdkHttpClient
+            && "software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient".equals(httpClient.getClass().getName());
+    }
+
     private final SdkAutoCloseable httpClient;
     private final boolean isApacheHttpClient;
     private final boolean isUrlConnectionHttpClient;
@@ -227,8 +235,7 @@ public class AwsSdk2Transport implements OpenSearchTransport {
     ) {
         this.httpClient = httpClient;
         this.isApacheHttpClient = isAwsSdkApacheHttpClient(httpClient);
-        this.isUrlConnectionHttpClient = httpClient instanceof SdkHttpClient
-            && "software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient".equals(httpClient.getClass().getName());
+        this.isUrlConnectionHttpClient = isAwsSdkUrlConnectionHttpClient(httpClient);
         this.host = normalizeHost(host);
         this.signingServiceName = signingServiceName;
         this.signingRegion = signingRegion;
@@ -329,7 +336,7 @@ public class AwsSdk2Transport implements OpenSearchTransport {
         Endpoint<RequestT, ?, ?> endpoint,
         TransportOptions options
     ) throws IOException {
-        if (endpoint.hasRequestBody()) {
+        if (endpoint.hasRequestBody(request)) {
             final JsonpMapper mapper = Optional.ofNullable(
                 options instanceof AwsSdk2TransportOptions ? ((AwsSdk2TransportOptions) options) : null
             ).map(AwsSdk2TransportOptions::mapper).orElse(defaultMapper);
@@ -353,6 +360,8 @@ public class AwsSdk2Transport implements OpenSearchTransport {
     ) throws UnsupportedEncodingException, TransportException {
         SdkHttpMethod method = SdkHttpMethod.fromValue(endpoint.method(request));
 
+        // URLConnection enables output for any body provider, even zero bytes, causing the JDK to rewrite GET to POST.
+        // Unlike the Apache check below, this must not depend on content length.
         if (isUrlConnectionHttpClient && method == SdkHttpMethod.GET && body != null) {
             throw new TransportException(
                 "AWS SDK's UrlConnectionHttpClient changes GET requests with a body to POST. "

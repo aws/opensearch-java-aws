@@ -101,7 +101,13 @@
             {{TYPES.Client.Transport.Endpoints.SimpleEndpoint}}.emptyMap()
         {{^isBooleanRequest}}
             ,
+            {{#hasOptionalGetBody}}
+            // Omit an optional GET body only when none of its fields were supplied.
+            request -> {{#bodyFields}}{{^-first}} || {{/-first}}{{#type.isDefined}}request.{{name}}(){{/type.isDefined}}{{/bodyFields}},
+            {{/hasOptionalGetBody}}
+            {{^hasOptionalGetBody}}
             {{hasRequestBody}},
+            {{/hasOptionalGetBody}}
             {{responseType.name}}._DESERIALIZER
         {{/isBooleanRequest}}
     );

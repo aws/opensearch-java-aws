@@ -24,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 import org.junit.Test;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -35,28 +36,162 @@ import software.amazon.awssdk.http.HttpExecuteResponse;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.http.SdkHttpMethod;
 import software.amazon.awssdk.http.SdkHttpResponse;
+import software.amazon.awssdk.http.apache.ApacheHttpClient;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.utils.IoUtils;
+import software.amazon.opensearch.client.aos.cat.PitSegmentsRequest;
+import software.amazon.opensearch.client.aos.core.ClearScrollRequest;
+import software.amazon.opensearch.client.aos.ml.GetProfileModelsRequest;
+import software.amazon.opensearch.client.aos.ml.GetProfileRequest;
+import software.amazon.opensearch.client.aos.ml.GetProfileTasksRequest;
 import software.amazon.opensearch.client.aoss.OpenSearchAsyncClient;
 import software.amazon.opensearch.client.aoss.OpenSearchClient;
 import software.amazon.opensearch.client.aoss.snapshot.GetSnapshotRequest;
+import software.amazon.opensearch.client.errors.ErrorResponse;
 import software.amazon.opensearch.client.generic.Requests;
 import software.amazon.opensearch.client.generic.Response;
+import software.amazon.opensearch.client.json.JsonData;
+import software.amazon.opensearch.client.transport.Endpoint;
+import software.amazon.opensearch.client.transport.HttpTransportTestServer;
 import software.amazon.opensearch.client.transport.TransportException;
+import software.amazon.opensearch.client.transport.endpoints.DelegatingJsonEndpoint;
+import software.amazon.opensearch.client.transport.endpoints.SimpleEndpoint;
 
 public class AwsSdk2TransportGetBodyTests {
     @Test
-    public void rejectsUrlConnectionGetWithEmptyJsonBodyBeforeSigning() {
+    public void rejectsUrlConnectionGetWithExplicitEmptyJsonBodyBeforeSigning() {
         try (SdkHttpClient http = UrlConnectionHttpClient.builder().build()) {
             OpenSearchClient client = new OpenSearchClient(transportWithoutCredentials(http));
             TransportException error = assertThrows(
                 TransportException.class,
-                () -> client.snapshot().get(r -> r.repository("aoss-automated").snapshot("_all"))
+                () -> client.generic().execute(Requests.builder().method("GET").endpoint("/").json("{}").build())
             );
 
             assertTrue(error.getMessage().contains("UrlConnectionHttpClient"));
             assertTrue(error.getMessage().contains("AwsCrtHttpClient"));
+        }
+    }
+
+    @Test
+    public void omitsUnsetOptionalGetBodiesWithUrlConnection() throws Exception {
+        assertUrlConnectionExchange(
+            GetSnapshotRequest.of(r -> r.repository("aoss-automated").snapshot("_all")),
+            GetSnapshotRequest._ENDPOINT,
+            "GET",
+            "/_snapshot/aoss-automated/_all",
+            ""
+        );
+        assertUrlConnectionExchange(GetProfileRequest.of(r -> r), GetProfileRequest._ENDPOINT, "GET", "/_plugins/_ml/profile", "");
+        assertUrlConnectionExchange(
+            GetProfileModelsRequest.of(r -> r),
+            GetProfileModelsRequest._ENDPOINT,
+            "GET",
+            "/_plugins/_ml/profile/models",
+            ""
+        );
+        assertUrlConnectionExchange(
+            GetProfileModelsRequest.of(r -> r.modelId("model-1")),
+            GetProfileModelsRequest._ENDPOINT,
+            "GET",
+            "/_plugins/_ml/profile/models/model-1",
+            ""
+        );
+        assertUrlConnectionExchange(
+            GetProfileTasksRequest.of(r -> r),
+            GetProfileTasksRequest._ENDPOINT,
+            "GET",
+            "/_plugins/_ml/profile/tasks",
+            ""
+        );
+        assertUrlConnectionExchange(
+            GetProfileTasksRequest.of(r -> r.taskId("task-1")),
+            GetProfileTasksRequest._ENDPOINT,
+            "GET",
+            "/_plugins/_ml/profile/tasks/task-1",
+            ""
+        );
+    }
+
+    @Test
+    public void unsetSnapshotBodyAlsoReachesSigningWithAwsApache() throws Exception {
+        try (SdkHttpClient http = ApacheHttpClient.builder().build()) {
+            OpenSearchClient client = new OpenSearchClient(transportWithoutCredentials(http));
+            AssertionError error = assertThrows(
+                AssertionError.class,
+                () -> client.snapshot().get(r -> r.repository("aoss-automated").snapshot("_all"))
+            );
+            assertEquals("Signing reached", error.getMessage());
+        }
+    }
+
+    @Test
+    public void retainsRequiredPitBodyAndExplicitMlBodyFields() throws Exception {
+        assertRecordedBody(PitSegmentsRequest.of(r -> r.pitId("pit-1")), PitSegmentsRequest._ENDPOINT, "{\"pit_id\":[\"pit-1\"]}");
+        assertRecordedBody(
+            GetProfileRequest.of(r -> r.returnAllModels(false)),
+            GetProfileRequest._ENDPOINT,
+            "{\"return_all_models\":false}"
+        );
+        assertRecordedBody(
+            GetProfileModelsRequest.of(r -> r.modelIds(Collections.emptyList())),
+            GetProfileModelsRequest._ENDPOINT,
+            "{\"model_ids\":[]}"
+        );
+        assertRecordedBody(
+            GetProfileTasksRequest.of(r -> r.taskIds("task-1")),
+            GetProfileTasksRequest._ENDPOINT,
+            "{\"task_ids\":[\"task-1\"]}"
+        );
+        try (SdkHttpClient http = UrlConnectionHttpClient.builder().build()) {
+            AwsSdk2Transport transport = transportWithoutCredentials(http);
+            assertThrows(
+                TransportException.class,
+                () -> transport.performRequest(PitSegmentsRequest.of(r -> r.pitId("pit-1")), PitSegmentsRequest._ENDPOINT, null)
+            );
+            assertThrows(
+                TransportException.class,
+                () -> transport.performRequest(GetProfileRequest.of(r -> r.returnAllModels(false)), GetProfileRequest._ENDPOINT, null)
+            );
+        }
+    }
+
+    @Test
+    public void preservesAllGeneratedDeleteBodiesWithUrlConnection() throws Exception {
+        assertUrlConnectionExchange(
+            ClearScrollRequest.of(r -> r.scrollId("scroll-1")),
+            ClearScrollRequest._ENDPOINT,
+            "DELETE",
+            "/_search/scroll",
+            "{\"scroll_id\":[\"scroll-1\"]}"
+        );
+        assertUrlConnectionExchange(
+            software.amazon.opensearch.client.aos.core.DeletePitRequest.of(r -> r.pitId("pit-1")),
+            software.amazon.opensearch.client.aos.core.DeletePitRequest._ENDPOINT,
+            "DELETE",
+            "/_search/point_in_time",
+            "{\"pit_id\":[\"pit-1\"]}"
+        );
+        assertUrlConnectionExchange(
+            software.amazon.opensearch.client.aoss.core.DeletePitRequest.of(r -> r.pitId("pit-1")),
+            software.amazon.opensearch.client.aoss.core.DeletePitRequest._ENDPOINT,
+            "DELETE",
+            "/_search/point_in_time",
+            "{\"pit_id\":[\"pit-1\"]}"
+        );
+    }
+
+    @Test
+    public void urlConnectionDetectionDistinguishesConcreteClients() {
+        assertFalse(AwsSdk2Transport.isAwsSdkUrlConnectionHttpClient(null));
+        assertFalse(AwsSdk2Transport.isAwsSdkUrlConnectionHttpClient(() -> {}));
+        assertFalse(AwsSdk2Transport.isAwsSdkUrlConnectionHttpClient(new RecordingHttpClient()));
+        try (
+            SdkHttpClient urlConnection = UrlConnectionHttpClient.builder().build();
+            SdkHttpClient apache = ApacheHttpClient.builder().build()
+        ) {
+            assertTrue(AwsSdk2Transport.isAwsSdkUrlConnectionHttpClient(urlConnection));
+            assertFalse(AwsSdk2Transport.isAwsSdkUrlConnectionHttpClient(apache));
         }
     }
 
@@ -131,7 +266,7 @@ public class AwsSdk2TransportGetBodyTests {
             assertNull(http.body);
         }
 
-        for (String method : new String[] { "POST", "PUT" }) {
+        for (String method : new String[] { "POST", "PUT", "DELETE" }) {
             try (
                 Response response = client.generic()
                     .execute(Requests.builder().method(method).endpoint("/test-index/_doc").json("{\"value\":1}").build())
@@ -139,6 +274,63 @@ public class AwsSdk2TransportGetBodyTests {
                 assertEquals(200, response.getStatus());
                 assertEquals(SdkHttpMethod.fromValue(method), http.request.httpRequest().method());
                 assertEquals("{\"value\":1}", http.body);
+            }
+        }
+
+        try (Response response = client.generic().execute(Requests.builder().method("GET").endpoint("/").json("{}").build())) {
+            assertEquals(200, response.getStatus());
+            assertEquals(SdkHttpMethod.GET, http.request.httpRequest().method());
+            assertEquals("{}", http.body);
+        }
+    }
+
+    private static <T> void assertRecordedBody(T request, Endpoint<T, ?, ErrorResponse> endpoint, String expected) throws Exception {
+        RecordingHttpClient http = new RecordingHttpClient();
+        recordingTransport(http).performRequest(
+            request,
+            ((SimpleEndpoint<T, ?>) endpoint).withResponseDeserializer(JsonData._DESERIALIZER),
+            null
+        );
+        assertEquals(SdkHttpMethod.GET, http.request.httpRequest().method());
+        assertEquals(expected, http.body);
+    }
+
+    private static <T> void assertUrlConnectionExchange(
+        T request,
+        Endpoint<T, ?, ErrorResponse> endpoint,
+        String method,
+        String path,
+        String expectedBody
+    ) throws Exception {
+        for (boolean async : new boolean[] { false, true }) {
+            try (
+                HttpTransportTestServer server = new HttpTransportTestServer();
+                SdkHttpClient http = UrlConnectionHttpClient.create(server::openConnection)
+            ) {
+                AwsSdk2Transport transport = recordingTransport(http);
+                // Exercise predicate preservation through response-parser replacement and endpoint decoration.
+                DelegatingJsonEndpoint<T, JsonData, ErrorResponse> decorated = new DelegatingJsonEndpoint<>(
+                    ((SimpleEndpoint<T, ?>) endpoint).withResponseDeserializer(JsonData._DESERIALIZER)
+                );
+                if (async) {
+                    transport.performRequestAsync(request, decorated, null).get();
+                } else {
+                    transport.performRequest(request, decorated, null);
+                }
+                HttpTransportTestServer.CapturedRequest captured = server.awaitRequest();
+                assertEquals(method, captured.method);
+                assertEquals(path, captured.path);
+                assertEquals(expectedBody, captured.body);
+                assertTrue(captured.headers.containsKey("authorization"));
+                if (expectedBody.isEmpty()) {
+                    assertFalse(captured.headers.containsKey("content-type"));
+                    assertFalse(captured.headers.containsKey("content-length"));
+                    assertFalse(captured.headers.containsKey("content-encoding"));
+                    assertEquals(
+                        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                        captured.headers.get("x-amz-content-sha256")
+                    );
+                }
             }
         }
     }

@@ -433,7 +433,12 @@ public final class GetProfileTasksRequest extends RequestBase
             return params;
         },
         SimpleEndpoint.emptyMap(),
-        true,
+        // Omit an optional GET body only when none of its fields were supplied.
+        request -> ApiTypeHelper.isDefined(request.modelIds())
+            || ApiTypeHelper.isDefined(request.nodeIds())
+            || request.returnAllModels() != null
+            || request.returnAllTasks() != null
+            || ApiTypeHelper.isDefined(request.taskIds()),
         GetProfileTasksResponse._DESERIALIZER
     );
 

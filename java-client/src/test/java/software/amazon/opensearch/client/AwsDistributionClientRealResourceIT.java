@@ -25,7 +25,7 @@ import org.apache.hc.core5.http.HttpHost;
 import org.junit.Assume;
 import org.junit.Test;
 import software.amazon.awssdk.http.SdkHttpClient;
-import software.amazon.awssdk.http.crt.AwsCrtHttpClient;
+import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.opensearch.client.aos.OpenSearchClient;
 import software.amazon.opensearch.client.aos.core.InfoResponse;
@@ -69,7 +69,7 @@ public class AwsDistributionClientRealResourceIT {
         String endpoint = System.getenv("OPENSEARCH_TEST_AOSS_ENDPOINT");
         Assume.assumeNotNull(endpoint);
 
-        try (SdkHttpClient httpClient = AwsCrtHttpClient.builder().build()) {
+        try (SdkHttpClient httpClient = UrlConnectionHttpClient.builder().build()) {
             software.amazon.opensearch.client.aoss.OpenSearchClient client = software.amazon.opensearch.client.aoss.OpenSearchClient.create(
                 httpClient,
                 endpoint,

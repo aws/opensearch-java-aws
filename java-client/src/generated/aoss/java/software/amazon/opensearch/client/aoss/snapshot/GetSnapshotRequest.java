@@ -511,7 +511,8 @@ public final class GetSnapshotRequest extends RequestBase
             return params;
         },
         SimpleEndpoint.emptyMap(),
-        true,
+        // Omit an optional GET body only when none of its fields were supplied.
+        request -> request.sourceCollectionId() != null,
         GetSnapshotResponse._DESERIALIZER
     );
 
