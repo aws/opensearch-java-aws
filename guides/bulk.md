@@ -8,48 +8,41 @@ The [Bulk API](https://opensearch.org/docs/latest/api-reference/document-apis/bu
 
 ## Bulk Indexing
 
-The `BulkIngester` is a helper class that simplifies bulk indexing by automatically buffering operations and flushing them to OpenSearch based on configurable thresholds. It provides:
-
-- Automatic flushing based on number of operations, total size in bytes, or time interval
-- Backpressure control to prevent overwhelming the cluster
-- Automatic retries with configurable backoff policies for failed operations
-- Thread-safe concurrent operation
+Use the AWS client's Bulk API to send bounded batches of operations. The application
+controls batch size and checks each response for failed operations.
 
 ```java
-String indexName = "sample-index";
-
-// Create a BulkIngester with custom settings
-BulkIngester<Void> ingester = BulkIngester.of(b -> b
-    .client(client)
-    .maxOperations(1000)           // Flush every 1000 operations
-    .flushInterval(5, TimeUnit.SECONDS)  // Or every 5 seconds
-    .maxConcurrentRequests(2)       // Allow 2 concurrent bulk requests
+var documents = List.of(
+    new IndexData("Document 1", "The text of document 1"),
+    new IndexData("Document 2", "The text of document 2"),
+    new IndexData("Document 3", "The text of document 3")
 );
-
-// Add operations - they are automatically buffered and flushed
-IndexData doc1 = new IndexData("Document 1", "The text of document 1");
-ingester.add(op -> op.index(i -> i.index(indexName).id("id1").document(doc1)));
-
-IndexData doc2 = new IndexData("Document 2", "The text of document 2");
-ingester.add(op -> op.index(i -> i.index(indexName).id("id2").document(doc2)));
-
-IndexData doc3 = new IndexData("Document 3", "The text of document 3");
-ingester.add(op -> op.index(i -> i.index(indexName).id("id3").document(doc3)));
-
-// Close the ingester - this flushes any remaining buffered operations
-ingester.close();
+int batchSize = 2;
+for (int start = 0; start < documents.size(); start += batchSize) {
+    var batch = new BulkRequest.Builder().index("sample-index");
+    for (int i = start; i < Math.min(start + batchSize, documents.size()); i++) {
+        var id = "id" + (i + 1);
+        var document = documents.get(i);
+        batch.operations(op -> op.index(b -> b.id(id).document(document)));
+    }
+    var response = client.bulk(batch.build());
+    if (response.errors()) {
+        throw new IllegalStateException("A bulk batch contains failed operations: " + response.items());
+    }
+}
 ```
 
-[IndexData](../samples/src/main/java/org/opensearch/client/samples/util/IndexData.java) refers to sample data class.
-
-You can find a working sample of the above code in [BulkIngesterBasics.java](../samples/src/main/java/org/opensearch/client/samples/BulkIngesterBasics.java).
+[IndexData](../samples/src/main/java/software/amazon/opensearch/client/samples/util/IndexData.java) is the sample data class.
+See [BulkBatching.java](../samples/src/main/java/software/amazon/opensearch/client/samples/BulkBatching.java)
+for the complete example. The standalone OSS client's `BulkIngester` helper is
+not included in this AWS client.
 
 
 ## Bulk requests
 
 ```java
 String indexName = "sample-index";
-CreateIndexRequest createIndexRequest = new CreateIndexRequest.Builder().index(index).build();
+CreateIndexRequest createIndexRequest = new CreateIndexRequest.Builder().index(indexName).build();
 client.indices().create(createIndexRequest);
 
 ArrayList<BulkOperation> ops = new ArrayList<>();
@@ -73,6 +66,6 @@ BulkRequest.Builder bulkReq = new BulkRequest.Builder()
 BulkResponse bulkResponse = client.bulk(bulkReq.build());
 ```
 
-[IndexData](../samples/src/main/java/org/opensearch/client/samples/util/IndexData.java) refers to sample data class.
+[IndexData](../samples/src/main/java/software/amazon/opensearch/client/samples/util/IndexData.java) refers to sample data class.
 
-You can find a working sample of the above code in [Bulk.java](../samples/src/main/java/org/opensearch/client/samples/Bulk.java).
+You can find a working sample of the above code in [Bulk.java](../samples/src/main/java/software/amazon/opensearch/client/samples/Bulk.java).

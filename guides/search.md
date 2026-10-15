@@ -46,7 +46,7 @@ indexRequest = new IndexRequest.Builder<IndexData>().index(index).id("2").docume
 client.index(indexRequest);
 ```
 
-[IndexData](../samples/src/main/java/org/opensearch/client/samples/util/IndexData.java) refers to sample data class.
+[IndexData](../samples/src/main/java/software/amazon/opensearch/client/samples/util/IndexData.java) refers to sample data class.
 
 ## Search API
 
@@ -104,7 +104,7 @@ for (var hit : searchResponse.hits().hits()) {
 
 ### Search documents using suggesters
 
-[AppData](../samples/src/main/java/org/opensearch/client/samples/util/AppData.java) refers to the sample data class used in the below samples.
+[AppData](../samples/src/main/java/software/amazon/opensearch/client/samples/util/AppData.java) refers to the sample data class used in the below samples.
 
 #### Using completion suggester
 
@@ -310,7 +310,7 @@ CompositeAggregationSource compositeAggregationSource1 = new CompositeAggregatio
 ).build();
 comAggrSrcMap.put("titles", compositeAggregationSource1);
 
-CompositeAggregation compAgg = new CompositeAggregation.Builder().sources(comAggrSrcMap).build();
+CompositeAggregationFields compAgg = new CompositeAggregationFields.Builder().sources(comAggrSrcMap).build();
 Aggregation aggregation = new Aggregation.Builder().composite(compAgg).build();
 
 SearchRequest request = SearchRequest.of(r -> r.index(indexName).query(q -> q.match(m -> m.field("title").query(FieldValue.of("Document 1")))).aggregations("my_buckets", aggregation));
@@ -321,4 +321,4 @@ for (Map.Entry<String, Aggregate> entry : response.aggregations().entrySet()) {
 }
 ```
 
-You can find a working sample of the above code in [Search.java](../samples/src/main/java/org/opensearch/client/samples/Search.java).
+You can find a working sample of the above code in [Search.java](../samples/src/main/java/software/amazon/opensearch/client/samples/Search.java).

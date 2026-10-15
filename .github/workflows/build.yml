@@ -24,4 +24,4 @@ jobs:
           cache: 'gradle'
 
       - name: Build with Gradle
-        run: ./gradlew clean :java-client:build :java-codegen:build -x test
+        run: ./gradlew clean :java-client:build :java-codegen:build :samples:build -x test
