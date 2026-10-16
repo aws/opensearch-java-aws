@@ -105,6 +105,13 @@ public class AwsSdk2Transport implements OpenSearchTransport {
     );
 
     /**
+     * FQCNs of URLConnection-backed AWS SDK HTTP clients that rewrite GET requests with bodies as POST.
+     */
+    private static final Set<String> URL_CONNECTION_HTTP_CLIENT_CLASS_NAMES = Collections.unmodifiableSet(
+        new HashSet<>(Arrays.asList("software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient"))
+    );
+
+    /**
      * Package-private to allow assertions in unit tests.
      */
     static boolean isAwsSdkApacheHttpClient(SdkAutoCloseable httpClient) {
@@ -115,8 +122,7 @@ public class AwsSdk2Transport implements OpenSearchTransport {
      * Package-private to allow assertions in unit tests. Detects the concrete SDK implementation, not wrappers.
      */
     static boolean isAwsSdkUrlConnectionHttpClient(SdkAutoCloseable httpClient) {
-        return httpClient instanceof SdkHttpClient
-            && "software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient".equals(httpClient.getClass().getName());
+        return httpClient instanceof SdkHttpClient && URL_CONNECTION_HTTP_CLIENT_CLASS_NAMES.contains(httpClient.getClass().getName());
     }
 
     private final SdkAutoCloseable httpClient;

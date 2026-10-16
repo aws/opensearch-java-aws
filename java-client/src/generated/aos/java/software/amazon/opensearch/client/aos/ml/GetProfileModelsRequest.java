@@ -401,6 +401,17 @@ public final class GetProfileModelsRequest extends RequestBase
     // ---------------------------------------------------------------------------------------------
 
     /**
+     * Returns whether any optional body fields were explicitly supplied.
+     */
+    private boolean hasBodyFields() {
+        return ApiTypeHelper.isDefined(this.modelIds())
+            || ApiTypeHelper.isDefined(this.nodeIds())
+            || this.returnAllModels() != null
+            || this.returnAllTasks() != null
+            || ApiTypeHelper.isDefined(this.taskIds());
+    }
+
+    /**
      * Endpoint "{@code ml.get_profile_models}".
      */
     public static final Endpoint<GetProfileModelsRequest, GetProfileModelsResponse, ErrorResponse> _ENDPOINT = new SimpleEndpoint<>(
@@ -434,11 +445,7 @@ public final class GetProfileModelsRequest extends RequestBase
         },
         SimpleEndpoint.emptyMap(),
         // Omit an optional GET body only when none of its fields were supplied.
-        request -> ApiTypeHelper.isDefined(request.modelIds())
-            || ApiTypeHelper.isDefined(request.nodeIds())
-            || request.returnAllModels() != null
-            || request.returnAllTasks() != null
-            || ApiTypeHelper.isDefined(request.taskIds()),
+        GetProfileModelsRequest::hasBodyFields,
         GetProfileModelsResponse._DESERIALIZER
     );
 

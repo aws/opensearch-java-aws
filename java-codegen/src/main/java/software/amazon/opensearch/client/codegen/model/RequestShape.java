@@ -134,7 +134,7 @@ public class RequestShape extends ObjectShape {
     }
 
     public boolean hasOptionalGetBody() {
-        return "GET".equals(getHttpMethod())
+        return "GET".equalsIgnoreCase(getHttpMethod())
             && hasRequestBody()
             && !requestBodyRequired
             && !hasDelegatedBodyField()

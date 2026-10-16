@@ -111,6 +111,6 @@ public class OptionalGetBodyGenerationTests {
             transformer.getRoot().render(context);
         }
         String generated = Files.readString(output.resolve("example/InspectRequest.java"));
-        assertEquals(conditionalBody, generated.contains("request -> request.filter() != null"));
+        assertEquals(conditionalBody, generated.contains("InspectRequest::hasBodyFields"));
     }
 }

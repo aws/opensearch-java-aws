@@ -45,6 +45,17 @@
     }
 {{/hasQueryParams}}
 
+{{^isBooleanRequest}}
+{{#hasOptionalGetBody}}
+    /**
+     * Returns whether any optional body fields were explicitly supplied.
+     */
+    private boolean hasBodyFields() {
+        return {{#bodyFields}}{{^-first}} || {{/-first}}{{#type.isDefined}}this.{{name}}(){{/type.isDefined}}{{/bodyFields}};
+    }
+
+{{/hasOptionalGetBody}}
+{{/isBooleanRequest}}
     /**
      * Endpoint "{@code {{operationGroup}}}".
      */
@@ -103,7 +114,7 @@
             ,
             {{#hasOptionalGetBody}}
             // Omit an optional GET body only when none of its fields were supplied.
-            request -> {{#bodyFields}}{{^-first}} || {{/-first}}{{#type.isDefined}}request.{{name}}(){{/type.isDefined}}{{/bodyFields}},
+            {{className}}::hasBodyFields,
             {{/hasOptionalGetBody}}
             {{^hasOptionalGetBody}}
             {{hasRequestBody}},
