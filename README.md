@@ -135,6 +135,26 @@ try (SdkHttpClient httpClient = UrlConnectionHttpClient.builder().build()) {
 The caller's IAM principal must also be allowed by the collection's network,
 encryption, and data access policies.
 
+These search examples use POST and work with `UrlConnectionHttpClient`.
+Optional GET bodies are omitted when none of their body fields are set. For
+example, AOSS snapshot listing without `sourceCollectionId` works with
+`UrlConnectionHttpClient`.
+
+Requests that need a GET body, such as cross-collection snapshot listing with
+`sourceCollectionId`, ML profiling with body filters, or CAT PIT segments, need
+an HTTP client that preserves GET bodies. For these calls, add the
+`software.amazon.awssdk:aws-crt-client` dependency and use
+`software.amazon.awssdk.http.crt.AwsCrtHttpClient.builder().build()`.
+`AwsSdk2Transport` throws `TransportException` for GET bodies with
+`UrlConnectionHttpClient`, which would otherwise rewrite the signed request to
+POST. This also applies to explicitly supplied generic GET bodies such as `{}` or
+an empty string. DELETE bodies are supported by `UrlConnectionHttpClient`.
+
+When no ML profile body fields are set, the server now applies the defaults and
+model/task IDs from the request URL. This can produce different results from the
+previous empty `{}` body. Explicit values such as `returnAllModels(false)` or an
+empty list remain in the body and require an HTTP client that supports GET bodies.
+
 ## Use AOS and AOSS in the same application
 
 Both clients can be used in the same source file. Their generated model types
