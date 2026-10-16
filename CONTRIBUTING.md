@@ -105,7 +105,7 @@ git secrets --install
 git secrets --register-aws
 ```
 
-`git secrets --install` adds `pre-commit`, `commit-msg`, and `prepare-commit-msg` hooks so every commit is scanned automatically. `git secrets --register-aws` loads the AWS access-key / secret-key / account-id patterns. To scan the existing history on demand:
+`git secrets --install` adds `pre-commit`, `commit-msg`, and `prepare-commit-msg` hooks so every commit is scanned automatically. `git secrets --register-aws` loads the AWS access-key / secret-key / account-id patterns. The CI scan additionally covers this project's release secrets (the PGP signing key and the Sonatype publishing token); see `.github/workflows/git-secrets.yml`. To scan the existing history on demand:
 
 ```
 git secrets --scan-history
