@@ -88,6 +88,14 @@ public interface Endpoint<RequestT, ResponseT, ErrorT> {
     boolean hasRequestBody();
 
     /**
+     * Whether this particular request has a body. Optional bodies can be absent even when
+     * {@link #hasRequestBody()} is true. Existing endpoints retain their fixed body behavior.
+     */
+    default boolean hasRequestBody(RequestT request) {
+        return hasRequestBody();
+    }
+
+    /**
      * Is this status code to be considered as an error?
      */
     boolean isError(int statusCode);

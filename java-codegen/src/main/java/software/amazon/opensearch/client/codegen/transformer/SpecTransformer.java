@@ -298,12 +298,16 @@ public class SpecTransformer {
             shape.addPathParam(entry.getValue().toBuilder().withRequired(requiredPathParams.contains(entry.getKey())).build());
         }
 
-        variants.stream()
+        var requestBodies = variants.stream()
             .map(Pair::getRight)
             .map(OpenApiOperation::getRequestBody)
             .flatMap(Optional::stream)
-            .findFirst()
             .map(OpenApiRefElement::resolve)
+            .collect(Collectors.toList());
+        shape.setRequestBodyRequired(requestBodies.stream().anyMatch(OpenApiRequestBody::getRequired));
+
+        requestBodies.stream()
+            .findFirst()
             .flatMap(OpenApiRequestBody::getContent)
             .flatMap(c -> c.get(MimeType.Json))
             .flatMap(OpenApiMediaType::getSchema)

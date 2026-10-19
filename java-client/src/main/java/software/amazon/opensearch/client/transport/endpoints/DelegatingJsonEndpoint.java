@@ -77,6 +77,11 @@ public class DelegatingJsonEndpoint<Req, Res, Err> implements JsonEndpoint<Req, 
     }
 
     @Override
+    public boolean hasRequestBody(Req request) {
+        return endpoint.hasRequestBody(request);
+    }
+
+    @Override
     @Nullable
     public JsonpDeserializer<Res> responseDeserializer() {
         return endpoint.responseDeserializer();
