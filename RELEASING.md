@@ -2,23 +2,22 @@
 - [Project status](#project-status)
 - [Versioning](#versioning)
 - [Branching](#branching)
-- [Snapshots](#snapshots)
 - [Releases](#releases)
 - [CHANGELOG entries](#changelog-entries)
 
 ## Overview
 
-This document describes how `aws/opensearch-java-aws` is versioned, how snapshots
-are published, and the current state of the release-to-Maven-Central process. It
-replaces the release strategy inherited from upstream `opensearch-java`, which
-does not apply to this fork.
+This document describes how `aws/opensearch-java-aws` is versioned and the
+current state of the release-to-Maven-Central process. It replaces the release
+strategy inherited from upstream `opensearch-java`, which does not apply to this
+fork.
 
 ## Project status
 
 This project is a **pre-release prototype** (version `0.1.0`). The final Maven
 coordinate, POM metadata, signing keys, and the production release process to
-Maven Central have **not been finalized**. Until they are, only snapshots are
-published; there is no tagged GA release flow yet.
+Maven Central have **not been finalized**. There is no published artifact yet:
+snapshot builds are produced locally only, and no tagged GA release flow exists.
 
 ## Versioning
 
@@ -39,15 +38,6 @@ The [bump-version workflow](.github/workflows/bump-version.yml) opens a PR to se
 
 This fork **backports manually**: cherry-pick the change onto the target release
 branch and open a PR against it. There is no automated backport workflow.
-
-## Snapshots
-
-Snapshots publish automatically from CI on every push to `main` (and to a
-`<major>.x` release branch) via the
-[publish-snapshots workflow](.github/workflows/publish-snapshots.yml). It
-authenticates to AWS with GitHub OIDC (no long-lived credentials) and publishes
-the snapshot JARs. Maven Central does not require snapshots to be PGP-signed, so
-no signing key is involved in the snapshot path.
 
 ## Releases
 

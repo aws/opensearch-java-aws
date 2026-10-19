@@ -390,22 +390,11 @@ tasks.withType<Jar> {
 
 publishing {
     repositories{
-        if (version.toString().endsWith("SNAPSHOT")) {
-            maven(providers.environmentVariable("MAVEN_SNAPSHOTS_S3_REPO")) {
-                name = "Snapshots"
-		credentials(AwsCredentials::class) {
-                    accessKey = System.getenv("AWS_ACCESS_KEY_ID")
-                    secretKey = System.getenv("AWS_SECRET_ACCESS_KEY")
-                    sessionToken = System.getenv("AWS_SESSION_TOKEN")
-                }
-            }
-        } else {
-            maven("https://aws.oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                name = "SonatypeStaging"
-                credentials {
-                    username = (findProperty("mavenUsername") as String?) ?: ""
-                    password = (findProperty("mavenPassword") as String?) ?: ""
-                }
+        maven("https://aws.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+            name = "SonatypeStaging"
+            credentials {
+                username = (findProperty("mavenUsername") as String?) ?: ""
+                password = (findProperty("mavenPassword") as String?) ?: ""
             }
         }
         maven(rootProject.layout.buildDirectory.dir("repository")) {
