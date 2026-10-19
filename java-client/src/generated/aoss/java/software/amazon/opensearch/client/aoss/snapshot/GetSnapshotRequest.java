@@ -490,6 +490,13 @@ public final class GetSnapshotRequest extends RequestBase
     }
 
     /**
+     * Returns whether any optional body fields were explicitly supplied.
+     */
+    private boolean hasBodyFields() {
+        return this.sourceCollectionId() != null;
+    }
+
+    /**
      * Endpoint "{@code snapshot.get}".
      */
     public static final Endpoint<GetSnapshotRequest, GetSnapshotResponse, ErrorResponse> _ENDPOINT = new SimpleEndpoint<>(
@@ -511,7 +518,8 @@ public final class GetSnapshotRequest extends RequestBase
             return params;
         },
         SimpleEndpoint.emptyMap(),
-        true,
+        // Omit an optional GET body only when none of its fields were supplied.
+        GetSnapshotRequest::hasBodyFields,
         GetSnapshotResponse._DESERIALIZER
     );
 

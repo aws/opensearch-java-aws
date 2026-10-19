@@ -577,7 +577,7 @@ public class ApacheHttpClient5Transport implements OpenSearchTransport {
 
         final URI uri = buildUri(pathPrefix, path, params);
         final HttpUriRequestBase clientReq = new HttpUriRequestBase(method, uri);
-        if (endpoint.hasRequestBody()) {
+        if (endpoint.hasRequestBody(request)) {
             // Request has a body and must implement JsonpSerializable or NdJsonpSerializable
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
