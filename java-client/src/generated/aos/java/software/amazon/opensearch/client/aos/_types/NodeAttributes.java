@@ -86,19 +86,19 @@ public class NodeAttributes implements PlainJsonSerializable, ToCopyableBuilder<
     @Nonnull
     private final List<NodeRole> roles;
 
-    @Nonnull
+    @Nullable
     private final String transportAddress;
 
     // ---------------------------------------------------------------------------------------------
 
     private NodeAttributes(Builder builder) {
-        this.attributes = ApiTypeHelper.unmodifiableRequired(builder.attributes, this, "attributes");
+        this.attributes = ApiTypeHelper.unmodifiable(builder.attributes);
         this.ephemeralId = ApiTypeHelper.requireNonNull(builder.ephemeralId, this, "ephemeralId");
         this.externalId = builder.externalId;
         this.id = builder.id;
         this.name = ApiTypeHelper.requireNonNull(builder.name, this, "name");
         this.roles = ApiTypeHelper.unmodifiable(builder.roles);
-        this.transportAddress = ApiTypeHelper.requireNonNull(builder.transportAddress, this, "transportAddress");
+        this.transportAddress = builder.transportAddress;
     }
 
     public static NodeAttributes of(Function<NodeAttributes.Builder, ObjectBuilder<NodeAttributes>> fn) {
@@ -106,7 +106,7 @@ public class NodeAttributes implements PlainJsonSerializable, ToCopyableBuilder<
     }
 
     /**
-     * Required - A list of node attributes.
+     * A list of node attributes.
      * <p>
      * API name: {@code attributes}
      * </p>
@@ -160,9 +160,9 @@ public class NodeAttributes implements PlainJsonSerializable, ToCopyableBuilder<
     }
 
     /**
-     * Required - API name: {@code transport_address}
+     * API name: {@code transport_address}
      */
-    @Nonnull
+    @Nullable
     public final String transportAddress() {
         return this.transportAddress;
     }
@@ -178,13 +178,15 @@ public class NodeAttributes implements PlainJsonSerializable, ToCopyableBuilder<
     }
 
     protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
-        generator.writeKey("attributes");
-        generator.writeStartObject();
-        for (Map.Entry<String, String> item0 : this.attributes.entrySet()) {
-            generator.writeKey(item0.getKey());
-            generator.write(item0.getValue());
+        if (ApiTypeHelper.isDefined(this.attributes)) {
+            generator.writeKey("attributes");
+            generator.writeStartObject();
+            for (Map.Entry<String, String> item0 : this.attributes.entrySet()) {
+                generator.writeKey(item0.getKey());
+                generator.write(item0.getValue());
+            }
+            generator.writeEnd();
         }
-        generator.writeEnd();
 
         generator.writeKey("ephemeral_id");
         generator.write(this.ephemeralId);
@@ -211,8 +213,10 @@ public class NodeAttributes implements PlainJsonSerializable, ToCopyableBuilder<
             generator.writeEnd();
         }
 
-        generator.writeKey("transport_address");
-        generator.write(this.transportAddress);
+        if (this.transportAddress != null) {
+            generator.writeKey("transport_address");
+            generator.write(this.transportAddress);
+        }
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -232,6 +236,7 @@ public class NodeAttributes implements PlainJsonSerializable, ToCopyableBuilder<
      * Builder for {@link NodeAttributes}.
      */
     public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, NodeAttributes> {
+        @Nullable
         private Map<String, String> attributes;
         private String ephemeralId;
         @Nullable
@@ -241,6 +246,7 @@ public class NodeAttributes implements PlainJsonSerializable, ToCopyableBuilder<
         private String name;
         @Nullable
         private List<NodeRole> roles;
+        @Nullable
         private String transportAddress;
 
         public Builder() {}
@@ -272,7 +278,7 @@ public class NodeAttributes implements PlainJsonSerializable, ToCopyableBuilder<
         }
 
         /**
-         * Required - A list of node attributes.
+         * A list of node attributes.
          * <p>
          * API name: {@code attributes}
          * </p>
@@ -288,7 +294,7 @@ public class NodeAttributes implements PlainJsonSerializable, ToCopyableBuilder<
         }
 
         /**
-         * Required - A list of node attributes.
+         * A list of node attributes.
          * <p>
          * API name: {@code attributes}
          * </p>
@@ -369,10 +375,10 @@ public class NodeAttributes implements PlainJsonSerializable, ToCopyableBuilder<
         }
 
         /**
-         * Required - API name: {@code transport_address}
+         * API name: {@code transport_address}
          */
         @Nonnull
-        public final Builder transportAddress(String value) {
+        public final Builder transportAddress(@Nullable String value) {
             this.transportAddress = value;
             return this;
         }
@@ -414,13 +420,13 @@ public class NodeAttributes implements PlainJsonSerializable, ToCopyableBuilder<
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + this.attributes.hashCode();
+        result = 31 * result + Objects.hashCode(this.attributes);
         result = 31 * result + this.ephemeralId.hashCode();
         result = 31 * result + Objects.hashCode(this.externalId);
         result = 31 * result + Objects.hashCode(this.id);
         result = 31 * result + this.name.hashCode();
         result = 31 * result + Objects.hashCode(this.roles);
-        result = 31 * result + this.transportAddress.hashCode();
+        result = 31 * result + Objects.hashCode(this.transportAddress);
         return result;
     }
 
@@ -429,12 +435,12 @@ public class NodeAttributes implements PlainJsonSerializable, ToCopyableBuilder<
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         NodeAttributes other = (NodeAttributes) o;
-        return this.attributes.equals(other.attributes)
+        return Objects.equals(this.attributes, other.attributes)
             && this.ephemeralId.equals(other.ephemeralId)
             && Objects.equals(this.externalId, other.externalId)
             && Objects.equals(this.id, other.id)
             && this.name.equals(other.name)
             && Objects.equals(this.roles, other.roles)
-            && this.transportAddress.equals(other.transportAddress);
+            && Objects.equals(this.transportAddress, other.transportAddress);
     }
 }
