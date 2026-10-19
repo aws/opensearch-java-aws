@@ -9,41 +9,78 @@ jobs:
   draft-a-release:
     name: Draft a release
     runs-on: ubuntu-latest
+    # Gating on an environment rather than an in-workflow approval step means GitHub
+    # resolves the reviewer team itself. The `amazon-opensearch-clients` team is the
+    # source of truth for maintainership (see MAINTAINERS.md), and the default
+    # GITHUB_TOKEN cannot enumerate team members, so an action-based gate would need
+    # a GitHub App token just to read the roster.
+    #
+    # Requires a `maven-central` environment configured with:
+    #   - Required reviewers: @aws/amazon-opensearch-clients
+    #   - Environment secrets: CENTRAL_PORTAL_USERNAME, CENTRAL_PORTAL_TOKEN,
+    #     MAVEN_CENTRAL_SIGNING_KEY, MAVEN_CENTRAL_SIGNING_PASSWORD
+    #
+    # Scoping the release credentials to this environment also keeps them out of
+    # reach of every other workflow in the repository.
+    environment: maven-central
     permissions:
-      issues: write
       contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          # This job holds the signing key and the Portal token. Leaving a push
+          # credential in .git/config for the rest of the run serves no purpose here.
           persist-credentials: false
-      - id: get_data
-        run: |
-          echo "approvers=$(cat .github/CODEOWNERS | grep @ | tr -d '* ' | sed 's/@/,/g' | sed 's/,//1')" >> $GITHUB_OUTPUT
-          echo "version=$(cat gradle.properties | grep "systemProp.version" | cut -d'=' -f2)" >> $GITHUB_OUTPUT
-      - uses: trstringer/manual-approval@fa642940caf8412403569b28b2db4a1df08a83a3 # v1
-        with:
-          secret: ${{ github.TOKEN }}
-          approvers: ${{ steps.get_data.outputs.approvers }}
-          minimum-approvals: 1
-          issue-title: 'Release opensearch-java : ${{ steps.get_data.outputs.version }}'
-          issue-body: "Please approve or deny the release of opensearch-java. **VERSION**: ${{ steps.get_data.outputs.version }} **TAG**: ${{ github.ref_name }}  **COMMIT**: ${{ github.sha }}"
-          exclude-workflow-initiator-as-approver: true
       - name: Set up JDK 21
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
         with:
           java-version: '21'
           distribution: 'temurin'
-          cache: 'gradle'
-      - name: Build with Gradle
+          # No Gradle cache: a release is built once, and a cache shared with
+          # unprivileged workflows would be an input to the job that signs it.
+      - name: Resolve the release version
+        id: get_data
         run: |
-          export VERSION=`cat gradle.properties | grep "systemProp.version" | tr -d " " | cut -d '=' -f2`
-          echo Building the version: $VERSION
-          ./gradlew --no-daemon publishPublishMavenPublicationToLocalRepoRepository && tar -C build -cvf artifacts.tar.gz repository
+          version=$(grep "systemProp.version" gradle.properties | tr -d " " | cut -d '=' -f2)
+          if [ -z "$version" ]; then
+            echo "Could not read systemProp.version from gradle.properties" >&2
+            exit 1
+          fi
+          # The tag must match the version being published, or the drafted GitHub
+          # release and the artifacts on Maven Central would disagree.
+          if [ "${GITHUB_REF_NAME#v}" != "$version" ]; then
+            echo "Tag '${GITHUB_REF_NAME}' does not match systemProp.version '${version}'." >&2
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - name: Run unit tests
+        env:
+          VERSION: ${{ steps.get_data.outputs.version }}
+        run: ./gradlew --no-daemon :java-client:test
+      - name: Build, sign and upload the Central Portal bundle
+        env:
+          VERSION: ${{ steps.get_data.outputs.version }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.MAVEN_CENTRAL_SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.MAVEN_CENTRAL_SIGNING_PASSWORD }}
+          CENTRAL_PORTAL_USERNAME: ${{ secrets.CENTRAL_PORTAL_USERNAME }}
+          CENTRAL_PORTAL_TOKEN: ${{ secrets.CENTRAL_PORTAL_TOKEN }}
+        run: |
+          echo "Releasing version: $VERSION"
+          # One invocation, so the archive attached to the GitHub release below is
+          # byte-for-byte the archive that was uploaded. Building the bundle in a
+          # separate step would re-sign it, and PGP signatures are not reproducible.
+          # USER_MANAGED: the deployment waits in the Portal for a maintainer to release it.
+          ./gradlew --no-daemon :java-client:publishToCentralPortal
+          cp java-client/build/central-bundle.zip .
+          sha256sum central-bundle.zip | tee central-bundle.zip.sha256
       - name: Draft a release
         uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd
         with:
           immutableCreate: true
           generateReleaseNotes: true
-          artifacts: "artifacts.tar.gz"
+          artifacts: "central-bundle.zip,central-bundle.zip.sha256"
+          # Created as a draft so the Portal deployment can be checked before anything
+          # is announced; RELEASING.md has the maintainer publish it as the last step.
+          draft: true
           prerelease: true

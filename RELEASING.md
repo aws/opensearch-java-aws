@@ -14,17 +14,25 @@ fork.
 
 ## Project status
 
-This project is a **pre-release prototype** (version `0.1.0`). The final Maven
-coordinate, POM metadata, signing keys, and the production release process to
-Maven Central have **not been finalized**. There is no published artifact yet:
-snapshot builds are produced locally only, and no tagged GA release flow exists.
+This project is a **pre-release prototype** (version `0.1.0`). The release
+mechanics to Maven Central are in place (see [Releases](#releases)) and the
+`software.amazon.opensearch` namespace is verified in the Central Portal, but no
+tagged release has been cut yet. The upload path has therefore never run against
+the live Portal, so cut the first tag as a pre-release version.
 
 ## Versioning
 
 The version lives in `systemProp.version` in [gradle.properties](gradle.properties)
-(currently `0.1.0`). The build appends `-SNAPSHOT` unless a concrete `VERSION`
-environment variable or `-Dversion=` system property is supplied, so ordinary
-builds produce snapshot artifacts.
+(currently `0.1.0`). Only the `VERSION` environment variable produces a release
+version:
+
+```kotlin
+version = System.getenv("VERSION") ?: System.getProperty("version") + "-SNAPSHOT"
+```
+
+`-Dversion=0.1.0` sets the *base* version and still yields `0.1.0-SNAPSHOT`, so
+ordinary and snapshot builds need no extra flags, and a release build must set
+`VERSION=0.1.0`.
 
 The [bump-version workflow](.github/workflows/bump-version.yml) opens a PR to set
 `systemProp.version` on a new branch or tag. It can be run manually
@@ -41,25 +49,93 @@ branch and open a PR against it. There is no automated backport workflow.
 
 ## Releases
 
-**No production release workflow exists yet.** Publishing a signed GA artifact to
-Maven Central requires several things this fork has not yet set up:
+Releases go to Maven Central through the [Central Publisher
+Portal](https://central.sonatype.org/publish/publish-portal-api/). The Portal
+replaced the retired OSSRH staging repositories: instead of pushing artifacts one
+by one to a staging Nexus, a release is a single zip whose contents follow the
+Maven repository layout, uploaded in one request and then released from the Portal
+UI.
 
-- a Maven Central (Sonatype) namespace grant for the `software.amazon.opensearch`
-  group ID, and a dedicated, non-admin publishing token;
-- a PGP signing key generated for this project, with the private key and
-  passphrase stored in a team-owned secret store (AWS Secrets Manager or a
-  protected GitHub Actions environment) readable only by the release job;
-- a release workflow that runs only from CI, signs the artifacts, and publishes
-  from a protected environment.
+### Build mechanics
 
-The Gradle `signing` block in `java-client/build.gradle.kts` is already wired for
-this (it activates only when a signing key is supplied), but the key, the token,
-and the release workflow are pending. When they are in place, this section will
-document the tag-to-release steps.
+Two Gradle tasks implement this, both in `java-client/build.gradle.kts`:
 
-The [release-drafter workflow](.github/workflows/release-drafter.yml) drafts
-GitHub release notes from merged PRs; it drafts notes only and does not publish
-artifacts.
+- `:java-client:centralBundle` publishes the release into `build/repository` via
+  the `localRepo` target, then zips it to
+  `java-client/build/central-bundle.zip`. It refuses to run for `-SNAPSHOT`
+  versions, wipes `build/repository` first so stale artifacts cannot leak into a
+  bundle, and excludes `maven-metadata.xml` (the Portal derives coordinates from
+  the directory layout and rejects repository-level metadata).
+- `:java-client:publishToCentralPortal` uploads that bundle. It defaults to
+  `publishingType=USER_MANAGED`, so the deployment waits in the Portal for a
+  maintainer to release it rather than going live automatically. Pass
+  `-PcentralPublishingType=AUTOMATIC` to skip that gate — note this cannot be
+  undone, since Maven Central does not allow deleting a published version.
+
+Use `:java-client:checkCentralPortalStatus -PdeploymentId=<id>` to poll a
+deployment.
+
+### Required credentials
+
+| Purpose | Gradle property | Environment variable | GitHub secret |
+| --- | --- | --- | --- |
+| Portal user token name | `centralPortalUsername` | `CENTRAL_PORTAL_USERNAME` | `CENTRAL_PORTAL_USERNAME` |
+| Portal user token secret | `centralPortalToken` | `CENTRAL_PORTAL_TOKEN` | `CENTRAL_PORTAL_TOKEN` |
+| PGP private key (ASCII-armored) | `signingKey` | `ORG_GRADLE_PROJECT_signingKey` | `MAVEN_CENTRAL_SIGNING_KEY` |
+| PGP key passphrase | `signingPassword` | `ORG_GRADLE_PROJECT_signingPassword` | `MAVEN_CENTRAL_SIGNING_PASSWORD` |
+
+The four GitHub secrets belong to a **`maven-central` environment**, not to the
+repository as a whole, so only the gated release job can read them. Configure it
+under Settings → Environments:
+
+- name: `maven-central`
+- required reviewers: `@aws/amazon-opensearch-clients`
+- environment secrets: the four above
+
+The release job declares `environment: maven-central`, so GitHub pauses the run
+for a reviewer from that team before any step executes. GitHub resolves team
+membership itself, which an in-workflow approval action cannot do with the
+default `GITHUB_TOKEN`.
+
+Generate the user token from the "Account" page in the Portal. The signing key's
+**public** half must be published to a keyserver the Portal checks
+(`keyserver.ubuntu.com` or `keys.openpgp.org`) or validation fails with an
+unverifiable signature.
+
+Store the private key and passphrase in a team-owned secret store — never on a
+developer machine and never in a personal account. The `signing` block activates
+only when a key is supplied, so local builds stay unsigned and credential-free.
+
+### Cutting a release
+
+1. Land the version and CHANGELOG changes per [Versioning](#versioning).
+2. Tag the release commit and push the tag. The tag must match
+   `systemProp.version` (with or without a leading `v`); the
+   [release-drafter workflow](.github/workflows/release-drafter.yml) fails fast
+   otherwise. It then waits for a reviewer from
+   `@aws/amazon-opensearch-clients`, runs the unit tests, builds and signs the
+   bundle, uploads it to the Portal, and drafts a GitHub release with that exact
+   archive and its SHA-256 attached.
+3. Once the deployment reports `VALIDATED` at
+   <https://central.sonatype.com/publishing/deployments>, release it from the
+   Portal UI.
+4. Publish the draft GitHub release.
+
+Artifacts appear on `repo1.maven.org` within minutes of release, but search
+indexes can lag by up to a few hours.
+
+### Verifying a bundle locally
+
+A bundle can be built and inspected without any Portal credentials:
+
+```
+VERSION=0.1.0 ./gradlew :java-client:centralBundle
+unzip -l java-client/build/central-bundle.zip
+```
+
+The result must contain the main, `-sources`, and `-javadoc` JARs plus the POM,
+each with `.asc`, `.md5`, and `.sha1` companions. Signatures only appear when a
+signing key is supplied.
 
 ## CHANGELOG entries
 
