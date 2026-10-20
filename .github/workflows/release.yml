@@ -77,8 +77,11 @@ jobs:
           # Fetched here rather than written to $GITHUB_ENV: values placed there are
           # readable by every later step and are not masked in logs. add-mask covers
           # the case of a dependency echoing one back.
-          get() { aws secretsmanager get-secret-value --secret-id "$1" \
-                    --query SecretString --output text; }
+          # `--output text` would be simpler, but it is lossy for the armored private
+          # key: it can drop the trailing newline and mangles embedded tabs. Going
+          # through JSON keeps the value byte-exact.
+          get() { aws secretsmanager get-secret-value --secret-id "$1" --output json \
+                    | jq -re .SecretString; }
 
           ORG_GRADLE_PROJECT_signingKey=$(get opensearch-java/release/gpg-signing-key)
           ORG_GRADLE_PROJECT_signingPassword=$(get opensearch-java/release/gpg-passphrase)
