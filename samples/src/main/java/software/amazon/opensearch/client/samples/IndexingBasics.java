@@ -17,6 +17,8 @@ package software.amazon.opensearch.client.samples;
 import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.amazon.opensearch.client.aos.OpenSearchClient;
+import software.amazon.opensearch.client.aos._types.OpenSearchVersionInfo;
 import software.amazon.opensearch.client.aos._types.mapping.DynamicMapping;
 import software.amazon.opensearch.client.aos._types.mapping.FieldNamesField;
 import software.amazon.opensearch.client.aos._types.mapping.IntegerNumberProperty;
@@ -26,6 +28,7 @@ import software.amazon.opensearch.client.aos._types.mapping.SourceField;
 import software.amazon.opensearch.client.aos._types.mapping.TypeMapping;
 import software.amazon.opensearch.client.aos.core.IndexRequest;
 import software.amazon.opensearch.client.aos.core.SearchResponse;
+import software.amazon.opensearch.client.aos.core.search.Hit;
 import software.amazon.opensearch.client.aos.indices.CreateIndexRequest;
 import software.amazon.opensearch.client.aos.indices.DeleteIndexRequest;
 import software.amazon.opensearch.client.aos.indices.GetMappingRequest;
@@ -43,12 +46,12 @@ public class IndexingBasics {
 
     public static void main(String[] args) {
         try {
-            var client = SampleClient.create();
+            OpenSearchClient client = SampleClient.create();
 
-            var version = client.info().version();
+            OpenSearchVersionInfo version = client.info().version();
             LOGGER.info("Server: {}@{}", version.distribution(), version.number());
 
-            final var indexName = "my-index";
+            final String indexName = "my-index";
 
             if (!client.indices().exists(r -> r.index(indexName)).value()) {
                 LOGGER.info("Creating index {}", indexName);
@@ -80,7 +83,7 @@ public class IndexingBasics {
             Thread.sleep(3000);
 
             SearchResponse<IndexData> searchResponse = client.search(s -> s.index(indexName), IndexData.class);
-            for (var hit : searchResponse.hits().hits()) {
+            for (Hit<IndexData> hit : searchResponse.hits().hits()) {
                 LOGGER.info("Found {} with score {}", hit.source(), hit.score());
             }
 

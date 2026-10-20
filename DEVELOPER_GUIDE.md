@@ -58,7 +58,8 @@ The build runs on JDK 21 or newer, while the generated Java client targets Java 
 
 ## Samples
 
-Samples require JDK 21 or newer and are compiled and checked in the build CI matrix.
+Samples target Java 8 and use the Jackson 2 mapper. Gradle requires JDK 21 or newer;
+the build CI matrix compiles the samples with `--release 8` and checks their formatting.
 See [samples/README.md](samples/README.md) for connection settings and AOS/AOSS run commands.
 
 ## Real-resource tests

@@ -14,6 +14,7 @@
  */
 package software.amazon.opensearch.client.samples;
 
+import jakarta.json.JsonObject;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.amazon.opensearch.client.aos.OpenSearchClient;
 import software.amazon.opensearch.client.aos._types.FieldValue;
+import software.amazon.opensearch.client.aos._types.OpenSearchVersionInfo;
 import software.amazon.opensearch.client.aos._types.Refresh;
 import software.amazon.opensearch.client.aos._types.SortOrder;
 import software.amazon.opensearch.client.aos._types.aggregations.Aggregate;
@@ -44,6 +46,7 @@ import software.amazon.opensearch.client.aos.core.SearchResponse;
 import software.amazon.opensearch.client.aos.core.search.CompletionSuggester;
 import software.amazon.opensearch.client.aos.core.search.FieldSuggester;
 import software.amazon.opensearch.client.aos.core.search.FieldSuggesterBuilders;
+import software.amazon.opensearch.client.aos.core.search.Hit;
 import software.amazon.opensearch.client.aos.core.search.PhraseSuggester;
 import software.amazon.opensearch.client.aos.core.search.Suggester;
 import software.amazon.opensearch.client.aos.core.search.TermSuggester;
@@ -66,10 +69,10 @@ public class Search {
         try {
             client = SampleClient.create();
 
-            var version = client.info().version();
+            OpenSearchVersionInfo version = client.info().version();
             LOGGER.info("Server: {}@{}", version.distribution(), version.number());
 
-            final var indexName = "my-index";
+            final String indexName = "my-index";
 
             if (!client.indices().exists(r -> r.index(indexName)).value()) {
                 LOGGER.info("Creating index {}", indexName);
@@ -93,7 +96,7 @@ public class Search {
             Thread.sleep(3000);
 
             SearchResponse<IndexData> searchResponse = client.search(s -> s.index(indexName), IndexData.class);
-            for (var hit : searchResponse.hits().hits()) {
+            for (Hit<IndexData> hit : searchResponse.hits().hits()) {
                 LOGGER.info("Found {} with score {}", hit.source(), hit.score());
             }
 
@@ -102,7 +105,7 @@ public class Search {
             ).build();
 
             searchResponse = client.search(searchRequest, IndexData.class);
-            for (var hit : searchResponse.hits().hits()) {
+            for (Hit<IndexData> hit : searchResponse.hits().hits()) {
                 LOGGER.info("Found {} with score {}", hit.source(), hit.score());
             }
 
@@ -114,7 +117,7 @@ public class Search {
             for (Map.Entry<String, Aggregate> entry : searchResponse.aggregations().entrySet()) {
                 LOGGER.info("Agg - {}", entry.getKey());
                 entry.getValue().sterms().buckets().array().forEach(b -> {
-                    var bucket = b.toJson().asJsonObject();
+                    JsonObject bucket = b.toJson().asJsonObject();
                     LOGGER.info("{} : {}", bucket.getString("key"), bucket.getJsonNumber("doc_count").longValue());
                 });
             }
@@ -150,7 +153,7 @@ public class Search {
             );
             searchRequest = new SearchRequest.Builder().query(searchQuery).build();
             searchResponse = client.search(searchRequest, IndexData.class);
-            for (var hit : searchResponse.hits().hits()) {
+            for (Hit<IndexData> hit : searchResponse.hits().hits()) {
                 LOGGER.info("Found {} with score {}", hit.source(), hit.score());
             }
 
@@ -168,7 +171,7 @@ public class Search {
 
     public static void searchWithCompletionSuggester() {
         try {
-            var index = "completion-suggester";
+            String index = "completion-suggester";
             Property intValueProp = new Property.Builder().long_(v -> v).build();
             Property msgCompletionProp = new Property.Builder().completion(c -> c).build();
             client.indices()

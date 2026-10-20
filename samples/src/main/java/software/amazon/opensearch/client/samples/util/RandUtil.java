@@ -23,16 +23,16 @@ public class RandUtil {
     }
 
     public static float[] rand2SfArray(int n) {
-        var arr = new float[n];
-        for (var i = 0; i < n; ++i) {
+        float[] arr = new float[n];
+        for (int i = 0; i < n; ++i) {
             arr[i] = rand2Sf();
         }
         return arr;
     }
 
     public static List<Float> rand2SfList(int n) {
-        var arr = new ArrayList<Float>(n);
-        for (var i = 0; i < n; ++i) {
+        ArrayList<Float> arr = new ArrayList<Float>(n);
+        for (int i = 0; i < n; ++i) {
             arr.add(rand2Sf());
         }
         return arr;

@@ -246,7 +246,8 @@ public class AwsSdk2Transport implements OpenSearchTransport {
         this.signingServiceName = signingServiceName;
         this.signingRegion = signingRegion;
         this.transportOptions = options != null ? options : AwsSdk2TransportOptions.builder().build();
-        this.defaultMapper = Optional.ofNullable(options).map(AwsSdk2TransportOptions::mapper).orElseGet(JacksonJsonpMapper::new);
+        JsonpMapper mapper = this.transportOptions.mapper();
+        this.defaultMapper = mapper != null ? mapper : new JacksonJsonpMapper();
     }
 
     static String normalizeHost(String host) {

@@ -21,22 +21,33 @@ import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.amazon.opensearch.client.aos.OpenSearchClient;
+import software.amazon.opensearch.client.aos._types.OpenSearchVersionInfo;
 import software.amazon.opensearch.client.aos._types.Refresh;
 import software.amazon.opensearch.client.aos._types.query_dsl.NeuralQuery;
 import software.amazon.opensearch.client.aos._types.query_dsl.Query;
+import software.amazon.opensearch.client.aos.core.BulkResponse;
 import software.amazon.opensearch.client.aos.core.SearchRequest;
+import software.amazon.opensearch.client.aos.core.SearchResponse;
 import software.amazon.opensearch.client.aos.core.bulk.BulkOperation;
+import software.amazon.opensearch.client.aos.core.search.Hit;
 import software.amazon.opensearch.client.aos.ingest.Processor;
 import software.amazon.opensearch.client.aos.ingest.PutPipelineRequest;
 import software.amazon.opensearch.client.aos.ingest.TextEmbeddingProcessor;
 import software.amazon.opensearch.client.aos.ml.DeleteModelGroupRequest;
+import software.amazon.opensearch.client.aos.ml.DeleteModelGroupResponse;
 import software.amazon.opensearch.client.aos.ml.DeleteModelRequest;
+import software.amazon.opensearch.client.aos.ml.DeleteModelResponse;
 import software.amazon.opensearch.client.aos.ml.DeleteTaskRequest;
+import software.amazon.opensearch.client.aos.ml.DeleteTaskResponse;
 import software.amazon.opensearch.client.aos.ml.DeployModelRequest;
+import software.amazon.opensearch.client.aos.ml.DeployModelResponse;
 import software.amazon.opensearch.client.aos.ml.GetTaskRequest;
+import software.amazon.opensearch.client.aos.ml.GetTaskResponse;
 import software.amazon.opensearch.client.aos.ml.ModelFormat;
 import software.amazon.opensearch.client.aos.ml.ModelGroupAccessMode;
+import software.amazon.opensearch.client.aos.ml.RegisterModelGroupResponse;
 import software.amazon.opensearch.client.aos.ml.RegisterModelRequest;
+import software.amazon.opensearch.client.aos.ml.RegisterModelResponse;
 import software.amazon.opensearch.client.aos.ml.UndeployModelRequest;
 import software.amazon.opensearch.client.errors.OpenSearchException;
 import software.amazon.opensearch.client.json.JsonData;
@@ -66,7 +77,7 @@ public class NeuralSearch {
         try {
             client = SampleClient.create();
 
-            var version = client.info().version();
+            OpenSearchVersionInfo version = client.info().version();
             LOGGER.info("Server: {}@{}", version.distribution(), version.number());
 
             LOGGER.info("Temporarily configuring the cluster to allow local running of the ML model");
@@ -78,7 +89,7 @@ public class NeuralSearch {
                 );
 
             LOGGER.info("Registering ML model group");
-            var groupRegistration = client.ml()
+            RegisterModelGroupResponse groupRegistration = client.ml()
                 .registerModelGroup(
                     r -> r.name(ML_MODEL_GROUP_NAME)
                         .description("A model group for the opensearch-java " + SAMPLE_NAME + " sample")
@@ -91,7 +102,7 @@ public class NeuralSearch {
             LOGGER.info("ML model group `{}` id: {}", ML_MODEL_GROUP_NAME, modelGroupId);
 
             LOGGER.info("Registering ML model");
-            var modelRegistration = client.ml()
+            RegisterModelResponse modelRegistration = client.ml()
                 .registerModel(
                     new RegisterModelRequest.Builder().name("huggingface/sentence-transformers/msmarco-distilbert-base-tas-b")
                         .version("1.0.1")
@@ -107,7 +118,8 @@ public class NeuralSearch {
 
             LOGGER.info("Waiting for ML model registration to complete");
             registerWait: while (true) {
-                var modelRegistrationTask = client.ml().getTask(new GetTaskRequest.Builder().taskId(modelRegistrationTaskId).build());
+                GetTaskResponse modelRegistrationTask = client.ml()
+                    .getTask(new GetTaskRequest.Builder().taskId(modelRegistrationTaskId).build());
                 LOGGER.info("ML model registration: {}", modelRegistrationTask.state());
                 switch (modelRegistrationTask.state()) {
                     case Completed:
@@ -123,7 +135,7 @@ public class NeuralSearch {
             LOGGER.info("ML model registered: {}", modelId);
 
             LOGGER.info("Deploying ML model");
-            var modelDeploy = client.ml().deployModel(new DeployModelRequest.Builder().modelId(modelId).build());
+            DeployModelResponse modelDeploy = client.ml().deployModel(new DeployModelRequest.Builder().modelId(modelId).build());
             if (!"CREATED".equals(modelDeploy.status())) throw new Exception(
                 "Expected ML model deploy task to be CREATED, was: " + modelDeploy.status()
             );
@@ -132,7 +144,7 @@ public class NeuralSearch {
 
             LOGGER.info("Waiting for ML model deployment to complete");
             deployWait: while (true) {
-                var modelDeployTask = client.ml().getTask(new GetTaskRequest.Builder().taskId(modelDeployTaskId).build());
+                GetTaskResponse modelDeployTask = client.ml().getTask(new GetTaskRequest.Builder().taskId(modelDeployTaskId).build());
                 LOGGER.info("ML model deployment: {}", modelDeployTask.state());
                 switch (modelDeployTask.state()) {
                     case Completed:
@@ -181,7 +193,7 @@ public class NeuralSearch {
             LOGGER.info("Created index");
 
             LOGGER.info("Indexing documents");
-            var documents = new NeuralSearchDoc[] {
+            NeuralSearchDoc[] documents = new NeuralSearchDoc[] {
                 new NeuralSearchDoc(
                     "4319130149.jpg",
                     "A West Virginia university women 's basketball team , officials , and a small gathering of fans are in a West Virginia arena ."
@@ -196,7 +208,7 @@ public class NeuralSearch {
                     "2691147709.jpg",
                     "A rodeo cowboy , wearing a cowboy hat , is being thrown off of a wild white horse ."
                 ) };
-            var bulk = client.bulk(
+            BulkResponse bulk = client.bulk(
                 b -> b.index(INDEX_NAME)
                     .operations(
                         Arrays.stream(documents)
@@ -208,7 +220,7 @@ public class NeuralSearch {
             LOGGER.info("Indexed {} documents", bulk.items().stream().filter(i -> i.error() == null).count());
 
             LOGGER.info("Performing neural search for text 'wild west'");
-            var search = client.search(
+            SearchResponse<NeuralSearchDoc> search = client.search(
                 new SearchRequest.Builder().index(INDEX_NAME)
                     .source(sc -> sc.filter(sf -> sf.excludes("passageEmbedding")))
                     .query(
@@ -220,7 +232,7 @@ public class NeuralSearch {
                 NeuralSearchDoc.class
             );
             LOGGER.info("Found {} documents", search.hits().hits().size());
-            for (var hit : search.hits().hits()) {
+            for (Hit<NeuralSearchDoc> hit : search.hits().hits()) {
                 LOGGER.info(
                     "- Document id: {}, score: {}, text: {}",
                     hit.id(),
@@ -252,7 +264,8 @@ public class NeuralSearch {
             if (modelDeployTaskId != null) {
                 try {
                     LOGGER.info("Deleting ML model deploy task: {}", modelDeployTaskId);
-                    var taskDeleted = client.ml().deleteTask(new DeleteTaskRequest.Builder().taskId(modelDeployTaskId).build());
+                    DeleteTaskResponse taskDeleted = client.ml()
+                        .deleteTask(new DeleteTaskRequest.Builder().taskId(modelDeployTaskId).build());
                     LOGGER.info("Deleted ML model deploy task: {}", taskDeleted.result());
                 } catch (Exception ignored) {}
             }
@@ -261,11 +274,12 @@ public class NeuralSearch {
                 while (true) {
                     try {
                         LOGGER.info("Deleting ML model: {}", modelId);
-                        var modelDeleted = client.ml().deleteModel(new DeleteModelRequest.Builder().modelId(modelId).build());
+                        DeleteModelResponse modelDeleted = client.ml()
+                            .deleteModel(new DeleteModelRequest.Builder().modelId(modelId).build());
                         LOGGER.info("Deleted ML model: {}", modelDeleted.result());
                         break;
                     } catch (OpenSearchException ex) {
-                        var reason = ex.error() != null ? ex.error().reason() : null;
+                        String reason = ex.error() != null ? ex.error().reason() : null;
 
                         if (reason == null || !reason.contains("Try undeploy")) break;
 
@@ -286,7 +300,8 @@ public class NeuralSearch {
             if (modelRegistrationTaskId != null) {
                 try {
                     LOGGER.info("Deleting ML model registration task: {}", modelRegistrationTaskId);
-                    var taskDeleted = client.ml().deleteTask(new DeleteTaskRequest.Builder().taskId(modelRegistrationTaskId).build());
+                    DeleteTaskResponse taskDeleted = client.ml()
+                        .deleteTask(new DeleteTaskRequest.Builder().taskId(modelRegistrationTaskId).build());
                     LOGGER.info("Deleted ML model registration task: {}", taskDeleted.result());
                 } catch (Exception ignored) {}
             }
@@ -294,7 +309,7 @@ public class NeuralSearch {
             if (modelGroupId != null) {
                 try {
                     LOGGER.info("Deleting ML model group: {}", modelGroupId);
-                    var groupDeleted = client.ml()
+                    DeleteModelGroupResponse groupDeleted = client.ml()
                         .deleteModelGroup(new DeleteModelGroupRequest.Builder().modelGroupId(modelGroupId).build());
                     LOGGER.info("Deleted ML model group: {}", groupDeleted.result());
                 } catch (Exception ignored) {}

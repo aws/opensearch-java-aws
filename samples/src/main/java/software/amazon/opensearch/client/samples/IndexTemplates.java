@@ -14,9 +14,10 @@
  */
 package software.amazon.opensearch.client.samples;
 
-import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.amazon.opensearch.client.aos.OpenSearchClient;
+import software.amazon.opensearch.client.aos._types.OpenSearchVersionInfo;
 import software.amazon.opensearch.client.aos.cluster.PutComponentTemplateRequest;
 import software.amazon.opensearch.client.aos.indices.CreateIndexRequest;
 import software.amazon.opensearch.client.aos.indices.DeleteIndexRequest;
@@ -35,11 +36,11 @@ public class IndexTemplates {
 
     public static void main(String[] args) {
         try {
-            var client = SampleClient.create();
-            var version = client.info().version();
+            OpenSearchClient client = SampleClient.create();
+            OpenSearchVersionInfo version = client.info().version();
             LOGGER.info("Server: {}@{}", version.distribution(), version.number());
 
-            final var indexTemplateName = "my-index-template";
+            final String indexTemplateName = "my-index-template";
 
             if (client.indices().existsIndexTemplate(t -> t.name(indexTemplateName)).value()) {
                 DeleteIndexTemplateRequest deleteIndexTemplateRequest = DeleteIndexTemplateRequest.of(i -> i.name(indexTemplateName));
@@ -48,7 +49,7 @@ public class IndexTemplates {
             }
 
             // Create an index template composed of two component templates, one for index settings, and one for mappings
-            final var indexSettingsComponentTemplate = "index-settings";
+            final String indexSettingsComponentTemplate = "index-settings";
             PutComponentTemplateRequest putComponentTemplateRequest = PutComponentTemplateRequest.of(
                 c -> c.name(indexSettingsComponentTemplate)
                     .template(
@@ -71,7 +72,7 @@ public class IndexTemplates {
             LOGGER.info("Creating component template {}", indexSettingsComponentTemplate);
             client.cluster().putComponentTemplate(putComponentTemplateRequest);
 
-            final var indexMappingsComponentTemplate = "index-mappings";
+            final String indexMappingsComponentTemplate = "index-mappings";
             putComponentTemplateRequest = PutComponentTemplateRequest.of(
                 c -> c.name(indexMappingsComponentTemplate).template(t -> t.mappings(m -> m.properties("age", p -> p.integer(i -> i))))
             );
@@ -81,13 +82,13 @@ public class IndexTemplates {
             PutIndexTemplateRequest putIndexTemplateRequest = PutIndexTemplateRequest.of(
                 it -> it.name(indexTemplateName)
                     .indexPatterns("my-index-*")
-                    .composedOf(List.of(indexSettingsComponentTemplate, indexMappingsComponentTemplate))
+                    .composedOf(indexSettingsComponentTemplate, indexMappingsComponentTemplate)
             );
 
             LOGGER.info("Creating index template {}", indexTemplateName);
             client.indices().putIndexTemplate(putIndexTemplateRequest);
 
-            final var indexName = "my-index-1";
+            final String indexName = "my-index-1";
             if (client.indices().exists(r -> r.index(indexName)).value()) {
                 LOGGER.info("Deleting index {}", indexName);
                 client.indices().delete(DeleteIndexRequest.of(d -> d.index(indexName)));

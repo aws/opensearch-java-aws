@@ -14,6 +14,7 @@
  */
 package software.amazon.opensearch.client.samples;
 
+import java.lang.reflect.Method;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,21 +22,21 @@ public class Main {
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
-        var mainClass = System.getProperty("samples.mainClass");
+        String mainClass = System.getProperty("samples.mainClass");
         if (mainClass == null || mainClass.isEmpty()) {
             LOGGER.error("Please specify the main class to run with -Dsamples.mainClass=<main class>");
             System.exit(1);
         }
 
-        if (!mainClass.startsWith(Main.class.getPackageName() + ".")) {
-            mainClass = Main.class.getPackageName() + "." + mainClass;
+        if (!mainClass.startsWith(Main.class.getPackage().getName() + ".")) {
+            mainClass = Main.class.getPackage().getName() + "." + mainClass;
         }
 
         LOGGER.info("Running main class: {}", mainClass);
 
         try {
-            final var clazz = Class.forName(mainClass);
-            final var mainMethod = clazz.getMethod("main", String[].class);
+            final Class<?> clazz = Class.forName(mainClass);
+            final Method mainMethod = clazz.getMethod("main", String[].class);
             mainMethod.invoke(null, (Object) args);
         } catch (Exception e) {
             LOGGER.error("Failed to run main class", e);

@@ -16,6 +16,8 @@ package software.amazon.opensearch.client.samples;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.amazon.opensearch.client.aos.OpenSearchClient;
+import software.amazon.opensearch.client.aos._types.OpenSearchVersionInfo;
 import software.amazon.opensearch.client.aos.indices.CreateDataStreamRequest;
 import software.amazon.opensearch.client.aos.indices.DataStreamsStatsRequest;
 import software.amazon.opensearch.client.aos.indices.DataStreamsStatsResponse;
@@ -32,9 +34,9 @@ public class DataStreamBasics {
 
     public static void main(String[] args) {
         try {
-            var client = SampleClient.create();
+            OpenSearchClient client = SampleClient.create();
 
-            var version = client.info().version();
+            OpenSearchVersionInfo version = client.info().version();
             LOGGER.info("Server: {}@{}", version.distribution(), version.number());
 
             String dataStreamIndexTemplateName = "sample-data-stream-template";

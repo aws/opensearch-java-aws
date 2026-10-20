@@ -15,9 +15,10 @@
 package software.amazon.opensearch.client.samples;
 
 import java.util.ArrayList;
-import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.amazon.opensearch.client.aos.OpenSearchClient;
+import software.amazon.opensearch.client.aos._types.OpenSearchVersionInfo;
 import software.amazon.opensearch.client.aos._types.Refresh;
 import software.amazon.opensearch.client.aos._types.mapping.IntegerNumberProperty;
 import software.amazon.opensearch.client.aos._types.mapping.Property;
@@ -42,12 +43,12 @@ public class Bulk {
 
     public static void main(String[] args) {
         try {
-            var client = SampleClient.create();
+            OpenSearchClient client = SampleClient.create();
 
-            var version = client.info().version();
+            OpenSearchVersionInfo version = client.info().version();
             LOGGER.info("Server: {}@{}", version.distribution(), version.number());
 
-            final var indexName = "my-index";
+            final String indexName = "my-index";
 
             if (!client.indices().exists(r -> r.index(indexName)).value()) {
                 LOGGER.info("Creating index {}", indexName);
@@ -78,7 +79,7 @@ public class Bulk {
 
             Query query = Query.of(qb -> qb.match(mb -> mb.field("title").query(fv -> fv.stringValue("Document"))));
             final SearchRequest.Builder searchReq = new SearchRequest.Builder().allowPartialSearchResults(false)
-                .index(List.of(indexName))
+                .index(indexName)
                 .size(10)
                 .source(sc -> sc.fetch(false))
                 .ignoreThrottled(false)

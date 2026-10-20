@@ -1,7 +1,8 @@
 # AWS OpenSearch Java client samples
 
 The samples use the client JAR built by this repository, including its shared
-runtime and generated AOS and AOSS classes. JDK 21 or newer is required.
+runtime and generated AOS and AOSS classes. Sample sources and bytecode target
+Java 8 and use the Jackson 2 mapper. JDK 21 or newer is required to run Gradle.
 
 ```sh
 ./gradlew :samples:build

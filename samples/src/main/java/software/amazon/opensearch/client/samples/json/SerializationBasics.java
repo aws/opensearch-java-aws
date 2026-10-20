@@ -14,10 +14,10 @@
  */
 package software.amazon.opensearch.client.samples.json;
 
-import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.amazon.opensearch.client.aos.OpenSearchClient;
+import software.amazon.opensearch.client.aos._types.OpenSearchVersionInfo;
 import software.amazon.opensearch.client.aos.indices.PutIndexTemplateRequest;
 import software.amazon.opensearch.client.aos.indices.PutIndexTemplateResponse;
 import software.amazon.opensearch.client.samples.SampleClient;
@@ -33,18 +33,18 @@ public class SerializationBasics {
         try {
             client = SampleClient.create();
 
-            var version = client.info().version();
+            OpenSearchVersionInfo version = client.info().version();
             LOGGER.info("Server: {}@{}.", version.distribution(), version.number());
 
-            final var indexTemplateName = "my-index";
-            final var indexSettingsComponentTemplate = "index-settings";
-            final var indexMappingsComponentTemplate = "index-mappings";
+            final String indexTemplateName = "my-index";
+            final String indexSettingsComponentTemplate = "index-settings";
+            final String indexMappingsComponentTemplate = "index-mappings";
 
             // Create Index Template Request for index 'my-index'.
             PutIndexTemplateRequest putIndexTemplateRequest = PutIndexTemplateRequest.of(
                 it -> it.name(indexTemplateName)
                     .indexPatterns("my-index-*")
-                    .composedOf(List.of(indexSettingsComponentTemplate, indexMappingsComponentTemplate))
+                    .composedOf(indexSettingsComponentTemplate, indexMappingsComponentTemplate)
             );
 
             LOGGER.info("Creating index template {}.", indexTemplateName);

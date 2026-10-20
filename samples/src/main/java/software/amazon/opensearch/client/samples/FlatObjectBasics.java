@@ -14,15 +14,18 @@
  */
 package software.amazon.opensearch.client.samples;
 
-import java.util.List;
+import java.util.Arrays;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.amazon.opensearch.client.aos.OpenSearchClient;
 import software.amazon.opensearch.client.aos._types.FieldValue;
+import software.amazon.opensearch.client.aos._types.OpenSearchVersionInfo;
 import software.amazon.opensearch.client.aos._types.mapping.FlatObjectProperty;
 import software.amazon.opensearch.client.aos._types.mapping.Property;
 import software.amazon.opensearch.client.aos.core.IndexRequest;
 import software.amazon.opensearch.client.aos.core.SearchRequest;
 import software.amazon.opensearch.client.aos.core.SearchResponse;
+import software.amazon.opensearch.client.aos.core.search.Hit;
 import software.amazon.opensearch.client.aos.indices.CreateIndexRequest;
 import software.amazon.opensearch.client.samples.util.IssueDocument;
 
@@ -31,12 +34,12 @@ public class FlatObjectBasics {
 
     public static void main(String[] args) {
         try {
-            var client = SampleClient.create();
+            OpenSearchClient client = SampleClient.create();
 
-            var version = client.info().version();
+            OpenSearchVersionInfo version = client.info().version();
             LOGGER.info("Server: {}@{}", version.distribution(), version.number());
 
-            final var indexName = "flat_object-sample";
+            final String indexName = "flat_object-sample";
 
             // Create a new index with an "issue" field with flat_object type
             if (!client.indices().exists(e -> e.index(indexName)).value()) {
@@ -51,7 +54,7 @@ public class FlatObjectBasics {
             final IssueDocument.Issue issue = new IssueDocument.Issue();
             issue.setNumber("123456");
             final IssueDocument.Labels labels = new IssueDocument.Labels();
-            labels.setBackport(List.of("1.3", "2.0"));
+            labels.setBackport(Arrays.asList("1.3", "2.0"));
             labels.setVersion("2.1");
             final IssueDocument.Category category = new IssueDocument.Category();
             category.setType("API");
@@ -104,7 +107,7 @@ public class FlatObjectBasics {
                 .build();
 
             SearchResponse<IssueDocument> searchResponse = client.search(searchRequest, IssueDocument.class);
-            for (var hit : searchResponse.hits().hits()) {
+            for (Hit<IssueDocument> hit : searchResponse.hits().hits()) {
                 LOGGER.info("Found {} with score {}", hit.source(), hit.score());
             }
 
@@ -114,7 +117,7 @@ public class FlatObjectBasics {
                 .build();
 
             SearchResponse<IssueDocument> searchResponse2 = client.search(searchRequest2, IssueDocument.class);
-            for (var hit : searchResponse2.hits().hits()) {
+            for (Hit<IssueDocument> hit : searchResponse2.hits().hits()) {
                 LOGGER.info("Found {} with score {}", hit.source(), hit.score());
             }
 

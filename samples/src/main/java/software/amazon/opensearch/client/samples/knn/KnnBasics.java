@@ -15,9 +15,14 @@
 package software.amazon.opensearch.client.samples.knn;
 
 import java.util.Arrays;
+import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.amazon.opensearch.client.aos.OpenSearchClient;
+import software.amazon.opensearch.client.aos._types.OpenSearchVersionInfo;
 import software.amazon.opensearch.client.aos.core.BulkRequest;
+import software.amazon.opensearch.client.aos.core.SearchResponse;
+import software.amazon.opensearch.client.aos.core.search.Hit;
 import software.amazon.opensearch.client.samples.SampleClient;
 import software.amazon.opensearch.client.samples.util.RandUtil;
 
@@ -29,13 +34,13 @@ public class KnnBasics {
 
     public static void main(String[] args) {
         try {
-            var client = SampleClient.create();
+            OpenSearchClient client = SampleClient.create();
 
-            var version = client.info().version();
+            OpenSearchVersionInfo version = client.info().version();
             LOGGER.info("Server: {}@{}", version.distribution(), version.number());
 
-            final var indexName = "my-index";
-            final var dimensions = 5;
+            final String indexName = "my-index";
+            final int dimensions = 5;
 
             if (!client.indices().exists(r -> r.index(indexName)).value()) {
                 LOGGER.info("Creating index {}", indexName);
@@ -47,11 +52,11 @@ public class KnnBasics {
                     );
             }
 
-            final var nVectors = 10;
-            var bulkRequest = new BulkRequest.Builder();
-            for (var i = 0; i < nVectors; ++i) {
-                var id = Integer.toString(i);
-                var doc = Doc.rand(dimensions);
+            final int nVectors = 10;
+            BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
+            for (int i = 0; i < nVectors; ++i) {
+                String id = Integer.toString(i);
+                Doc doc = Doc.rand(dimensions);
                 bulkRequest.operations(b -> b.index(o -> o.index(indexName).id(id).document(doc)));
             }
 
@@ -61,15 +66,15 @@ public class KnnBasics {
             LOGGER.info("Waiting for indexing to finish");
             client.indices().refresh(i -> i.index(indexName));
 
-            final var searchVector = RandUtil.rand2SfList(dimensions);
+            final List<Float> searchVector = RandUtil.rand2SfList(dimensions);
             LOGGER.info("Searching for vector {}", searchVector);
 
-            var searchResponse = client.search(
+            SearchResponse<Doc> searchResponse = client.search(
                 s -> s.index(indexName).query(q -> q.knn(k -> k.field("values").vector(searchVector).k(3))),
                 Doc.class
             );
 
-            for (var hit : searchResponse.hits().hits()) {
+            for (Hit<Doc> hit : searchResponse.hits().hits()) {
                 LOGGER.info("Found {} with score {}", hit.source(), hit.score());
             }
 

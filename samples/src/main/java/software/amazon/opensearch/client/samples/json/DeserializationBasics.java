@@ -20,6 +20,7 @@ import java.nio.charset.StandardCharsets;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.amazon.opensearch.client.aos.OpenSearchClient;
+import software.amazon.opensearch.client.aos._types.OpenSearchVersionInfo;
 import software.amazon.opensearch.client.aos.indices.PutIndexTemplateRequest;
 import software.amazon.opensearch.client.aos.indices.PutIndexTemplateResponse;
 import software.amazon.opensearch.client.aos.indices.put_index_template.IndexTemplateMapping;
@@ -35,10 +36,10 @@ public class DeserializationBasics {
         try {
             client = SampleClient.create();
 
-            var version = client.info().version();
+            OpenSearchVersionInfo version = client.info().version();
             LOGGER.info("Server: {}@{}.", version.distribution(), version.number());
 
-            final var indexTemplateName = "my-index";
+            final String indexTemplateName = "my-index";
 
             // Use Json String/File for storing template.
             String stringTemplate =

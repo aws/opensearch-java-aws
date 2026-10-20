@@ -17,9 +17,13 @@ package software.amazon.opensearch.client.samples.knn;
 import java.util.Arrays;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.amazon.opensearch.client.aos.OpenSearchClient;
 import software.amazon.opensearch.client.aos._types.FieldValue;
+import software.amazon.opensearch.client.aos._types.OpenSearchVersionInfo;
 import software.amazon.opensearch.client.aos._types.query_dsl.Query;
 import software.amazon.opensearch.client.aos.core.BulkRequest;
+import software.amazon.opensearch.client.aos.core.SearchResponse;
+import software.amazon.opensearch.client.aos.core.search.Hit;
 import software.amazon.opensearch.client.json.JsonData;
 import software.amazon.opensearch.client.samples.SampleClient;
 
@@ -31,12 +35,12 @@ public class KnnEfficientFilter {
 
     public static void main(String[] args) {
         try {
-            var client = SampleClient.create();
+            OpenSearchClient client = SampleClient.create();
 
-            var version = client.info().version();
+            OpenSearchVersionInfo version = client.info().version();
             LOGGER.info("Server: {}@{}", version.distribution(), version.number());
 
-            final var indexName = "hotels-index";
+            final String indexName = "hotels-index";
 
             if (!client.indices().exists(r -> r.index(indexName)).value()) {
                 LOGGER.info("Creating index {}", indexName);
@@ -62,7 +66,7 @@ public class KnnEfficientFilter {
                     );
             }
 
-            final var hotels = new Hotel[] {
+            final Hotel[] hotels = new Hotel[] {
                 new Hotel(5.2f, 4.f, true, 5),
                 new Hotel(5.2f, 3.9f, false, 4),
                 new Hotel(4.9f, 3.4f, true, 9),
@@ -75,10 +79,10 @@ public class KnnEfficientFilter {
                 new Hotel(7.0f, 9.9f, true, 9),
                 new Hotel(3.0f, 2.3f, false, 6),
                 new Hotel(5.0f, 1.0f, true, 3), };
-            var bulkRequest = new BulkRequest.Builder();
-            for (var i = 0; i < hotels.length; ++i) {
-                final var id = Integer.toString(i + 1);
-                final var hotel = hotels[i];
+            BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
+            for (int i = 0; i < hotels.length; ++i) {
+                final String id = Integer.toString(i + 1);
+                final Hotel hotel = hotels[i];
                 LOGGER.info("Indexing hotel {} with id {}", hotel, id);
                 bulkRequest.operations(b -> b.index(o -> o.index(indexName).id(id).document(hotel)));
             }
@@ -89,11 +93,11 @@ public class KnnEfficientFilter {
             LOGGER.info("Waiting for indexing to finish");
             client.indices().refresh(i -> i.index(indexName));
 
-            final var searchLocationX = 5.0f;
-            final var searchLocationY = 4.0f;
-            final var searchRatingMin = 8;
-            final var searchRatingMax = 10;
-            final var searchParking = true;
+            final float searchLocationX = 5.0f;
+            final float searchLocationY = 4.0f;
+            final int searchRatingMin = 8;
+            final int searchRatingMax = 10;
+            final boolean searchParking = true;
             LOGGER.info(
                 "Searching for hotel near [{}, {}] with rating >={},<={} and parking={}",
                 searchLocationX,
@@ -103,7 +107,7 @@ public class KnnEfficientFilter {
                 searchParking
             );
 
-            var searchResponse = client.search(
+            SearchResponse<Hotel> searchResponse = client.search(
                 s -> s.index(indexName)
                     .size(3)
                     .query(
@@ -129,7 +133,7 @@ public class KnnEfficientFilter {
                 Hotel.class
             );
 
-            for (var hit : searchResponse.hits().hits()) {
+            for (Hit<Hotel> hit : searchResponse.hits().hits()) {
                 LOGGER.info("Found {} with score {}", hit.source(), hit.score());
             }
 

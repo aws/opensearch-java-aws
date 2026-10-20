@@ -17,46 +17,53 @@ package software.amazon.opensearch.client.samples;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
+import javax.net.ssl.SSLContext;
 import org.apache.hc.client5.http.auth.AuthScope;
 import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
 import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
+import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManager;
 import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManagerBuilder;
 import org.apache.hc.client5.http.ssl.ClientTlsStrategyBuilder;
 import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
 import org.apache.hc.core5.http.HttpHost;
+import org.apache.hc.core5.http.nio.ssl.TlsStrategy;
 import org.apache.hc.core5.ssl.SSLContextBuilder;
 import software.amazon.opensearch.client.aos.OpenSearchClient;
-import software.amazon.opensearch.client.json.jackson3.JacksonJsonpMapper;
+import software.amazon.opensearch.client.json.jackson.JacksonJsonpMapper;
+import software.amazon.opensearch.client.transport.httpclient5.ApacheHttpClient5Transport;
 import software.amazon.opensearch.client.transport.httpclient5.ApacheHttpClient5TransportBuilder;
 
 public class SampleClient {
     public static OpenSearchClient create() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-        var env = System.getenv();
-        var https = Boolean.parseBoolean(env.getOrDefault("HTTPS", "true"));
-        var hostname = env.getOrDefault("HOST", "localhost");
-        var port = Integer.parseInt(env.getOrDefault("PORT", "9200"));
-        var user = env.getOrDefault("USERNAME", "admin");
-        var pass = env.getOrDefault("PASSWORD", "admin");
+        Map<String, String> env = System.getenv();
+        boolean https = Boolean.parseBoolean(env.getOrDefault("HTTPS", "true"));
+        String hostname = env.getOrDefault("HOST", "localhost");
+        int port = Integer.parseInt(env.getOrDefault("PORT", "9200"));
+        String user = env.getOrDefault("USERNAME", "admin");
+        String pass = env.getOrDefault("PASSWORD", "admin");
 
-        final var hosts = new HttpHost[] { new HttpHost(https ? "https" : "http", hostname, port) };
+        final HttpHost[] hosts = new HttpHost[] { new HttpHost(https ? "https" : "http", hostname, port) };
 
-        final var sslContext = SSLContextBuilder.create().loadTrustMaterial(null, (chains, authType) -> true).build();
+        final SSLContext sslContext = SSLContextBuilder.create().loadTrustMaterial(null, (chains, authType) -> true).build();
 
-        final var transport = ApacheHttpClient5TransportBuilder.builder(hosts)
+        final ApacheHttpClient5Transport transport = ApacheHttpClient5TransportBuilder.builder(hosts)
             .setMapper(new JacksonJsonpMapper())
             .setHttpClientConfigCallback(httpClientBuilder -> {
-                final var credentialsProvider = new BasicCredentialsProvider();
-                for (final var host : hosts) {
+                final BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+                for (final HttpHost host : hosts) {
                     credentialsProvider.setCredentials(new AuthScope(host), new UsernamePasswordCredentials(user, pass.toCharArray()));
                 }
 
                 // Disable SSL/TLS verification as our local testing clusters use self-signed certificates
-                final var tlsStrategy = ClientTlsStrategyBuilder.create()
+                final TlsStrategy tlsStrategy = ClientTlsStrategyBuilder.create()
                     .setSslContext(sslContext)
                     .setHostnameVerifier(NoopHostnameVerifier.INSTANCE)
                     .build();
 
-                final var connectionManager = PoolingAsyncClientConnectionManagerBuilder.create().setTlsStrategy(tlsStrategy).build();
+                final PoolingAsyncClientConnectionManager connectionManager = PoolingAsyncClientConnectionManagerBuilder.create()
+                    .setTlsStrategy(tlsStrategy)
+                    .build();
 
                 return httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider).setConnectionManager(connectionManager);
             })
