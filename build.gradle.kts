@@ -37,8 +37,6 @@ allprojects {
     version = System.getenv("VERSION") ?: System.getProperty("version") + "-SNAPSHOT"
 
     repositories {
-        mavenLocal()
-        maven(url = "https://ci.opensearch.org/ci/dbc/snapshots/maven/")
         mavenCentral()
         gradlePluginPortal()
     }

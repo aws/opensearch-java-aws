@@ -19,8 +19,6 @@ import java.security.MessageDigest
 
 buildscript {
     repositories {
-        mavenLocal()
-        maven(url = "https://ci.opensearch.org/ci/dbc/snapshots/maven/")
         mavenCentral()
         gradlePluginPortal()
     }
