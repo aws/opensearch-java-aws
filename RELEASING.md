@@ -75,36 +75,51 @@ Two Gradle tasks implement this, both in `java-client/build.gradle.kts`:
 Use `:java-client:checkCentralPortalStatus -PdeploymentId=<id>` to poll a
 deployment.
 
-### Required credentials
+### Credentials
 
-| Purpose | Gradle property | Environment variable | GitHub secret |
-| --- | --- | --- | --- |
-| Portal user token name | `centralPortalUsername` | `CENTRAL_PORTAL_USERNAME` | `CENTRAL_PORTAL_USERNAME` |
-| Portal user token secret | `centralPortalToken` | `CENTRAL_PORTAL_TOKEN` | `CENTRAL_PORTAL_TOKEN` |
-| PGP private key (ASCII-armored) | `signingKey` | `ORG_GRADLE_PROJECT_signingKey` | `MAVEN_CENTRAL_SIGNING_KEY` |
-| PGP key passphrase | `signingPassword` | `ORG_GRADLE_PROJECT_signingPassword` | `MAVEN_CENTRAL_SIGNING_PASSWORD` |
+The release credentials live in AWS Secrets Manager in account `984220191423`
+(`us-west-2`), and nowhere else:
 
-The four GitHub secrets belong to a **`maven-central` environment**, not to the
-repository as a whole, so only the gated release job can read them. Configure it
-under Settings → Environments:
+| Secret | Contents |
+| --- | --- |
+| `opensearch-java/release/gpg-signing-key` | ASCII-armored PGP private key |
+| `opensearch-java/release/gpg-passphrase` | its passphrase |
+| `opensearch-java/release/central-portal-token` | JSON with `username` and `token` |
+| `opensearch-java/release/gpg-revocation-cert` | revocation certificate; not read by CI |
 
-- name: `maven-central`
-- required reviewers: `@aws/amazon-opensearch-clients`
-- environment secrets: the four above
+GitHub holds no copy. The release job assumes an IAM role by OIDC and reads them
+at run time, so rotating a credential touches one place and every retrieval is
+recorded in CloudTrail. The only GitHub secret is
+`MAVEN_CENTRAL_SIGNING_ROLE`, the role ARN, which is not sensitive.
 
-The release job declares `environment: maven-central`, so GitHub pauses the run
-for a reviewer from that team before any step executes. GitHub resolves team
-membership itself, which an in-workflow approval action cannot do with the
-default `GITHUB_TOKEN`.
+The role's trust policy must pin the subject exactly:
 
-Generate the user token from the "Account" page in the Portal. The signing key's
-**public** half must be published to a keyserver the Portal checks
-(`keyserver.ubuntu.com` or `keys.openpgp.org`) or validation fails with an
-unverifiable signature.
+```json
+"Condition": {
+  "StringEquals": {
+    "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+    "token.actions.githubusercontent.com:sub": "repo:aws/opensearch-java-aws:environment:maven-central"
+  }
+}
+```
 
-Store the private key and passphrase in a team-owned secret store — never on a
-developer machine and never in a personal account. The `signing` block activates
-only when a key is supplied, so local builds stay unsigned and credential-free.
+`StringEquals`, not `StringLike`, and no wildcards: the `environment:maven-central`
+segment is what makes the reviewer gate a security control rather than a prompt.
+A workflow that never enters the environment cannot assume the role, and a fork
+cannot either, because GitHub signs the repository into the `sub` claim. Grant the
+role only `secretsmanager:GetSecretValue` on
+`arn:aws:secretsmanager:us-west-2:984220191423:secret:opensearch-java/release/*`.
+
+The signing key's **public** half must be published to a keyserver the Portal
+checks (`keyserver.ubuntu.com` or `keys.openpgp.org`) or validation fails with an
+unverifiable signature. Current key: `A9FC32A0AA70D58C`, fingerprint
+`0D84956F0DCA5BB0A324A1F3A9FC32A0AA70D58C`, expires 2031-10-14.
+
+For a local release build, supply the same values as Gradle properties
+(`signingKey`, `signingPassword`, `centralPortalUsername`, `centralPortalToken`)
+or the equivalent `ORG_GRADLE_PROJECT_*` / `CENTRAL_PORTAL_*` environment
+variables. The `signing` block is inert when no key is given, so ordinary builds
+need no credentials.
 
 ### Cutting a release
 

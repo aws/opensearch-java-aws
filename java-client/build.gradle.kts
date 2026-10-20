@@ -71,8 +71,13 @@ logger.quiet("  Gradle JDK Version    : " + JavaVersion.current())
 logger.quiet("=======================================")
 
 java {
-    targetCompatibility = JavaVersion.VERSION_1_8
-    sourceCompatibility = JavaVersion.VERSION_1_8
+    // Java 17, not the 8 inherited from upstream opensearch-java. The default JSON
+    // mapper is backed by Jackson 3, whose class files are major version 61, so a
+    // Java 8 target advertised a baseline the artifact could never honour: a JDK 8
+    // or 11 consumer gets UnsupportedClassVersionError as soon as a mapper is
+    // created. README already documents 17.
+    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
 
     withJavadocJar()
     withSourcesJar()

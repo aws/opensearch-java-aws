@@ -15,16 +15,21 @@ jobs:
     # GITHUB_TOKEN cannot enumerate team members, so an action-based gate would need
     # a GitHub App token just to read the roster.
     #
+    # The release credentials are not held in GitHub. This job assumes an IAM role by
+    # OIDC and reads them from AWS Secrets Manager at run time, so the signing key has
+    # exactly one copy, rotating it touches one place, and every retrieval is recorded
+    # in CloudTrail. The role's trust policy pins
+    # `repo:aws/opensearch-java-aws:environment:maven-central`, which is why the
+    # environment below is part of the security boundary rather than only a reviewer
+    # prompt: a workflow that does not enter it cannot assume the role.
+    #
     # Requires a `maven-central` environment configured with:
     #   - Required reviewers: @aws/amazon-opensearch-clients
-    #   - Environment secrets: CENTRAL_PORTAL_USERNAME, CENTRAL_PORTAL_TOKEN,
-    #     MAVEN_CENTRAL_SIGNING_KEY, MAVEN_CENTRAL_SIGNING_PASSWORD
-    #
-    # Scoping the release credentials to this environment also keeps them out of
-    # reach of every other workflow in the repository.
+    #   - Environment secret MAVEN_CENTRAL_SIGNING_ROLE: the role ARN
     environment: maven-central
     permissions:
       contents: write
+      id-token: write
     steps:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -58,15 +63,36 @@ jobs:
         env:
           VERSION: ${{ steps.get_data.outputs.version }}
         run: ./gradlew --no-daemon :java-client:test
+      - name: Assume the release role
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6
+        with:
+          role-to-assume: ${{ secrets.MAVEN_CENTRAL_SIGNING_ROLE }}
+          aws-region: us-west-2
       - name: Build, sign and upload the Central Portal bundle
         env:
           VERSION: ${{ steps.get_data.outputs.version }}
-          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.MAVEN_CENTRAL_SIGNING_KEY }}
-          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.MAVEN_CENTRAL_SIGNING_PASSWORD }}
-          CENTRAL_PORTAL_USERNAME: ${{ secrets.CENTRAL_PORTAL_USERNAME }}
-          CENTRAL_PORTAL_TOKEN: ${{ secrets.CENTRAL_PORTAL_TOKEN }}
         run: |
           echo "Releasing version: $VERSION"
+
+          # Fetched here rather than written to $GITHUB_ENV: values placed there are
+          # readable by every later step and are not masked in logs. add-mask covers
+          # the case of a dependency echoing one back.
+          get() { aws secretsmanager get-secret-value --secret-id "$1" \
+                    --query SecretString --output text; }
+
+          ORG_GRADLE_PROJECT_signingKey=$(get opensearch-java/release/gpg-signing-key)
+          ORG_GRADLE_PROJECT_signingPassword=$(get opensearch-java/release/gpg-passphrase)
+          portal=$(get opensearch-java/release/central-portal-token)
+          CENTRAL_PORTAL_USERNAME=$(jq -re .username <<<"$portal")
+          CENTRAL_PORTAL_TOKEN=$(jq -re .token <<<"$portal")
+          unset portal
+
+          for v in "$ORG_GRADLE_PROJECT_signingPassword" "$CENTRAL_PORTAL_USERNAME" "$CENTRAL_PORTAL_TOKEN"; do
+            echo "::add-mask::$v"
+          done
+          export ORG_GRADLE_PROJECT_signingKey ORG_GRADLE_PROJECT_signingPassword
+          export CENTRAL_PORTAL_USERNAME CENTRAL_PORTAL_TOKEN
+
           # One invocation, so the archive attached to the GitHub release below is
           # byte-for-byte the archive that was uploaded. Building the bundle in a
           # separate step would re-sign it, and PGP signatures are not reproducible.
