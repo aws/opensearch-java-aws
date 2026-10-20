@@ -10,23 +10,8 @@ jobs:
     name: Publish the release
     if: github.repository == 'aws/opensearch-java-aws'
     runs-on: ubuntu-latest
-    # Gating on an environment rather than an in-workflow approval step means GitHub
-    # resolves the reviewers itself. The inherited `manual-approval` step was handed
-    # the `amazon-opensearch-clients` org team but authenticated with the default
-    # GITHUB_TOKEN, which cannot enumerate team members, so it could never have passed.
-    #
-    # The release credentials are not held in GitHub. This job assumes an IAM role by
-    # OIDC and reads them from AWS Secrets Manager at run time, so the signing key has
-    # exactly one copy, rotating it touches one place, and every retrieval is recorded
-    # in CloudTrail. The role's trust policy pins
-    # `repo:aws/opensearch-java-aws:environment:release`, which is why the
-    # environment below is part of the security boundary rather than only a reviewer
-    # prompt: a workflow that does not enter it cannot assume the role.
-    #
-    # Requires a `release` environment configured with:
-    #   - Required reviewers, so that entering the environment is not free: the IAM
-    #     condition below is only as strong as that gate
-    #   - Environment secret MAVEN_CENTRAL_SIGNING_ROLE: the role ARN
+    # Configure required reviewers and MAVEN_CENTRAL_SIGNING_ROLE on this environment.
+    # The role's OIDC trust policy must require this repository and environment.
     environment: release
     permissions:
       contents: write
@@ -35,8 +20,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          # This job holds the signing key and the Portal token. Leaving a push
-          # credential in .git/config for the rest of the run serves no purpose here.
           persist-credentials: false
       - name: Set up JDK 21
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
@@ -69,48 +52,36 @@ jobs:
         with:
           role-to-assume: ${{ secrets.MAVEN_CENTRAL_SIGNING_ROLE }}
           aws-region: us-west-2
-      - name: Build, sign and upload the Central Portal bundle
+      - name: Build, sign and publish to Sonatype staging
         env:
           VERSION: ${{ steps.get_data.outputs.version }}
         run: |
           echo "Releasing version: $VERSION"
 
-          # Fetched here rather than written to $GITHUB_ENV: values placed there are
-          # readable by every later step and are not masked in logs. add-mask covers
-          # the case of a dependency echoing one back.
-          # jq over JSON rather than `--output text`: for a single scalar the two are
-          # equivalent, but the explicit form will not start interpreting the value as
-          # columns if a secret ever gains structure.
+          # Keep credentials scoped to this step and pass them to Gradle through the environment.
           get() { aws secretsmanager get-secret-value --secret-id "$1" --output json \
                     | jq -re .SecretString; }
 
           ORG_GRADLE_PROJECT_signingKey=$(get opensearch-java/release/gpg-signing-key)
           ORG_GRADLE_PROJECT_signingPassword=$(get opensearch-java/release/gpg-passphrase)
-          portal=$(get opensearch-java/release/central-portal-token)
-          CENTRAL_PORTAL_USERNAME=$(jq -re .username <<<"$portal")
-          CENTRAL_PORTAL_TOKEN=$(jq -re .token <<<"$portal")
-          unset portal
+          sonatype=$(get opensearch-java/release/sonatype-credentials)
+          ORG_GRADLE_PROJECT_mavenUsername=$(jq -re .username <<<"$sonatype")
+          ORG_GRADLE_PROJECT_mavenPassword=$(jq -re .password <<<"$sonatype")
+          unset sonatype
 
-          for v in "$ORG_GRADLE_PROJECT_signingPassword" "$CENTRAL_PORTAL_USERNAME" "$CENTRAL_PORTAL_TOKEN"; do
+          for v in "$ORG_GRADLE_PROJECT_signingPassword" "$ORG_GRADLE_PROJECT_mavenUsername" "$ORG_GRADLE_PROJECT_mavenPassword"; do
             echo "::add-mask::$v"
           done
           export ORG_GRADLE_PROJECT_signingKey ORG_GRADLE_PROJECT_signingPassword
-          export CENTRAL_PORTAL_USERNAME CENTRAL_PORTAL_TOKEN
+          export ORG_GRADLE_PROJECT_mavenUsername ORG_GRADLE_PROJECT_mavenPassword
 
-          # One invocation, so the archive attached to the GitHub release below is
-          # byte-for-byte the archive that was uploaded. Building the bundle in a
-          # separate step would re-sign it, and PGP signatures are not reproducible.
-          # USER_MANAGED: the deployment waits in the Portal for a maintainer to release it.
-          ./gradlew --no-daemon :java-client:publishToCentralPortal
-          cp java-client/build/central-bundle.zip .
-          sha256sum central-bundle.zip | tee central-bundle.zip.sha256
+          ./gradlew --no-daemon :java-client:publishPublishMavenPublicationToSonatypeStagingRepository
       - name: Draft a release
         uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd
         with:
           immutableCreate: true
           generateReleaseNotes: true
-          artifacts: "central-bundle.zip,central-bundle.zip.sha256"
-          # Created as a draft so the Portal deployment can be checked before anything
-          # is announced; RELEASING.md has the maintainer publish it as the last step.
+          artifacts: "java-client/build/libs/*.jar,java-client/build/libs/*.jar.asc"
+          # Publish the draft after a maintainer closes and releases the Sonatype staging repository.
           draft: true
           prerelease: true

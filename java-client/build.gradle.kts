@@ -33,11 +33,8 @@
 import com.github.jk1.license.ProjectData
 import com.github.jk1.license.render.ReportRenderer
 import org.gradle.api.tasks.testing.Test
+import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import java.io.FileWriter
-import java.net.HttpURLConnection
-import java.net.URI
-import java.net.URLEncoder
-import java.util.Base64
 
 buildscript {
     repositories {
@@ -417,9 +414,13 @@ tasks.withType<Jar> {
 
 publishing {
     repositories{
-        // Releases are not pushed to a staging repository. The Central Publisher Portal
-        // takes a single zipped bundle instead, which `centralBundle` builds from the
-        // `localRepo` output below. See `publishToCentralPortal`.
+        maven("https://aws.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+            name = "SonatypeStaging"
+            credentials {
+                username = providers.gradleProperty("mavenUsername").orNull
+                password = providers.gradleProperty("mavenPassword").orNull
+            }
+        }
         maven(rootProject.layout.buildDirectory.dir("repository")) {
             name = "localRepo"
         }
@@ -457,203 +458,12 @@ publishing {
 }
 
 
-// ---------------------------------------------------------------------------------------------
-// Central Publisher Portal release publishing.
-//
-// The Portal does not accept artifact-by-artifact uploads to a staging repository the way the
-// retired OSSRH Nexus did. Instead a release is one archive whose contents follow the Maven
-// repository layout, uploaded in a single request. `localRepo` already produces exactly that
-// layout under build/repository, so `centralBundle` only has to zip it and `publishToCentralPortal`
-// only has to POST it.
-//
-// See https://central.sonatype.org/publish/publish-portal-api/
-// ---------------------------------------------------------------------------------------------
-
-private val centralPortalUploadUrl = "https://central.sonatype.com/api/v1/publisher/upload"
-private val centralPortalStatusUrl = "https://central.sonatype.com/api/v1/publisher/status"
-
-// Stale artifacts from an earlier build would otherwise be swept into the bundle and rejected,
-// or worse, published alongside the current version.
-val cleanLocalRepo by tasks.registering(Delete::class) {
-    delete(rootProject.layout.buildDirectory.dir("repository"))
-}
-
-tasks.named("publishPublishMavenPublicationToLocalRepoRepository") {
-    mustRunAfter(cleanLocalRepo)
-}
-
-val centralBundle by tasks.registering(Zip::class) {
-    group = "publishing"
-    description = "Builds the Central Publisher Portal deployment bundle from the local repository layout."
-
-    dependsOn(cleanLocalRepo, "publishPublishMavenPublicationToLocalRepoRepository")
-
-    from(rootProject.layout.buildDirectory.dir("repository")) {
-        // The Portal derives coordinates from the directory layout and rejects repository-level
-        // metadata, which Gradle writes for its own benefit.
-        exclude("**/maven-metadata.xml", "**/maven-metadata.xml.*")
-    }
-    archiveFileName.set("central-bundle.zip")
-    destinationDirectory.set(layout.buildDirectory)
-
+tasks.named<PublishToMavenRepository>("publishPublishMavenPublicationToSonatypeStagingRepository") {
+    val releaseVersion = project.version.toString()
     doFirst {
-        if (version.toString().endsWith("SNAPSHOT")) {
-            throw GradleException(
-                "Refusing to build a Central Portal bundle for snapshot version '$version'. " +
-                    "The Portal only accepts release versions; set the VERSION environment variable, " +
-                    "e.g. VERSION=x.y.z ./gradlew :java-client:centralBundle. " +
-                    "(-Dversion only sets the base version and still yields a snapshot.)"
-            )
+        if (releaseVersion.endsWith("SNAPSHOT")) {
+            throw GradleException("Sonatype staging requires a release version. Set VERSION=x.y.z before publishing.")
         }
-
-        // The signing plugin is a no-op when no key is configured, which would otherwise
-        // produce a well-formed but unsigned bundle. The Portal only rejects that after
-        // upload, so fail here instead.
-        val repoDir = rootProject.layout.buildDirectory.dir("repository").get().asFile
-        val signable = repoDir.walkTopDown()
-            .filter { it.isFile }
-            .filterNot { it.name.startsWith("maven-metadata.xml") }
-            .filterNot { it.name.endsWith(".asc") }
-            .filterNot { it.name.endsWith(".md5") || it.name.endsWith(".sha1") }
-            .filterNot { it.name.endsWith(".sha256") || it.name.endsWith(".sha512") }
-            .toList()
-
-        if (signable.isEmpty()) {
-            throw GradleException("No publishable artifacts found under $repoDir.")
-        }
-        val unsigned = signable.filterNot { File("${it.path}.asc").isFile }
-        if (unsigned.isNotEmpty()) {
-            throw GradleException(
-                "Maven Central requires a PGP signature for every published file, but " +
-                    unsigned.size + " of " + signable.size + " have no .asc:\n" +
-                    unsigned.joinToString("\n") { "  " + it.relativeTo(repoDir).path } +
-                    "\nSupply the signing key via the signingKey and signingPassword Gradle " +
-                    "properties (or ORG_GRADLE_PROJECT_signingKey / ORG_GRADLE_PROJECT_signingPassword)."
-            )
-        }
-    }
-}
-
-val publishToCentralPortal by tasks.registering {
-    group = "publishing"
-    description = "Uploads the deployment bundle to the Central Publisher Portal."
-
-    dependsOn(centralBundle)
-
-    // Resolved at configuration time so the task body stays free of Project access.
-    val bundleFile = centralBundle.flatMap { it.archiveFile }
-    val deploymentName = "${project.group}:opensearch-java:$version"
-    val username = (findProperty("centralPortalUsername") as String?) ?: System.getenv("CENTRAL_PORTAL_USERNAME")
-    val token = (findProperty("centralPortalToken") as String?) ?: System.getenv("CENTRAL_PORTAL_TOKEN")
-    // USER_MANAGED holds the deployment in the Portal for a human to release. AUTOMATIC publishes
-    // straight to Maven Central on successful validation and cannot be undone.
-    val publishingType = (findProperty("centralPublishingType") as String?) ?: "USER_MANAGED"
-
-    doLast {
-        if (username.isNullOrBlank() || token.isNullOrBlank()) {
-            throw GradleException(
-                "Central Portal credentials are missing. Set the centralPortalUsername and " +
-                    "centralPortalToken Gradle properties, or the CENTRAL_PORTAL_USERNAME and " +
-                    "CENTRAL_PORTAL_TOKEN environment variables, to a Portal user token."
-            )
-        }
-        if (publishingType != "USER_MANAGED" && publishingType != "AUTOMATIC") {
-            throw GradleException("centralPublishingType must be USER_MANAGED or AUTOMATIC, was '$publishingType'.")
-        }
-
-        val bundle = bundleFile.get().asFile
-        val credential = Base64.getEncoder().encodeToString("$username:$token".toByteArray())
-        val deploymentId = uploadCentralBundle(bundle, credential, deploymentName, publishingType)
-
-        logger.lifecycle("Uploaded ${bundle.name} to the Central Publisher Portal as deployment $deploymentId.")
-        if (publishingType == "USER_MANAGED") {
-            logger.lifecycle("Validation is running. Release it from https://central.sonatype.com/publishing/deployments once it reports VALIDATED.")
-        }
-    }
-}
-
-/**
- * Posts [bundle] to the Portal upload endpoint as a `multipart/form-data` part named `bundle`,
- * returning the deployment ID. The body is assembled by hand to keep the build free of an HTTP
- * client dependency.
- */
-fun uploadCentralBundle(bundle: File, credential: String, deploymentName: String, publishingType: String): String {
-    val boundary = "----CentralBundle${System.currentTimeMillis()}"
-    val query = "?name=${URLEncoder.encode(deploymentName, "UTF-8")}&publishingType=$publishingType"
-    val connection = URI("$centralPortalUploadUrl$query").toURL().openConnection() as HttpURLConnection
-
-    val preamble = (
-        "--$boundary\r\n" +
-            "Content-Disposition: form-data; name=\"bundle\"; filename=\"${bundle.name}\"\r\n" +
-            "Content-Type: application/octet-stream\r\n\r\n"
-        ).toByteArray()
-    val epilogue = "\r\n--$boundary--\r\n".toByteArray()
-
-    connection.requestMethod = "POST"
-    connection.doOutput = true
-    connection.setRequestProperty("Authorization", "Bearer $credential")
-    connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=$boundary")
-    connection.connectTimeout = 30_000
-    // The Portal answers 201 as soon as the upload lands and validates asynchronously,
-    // so this only has to cover transferring the bundle, not validating it.
-    connection.readTimeout = 600_000
-    // Streamed rather than buffered in heap, with the length declared up front. The
-    // documented API examples send Content-Length, and this path has never run against
-    // the live Portal, so it is not the place to assume chunked encoding is accepted.
-    connection.setFixedLengthStreamingMode(preamble.size + bundle.length() + epilogue.size)
-
-    connection.outputStream.use { out ->
-        out.write(preamble)
-        bundle.inputStream().use { it.copyTo(out) }
-        out.write(epilogue)
-    }
-
-    val status = connection.responseCode
-    val body = (if (status in 200..299) connection.inputStream else connection.errorStream)
-        ?.bufferedReader()?.use { it.readText() }?.trim()
-        ?: ""
-
-    if (status !in 200..299) {
-        throw GradleException("Central Portal upload failed with HTTP $status: $body")
-    }
-    if (body.isEmpty()) {
-        throw GradleException("Central Portal upload returned HTTP $status with no deployment ID.")
-    }
-    return body
-}
-
-val checkCentralPortalStatus by tasks.registering {
-    group = "publishing"
-    description = "Reports the Portal status of a deployment. Pass -PdeploymentId=<id>."
-
-    val deploymentId = findProperty("deploymentId") as String?
-    val username = (findProperty("centralPortalUsername") as String?) ?: System.getenv("CENTRAL_PORTAL_USERNAME")
-    val token = (findProperty("centralPortalToken") as String?) ?: System.getenv("CENTRAL_PORTAL_TOKEN")
-
-    doLast {
-        if (deploymentId.isNullOrBlank()) {
-            throw GradleException("Pass the deployment to inspect with -PdeploymentId=<id>.")
-        }
-        if (username.isNullOrBlank() || token.isNullOrBlank()) {
-            throw GradleException("Central Portal credentials are missing. See publishToCentralPortal for the accepted properties.")
-        }
-
-        val credential = Base64.getEncoder().encodeToString("$username:$token".toByteArray())
-        val connection = URI("$centralPortalStatusUrl?id=$deploymentId").toURL().openConnection() as HttpURLConnection
-        connection.requestMethod = "POST"
-        connection.setRequestProperty("Authorization", "Bearer $credential")
-        connection.connectTimeout = 30_000
-        connection.readTimeout = 60_000
-
-        val status = connection.responseCode
-        val body = (if (status in 200..299) connection.inputStream else connection.errorStream)
-            ?.bufferedReader()?.use { it.readText() }?.trim()
-            ?: ""
-
-        if (status !in 200..299) {
-            throw GradleException("Central Portal status check failed with HTTP $status: $body")
-        }
-        logger.lifecycle(body)
     }
 }
 
@@ -666,11 +476,9 @@ signing {
     val signingKey = findProperty("signingKey") as String?
     val signingPassword = findProperty("signingPassword") as String?
     val hasKeyring = findProperty("signing.keyId") != null
-    isRequired = signingKey != null || hasKeyring
+    isRequired = !version.toString().endsWith("SNAPSHOT") || signingKey != null || hasKeyring
     if (signingKey != null) {
         useInMemoryPgpKeys(signingKey, signingPassword)
     }
-    if (isRequired) {
-        sign(publishing.publications["publishMaven"])
-    }
+    sign(publishing.publications["publishMaven"])
 }
