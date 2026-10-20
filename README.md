@@ -34,7 +34,8 @@ credentials provider is supplied explicitly.
 
 ## Build the client
 
-Requires JDK 17 or newer.
+The client runs on Java 8 or newer and uses Jackson 2. Building this repository
+requires JDK 21 or newer.
 
 Clone the repository and build the JAR:
 
@@ -43,6 +44,15 @@ git clone <repository-url>
 cd opensearch-java-aws
 ./gradlew --no-daemon --max-workers=1 :java-client:jar
 ```
+
+Run the client tests against the packaged JAR on Java 8:
+
+```bash
+./gradlew :java-client:java8Test
+```
+
+Gradle locates or downloads a Java 8 toolchain for this task; keep JDK 21 or newer
+as the build JDK.
 
 The generated local artifact is:
 

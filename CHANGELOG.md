@@ -15,14 +15,14 @@ Serverless (AOSS).
 - `Build Distributions` CI workflow that compiles the AOS and AOSS clients and runs their unit tests across JDK 21 and 25.
 
 ### Dependencies
-- Pin AWS SDK dependencies to `2.56.0`; consumers can override the version with their AWS SDK BOM.
+- Pin AWS SDK dependencies to `2.57.0`; consumers can override the version with their AWS SDK BOM.
 
 ### Changed
 - Prefer Maven Central for build plugins and dependencies; the OpenSearch repository plugin still adds CI repositories as fallbacks ([#36](https://github.com/aws/opensearch-java-aws/pull/36)).
 - Compatibility: `AwsSdk2Transport` now throws `TransportException` before sending a GET body through AWS SDK `UrlConnectionHttpClient`, including explicitly supplied empty bodies. Use an HTTP client that preserves GET bodies, such as AWS CRT, when body fields are set.
 - Compatibility: unset optional GET bodies are omitted for AOSS snapshot listing and AOS ML profiling. ML profile calls without body fields now use the server's URL-based defaults and model/task IDs instead of parsing `{}`, which can change returned results. Explicit false values, empty collections, and generic request bodies are preserved.
 - Update `RELEASING.md` with the prototype release process, manual backporting, and publishing through Sonatype's OSSRH Staging API.
-- Require Java 17 for the client, matching the default Jackson 3 mapper.
+- Support Java 8 with Jackson 2 as the default mapper, and test the packaged JAR on Java 8 in CI. Explicit mapper imports should use `json.jackson` instead of the removed `json.jackson3` package.
 - Moved the code generator to `software.amazon.opensearch.client.codegen`, so the emitted `@Generated(...)` marker references a class that exists in this fork.
 - Removed the unsupported `refresh` parameter from AOSS multi-get requests.
 - Consolidated the handwritten sources into the standard `src/main/java` layout (from `src/java`) and moved `version.properties` to its package resource path, updating the `awsRuntime`/`aos`/`aoss` source sets to match.

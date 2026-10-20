@@ -66,13 +66,8 @@ logger.quiet("  Gradle JDK Version    : " + JavaVersion.current())
 logger.quiet("=======================================")
 
 java {
-    // Java 17, not the 8 inherited from upstream opensearch-java. The default JSON
-    // mapper is backed by Jackson 3, whose class files are major version 61, so a
-    // Java 8 target advertised a baseline the artifact could never honour: a JDK 8
-    // or 11 consumer gets UnsupportedClassVersionError as soon as a mapper is
-    // created. README already documents 17.
-    targetCompatibility = JavaVersion.VERSION_17
-    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_8
 
     withJavadocJar()
     withSourcesJar()
@@ -90,6 +85,11 @@ java {
       languageVersion = JavaLanguageVersion.of(runtimeJavaVersion.majorVersion)
       vendor = JvmVendorSpec.ADOPTIUM
     }
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    // Also reject JDK APIs introduced after Java 8 when compiling on a newer JDK.
+    options.release.set(8)
 }
 
 sourceSets.main {
@@ -249,6 +249,23 @@ val unitTest = tasks.register<Test>("unitTest") {
     systemProperty("tests.security.manager", "false")
 }
 
+tasks.register<Test>("java8Test") {
+    description = "Runs the AWS AOS/AOSS client unit tests against the packaged JAR on Java 8."
+    group = "verification"
+    dependsOn(tasks.jar, tasks.testClasses)
+    javaLauncher.set(javaToolchains.launcherFor {
+        languageVersion.set(JavaLanguageVersion.of(8))
+    })
+    testClassesDirs = sourceSets.test.get().output.classesDirs
+    // Load client classes from the artifact consumers receive.
+    classpath = files(tasks.jar.flatMap { it.archiveFile }) +
+        sourceSets.test.get().output + configurations.testRuntimeClasspath.get()
+    include("software/amazon/opensearch/client/**/*Test.class")
+    include("software/amazon/opensearch/client/**/*Tests.class")
+    exclude("**/*RealResourceIT.class")
+    systemProperty("tests.security.manager", "false")
+}
+
 tasks.register<Test>("realResourceTest") {
     description = "Runs opt-in tests against configured AOS and AOSS resources."
     group = "verification"
@@ -259,11 +276,9 @@ tasks.register<Test>("realResourceTest") {
 }
 
 dependencies {
-    val awsSdkVersion = "2.56.0"
+    val awsSdkVersion = "2.57.0"
     val jacksonVersion = "2.22.2"
     val jacksonDatabindVersion = "2.22.2"
-    val jackson3Version = "3.2.2"
-    val jackson3DatabindVersion = "3.2.2"
 
     // Apache 2.0
     api("commons-logging:commons-logging:1.4.0")
@@ -293,10 +308,8 @@ dependencies {
     implementation("jakarta.annotation", "jakarta.annotation-api", "1.3.5")
 
     // Apache 2.0
-    implementation("tools.jackson.core", "jackson-core", jackson3Version)
-    implementation("tools.jackson.core", "jackson-databind", jackson3DatabindVersion)
-    compileOnly("com.fasterxml.jackson.core", "jackson-core", jacksonVersion)
-    compileOnly("com.fasterxml.jackson.core", "jackson-databind", jacksonDatabindVersion)
+    implementation("com.fasterxml.jackson.core", "jackson-core", jacksonVersion)
+    implementation("com.fasterxml.jackson.core", "jackson-databind", jacksonDatabindVersion)
     testImplementation("com.fasterxml.jackson.datatype", "jackson-datatype-jakarta-jsonp", jacksonVersion)
 
     // For AwsSdk2Transport.
@@ -483,8 +496,10 @@ tasks.named<PublishToMavenRepository>("publishPublishMavenPublicationToCentralSt
 }
 
 tasks.withType<Test>().configureEach {
-    dependsOn("awsRuntimeClasses", "aosClasses", "aossClasses")
-    classpath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
+    if (name != "java8Test") {
+        dependsOn("awsRuntimeClasses", "aosClasses", "aossClasses")
+        classpath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
+    }
 }
 
 signing {
