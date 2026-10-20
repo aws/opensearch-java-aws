@@ -584,26 +584,30 @@ fun uploadCentralBundle(bundle: File, credential: String, deploymentName: String
     val query = "?name=${URLEncoder.encode(deploymentName, "UTF-8")}&publishingType=$publishingType"
     val connection = URI("$centralPortalUploadUrl$query").toURL().openConnection() as HttpURLConnection
 
+    val preamble = (
+        "--$boundary\r\n" +
+            "Content-Disposition: form-data; name=\"bundle\"; filename=\"${bundle.name}\"\r\n" +
+            "Content-Type: application/octet-stream\r\n\r\n"
+        ).toByteArray()
+    val epilogue = "\r\n--$boundary--\r\n".toByteArray()
+
     connection.requestMethod = "POST"
     connection.doOutput = true
     connection.setRequestProperty("Authorization", "Bearer $credential")
     connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=$boundary")
     connection.connectTimeout = 30_000
-    // Validation happens before the response is written, so the read timeout has to be generous.
+    // The Portal answers 201 as soon as the upload lands and validates asynchronously,
+    // so this only has to cover transferring the bundle, not validating it.
     connection.readTimeout = 600_000
-    // Avoid buffering the whole bundle in heap on the way out.
-    connection.setChunkedStreamingMode(0)
+    // Streamed rather than buffered in heap, with the length declared up front. The
+    // documented API examples send Content-Length, and this path has never run against
+    // the live Portal, so it is not the place to assume chunked encoding is accepted.
+    connection.setFixedLengthStreamingMode(preamble.size + bundle.length() + epilogue.size)
 
     connection.outputStream.use { out ->
-        out.write(
-            (
-                "--$boundary\r\n" +
-                    "Content-Disposition: form-data; name=\"bundle\"; filename=\"${bundle.name}\"\r\n" +
-                    "Content-Type: application/octet-stream\r\n\r\n"
-                ).toByteArray()
-        )
+        out.write(preamble)
         bundle.inputStream().use { it.copyTo(out) }
-        out.write("\r\n--$boundary--\r\n".toByteArray())
+        out.write(epilogue)
     }
 
     val status = connection.responseCode
