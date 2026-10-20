@@ -1,4 +1,4 @@
-name: Release drafter
+name: Release
 
 on:
   push:
@@ -6,27 +6,27 @@ on:
       - "*"
 
 jobs:
-  draft-a-release:
-    name: Draft a release
+  release:
+    name: Publish the release
     runs-on: ubuntu-latest
     # Gating on an environment rather than an in-workflow approval step means GitHub
-    # resolves the reviewer team itself. The `amazon-opensearch-clients` team is the
-    # source of truth for maintainership (see MAINTAINERS.md), and the default
-    # GITHUB_TOKEN cannot enumerate team members, so an action-based gate would need
-    # a GitHub App token just to read the roster.
+    # resolves the reviewers itself. The inherited `manual-approval` step was handed
+    # the `amazon-opensearch-clients` org team but authenticated with the default
+    # GITHUB_TOKEN, which cannot enumerate team members, so it could never have passed.
     #
     # The release credentials are not held in GitHub. This job assumes an IAM role by
     # OIDC and reads them from AWS Secrets Manager at run time, so the signing key has
     # exactly one copy, rotating it touches one place, and every retrieval is recorded
     # in CloudTrail. The role's trust policy pins
-    # `repo:aws/opensearch-java-aws:environment:maven-central`, which is why the
+    # `repo:aws/opensearch-java-aws:environment:release`, which is why the
     # environment below is part of the security boundary rather than only a reviewer
     # prompt: a workflow that does not enter it cannot assume the role.
     #
-    # Requires a `maven-central` environment configured with:
-    #   - Required reviewers: @aws/amazon-opensearch-clients
+    # Requires a `release` environment configured with:
+    #   - Required reviewers, so that entering the environment is not free: the IAM
+    #     condition below is only as strong as that gate
     #   - Environment secret MAVEN_CENTRAL_SIGNING_ROLE: the role ARN
-    environment: maven-central
+    environment: release
     permissions:
       contents: write
       id-token: write

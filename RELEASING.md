@@ -98,12 +98,12 @@ The role's trust policy must pin the subject exactly:
 "Condition": {
   "StringEquals": {
     "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-    "token.actions.githubusercontent.com:sub": "repo:aws/opensearch-java-aws:environment:maven-central"
+    "token.actions.githubusercontent.com:sub": "repo:aws/opensearch-java-aws:environment:release"
   }
 }
 ```
 
-`StringEquals`, not `StringLike`, and no wildcards: the `environment:maven-central`
+`StringEquals`, not `StringLike`, and no wildcards: the `environment:release`
 segment is what makes the reviewer gate a security control rather than a prompt.
 A workflow that never enters the environment cannot assume the role, and a fork
 cannot either, because GitHub signs the repository into the `sub` claim. Grant the
@@ -126,7 +126,7 @@ need no credentials.
 1. Land the version and CHANGELOG changes per [Versioning](#versioning).
 2. Tag the release commit and push the tag. The tag must match
    `systemProp.version` (with or without a leading `v`); the
-   [release-drafter workflow](.github/workflows/release-drafter.yml) fails fast
+   [release workflow](.github/workflows/release.yml) fails fast
    otherwise. It then waits for a reviewer from
    `@aws/amazon-opensearch-clients`, runs the unit tests, builds and signs the
    bundle, uploads it to the Portal, and drafts a GitHub release with that exact
