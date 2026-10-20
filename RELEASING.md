@@ -55,12 +55,10 @@ publication to Sonatype's OSSRH Staging API:
 https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/
 ```
 
-This is Sonatype's reimplementation of the retired OSSRH staging API, which lets
-the standard `maven-publish` plugin publish to the Central Publisher Portal. Note
-that `aws.oss.sonatype.org`, which the internal
-[PublishingToMavenCentral](https://w.amazon.com/bin/view/Open_Source/Open_Sourcing/Uploading/PublishingToMavenCentral)
-wiki still documents, is retired: it answers uploads with HTTP 402 and its
-`/#stagingRepositories` UI is gone. That wiki predates the OSSRH sunset.
+This compatibility service accepts uploads from Gradle's standard `maven-publish`
+plugin. See Sonatype's public [OSSRH Staging API documentation](https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/)
+for repository configuration and transferring deployments to the Central Publisher
+Portal.
 
 The publication includes the library, sources, and Javadoc JARs, POM, Gradle
 module metadata, and PGP signatures. A maintainer publishes the deployment from
