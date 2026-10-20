@@ -30,11 +30,36 @@ public final class Markdown {
     private static final Pattern SITE_BASE_URL_PLACEHOLDER = Pattern.compile("\\{\\{site.baseurl}}");
     private static final String SITE_BASE_URL_REPLACEMENT = "/docs/latest";
 
+    // Matches a leftover backslash-u sequence, which javac decodes into a
+    // Unicode character before tokenizing (JLS 3.3). After escaping has run
+    // there should be none left, so any match means text could still break out
+    // of the generated comment.
+    private static final Pattern UNICODE_ESCAPE = Pattern.compile("\\\\u");
+
     @Nonnull
     public static String toJavaDocHtml(@Nonnull String markdown) {
         var html = RENDERER.render(PARSER.parse(markdown)).strip();
         html = SITE_URL_PLACEHOLDER.matcher(html).replaceAll(SITE_URL_REPLACEMENT);
         html = SITE_BASE_URL_PLACEHOLDER.matcher(html).replaceAll(SITE_BASE_URL_REPLACEMENT);
+        html = escapeJavaDoc(html);
         return html;
+    }
+
+    // The rendered text is written verbatim into a /* */ Javadoc comment, so it
+    // must not be able to close the comment or contain a Unicode escape that
+    // javac would decode into one. commonmark's HTML escaping only covers
+    // & < > ", so neutralize the remaining comment-breaking sequences here.
+    @Nonnull
+    private static String escapeJavaDoc(@Nonnull String html) {
+        // Escape every backslash first so no \\uXXXX escape can survive to be
+        // decoded by javac into an arbitrary character (including */).
+        var escaped = html.replace("\\", "&#92;");
+        // Escape any literal comment terminator so it cannot end the Javadoc.
+        escaped = escaped.replace("*/", "*&#47;");
+        // Fail the build if a backslash-u somehow remains, rather than emit it.
+        if (UNICODE_ESCAPE.matcher(escaped).find()) {
+            throw new IllegalArgumentException("Refusing to emit Javadoc containing a \\u escape sequence: " + html);
+        }
+        return escaped;
     }
 }

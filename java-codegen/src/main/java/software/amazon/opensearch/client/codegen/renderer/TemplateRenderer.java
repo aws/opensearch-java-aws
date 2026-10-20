@@ -81,7 +81,7 @@ public final class TemplateRenderer {
         try {
             javaCodeFormatter.format(outputFile);
         } catch (JavaFormatterException e) {
-            // throw new RenderException("Unable to format rendered output: " + outputFile, e);
+            throw new RenderException("Unable to format rendered output: " + outputFile, e);
         }
     }
 
