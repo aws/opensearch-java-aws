@@ -7,6 +7,7 @@ data-plane clients for Amazon OpenSearch Service (AOS) and Amazon OpenSearch
 Serverless (AOSS).
 
 ### Added
+- Pinned each input spec with a committed `<spec>.sha256` checksum, verified before generating — the same approach OpenSearch core uses for its `<jar>.sha1` dependency pins. The `code-generation` workflow now runs on pull requests and fails if regenerating from the committed specs drifts from the committed output ([#35](https://github.com/aws/opensearch-java-aws/pull/35)).
 - Bundled AOS and AOSS OpenAPI snapshots as the default inputs for distribution client generation ([#14](https://github.com/aws/opensearch-java-aws/pull/14)).
 - Typed AOS and AOSS data-plane clients under `software.amazon.opensearch.client`, generated per distribution into `src/generated/aos` and `src/generated/aoss`.
 - Handwritten AOS and AOSS APIs and shared AWS runtime (SigV4 transport, JSON model support).
@@ -34,6 +35,7 @@ Serverless (AOSS).
 - The gRPC transport module (`java-client-grpc`), its samples, and the gRPC integration-test path.
 
 ### Fixed
+- Escaped backslashes and comment terminators in spec descriptions so they no longer break the generated Javadoc comment, and made the generator fail if the rendered doc would still contain a backslash-u sequence. Generation now also fails if the Java formatter cannot format its output, instead of silently emitting unformatted code. Regenerating under the new escaping updated five generated files ([#35](https://github.com/aws/opensearch-java-aws/pull/35)).
 - Accept AOS search-shards node responses that omit attributes and transport addresses, and segment responses that omit attributes, compound flags, or versions. `Segment.compound()` and its builder setter now use nullable `Boolean`; consumers should recompile and handle absent values.
 - Preserve optional GET body presence through client generation and transport processing, so requests with no body fields set do not send an unnecessary `{}`.
 - Pointed the `bump-version` auto-bump job's repository guard and the generated jar's `Implementation-URL` manifest attribute at `aws/opensearch-java-aws` instead of the inherited `opensearch-project/opensearch-java`.
