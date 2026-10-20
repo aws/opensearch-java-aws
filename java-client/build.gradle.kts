@@ -414,11 +414,22 @@ tasks.withType<Jar> {
 
 publishing {
     repositories{
-        maven("https://aws.oss.sonatype.org/service/local/staging/deploy/maven2/") {
-            name = "SonatypeStaging"
+        // Sonatype's reimplementation of the OSSRH staging API, which lets the standard
+        // maven-publish plugin keep working against the Central Publisher Portal.
+        //
+        // Not `aws.oss.sonatype.org`: that host is retired and answers uploads with
+        // HTTP 402, and its `/#stagingRepositories` UI is gone. The internal
+        // PublishingToMavenCentral wiki still documents it, but the wiki predates the
+        // OSSRH sunset.
+        //
+        // Credentials are a Central Portal user token, not an old OSSRH account
+        // password. Staging repositories created through this API are isolated by IP,
+        // so a release must be uploaded by a single job.
+        maven("https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/") {
+            name = "CentralStaging"
             credentials {
-                username = providers.gradleProperty("mavenUsername").orNull
-                password = providers.gradleProperty("mavenPassword").orNull
+                username = providers.gradleProperty("centralPortalUsername").orNull
+                password = providers.gradleProperty("centralPortalToken").orNull
             }
         }
         maven(rootProject.layout.buildDirectory.dir("repository")) {
@@ -458,11 +469,15 @@ publishing {
 }
 
 
-tasks.named<PublishToMavenRepository>("publishPublishMavenPublicationToSonatypeStagingRepository") {
+tasks.named<PublishToMavenRepository>("publishPublishMavenPublicationToCentralStagingRepository") {
     val releaseVersion = project.version.toString()
     doFirst {
         if (releaseVersion.endsWith("SNAPSHOT")) {
-            throw GradleException("Sonatype staging requires a release version. Set VERSION=x.y.z before publishing.")
+            throw GradleException(
+                "Central staging requires a release version, but the version is '" + releaseVersion +
+                    "'. Set the VERSION environment variable, e.g. VERSION=x.y.z. " +
+                    "(-Dversion only sets the base version and still yields a snapshot.)"
+            )
         }
     }
 }

@@ -8,7 +8,7 @@ Serverless (AOSS).
 
 ### Added
 - Pinned each input spec with a committed `<spec>.sha256` checksum, verified before generating — the same approach OpenSearch core uses for its `<jar>.sha1` dependency pins. The `code-generation` workflow now runs on pull requests and fails if regenerating from the committed specs drifts from the committed output ([#35](https://github.com/aws/opensearch-java-aws/pull/35)).
-- Add signed Maven Central publishing through AWS Sonatype staging using Gradle's `maven-publish` and `signing` plugins ([#42](https://github.com/aws/opensearch-java-aws/pull/42)).
+- Add signed Maven Central publishing through Sonatype's OSSRH Staging API using Gradle's `maven-publish` and `signing` plugins ([#42](https://github.com/aws/opensearch-java-aws/pull/42)).
 - Bundled AOS and AOSS OpenAPI snapshots as the default inputs for distribution client generation ([#14](https://github.com/aws/opensearch-java-aws/pull/14)).
 - Typed AOS and AOSS data-plane clients under `software.amazon.opensearch.client`, generated per distribution into `src/generated/aos` and `src/generated/aoss`.
 - Handwritten AOS and AOSS APIs and shared AWS runtime (SigV4 transport, JSON model support).
@@ -21,7 +21,7 @@ Serverless (AOSS).
 - Prefer Maven Central for build plugins and dependencies; the OpenSearch repository plugin still adds CI repositories as fallbacks ([#36](https://github.com/aws/opensearch-java-aws/pull/36)).
 - Compatibility: `AwsSdk2Transport` now throws `TransportException` before sending a GET body through AWS SDK `UrlConnectionHttpClient`, including explicitly supplied empty bodies. Use an HTTP client that preserves GET bodies, such as AWS CRT, when body fields are set.
 - Compatibility: unset optional GET bodies are omitted for AOSS snapshot listing and AOS ML profiling. ML profile calls without body fields now use the server's URL-based defaults and model/task IDs instead of parsing `{}`, which can change returned results. Explicit false values, empty collections, and generic request bodies are preserved.
-- Update `RELEASING.md` with the prototype release process, manual backporting, and Sonatype staging publishing.
+- Update `RELEASING.md` with the prototype release process, manual backporting, and publishing through Sonatype's OSSRH Staging API.
 - Require Java 17 for the client, matching the default Jackson 3 mapper.
 - Moved the code generator to `software.amazon.opensearch.client.codegen`, so the emitted `@Generated(...)` marker references a class that exists in this fork.
 - Removed the unsupported `refresh` parameter from AOSS multi-get requests.

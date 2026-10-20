@@ -49,15 +49,26 @@ branch and open a PR against it. There is no automated backport workflow.
 ## Releases
 
 The Gradle `maven-publish` and `signing` plugins build, sign, and upload the
-publication to AWS Sonatype staging:
+publication to Sonatype's OSSRH Staging API:
 
 ```text
-https://aws.oss.sonatype.org/service/local/staging/deploy/maven2/
+https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/
 ```
 
+This is Sonatype's reimplementation of the retired OSSRH staging API, which lets
+the standard `maven-publish` plugin publish to the Central Publisher Portal. Note
+that `aws.oss.sonatype.org`, which the internal
+[PublishingToMavenCentral](https://w.amazon.com/bin/view/Open_Source/Open_Sourcing/Uploading/PublishingToMavenCentral)
+wiki still documents, is retired: it answers uploads with HTTP 402 and its
+`/#stagingRepositories` UI is gone. That wiki predates the OSSRH sunset.
+
 The publication includes the library, sources, and Javadoc JARs, POM, Gradle
-module metadata, and PGP signatures. A maintainer closes and releases the staging
-repository in the Sonatype web UI after verifying the artifacts.
+module metadata, and PGP signatures. A maintainer publishes the deployment from
+the Central Portal after verifying the artifacts.
+
+Staging repositories created through this API are **isolated by IP**, so a
+release has to be uploaded by a single job. Splitting the upload across runners
+would scatter the artifacts across separate staging repositories.
 
 ### Credentials
 
@@ -68,7 +79,7 @@ release account, in `us-west-2`:
 | --- | --- |
 | `opensearch-java/release/gpg-signing-key` | ASCII-armored PGP private key |
 | `opensearch-java/release/gpg-passphrase` | Signing key passphrase |
-| `opensearch-java/release/sonatype-credentials` | JSON with `username` and `password` for AWS Sonatype staging |
+| `opensearch-java/release/central-portal-token` | JSON with `username` and `token`, the Central Portal user token |
 
 The staging account must have publishing access to `software.amazon.opensearch`.
 An existing Central Portal account or namespace approval does not by itself
@@ -92,8 +103,8 @@ The workflow passes credentials through Gradle's environment properties:
 
 | Environment variable | Gradle property |
 | --- | --- |
-| `ORG_GRADLE_PROJECT_mavenUsername` | `mavenUsername` |
-| `ORG_GRADLE_PROJECT_mavenPassword` | `mavenPassword` |
+| `ORG_GRADLE_PROJECT_centralPortalUsername` | `centralPortalUsername` |
+| `ORG_GRADLE_PROJECT_centralPortalToken` | `centralPortalToken` |
 | `ORG_GRADLE_PROJECT_signingKey` | `signingKey` |
 | `ORG_GRADLE_PROJECT_signingPassword` | `signingPassword` |
 
@@ -110,19 +121,21 @@ Publish the signing public key to a keyserver accepted by Sonatype, such as
 
    ```bash
    VERSION=0.1.0 ./gradlew --no-daemon \
-     :java-client:publishPublishMavenPublicationToSonatypeStagingRepository
+     :java-client:publishPublishMavenPublicationToCentralStagingRepository
    ```
 
    Gradle builds and signs the artifacts before uploading them. Snapshot versions
    are rejected by the staging task, and release publications require a signing
    key. The workflow then creates a draft GitHub release with the JARs and their
    signatures attached.
-3. Open the staging repositories in the AWS Sonatype web UI:
-   `https://aws.oss.sonatype.org/#stagingRepositories`. Find this release's staging
-   repository, inspect its artifacts, and **Close** it.
-4. Use the staging repository URL shown by Sonatype to verify that a consuming
-   Maven or Gradle project can resolve and use the client. Then **Release** the
-   staging repository to Maven Central.
+3. Open <https://central.sonatype.com/publishing/deployments>. A staging
+   repository has to be closed, or uploaded manually, before it appears there.
+   Inspect the deployment's artifacts; it reaches `VALIDATED` once Sonatype's
+   checks pass, and nothing is on Maven Central until it is published.
+4. Verify that a consuming Maven or Gradle project can resolve the client from
+   the staging repository, then **Publish** the deployment. Publishing cannot be
+   undone — Maven Central does not allow deleting or replacing a version. To
+   abandon a release instead, **Drop** the deployment.
 5. Publish the draft GitHub release after confirming the Maven Central artifacts
    are available.
 

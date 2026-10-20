@@ -52,7 +52,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.MAVEN_CENTRAL_SIGNING_ROLE }}
           aws-region: us-west-2
-      - name: Build, sign and publish to Sonatype staging
+      - name: Build, sign and publish to Central staging
         env:
           VERSION: ${{ steps.get_data.outputs.version }}
         run: |
@@ -64,18 +64,18 @@ jobs:
 
           ORG_GRADLE_PROJECT_signingKey=$(get opensearch-java/release/gpg-signing-key)
           ORG_GRADLE_PROJECT_signingPassword=$(get opensearch-java/release/gpg-passphrase)
-          sonatype=$(get opensearch-java/release/sonatype-credentials)
-          ORG_GRADLE_PROJECT_mavenUsername=$(jq -re .username <<<"$sonatype")
-          ORG_GRADLE_PROJECT_mavenPassword=$(jq -re .password <<<"$sonatype")
-          unset sonatype
+          portal=$(get opensearch-java/release/central-portal-token)
+          ORG_GRADLE_PROJECT_centralPortalUsername=$(jq -re .username <<<"$portal")
+          ORG_GRADLE_PROJECT_centralPortalToken=$(jq -re .token <<<"$portal")
+          unset portal
 
-          for v in "$ORG_GRADLE_PROJECT_signingPassword" "$ORG_GRADLE_PROJECT_mavenUsername" "$ORG_GRADLE_PROJECT_mavenPassword"; do
+          for v in "$ORG_GRADLE_PROJECT_signingPassword" "$ORG_GRADLE_PROJECT_centralPortalUsername" "$ORG_GRADLE_PROJECT_centralPortalToken"; do
             echo "::add-mask::$v"
           done
           export ORG_GRADLE_PROJECT_signingKey ORG_GRADLE_PROJECT_signingPassword
-          export ORG_GRADLE_PROJECT_mavenUsername ORG_GRADLE_PROJECT_mavenPassword
+          export ORG_GRADLE_PROJECT_centralPortalUsername ORG_GRADLE_PROJECT_centralPortalToken
 
-          ./gradlew --no-daemon :java-client:publishPublishMavenPublicationToSonatypeStagingRepository
+          ./gradlew --no-daemon :java-client:publishPublishMavenPublicationToCentralStagingRepository
       - name: Draft a release
         uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd
         with:
