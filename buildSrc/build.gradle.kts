@@ -35,9 +35,6 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
-    maven(url = "https://central.sonatype.com/repository/maven-snapshots/")
-    maven(url = "https://aws.oss.sonatype.org/content/repositories/snapshots")
     mavenCentral()
     gradlePluginPortal()
 }
