@@ -45,8 +45,6 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        // A release, not a -SNAPSHOT: the release job executes this plugin, and a
-        // snapshot's contents can change between runs.
         "classpath"(group = "org.opensearch.gradle", name = "build-tools", version = "3.9.0")
     }
 }

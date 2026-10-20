@@ -3,11 +3,12 @@ name: Release
 on:
   push:
     tags:
-      - "*"
+      - "v*"
 
 jobs:
   release:
     name: Publish the release
+    if: github.repository == 'aws/opensearch-java-aws'
     runs-on: ubuntu-latest
     # Gating on an environment rather than an in-workflow approval step means GitHub
     # resolves the reviewers itself. The inherited `manual-approval` step was handed
