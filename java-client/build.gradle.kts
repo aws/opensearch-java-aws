@@ -43,7 +43,7 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        "classpath"(group = "org.opensearch.gradle", name = "build-tools", version = "3.8.0-SNAPSHOT")
+        "classpath"(group = "org.opensearch.gradle", name = "build-tools", version = "3.9.0")
     }
 }
 
@@ -259,7 +259,7 @@ dependencies {
     api("commons-logging:commons-logging:1.4.0")
     testImplementation("org.hamcrest:hamcrest:3.0")
 
-    api("org.apache.httpcomponents.client5:httpclient5:5.6.4") {
+    api("org.apache.httpcomponents.client5:httpclient5:5.6.5") {
       exclude(group = "org.apache.httpcomponents.core5")
     }
     api("org.apache.httpcomponents.core5:httpcore5:5.4.4")
