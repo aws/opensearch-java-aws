@@ -81,7 +81,7 @@ public final class CreateDataStreamRequest extends RequestBase
     }
 
     /**
-     * Required - Name of the data stream, which must meet the following criteria: Lowercase only; Cannot include <code>\</code>,
+     * Required - Name of the data stream, which must meet the following criteria: Lowercase only; Cannot include <code>&#92;</code>,
      * <code>/</code>, <code>*</code>, <code>?</code>, <code>&quot;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>|</code>,
      * <code>,</code>, <code>#</code>, <code>:</code>, or a space character; Cannot start with <code>-</code>, <code>_</code>,
      * <code>+</code>, or <code>.ds-</code>; Cannot be <code>.</code> or <code>..</code>; Cannot be longer than 255 bytes. Multi-byte
@@ -139,7 +139,7 @@ public final class CreateDataStreamRequest extends RequestBase
         }
 
         /**
-         * Required - Name of the data stream, which must meet the following criteria: Lowercase only; Cannot include <code>\</code>,
+         * Required - Name of the data stream, which must meet the following criteria: Lowercase only; Cannot include <code>&#92;</code>,
          * <code>/</code>, <code>*</code>, <code>?</code>, <code>&quot;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>|</code>,
          * <code>,</code>, <code>#</code>, <code>:</code>, or a space character; Cannot start with <code>-</code>, <code>_</code>,
          * <code>+</code>, or <code>.ds-</code>; Cannot be <code>.</code> or <code>..</code>; Cannot be longer than 255 bytes. Multi-byte

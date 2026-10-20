@@ -15,6 +15,7 @@ import com.github.jk1.license.ProjectData
 import com.github.jk1.license.render.ReportRenderer
 import de.undercouch.gradle.tasks.download.Download
 import java.io.FileWriter
+import java.security.MessageDigest
 
 buildscript {
     repositories {
@@ -83,6 +84,7 @@ fun registerDistributionClientTask(
         group = "code generation"
         description = "Generates the $distribution Java client into the java-codegen build directory."
         dependsOn("classes")
+        dependsOn("verifySpecChecksums")
 
         mainClass.set(application.mainClass)
         classpath = sourceSets["main"].runtimeClasspath
@@ -134,13 +136,36 @@ tasks.register("generateClients") {
     dependsOn("generateAosClient", "generateAossClient")
 }
 
+// Each generator-input spec is pinned by a committed `<spec>.sha256` holding the
+// bare SHA-256 of the spec bytes, mirroring OpenSearch core's `<jar>.sha1`
+// dependency pins. `updateSpecShas` writes a missing pin (never silently
+// overwrites an existing one); `verifySpecChecksums` (a dependency of every
+// client-generation task) recomputes each spec's hash and fails the build on a
+// mismatch or a missing pin, so a spec changes only through a reviewed refresh.
+val distributionSpecFiles = listOf(
+    "opensearch-openapi-aos.yaml",
+    "opensearch-openapi-aoss.yaml"
+)
+
+fun sha256Of(f: File): String {
+    val digest = MessageDigest.getInstance("SHA-256").digest(f.readBytes())
+    val sb = StringBuilder(digest.size * 2)
+    for (b in digest) {
+        sb.append("%02x".format(b))
+    }
+    return sb.toString()
+}
+
+fun shaFileFor(specName: String): File = file("${projectDir}/$specName.sha256")
+
 // Refreshes the committed AOS/AOSS distribution specs from the published
-// OpenSearch API spec site. These downloaded files are the generator input;
-// run this task, then commit the updated specs via PR so the spec change is
-// reviewed before code is regenerated from it.
+// OpenSearch API spec site. These downloaded files are the generator input; run
+// this task (it refreshes the `<spec>.sha256` pins too), then commit the updated
+// specs and pins via PR so the spec change is reviewed before code is
+// regenerated from it.
 tasks.register<Download>("downloadLatestSpecs") {
     group = "code generation"
-    description = "Downloads the latest AOS and AOSS distribution specs into java-codegen."
+    description = "Downloads the latest AOS and AOSS distribution specs into java-codegen and refreshes their checksum pins."
     src(
         listOf(
             "https://api-spec.opensearch.org/opensearch-openapi-aos.yaml",
@@ -149,6 +174,62 @@ tasks.register<Download>("downloadLatestSpecs") {
     )
     dest(projectDir)
     overwrite(true)
+    doLast {
+        // A fresh download may change the spec, so re-pin unconditionally here.
+        distributionSpecFiles.forEach { name ->
+            val sha = sha256Of(file("${projectDir}/$name"))
+            shaFileFor(name).writeText(sha + "\n")
+            logger.quiet("Pinned $name.sha256")
+        }
+    }
+}
+
+// Writes a `<spec>.sha256` pin for any spec that does not have one yet, like
+// OpenSearch's `updateShas`. Existing pins are left untouched so a change is
+// never silently absorbed; refresh those with `downloadLatestSpecs`.
+tasks.register("updateSpecShas") {
+    group = "code generation"
+    description = "Writes a SHA-256 pin for any distribution spec that is missing one."
+    doLast {
+        distributionSpecFiles.forEach { name ->
+            val specFile = file("${projectDir}/$name")
+            check(specFile.isFile) { "Distribution specification not found: $specFile" }
+            val shaFile = shaFileFor(name)
+            if (shaFile.exists()) {
+                logger.quiet("Pin already present for $name")
+            } else {
+                shaFile.writeText(sha256Of(specFile) + "\n")
+                logger.quiet("Added pin $name.sha256")
+            }
+        }
+    }
+}
+
+// Verifies each generator-input spec on disk matches its committed `<spec>.sha256`
+// pin. Every client-generation task depends on this so a spec that was changed
+// without updating its pin never reaches the generator.
+val verifySpecChecksums = tasks.register("verifySpecChecksums") {
+    group = "verification"
+    description = "Verifies the AOS and AOSS distribution specs match their committed SHA-256 pins."
+    inputs.files(distributionSpecFiles.map { file("${projectDir}/$it") })
+    inputs.files(distributionSpecFiles.map { shaFileFor(it) })
+    doLast {
+        distributionSpecFiles.forEach { name ->
+            val specFile = file("${projectDir}/$name")
+            check(specFile.isFile) { "Distribution specification not found: $specFile" }
+            val shaFile = shaFileFor(name)
+            check(shaFile.isFile) {
+                "Checksum pin not found: ${shaFile.name}. Run `updateSpecShas` (or `downloadLatestSpecs`) to create it."
+            }
+            val want = shaFile.readText().trim()
+            val got = sha256Of(specFile)
+            check(got == want) {
+                "Checksum mismatch for $name: expected $want but found $got. " +
+                    "The spec was changed without updating ${shaFile.name}; refresh it via `downloadLatestSpecs` in a reviewed PR."
+            }
+        }
+        logger.quiet("Verified ${distributionSpecFiles.size} distribution spec checksum pins.")
+    }
 }
 
 tasks.withType<ProcessResources> {

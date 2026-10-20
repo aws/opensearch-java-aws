@@ -2,6 +2,11 @@ name: Validate AWS Generated Sources
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'java-codegen/**'
+      - 'java-client/src/generated/**'
+      - '.github/workflows/code-generation.yml'
 
 permissions:
   contents: read
@@ -19,6 +24,19 @@ jobs:
           java-version: 21
           distribution: temurin
           cache: gradle
+
+      - name: Verify spec checksums
+        run: ./gradlew :java-codegen:verifySpecChecksums
+
+      - name: Regenerate AOS and AOSS clients from committed specs
+        run: ./gradlew :java-codegen:generateClients
+
+      - name: Fail if generated sources drift from committed output
+        run: |
+          if ! git diff --exit-code -- java-client/src/generated; then
+            echo "::error::Generated sources differ from committed output. Run './gradlew :java-codegen:generateClients' and commit the result."
+            exit 1
+          fi
 
       - name: Compile AOS and AOSS generated sources
         run: ./gradlew :java-client:compileAosJava :java-client:compileAossJava

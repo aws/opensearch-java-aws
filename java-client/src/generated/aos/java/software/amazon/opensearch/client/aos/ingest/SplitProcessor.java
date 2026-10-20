@@ -133,7 +133,7 @@ public class SplitProcessor extends ProcessorBase implements ProcessorVariant, T
     }
 
     /**
-     * Required - A regex which matches the separator, for example, <code>,</code> or <code>\s+</code>.
+     * Required - A regex which matches the separator, for example, <code>,</code> or <code>&#92;s+</code>.
      * <p>
      * API name: {@code separator}
      * </p>
@@ -267,7 +267,7 @@ public class SplitProcessor extends ProcessorBase implements ProcessorVariant, T
         }
 
         /**
-         * Required - A regex which matches the separator, for example, <code>,</code> or <code>\s+</code>.
+         * Required - A regex which matches the separator, for example, <code>,</code> or <code>&#92;s+</code>.
          * <p>
          * API name: {@code separator}
          * </p>
