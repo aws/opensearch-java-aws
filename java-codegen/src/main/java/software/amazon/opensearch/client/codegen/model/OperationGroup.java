@@ -38,8 +38,8 @@ public class OperationGroup {
     }
 
     public OperationGroup(@Nullable String namespace, @Nonnull String name) {
-        this.namespace = namespace;
-        this.name = Strings.requireNonBlank(name, "name must not be blank");
+        this.namespace = namespace != null ? Strings.requireValidName(namespace, "operation namespace is not a valid spec name") : null;
+        this.name = Strings.requireValidName(name, "operation name is not a valid spec name");
     }
 
     @Nonnull
