@@ -290,9 +290,9 @@ dependencies {
     implementation("commons-logging", "commons-logging", "1.3.2")
     implementation("org.apache.commons", "commons-lang3", "3.14.0")
     implementation("org.apache.commons", "commons-text", "1.12.0")
-    implementation("org.apache.logging.log4j", "log4j-api", "[2.17.1,3.0)")
-    implementation("org.apache.logging.log4j", "log4j-core", "[2.17.1,3.0)")
-    implementation("org.apache.logging.log4j", "log4j-slf4j2-impl", "[2.17.1,3.0)")
+    implementation("org.apache.logging.log4j", "log4j-api", "2.26.1")
+    implementation("org.apache.logging.log4j", "log4j-core", "2.26.1")
+    implementation("org.apache.logging.log4j", "log4j-slf4j2-impl", "2.26.1")
 
     // Apache 2.0
     implementation("com.fasterxml.jackson.core", "jackson-core", "2.22.2")

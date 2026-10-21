@@ -252,6 +252,7 @@ dependencies {
     val jackson3Version = "3.2.2"
     val jackson3DatabindVersion = "3.2.2"
     val awsSdkVersion = "2.57.1"
+    val log4jVersion = "2.26.1"
 
     // Apache 2.0
     api("commons-logging:commons-logging:1.4.0")
@@ -301,10 +302,10 @@ dependencies {
     testImplementation("software.amazon.awssdk", "url-connection-client", awsSdkVersion)
     testImplementation("software.amazon.awssdk", "sts", awsSdkVersion)
 
-    testImplementation("org.apache.logging.log4j", "log4j-api","[2.17.1,3.0)") {
+    testImplementation("org.apache.logging.log4j", "log4j-api", log4jVersion) {
         exclude(group = "com.github.spotbugs", module = "spotbugs-annotations")
     }
-    testImplementation("org.apache.logging.log4j", "log4j-core","[2.17.1,3.0)") {
+    testImplementation("org.apache.logging.log4j", "log4j-core", log4jVersion) {
         exclude(group = "com.github.spotbugs", module = "spotbugs-annotations")
     }
 
