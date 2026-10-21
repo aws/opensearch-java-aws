@@ -67,6 +67,20 @@ public class StringsTests {
         assertEquals(input, output);
     }
 
+    @ParameterizedTest(name = "[{index}] \"{0}\" is a valid spec name")
+    @ValueSource(strings = { "field", "_source", "snake_case", "dot.separated", "kebab-case", "v2", "a" })
+    public void requireValidName_withValidName_shouldPassThroughValue(String input) {
+        var output = assertDoesNotThrow(() -> Strings.requireValidName(input, "name is not valid"));
+        assertEquals(input, output);
+    }
+
+    @ParameterizedTest(name = "[{index}] \"{0}\" is not a valid spec name")
+    @NullSource
+    @ValueSource(strings = { "", "has space", "ends*/here", "back\\slash", "uni\\u0041code", "star*", "slash/path", "colon:x" })
+    public void requireValidName_withInvalidName_shouldThrowException(String input) {
+        assertThrowsExactly(IllegalArgumentException.class, () -> Strings.requireValidName(input, "name is not valid"));
+    }
+
     @ParameterizedTest(name = "[{index}] \"{0}\" in snake case should be \"{1}\"")
     @CsvSource({
         "camelCase, camel_case",

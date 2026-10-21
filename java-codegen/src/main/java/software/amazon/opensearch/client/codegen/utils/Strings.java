@@ -20,6 +20,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -42,6 +43,22 @@ public final class Strings {
     public static String requireNonBlank(@Nullable String str, @Nullable String message) {
         if (isNullOrBlank(str)) {
             throw new IllegalArgumentException(message);
+        }
+        return str;
+    }
+
+    // Spec names (property, operation and variant names) are written verbatim
+    // into generated comments, including {@code ...} Javadoc. A name containing
+    // */ would close the comment and a backslash-u sequence would be decoded by
+    // javac into another character (JLS 3.3), either of which breaks the output.
+    // Restrict names to a plain identifier so none of those sequences can occur.
+    private static final Pattern VALID_NAME = Pattern.compile("[A-Za-z0-9_.-]+");
+
+    @Nonnull
+    @Contract(value = "null, _ -> fail; _, _ -> param1", pure = true)
+    public static String requireValidName(@Nullable String str, @Nullable String message) {
+        if (str == null || !VALID_NAME.matcher(str).matches()) {
+            throw new IllegalArgumentException(message + ": " + str);
         }
         return str;
     }
