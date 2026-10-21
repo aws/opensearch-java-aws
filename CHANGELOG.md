@@ -18,6 +18,8 @@ Serverless (AOSS).
 ### Changed
 - Include Java 8-compatible `samples` in Gradle and CI builds, align examples with the AWS client packages and APIs, and add AOS/AOSS search examples and usage documentation ([#43](https://github.com/aws/opensearch-java-aws/pull/43)).
 - Resolve build plugins and dependencies from Maven Central only ([#36](https://github.com/aws/opensearch-java-aws/pull/36)).
+- Dropped the unused `opensearch.repositories` plugin and pinned the AWS SDK and log4j dependencies to fixed versions instead of ranges ([#45](https://github.com/aws/opensearch-java-aws/pull/45)).
+- Added Gradle dependency verification so build artifacts are checked against recorded SHA-256 checksums ([#45](https://github.com/aws/opensearch-java-aws/pull/45)).
 - Compatibility: `AwsSdk2Transport` now throws `TransportException` before sending a GET body through AWS SDK `UrlConnectionHttpClient`, including explicitly supplied empty bodies. Use an HTTP client that preserves GET bodies, such as AWS CRT, when body fields are set.
 - Compatibility: unset optional GET bodies are omitted for AOSS snapshot listing and AOS ML profiling. ML profile calls without body fields now use the server's URL-based defaults and model/task IDs instead of parsing `{}`, which can change returned results. Explicit false values, empty collections, and generic request bodies are preserved.
 - Rewrote `RELEASING.md` for this fork: documents the `0.1.0` prototype status, snapshot publishing via GitHub Actions OIDC, manual backporting, and that the signed Maven Central release path is not yet established — replacing the inherited upstream Jenkins/opensearch.org release strategy.
