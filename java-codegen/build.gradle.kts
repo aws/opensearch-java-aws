@@ -17,16 +17,6 @@ import de.undercouch.gradle.tasks.download.Download
 import java.io.FileWriter
 import java.security.MessageDigest
 
-buildscript {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-        "classpath"(group = "org.opensearch.gradle", name = "build-tools", version = "3.9.0")
-    }
-}
-
 plugins {
     application
     id("com.github.jk1.dependency-license-report") version "3.1.4"
@@ -35,7 +25,6 @@ plugins {
 
     id("opensearch-java.spotless-conventions")
 }
-apply(plugin = "opensearch.repositories")
 apply(plugin = "org.owasp.dependencycheck")
 
 val runtimeJavaVersion = (System.getProperty("runtime.java")?.toInt())?.let(JavaVersion::toVersion) ?: JavaVersion.current()
@@ -291,9 +280,9 @@ dependencies {
     implementation("commons-logging", "commons-logging", "1.3.2")
     implementation("org.apache.commons", "commons-lang3", "3.14.0")
     implementation("org.apache.commons", "commons-text", "1.12.0")
-    implementation("org.apache.logging.log4j", "log4j-api", "[2.17.1,3.0)")
-    implementation("org.apache.logging.log4j", "log4j-core", "[2.17.1,3.0)")
-    implementation("org.apache.logging.log4j", "log4j-slf4j2-impl", "[2.17.1,3.0)")
+    implementation("org.apache.logging.log4j", "log4j-api", "2.26.1")
+    implementation("org.apache.logging.log4j", "log4j-core", "2.26.1")
+    implementation("org.apache.logging.log4j", "log4j-slf4j2-impl", "2.26.1")
 
     // Apache 2.0
     implementation("com.fasterxml.jackson.core", "jackson-core", "2.22.2")

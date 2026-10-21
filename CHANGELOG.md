@@ -15,10 +15,12 @@ Serverless (AOSS).
 - `Build Distributions` CI workflow that compiles the AOS and AOSS clients and runs their unit tests across JDK 21 and 25.
 
 ### Dependencies
-- Pin AWS SDK dependencies to `2.57.0`; consumers can override the version with their AWS SDK BOM.
+- Pin AWS SDK dependencies to `2.57.1`; consumers can override the version with their AWS SDK BOM.
 
 ### Changed
-- Prefer Maven Central for build plugins and dependencies; the OpenSearch repository plugin still adds CI repositories as fallbacks ([#36](https://github.com/aws/opensearch-java-aws/pull/36)).
+- Resolve build plugins and dependencies from Maven Central only ([#36](https://github.com/aws/opensearch-java-aws/pull/36)).
+- Dropped the unused `opensearch.repositories` plugin and pinned the AWS SDK and log4j dependencies to fixed versions instead of ranges ([#45](https://github.com/aws/opensearch-java-aws/pull/45)).
+- Added Gradle dependency verification so build artifacts are checked against recorded SHA-256 checksums ([#45](https://github.com/aws/opensearch-java-aws/pull/45)).
 - Compatibility: `AwsSdk2Transport` now throws `TransportException` before sending a GET body through AWS SDK `UrlConnectionHttpClient`, including explicitly supplied empty bodies. Use an HTTP client that preserves GET bodies, such as AWS CRT, when body fields are set.
 - Compatibility: unset optional GET bodies are omitted for AOSS snapshot listing and AOS ML profiling. ML profile calls without body fields now use the server's URL-based defaults and model/task IDs instead of parsing `{}`, which can change returned results. Explicit false values, empty collections, and generic request bodies are preserved.
 - Update `RELEASING.md` with the prototype release process, manual backporting, and publishing through Sonatype's OSSRH Staging API.

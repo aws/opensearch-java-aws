@@ -25,10 +25,10 @@ dependencies {
     implementation("org.apache.logging.log4j", "log4j-slf4j2-impl","[2.17.1,3.0)")
     implementation("commons-logging", "commons-logging", "1.2")
     implementation("com.fasterxml.jackson.core", "jackson-databind", "2.22.2")
-    implementation("software.amazon.awssdk", "sdk-core", "2.57.0")
-    implementation("software.amazon.awssdk", "auth", "2.57.0")
-    implementation("software.amazon.awssdk", "http-auth-aws", "2.57.0")
-    implementation("software.amazon.awssdk", "apache-client", "2.57.0")
+    implementation("software.amazon.awssdk", "sdk-core", "2.57.1")
+    implementation("software.amazon.awssdk", "auth", "2.57.1")
+    implementation("software.amazon.awssdk", "http-auth-aws", "2.57.1")
+    implementation("software.amazon.awssdk", "apache-client", "2.57.1")
 }
 
 application {
