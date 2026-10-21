@@ -37,3 +37,4 @@ plugins {
 rootProject.name = "opensearch-java-aws"
 include("java-client")
 include("java-codegen")
+include("samples")
