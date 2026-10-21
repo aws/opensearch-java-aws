@@ -35,7 +35,6 @@ plugins {
 
     id("opensearch-java.spotless-conventions")
 }
-apply(plugin = "opensearch.repositories")
 apply(plugin = "org.owasp.dependencycheck")
 
 val runtimeJavaVersion = (System.getProperty("runtime.java")?.toInt())?.let(JavaVersion::toVersion) ?: JavaVersion.current()

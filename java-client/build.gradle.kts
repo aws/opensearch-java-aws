@@ -55,7 +55,6 @@ plugins {
 
     id("opensearch-java.spotless-conventions")
 }
-apply(plugin = "opensearch.repositories")
 apply(plugin = "org.owasp.dependencycheck")
 
 val runtimeJavaVersion = (System.getProperty("runtime.java")?.toInt())?.let(JavaVersion::toVersion) ?: JavaVersion.current()
@@ -252,6 +251,7 @@ dependencies {
     val jacksonDatabindVersion = "2.22.2"
     val jackson3Version = "3.2.2"
     val jackson3DatabindVersion = "3.2.2"
+    val awsSdkVersion = "2.57.1"
 
     // Apache 2.0
     api("commons-logging:commons-logging:1.4.0")
@@ -288,18 +288,18 @@ dependencies {
     testImplementation("com.fasterxml.jackson.datatype", "jackson-datatype-jakarta-jsonp", jacksonVersion)
 
     // For AwsSdk2Transport
-    "awsSdk2SupportCompileOnly"("software.amazon.awssdk", "sdk-core", "[2.21,3.0)")
-    "awsSdk2SupportCompileOnly"("software.amazon.awssdk", "auth", "[2.21,3.0)")
-    "awsSdk2SupportCompileOnly"("software.amazon.awssdk", "http-auth-aws", "[2.21,3.0)")
-    testImplementation("software.amazon.awssdk", "sdk-core", "[2.21,3.0)")
-    testImplementation("software.amazon.awssdk", "auth", "[2.21,3.0)")
-    testImplementation("software.amazon.awssdk", "http-auth-aws", "[2.21,3.0)")
-    testImplementation("software.amazon.awssdk", "aws-crt-client", "[2.21,3.0)")
-    testImplementation("software.amazon.awssdk", "apache-client", "[2.21,3.0)")
-    testImplementation("software.amazon.awssdk", "apache5-client", "[2.34,3.0)")
-    testImplementation("software.amazon.awssdk", "netty-nio-client", "[2.21,3.0)")
-    testImplementation("software.amazon.awssdk", "url-connection-client", "[2.21,3.0)")
-    testImplementation("software.amazon.awssdk", "sts", "[2.21,3.0)")
+    "awsSdk2SupportCompileOnly"("software.amazon.awssdk", "sdk-core", awsSdkVersion)
+    "awsSdk2SupportCompileOnly"("software.amazon.awssdk", "auth", awsSdkVersion)
+    "awsSdk2SupportCompileOnly"("software.amazon.awssdk", "http-auth-aws", awsSdkVersion)
+    testImplementation("software.amazon.awssdk", "sdk-core", awsSdkVersion)
+    testImplementation("software.amazon.awssdk", "auth", awsSdkVersion)
+    testImplementation("software.amazon.awssdk", "http-auth-aws", awsSdkVersion)
+    testImplementation("software.amazon.awssdk", "aws-crt-client", awsSdkVersion)
+    testImplementation("software.amazon.awssdk", "apache-client", awsSdkVersion)
+    testImplementation("software.amazon.awssdk", "apache5-client", awsSdkVersion)
+    testImplementation("software.amazon.awssdk", "netty-nio-client", awsSdkVersion)
+    testImplementation("software.amazon.awssdk", "url-connection-client", awsSdkVersion)
+    testImplementation("software.amazon.awssdk", "sts", awsSdkVersion)
 
     testImplementation("org.apache.logging.log4j", "log4j-api","[2.17.1,3.0)") {
         exclude(group = "com.github.spotbugs", module = "spotbugs-annotations")
