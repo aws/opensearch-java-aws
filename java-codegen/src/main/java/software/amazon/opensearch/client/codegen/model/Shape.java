@@ -63,7 +63,7 @@ public abstract class Shape {
     public Shape(Namespace parent, String className, String typedefName, String description, ShouldGenerate shouldGenerate) {
         this.parent = parent;
         this.className = className;
-        this.typedefName = typedefName;
+        this.typedefName = typedefName != null ? Strings.requireValidName(typedefName, "typedef name is not a valid spec name") : null;
         this.description = description != null ? Markdown.toJavaDocHtml(description) : null;
         this.shouldGenerate = shouldGenerate;
     }
