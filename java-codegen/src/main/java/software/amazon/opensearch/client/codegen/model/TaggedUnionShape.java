@@ -44,6 +44,7 @@ public class TaggedUnionShape extends ObjectShapeBase {
     }
 
     public void addVariant(String name, TypeRef type) {
+        Strings.requireValidName(name, "variant name is not a valid spec name");
         variants.put(name, new Variant(name, type.getBoxed()));
         tryAddReference(ReferenceKind.UnionVariant, type);
     }

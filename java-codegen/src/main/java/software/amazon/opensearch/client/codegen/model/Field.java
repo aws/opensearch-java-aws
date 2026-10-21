@@ -47,7 +47,7 @@ public class Field {
     private Field(@Nonnull Builder builder) {
         Objects.requireNonNull(builder, "builder must not be null");
         if (builder.wireName != null) {
-            this.wireName = Strings.requireNonBlank(builder.wireName, "wireName must not be blank");
+            this.wireName = Strings.requireValidName(builder.wireName, "wireName is not a valid spec name");
             this.name = builder.name != null
                 ? Strings.requireNonBlank(builder.name, "name must not be blank")
                 : NameSanitizer.fieldName(wireName);
