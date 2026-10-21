@@ -18,6 +18,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.hc.core5.http.HttpHost;
+import org.apache.hc.core5.util.Timeout;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.http.SdkHttpClient;
@@ -76,6 +77,8 @@ public final class JsonpMapperTestSupport {
                     HttpTransportTestServer server = new HttpTransportTestServer(index ? INDEX_RESPONSE : SEARCH_RESPONSE);
                     ApacheHttpClient5Transport transport = ApacheHttpClient5TransportBuilder.builder(HttpHost.create(server.baseUrl()))
                         .setMapper(mapper)
+                        // The 1s default connect timeout is too tight for loaded CI runners (notably macOS).
+                        .setConnectionConfigCallback(c -> c.setConnectTimeout(Timeout.ofSeconds(10)))
                         .build()
                 ) {
                     assertExchange(transport, server, serverless, async, index);
