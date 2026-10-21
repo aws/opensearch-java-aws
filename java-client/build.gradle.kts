@@ -353,8 +353,9 @@ dependencies {
     implementation("jakarta.annotation", "jakarta.annotation-api", "1.3.5")
 
     // Apache 2.0
-    implementation("com.fasterxml.jackson.core", "jackson-core", jacksonVersion)
-    implementation("com.fasterxml.jackson.core", "jackson-databind", jacksonDatabindVersion)
+    // `api`: Jackson 2 types appear in the public JacksonJsonpMapper signatures.
+    api("com.fasterxml.jackson.core", "jackson-core", jacksonVersion)
+    api("com.fasterxml.jackson.core", "jackson-databind", jacksonDatabindVersion)
     // Optional Java 21 adapter: these dependencies are not required by Java 8 consumers.
     add(jackson3SourceSet.compileOnlyConfigurationName, "tools.jackson.core:jackson-core:$jackson3Version")
     add(jackson3SourceSet.compileOnlyConfigurationName, "tools.jackson.core:jackson-databind:$jackson3DatabindVersion")
