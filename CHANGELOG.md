@@ -50,7 +50,7 @@ Serverless (AOSS).
 - Pointed the inherited open-source metadata (CODEOWNERS, MAINTAINERS, ADMINS, NOTICE, SECURITY) at the `aws/amazon-opensearch-clients` owning team and AWS vulnerability reporting.
 
 ### Security
-- Fetch release credentials from AWS Secrets Manager using GitHub OIDC and gate publishing on the `release` environment.
+- Fetch release credentials from AWS Secrets Manager using GitHub OIDC and gate publishing on the `release` environment; mask every non-empty line of the GPG private key in workflow logs.
 - Restricted default GitHub Actions token permissions to read-only for build and maintenance workflows ([#16](https://github.com/aws/opensearch-java-aws/pull/16)).
 - Added a `git-secrets` CI workflow and documented the local pre-commit hook to prevent committing secrets.
 - Extended the `git-secrets` scan with patterns for this project's release secrets (the PGP signing key and the Sonatype/Nexus publishing token), fixed the private-key patterns so git-secrets' internal grep no longer rejects the leading dash, and scoped the self-referential false positives in `.gitallowed` by file path.

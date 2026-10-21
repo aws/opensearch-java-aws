@@ -64,6 +64,14 @@ jobs:
                     | jq -re .SecretString; }
 
           ORG_GRADLE_PROJECT_signingKey=$(get opensearch-java/release/gpg-signing-key)
+          # Register every non-empty line of the armored key before running other tools.
+          while IFS= read -r signing_key_line; do
+            signing_key_line=${signing_key_line%$'\r'}
+            [ -z "$signing_key_line" ] && continue
+            signing_key_line=${signing_key_line//'%'/'%25'}
+            printf '::add-mask::%s\n' "$signing_key_line"
+          done <<< "$ORG_GRADLE_PROJECT_signingKey"
+          unset signing_key_line
           ORG_GRADLE_PROJECT_signingPassword=$(get opensearch-java/release/gpg-passphrase)
           portal=$(get opensearch-java/release/central-portal-token)
           ORG_GRADLE_PROJECT_centralPortalUsername=$(jq -re .username <<<"$portal")
