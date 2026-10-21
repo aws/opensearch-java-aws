@@ -52,7 +52,8 @@ jobs:
         with:
           role-to-assume: ${{ secrets.MAVEN_CENTRAL_SIGNING_ROLE }}
           aws-region: us-west-2
-      - name: Build, sign and publish to Central staging
+      - name: Build, sign and transfer to Central Portal
+        shell: bash
         env:
           VERSION: ${{ steps.get_data.outputs.version }}
         run: |
@@ -76,12 +77,23 @@ jobs:
           export ORG_GRADLE_PROJECT_centralPortalUsername ORG_GRADLE_PROJECT_centralPortalToken
 
           ./gradlew --no-daemon :java-client:publishPublishMavenPublicationToCentralStagingRepository
+
+          # Sonatype requires this handoff from the same IP as the artifact uploads.
+          portal_authorization=$(printf '%s:%s' "$ORG_GRADLE_PROJECT_centralPortalUsername" "$ORG_GRADLE_PROJECT_centralPortalToken" | base64 | tr -d '\n')
+          echo "::add-mask::$portal_authorization"
+          printf 'Authorization: Bearer %s\n' "$portal_authorization" |
+            curl --fail-with-body --silent --show-error \
+              --connect-timeout 30 --max-time 600 \
+              --request POST --header @- \
+              'https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/software.amazon.opensearch?publishing_type=user_managed'
+          unset portal_authorization
+          echo "Deployment transferred to Central Portal for validation and manual publication."
       - name: Draft a release
         uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd
         with:
           immutableCreate: true
           generateReleaseNotes: true
           artifacts: "java-client/build/libs/*.jar,java-client/build/libs/*.jar.asc"
-          # Publish the draft after a maintainer closes and releases the Sonatype staging repository.
+          # Publish the draft after a maintainer publishes the deployment in Central Portal.
           draft: true
           prerelease: true

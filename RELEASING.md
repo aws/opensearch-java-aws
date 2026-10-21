@@ -14,10 +14,10 @@ fork.
 
 ## Project status
 
-This project is a **pre-release prototype** (version `0.1.0`). Publishing is
-configured for AWS Sonatype staging. Before the first release, confirm that the
-team account can publish `software.amazon.opensearch` through that endpoint.
-The live staging upload has not yet been validated.
+This project is a **pre-release prototype** (version `0.1.0`). Publishing uses
+Sonatype's OSSRH Staging API and transfers the deployment to Central Portal for
+manual publication. The live upload and team publishing credentials have not yet
+been validated.
 
 ## Versioning
 
@@ -64,6 +64,13 @@ The publication includes the library, sources, and Javadoc JARs, POM, Gradle
 module metadata, and PGP signatures. A maintainer publishes the deployment from
 the Central Portal after verifying the artifacts.
 
+After Gradle uploads all artifacts, the same workflow step calls Sonatype's
+`POST /manual/upload/defaultRepository/software.amazon.opensearch` endpoint with
+`publishing_type=user_managed`. This makes the deployment visible in Central
+Portal for validation and manual publication. It does not publish to Maven
+Central automatically. The request uses a Bearer token built from the existing
+Central Portal token username and password.
+
 Staging repositories created through this API are **isolated by IP**, so a
 release has to be uploaded by a single job. Splitting the upload across runners
 would scatter the artifacts across separate staging repositories.
@@ -79,10 +86,10 @@ release account, in `us-west-2`:
 | `opensearch-java/release/gpg-passphrase` | Signing key passphrase |
 | `opensearch-java/release/central-portal-token` | JSON with `username` and `token`, the Central Portal user token |
 
-The staging account must have publishing access to `software.amazon.opensearch`.
-An existing Central Portal account or namespace approval does not by itself
-confirm access to the AWS staging endpoint. Configure and verify the staging
-credentials before triggering a release.
+Generate the Central Portal user token from the team account authorized to publish
+`software.amazon.opensearch`. The workflow uses this token for both the artifact
+uploads and the transfer to Central Portal. Verify the stored credentials and
+upload access before the first release.
 
 Configure required reviewers and the `MAVEN_CENTRAL_SIGNING_ROLE` secret on the
 GitHub `release` environment. The role must allow `secretsmanager:GetSecretValue`
@@ -115,7 +122,7 @@ Publish the signing public key to a keyserver accepted by Sonatype, such as
 1. Land the version and CHANGELOG changes per [Versioning](#versioning).
 2. Push a tag matching `v<systemProp.version>`, for example `v0.1.0`, to the
    official repository. The [release workflow](.github/workflows/release.yml)
-   waits for environment approval, runs unit tests, and invokes:
+   uses the `release` environment, runs unit tests, and invokes:
 
    ```bash
    VERSION=0.1.0 ./gradlew --no-daemon \
@@ -124,18 +131,17 @@ Publish the signing public key to a keyserver accepted by Sonatype, such as
 
    Gradle builds and signs the artifacts before uploading them. Snapshot versions
    are rejected by the staging task, and release publications require a signing
-   key. The workflow then creates a draft GitHub release with the JARs and their
-   signatures attached.
-3. Open <https://central.sonatype.com/publishing/deployments>. A staging
-   repository has to be closed, or uploaded manually, before it appears there.
-   Inspect the deployment's artifacts; it reaches `VALIDATED` once Sonatype's
-   checks pass, and nothing is on Maven Central until it is published.
-4. Verify that a consuming Maven or Gradle project can resolve the client from
-   the staging repository, then **Publish** the deployment. Publishing cannot be
+   key. After the upload, the same runner transfers the deployment to Central
+   Portal in `user_managed` mode. A failed upload or transfer fails the workflow;
+   the draft GitHub release is created only after both succeed.
+3. Open <https://central.sonatype.com/publishing/deployments> and inspect the
+   transferred deployment's artifacts. Wait for `VALIDATED`; the artifacts are
+   not on Maven Central yet.
+4. **Publish** the validated deployment in Central Portal. Publishing cannot be
    undone — Maven Central does not allow deleting or replacing a version. To
    abandon a release instead, **Drop** the deployment.
-5. Publish the draft GitHub release after confirming the Maven Central artifacts
-   are available.
+5. Confirm that a consuming Maven or Gradle project can resolve the artifacts
+   from Maven Central, then publish the draft GitHub release.
 
 ### Verifying artifacts locally
 
@@ -153,7 +159,7 @@ metadata.
 For local signing validation, use a throwaway key through the signing properties
 above and set `VERSION=0.1.0` for the same local repository task. Verify each
 artifact's `.asc` signature with `gpg --verify`. Local publication validates the
-artifact layout and signing; it does not validate access to the AWS staging
+artifact layout and signing; it does not validate access to the live Sonatype
 service.
 
 ## CHANGELOG entries

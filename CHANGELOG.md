@@ -8,7 +8,7 @@ Serverless (AOSS).
 
 ### Added
 - Pinned each input spec with a committed `<spec>.sha256` checksum, verified before generating — the same approach OpenSearch core uses for its `<jar>.sha1` dependency pins. The `code-generation` workflow now runs on pull requests and fails if regenerating from the committed specs drifts from the committed output ([#35](https://github.com/aws/opensearch-java-aws/pull/35)).
-- Add signed Maven Central publishing through Sonatype's OSSRH Staging API using Gradle's `maven-publish` and `signing` plugins ([#42](https://github.com/aws/opensearch-java-aws/pull/42)).
+- Add signed Maven Central publishing through Sonatype's OSSRH Staging API using Gradle's `maven-publish` and `signing` plugins, with transfer to Central Portal for manual publication ([#42](https://github.com/aws/opensearch-java-aws/pull/42)).
 - Bundled AOS and AOSS OpenAPI snapshots as the default inputs for distribution client generation ([#14](https://github.com/aws/opensearch-java-aws/pull/14)).
 - Typed AOS and AOSS data-plane clients under `software.amazon.opensearch.client`, generated per distribution into `src/generated/aos` and `src/generated/aoss`.
 - Handwritten AOS and AOSS APIs and shared AWS runtime (SigV4 transport, JSON model support).
