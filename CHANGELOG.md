@@ -24,7 +24,7 @@ Serverless (AOSS).
 - Compatibility: `AwsSdk2Transport` now throws `TransportException` before sending a GET body through AWS SDK `UrlConnectionHttpClient`, including explicitly supplied empty bodies. Use an HTTP client that preserves GET bodies, such as AWS CRT, when body fields are set.
 - Compatibility: unset optional GET bodies are omitted for AOSS snapshot listing and AOS ML profiling. ML profile calls without body fields now use the server's URL-based defaults and model/task IDs instead of parsing `{}`, which can change returned results. Explicit false values, empty collections, and generic request bodies are preserved.
 - Update `RELEASING.md` with the prototype release process, manual backporting, and publishing through Sonatype's OSSRH Staging API.
-- Support Java 8 with Jackson 2 as the default mapper, and test the packaged JAR on Java 8 in CI. Explicit mapper imports should use `json.jackson` instead of the removed `json.jackson3` package.
+- Ship a multi-release JAR with Jackson 2 as the default on Java 8+, and an optional Jackson 3 mapper on Java 21+. Test both mappers against the packaged JAR in CI.
 - Moved the code generator to `software.amazon.opensearch.client.codegen`, so the emitted `@Generated(...)` marker references a class that exists in this fork.
 - Removed the unsupported `refresh` parameter from AOSS multi-get requests.
 - Consolidated the handwritten sources into the standard `src/main/java` layout (from `src/java`) and moved `version.properties` to its package resource path, updating the `awsRuntime`/`aos`/`aoss` source sets to match.

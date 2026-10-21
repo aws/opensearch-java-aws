@@ -32,6 +32,7 @@
 
 import com.github.jk1.license.ProjectData
 import com.github.jk1.license.render.ReportRenderer
+import org.gradle.api.attributes.java.TargetJvmVersion
 import org.gradle.api.tasks.testing.Test
 import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import java.io.FileWriter
@@ -117,6 +118,12 @@ val aossSourceSet = sourceSets.create("aoss") {
     runtimeClasspath += awsRuntimeSourceSet.output
 }
 
+val jackson3SourceSet = sourceSets.create("jackson3") {
+    java.setSrcDirs(listOf("src/main/java21"))
+    compileClasspath += awsRuntimeSourceSet.output
+}
+configurations[jackson3SourceSet.implementationConfigurationName].extendsFrom(configurations["implementation"])
+
 configurations[awsRuntimeSourceSet.implementationConfigurationName].extendsFrom(configurations["implementation"])
 configurations[awsRuntimeSourceSet.compileOnlyConfigurationName].extendsFrom(
     configurations["compileOnly"],
@@ -142,6 +149,33 @@ sourceSets.test {
     runtimeClasspath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
 }
 
+val jackson3TestSourceSet = sourceSets.create("jackson3Test") {
+    java.setSrcDirs(listOf("src/test/java21"))
+    // Compile and run against the multi-release JAR, including its Java 21 entries.
+    compileClasspath += files(tasks.jar.flatMap { it.archiveFile }) + sourceSets.test.get().output
+    runtimeClasspath += files(tasks.jar.flatMap { it.archiveFile }) + sourceSets.test.get().output
+}
+configurations[jackson3TestSourceSet.implementationConfigurationName].extendsFrom(
+    configurations["testImplementation"],
+    configurations[jackson3SourceSet.compileOnlyConfigurationName]
+)
+configurations[jackson3TestSourceSet.runtimeOnlyConfigurationName].extendsFrom(configurations["testRuntimeOnly"])
+
+listOf(jackson3SourceSet, jackson3TestSourceSet).forEach { sourceSet ->
+    tasks.named<JavaCompile>(sourceSet.compileJavaTaskName) {
+        options.release.set(21)
+    }
+    listOf(sourceSet.compileClasspathConfigurationName, sourceSet.runtimeClasspathConfigurationName).forEach { name ->
+        configurations[name].attributes.attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 21)
+    }
+}
+tasks.named(jackson3SourceSet.compileJavaTaskName) {
+    dependsOn("compileAwsRuntimeJava")
+}
+tasks.named(jackson3TestSourceSet.compileJavaTaskName) {
+    dependsOn(tasks.jar, tasks.testClasses)
+}
+
 tasks.named("compileAosJava") {
     dependsOn("compileAwsRuntimeJava")
 }
@@ -155,23 +189,31 @@ tasks.named("compileTestJava") {
 }
 
 tasks.named<Jar>("jar") {
-    dependsOn("awsRuntimeClasses", "aosClasses", "aossClasses")
+    dependsOn("awsRuntimeClasses", "aosClasses", "aossClasses", jackson3SourceSet.classesTaskName)
     exclude("org/opensearch/client/**")
     from(awsRuntimeSourceSet.output, aosSourceSet.output, aossSourceSet.output)
+    into("META-INF/versions/21") {
+        from(jackson3SourceSet.output)
+    }
+    manifest.attributes["Multi-Release"] = "true"
 }
 
 tasks.named<Jar>("sourcesJar") {
     exclude("org/opensearch/client/**")
     from(awsRuntimeSourceSet.allSource, aosSourceSet.allSource, aossSourceSet.allSource)
+    into("META-INF/versions/21") {
+        from(jackson3SourceSet.allSource)
+    }
 }
 
 tasks.named<Javadoc>("javadoc") {
     dependsOn("compileAwsRuntimeJava")
-    setSource(files(awsRuntimeSourceSet.allJava, aosSourceSet.allJava, aossSourceSet.allJava))
+    setSource(files(awsRuntimeSourceSet.allJava, aosSourceSet.allJava, aossSourceSet.allJava, jackson3SourceSet.allJava))
     classpath = files(
         awsRuntimeSourceSet.compileClasspath,
         aosSourceSet.compileClasspath,
-        aossSourceSet.compileClasspath
+        aossSourceSet.compileClasspath,
+        jackson3SourceSet.compileClasspath
     )
 }
 
@@ -223,6 +265,7 @@ tasks.build {
 }
 
 tasks.test {
+    dependsOn("jackson3Test")
     systemProperty("tests.security.manager", "false")
     exclude("**/*RealResourceIT.class")
 }
@@ -230,11 +273,21 @@ tasks.test {
 val unitTest = tasks.register<Test>("unitTest") {
     description = "Runs the AWS AOS/AOSS client unit tests."
     group = "verification"
+    dependsOn("jackson3Test")
     testClassesDirs = sourceSets.test.get().output.classesDirs
     classpath = sourceSets.test.get().runtimeClasspath
     include("software/amazon/opensearch/client/**/*Test.class")
     include("software/amazon/opensearch/client/**/*Tests.class")
     exclude("**/*RealResourceIT.class")
+    systemProperty("tests.security.manager", "false")
+}
+
+tasks.register<Test>("jackson3Test") {
+    description = "Runs Jackson 3 transport tests against the multi-release JAR on the build JDK (21+)."
+    group = "verification"
+    testClassesDirs = jackson3TestSourceSet.output.classesDirs
+    classpath = jackson3TestSourceSet.runtimeClasspath
+    include("**/*Tests.class")
     systemProperty("tests.security.manager", "false")
 }
 
@@ -268,6 +321,8 @@ dependencies {
     val awsSdkVersion = "2.57.1"
     val jacksonVersion = "2.22.2"
     val jacksonDatabindVersion = "2.22.2"
+    val jackson3Version = "3.2.2"
+    val jackson3DatabindVersion = "3.2.2"
     val log4jVersion = "2.26.1"
 
     // Apache 2.0
@@ -300,6 +355,9 @@ dependencies {
     // Apache 2.0
     implementation("com.fasterxml.jackson.core", "jackson-core", jacksonVersion)
     implementation("com.fasterxml.jackson.core", "jackson-databind", jacksonDatabindVersion)
+    // Optional Java 21 adapter: these dependencies are not required by Java 8 consumers.
+    add(jackson3SourceSet.compileOnlyConfigurationName, "tools.jackson.core:jackson-core:$jackson3Version")
+    add(jackson3SourceSet.compileOnlyConfigurationName, "tools.jackson.core:jackson-databind:$jackson3DatabindVersion")
     testImplementation("com.fasterxml.jackson.datatype", "jackson-datatype-jakarta-jsonp", jacksonVersion)
 
     // For AwsSdk2Transport.
@@ -486,7 +544,7 @@ tasks.named<PublishToMavenRepository>("publishPublishMavenPublicationToCentralSt
 }
 
 tasks.withType<Test>().configureEach {
-    if (name != "java8Test") {
+    if (name != "java8Test" && name != "jackson3Test") {
         dependsOn("awsRuntimeClasses", "aosClasses", "aossClasses")
         classpath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
     }

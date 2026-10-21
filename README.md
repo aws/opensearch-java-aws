@@ -34,8 +34,9 @@ credentials provider is supplied explicitly.
 
 ## Build the client
 
-The client runs on Java 8 or newer and uses Jackson 2. Building this repository
-requires JDK 21 or newer.
+The client runs on Java 8 or newer and uses Jackson 2 by default. The same
+multi-release JAR also includes an optional Jackson 3 mapper for Java 21 or newer.
+Building this repository requires JDK 21 or newer.
 
 Clone the repository and build the JAR:
 
@@ -53,6 +54,12 @@ Run the client tests against the packaged JAR on Java 8:
 
 Gradle locates or downloads a Java 8 toolchain for this task; keep JDK 21 or newer
 as the build JDK.
+
+Run the default mapper tests and the Jackson 3 tests on the build JDK:
+
+```bash
+./gradlew :java-client:unitTest
+```
 
 The generated local artifact is:
 
@@ -164,6 +171,32 @@ dependencies {
     implementation("software.amazon.awssdk:url-connection-client")
 }
 ```
+
+### Using Jackson 3 on Java 21+
+
+Jackson 2 remains the default on every Java version. To select Jackson 3, add
+`tools.jackson.core:jackson-databind:3.2.2` to your application dependencies:
+
+```kotlin
+implementation("tools.jackson.core:jackson-databind:3.2.2")
+```
+
+Then pass the Jackson 3 mapper to the transport:
+
+```java
+import software.amazon.opensearch.client.json.jackson3.JacksonJsonpMapper;
+import software.amazon.opensearch.client.transport.aws.AwsSdk2TransportOptions;
+
+AwsSdk2TransportOptions options = AwsSdk2TransportOptions.builder()
+    .setMapper(new JacksonJsonpMapper())
+    .build();
+```
+
+Use these options when constructing `AwsSdk2Transport`. For the Apache transport,
+pass the same mapper to `ApacheHttpClient5TransportBuilder.setMapper(...)`.
+The adapter is packaged under `META-INF/versions/21`; Java 8 and Java 17 applications
+use the default Jackson 2 mapper. Jackson 3 dependencies are optional and are not
+added transitively to Java 8 applications.
 
 ## Quick start: AOS
 
