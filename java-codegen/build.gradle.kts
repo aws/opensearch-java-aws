@@ -17,16 +17,6 @@ import de.undercouch.gradle.tasks.download.Download
 import java.io.FileWriter
 import java.security.MessageDigest
 
-buildscript {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-        "classpath"(group = "org.opensearch.gradle", name = "build-tools", version = "3.9.0")
-    }
-}
-
 plugins {
     application
     id("com.github.jk1.dependency-license-report") version "3.1.4"

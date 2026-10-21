@@ -35,16 +35,6 @@ import com.github.jk1.license.render.ReportRenderer
 import org.gradle.api.tasks.testing.Test
 import java.io.FileWriter
 
-buildscript {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    dependencies {
-        "classpath"(group = "org.opensearch.gradle", name = "build-tools", version = "3.9.0")
-    }
-}
-
 plugins {
     java
     `java-library`
