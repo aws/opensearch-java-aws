@@ -39,6 +39,11 @@ public final class HttpTransportTestServer implements AutoCloseable {
     private final FutureTask<CapturedRequest> exchange;
 
     public HttpTransportTestServer() throws IOException {
+        this("{}");
+    }
+
+    public HttpTransportTestServer(String responseJson) throws IOException {
+        byte[] responseBody = responseJson.getBytes(StandardCharsets.UTF_8);
         server.setSoTimeout(10000);
         exchange = new FutureTask<>(() -> {
             try (Socket socket = server.accept()) {
@@ -55,10 +60,11 @@ public final class HttpTransportTestServer implements AutoCloseable {
                 input.readFully(body);
                 socket.getOutputStream()
                     .write(
-                        "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: 2\r\nConnection: close\r\n\r\n{}".getBytes(
-                            StandardCharsets.US_ASCII
-                        )
+                        ("HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: "
+                            + responseBody.length
+                            + "\r\nConnection: close\r\n\r\n").getBytes(StandardCharsets.US_ASCII)
                     );
+                socket.getOutputStream().write(responseBody);
                 socket.getOutputStream().flush();
                 return new CapturedRequest(requestLine[0], requestLine[1], headers, new String(body, StandardCharsets.UTF_8));
             }

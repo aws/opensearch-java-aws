@@ -34,7 +34,9 @@ credentials provider is supplied explicitly.
 
 ## Build the client
 
-Requires JDK 17 or newer.
+The client runs on Java 8 or newer and uses Jackson 2 by default. The same
+multi-release JAR also includes an optional Jackson 3 mapper for Java 21 or newer.
+Building this repository requires JDK 21 or newer.
 
 Clone the repository and build the JAR:
 
@@ -44,14 +46,119 @@ cd opensearch-java-aws
 ./gradlew --no-daemon --max-workers=1 :java-client:jar
 ```
 
+Run the client tests against the packaged JAR on Java 8:
+
+```bash
+./gradlew :java-client:java8Test
+```
+
+Gradle locates or downloads a Java 8 toolchain for this task; keep JDK 21 or newer
+as the build JDK.
+
+Run the default mapper tests and the Jackson 3 tests on the build JDK:
+
+```bash
+./gradlew :java-client:unitTest
+```
+
 The generated local artifact is:
 
 ```text
 java-client/build/libs/java-client-0.1.0-SNAPSHOT.jar
 ```
 
-Until the artifact is published, another Gradle project can use the local JAR
-for prototype testing:
+### Depending on the published artifact
+
+The Maven coordinate is `software.amazon.opensearch:opensearch-java`. No release
+has been published yet, so the snippets below describe the published layout
+rather than something you can resolve today.
+
+The AWS SDK artifacts needed by the SigV4 transport are published as an
+**optional feature** rather than as ordinary transitive dependencies, because the
+Apache HTTP client transport does not need them. Either way you must declare an
+HTTP client yourself — the client takes one as a constructor argument.
+
+Gradle:
+
+```kotlin
+dependencies {
+    implementation("software.amazon.opensearch:opensearch-java:<version>")
+
+    implementation(platform("software.amazon.awssdk:bom:<aws-sdk-version>"))
+    implementation("software.amazon.awssdk:sdk-core")
+    implementation("software.amazon.awssdk:auth")
+    implementation("software.amazon.awssdk:http-auth-aws")
+
+    // Pick an HTTP client. `implementation`, not `runtimeOnly`: your own code
+    // constructs it and passes it to the client.
+    implementation("software.amazon.awssdk:url-connection-client")   // synchronous
+    implementation("software.amazon.awssdk:netty-nio-client")        // asynchronous
+}
+```
+
+Requesting the feature by capability works too, but the module must then be
+declared **twice** — a capability request resolves to that variant alone, which
+carries only the AWS SDK artifacts and none of the client's own dependencies:
+
+```kotlin
+dependencies {
+    implementation("software.amazon.opensearch:opensearch-java:<version>")
+    implementation("software.amazon.opensearch:opensearch-java:<version>") {
+        capabilities {
+            requireCapability("software.amazon.opensearch:opensearch-java-aws-sdk2-support")
+        }
+    }
+    implementation("software.amazon.awssdk:url-connection-client:<aws-sdk-version>")
+}
+```
+
+Maven does not resolve optional dependencies transitively, so the AWS SDK
+artifacts always have to be declared. Use the AWS SDK BOM to keep versions
+aligned:
+
+```xml
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>bom</artifactId>
+      <version>${aws.sdk.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+
+<dependencies>
+  <dependency>
+    <groupId>software.amazon.opensearch</groupId>
+    <artifactId>opensearch-java</artifactId>
+    <version>${opensearch.java.version}</version>
+  </dependency>
+  <dependency><groupId>software.amazon.awssdk</groupId><artifactId>sdk-core</artifactId></dependency>
+  <dependency><groupId>software.amazon.awssdk</groupId><artifactId>auth</artifactId></dependency>
+  <dependency><groupId>software.amazon.awssdk</groupId><artifactId>http-auth-aws</artifactId></dependency>
+  <!-- synchronous -->
+  <dependency><groupId>software.amazon.awssdk</groupId><artifactId>url-connection-client</artifactId></dependency>
+  <!-- asynchronous -->
+  <dependency><groupId>software.amazon.awssdk</groupId><artifactId>netty-nio-client</artifactId></dependency>
+</dependencies>
+```
+
+The published metadata names the AWS SDK version this client is built and tested
+against. Importing your own BOM, as above, overrides it. Going far below that
+version will break: the SigV4 transport calls
+`ContentStreamProvider.fromByteArrayUnsafe`, which does not exist before AWS SDK
+2.25.69, and such a mismatch surfaces as a `NoSuchMethodError` at request time
+rather than as a resolution failure.
+
+### Using a locally built JAR
+
+For prototype testing before a release exists, a Gradle project can consume the
+JAR directly. Raw file dependencies carry no metadata, so every runtime
+dependency declared in `java-client/build.gradle.kts` has to be repeated by the
+consuming project — the AWS SDK artifacts below are only the ones the SigV4
+transport needs:
 
 ```kotlin
 dependencies {
@@ -65,14 +172,31 @@ dependencies {
 }
 ```
 
-Raw file dependencies do not include transitive dependency metadata. The
-consuming project must also provide the runtime dependencies declared in
-`java-client/build.gradle.kts`; the example above shows the additional AWS SDK
-dependencies needed by the SigV4 transport.
+### Using Jackson 3 on Java 21+
 
-`software.amazon.awssdk:opensearch-data-client` is only a proposed Maven
-coordinate. Do not publish or depend on it until the package metadata is
-finalized.
+Jackson 2 remains the default on every Java version. To select Jackson 3, add
+`tools.jackson.core:jackson-databind:3.2.2` to your application dependencies:
+
+```kotlin
+implementation("tools.jackson.core:jackson-databind:3.2.2")
+```
+
+Then pass the Jackson 3 mapper to the transport:
+
+```java
+import software.amazon.opensearch.client.json.jackson3.JacksonJsonpMapper;
+import software.amazon.opensearch.client.transport.aws.AwsSdk2TransportOptions;
+
+AwsSdk2TransportOptions options = AwsSdk2TransportOptions.builder()
+    .setMapper(new JacksonJsonpMapper())
+    .build();
+```
+
+Use these options when constructing `AwsSdk2Transport`. For the Apache transport,
+pass the same mapper to `ApacheHttpClient5TransportBuilder.setMapper(...)`.
+The adapter is packaged under `META-INF/versions/21`; Java 8 and Java 17 applications
+use the default Jackson 2 mapper. Jackson 3 dependencies are optional and are not
+added transitively to Java 8 applications.
 
 ## Quick start: AOS
 

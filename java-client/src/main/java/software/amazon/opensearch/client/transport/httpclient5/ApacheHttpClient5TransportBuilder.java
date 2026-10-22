@@ -42,7 +42,7 @@ import org.apache.hc.core5.http.nio.ssl.TlsStrategy;
 import org.apache.hc.core5.reactor.ssl.TlsDetails;
 import org.apache.hc.core5.util.Timeout;
 import software.amazon.opensearch.client.json.JsonpMapper;
-import software.amazon.opensearch.client.json.jackson3.JacksonJsonpMapper;
+import software.amazon.opensearch.client.json.jackson.JacksonJsonpMapper;
 import software.amazon.opensearch.client.transport.TransportOptions;
 import software.amazon.opensearch.client.transport.httpclient5.internal.Node;
 import software.amazon.opensearch.client.transport.httpclient5.internal.NodeSelector;

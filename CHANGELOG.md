@@ -8,6 +8,7 @@ Serverless (AOSS).
 
 ### Added
 - Pinned each input spec with a committed `<spec>.sha256` checksum, verified before generating — the same approach OpenSearch core uses for its `<jar>.sha1` dependency pins. The `code-generation` workflow now runs on pull requests and fails if regenerating from the committed specs drifts from the committed output ([#35](https://github.com/aws/opensearch-java-aws/pull/35)).
+- Add signed Maven Central publishing through the vanniktech `gradle-maven-publish-plugin`, which uploads to the Central Portal for manual publication ([#42](https://github.com/aws/opensearch-java-aws/pull/42)).
 - Bundled AOS and AOSS OpenAPI snapshots as the default inputs for distribution client generation ([#14](https://github.com/aws/opensearch-java-aws/pull/14)).
 - Typed AOS and AOSS data-plane clients under `software.amazon.opensearch.client`, generated per distribution into `src/generated/aos` and `src/generated/aoss`.
 - Handwritten AOS and AOSS APIs and shared AWS runtime (SigV4 transport, JSON model support).
@@ -15,6 +16,7 @@ Serverless (AOSS).
 
 ### Dependencies
 - Bumped Spotless to 8.10.4 and the code generator's `spotless-lib-extra` to 4.10.4, so the Eclipse JDT formatter resolves from Maven Central instead of the Eclipse P2 update site in both the build's formatting check and the code generator ([#48](https://github.com/aws/opensearch-java-aws/pull/48)).
+- Pin AWS SDK dependencies to `2.57.1`; consumers can override the version with their AWS SDK BOM.
 
 ### Changed
 - Include Java 8-compatible `samples` in Gradle and CI builds, align examples with the AWS client packages and APIs, and add AOS/AOSS search examples and usage documentation ([#43](https://github.com/aws/opensearch-java-aws/pull/43)).
@@ -24,8 +26,8 @@ Serverless (AOSS).
 - Added Gradle dependency verification so build artifacts are checked against recorded SHA-256 checksums ([#45](https://github.com/aws/opensearch-java-aws/pull/45)).
 - Compatibility: `AwsSdk2Transport` now throws `TransportException` before sending a GET body through AWS SDK `UrlConnectionHttpClient`, including explicitly supplied empty bodies. Use an HTTP client that preserves GET bodies, such as AWS CRT, when body fields are set.
 - Compatibility: unset optional GET bodies are omitted for AOSS snapshot listing and AOS ML profiling. ML profile calls without body fields now use the server's URL-based defaults and model/task IDs instead of parsing `{}`, which can change returned results. Explicit false values, empty collections, and generic request bodies are preserved.
-- Rewrote `RELEASING.md` for this fork: documents the `0.1.0` prototype status, snapshot publishing via GitHub Actions OIDC, manual backporting, and that the signed Maven Central release path is not yet established — replacing the inherited upstream Jenkins/opensearch.org release strategy.
-- Set the `java-client` compile target to Java 8 to match upstream opensearch-java, so the published client runs on any JVM >= 8 while building with JDK 21 or newer.
+- Update `RELEASING.md` with the prototype release process, manual backporting, and publishing through the vanniktech `gradle-maven-publish-plugin`.
+- Ship a multi-release JAR with Jackson 2 as the default on Java 8+, and an optional Jackson 3 mapper on Java 21+. Jackson 2 is published at compile scope because its types appear in the public mapper API. Test both mappers against the packaged JAR in CI.
 - Moved the code generator to `software.amazon.opensearch.client.codegen`, so the emitted `@Generated(...)` marker references a class that exists in this fork.
 - Removed the unsupported `refresh` parameter from AOSS multi-get requests.
 - Consolidated the handwritten sources into the standard `src/main/java` layout (from `src/java`) and moved `version.properties` to its package resource path, updating the `awsRuntime`/`aos`/`aoss` source sets to match.
@@ -46,10 +48,14 @@ Serverless (AOSS).
 - Escaped backslashes and comment terminators in spec descriptions so they no longer break the generated Javadoc comment, and made the generator fail if the rendered doc would still contain a backslash-u sequence. Generation now also fails if the Java formatter cannot format its output, instead of silently emitting unformatted code. Regenerating under the new escaping updated five generated files ([#35](https://github.com/aws/opensearch-java-aws/pull/35)).
 - Accept AOS search-shards node responses that omit attributes and transport addresses, and segment responses that omit attributes, compound flags, or versions. `Segment.compound()` and its builder setter now use nullable `Boolean`; consumers should recompile and handle absent values.
 - Preserve optional GET body presence through client generation and transport processing, so requests with no body fields set do not send an unnecessary `{}`.
+- Restrict release publishing to matching `v` tags in the official repository and create GitHub releases as drafts.
+- Publish AWS SDK transport dependencies as optional POM dependencies and expose the correct Gradle capability.
+- Correct the POM inception year and SCM metadata.
 - Pointed the `bump-version` auto-bump job's repository guard and the generated jar's `Implementation-URL` manifest attribute at `aws/opensearch-java-aws` instead of the inherited `opensearch-project/opensearch-java`.
 - Pointed the inherited open-source metadata (CODEOWNERS, MAINTAINERS, ADMINS, NOTICE, SECURITY) at the `aws/amazon-opensearch-clients` owning team and AWS vulnerability reporting.
 
 ### Security
+- Fetch release credentials from AWS Secrets Manager using GitHub OIDC and gate publishing on the `release` environment; mask every non-empty line of the GPG private key in workflow logs.
 - Restricted default GitHub Actions token permissions to read-only for build and maintenance workflows ([#16](https://github.com/aws/opensearch-java-aws/pull/16)).
 - Added a `git-secrets` CI workflow and documented the local pre-commit hook to prevent committing secrets.
 - Extended the `git-secrets` scan with patterns for this project's release secrets (the PGP signing key and the Sonatype/Nexus publishing token), fixed the private-key patterns so git-secrets' internal grep no longer rejects the leading dash, and scoped the self-referential false positives in `.gitallowed` by file path.

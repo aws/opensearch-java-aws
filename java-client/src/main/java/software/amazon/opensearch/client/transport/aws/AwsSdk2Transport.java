@@ -70,7 +70,7 @@ import software.amazon.opensearch.client.errors.OpenSearchException;
 import software.amazon.opensearch.client.generic.OpenSearchClientException;
 import software.amazon.opensearch.client.json.JsonpDeserializer;
 import software.amazon.opensearch.client.json.JsonpMapper;
-import software.amazon.opensearch.client.json.jackson3.JacksonJsonpMapper;
+import software.amazon.opensearch.client.json.jackson.JacksonJsonpMapper;
 import software.amazon.opensearch.client.transport.Endpoint;
 import software.amazon.opensearch.client.transport.GenericEndpoint;
 import software.amazon.opensearch.client.transport.JsonEndpoint;
