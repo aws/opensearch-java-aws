@@ -31,4 +31,4 @@ jobs:
           # Dependabot pull requests get a read-only token, so they cannot upload SARIF.
           advanced-security: ${{ github.event.pull_request.user.login != 'dependabot[bot]' }}
           annotations: ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
-        continue-on-error: true
+        continue-on-error: false
