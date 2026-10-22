@@ -52,5 +52,6 @@ Serverless (AOSS).
 - Restricted default GitHub Actions token permissions to read-only for build and maintenance workflows ([#16](https://github.com/aws/opensearch-java-aws/pull/16)).
 - Added a `git-secrets` CI workflow and documented the local pre-commit hook to prevent committing secrets.
 - Extended the `git-secrets` scan with patterns for this project's release secrets (the PGP signing key and the Sonatype/Nexus publishing token), fixed the private-key patterns so git-secrets' internal grep no longer rejects the leading dash, and scoped the self-referential false positives in `.gitallowed` by file path.
+- Pinned the remaining floating third-party action references to commit SHAs, and set `persist-credentials: false` on the checkouts that do not push ([#47](https://github.com/aws/opensearch-java-aws/pull/47)).
 - Added a `zizmor` CI workflow that statically scans the GitHub Actions workflows and uploads findings to the Security tab.
 - Migrated the `AOS and AOSS Real Resource Tests` workflow from long-lived `AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY`/`AWS_SESSION_TOKEN` secrets to GitHub Actions OIDC role assumption, so CI holds no long-lived AWS credentials.

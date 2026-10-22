@@ -18,10 +18,11 @@ runs:
   using: 'composite'
   steps:
     - name: Checkout ${{ inputs.branch }}
-      uses: actions/checkout@v4
+      uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       with:
         ref: ${{ inputs.branch }}
         path: client
+        persist-credentials: false
 
     - name: Bump Version To ${{ inputs.version }}
       shell: bash -eo pipefail {0}
@@ -31,7 +32,7 @@ runs:
         VERSION: ${{ inputs.version }}
 
     - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v7
+      uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
       with:
         token: ${{ inputs.token }}
         path: client
