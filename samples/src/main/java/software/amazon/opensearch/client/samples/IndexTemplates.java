@@ -1,0 +1,115 @@
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+package software.amazon.opensearch.client.samples;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import software.amazon.opensearch.client.aos.OpenSearchClient;
+import software.amazon.opensearch.client.aos._types.OpenSearchVersionInfo;
+import software.amazon.opensearch.client.aos.cluster.PutComponentTemplateRequest;
+import software.amazon.opensearch.client.aos.indices.CreateIndexRequest;
+import software.amazon.opensearch.client.aos.indices.DeleteIndexRequest;
+import software.amazon.opensearch.client.aos.indices.DeleteIndexTemplateRequest;
+import software.amazon.opensearch.client.aos.indices.GetIndicesSettingsRequest;
+import software.amazon.opensearch.client.aos.indices.GetIndicesSettingsResponse;
+import software.amazon.opensearch.client.aos.indices.GetMappingRequest;
+import software.amazon.opensearch.client.aos.indices.GetMappingResponse;
+import software.amazon.opensearch.client.aos.indices.PutIndexTemplateRequest;
+
+/**
+ * Run with: {@code ./gradlew :samples:run -Dsamples.mainClass=IndexTemplates}
+ */
+public class IndexTemplates {
+    private static final Logger LOGGER = LogManager.getLogger(IndexTemplates.class);
+
+    public static void main(String[] args) {
+        try {
+            OpenSearchClient client = SampleClient.create();
+            OpenSearchVersionInfo version = client.info().version();
+            LOGGER.info("Server: {}@{}", version.distribution(), version.number());
+
+            final String indexTemplateName = "my-index-template";
+
+            if (client.indices().existsIndexTemplate(t -> t.name(indexTemplateName)).value()) {
+                DeleteIndexTemplateRequest deleteIndexTemplateRequest = DeleteIndexTemplateRequest.of(i -> i.name(indexTemplateName));
+                LOGGER.info("Deleting index template {}", indexTemplateName);
+                client.indices().deleteIndexTemplate(deleteIndexTemplateRequest);
+            }
+
+            // Create an index template composed of two component templates, one for index settings, and one for mappings
+            final String indexSettingsComponentTemplate = "index-settings";
+            PutComponentTemplateRequest putComponentTemplateRequest = PutComponentTemplateRequest.of(
+                c -> c.name(indexSettingsComponentTemplate)
+                    .template(
+                        t -> t.settings(
+                            s -> s.numberOfShards(2)
+                                .numberOfReplicas(1)
+                                .indexing(
+                                    i -> i.slowlog(
+                                        sl -> sl.level("info")
+                                            .reformat(true)
+                                            .threshold(th -> th.index(ith -> ith.warn(tt -> tt.time("2s"))))
+                                    )
+                                )
+                                .search(
+                                    se -> se.slowlog(sl -> sl.level("info").threshold(th -> th.query(q -> q.warn(tt -> tt.time("2s")))))
+                                )
+                        )
+                    )
+            );
+            LOGGER.info("Creating component template {}", indexSettingsComponentTemplate);
+            client.cluster().putComponentTemplate(putComponentTemplateRequest);
+
+            final String indexMappingsComponentTemplate = "index-mappings";
+            putComponentTemplateRequest = PutComponentTemplateRequest.of(
+                c -> c.name(indexMappingsComponentTemplate).template(t -> t.mappings(m -> m.properties("age", p -> p.integer(i -> i))))
+            );
+            LOGGER.info("Creating component template {}", indexMappingsComponentTemplate);
+            client.cluster().putComponentTemplate(putComponentTemplateRequest);
+
+            PutIndexTemplateRequest putIndexTemplateRequest = PutIndexTemplateRequest.of(
+                it -> it.name(indexTemplateName)
+                    .indexPatterns("my-index-*")
+                    .composedOf(indexSettingsComponentTemplate, indexMappingsComponentTemplate)
+            );
+
+            LOGGER.info("Creating index template {}", indexTemplateName);
+            client.indices().putIndexTemplate(putIndexTemplateRequest);
+
+            final String indexName = "my-index-1";
+            if (client.indices().exists(r -> r.index(indexName)).value()) {
+                LOGGER.info("Deleting index {}", indexName);
+                client.indices().delete(DeleteIndexRequest.of(d -> d.index(indexName)));
+            }
+
+            LOGGER.info("Creating index {}", indexName);
+            client.indices().create(CreateIndexRequest.of(c -> c.index(indexName)));
+
+            GetMappingResponse getMappingResponse = client.indices().getMapping(GetMappingRequest.of(m -> m.index(indexName)));
+            // mappings for the index should contain those defined in component template
+            LOGGER.info("Mappings {} found for index {}", getMappingResponse.result().get(indexName).mappings(), indexName);
+
+            GetIndicesSettingsResponse getSettingsResponse = client.indices()
+                .getSettings(GetIndicesSettingsRequest.of(m -> m.index(indexName)));
+            // settings for the index should contain those defined in component template
+            LOGGER.info("Settings {} found for index {}", getSettingsResponse.result().get(indexName).settings(), indexName);
+
+            LOGGER.info("Deleting index {}", indexName);
+            client.indices().delete(DeleteIndexRequest.of(d -> d.index(indexName)));
+        } catch (Exception e) {
+            LOGGER.error("Unexpected exception", e);
+        }
+    }
+}

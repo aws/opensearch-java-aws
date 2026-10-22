@@ -1,0 +1,114 @@
+/*
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://aws.amazon.com/apache2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+package software.amazon.opensearch.client.samples.knn;
+
+import java.util.Arrays;
+import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import software.amazon.opensearch.client.aos.OpenSearchClient;
+import software.amazon.opensearch.client.aos._types.OpenSearchVersionInfo;
+import software.amazon.opensearch.client.aos.core.BulkRequest;
+import software.amazon.opensearch.client.aos.core.SearchResponse;
+import software.amazon.opensearch.client.aos.core.search.Hit;
+import software.amazon.opensearch.client.samples.SampleClient;
+import software.amazon.opensearch.client.samples.util.RandUtil;
+
+/**
+ * Run with: {@code ./gradlew :samples:run -Dsamples.mainClass=knn.KnnBasics}
+ */
+public class KnnBasics {
+    private static final Logger LOGGER = LogManager.getLogger(KnnBasics.class);
+
+    public static void main(String[] args) {
+        try {
+            OpenSearchClient client = SampleClient.create();
+
+            OpenSearchVersionInfo version = client.info().version();
+            LOGGER.info("Server: {}@{}", version.distribution(), version.number());
+
+            final String indexName = "my-index";
+            final int dimensions = 5;
+
+            if (!client.indices().exists(r -> r.index(indexName)).value()) {
+                LOGGER.info("Creating index {}", indexName);
+                client.indices()
+                    .create(
+                        r -> r.index(indexName)
+                            .settings(s -> s.knn(true))
+                            .mappings(m -> m.properties("values", p -> p.knnVector(k -> k.dimension(dimensions))))
+                    );
+            }
+
+            final int nVectors = 10;
+            BulkRequest.Builder bulkRequest = new BulkRequest.Builder();
+            for (int i = 0; i < nVectors; ++i) {
+                String id = Integer.toString(i);
+                Doc doc = Doc.rand(dimensions);
+                bulkRequest.operations(b -> b.index(o -> o.index(indexName).id(id).document(doc)));
+            }
+
+            LOGGER.info("Indexing {} vectors", nVectors);
+            client.bulk(bulkRequest.build());
+
+            LOGGER.info("Waiting for indexing to finish");
+            client.indices().refresh(i -> i.index(indexName));
+
+            final List<Float> searchVector = RandUtil.rand2SfList(dimensions);
+            LOGGER.info("Searching for vector {}", searchVector);
+
+            SearchResponse<Doc> searchResponse = client.search(
+                s -> s.index(indexName).query(q -> q.knn(k -> k.field("values").vector(searchVector).k(3))),
+                Doc.class
+            );
+
+            for (Hit<Doc> hit : searchResponse.hits().hits()) {
+                LOGGER.info("Found {} with score {}", hit.source(), hit.score());
+            }
+
+            LOGGER.info("Deleting index {}", indexName);
+            client.indices().delete(r -> r.index(indexName));
+        } catch (Exception e) {
+            LOGGER.error("Unexpected exception", e);
+        }
+    }
+
+    public static class Doc {
+        private float[] values;
+
+        public Doc() {}
+
+        public Doc(float[] values) {
+            this.values = values;
+        }
+
+        public static Doc rand(int dimensions) {
+            return new Doc(RandUtil.rand2SfArray(dimensions));
+        }
+
+        public float[] getValues() {
+            return values;
+        }
+
+        public void setValues(float[] values) {
+            this.values = values;
+        }
+
+        @Override
+        public String toString() {
+            return "{" + "values=" + Arrays.toString(values) + '}';
+        }
+    }
+}

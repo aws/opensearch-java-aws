@@ -14,7 +14,6 @@
  */
 package software.amazon.opensearch.client.codegen.renderer;
 
-import com.diffplug.spotless.FormatExceptionPolicyStrict;
 import com.diffplug.spotless.Formatter;
 import com.diffplug.spotless.LineEnding;
 import com.diffplug.spotless.Provisioner;
@@ -25,6 +24,7 @@ import com.diffplug.spotless.java.ImportOrderStep;
 import com.diffplug.spotless.java.RemoveUnusedImportsStep;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
@@ -41,7 +41,10 @@ public class JavaCodeFormatter implements AutoCloseable {
 
         Provisioner provisioner = MavenArtifactResolver.createDefault()::resolve;
 
-        var eclipseFormatter = EclipseJdtFormatterStep.createBuilder(provisioner);
+        var eclipseFormatter = EclipseJdtFormatterStep.createBuilder(
+            provisioner,
+            com.diffplug.spotless.extra.P2Provisioner.createDefault()
+        );
         eclipseFormatter.setPreferences(
             List.of(Objects.requireNonNull(builder.eclipseFormatterConfig, "eclipseFormatterConfig must not be null"))
         );
@@ -55,18 +58,17 @@ public class JavaCodeFormatter implements AutoCloseable {
         );
 
         this.formatter = Formatter.builder()
-            .name("java")
             .lineEndingsPolicy(LineEnding.UNIX.createPolicy())
             .encoding(StandardCharsets.UTF_8)
-            .rootDir(Objects.requireNonNull(builder.rootDir, "rootDir must not be null"))
             .steps(steps)
-            .exceptionPolicy(new FormatExceptionPolicyStrict())
             .build();
     }
 
     public void format(File file) throws JavaFormatterException {
         try {
-            formatter.applyTo(file);
+            String raw = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+            String formatted = formatter.compute(raw, file);
+            Files.write(file.toPath(), formatted.getBytes(StandardCharsets.UTF_8));
         } catch (Throwable e) {
             throw new JavaFormatterException("Failed to format: " + file, e);
         }

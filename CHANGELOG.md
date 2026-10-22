@@ -8,27 +8,32 @@ Serverless (AOSS).
 
 ### Added
 - Pinned each input spec with a committed `<spec>.sha256` checksum, verified before generating — the same approach OpenSearch core uses for its `<jar>.sha1` dependency pins. The `code-generation` workflow now runs on pull requests and fails if regenerating from the committed specs drifts from the committed output ([#35](https://github.com/aws/opensearch-java-aws/pull/35)).
-- Add signed Maven Central publishing through Sonatype's OSSRH Staging API using Gradle's `maven-publish` and `signing` plugins, with transfer to Central Portal for manual publication ([#42](https://github.com/aws/opensearch-java-aws/pull/42)).
+- Add signed Maven Central publishing through the vanniktech `gradle-maven-publish-plugin`, which uploads to the Central Portal for manual publication ([#42](https://github.com/aws/opensearch-java-aws/pull/42)).
 - Bundled AOS and AOSS OpenAPI snapshots as the default inputs for distribution client generation ([#14](https://github.com/aws/opensearch-java-aws/pull/14)).
 - Typed AOS and AOSS data-plane clients under `software.amazon.opensearch.client`, generated per distribution into `src/generated/aos` and `src/generated/aoss`.
 - Handwritten AOS and AOSS APIs and shared AWS runtime (SigV4 transport, JSON model support).
 - `Build Distributions` CI workflow that compiles the AOS and AOSS clients and runs their unit tests across JDK 21 and 25.
 
 ### Dependencies
+- Bumped Spotless to 8.10.4 and the code generator's `spotless-lib-extra` to 4.10.4, so the Eclipse JDT formatter resolves from Maven Central instead of the Eclipse P2 update site in both the build's formatting check and the code generator ([#48](https://github.com/aws/opensearch-java-aws/pull/48)).
 - Pin AWS SDK dependencies to `2.57.1`; consumers can override the version with their AWS SDK BOM.
 
 ### Changed
+- Include Java 8-compatible `samples` in Gradle and CI builds, align examples with the AWS client packages and APIs, and add AOS/AOSS search examples and usage documentation ([#43](https://github.com/aws/opensearch-java-aws/pull/43)).
+- Run client and generator tests as part of CI builds ([#43](https://github.com/aws/opensearch-java-aws/pull/43)).
 - Resolve build plugins and dependencies from Maven Central only ([#36](https://github.com/aws/opensearch-java-aws/pull/36)).
 - Dropped the unused `opensearch.repositories` plugin and pinned the AWS SDK and log4j dependencies to fixed versions instead of ranges ([#45](https://github.com/aws/opensearch-java-aws/pull/45)).
 - Added Gradle dependency verification so build artifacts are checked against recorded SHA-256 checksums ([#45](https://github.com/aws/opensearch-java-aws/pull/45)).
 - Compatibility: `AwsSdk2Transport` now throws `TransportException` before sending a GET body through AWS SDK `UrlConnectionHttpClient`, including explicitly supplied empty bodies. Use an HTTP client that preserves GET bodies, such as AWS CRT, when body fields are set.
 - Compatibility: unset optional GET bodies are omitted for AOSS snapshot listing and AOS ML profiling. ML profile calls without body fields now use the server's URL-based defaults and model/task IDs instead of parsing `{}`, which can change returned results. Explicit false values, empty collections, and generic request bodies are preserved.
-- Update `RELEASING.md` with the prototype release process, manual backporting, and publishing through Sonatype's OSSRH Staging API.
+- Update `RELEASING.md` with the prototype release process, manual backporting, and publishing through the vanniktech `gradle-maven-publish-plugin`.
 - Ship a multi-release JAR with Jackson 2 as the default on Java 8+, and an optional Jackson 3 mapper on Java 21+. Jackson 2 is published at compile scope because its types appear in the public mapper API. Test both mappers against the packaged JAR in CI.
 - Moved the code generator to `software.amazon.opensearch.client.codegen`, so the emitted `@Generated(...)` marker references a class that exists in this fork.
 - Removed the unsupported `refresh` parameter from AOSS multi-get requests.
 - Consolidated the handwritten sources into the standard `src/main/java` layout (from `src/java`) and moved `version.properties` to its package resource path, updating the `awsRuntime`/`aos`/`aoss` source sets to match.
 - Published the client under the Maven coordinate `software.amazon.opensearch:opensearch-java` (changing only the groupId from the inherited `org.opensearch.client:opensearch-java`), and set the build version to `0.1.0` to match the `[Unreleased 0.1.0]` release line.
+- Hardened the CI workflows: scoped the push and pull-request triggers to `main` and release branches so a feature-branch push no longer runs CI twice, and trimmed the redundant `macOS-14` build-matrix entry ([#48](https://github.com/aws/opensearch-java-aws/pull/48)).
+- Fixed the remaining zizmor findings in the CI workflows and the zizmor report upload ([#49](https://github.com/aws/opensearch-java-aws/pull/49)).
 
 ### Deprecated
 
@@ -54,5 +59,6 @@ Serverless (AOSS).
 - Restricted default GitHub Actions token permissions to read-only for build and maintenance workflows ([#16](https://github.com/aws/opensearch-java-aws/pull/16)).
 - Added a `git-secrets` CI workflow and documented the local pre-commit hook to prevent committing secrets.
 - Extended the `git-secrets` scan with patterns for this project's release secrets (the PGP signing key and the Sonatype/Nexus publishing token), fixed the private-key patterns so git-secrets' internal grep no longer rejects the leading dash, and scoped the self-referential false positives in `.gitallowed` by file path.
+- Pinned the remaining floating third-party action references to commit SHAs, and set `persist-credentials: false` on the checkouts that do not push ([#47](https://github.com/aws/opensearch-java-aws/pull/47)).
 - Added a `zizmor` CI workflow that statically scans the GitHub Actions workflows and uploads findings to the Security tab.
 - Migrated the `AOS and AOSS Real Resource Tests` workflow from long-lived `AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY`/`AWS_SESSION_TOKEN` secrets to GitHub Actions OIDC role assumption, so CI holds no long-lived AWS credentials.

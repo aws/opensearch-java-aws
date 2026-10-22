@@ -34,20 +34,18 @@ import com.github.jk1.license.ProjectData
 import com.github.jk1.license.render.ReportRenderer
 import org.gradle.api.attributes.java.TargetJvmVersion
 import org.gradle.api.tasks.testing.Test
-import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import java.io.FileWriter
 
 plugins {
     java
     `java-library`
     `maven-publish`
-    signing
+    id("com.vanniktech.maven.publish") version "0.37.0"
     id("com.github.jk1.dependency-license-report") version "3.1.4"
     id("org.owasp.dependencycheck") version "13.0.0"
 
     id("opensearch-java.spotless-conventions")
 }
-apply(plugin = "org.owasp.dependencycheck")
 
 val runtimeJavaVersion = (System.getProperty("runtime.java")?.toInt())?.let(JavaVersion::toVersion) ?: JavaVersion.current()
 logger.quiet("=======================================")
@@ -58,9 +56,6 @@ logger.quiet("=======================================")
 java {
     targetCompatibility = JavaVersion.VERSION_1_8
     sourceCompatibility = JavaVersion.VERSION_1_8
-
-    withJavadocJar()
-    withSourcesJar()
 
     registerFeature("awsSdk2Support") {
         usingSourceSet(sourceSets.get("main"))
@@ -198,7 +193,7 @@ tasks.named<Jar>("jar") {
     manifest.attributes["Multi-Release"] = "true"
 }
 
-tasks.named<Jar>("sourcesJar") {
+tasks.withType<Jar>().matching { it.name == "sourcesJar" }.configureEach {
     exclude("org/opensearch/client/**")
     from(awsRuntimeSourceSet.allSource, aosSourceSet.allSource, aossSourceSet.allSource)
     into("META-INF/versions/21") {
@@ -463,80 +458,70 @@ class SpdxReporter(val dest: File) : ReportRenderer {
     }
 }
 
-tasks.withType<Jar> {
-    doLast {
-        ant.withGroovyBuilder {
-            "checksum"("algorithm" to "md5", "file" to archiveFile.get())
-            "checksum"("algorithm" to "sha1", "file" to archiveFile.get())
-            "checksum"("algorithm" to "sha-256", "file" to archiveFile.get(), "fileext" to ".sha256")
-            "checksum"("algorithm" to "sha-512", "file" to archiveFile.get(), "fileext" to ".sha512")
-        }
-    }
-}
-
 publishing {
-    repositories{
-        // Sonatype's reimplementation of the OSSRH staging API, which lets the standard
-        // maven-publish plugin keep working against the Central Publisher Portal.
-        //
-        // Not `aws.oss.sonatype.org`: that host is retired and answers uploads with
-        // HTTP 402, and its `/#stagingRepositories` UI is gone. The internal
-        // PublishingToMavenCentral wiki still documents it, but the wiki predates the
-        // OSSRH sunset.
-        //
-        // Credentials are a Central Portal user token, not an old OSSRH account
-        // password. Staging repositories created through this API are isolated by IP,
-        // so a release must be uploaded by a single job.
-        maven("https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/") {
-            name = "CentralStaging"
-            credentials {
-                username = providers.gradleProperty("centralPortalUsername").orNull
-                password = providers.gradleProperty("centralPortalToken").orNull
-            }
-        }
+    repositories {
+        // Offline verification repo: `publishMavenPublicationToLocalRepoRepository`
+        // writes the full publication (jar, sources, javadoc, POM, module metadata,
+        // and signatures) under the root build dir so it can be inspected without
+        // touching the Central Portal.
         maven(rootProject.layout.buildDirectory.dir("repository")) {
             name = "localRepo"
         }
     }
-    publications {
-        create<MavenPublication>("publishMaven") {
-            from(components["java"])
-            pom {
-                name.set("AWS OpenSearch Java Data Client")
-                packaging = "jar"
-                artifactId = "opensearch-java"
-                description.set("Typed Java data-plane clients for Amazon OpenSearch Service and OpenSearch Serverless.")
-                url.set("https://github.com/aws/opensearch-java-aws/")
-                inceptionYear.set("2026")
-                scm {
-                    connection.set("scm:git:https://github.com/aws/opensearch-java-aws.git")
-                    developerConnection.set("scm:git:ssh://git@github.com/aws/opensearch-java-aws.git")
-                    url.set("https://github.com/aws/opensearch-java-aws")
-                }
-                licenses {
-                    license {
-                        name.set("The Apache License, Version 2.0")
-                        url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
-                    }
-                }
-                developers {
-                    developer {
-                        name.set("Amazon Web Services")
-                        url.set("https://aws.amazon.com/opensearch-service/")
-                    }
-                }
+}
+
+mavenPublishing {
+    // USER_MANAGED: the plugin uploads to the Central Portal but does not auto-release.
+    // A maintainer publishes the deployment from the Portal UI. Use
+    // `publishAndReleaseToMavenCentral` only to auto-release.
+    publishToMavenCentral()
+    // Sign only when a key is provided, so local publishing works without one.
+    // Uploading to Maven Central without a key is rejected below.
+    if (!providers.gradleProperty("signingInMemoryKey").orNull.isNullOrBlank()) {
+        signAllPublications()
+    }
+    coordinates("software.amazon.opensearch", "opensearch-java", project.version.toString())
+    pom {
+        name.set("AWS OpenSearch Java Data Client")
+        description.set("Typed Java data-plane clients for Amazon OpenSearch Service and OpenSearch Serverless.")
+        url.set("https://github.com/aws/opensearch-java-aws/")
+        inceptionYear.set("2026")
+        scm {
+            connection.set("scm:git:https://github.com/aws/opensearch-java-aws.git")
+            developerConnection.set("scm:git:ssh://git@github.com/aws/opensearch-java-aws.git")
+            url.set("https://github.com/aws/opensearch-java-aws")
+        }
+        licenses {
+            license {
+                name.set("The Apache License, Version 2.0")
+                url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
+            }
+        }
+        developers {
+            developer {
+                name.set("Amazon Web Services")
+                url.set("https://aws.amazon.com/opensearch-service/")
             }
         }
     }
 }
 
-
-tasks.named<PublishToMavenRepository>("publishPublishMavenPublicationToCentralStagingRepository") {
+// `prepareMavenCentralPublishing` is shared by `publishToMavenCentral` and
+// `publishAndReleaseToMavenCentral`, so the guard covers both.
+tasks.named("prepareMavenCentralPublishing") {
     val releaseVersion = project.version.toString()
+    val signingKey = providers.gradleProperty("signingInMemoryKey")
     doFirst {
+        if (signingKey.orNull.isNullOrBlank()) {
+            throw GradleException(
+                "Refusing to upload unsigned artifacts to Maven Central. " +
+                    "Set the signingInMemoryKey property (ORG_GRADLE_PROJECT_signingInMemoryKey) " +
+                    "to the ASCII-armored signing key."
+            )
+        }
         if (releaseVersion.endsWith("SNAPSHOT")) {
             throw GradleException(
-                "Central staging requires a release version, but the version is '" + releaseVersion +
+                "Maven Central requires a release version, but the version is '" + releaseVersion +
                     "'. Set the VERSION environment variable, e.g. VERSION=x.y.z. " +
                     "(-Dversion only sets the base version and still yields a snapshot.)"
             )
@@ -549,15 +534,4 @@ tasks.withType<Test>().configureEach {
         dependsOn("awsRuntimeClasses", "aosClasses", "aossClasses")
         classpath += awsRuntimeSourceSet.output + aosSourceSet.output + aossSourceSet.output
     }
-}
-
-signing {
-    val signingKey = findProperty("signingKey") as String?
-    val signingPassword = findProperty("signingPassword") as String?
-    val hasKeyring = findProperty("signing.keyId") != null
-    isRequired = !version.toString().endsWith("SNAPSHOT") || signingKey != null || hasKeyring
-    if (signingKey != null) {
-        useInMemoryPgpKeys(signingKey, signingPassword)
-    }
-    sign(publishing.publications["publishMaven"])
 }

@@ -14,8 +14,8 @@ fork.
 
 ## Project status
 
-This project is a **pre-release prototype** (version `0.1.0`). Publishing uses
-Sonatype's OSSRH Staging API and transfers the deployment to Central Portal for
+This project is a **pre-release prototype** (version `0.1.0`). Publishing uses the
+vanniktech `gradle-maven-publish-plugin`, which uploads to the Central Portal for
 manual publication. The live upload and team publishing credentials have not yet
 been validated.
 
@@ -48,32 +48,18 @@ branch and open a PR against it. There is no automated backport workflow.
 
 ## Releases
 
-The Gradle `maven-publish` and `signing` plugins build, sign, and upload the
-publication to Sonatype's OSSRH Staging API:
-
-```text
-https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/
-```
-
-This compatibility service accepts uploads from Gradle's standard `maven-publish`
-plugin. See Sonatype's public [OSSRH Staging API documentation](https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/)
-for repository configuration and transferring deployments to the Central Publisher
-Portal.
+The [vanniktech `gradle-maven-publish-plugin`](https://vanniktech.github.io/gradle-maven-publish-plugin/)
+builds, signs, and uploads the publication to the Central Portal. It configures
+the sources and Javadoc JARs, PGP signing, and the Portal upload, replacing the
+hand-written `maven-publish` configuration.
 
 The publication includes the library, sources, and Javadoc JARs, POM, Gradle
-module metadata, and PGP signatures. A maintainer publishes the deployment from
-the Central Portal after verifying the artifacts.
-
-After Gradle uploads all artifacts, the same workflow step calls Sonatype's
-`POST /manual/upload/defaultRepository/software.amazon.opensearch` endpoint with
-`publishing_type=user_managed`. This makes the deployment visible in Central
-Portal for validation and manual publication. It does not publish to Maven
-Central automatically. The request uses a Bearer token built from the existing
-Central Portal token username and password.
-
-Staging repositories created through this API are **isolated by IP**, so a
-release has to be uploaded by a single job. Splitting the upload across runners
-would scatter the artifacts across separate staging repositories.
+module metadata, and PGP signatures. The plugin uploads the deployment in
+`USER_MANAGED` mode: it becomes visible in the Central Portal for validation but
+is **not** published to Maven Central automatically. A maintainer publishes it
+from the Portal after verifying the artifacts. Running
+`publishAndReleaseToMavenCentral` instead would auto-release, which this project
+deliberately does not do.
 
 ### Credentials
 
@@ -87,9 +73,8 @@ release account, in `us-west-2`:
 | `opensearch-java/release/central-portal-token` | JSON with `username` and `token`, the Central Portal user token |
 
 Generate the Central Portal user token from the team account authorized to publish
-`software.amazon.opensearch`. The workflow uses this token for both the artifact
-uploads and the transfer to Central Portal. Verify the stored credentials and
-upload access before the first release.
+`software.amazon.opensearch`. The plugin uses this token to upload to the Portal.
+Verify the stored credentials and upload access before the first release.
 
 Configure required reviewers and the `MAVEN_CENTRAL_SIGNING_ROLE` secret on the
 GitHub `release` environment. The role must allow `secretsmanager:GetSecretValue`
@@ -108,10 +93,10 @@ The workflow passes credentials through Gradle's environment properties:
 
 | Environment variable | Gradle property |
 | --- | --- |
-| `ORG_GRADLE_PROJECT_centralPortalUsername` | `centralPortalUsername` |
-| `ORG_GRADLE_PROJECT_centralPortalToken` | `centralPortalToken` |
-| `ORG_GRADLE_PROJECT_signingKey` | `signingKey` |
-| `ORG_GRADLE_PROJECT_signingPassword` | `signingPassword` |
+| `ORG_GRADLE_PROJECT_mavenCentralUsername` | `mavenCentralUsername` |
+| `ORG_GRADLE_PROJECT_mavenCentralPassword` | `mavenCentralPassword` |
+| `ORG_GRADLE_PROJECT_signingInMemoryKey` | `signingInMemoryKey` |
+| `ORG_GRADLE_PROJECT_signingInMemoryKeyPassword` | `signingInMemoryKeyPassword` |
 
 Keep the project private key and credentials in the team-owned secret store.
 Publish the signing public key to a keyserver accepted by Sonatype, such as
@@ -126,16 +111,16 @@ Publish the signing public key to a keyserver accepted by Sonatype, such as
 
    ```bash
    VERSION=0.1.0 ./gradlew --no-daemon \
-     :java-client:publishPublishMavenPublicationToCentralStagingRepository
+     :java-client:publishToMavenCentral
    ```
 
    Gradle builds and signs the artifacts before uploading them. Snapshot versions
-   are rejected by the staging task, and release publications require a signing
-   key. After the upload, the same runner transfers the deployment to Central
-   Portal in `user_managed` mode. A failed upload or transfer fails the workflow;
-   the draft GitHub release is created only after both succeed.
+   are rejected by the publish task, and release publications require a signing
+   key. The plugin uploads the deployment to the Central Portal in `USER_MANAGED`
+   mode. A failed upload fails the workflow;
+   the draft GitHub release is created only after the upload succeeds.
 3. Open <https://central.sonatype.com/publishing/deployments> and inspect the
-   transferred deployment's artifacts. Wait for `VALIDATED`; the artifacts are
+   uploaded deployment's artifacts. Wait for `VALIDATED`; the artifacts are
    not on Maven Central yet.
 4. **Publish** the validated deployment in Central Portal. Publishing cannot be
    undone — Maven Central does not allow deleting or replacing a version. To
@@ -145,10 +130,12 @@ Publish the signing public key to a keyserver accepted by Sonatype, such as
 
 ### Verifying artifacts locally
 
-Publish an unsigned local snapshot without Sonatype credentials:
+Publish an unsigned local snapshot without Sonatype credentials. Signing is
+enabled only when the `signingInMemoryKey` property is set. Uploading to
+Maven Central without it fails.
 
 ```bash
-./gradlew --no-daemon :java-client:publishPublishMavenPublicationToLocalRepoRepository
+./gradlew --no-daemon :java-client:publishMavenPublicationToLocalRepoRepository
 ```
 
 Inspect the publication under

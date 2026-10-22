@@ -14,6 +14,7 @@ This repository builds typed Java data-plane clients for Amazon OpenSearch Servi
 - java-client/src/generated/aos: generated AOS models and clients
 - java-client/src/generated/aoss: generated AOSS models and clients
 - java-codegen: the shared OpenAPI Java generator and AWS distribution generation tasks
+- samples: runnable examples using the AWS client JAR
 
 The repository does not contain or build the standalone OSS opensearch-java client.
 
@@ -49,10 +50,17 @@ Do not manually edit generated AOS or AOSS source files. Update the API specific
   :java-codegen:spotlessJavaCheck \
   :java-client:jar \
   :java-client:sourcesJar \
-  :java-client:javadocJar
+  :java-client:javadocJar \
+  :samples:build
 ~~~
 
 The build runs on JDK 21 or newer, while the generated Java client targets Java 8 bytecode.
+
+## Samples
+
+Samples target Java 8 and use the Jackson 2 mapper. Gradle requires JDK 21 or newer;
+the build CI matrix compiles the samples with `--release 8` and checks their formatting.
+See [samples/README.md](samples/README.md) for connection settings and AOS/AOSS run commands.
 
 ## Real-resource tests
 
@@ -67,7 +75,7 @@ Provide endpoints and credentials through environment variables or the AWS SDK d
 ## Formatting
 
 ~~~bash
-./gradlew :java-client:spotlessApply :java-codegen:spotlessApply
+./gradlew :java-client:spotlessApply :java-codegen:spotlessApply :samples:spotlessApply
 ~~~
 
 ## Submitting changes

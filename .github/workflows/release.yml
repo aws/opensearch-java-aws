@@ -72,7 +72,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.MAVEN_CENTRAL_SIGNING_ROLE }}
           aws-region: us-west-2
-      - name: Build, sign and transfer to Central Portal
+      - name: Build, sign and publish to Central Portal
         shell: bash
         env:
           VERSION: ${{ steps.get_data.outputs.version }}
@@ -83,39 +83,32 @@ jobs:
           get() { aws secretsmanager get-secret-value --secret-id "$1" --output json \
                     | jq -re .SecretString; }
 
-          ORG_GRADLE_PROJECT_signingKey=$(get opensearch-java/release/gpg-signing-key)
+          ORG_GRADLE_PROJECT_signingInMemoryKey=$(get opensearch-java/release/gpg-signing-key)
           # Register every non-empty line of the armored key before running other tools.
           while IFS= read -r signing_key_line; do
             signing_key_line=${signing_key_line%$'\r'}
             [ -z "$signing_key_line" ] && continue
             signing_key_line=${signing_key_line//'%'/'%25'}
             printf '::add-mask::%s\n' "$signing_key_line"
-          done <<< "$ORG_GRADLE_PROJECT_signingKey"
+          done <<< "$ORG_GRADLE_PROJECT_signingInMemoryKey"
           unset signing_key_line
-          ORG_GRADLE_PROJECT_signingPassword=$(get opensearch-java/release/gpg-passphrase)
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword=$(get opensearch-java/release/gpg-passphrase)
           portal=$(get opensearch-java/release/central-portal-token)
-          ORG_GRADLE_PROJECT_centralPortalUsername=$(jq -re .username <<<"$portal")
-          ORG_GRADLE_PROJECT_centralPortalToken=$(jq -re .token <<<"$portal")
+          ORG_GRADLE_PROJECT_mavenCentralUsername=$(jq -re .username <<<"$portal")
+          ORG_GRADLE_PROJECT_mavenCentralPassword=$(jq -re .token <<<"$portal")
           unset portal
 
-          for v in "$ORG_GRADLE_PROJECT_signingPassword" "$ORG_GRADLE_PROJECT_centralPortalUsername" "$ORG_GRADLE_PROJECT_centralPortalToken"; do
+          for v in "$ORG_GRADLE_PROJECT_signingInMemoryKeyPassword" "$ORG_GRADLE_PROJECT_mavenCentralUsername" "$ORG_GRADLE_PROJECT_mavenCentralPassword"; do
             echo "::add-mask::$v"
           done
-          export ORG_GRADLE_PROJECT_signingKey ORG_GRADLE_PROJECT_signingPassword
-          export ORG_GRADLE_PROJECT_centralPortalUsername ORG_GRADLE_PROJECT_centralPortalToken
+          export ORG_GRADLE_PROJECT_signingInMemoryKey ORG_GRADLE_PROJECT_signingInMemoryKeyPassword
+          export ORG_GRADLE_PROJECT_mavenCentralUsername ORG_GRADLE_PROJECT_mavenCentralPassword
 
-          ./gradlew --no-daemon :java-client:publishPublishMavenPublicationToCentralStagingRepository
-
-          # Sonatype requires this handoff from the same IP as the artifact uploads.
-          portal_authorization=$(printf '%s:%s' "$ORG_GRADLE_PROJECT_centralPortalUsername" "$ORG_GRADLE_PROJECT_centralPortalToken" | base64 | tr -d '\n')
-          echo "::add-mask::$portal_authorization"
-          printf 'Authorization: Bearer %s\n' "$portal_authorization" |
-            curl --fail-with-body --silent --show-error \
-              --connect-timeout 30 --max-time 600 \
-              --request POST --header @- \
-              'https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/software.amazon.opensearch?publishing_type=user_managed'
-          unset portal_authorization
-          echo "Deployment transferred to Central Portal for validation and manual publication."
+          # The vanniktech plugin uploads the signed artifacts to the Central Portal and
+          # leaves the deployment USER_MANAGED, so a maintainer publishes it from the
+          # Portal UI. No separate manual transfer step is needed.
+          ./gradlew --no-daemon :java-client:publishToMavenCentral
+          echo "Deployment uploaded to Central Portal for validation and manual publication."
       - name: Drop AWS credentials before third-party steps
         run: |
           for v in AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN; do

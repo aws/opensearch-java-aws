@@ -34,8 +34,8 @@ logger.quiet("  Gradle JDK Version    : " + JavaVersion.current())
 logger.quiet("=======================================")
 
 java {
-    targetCompatibility = JavaVersion.VERSION_11
-    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
 
     withJavadocJar()
     withSourcesJar()
@@ -289,8 +289,8 @@ dependencies {
     implementation("com.fasterxml.jackson.core", "jackson-databind", "2.22.2")
 
     // Apache 2.0
-    implementation("com.diffplug.spotless", "spotless-lib", "2.45.0")
-    implementation("com.diffplug.spotless", "spotless-lib-extra", "2.45.0")
+    implementation("com.diffplug.spotless", "spotless-lib", "4.10.4")
+    implementation("com.diffplug.spotless", "spotless-lib-extra", "4.10.4")
 
     // Apache 2.0
     // https://search.maven.org/artifact/com.google.code.findbugs/jsr305
