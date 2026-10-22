@@ -41,6 +41,6 @@ repositories {
 
 dependencies {
     implementation("org.ajoberstar.grgit:grgit-gradle:5.3.3")
-    implementation("com.diffplug.spotless", "spotless-plugin-gradle", "8.8.0")
+    implementation("com.diffplug.spotless", "spotless-plugin-gradle", "8.10.4")
 }
 
