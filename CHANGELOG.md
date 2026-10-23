@@ -35,6 +35,7 @@ Serverless (AOSS).
 - Published the client under the Maven coordinate `software.amazon.opensearch:opensearch-java` (changing only the groupId from the inherited `org.opensearch.client:opensearch-java`), and set the build version to `0.1.0` to match the `[Unreleased 0.1.0]` release line.
 - Hardened the CI workflows: scoped the push and pull-request triggers to `main` and release branches so a feature-branch push no longer runs CI twice, and trimmed the redundant `macOS-14` build-matrix entry ([#48](https://github.com/aws/opensearch-java-aws/pull/48)).
 - Fixed the remaining zizmor findings in the CI workflows and the zizmor report upload ([#49](https://github.com/aws/opensearch-java-aws/pull/49)).
+- Set `persist-credentials: false` on the read-only checkouts in the CI workflows so the job token is not left in the git config after checkout ([#52](https://github.com/aws/opensearch-java-aws/pull/52)).
 
 ### Deprecated
 
@@ -54,6 +55,7 @@ Serverless (AOSS).
 - Correct the POM inception year and SCM metadata.
 - Pointed the `bump-version` auto-bump job's repository guard and the generated jar's `Implementation-URL` manifest attribute at `aws/opensearch-java-aws` instead of the inherited `opensearch-project/opensearch-java`.
 - Pointed the inherited open-source metadata (CODEOWNERS, MAINTAINERS, ADMINS, NOTICE, SECURITY) at the `aws/amazon-opensearch-clients` owning team and AWS vulnerability reporting.
+- Pinned the `samples` AWS SDK and log4j dependencies to fixed versions so a clean build no longer resolves a newer release that fails dependency verification ([#52](https://github.com/aws/opensearch-java-aws/pull/52)).
 
 ### Security
 - Fetch release credentials from AWS Secrets Manager using GitHub OIDC and gate publishing on the `release` environment; mask every non-empty line of the GPG private key in workflow logs.
