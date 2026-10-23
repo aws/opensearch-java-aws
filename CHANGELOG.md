@@ -54,6 +54,7 @@ Serverless (AOSS).
 - Correct the POM inception year and SCM metadata.
 - Pointed the `bump-version` auto-bump job's repository guard and the generated jar's `Implementation-URL` manifest attribute at `aws/opensearch-java-aws` instead of the inherited `opensearch-project/opensearch-java`.
 - Pointed the inherited open-source metadata (CODEOWNERS, MAINTAINERS, ADMINS, NOTICE, SECURITY) at the `aws/amazon-opensearch-clients` owning team and AWS vulnerability reporting.
+- Pinned the `samples` AWS SDK and log4j dependencies to fixed versions so a clean build no longer resolves a newer release that fails dependency verification ([#52](https://github.com/aws/opensearch-java-aws/pull/52)).
 
 ### Security
 - Fetch release credentials from AWS Secrets Manager using GitHub OIDC and gate publishing on the `release` environment; mask every non-empty line of the GPG private key in workflow logs.
