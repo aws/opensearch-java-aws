@@ -33,10 +33,6 @@ version = System.getenv("VERSION") ?: System.getProperty("version") + "-SNAPSHOT
 ordinary and snapshot builds need no extra flags, and a release build must set
 `VERSION=0.1.0`.
 
-The [bump-version workflow](.github/workflows/bump-version.yml) opens a PR to set
-`systemProp.version` on a new branch or tag. It can be run manually
-(`workflow_dispatch`) or fires automatically on branch/tag creation for this repo.
-
 ## Branching
 
 - **main** — all merges land here; it tracks the next release line.

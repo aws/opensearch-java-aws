@@ -32,14 +32,16 @@ dependencies {
         // Samples explicitly use the Java 8-compatible Jackson 2 mapper.
         exclude(group = "tools.jackson.core")
     }
-    implementation("org.apache.logging.log4j:log4j-api:[2.17.1,3.0)")
-    runtimeOnly("org.apache.logging.log4j:log4j-core:[2.17.1,3.0)")
-    runtimeOnly("org.apache.logging.log4j:log4j-slf4j2-impl:[2.17.1,3.0)")
+    val log4jVersion = "2.26.1"
+    implementation("org.apache.logging.log4j:log4j-api:$log4jVersion")
+    runtimeOnly("org.apache.logging.log4j:log4j-core:$log4jVersion")
+    runtimeOnly("org.apache.logging.log4j:log4j-slf4j2-impl:$log4jVersion")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.22.2")
-    implementation("software.amazon.awssdk:sdk-core:[2.21,3.0)")
-    implementation("software.amazon.awssdk:auth:[2.21,3.0)")
-    implementation("software.amazon.awssdk:http-auth-aws:[2.21,3.0)")
-    implementation("software.amazon.awssdk:url-connection-client:[2.21,3.0)")
+    val awsSdkVersion = "2.57.1"
+    implementation("software.amazon.awssdk:sdk-core:$awsSdkVersion")
+    implementation("software.amazon.awssdk:auth:$awsSdkVersion")
+    implementation("software.amazon.awssdk:http-auth-aws:$awsSdkVersion")
+    implementation("software.amazon.awssdk:url-connection-client:$awsSdkVersion")
 }
 
 application {
