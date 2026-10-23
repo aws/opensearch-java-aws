@@ -9,10 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event.pull_request.base.repo.id == github.event.pull_request.head.repo.id 
-      && (
-        startsWith(github.event.pull_request.head.ref, 'backport/') 
-        || startsWith(github.event.pull_request.head.ref, 'bump-version/')
-      )
+      && startsWith(github.event.pull_request.head.ref, 'backport/')
     permissions:
       contents: write
     steps:
