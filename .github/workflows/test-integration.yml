@@ -19,8 +19,6 @@ jobs:
       id-token: write
     env:
       OPENSEARCH_TEST_AOS_ENDPOINT: ${{ secrets.OPENSEARCH_TEST_AOS_ENDPOINT }}
-      OPENSEARCH_TEST_AOS_USERNAME: ${{ secrets.OPENSEARCH_TEST_AOS_USERNAME }}
-      OPENSEARCH_TEST_AOS_PASSWORD: ${{ secrets.OPENSEARCH_TEST_AOS_PASSWORD }}
       OPENSEARCH_TEST_AOSS_ENDPOINT: ${{ secrets.OPENSEARCH_TEST_AOSS_ENDPOINT }}
     steps:
       - name: Require the test resource secrets
@@ -30,8 +28,7 @@ jobs:
           # The tests skip themselves when a variable is unset, which would pass
           # without testing anything.
           missing=()
-          for name in AOS_AOSS_TEST_ROLE OPENSEARCH_TEST_AOS_ENDPOINT OPENSEARCH_TEST_AOS_USERNAME \
-                      OPENSEARCH_TEST_AOS_PASSWORD OPENSEARCH_TEST_AOSS_ENDPOINT; do
+          for name in AOS_AOSS_TEST_ROLE OPENSEARCH_TEST_AOS_ENDPOINT OPENSEARCH_TEST_AOSS_ENDPOINT; do
             [ -n "${!name}" ] || missing+=("$name")
           done
           if [ ${#missing[@]} -gt 0 ]; then
@@ -55,7 +52,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@cbe3b392738ccf3f987d68400dafcf4b0624a56c # v6
         with:
           role-to-assume: ${{ secrets.AOS_AOSS_TEST_ROLE }}
-          aws-region: us-east-1
+          # The tests sign for this region, so the AOS domain and AOSS collection must be in it.
+          aws-region: us-west-2
 
       - name: Run real-resource smoke tests
         run: ./gradlew :java-client:realResourceTest
