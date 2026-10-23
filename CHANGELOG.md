@@ -19,6 +19,7 @@ Serverless (AOSS).
 - Pin AWS SDK dependencies to `2.57.1`; consumers can override the version with their AWS SDK BOM.
 
 ### Changed
+- Removed the `Bump Version` and `Dependabot PR actions` workflows along with their dead `create-version-bump-pr` action and `.ci/bump-version.sh` script ([#51](https://github.com/aws/opensearch-java-aws/pull/51)).
 - Include Java 8-compatible `samples` in Gradle and CI builds, align examples with the AWS client packages and APIs, and add AOS/AOSS search examples and usage documentation ([#43](https://github.com/aws/opensearch-java-aws/pull/43)).
 - Run client and generator tests as part of CI builds ([#43](https://github.com/aws/opensearch-java-aws/pull/43)).
 - Resolve build plugins and dependencies from Maven Central only ([#36](https://github.com/aws/opensearch-java-aws/pull/36)).
