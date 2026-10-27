@@ -317,7 +317,7 @@ dependencies {
     val jacksonVersion = "2.22.2"
     val jacksonDatabindVersion = "2.22.2"
     val jackson3Version = "3.2.2"
-    val jackson3DatabindVersion = "3.2.2"
+    val jackson3DatabindVersion = "3.2.4"
     val log4jVersion = "2.26.1"
 
     // Apache 2.0
