@@ -80,10 +80,16 @@ for the three secrets above and trust this OIDC subject:
 "Condition": {
   "StringEquals": {
     "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-    "token.actions.githubusercontent.com:sub": "repo:aws/opensearch-java-aws:environment:release"
+    "token.actions.githubusercontent.com:sub": "repo:aws@2232217/opensearch-java-aws@1356822943:environment:release"
   }
 }
 ```
+
+The `aws` GitHub organization puts immutable owner and repository IDs in the OIDC
+subject (`<owner>@<id>/<repo>@<id>`), so the name-only form
+`repo:aws/opensearch-java-aws:...` never matches. Failed attempts are recorded in
+CloudTrail as `AssumeRoleWithWebIdentity` events whose `userIdentity.userName` is
+the subject GitHub actually sent.
 
 The workflow passes credentials through Gradle's environment properties:
 

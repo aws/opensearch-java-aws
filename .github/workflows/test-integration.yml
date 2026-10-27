@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     # Configure required reviewers and the secrets below on this environment, so a
     # run waits for approval before it can reach the test resources.
-    # The role's OIDC trust policy must require this repository and environment.
+    # The role's OIDC trust policy must require this repository and environment:
+    # repo:aws@2232217/opensearch-java-aws@1356822943:environment:real-resource-tests
     environment: real-resource-tests
     permissions:
       contents: read
