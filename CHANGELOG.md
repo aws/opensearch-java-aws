@@ -7,6 +7,7 @@ data-plane clients for Amazon OpenSearch Service (AOS) and Amazon OpenSearch
 Serverless (AOSS).
 
 ### Added
+- Add `FieldValue.FIRST` and `FieldValue.LAST` constants for the `_first` and `_last` sort values to the AOS and AOSS clients (ported from upstream [opensearch-java#2189](https://github.com/opensearch-project/opensearch-java/pull/2189)).
 - Pinned each input spec with a committed `<spec>.sha256` checksum, verified before generating — the same approach OpenSearch core uses for its `<jar>.sha1` dependency pins. The `code-generation` workflow now runs on pull requests and fails if regenerating from the committed specs drifts from the committed output ([#35](https://github.com/aws/opensearch-java-aws/pull/35)).
 - Add signed Maven Central publishing through the vanniktech `gradle-maven-publish-plugin`, which uploads to the Central Portal for manual publication ([#42](https://github.com/aws/opensearch-java-aws/pull/42)).
 - Bundled AOS and AOSS OpenAPI snapshots as the default inputs for distribution client generation ([#14](https://github.com/aws/opensearch-java-aws/pull/14)).
@@ -15,10 +16,12 @@ Serverless (AOSS).
 - `Build Distributions` CI workflow that compiles the AOS and AOSS clients and runs their unit tests across JDK 21 and 25.
 
 ### Dependencies
+- Bump Jackson to `2.22.4` / `3.2.4` and the test-only `io.github.classgraph:classgraph` to `5.0.0` (ported from upstream [opensearch-java#2231](https://github.com/opensearch-project/opensearch-java/pull/2231), [#2228](https://github.com/opensearch-project/opensearch-java/pull/2228)).
 - Bumped Spotless to 8.10.4 and the code generator's `spotless-lib-extra` to 4.10.4, so the Eclipse JDT formatter resolves from Maven Central instead of the Eclipse P2 update site in both the build's formatting check and the code generator ([#48](https://github.com/aws/opensearch-java-aws/pull/48)).
 - Pin AWS SDK dependencies to `2.57.1`; consumers can override the version with their AWS SDK BOM.
 
 ### Changed
+- `ApacheHttpClient5Transport` creates the request entity directly on the serialization buffer instead of copying it, halving the memory needed for large bulk requests (ported from upstream [opensearch-java#2196](https://github.com/opensearch-project/opensearch-java/pull/2196)).
 - Removed the `Bump Version` and `Dependabot PR actions` workflows along with their dead `create-version-bump-pr` action and `.ci/bump-version.sh` script ([#51](https://github.com/aws/opensearch-java-aws/pull/51)).
 - Include Java 8-compatible `samples` in Gradle and CI builds, align examples with the AWS client packages and APIs, and add AOS/AOSS search examples and usage documentation ([#43](https://github.com/aws/opensearch-java-aws/pull/43)).
 - Run client and generator tests as part of CI builds ([#43](https://github.com/aws/opensearch-java-aws/pull/43)).
@@ -46,6 +49,9 @@ Serverless (AOSS).
 - The gRPC transport module (`java-client-grpc`), its samples, and the gRPC integration-test path.
 
 ### Fixed
+- Code generator: flatten `properties` declared next to an `allOf` combinator, so the generated AOS and AOSS `TermsLookup` now includes `index`, `path`, `routing` and `store` (ported from upstream [opensearch-java#2239](https://github.com/opensearch-project/opensearch-java/pull/2239)).
+- Code generator: model nested sub-aggregations on single-bucket aggregates (`SingleBucketAggregateBase`), and map multi-member `allOf` schemas to their last member instead of failing with a `NullPointerException` (ported from upstream [opensearch-java#1957](https://github.com/opensearch-project/opensearch-java/pull/1957), [#2238](https://github.com/opensearch-project/opensearch-java/pull/2238)).
+- `JsonData._DESERIALIZER` reads the value at the current parser event instead of advancing past it, and the `Requests.JsonBodyBuilder.method` null check now reports `method cannot be null` (ported from upstream [opensearch-java#1957](https://github.com/opensearch-project/opensearch-java/pull/1957), [#2229](https://github.com/opensearch-project/opensearch-java/pull/2229)).
 - Reject spec names that are not plain identifiers so they cannot break out of generated comments ([#44](https://github.com/aws/opensearch-java-aws/pull/44)).
 - Escaped backslashes and comment terminators in spec descriptions so they no longer break the generated Javadoc comment, and made the generator fail if the rendered doc would still contain a backslash-u sequence. Generation now also fails if the Java formatter cannot format its output, instead of silently emitting unformatted code. Regenerating under the new escaping updated five generated files ([#35](https://github.com/aws/opensearch-java-aws/pull/35)).
 - Accept AOS search-shards node responses that omit attributes and transport addresses, and segment responses that omit attributes, compound flags, or versions. `Segment.compound()` and its builder setter now use nullable `Boolean`; consumers should recompile and handle absent values.

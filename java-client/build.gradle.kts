@@ -314,10 +314,10 @@ tasks.register<Test>("realResourceTest") {
 
 dependencies {
     val awsSdkVersion = "2.57.1"
-    val jacksonVersion = "2.22.2"
-    val jacksonDatabindVersion = "2.22.2"
-    val jackson3Version = "3.2.2"
-    val jackson3DatabindVersion = "3.2.2"
+    val jacksonVersion = "2.22.4"
+    val jacksonDatabindVersion = "2.22.4"
+    val jackson3Version = "3.2.4"
+    val jackson3DatabindVersion = "3.2.4"
     val log4jVersion = "2.26.1"
 
     // Apache 2.0
@@ -396,7 +396,7 @@ dependencies {
     implementation("org.eclipse", "yasson", "2.0.2")
 
     // https://github.com/classgraph/classgraph
-    testImplementation("io.github.classgraph:classgraph:4.8.196")
+    testImplementation("io.github.classgraph:classgraph:5.0.0")
 
     // Eclipse 1.0
     testImplementation("junit", "junit" , "4.13.2") {

@@ -14,6 +14,7 @@
  */
 package software.amazon.opensearch.client;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -84,6 +85,26 @@ public class AwsHandwrittenApiTests {
         assertTrue(body.endsWith("\n"));
         assertTrue(body.contains("\"index\""));
         assertTrue(body.contains("\"title\":\"OpenSearch\""));
+    }
+
+    @Test
+    public void fieldValueExposesMissingSortConstants() {
+        assertEquals(
+            software.amazon.opensearch.client.aos._types.FieldValue.of("_first"),
+            software.amazon.opensearch.client.aos._types.FieldValue.FIRST
+        );
+        assertEquals(
+            software.amazon.opensearch.client.aos._types.FieldValue.of("_last"),
+            software.amazon.opensearch.client.aos._types.FieldValue.LAST
+        );
+        assertEquals(
+            software.amazon.opensearch.client.aoss._types.FieldValue.of("_first"),
+            software.amazon.opensearch.client.aoss._types.FieldValue.FIRST
+        );
+        assertEquals(
+            software.amazon.opensearch.client.aoss._types.FieldValue.of("_last"),
+            software.amazon.opensearch.client.aoss._types.FieldValue.LAST
+        );
     }
 
     private static void assertApis(Class<?> client, String distribution) throws Exception {
