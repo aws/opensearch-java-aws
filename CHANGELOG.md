@@ -7,6 +7,7 @@ data-plane clients for Amazon OpenSearch Service (AOS) and Amazon OpenSearch
 Serverless (AOSS).
 
 ### Added
+- Add `search_pipeline` to AOS and AOSS `_msearch` sub-request bodies (`MultisearchBody.searchPipeline`); previously the field could not be set and was dropped when a body was deserialized and re-serialized (ported from upstream [opensearch-java#2206](https://github.com/opensearch-project/opensearch-java/pull/2206)).
 - Add `FieldValue.FIRST` and `FieldValue.LAST` constants for the `_first` and `_last` sort values to the AOS and AOSS clients (ported from upstream [opensearch-java#2189](https://github.com/opensearch-project/opensearch-java/pull/2189)).
 - Pinned each input spec with a committed `<spec>.sha256` checksum, verified before generating — the same approach OpenSearch core uses for its `<jar>.sha1` dependency pins. The `code-generation` workflow now runs on pull requests and fails if regenerating from the committed specs drifts from the committed output ([#35](https://github.com/aws/opensearch-java-aws/pull/35)).
 - Add signed Maven Central publishing through the vanniktech `gradle-maven-publish-plugin`, which uploads to the Central Portal for manual publication ([#42](https://github.com/aws/opensearch-java-aws/pull/42)).
