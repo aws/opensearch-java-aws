@@ -209,7 +209,7 @@ public class CodeGenerator {
             LOGGER.info("Model Package: {}", modelPackage);
             LOGGER.info("Root Client Name: {}", rootClientName);
 
-            Namespace root = parseSpec(specLocation, modelPackage, rootClientName);
+            Namespace root = parseSpec(specLocation, Overrides.forDistribution(distribution), modelPackage, rootClientName);
 
             cleanDirectory(outputDir);
 
@@ -237,10 +237,11 @@ public class CodeGenerator {
         }
     }
 
-    private static Namespace parseSpec(URI location, String modelPackage, String rootClientName) throws ApiSpecificationParseException {
+    private static Namespace parseSpec(URI location, Overrides overrides, String modelPackage, String rootClientName)
+        throws ApiSpecificationParseException {
         var spec = OpenApiSpecification.retrieve(location);
-        spec = SpecificationRewriter.rewrite(spec, Overrides.OVERRIDES);
-        var transformer = new SpecTransformer(OPERATION_MATCHER, Overrides.OVERRIDES, modelPackage, rootClientName);
+        spec = SpecificationRewriter.rewrite(spec, overrides);
+        var transformer = new SpecTransformer(OPERATION_MATCHER, overrides, modelPackage, rootClientName);
         transformer.visit(spec);
         return transformer.getRoot();
     }

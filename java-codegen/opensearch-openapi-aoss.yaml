@@ -489,6 +489,27 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/cat.templates___200'
+  /_cluster/settings/_describe:
+    get:
+      operationId: cluster.describe_settings.0
+      x-operation-group: cluster.describe_settings
+      tags:
+        - Cluster
+      x-version-added: '3.10'
+      description: Returns definition metadata for cluster settings, including whether each setting is dynamic. Does not return setting values or defaults.
+      externalDocs:
+        url: https://docs.opensearch.org/latest/api-reference/cluster-api/describe-cluster-settings/
+      parameters:
+        - $ref: '#/components/parameters/cluster.describe_settings___query.cluster_manager_timeout'
+        - $ref: '#/components/parameters/cluster.describe_settings___query.settings'
+        - $ref: '#/components/parameters/_global___query.pretty'
+        - $ref: '#/components/parameters/_global___query.human'
+        - $ref: '#/components/parameters/_global___query.error_trace'
+        - $ref: '#/components/parameters/_global___query.source'
+        - $ref: '#/components/parameters/_global___query.filter_path'
+      responses:
+        '200':
+          $ref: '#/components/responses/cluster.describe_settings___200'
   /_component_template:
     get:
       operationId: cluster.get_component_template.0
@@ -2831,7 +2852,7 @@ paths:
               properties:
                 sourceCollectionId:
                   type: string
-                  pattern: '^[a-z0-9]{3,40}$'
+                  pattern: ^[a-z0-9]{3,40}$
                   description: Source collection whose snapshot repository to list; requires the CCR feature flag.
   /_snapshot/{repository}/{snapshot}/_restore:
     post:
@@ -4500,7 +4521,10 @@ components:
     asynchronous_search.search___query.keep_alive:
       name: keep_alive
       in: query
-      description: "The amount of time that the result is saved in the cluster. For example, `2d` means that the results are stored in the cluster for 48 hours. \nThe saved search results are deleted after this period or if the search is canceled. Note that this includes the query execution time. \nIf the query exceeds this amount of time, the process cancels this query automatically."
+      description: |-
+        The amount of time that the result is saved in the cluster. For example, `2d` means that the results are stored in the cluster for 48 hours. 
+        The saved search results are deleted after this period or if the search is canceled. Note that this includes the query execution time. 
+        If the query exceeds this amount of time, the process cancels this query automatically.
       schema:
         type: string
     asynchronous_search.search___query.keep_on_completion:
@@ -6308,13 +6332,17 @@ components:
     cat.tasks___query.nodes:
       name: nodes
       in: query
-      description: "A comma-separated list of node IDs or names used to limit the returned information. \nUse `_local` to return information from the node to which you're connecting, specify a specific node from which to get information, or keep the parameter empty to get information from all nodes."
+      description: |-
+        A comma-separated list of node IDs or names used to limit the returned information. 
+        Use `_local` to return information from the node to which you're connecting, specify a specific node from which to get information, or keep the parameter empty to get information from all nodes.
       style: form
       schema:
         type: array
         items:
           type: string
-        description: "A comma-separated list of node IDs or names used to limit the returned information. \nUse `_local` to return information from the node to which you're connecting, specify a specific node from which to get information, or keep the parameter empty to get information from all nodes."
+        description: |-
+          A comma-separated list of node IDs or names used to limit the returned information. 
+          Use `_local` to return information from the node to which you're connecting, specify a specific node from which to get information, or keep the parameter empty to get information from all nodes.
     cat.tasks___query.parent_task_id:
       in: query
       name: parent_task_id
@@ -6584,6 +6612,23 @@ components:
         type: boolean
         default: true
       style: form
+    cluster.describe_settings___query.cluster_manager_timeout:
+      name: cluster_manager_timeout
+      description: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
+      in: query
+      schema:
+        $ref: '#/components/schemas/_common___Duration'
+      x-version-added: '3.10'
+    cluster.describe_settings___query.settings:
+      name: settings
+      in: query
+      required: true
+      description: A comma-separated list of exact setting names to describe. Wildcards are not supported; each name must be an exact, valid setting key. At least one name is required.
+      schema:
+        $ref: '#/components/schemas/_common___StringOrStringArray'
+      style: form
+      explode: false
+      x-version-added: '3.10'
     cluster.exists_component_template___path.name:
       in: path
       name: name
@@ -9029,7 +9074,9 @@ components:
     indices.create___query.wait_for_active_shards:
       in: query
       name: wait_for_active_shards
-      description: "The number of shard copies that must be active before proceeding with the operation. \nSet to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`)."
+      description: |-
+        The number of shard copies that must be active before proceeding with the operation. 
+        Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
       schema:
         $ref: '#/components/schemas/_common___WaitForActiveShards'
       style: form
@@ -13407,7 +13454,10 @@ components:
     neural.stats___query.flat_stat_paths:
       in: query
       name: flat_stat_paths
-      description: "Whether to return stats in the flat form, which can improve readability, especially for heavily nested stats.\nFor example, the flat form of `\"processors\": { \"ingest\": { \"text_embedding_executions\": 20181212 } }` is \n`\"processors.ingest.text_embedding_executions\": \"20181212\"`."
+      description: |-
+        Whether to return stats in the flat form, which can improve readability, especially for heavily nested stats.
+        For example, the flat form of `"processors": { "ingest": { "text_embedding_executions": 20181212 } }` is 
+        `"processors.ingest.text_embedding_executions": "20181212"`.
       schema:
         type: boolean
         default: false
@@ -15519,6 +15569,13 @@ components:
       schema:
         type: string
       required: true
+    security.create_role_mappings___query.wait_for_completion:
+      name: wait_for_completion
+      in: query
+      description: If false, returns a task ID after validation and runs the configuration write and reload asynchronously.
+      schema:
+        type: boolean
+        default: true
     security.create_role___path.role:
       name: role
       in: path
@@ -17778,7 +17835,9 @@ components:
                 description: The description for the ingest pipeline.
                 type: string
               on_failure:
-                description: "The new processor to run immediately after another processor fails. The processors specified in the `on_failure` parameter run sequentially in the order specified. \nIf no pipeline are specified in `on_failure` array is specified, OpenSearch will not attempt to run the pipeline's remaining processors."
+                description: |-
+                  The new processor to run immediately after another processor fails. The processors specified in the `on_failure` parameter run sequentially in the order specified. 
+                  If no pipeline are specified in `on_failure` array is specified, OpenSearch will not attempt to run the pipeline's remaining processors.
                 type: array
                 items:
                   $ref: '#/components/schemas/ingest._common___ProcessorContainer'
@@ -19377,6 +19436,16 @@ components:
           schema:
             $ref: '#/components/schemas/security._common___ActionGroup'
       required: true
+    security.create_action_groups:
+      content:
+        application/json:
+          schema:
+            type: object
+            description: A non-empty object mapping action group names to complete action group definitions.
+            minProperties: 1
+            additionalProperties:
+              $ref: '#/components/schemas/security._common___ActionGroup'
+      required: true
     security.create_allowlist:
       content:
         application/json:
@@ -19394,6 +19463,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/security._common___RoleMapping'
+      required: true
+    security.create_role_mappings:
+      content:
+        application/json:
+          schema:
+            type: object
+            description: A non-empty object mapping existing role names to complete role mapping definitions.
+            minProperties: 1
+            additionalProperties:
+              $ref: '#/components/schemas/security._common___RoleMapping'
       required: true
     security.create_tenant:
       content:
@@ -19605,23 +19684,33 @@ components:
             type: object
             properties:
               ignore_unavailable:
-                description: "When `true`, the request ignores any data streams and indexes that are missing or closed. \nWhen `false`, the request returns an error for any data streams or indexes that is missing or closed."
+                description: |-
+                  When `true`, the request ignores any data streams and indexes that are missing or closed. 
+                  When `false`, the request returns an error for any data streams or indexes that is missing or closed.
                 type: boolean
               include_global_state:
-                description: "When `true`, includes the current cluster state in the snapshot. \nThe cluster state includes persistent cluster settings, composable index templates, legacy index templates, ingest pipelines, and ILM policies. \nThe cluster state also includes data stored in system indexes, such as watches and task records (configurable with `feature_states`)."
+                description: |-
+                  When `true`, includes the current cluster state in the snapshot. 
+                  The cluster state includes persistent cluster settings, composable index templates, legacy index templates, ingest pipelines, and ILM policies. 
+                  The cluster state also includes data stored in system indexes, such as watches and task records (configurable with `feature_states`).
                 type: boolean
                 default: true
               indices:
                 $ref: '#/components/schemas/_common___Indices'
               feature_states:
-                description: "A list of feature states to include in the snapshot. Each feature state includes one or more system indexes which contain related data. You can view a list of features using the Get Feature API.  \nIf `include_global_state` is `true`, all current feature states are included by default. If `include_global_state` is `false`, no feature states are included by default."
+                description: |-
+                  A list of feature states to include in the snapshot. Each feature state includes one or more system indexes which contain related data. You can view a list of features using the Get Feature API.  
+                  If `include_global_state` is `true`, all current feature states are included by default. If `include_global_state` is `false`, no feature states are included by default.
                 type: array
                 items:
                   type: string
               metadata:
                 $ref: '#/components/schemas/_common___Metadata'
               partial:
-                description: "When `true`, enables the restoration of a partial snapshot from indexes with unavailable shards. \nOnly shards that were successfully included in the snapshot will be restored. All missing shards will be recreated as empty. \nWhen `false`, the entire restore operation will fail if one or more indexes included in the snapshot do not have all primary shards available."
+                description: |-
+                  When `true`, enables the restoration of a partial snapshot from indexes with unavailable shards. 
+                  Only shards that were successfully included in the snapshot will be restored. All missing shards will be recreated as empty. 
+                  When `false`, the entire restore operation will fail if one or more indexes included in the snapshot do not have all primary shards available.
                 type: boolean
                 default: false
             description: The snapshot definition.
@@ -19664,24 +19753,39 @@ components:
               ignore_unavailable:
                 type: boolean
                 default: false
-                description: "How to handle data streams or indexes that are missing or closed. \nWhen `false`, the request returns an error for any data stream or index that is missing or closed. \nWhen `true`, the request ignores data streams and indexes in indexes that are missing or closed. "
+                description: |-
+                  How to handle data streams or indexes that are missing or closed. 
+                  When `false`, the request returns an error for any data stream or index that is missing or closed. 
+                  When `true`, the request ignores data streams and indexes in indexes that are missing or closed. 
               include_aliases:
                 type: boolean
                 default: true
-                description: "How to handle index aliases from the original snapshot. \nWhen `true`, index aliases from the original snapshot are restored. \nWhen `false`, aliases along with associated indexes are not restored. "
+                description: |-
+                  How to handle index aliases from the original snapshot. 
+                  When `true`, index aliases from the original snapshot are restored. 
+                  When `false`, aliases along with associated indexes are not restored. 
               include_global_state:
                 type: boolean
                 default: false
-                description: "Whether to restore the current cluster state. When `false`, the cluster state is not restored. \nWhen `true`, the current cluster state is restored. "
+                description: |-
+                  Whether to restore the current cluster state. When `false`, the cluster state is not restored. 
+                  When `true`, the current cluster state is restored. 
               index_settings:
-                description: "A comma-delimited list of settings to add or change in all restored indexes. \nUse this parameter to override index settings during snapshot restoration. \nFor data streams, these index settings are applied to the restored backing indexes."
+                description: |-
+                  A comma-delimited list of settings to add or change in all restored indexes. 
+                  Use this parameter to override index settings during snapshot restoration. 
+                  For data streams, these index settings are applied to the restored backing indexes.
                 $ref: '#/components/schemas/indices._common___IndexSettings'
               indices:
                 $ref: '#/components/schemas/_common___Indices'
               partial:
                 type: boolean
                 default: false
-                description: "How the restore operation will behave if indexes in the snapshot do not have all primary shards available.\nWhen `false`, the entire restore operation fails if any indexes in the snapshot do not have all primary shards available.\nWhen `true`, allows the restoration of a partial snapshot of indexes with unavailable shards. Only shards that were successfully included in the snapshot are restored. \nAll missing shards are recreated as empty. By default, the entire restore operation fails if one or more indexes included in the snapshot do not have all primary shards available. To change this behavior, set `partial` to `true`."
+                description: |-
+                  How the restore operation will behave if indexes in the snapshot do not have all primary shards available.
+                  When `false`, the entire restore operation fails if any indexes in the snapshot do not have all primary shards available.
+                  When `true`, allows the restoration of a partial snapshot of indexes with unavailable shards. Only shards that were successfully included in the snapshot are restored. 
+                  All missing shards are recreated as empty. By default, the entire restore operation fails if one or more indexes included in the snapshot do not have all primary shards available. To change this behavior, set `partial` to `true`.
               rename_pattern:
                 type: string
                 description: |-
@@ -19718,12 +19822,12 @@ components:
                   A value of `remote_snapshot` indicates that snapshot metadata will be downloaded to the cluster, but the remote repository will remain the authoritative store of the index data. Data will be downloaded and cached as necessary to service queries. At least one node in the cluster must be configured with the search role in order to restore a snapshot using the type `remote_snapshot`.
               sourceCollectionId:
                 type: string
-                pattern: '^[a-z0-9]{3,40}$'
+                pattern: ^[a-z0-9]{3,40}$
                 description: Source collection to restore from (cross-collection restore); requires the CCR feature flag. Omit to restore from the same collection.
               allow_regex:
                 type: boolean
                 default: false
-                description: 'When true, rename_pattern/replacement use Java regex with capture groups (e.g. $1); false = plain strings.'
+                description: When true, rename_pattern/replacement use Java regex with capture groups (e.g. $1); false = plain strings.
             description: Determines which settings and indexes to restore when restoring a snapshot
     sql.close:
       description: Contains the cursor identifier to close.
@@ -20296,6 +20400,22 @@ components:
           schema:
             $ref: '#/components/schemas/_common___AcknowledgedResponseBase'
       description: ''
+    cluster.describe_settings___200:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              settings:
+                type: object
+                description: |-
+                  A map of setting names to their definition metadata. Setting names are returned in sorted order.
+                  A requested name is omitted if it is unknown or filtered.
+                additionalProperties:
+                  $ref: '#/components/schemas/cluster._common___SettingMetadata'
+            required:
+              - settings
+      description: ''
     cluster.exists_component_template___200:
       content:
         application/json: {}
@@ -20432,7 +20552,9 @@ components:
                     items:
                       $ref: '#/components/schemas/cluster.reroute___RerouteExplanation'
                   state:
-                    description: "Shows the internal representation of the structure, which can\ndiffer from the external representation.                  "
+                    description: |-
+                      Shows the internal representation of the structure, which can
+                      differ from the external representation.                  
       description: ''
     cluster.state___200:
       content:
@@ -23820,6 +23942,24 @@ components:
           schema:
             $ref: '#/components/schemas/security._common___Created'
       description: ''
+    security.create_action_groups___200:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/security._common___Ok'
+      description: ''
+    security.create_action_groups___400:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/security._common___Error'
+      description: ''
+    security.create_action_groups___403:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/security._common___Error'
+      description: ''
     security.create_allowlist___200:
       content:
         application/json:
@@ -23843,6 +23983,37 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/security._common___Created'
+      description: ''
+    security.create_role_mappings___200:
+      content:
+        application/json:
+          schema:
+            anyOf:
+              - $ref: '#/components/schemas/security._common___Ok'
+              - type: object
+                required:
+                  - task
+                properties:
+                  task:
+                    $ref: '#/components/schemas/_common___TaskId'
+      description: ''
+    security.create_role_mappings___400:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/security._common___Error'
+      description: ''
+    security.create_role_mappings___403:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/security._common___Error'
+      description: ''
+    security.create_role_mappings___404:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/security._common___Error'
       description: ''
     security.create_role___200:
       content:
@@ -25340,7 +25511,7 @@ components:
           const: l
           description: The Laplace after effect.
         - type: string
-          const: 'no'
+          const: no
           description: No after effect.
     _common___DFRBasicModel:
       oneOf:
@@ -27654,7 +27825,7 @@ components:
           const: h3
           description: The third normalization of Hazm.
         - type: string
-          const: 'no'
+          const: no
           description: No normalization.
         - type: string
           const: z
@@ -27934,13 +28105,13 @@ components:
           description: The x coordinate.
           type: number
           format: double
-        'y':
+        y:
           description: The y coordinate.
           type: number
           format: double
       required:
         - x
-        - 'y'
+        - y
     _common___XyLocation:
       x-version-added: '2.4'
       description: |-
@@ -31879,7 +32050,7 @@ components:
       type: string
       enum:
         - canonical
-        - 'no'
+        - no
     _common.analysis___IcuCollationStrength:
       type: string
       enum:
@@ -34066,6 +34237,23 @@ components:
           type: string
           enum:
             - match_only_text
+        analyzer:
+          type: string
+        boost:
+          type: number
+          format: double
+        eager_global_ordinals:
+          type: boolean
+        fielddata:
+          type: boolean
+        fielddata_frequency_filter:
+          $ref: '#/components/schemas/indices._common___FielddataFrequencyFilter'
+        position_increment_gap:
+          type: integer
+        search_analyzer:
+          type: string
+        term_vector:
+          $ref: '#/components/schemas/_common.mapping___TermVectorOption'
         index:
           type: boolean
         fields:
@@ -34334,6 +34522,31 @@ components:
           type: string
         method:
           $ref: '#/components/schemas/_common.mapping___KnnVectorMethod'
+    _common.mapping___SemanticModelLanguageOption:
+      x-version-added: '3.9'
+      type: string
+      enum:
+        - ENGLISH
+        - MULTILINGUAL
+    _common.mapping___SemanticModelSelection:
+      x-version-added: '3.9'
+      type: object
+      description: |-
+        Resolves the model to use for a semantic field from cluster settings instead of a hard-coded `model_id`.
+        The `model_type` and `language_option` pair maps to the cluster setting
+        `plugins.neural_search.model_selection.model_id.<model_type>.<language_option>` (lower-cased),
+        whose value is the resolved model id.
+      properties:
+        language_option:
+          $ref: '#/components/schemas/_common.mapping___SemanticModelLanguageOption'
+        model_type:
+          $ref: '#/components/schemas/_common.mapping___SemanticModelType'
+    _common.mapping___SemanticModelType:
+      x-version-added: '3.9'
+      type: string
+      enum:
+        - DENSE
+        - SPARSE
     _common.mapping___SemanticProperty:
       x-version-added: '3.1'
       type: object
@@ -34346,6 +34559,9 @@ components:
           type: string
         model_id:
           type: string
+        model_selection:
+          $ref: '#/components/schemas/_common.mapping___SemanticModelSelection'
+          x-version-added: '3.9'
         search_model_id:
           type: string
         semantic_info_field_name:
@@ -34366,8 +34582,22 @@ components:
           type: boolean
           default: false
       required:
-        - model_id
         - type
+      allOf:
+        - anyOf:
+            - type: object
+              properties:
+                model_id:
+                  type: string
+              required:
+                - model_id
+            - type: object
+              x-version-added: '3.9'
+              properties:
+                model_selection:
+                  $ref: '#/components/schemas/_common.mapping___SemanticModelSelection'
+              required:
+                - model_selection
     _common.mapping___SemanticSparseEncodingConfig:
       type: object
       properties:
@@ -34431,13 +34661,13 @@ components:
     _common.mapping___TermVectorOption:
       type: string
       enum:
-        - 'no'
+        - no
         - with_offsets
         - with_positions
         - with_positions_offsets
         - with_positions_offsets_payloads
         - with_positions_payloads
-        - 'yes'
+        - yes
     _common.mapping___TextIndexPrefixes:
       type: object
       properties:
@@ -42068,6 +42298,14 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/indices._common___AliasDefinition'
+    cluster._common___SettingMetadata:
+      type: object
+      properties:
+        dynamic:
+          type: boolean
+          description: Whether the setting is dynamic. A dynamic setting can be updated on a running cluster; a static setting requires a node restart to change.
+      required:
+        - dynamic
     cluster._common___WaitForNodes:
       description: Waits until the specified number of nodes (`N`) is available. Accepts `>=N`, `<=N`, `>N`, and `<N`. You can also use `ge(N)`, `le(N)`, `gt(N)`, and `lt(N)` notation.
       oneOf:
@@ -42093,9 +42331,9 @@ components:
       type: string
       enum:
         - ALWAYS
-        - 'NO'
+        - NO
         - THROTTLE
-        - 'YES'
+        - YES
     cluster.allocation_explain___AllocationStore:
       type: object
       properties:
@@ -42175,12 +42413,12 @@ components:
       enum:
         - allocation_delayed
         - awaiting_info
-        - 'no'
+        - no
         - no_attempt
         - no_valid_shard_copy
         - throttled
         - worse_balance
-        - 'yes'
+        - yes
     cluster.allocation_explain___DiskUsage:
       type: object
       properties:
@@ -45020,10 +45258,10 @@ components:
           $ref: '#/components/schemas/indices._common___ReplicationType'
         data.retention:
           $ref: '#/components/schemas/_common___Duration'
-          description: 'Data-retention period for a V2 index (duration, e.g. `7d`).'
+          description: Data-retention period for a V2 index (duration, e.g. `7d`).
         warm.after:
           $ref: '#/components/schemas/_common___Duration'
-          description: 'Age after which an index migrates hot -> warm (duration, e.g. `30d`).'
+          description: Age after which an index migrates hot -> warm (duration, e.g. `30d`).
         timestamp_field:
           $ref: '#/components/schemas/_common___Field'
           description: Document field holding the event timestamp that drives time-based lifecycle.
@@ -54846,7 +55084,7 @@ components:
         x:
           type: integer
           description: The x-coordinate position of the visualization.
-        'y':
+        y:
           type: integer
           description: The y-coordinate position of the visualization.
         w:
@@ -54861,7 +55099,7 @@ components:
         - savedVisualizationId
         - w
         - x
-        - 'y'
+        - y
     ppl._common___ResponseFormat:
       type: string
       description: |-

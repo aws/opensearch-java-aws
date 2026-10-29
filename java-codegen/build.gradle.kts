@@ -271,6 +271,9 @@ dependencies {
     // Apache 2.0
     implementation("io.swagger.parser.v3", "swagger-parser", "2.1.22")
 
+    // Apache 2.0
+    implementation("org.snakeyaml", "snakeyaml-engine", "3.2")
+
     // (New) BSD
     implementation("com.samskivert", "jmustache", "1.16")
 

@@ -39,8 +39,38 @@ public class Overrides {
         return OpenApiSchema.COMPONENTS_SCHEMAS.append(namespace + OpenApiSchema.NAMESPACE_NAME_SEPARATOR + name);
     }
 
-    public static final Overrides OVERRIDES = builder().withOperations(
-        o -> o.with(
+    public static final Overrides OVERRIDES = builder().withOperations(Overrides::operations).withSchemas(Overrides::schemas).build();
+
+    // Corrections to the published AOS specification, kept here rather than in the bundled snapshot so that refreshing the
+    // snapshot cannot drop them.
+    private static final Overrides AOS_OVERRIDES = builder().withOperations(Overrides::operations)
+        .withSchemas(
+            s -> schemas(s)
+                // AOS omits these from search_shards and segments responses (https://github.com/aws/opensearch-java-aws/pull/29).
+                .with(
+                    schema("_common", "NodeAttributes"),
+                    so -> so.withProperties(
+                        p -> p.with("attributes", po -> po.withRequired(false)).with("transport_address", po -> po.withRequired(false))
+                    )
+                )
+                .with(
+                    schema("indices.segments", "Segment"),
+                    so -> so.withProperties(
+                        p -> p.with("attributes", po -> po.withRequired(false))
+                            .with("compound", po -> po.withRequired(false))
+                            .with("version", po -> po.withRequired(false))
+                    )
+                )
+        )
+        .build();
+
+    @Nonnull
+    public static Overrides forDistribution(@Nonnull String distribution) {
+        return "aos".equals(distribution) ? AOS_OVERRIDES : OVERRIDES;
+    }
+
+    private static OperationOverride.MapBuilder operations(OperationOverride.MapBuilder o) {
+        return o.with(
             OperationGroup.from("scroll"),
             oo -> oo.withQueryParameters(qp -> qp.with("rest_total_hits_as_int", po -> po.withIgnore(true)))
         )
@@ -75,163 +105,160 @@ public class Overrides {
             .with(
                 OperationGroup.from("snapshot.get_repository"),
                 oo -> oo.withPathParameters(pp -> pp.with("repository", po -> po.withName("name")))
+            );
+    }
+
+    private static SchemaOverride.MapBuilder schemas(SchemaOverride.MapBuilder s) {
+        return s.with(schema("_common", "ByteUnit"), so -> so.withClassName("Bytes"))
+            .with(schema("_common", "DateTime"), so -> so.withMappedType(Types.Java.Lang.String))
+            .with(schema("_common", "Duration"), so -> so.withMappedType(Types.Client.OpenSearch._Types.Time))
+            .with(schema("_common", "DurationLarge"), so -> so.withMappedType(Types.Client.OpenSearch._Types.Time))
+            .with(schema("_common", "FieldValue"), so -> so.withMappedType(Types.Client.OpenSearch._Types.FieldValue))
+            .with(schema("_common", "Fuzziness"), so -> so.withMappedType(Types.Java.Lang.String))
+            .with(schema("_common", "MinimumShouldMatch"), so -> so.withMappedType(Types.Java.Lang.String))
+            .with(schema("_common", "StringifiedBoolean"), so -> so.withMappedType(Types.Primitive.Boolean))
+            .with(schema("_common", "StringifiedDouble"), so -> so.withMappedType(Types.Primitive.Double))
+            .with(schema("_common", "StringifiedEpochTimeUnitMillis"), so -> so.withMappedType(Types.Primitive.Long))
+            .with(schema("_common", "StringifiedEpochTimeUnitSeconds"), so -> so.withMappedType(Types.Primitive.Long))
+            .with(schema("_common", "StringifiedInteger"), so -> so.withMappedType(Types.Primitive.Int))
+            .with(schema("_common", "StringifiedLong"), so -> so.withMappedType(Types.Primitive.Long))
+            .with(schema("_common", "StringifiedVersionNumber"), so -> so.withMappedType(Types.Primitive.Long))
+            .with(schema("_common", "Void"), so -> so.withMappedType(Types.Primitive.Void))
+
+            .with(schema("_common", "ScriptSort"), so -> so.withShouldGenerate(ShouldGenerate.Always))
+            .with(
+                schema("_common", "SortOptions"),
+                so -> so.withMappedType(t -> t.withPackage(Types.Client.OpenSearch._Types.PACKAGE).withName("SortOptions"))
             )
-    )
-        .withSchemas(
-            s -> s.with(schema("_common", "ByteUnit"), so -> so.withClassName("Bytes"))
-                .with(schema("_common", "DateTime"), so -> so.withMappedType(Types.Java.Lang.String))
-                .with(schema("_common", "Duration"), so -> so.withMappedType(Types.Client.OpenSearch._Types.Time))
-                .with(schema("_common", "DurationLarge"), so -> so.withMappedType(Types.Client.OpenSearch._Types.Time))
-                .with(schema("_common", "FieldValue"), so -> so.withMappedType(Types.Client.OpenSearch._Types.FieldValue))
-                .with(schema("_common", "Fuzziness"), so -> so.withMappedType(Types.Java.Lang.String))
-                .with(schema("_common", "MinimumShouldMatch"), so -> so.withMappedType(Types.Java.Lang.String))
-                .with(schema("_common", "StringifiedBoolean"), so -> so.withMappedType(Types.Primitive.Boolean))
-                .with(schema("_common", "StringifiedDouble"), so -> so.withMappedType(Types.Primitive.Double))
-                .with(schema("_common", "StringifiedEpochTimeUnitMillis"), so -> so.withMappedType(Types.Primitive.Long))
-                .with(schema("_common", "StringifiedEpochTimeUnitSeconds"), so -> so.withMappedType(Types.Primitive.Long))
-                .with(schema("_common", "StringifiedInteger"), so -> so.withMappedType(Types.Primitive.Int))
-                .with(schema("_common", "StringifiedLong"), so -> so.withMappedType(Types.Primitive.Long))
-                .with(schema("_common", "StringifiedVersionNumber"), so -> so.withMappedType(Types.Primitive.Long))
-                .with(schema("_common", "Void"), so -> so.withMappedType(Types.Primitive.Void))
+            .with(
+                schema("_common", "SortCombinations"),
+                so -> so.withMappedType(t -> t.withPackage(Types.Client.OpenSearch._Types.PACKAGE).withName("SortOptions"))
+            )
 
-                .with(schema("_common", "ScriptSort"), so -> so.withShouldGenerate(ShouldGenerate.Always))
-                .with(
-                    schema("_common", "SortOptions"),
-                    so -> so.withMappedType(t -> t.withPackage(Types.Client.OpenSearch._Types.PACKAGE).withName("SortOptions"))
+            .with(
+                schema("_common", "GetStats"),
+                so -> so.withProperties(
+                    p -> p.with("getTime", po -> po.withIgnore(true)).with("time", po -> po.withAliases(Set.of("getTime")))
                 )
-                .with(
-                    schema("_common", "SortCombinations"),
-                    so -> so.withMappedType(t -> t.withPackage(Types.Client.OpenSearch._Types.PACKAGE).withName("SortOptions"))
-                )
+            )
+            .with(schema("_common", "PhaseTook"), so -> so.withShouldGenerate(ShouldGenerate.Always))
+            .with(
+                schema("_common", "FieldSort"),
+                so -> so.withMappedType(t -> t.withPackage(Types.Client.OpenSearch._Types.PACKAGE).withName("FieldSort"))
+            )
 
-                .with(
-                    schema("_common", "GetStats"),
-                    so -> so.withProperties(
-                        p -> p.with("getTime", po -> po.withIgnore(true)).with("time", po -> po.withAliases(Set.of("getTime")))
-                    )
+            .with(schema("_common.aggregations", "Aggregate"), so -> so.withShouldGenerate(ShouldGenerate.Always))
+            .with(schema("_common.aggregations", "Aggregation"), so -> so.withClassName("AggregationBase"))
+            .with(
+                schema("_common.aggregations", "FilterAggregationFields"),
+                so -> so.withMappedType(Types.Client.OpenSearch._Types.QueryDsl.Query)
+            )
+            .with(
+                schema("_common.aggregations", "AggregationContainer"),
+                so -> so.withClassName("Aggregation").withShouldGenerate(ShouldGenerate.Always)
+            )
+            .with(
+                schema("_common.aggregations", "AggregationContainer").append("allOf", "0"),
+                so -> so.withProperties(
+                    p -> p.with("aggregations", po -> po.withAliases(Set.of("aggs"))).with("aggs", po -> po.withIgnore(true))
                 )
-                .with(schema("_common", "PhaseTook"), so -> so.withShouldGenerate(ShouldGenerate.Always))
-                .with(
-                    schema("_common", "FieldSort"),
-                    so -> so.withMappedType(t -> t.withPackage(Types.Client.OpenSearch._Types.PACKAGE).withName("FieldSort"))
+            )
+
+            .with(schema("_common.query_dsl", "FunctionScoreContainer"), so -> so.withClassName("FunctionScore"))
+
+            .with(schema("_common.query_dsl", "IntervalsContainer"), so -> so.withClassName("Intervals"))
+
+            .with(schema("_common.query_dsl", "QueryBase"), so -> so.withProperties(p -> p.with("_name", po -> po.withName("queryName"))))
+
+            .with(schema("_common.query_dsl", "QueryContainer"), so -> so.withClassName("Query"))
+            .with(
+                schema("_common.query_dsl", "RangeQuery").append("allOf", "1"),
+                so -> so.withProperties(
+                    p -> p.with("from", po -> po.withMappedType(Types.Client.Json.JsonData))
+                        .with("to", po -> po.withMappedType(Types.Client.Json.JsonData))
                 )
+            )
 
-                .with(schema("_common.aggregations", "Aggregate"), so -> so.withShouldGenerate(ShouldGenerate.Always))
-                .with(schema("_common.aggregations", "Aggregation"), so -> so.withClassName("AggregationBase"))
-                .with(
-                    schema("_common.aggregations", "FilterAggregationFields"),
-                    so -> so.withMappedType(Types.Client.OpenSearch._Types.QueryDsl.Query)
+            .with(schema("_core.mtermvectors", "Operation"), so -> so.withClassName("MultiTermVectorsOperation"))
+            .with(schema("_core.mtermvectors", "TermVectorsResult"), so -> so.withClassName("MultiTermVectorsResult"))
+
+            .with(schema("_core.reindex", "Source"), so -> so.withProperties(p -> p.with("_source", po -> po.withName("sourceFields"))))
+
+            .with(
+                schema("_core.search", "SourceFilter").append("oneOf", "1"),
+                so -> so.withAliasProvider(k -> k.endsWith("cludes") ? Set.of(k.substring(0, k.length() - 1)) : null)
+            )
+
+            .with(schema("_core.search", "PhraseSuggestOption"), so -> so.withShouldGenerate(ShouldGenerate.Always))
+            .with(schema("_core.search", "Profile"), so -> so.withShouldGenerate(ShouldGenerate.Always))
+            .with(schema("_core.search", "NestedIdentity"), so -> so.withShouldGenerate(ShouldGenerate.Always))
+            .with(schema("_core.search", "Rescore"), so -> so.withShouldGenerate(ShouldGenerate.Always))
+            .with(schema("_core.search", "Suggester"), so -> so.withShouldGenerate(ShouldGenerate.Always))
+            .with(schema("_core.search", "TermSuggestOption"), so -> so.withShouldGenerate(ShouldGenerate.Always))
+            .with(
+                schema("_core.search", "Hit"),
+                so -> so.withProperties(
+                    p -> p.with("matched_queries", po -> po.withMappedType(Types.Client.OpenSearch.Core.Search.MatchedQueries))
                 )
-                .with(
-                    schema("_common.aggregations", "AggregationContainer"),
-                    so -> so.withClassName("Aggregation").withShouldGenerate(ShouldGenerate.Always)
-                )
-                .with(
-                    schema("_common.aggregations", "AggregationContainer").append("allOf", "0"),
-                    so -> so.withProperties(
-                        p -> p.with("aggregations", po -> po.withAliases(Set.of("aggs"))).with("aggs", po -> po.withIgnore(true))
-                    )
-                )
-
-                .with(schema("_common.query_dsl", "FunctionScoreContainer"), so -> so.withClassName("FunctionScore"))
-
-                .with(schema("_common.query_dsl", "IntervalsContainer"), so -> so.withClassName("Intervals"))
-
-                .with(
-                    schema("_common.query_dsl", "QueryBase"),
-                    so -> so.withProperties(p -> p.with("_name", po -> po.withName("queryName")))
-                )
-
-                .with(schema("_common.query_dsl", "QueryContainer"), so -> so.withClassName("Query"))
-                .with(
-                    schema("_common.query_dsl", "RangeQuery").append("allOf", "1"),
-                    so -> so.withProperties(
-                        p -> p.with("from", po -> po.withMappedType(Types.Client.Json.JsonData))
-                            .with("to", po -> po.withMappedType(Types.Client.Json.JsonData))
-                    )
-                )
-
-                .with(schema("_core.mtermvectors", "Operation"), so -> so.withClassName("MultiTermVectorsOperation"))
-                .with(schema("_core.mtermvectors", "TermVectorsResult"), so -> so.withClassName("MultiTermVectorsResult"))
-
-                .with(schema("_core.reindex", "Source"), so -> so.withProperties(p -> p.with("_source", po -> po.withName("sourceFields"))))
-
-                .with(
-                    schema("_core.search", "SourceFilter").append("oneOf", "1"),
-                    so -> so.withAliasProvider(k -> k.endsWith("cludes") ? Set.of(k.substring(0, k.length() - 1)) : null)
-                )
-
-                .with(schema("_core.search", "PhraseSuggestOption"), so -> so.withShouldGenerate(ShouldGenerate.Always))
-                .with(schema("_core.search", "Profile"), so -> so.withShouldGenerate(ShouldGenerate.Always))
-                .with(schema("_core.search", "NestedIdentity"), so -> so.withShouldGenerate(ShouldGenerate.Always))
-                .with(schema("_core.search", "Rescore"), so -> so.withShouldGenerate(ShouldGenerate.Always))
-                .with(schema("_core.search", "Suggester"), so -> so.withShouldGenerate(ShouldGenerate.Always))
-                .with(schema("_core.search", "TermSuggestOption"), so -> so.withShouldGenerate(ShouldGenerate.Always))
-                .with(
-                    schema("_core.search", "Hit"),
-                    so -> so.withProperties(
-                        p -> p.with("matched_queries", po -> po.withMappedType(Types.Client.OpenSearch.Core.Search.MatchedQueries))
-                    )
-                )
-                .with(
-                    schema("_core.search", "HitsMetadata"),
-                    so -> so.withProperties(
-                        p -> p.with(
-                            "total",
-                            po -> po.withMappedType(
-                                Type.builder().withPackage(Types.Client.OpenSearch.PACKAGE + ".core.search").withName("TotalHits").build()
-                            )
+            )
+            .with(
+                schema("_core.search", "HitsMetadata"),
+                so -> so.withProperties(
+                    p -> p.with(
+                        "total",
+                        po -> po.withMappedType(
+                            Type.builder().withPackage(Types.Client.OpenSearch.PACKAGE + ".core.search").withName("TotalHits").build()
                         )
                     )
                 )
-                .with(schema("_core.search", "TotalHits"), so -> so.withShouldGenerate(ShouldGenerate.Always))
-                .with(schema("_core.search", "TrackHits"), so -> so.withShouldGenerate(ShouldGenerate.Always))
+            )
+            .with(schema("_core.search", "TotalHits"), so -> so.withShouldGenerate(ShouldGenerate.Always))
+            .with(schema("_core.search", "TrackHits"), so -> so.withShouldGenerate(ShouldGenerate.Always))
 
-                .with(schema("cluster.health", "Level"), so -> so.withClassName("ClusterHealthLevel"))
-                .with(schema("cluster.reroute", "Metric"), so -> so.withClassName("ClusterRerouteMetric"))
-                .with(schema("cluster.state", "Metric"), so -> so.withClassName("ClusterStateMetric"))
+            .with(schema("cluster.health", "Level"), so -> so.withClassName("ClusterHealthLevel"))
+            .with(schema("cluster.reroute", "Metric"), so -> so.withClassName("ClusterRerouteMetric"))
+            .with(schema("cluster.state", "Metric"), so -> so.withClassName("ClusterStateMetric"))
 
-                .with(schema("indices._common", "IndexSettings"), so -> so.withAliasProvider(k -> {
-                    switch (k) {
-                        case "index":
-                        case "indexing":
-                        case "mapping":
-                        case "search":
-                        case "settings":
-                        case "top_metrics_max_size":
-                            return null;
-                        default:
-                            return Set.of("index." + k);
-                    }
-                }))
+            .with(schema("indices._common", "IndexSettings"), so -> so.withAliasProvider(k -> {
+                switch (k) {
+                    case "index":
+                    case "indexing":
+                    case "mapping":
+                    case "search":
+                    case "settings":
+                    case "top_metrics_max_size":
+                        return null;
+                    default:
+                        return Set.of("index." + k);
+                }
+            }))
 
-                .with(schema("indices.stats", "Metric"), so -> so.withClassName("IndicesStatsMetric"))
+            .with(schema("indices.stats", "Metric"), so -> so.withClassName("IndicesStatsMetric"))
 
-                .with(schema("ingest._common", "ProcessorContainer"), so -> so.withClassName("Processor"))
+            .with(schema("ingest._common", "ProcessorContainer"), so -> so.withClassName("Processor"))
 
-                .with(
-                    schema("nodes._common", "NodesResponseBase"),
-                    so -> so.withProperties(p -> p.with("_nodes", po -> po.withName("nodeStats")))
+            .with(
+                schema("nodes._common", "NodesResponseBase"),
+                so -> so.withProperties(p -> p.with("_nodes", po -> po.withName("nodeStats")))
+            )
+            .with(schema("nodes.info", "Metric"), so -> so.withClassName("NodesInfoMetric"))
+            .with(schema("nodes.stats", "IndexMetric"), so -> so.withClassName("NodesStatsIndexMetric"))
+            .with(schema("nodes.stats", "Metric"), so -> so.withClassName("NodesStatsMetric"))
+            .with(schema("nodes.usage", "Metric"), so -> so.withClassName("NodesUsageMetric"))
+
+            .with(requestBodySchema("scroll"), so -> so.withProperties(p -> p.with("scroll_id", po -> po.withRequired(true))))
+            .with(
+                requestBodySchema("search"),
+                so -> so.withProperties(
+                    p -> p.with("aggregations", po -> po.withAliases(Set.of("aggs")))
+                        .with("aggs", po -> po.withIgnore(true))
+                        // The server ignores include_named_queries_score in the request body and renders named query scores only when
+                        // it is sent as a query parameter. See https://github.com/opensearch-project/OpenSearch/issues/22689. Remove
+                        // this once the server honors the body value.
+                        .with("include_named_queries_score", po -> po.withIgnore(true))
                 )
-                .with(schema("nodes.info", "Metric"), so -> so.withClassName("NodesInfoMetric"))
-                .with(schema("nodes.stats", "IndexMetric"), so -> so.withClassName("NodesStatsIndexMetric"))
-                .with(schema("nodes.stats", "Metric"), so -> so.withClassName("NodesStatsMetric"))
-                .with(schema("nodes.usage", "Metric"), so -> so.withClassName("NodesUsageMetric"))
-
-                .with(requestBodySchema("scroll"), so -> so.withProperties(p -> p.with("scroll_id", po -> po.withRequired(true))))
-                .with(
-                    requestBodySchema("search"),
-                    so -> so.withProperties(
-                        p -> p.with("aggregations", po -> po.withAliases(Set.of("aggs")))
-                            .with("aggs", po -> po.withIgnore(true))
-                            // The server ignores include_named_queries_score in the request body and renders named query scores only when
-                            // it is sent as a query parameter. See https://github.com/opensearch-project/OpenSearch/issues/22689. Remove
-                            // this once the server honors the body value.
-                            .with("include_named_queries_score", po -> po.withIgnore(true))
-                    )
-                )
-        )
-        .build();
+            );
+    }
 
     @Nonnull
     private final Map<OperationGroup, OperationOverride> operations;

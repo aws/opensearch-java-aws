@@ -38,6 +38,8 @@ the same names:
   -PdistributionSpecsDir=/path/to/opensearch-api-docs/build
 ~~~
 
+Keep the bundled snapshots byte-identical to the published specifications. Express distribution-specific corrections as code generator overrides (`Overrides.forDistribution` in `java-codegen`) rather than editing the snapshots, so a refresh cannot drop them.
+
 Do not manually edit generated AOS or AOSS source files. Update the API specification, distribution overlays, allowlists, or generator instead.
 
 ## Build and test
