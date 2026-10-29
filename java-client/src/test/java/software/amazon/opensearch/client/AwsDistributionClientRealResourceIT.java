@@ -18,46 +18,31 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
-import org.apache.hc.client5.http.auth.AuthScope;
-import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
-import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
-import org.apache.hc.core5.http.HttpHost;
 import org.junit.Assume;
 import org.junit.Test;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.regions.providers.DefaultAwsRegionProviderChain;
 import software.amazon.opensearch.client.aos.OpenSearchClient;
 import software.amazon.opensearch.client.aos.core.InfoResponse;
 import software.amazon.opensearch.client.aoss.core.SearchResponse;
-import software.amazon.opensearch.client.transport.httpclient5.ApacheHttpClient5Transport;
-import software.amazon.opensearch.client.transport.httpclient5.ApacheHttpClient5TransportBuilder;
 
 /**
  * Opt-in smoke tests for real AOS and AOSS resources.
  *
- * <p>AOS requires {@code OPENSEARCH_TEST_AOS_ENDPOINT}, {@code OPENSEARCH_TEST_AOS_USERNAME}, and
- * {@code OPENSEARCH_TEST_AOS_PASSWORD}. AOSS requires {@code OPENSEARCH_TEST_AOSS_ENDPOINT} and credentials available
- * through the AWS SDK default credential provider chain.
+ * <p>AOS requires {@code OPENSEARCH_TEST_AOS_ENDPOINT} and AOSS requires {@code OPENSEARCH_TEST_AOSS_ENDPOINT}. Both
+ * sign requests with SigV4 using credentials and the region (for example {@code AWS_REGION}) from the AWS SDK default
+ * provider chains.
  */
 public class AwsDistributionClientRealResourceIT {
     @Test
-    public void aosInfoWithBasicAuth() throws Exception {
+    public void aosInfoWithSigV4() throws Exception {
         String endpoint = System.getenv("OPENSEARCH_TEST_AOS_ENDPOINT");
-        String username = System.getenv("OPENSEARCH_TEST_AOS_USERNAME");
-        String password = System.getenv("OPENSEARCH_TEST_AOS_PASSWORD");
-        Assume.assumeNotNull(endpoint, username, password);
+        Assume.assumeNotNull(endpoint);
 
-        HttpHost host = HttpHost.create(endpoint);
-        BasicCredentialsProvider credentials = new BasicCredentialsProvider();
-        credentials.setCredentials(new AuthScope(host), new UsernamePasswordCredentials(username, password.toCharArray()));
-
-        try (
-            ApacheHttpClient5Transport transport = ApacheHttpClient5TransportBuilder.builder(host)
-                .setHttpClientConfigCallback(builder -> builder.setDefaultCredentialsProvider(credentials))
-                .build()
-        ) {
-            OpenSearchClient client = new OpenSearchClient(transport);
+        try (SdkHttpClient httpClient = UrlConnectionHttpClient.builder().build()) {
+            OpenSearchClient client = OpenSearchClient.create(httpClient, endpoint, region(), null);
             InfoResponse response = client.info();
             assertNotNull(response.clusterName());
             assertTrue(response.version().number().startsWith("3."));
@@ -73,11 +58,15 @@ public class AwsDistributionClientRealResourceIT {
             software.amazon.opensearch.client.aoss.OpenSearchClient client = software.amazon.opensearch.client.aoss.OpenSearchClient.create(
                 httpClient,
                 endpoint,
-                Region.US_EAST_1,
+                region(),
                 null
             );
             SearchResponse<Map> response = client.search(request -> request, Map.class);
             assertNotNull(response.hits());
         }
+    }
+
+    private static Region region() {
+        return new DefaultAwsRegionProviderChain().getRegion();
     }
 }
