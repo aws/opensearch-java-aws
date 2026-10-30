@@ -4,18 +4,39 @@ on:
   workflow_dispatch:
 
 permissions:
-  id-token: write
   contents: read
 
 jobs:
   smoke-test:
+    if: github.repository == 'aws/opensearch-java-aws'
     runs-on: ubuntu-latest
+    # Configure required reviewers and the secrets below on this environment, so a
+    # run waits for approval before it can reach the test resources.
+    # The role's OIDC trust policy must require this repository and environment:
+    # repo:aws@2232217/opensearch-java-aws@1356822943:environment:real-resource-tests
+    environment: real-resource-tests
+    permissions:
+      contents: read
+      id-token: write
     env:
       OPENSEARCH_TEST_AOS_ENDPOINT: ${{ secrets.OPENSEARCH_TEST_AOS_ENDPOINT }}
-      OPENSEARCH_TEST_AOS_USERNAME: ${{ secrets.OPENSEARCH_TEST_AOS_USERNAME }}
-      OPENSEARCH_TEST_AOS_PASSWORD: ${{ secrets.OPENSEARCH_TEST_AOS_PASSWORD }}
       OPENSEARCH_TEST_AOSS_ENDPOINT: ${{ secrets.OPENSEARCH_TEST_AOSS_ENDPOINT }}
     steps:
+      - name: Require the test resource secrets
+        env:
+          AOS_AOSS_TEST_ROLE: ${{ secrets.AOS_AOSS_TEST_ROLE }}
+        run: |
+          # The tests skip themselves when a variable is unset, which would pass
+          # without testing anything.
+          missing=()
+          for name in AOS_AOSS_TEST_ROLE OPENSEARCH_TEST_AOS_ENDPOINT OPENSEARCH_TEST_AOSS_ENDPOINT; do
+            [ -n "${!name}" ] || missing+=("$name")
+          done
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "Missing secrets on the real-resource-tests environment: ${missing[*]}" >&2
+            exit 1
+          fi
+
       - name: Checkout AWS Java Client
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -29,10 +50,11 @@ jobs:
           cache: gradle
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@cbe3b392738ccf3f987d68400dafcf4b0624a56c # v6
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6
         with:
           role-to-assume: ${{ secrets.AOS_AOSS_TEST_ROLE }}
-          aws-region: us-east-1
+          # The tests sign for this region, so the AOS domain and AOSS collection must be in it.
+          aws-region: us-west-2
 
       - name: Run real-resource smoke tests
         run: ./gradlew :java-client:realResourceTest
