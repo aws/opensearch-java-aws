@@ -2,6 +2,8 @@ name: Validate AWS Generated Sources
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1' # 00:00 UTC Weekly on Mondays
   pull_request:
     paths:
       - 'java-codegen/**'
@@ -13,6 +15,7 @@ permissions:
 
 jobs:
   validate:
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout AWS Java Client
@@ -42,3 +45,59 @@ jobs:
 
       - name: Compile AOS and AOSS generated sources
         run: ./gradlew :java-client:compileAosJava :java-client:compileAossJava
+
+  update_specs:
+    name: Refresh AOS/AOSS Specifications and Re-generate Clients
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.repository == 'aws/opensearch-java-aws')
+    runs-on: ubuntu-latest
+    concurrency:
+      group: code-gen-update-${{ github.ref_name }}
+      cancel-in-progress: false
+    permissions:
+      contents: write # push the refresh branch
+      pull-requests: write # open or update the refresh pull request
+    steps:
+      - name: Checkout AWS Java Client
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          java-version: 21
+          distribution: temurin
+
+      - name: Download latest specs and re-generate AOS and AOSS clients
+        run: ./gradlew :java-codegen:downloadLatestSpecs :java-codegen:generateClients
+
+      - name: Compile AOS and AOSS generated sources
+        run: ./gradlew :java-client:compileAosJava :java-client:compileAossJava
+
+      - name: Get current date
+        id: date
+        run: echo "date=$(date -u +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          add-paths: |
+            java-codegen/opensearch-openapi-aos.yaml
+            java-codegen/opensearch-openapi-aos.yaml.sha256
+            java-codegen/opensearch-openapi-aoss.yaml
+            java-codegen/opensearch-openapi-aoss.yaml.sha256
+            java-client/src/generated/**
+          commit-message: Re-generate AOS and AOSS clients using latest API specifications (${{ steps.date.outputs.date }})
+          title: Re-generate AOS and AOSS clients using latest API specifications
+          body: |
+            Refreshed the bundled AOS and AOSS specifications from https://api-spec.opensearch.org and re-generated the clients.
+            Date: ${{ steps.date.outputs.date }}
+
+            Review the specification diff for fields that became required, and add an AOS or AOSS override in
+            `Overrides.forDistribution` instead of editing the snapshots.
+          branch: code-gen/${{ github.ref_name }}/update
+          signoff: true
+          labels: |
+            autocut
+          delete-branch: true

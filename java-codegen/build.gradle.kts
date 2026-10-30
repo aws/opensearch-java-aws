@@ -198,6 +198,8 @@ tasks.register("updateSpecShas") {
 val verifySpecChecksums = tasks.register("verifySpecChecksums") {
     group = "verification"
     description = "Verifies the AOS and AOSS distribution specs match their committed SHA-256 pins."
+    // A refresh runs `downloadLatestSpecs` and the client generation tasks in one build; check the new pins.
+    mustRunAfter("downloadLatestSpecs")
     inputs.files(distributionSpecFiles.map { file("${projectDir}/$it") })
     inputs.files(distributionSpecFiles.map { shaFileFor(it) })
     doLast {

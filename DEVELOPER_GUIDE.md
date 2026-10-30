@@ -38,6 +38,8 @@ the same names:
   -PdistributionSpecsDir=/path/to/opensearch-api-docs/build
 ~~~
 
+The `Validate AWS Generated Sources` workflow refreshes the snapshots every Monday (or on demand via *Run workflow*) and opens a pull request labeled `autocut` with the updated specs, checksums and generated sources. Pull requests opened with the workflow token do not trigger other workflows; close and reopen the pull request to run the checks.
+
 Keep the bundled snapshots byte-identical to the published specifications. Express distribution-specific corrections as code generator overrides (`Overrides.forDistribution` in `java-codegen`) rather than editing the snapshots, so a refresh cannot drop them.
 
 Do not manually edit generated AOS or AOSS source files. Update the API specification, distribution overlays, allowlists, or generator instead.
