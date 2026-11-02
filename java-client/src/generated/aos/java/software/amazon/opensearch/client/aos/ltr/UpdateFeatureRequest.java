@@ -42,6 +42,7 @@
 
 package software.amazon.opensearch.client.aos.ltr;
 
+import jakarta.json.stream.JsonGenerator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -51,6 +52,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import software.amazon.opensearch.client.aos._types.RequestBase;
 import software.amazon.opensearch.client.errors.ErrorResponse;
+import software.amazon.opensearch.client.json.JsonData;
+import software.amazon.opensearch.client.json.JsonpDeserializable;
+import software.amazon.opensearch.client.json.JsonpDeserializer;
+import software.amazon.opensearch.client.json.JsonpMapper;
+import software.amazon.opensearch.client.json.PlainJsonSerializable;
 import software.amazon.opensearch.client.transport.Endpoint;
 import software.amazon.opensearch.client.transport.endpoints.SimpleEndpoint;
 import software.amazon.opensearch.client.util.ApiTypeHelper;
@@ -63,10 +69,15 @@ import software.amazon.opensearch.client.util.ToCopyableBuilder;
 /**
  * Update a feature in the default feature store.
  */
+@JsonpDeserializable
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
 public final class UpdateFeatureRequest extends RequestBase
     implements
+        PlainJsonSerializable,
         ToCopyableBuilder<UpdateFeatureRequest.Builder, UpdateFeatureRequest> {
+
+    @Nonnull
+    private final Map<String, JsonData> body;
 
     @Nonnull
     private final String id;
@@ -81,6 +92,7 @@ public final class UpdateFeatureRequest extends RequestBase
 
     private UpdateFeatureRequest(Builder builder) {
         super(builder);
+        this.body = ApiTypeHelper.unmodifiableRequired(builder.body, this, "body");
         this.id = ApiTypeHelper.requireNonNull(builder.id, this, "id");
         this.routing = builder.routing;
         this.store = builder.store;
@@ -88,6 +100,14 @@ public final class UpdateFeatureRequest extends RequestBase
 
     public static UpdateFeatureRequest of(Function<UpdateFeatureRequest.Builder, ObjectBuilder<UpdateFeatureRequest>> fn) {
         return fn.apply(new Builder()).build();
+    }
+
+    /**
+     * Required - Request body.
+     */
+    @Nonnull
+    public final Map<String, JsonData> body() {
+        return this.body;
     }
 
     /**
@@ -123,6 +143,19 @@ public final class UpdateFeatureRequest extends RequestBase
         return this.store;
     }
 
+    /**
+     * Serialize this value to JSON.
+     */
+    @Override
+    public void serialize(JsonGenerator generator, JsonpMapper mapper) {
+        generator.writeStartObject();
+        for (Map.Entry<String, JsonData> item0 : this.body.entrySet()) {
+            generator.writeKey(item0.getKey());
+            item0.getValue().serialize(generator, mapper);
+        }
+        generator.writeEnd();
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     @Override
@@ -140,6 +173,7 @@ public final class UpdateFeatureRequest extends RequestBase
      * Builder for {@link UpdateFeatureRequest}.
      */
     public static class Builder extends RequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, UpdateFeatureRequest> {
+        private Map<String, JsonData> body;
         private String id;
         @Nullable
         private String routing;
@@ -150,6 +184,7 @@ public final class UpdateFeatureRequest extends RequestBase
 
         private Builder(UpdateFeatureRequest o) {
             super(o);
+            this.body = _mapCopy(o.body);
             this.id = o.id;
             this.routing = o.routing;
             this.store = o.store;
@@ -157,6 +192,7 @@ public final class UpdateFeatureRequest extends RequestBase
 
         private Builder(Builder o) {
             super(o);
+            this.body = _mapCopy(o.body);
             this.id = o.id;
             this.routing = o.routing;
             this.store = o.store;
@@ -171,6 +207,32 @@ public final class UpdateFeatureRequest extends RequestBase
         @Override
         @Nonnull
         protected Builder self() {
+            return this;
+        }
+
+        /**
+         * Required - Request body.
+         *
+         * <p>
+         * Adds all elements of <code>map</code> to <code>body</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder body(Map<String, JsonData> map) {
+            this.body = _mapPutAll(this.body, map);
+            return this;
+        }
+
+        /**
+         * Required - Request body.
+         *
+         * <p>
+         * Adds an entry to <code>body</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder body(String key, JsonData value) {
+            this.body = _mapPut(this.body, key, value);
             return this;
         }
 
@@ -226,6 +288,18 @@ public final class UpdateFeatureRequest extends RequestBase
 
     // ---------------------------------------------------------------------------------------------
 
+    public static final JsonpDeserializer<UpdateFeatureRequest> _DESERIALIZER = createUpdateFeatureRequestDeserializer();
+
+    protected static JsonpDeserializer<UpdateFeatureRequest> createUpdateFeatureRequestDeserializer() {
+        JsonpDeserializer<Map<String, JsonData>> valueDeserializer = JsonpDeserializer.stringMapDeserializer(JsonData._DESERIALIZER);
+        return JsonpDeserializer.of(
+            valueDeserializer.acceptedEvents(),
+            (parser, mapper) -> new Builder().body(valueDeserializer.deserialize(parser, mapper)).build()
+        );
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
     @Override
     protected void applyQueryParameters(@Nonnull Map<String, String> params) {
         super.applyQueryParameters(params);
@@ -274,13 +348,14 @@ public final class UpdateFeatureRequest extends RequestBase
             return params;
         },
         SimpleEndpoint.emptyMap(),
-        false,
+        true,
         UpdateFeatureResponse._DESERIALIZER
     );
 
     @Override
     public int hashCode() {
         int result = 17;
+        result = 31 * result + this.body.hashCode();
         result = 31 * result + this.id.hashCode();
         result = 31 * result + Objects.hashCode(this.routing);
         result = 31 * result + Objects.hashCode(this.store);
@@ -292,6 +367,9 @@ public final class UpdateFeatureRequest extends RequestBase
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         UpdateFeatureRequest other = (UpdateFeatureRequest) o;
-        return this.id.equals(other.id) && Objects.equals(this.routing, other.routing) && Objects.equals(this.store, other.store);
+        return this.body.equals(other.body)
+            && this.id.equals(other.id)
+            && Objects.equals(this.routing, other.routing)
+            && Objects.equals(this.store, other.store);
     }
 }

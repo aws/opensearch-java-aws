@@ -238,14 +238,6 @@ public class OpenSearchSecurityClient extends ApiClient<OpenSearchTransport, Ope
         return createActionGroups(fn.apply(new CreateActionGroupsRequest.Builder()).build());
     }
 
-    /**
-     * Creates or replaces multiple action groups. Action groups omitted from the request are unchanged. All entries are validated before
-     * any changes are written.
-     */
-    public final CreateActionGroupsResponse createActionGroups() throws IOException, OpenSearchException {
-        return createActionGroups(new CreateActionGroupsRequest.Builder().build());
-    }
-
     // ----- Endpoint: security.create_allowlist
 
     /**
@@ -331,14 +323,6 @@ public class OpenSearchSecurityClient extends ApiClient<OpenSearchTransport, Ope
         Function<CreateRoleMappingsRequest.Builder, ObjectBuilder<CreateRoleMappingsRequest>> fn
     ) throws IOException, OpenSearchException {
         return createRoleMappings(fn.apply(new CreateRoleMappingsRequest.Builder()).build());
-    }
-
-    /**
-     * Creates or replaces multiple role mappings. Role mappings omitted from the request are unchanged. Every named role must exist, and
-     * all entries are validated before any changes are written.
-     */
-    public final CreateRoleMappingsResponse createRoleMappings() throws IOException, OpenSearchException {
-        return createRoleMappings(new CreateRoleMappingsRequest.Builder().build());
     }
 
     // ----- Endpoint: security.create_tenant

@@ -42,6 +42,7 @@
 
 package software.amazon.opensearch.client.aos.security;
 
+import jakarta.json.stream.JsonGenerator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -51,8 +52,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import software.amazon.opensearch.client.aos._types.RequestBase;
 import software.amazon.opensearch.client.errors.ErrorResponse;
+import software.amazon.opensearch.client.json.JsonpDeserializable;
+import software.amazon.opensearch.client.json.JsonpDeserializer;
+import software.amazon.opensearch.client.json.JsonpMapper;
+import software.amazon.opensearch.client.json.PlainJsonSerializable;
 import software.amazon.opensearch.client.transport.Endpoint;
 import software.amazon.opensearch.client.transport.endpoints.SimpleEndpoint;
+import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ToCopyableBuilder;
@@ -63,10 +69,15 @@ import software.amazon.opensearch.client.util.ToCopyableBuilder;
  * Creates or replaces multiple role mappings. Role mappings omitted from the request are unchanged. Every named role must exist, and all
  * entries are validated before any changes are written.
  */
+@JsonpDeserializable
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
 public final class CreateRoleMappingsRequest extends RequestBase
     implements
+        PlainJsonSerializable,
         ToCopyableBuilder<CreateRoleMappingsRequest.Builder, CreateRoleMappingsRequest> {
+
+    @Nonnull
+    private final Map<String, RoleMapping> body;
 
     @Nullable
     private final Boolean waitForCompletion;
@@ -75,11 +86,20 @@ public final class CreateRoleMappingsRequest extends RequestBase
 
     private CreateRoleMappingsRequest(Builder builder) {
         super(builder);
+        this.body = ApiTypeHelper.unmodifiableRequired(builder.body, this, "body");
         this.waitForCompletion = builder.waitForCompletion;
     }
 
     public static CreateRoleMappingsRequest of(Function<CreateRoleMappingsRequest.Builder, ObjectBuilder<CreateRoleMappingsRequest>> fn) {
         return fn.apply(new Builder()).build();
+    }
+
+    /**
+     * Required - Request body.
+     */
+    @Nonnull
+    public final Map<String, RoleMapping> body() {
+        return this.body;
     }
 
     /**
@@ -91,6 +111,19 @@ public final class CreateRoleMappingsRequest extends RequestBase
     @Nullable
     public final Boolean waitForCompletion() {
         return this.waitForCompletion;
+    }
+
+    /**
+     * Serialize this value to JSON.
+     */
+    @Override
+    public void serialize(JsonGenerator generator, JsonpMapper mapper) {
+        generator.writeStartObject();
+        for (Map.Entry<String, RoleMapping> item0 : this.body.entrySet()) {
+            generator.writeKey(item0.getKey());
+            item0.getValue().serialize(generator, mapper);
+        }
+        generator.writeEnd();
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -112,6 +145,7 @@ public final class CreateRoleMappingsRequest extends RequestBase
     public static class Builder extends RequestBase.AbstractBuilder<Builder>
         implements
             CopyableBuilder<Builder, CreateRoleMappingsRequest> {
+        private Map<String, RoleMapping> body;
         @Nullable
         private Boolean waitForCompletion;
 
@@ -119,11 +153,13 @@ public final class CreateRoleMappingsRequest extends RequestBase
 
         private Builder(CreateRoleMappingsRequest o) {
             super(o);
+            this.body = _mapCopy(o.body);
             this.waitForCompletion = o.waitForCompletion;
         }
 
         private Builder(Builder o) {
             super(o);
+            this.body = _mapCopy(o.body);
             this.waitForCompletion = o.waitForCompletion;
         }
 
@@ -137,6 +173,44 @@ public final class CreateRoleMappingsRequest extends RequestBase
         @Nonnull
         protected Builder self() {
             return this;
+        }
+
+        /**
+         * Required - Request body.
+         *
+         * <p>
+         * Adds all elements of <code>map</code> to <code>body</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder body(Map<String, RoleMapping> map) {
+            this.body = _mapPutAll(this.body, map);
+            return this;
+        }
+
+        /**
+         * Required - Request body.
+         *
+         * <p>
+         * Adds an entry to <code>body</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder body(String key, RoleMapping value) {
+            this.body = _mapPut(this.body, key, value);
+            return this;
+        }
+
+        /**
+         * Required - Request body.
+         *
+         * <p>
+         * Adds a value to <code>body</code> using a builder lambda.
+         * </p>
+         */
+        @Nonnull
+        public final Builder body(String key, Function<RoleMapping.Builder, ObjectBuilder<RoleMapping>> fn) {
+            return body(key, fn.apply(new RoleMapping.Builder()).build());
         }
 
         /**
@@ -167,6 +241,18 @@ public final class CreateRoleMappingsRequest extends RequestBase
 
     // ---------------------------------------------------------------------------------------------
 
+    public static final JsonpDeserializer<CreateRoleMappingsRequest> _DESERIALIZER = createCreateRoleMappingsRequestDeserializer();
+
+    protected static JsonpDeserializer<CreateRoleMappingsRequest> createCreateRoleMappingsRequestDeserializer() {
+        JsonpDeserializer<Map<String, RoleMapping>> valueDeserializer = JsonpDeserializer.stringMapDeserializer(RoleMapping._DESERIALIZER);
+        return JsonpDeserializer.of(
+            valueDeserializer.acceptedEvents(),
+            (parser, mapper) -> new Builder().body(valueDeserializer.deserialize(parser, mapper)).build()
+        );
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
     @Override
     protected void applyQueryParameters(@Nonnull Map<String, String> params) {
         super.applyQueryParameters(params);
@@ -190,13 +276,14 @@ public final class CreateRoleMappingsRequest extends RequestBase
             return params;
         },
         SimpleEndpoint.emptyMap(),
-        false,
+        true,
         CreateRoleMappingsResponse._DESERIALIZER
     );
 
     @Override
     public int hashCode() {
         int result = 17;
+        result = 31 * result + this.body.hashCode();
         result = 31 * result + Objects.hashCode(this.waitForCompletion);
         return result;
     }
@@ -206,6 +293,6 @@ public final class CreateRoleMappingsRequest extends RequestBase
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         CreateRoleMappingsRequest other = (CreateRoleMappingsRequest) o;
-        return Objects.equals(this.waitForCompletion, other.waitForCompletion);
+        return this.body.equals(other.body) && Objects.equals(this.waitForCompletion, other.waitForCompletion);
     }
 }

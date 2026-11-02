@@ -42,6 +42,7 @@
 
 package software.amazon.opensearch.client.aos.ltr;
 
+import jakarta.json.stream.JsonGenerator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -51,6 +52,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import software.amazon.opensearch.client.aos._types.RequestBase;
 import software.amazon.opensearch.client.errors.ErrorResponse;
+import software.amazon.opensearch.client.json.JsonData;
+import software.amazon.opensearch.client.json.JsonpDeserializable;
+import software.amazon.opensearch.client.json.JsonpDeserializer;
+import software.amazon.opensearch.client.json.JsonpMapper;
+import software.amazon.opensearch.client.json.PlainJsonSerializable;
 import software.amazon.opensearch.client.transport.Endpoint;
 import software.amazon.opensearch.client.transport.endpoints.SimpleEndpoint;
 import software.amazon.opensearch.client.util.ApiTypeHelper;
@@ -63,10 +69,15 @@ import software.amazon.opensearch.client.util.ToCopyableBuilder;
 /**
  * Add features to an existing feature set in the default feature store.
  */
+@JsonpDeserializable
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
 public final class AddFeaturesToSetRequest extends RequestBase
     implements
+        PlainJsonSerializable,
         ToCopyableBuilder<AddFeaturesToSetRequest.Builder, AddFeaturesToSetRequest> {
+
+    @Nonnull
+    private final Map<String, JsonData> body;
 
     @Nullable
     private final Boolean merge;
@@ -87,6 +98,7 @@ public final class AddFeaturesToSetRequest extends RequestBase
 
     private AddFeaturesToSetRequest(Builder builder) {
         super(builder);
+        this.body = ApiTypeHelper.unmodifiableRequired(builder.body, this, "body");
         this.merge = builder.merge;
         this.name = ApiTypeHelper.requireNonNull(builder.name, this, "name");
         this.routing = builder.routing;
@@ -96,6 +108,14 @@ public final class AddFeaturesToSetRequest extends RequestBase
 
     public static AddFeaturesToSetRequest of(Function<AddFeaturesToSetRequest.Builder, ObjectBuilder<AddFeaturesToSetRequest>> fn) {
         return fn.apply(new Builder()).build();
+    }
+
+    /**
+     * Required - Request body.
+     */
+    @Nonnull
+    public final Map<String, JsonData> body() {
+        return this.body;
     }
 
     /**
@@ -153,6 +173,19 @@ public final class AddFeaturesToSetRequest extends RequestBase
         return this.version;
     }
 
+    /**
+     * Serialize this value to JSON.
+     */
+    @Override
+    public void serialize(JsonGenerator generator, JsonpMapper mapper) {
+        generator.writeStartObject();
+        for (Map.Entry<String, JsonData> item0 : this.body.entrySet()) {
+            generator.writeKey(item0.getKey());
+            item0.getValue().serialize(generator, mapper);
+        }
+        generator.writeEnd();
+    }
+
     // ---------------------------------------------------------------------------------------------
 
     @Override
@@ -170,6 +203,7 @@ public final class AddFeaturesToSetRequest extends RequestBase
      * Builder for {@link AddFeaturesToSetRequest}.
      */
     public static class Builder extends RequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, AddFeaturesToSetRequest> {
+        private Map<String, JsonData> body;
         @Nullable
         private Boolean merge;
         private String name;
@@ -184,6 +218,7 @@ public final class AddFeaturesToSetRequest extends RequestBase
 
         private Builder(AddFeaturesToSetRequest o) {
             super(o);
+            this.body = _mapCopy(o.body);
             this.merge = o.merge;
             this.name = o.name;
             this.routing = o.routing;
@@ -193,6 +228,7 @@ public final class AddFeaturesToSetRequest extends RequestBase
 
         private Builder(Builder o) {
             super(o);
+            this.body = _mapCopy(o.body);
             this.merge = o.merge;
             this.name = o.name;
             this.routing = o.routing;
@@ -209,6 +245,32 @@ public final class AddFeaturesToSetRequest extends RequestBase
         @Override
         @Nonnull
         protected Builder self() {
+            return this;
+        }
+
+        /**
+         * Required - Request body.
+         *
+         * <p>
+         * Adds all elements of <code>map</code> to <code>body</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder body(Map<String, JsonData> map) {
+            this.body = _mapPutAll(this.body, map);
+            return this;
+        }
+
+        /**
+         * Required - Request body.
+         *
+         * <p>
+         * Adds an entry to <code>body</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder body(String key, JsonData value) {
+            this.body = _mapPut(this.body, key, value);
             return this;
         }
 
@@ -288,6 +350,18 @@ public final class AddFeaturesToSetRequest extends RequestBase
 
     // ---------------------------------------------------------------------------------------------
 
+    public static final JsonpDeserializer<AddFeaturesToSetRequest> _DESERIALIZER = createAddFeaturesToSetRequestDeserializer();
+
+    protected static JsonpDeserializer<AddFeaturesToSetRequest> createAddFeaturesToSetRequestDeserializer() {
+        JsonpDeserializer<Map<String, JsonData>> valueDeserializer = JsonpDeserializer.stringMapDeserializer(JsonData._DESERIALIZER);
+        return JsonpDeserializer.of(
+            valueDeserializer.acceptedEvents(),
+            (parser, mapper) -> new Builder().body(valueDeserializer.deserialize(parser, mapper)).build()
+        );
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
     @Override
     protected void applyQueryParameters(@Nonnull Map<String, String> params) {
         super.applyQueryParameters(params);
@@ -344,13 +418,14 @@ public final class AddFeaturesToSetRequest extends RequestBase
             return params;
         },
         SimpleEndpoint.emptyMap(),
-        false,
+        true,
         AddFeaturesToSetResponse._DESERIALIZER
     );
 
     @Override
     public int hashCode() {
         int result = 17;
+        result = 31 * result + this.body.hashCode();
         result = 31 * result + Objects.hashCode(this.merge);
         result = 31 * result + this.name.hashCode();
         result = 31 * result + Objects.hashCode(this.routing);
@@ -364,7 +439,8 @@ public final class AddFeaturesToSetRequest extends RequestBase
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         AddFeaturesToSetRequest other = (AddFeaturesToSetRequest) o;
-        return Objects.equals(this.merge, other.merge)
+        return this.body.equals(other.body)
+            && Objects.equals(this.merge, other.merge)
             && this.name.equals(other.name)
             && Objects.equals(this.routing, other.routing)
             && Objects.equals(this.store, other.store)

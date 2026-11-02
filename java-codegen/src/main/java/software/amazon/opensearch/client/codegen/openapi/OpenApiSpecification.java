@@ -24,6 +24,7 @@ import io.swagger.v3.parser.core.models.ParseOptions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -60,6 +61,10 @@ public final class OpenApiSpecification extends OpenApiElement<OpenApiSpecificat
     private static final Map<URI, OpenApiSpecification> SPECS = new HashMap<>();
 
     public static OpenApiSpecification retrieve(URI location) {
+        // A bare path such as `--input spec.yaml` has no scheme; resolve it against the working directory.
+        if (!location.isAbsolute()) {
+            location = Path.of(location.getPath()).toAbsolutePath().normalize().toUri();
+        }
         if (SPECS.containsKey(location)) {
             return SPECS.get(location);
         }

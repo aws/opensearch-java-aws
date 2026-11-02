@@ -54,6 +54,8 @@ Serverless (AOSS).
 - The gRPC transport module (`java-client-grpc`), its samples, and the gRPC integration-test path.
 
 ### Fixed
+- Code generator: generate a required `Map`-typed `body` for request bodies that are objects with only `additionalProperties`. These bodies were dropped, so the AOS `security.createActionGroups`/`createRoleMappings` and seven `ltr` create/update requests sent no body; the no-argument `createActionGroups()`/`createRoleMappings()` overloads, which could only send an invalid empty request, are removed.
+- Code generator: accept `--input` paths without a URI scheme again (resolved against the working directory), which the YAML 1.2 loader had broken.
 - Code generator: parse specs with the YAML 1.2 core schema, so plain scalars such as `no`, `yes`, `NO` and `YES` stay strings. The distribution specs are now emitted without quotes on these values, which the YAML 1.1 parser read as booleans, failing generation or turning enum constants such as `AllocationExplainDecision.No("NO")` into `False("false")`.
 - Code generator: flatten `properties` declared next to an `allOf` combinator, so the generated AOS and AOSS `TermsLookup` now includes `index`, `path`, `routing` and `store` (ported from upstream [opensearch-java#2239](https://github.com/opensearch-project/opensearch-java/pull/2239)).
 - Code generator: model nested sub-aggregations on single-bucket aggregates (`SingleBucketAggregateBase`), and map multi-member `allOf` schemas to their last member instead of failing with a `NullPointerException` (ported from upstream [opensearch-java#1957](https://github.com/opensearch-project/opensearch-java/pull/1957), [#2238](https://github.com/opensearch-project/opensearch-java/pull/2238)).

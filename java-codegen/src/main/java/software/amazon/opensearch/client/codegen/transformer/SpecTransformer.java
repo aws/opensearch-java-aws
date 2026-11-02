@@ -192,6 +192,12 @@ public class SpecTransformer {
         requestShape.setResponseType(responseType);
     }
 
+    // An object body that only declares `additionalProperties` (e.g. a map of names to definitions) has no body fields to
+    // generate, so it is delegated to a single Map-typed body field instead of being dropped.
+    private static boolean isMapBody(OpenApiSchema schema) {
+        return !schema.has$ref() && !schema.hasProperties() && schema.hasAdditionalProperties();
+    }
+
     private static Stream<OpenApiParameter> getAllRelevantParameters(OpenApiPath path, OpenApiOperation operation, In in) {
         return Stream.of(path.getParameters(), operation.getParameters())
             .flatMap(Optional::stream)
@@ -312,7 +318,9 @@ public class SpecTransformer {
             .flatMap(c -> c.get(MimeType.Json))
             .flatMap(OpenApiMediaType::getSchema)
             .ifPresent(s -> {
-                if ((s.has$ref() && s.hasTitle()) || !s.getSingleType().map(OpenApiSchemaType.Object::equals).orElse(false)) {
+                if ((s.has$ref() && s.hasTitle())
+                    || !s.getSingleType().map(OpenApiSchemaType.Object::equals).orElse(false)
+                    || isMapBody(s)) {
                     var name = s.getTitle().orElse("body");
                     shape.setDelegatedBodyField(name, typeMapper.mapType(s));
                 } else {

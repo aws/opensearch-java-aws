@@ -16,6 +16,7 @@ package software.amazon.opensearch.client.codegen.openapi;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -66,5 +67,19 @@ public class OpenApiSpecificationTests {
         assertEquals(List.of("no", "yes", "NO", "YES", "y", "off"), schemas.get("Decision").getEnums().orElseThrow());
         assertEquals("no", schemas.get("NoConst").getConst().orElseThrow());
         assertEquals(Boolean.TRUE, schemas.get("TrueConst").getConst().orElseThrow());
+    }
+
+    @Test
+    public void resolvesPathsWithoutSchemeAgainstWorkingDirectory() throws Exception {
+        Path specification = directory.resolve("relative.yaml");
+        Files.writeString(
+            specification,
+            String.join("\n", "openapi: 3.1.0", "info:", "  title: test", "  version: 1.0.0", "paths: {}", "")
+        );
+        String relativePath = Path.of("").toAbsolutePath().relativize(specification).toString().replace('\\', '/');
+
+        OpenApiSpecification spec = OpenApiSpecification.retrieve(new URI(relativePath));
+
+        assertEquals(specification.toUri(), spec.getLocation());
     }
 }
