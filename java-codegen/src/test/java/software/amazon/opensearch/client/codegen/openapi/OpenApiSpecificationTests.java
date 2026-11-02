@@ -71,15 +71,25 @@ public class OpenApiSpecificationTests {
 
     @Test
     public void resolvesPathsWithoutSchemeAgainstWorkingDirectory() throws Exception {
-        Path specification = directory.resolve("relative.yaml");
-        Files.writeString(
-            specification,
-            String.join("\n", "openapi: 3.1.0", "info:", "  title: test", "  version: 1.0.0", "paths: {}", "")
-        );
-        String relativePath = Path.of("").toAbsolutePath().relativize(specification).toString().replace('\\', '/');
+        // Keep the file under the working directory: a temporary directory can be on another drive (e.g. on Windows),
+        // and there is no relative path between different roots.
+        Path workingDirectory = Path.of("").toAbsolutePath();
+        Path buildDirectory = Files.createDirectories(workingDirectory.resolve("build"));
+        Path specificationDirectory = Files.createTempDirectory(buildDirectory, "relative-input");
+        Path specification = specificationDirectory.resolve("relative.yaml");
+        try {
+            Files.writeString(
+                specification,
+                String.join("\n", "openapi: 3.1.0", "info:", "  title: test", "  version: 1.0.0", "paths: {}", "")
+            );
+            String relativePath = workingDirectory.relativize(specification).toString().replace('\\', '/');
 
-        OpenApiSpecification spec = OpenApiSpecification.retrieve(new URI(relativePath));
+            OpenApiSpecification spec = OpenApiSpecification.retrieve(new URI(relativePath));
 
-        assertEquals(specification.toUri(), spec.getLocation());
+            assertEquals(specification.toUri(), spec.getLocation());
+        } finally {
+            Files.deleteIfExists(specification);
+            Files.deleteIfExists(specificationDirectory);
+        }
     }
 }
