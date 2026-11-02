@@ -17,6 +17,8 @@ package software.amazon.opensearch.client.codegen.openapi.rewriter;
 import java.util.ArrayList;
 import java.util.function.Function;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import org.semver4j.Semver;
 import software.amazon.opensearch.client.codegen.openapi.OpenApiComponents;
 import software.amazon.opensearch.client.codegen.openapi.OpenApiSchema;
 import software.amazon.opensearch.client.codegen.openapi.OpenApiSpecification;
@@ -29,12 +31,21 @@ import software.amazon.opensearch.client.codegen.utils.Maps;
 public final class SpecificationRewriter {
     @Nonnull
     public static OpenApiSpecification rewrite(@Nonnull OpenApiSpecification specification, @Nonnull Overrides overrides) {
+        return rewrite(specification, overrides, null);
+    }
+
+    @Nonnull
+    public static OpenApiSpecification rewrite(
+        @Nonnull OpenApiSpecification specification,
+        @Nonnull Overrides overrides,
+        @Nullable Semver maxVersion
+    ) {
         var visitorChain = new ArrayList<Function<OpenApiWalker, OpenApiVisitor>>();
 
         visitorChain.add(w -> new ExtendsAllOfRewritingVisitor());
         visitorChain.add(w -> new OneOfAllExtendsInvertingVisitor());
         visitorChain.add(TypeDeterminingVisitor::new);
-        visitorChain.add(w -> new ObjectFlatteningVisitor(overrides, w));
+        visitorChain.add(w -> new ObjectFlatteningVisitor(overrides, w, maxVersion));
         visitorChain.add(w -> new ResponseSchemaVisitor());
         visitorChain.add(GenericLabelingVisitor::new);
 

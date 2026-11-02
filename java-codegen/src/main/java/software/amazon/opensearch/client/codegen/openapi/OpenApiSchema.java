@@ -104,6 +104,8 @@ public class OpenApiSchema extends OpenApiRefElement<OpenApiSchema> implements T
     @Nullable
     private final Semver versionDeprecated;
     @Nullable
+    private final Semver versionAdded;
+    @Nullable
     private final Boolean supportsTypedKeys;
     @Nullable
     private Boolean isGenericTypeParameter;
@@ -136,6 +138,7 @@ public class OpenApiSchema extends OpenApiRefElement<OpenApiSchema> implements T
         constValue = builder.constValue;
         versionRemoved = builder.versionRemoved;
         versionDeprecated = builder.versionDeprecated;
+        versionAdded = builder.versionAdded;
         supportsTypedKeys = builder.supportsTypedKeys;
         isGenericTypeParameter = builder.isGenericTypeParameter;
         set$extends(builder.$extends);
@@ -184,6 +187,7 @@ public class OpenApiSchema extends OpenApiRefElement<OpenApiSchema> implements T
 
         versionRemoved = Maps.tryGet(extensions, "x-version-removed").map(v -> Versions.coerce((String) v)).orElse(null);
         versionDeprecated = Maps.tryGet(extensions, "x-version-deprecated").map(v -> Versions.coerce((String) v)).orElse(null);
+        versionAdded = Maps.tryGet(extensions, "x-version-added").map(v -> Versions.coerce(String.valueOf(v))).orElse(null);
 
         supportsTypedKeys = Maps.tryGet(extensions, "x-supports-typed-keys").map(Boolean.class::cast).orElse(null);
         isGenericTypeParameter = Maps.tryGet(extensions, "x-is-generic-type-parameter").map(Boolean.class::cast).orElse(null);
@@ -496,6 +500,11 @@ public class OpenApiSchema extends OpenApiRefElement<OpenApiSchema> implements T
         return Optional.ofNullable(versionDeprecated);
     }
 
+    @Nonnull
+    public Optional<Semver> getVersionAdded() {
+        return Optional.ofNullable(versionAdded);
+    }
+
     public boolean supportsTypedKeys() {
         return supportsTypedKeys != null && supportsTypedKeys;
     }
@@ -755,6 +764,9 @@ public class OpenApiSchema extends OpenApiRefElement<OpenApiSchema> implements T
         if (versionDeprecated != null) {
             generator.writeField("x-version-deprecated", versionDeprecated.toString());
         }
+        if (versionAdded != null) {
+            generator.writeField("x-version-added", versionAdded.toString());
+        }
         if (supportsTypedKeys != null) {
             generator.writeField("x-supports-typed-keys", supportsTypedKeys);
         }
@@ -797,6 +809,7 @@ public class OpenApiSchema extends OpenApiRefElement<OpenApiSchema> implements T
             .withConstValue(constValue)
             .withVersionRemoved(versionRemoved)
             .withVersionDeprecated(versionDeprecated)
+            .withVersionAdded(versionAdded)
             .withSupportsTypedKeys(supportsTypedKeys)
             .withIsGenericTypeParameter(isGenericTypeParameter);
     }
@@ -851,6 +864,8 @@ public class OpenApiSchema extends OpenApiRefElement<OpenApiSchema> implements T
         private Semver versionRemoved;
         @Nullable
         private Semver versionDeprecated;
+        @Nullable
+        private Semver versionAdded;
         @Nullable
         private Boolean supportsTypedKeys;
         @Nullable
@@ -1050,6 +1065,12 @@ public class OpenApiSchema extends OpenApiRefElement<OpenApiSchema> implements T
         @Nonnull
         public Builder withVersionDeprecated(@Nullable Semver versionDeprecated) {
             this.versionDeprecated = versionDeprecated;
+            return this;
+        }
+
+        @Nonnull
+        public Builder withVersionAdded(@Nullable Semver versionAdded) {
+            this.versionAdded = versionAdded;
             return this;
         }
 

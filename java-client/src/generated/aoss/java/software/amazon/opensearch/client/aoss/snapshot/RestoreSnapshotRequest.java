@@ -84,9 +84,6 @@ public final class RestoreSnapshotRequest extends RequestBase
     private final Boolean allowRegex;
 
     @Nullable
-    private final Boolean attachToDataStream;
-
-    @Nullable
     private final Time clusterManagerTimeout;
 
     @Nonnull
@@ -149,7 +146,6 @@ public final class RestoreSnapshotRequest extends RequestBase
     private RestoreSnapshotRequest(Builder builder) {
         super(builder);
         this.allowRegex = builder.allowRegex;
-        this.attachToDataStream = builder.attachToDataStream;
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.ignoreIndexSettings = ApiTypeHelper.unmodifiable(builder.ignoreIndexSettings);
         this.ignoreUnavailable = builder.ignoreUnavailable;
@@ -184,19 +180,6 @@ public final class RestoreSnapshotRequest extends RequestBase
     @Nullable
     public final Boolean allowRegex() {
         return this.allowRegex;
-    }
-
-    /**
-     * Whether to attach restored backing indexes to a pre-existing data stream of the same name. When <code>true</code>, a restored backing
-     * index (<code>.ds-&lt;stream&gt;-NNNNNN</code>) is attached to an existing data stream with a matching name during the restore. This
-     * is an experimental feature.
-     * <p>
-     * API name: {@code attach_to_data_stream}
-     * </p>
-     */
-    @Nullable
-    public final Boolean attachToDataStream() {
-        return this.attachToDataStream;
     }
 
     /**
@@ -449,11 +432,6 @@ public final class RestoreSnapshotRequest extends RequestBase
             generator.write(this.allowRegex);
         }
 
-        if (this.attachToDataStream != null) {
-            generator.writeKey("attach_to_data_stream");
-            generator.write(this.attachToDataStream);
-        }
-
         if (ApiTypeHelper.isDefined(this.ignoreIndexSettings)) {
             generator.writeKey("ignore_index_settings");
             generator.writeStartArray();
@@ -553,8 +531,6 @@ public final class RestoreSnapshotRequest extends RequestBase
         @Nullable
         private Boolean allowRegex;
         @Nullable
-        private Boolean attachToDataStream;
-        @Nullable
         private Time clusterManagerTimeout;
         @Nullable
         private List<String> ignoreIndexSettings;
@@ -596,7 +572,6 @@ public final class RestoreSnapshotRequest extends RequestBase
         private Builder(RestoreSnapshotRequest o) {
             super(o);
             this.allowRegex = o.allowRegex;
-            this.attachToDataStream = o.attachToDataStream;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.ignoreIndexSettings = _listCopy(o.ignoreIndexSettings);
             this.ignoreUnavailable = o.ignoreUnavailable;
@@ -621,7 +596,6 @@ public final class RestoreSnapshotRequest extends RequestBase
         private Builder(Builder o) {
             super(o);
             this.allowRegex = o.allowRegex;
-            this.attachToDataStream = o.attachToDataStream;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.ignoreIndexSettings = _listCopy(o.ignoreIndexSettings);
             this.ignoreUnavailable = o.ignoreUnavailable;
@@ -664,20 +638,6 @@ public final class RestoreSnapshotRequest extends RequestBase
         @Nonnull
         public final Builder allowRegex(@Nullable Boolean value) {
             this.allowRegex = value;
-            return this;
-        }
-
-        /**
-         * Whether to attach restored backing indexes to a pre-existing data stream of the same name. When <code>true</code>, a restored
-         * backing index (<code>.ds-&lt;stream&gt;-NNNNNN</code>) is attached to an existing data stream with a matching name during the
-         * restore. This is an experimental feature.
-         * <p>
-         * API name: {@code attach_to_data_stream}
-         * </p>
-         */
-        @Nonnull
-        public final Builder attachToDataStream(@Nullable Boolean value) {
-            this.attachToDataStream = value;
             return this;
         }
 
@@ -1034,7 +994,6 @@ public final class RestoreSnapshotRequest extends RequestBase
 
     protected static void setupRestoreSnapshotRequestDeserializer(ObjectDeserializer<RestoreSnapshotRequest.Builder> op) {
         op.add(Builder::allowRegex, JsonpDeserializer.booleanDeserializer(), "allow_regex");
-        op.add(Builder::attachToDataStream, JsonpDeserializer.booleanDeserializer(), "attach_to_data_stream");
         op.add(
             Builder::ignoreIndexSettings,
             JsonpDeserializer.arrayDeserializer(JsonpDeserializer.stringDeserializer()),
@@ -1102,7 +1061,6 @@ public final class RestoreSnapshotRequest extends RequestBase
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.allowRegex);
-        result = 31 * result + Objects.hashCode(this.attachToDataStream);
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.ignoreIndexSettings);
         result = 31 * result + Objects.hashCode(this.ignoreUnavailable);
@@ -1131,7 +1089,6 @@ public final class RestoreSnapshotRequest extends RequestBase
         if (o == null || this.getClass() != o.getClass()) return false;
         RestoreSnapshotRequest other = (RestoreSnapshotRequest) o;
         return Objects.equals(this.allowRegex, other.allowRegex)
-            && Objects.equals(this.attachToDataStream, other.attachToDataStream)
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.ignoreIndexSettings, other.ignoreIndexSettings)
             && Objects.equals(this.ignoreUnavailable, other.ignoreUnavailable)

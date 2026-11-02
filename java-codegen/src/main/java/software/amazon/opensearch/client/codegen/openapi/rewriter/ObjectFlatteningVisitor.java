@@ -31,6 +31,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.semver4j.Semver;
 import software.amazon.opensearch.client.codegen.openapi.MimeType;
 import software.amazon.opensearch.client.codegen.openapi.OpenApiMediaType;
 import software.amazon.opensearch.client.codegen.openapi.OpenApiRequestBody;
@@ -46,10 +47,31 @@ public final class ObjectFlatteningVisitor extends OpenApiVisitorBase {
     private final Overrides overrides;
     @Nonnull
     private final OpenApiWalker walker;
+    // Combinator members added after this version are left out, so they contribute neither properties nor requirements.
+    @Nullable
+    private final Semver maxVersion;
 
     public ObjectFlatteningVisitor(@Nonnull Overrides overrides, @Nonnull OpenApiWalker walker) {
+        this(overrides, walker, null);
+    }
+
+    public ObjectFlatteningVisitor(@Nonnull Overrides overrides, @Nonnull OpenApiWalker walker, @Nullable Semver maxVersion) {
         this.overrides = Objects.requireNonNull(overrides, "overrides cannot be null");
         this.walker = Objects.requireNonNull(walker, "walker cannot be null");
+        this.maxVersion = maxVersion;
+    }
+
+    private boolean isAvailable(@Nonnull OpenApiSchema member) {
+        var available = maxVersion == null || member.getVersionAdded().map(v -> !v.isGreaterThan(maxVersion)).orElse(true);
+        if (!available) {
+            LOGGER.info(
+                "Skipping combinator member {} added in {} (after {})",
+                member.getPointer(),
+                member.getVersionAdded().get(),
+                maxVersion
+            );
+        }
+        return available;
     }
 
     @Nullable
@@ -101,7 +123,9 @@ public final class ObjectFlatteningVisitor extends OpenApiVisitorBase {
 
         if (schema.hasAllOf()) {
             final var components = schema.getAllOf()
-                .map(s -> s.stream().map(p -> calculate(p, true)).collect(Collectors.toCollection(ArrayList::new)))
+                .map(
+                    s -> s.stream().filter(this::isAvailable).map(p -> calculate(p, true)).collect(Collectors.toCollection(ArrayList::new))
+                )
                 .orElseGet(ArrayList::new);
 
             //
@@ -152,7 +176,7 @@ public final class ObjectFlatteningVisitor extends OpenApiVisitorBase {
         BiFunction<Boolean, Boolean, Boolean> additionalPropertiesSingletonCombinator
     ) {
         return calculateCombinatorProperties(
-            components.stream().map(s -> calculate(s, true)).collect(Collectors.toList()),
+            components.stream().filter(this::isAvailable).map(s -> calculate(s, true)).collect(Collectors.toList()),
             schemaCombinator,
             requiredCombinator,
             additionalPropertiesSingletonCombinator
@@ -206,7 +230,7 @@ public final class ObjectFlatteningVisitor extends OpenApiVisitorBase {
             if (s.size() == 1) {
                 return s.get(0);
             }
-            return schemaCombinator.apply(OpenApiSchema.builder(), s).build();
+            return schemaCombinator.apply(OpenApiSchema.builder(), s).withVersionAdded(earliestVersionAdded(s)).build();
         };
 
         var combinedProperties = properties.entrySet()
@@ -234,6 +258,23 @@ public final class ObjectFlatteningVisitor extends OpenApiVisitorBase {
             additionalPropertiesSingleton,
             required
         );
+    }
+
+    // A property merged from several declarations is available from the earliest of them; if any declaration has no
+    // version, the property is always available.
+    @Nullable
+    private static Semver earliestVersionAdded(List<OpenApiSchema> schemas) {
+        Semver earliest = null;
+        for (var schema : schemas) {
+            var versionAdded = schema.getVersionAdded().orElse(null);
+            if (versionAdded == null) {
+                return null;
+            }
+            if (earliest == null || versionAdded.isLowerThan(earliest)) {
+                earliest = versionAdded;
+            }
+        }
+        return earliest;
     }
 
     private Properties calculateSimple(OpenApiSchema schema) {

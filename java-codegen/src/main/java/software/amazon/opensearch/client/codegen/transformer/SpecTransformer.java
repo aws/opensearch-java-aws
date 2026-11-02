@@ -167,19 +167,15 @@ public class SpecTransformer {
     }
 
     private boolean isAvailable(@Nonnull OpenApiOperation operation) {
-        if (maxVersion == null) {
+        return isAvailable("operation " + operation.getOperationGroup(), operation.getVersionAdded().map(Versions::coerce));
+    }
+
+    private boolean isAvailable(@Nonnull String what, @Nonnull Optional<Semver> versionAdded) {
+        if (maxVersion == null || versionAdded.isEmpty() || !versionAdded.get().isGreaterThan(maxVersion)) {
             return true;
         }
-        var available = operation.getVersionAdded().map(v -> !Versions.coerce(v).isGreaterThan(maxVersion)).orElse(true);
-        if (!available) {
-            LOGGER.info(
-                "Skipping operation {} added in {} (after {})",
-                operation.getOperationGroup(),
-                operation.getVersionAdded().orElseThrow(),
-                maxVersion
-            );
-        }
-        return available;
+        LOGGER.info("Skipping {} added in {} (after {})", what, versionAdded.get(), maxVersion);
+        return false;
     }
 
     private void visit(@Nonnull OperationGroup group, @Nonnull List<Pair<OpenApiPath, OpenApiOperation>> variants) {
@@ -656,9 +652,13 @@ public class SpecTransformer {
         final var required = schema.getRequired().orElseThrow();
 
         final var overrides = this.overrides.getSchema(schema.getPointer());
+        final var schemaPointer = schema.getPointer();
 
         properties.forEach((k, v) -> {
             if (superShape != null && superShape.hasBodyFieldWithWireName(k)) {
+                return;
+            }
+            if (!isAvailable("property " + schemaPointer + "/" + k, v.getVersionAdded())) {
                 return;
             }
 

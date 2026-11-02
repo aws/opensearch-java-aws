@@ -84,6 +84,106 @@ public class MaxVersionGenerationTests {
         assertFalse(mixed.contains("/_mixed/"), mixed);
     }
 
+    @Test
+    public void skipsFieldsAndCombinatorMembersAddedAfterMaxVersion() throws Exception {
+        Path specification = directory.resolve("fields.yaml");
+        Files.writeString(
+            specification,
+            String.join(
+                "\n",
+                "openapi: 3.1.0",
+                "info:",
+                "  title: Max version field test",
+                "  version: 1.0.0",
+                "paths:",
+                "  /_thing:",
+                "    get:",
+                "      operationId: example.thing.0",
+                "      x-operation-group: example.thing",
+                "      description: Test operation.",
+                "      responses:",
+                "        '200':",
+                "          description: Test response",
+                "          content:",
+                "            application/json:",
+                "              schema:",
+                "                $ref: '#/components/schemas/example___Thing'",
+                "components:",
+                "  schemas:",
+                "    example___Thing:",
+                "      type: object",
+                "      properties:",
+                "        old_field:",
+                "          type: string",
+                "        new_field:",
+                "          type: string",
+                "          x-version-added: '3.9'",
+                "        shared_field:",
+                "          type: string",
+                "          x-version-added: '3.9'",
+                "      allOf:",
+                "        - anyOf:",
+                "            - type: object",
+                "              properties:",
+                "                old_field:",
+                "                  type: string",
+                "                shared_field:",
+                "                  type: string",
+                "              required:",
+                "                - old_field",
+                "            - type: object",
+                "              x-version-added: '3.9'",
+                "              properties:",
+                "                new_field:",
+                "                  type: string",
+                "              required:",
+                "                - new_field",
+                ""
+            )
+        );
+        String thing = generate(specification, "3.3", "example/ThingResponse.java");
+
+        assertTrue(thing.contains("public final String oldField()"), thing);
+        // Only the available anyOf member remains, so old_field stays required.
+        assertTrue(thing.contains("ApiTypeHelper.requireNonNull(builder.oldField, this, \"oldField\")"), thing);
+        assertFalse(thing.contains("newField"), thing);
+        // Also declared, without a version, by an available member.
+        assertTrue(thing.contains("public final String sharedField()"), thing);
+
+        String unfiltered = generate(specification, null, "example/ThingResponse.java");
+        assertTrue(unfiltered.contains("public final String newField()"), unfiltered);
+        assertFalse(unfiltered.contains("ApiTypeHelper.requireNonNull(builder.oldField"), unfiltered);
+    }
+
+    private String generate(Path specification, String maxVersion, String file) throws Exception {
+        var version = maxVersion == null ? null : Versions.coerce(maxVersion);
+        Overrides overrides = Overrides.builder().build();
+        OpenApiSpecification spec = OpenApiSpecification.retrieve(specification.toUri()).clone();
+        spec = SpecificationRewriter.rewrite(spec, overrides, version);
+        SpecTransformer transformer = new SpecTransformer(
+            Matcher.all(),
+            overrides,
+            CodegenSettings.DEFAULT_MODEL_PACKAGE,
+            CodegenSettings.DEFAULT_ROOT_CLIENT_NAME,
+            version
+        );
+        transformer.visit(spec);
+
+        Path output = Files.createTempDirectory(directory, "generated");
+        try (
+            ShapeRenderingContext context = ShapeRenderingContext.builder()
+                .withOutputDir(output.toFile())
+                .withJavaCodeFormatter(
+                    b -> b.withRootDir(output).withEclipseFormatterConfig(Path.of("../buildSrc/formatterConfig.xml").toFile())
+                )
+                .withTemplateLoader(b -> b.withTemplatesResourceSubPath("/software/amazon/opensearch/client/codegen/templates"))
+                .build()
+        ) {
+            transformer.getRoot().render(context);
+        }
+        return Files.readString(output.resolve(file));
+    }
+
     private static String operation(String path, String operationId, String group, String versionAdded) {
         return String.join(
             "\n",

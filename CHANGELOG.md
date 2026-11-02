@@ -7,9 +7,9 @@ data-plane clients for Amazon OpenSearch Service (AOS) and Amazon OpenSearch
 Serverless (AOSS).
 
 ### Added
-- Code generator: skip operations whose `x-version-added` is newer than the distribution supports (`--max-version`; AOS `3.7`, AOSS `3.3`).
+- Code generator: skip operations, properties and combinator members whose `x-version-added` is newer than the distribution supports (`--max-version`; AOS `3.7`, AOSS `3.3`). Leaving out a newer `anyOf`/`oneOf` member also keeps the fields it would have made optional required.
 - Add a weekly refresh job to the `Validate AWS Generated Sources` workflow (also runnable manually) that refreshes the bundled AOS and AOSS specs from api-spec.opensearch.org, regenerates the clients and opens an `autocut` pull request, mirroring the upstream opensearch-java `update_spec` job.
-- Refresh the bundled AOS and AOSS spec snapshots (published 2026-10-29) and regenerate the clients: `MatchOnlyTextProperty` gains `analyzer`, `search_analyzer`, `boost`, `fielddata` and the other supported text parameters (the AOS/AOSS counterpart of upstream [opensearch-java#2217](https://github.com/opensearch-project/opensearch-java/pull/2217)) and `SemanticProperty` gains `model_selection`.
+- Refresh the bundled AOS and AOSS spec snapshots (published 2026-10-29) and regenerate the clients: `MatchOnlyTextProperty` gains `analyzer`, `search_analyzer`, `boost`, `fielddata` and the other supported text parameters (the AOS/AOSS counterpart of upstream [opensearch-java#2217](https://github.com/opensearch-project/opensearch-java/pull/2217)).
 - Code generator: support per-distribution overrides. The AOS corrections that make `NodeAttributes.attributes`/`transportAddress` and `Segment.attributes`/`compound`/`version` optional ([#29](https://github.com/aws/opensearch-java-aws/pull/29)) are now AOS overrides instead of edits to the bundled snapshot, which stays byte-identical to the published spec.
 - Add `search_pipeline` to AOS and AOSS `_msearch` sub-request bodies (`MultisearchBody.searchPipeline`); previously the field could not be set and was dropped when a body was deserialized and re-serialized (ported from upstream [opensearch-java#2206](https://github.com/opensearch-project/opensearch-java/pull/2206)).
 - Add `FieldValue.FIRST` and `FieldValue.LAST` constants for the `_first` and `_last` sort values to the AOS and AOSS clients (ported from upstream [opensearch-java#2189](https://github.com/opensearch-project/opensearch-java/pull/2189)).
@@ -49,7 +49,7 @@ Serverless (AOSS).
 ### Deprecated
 
 ### Removed
-- Remove AOS `tasks.delete` (OpenSearch 3.9) and `indices.modifyDataStream` (3.8), which are newer than AOS supports. The refreshed specs' `cluster.describeSettings` and AOS `security.createActionGroups`/`createRoleMappings` (3.10) are likewise not generated.
+- Remove APIs and fields newer than the distribution supports: AOS `tasks.delete` (OpenSearch 3.9) and `indices.modifyDataStream` (3.8), and `RestoreSnapshotRequest.attachToDataStream` (3.8) for AOS and AOSS. The refreshed specs' `cluster.describeSettings`, AOS `security.createActionGroups`/`createRoleMappings` (3.10) and `SemanticProperty.modelSelection` (3.9) are likewise not generated.
 - The snapshot publishing path: the `publish-snapshots.yml` workflow and the remote `Snapshots` publishing repository in `java-client/build.gradle.kts`. This fork's up/downstream consumers do not integrate against snapshots, so the only publishing path is the signed Maven Central release. Local snapshot builds still work via the `localRepo` repository.
 - The inherited `Backport` workflow (`.github/workflows/backport.yml`) and the upstream Jenkins release pipeline (`jenkins/release.jenkinsFile`), both dead scaffolding from upstream opensearch-java: the backport job was guarded to `opensearch-project/opensearch-java` so it never ran here (this fork backports manually per `RELEASING.md`), and the Jenkins file targets the opensearch.org build system this fork does not use.
 - Inherited OpenSearch OSS client sources under `org.opensearch.client.opensearch` and the generated OSS output in `src/generated/java`, which this fork does not ship.

@@ -40,7 +40,7 @@ the same names:
 
 The `Validate AWS Generated Sources` workflow refreshes the snapshots every Monday (or on demand via *Run workflow*) and opens a pull request labeled `autocut` with the updated specs, checksums and generated sources. Pull requests opened with the workflow token do not trigger other workflows; close and reopen the pull request to run the checks.
 
-Each distribution is generated with a maximum OpenSearch version (`--max-version`, set per distribution in `java-codegen/build.gradle.kts`: AOS `3.7`, AOSS `3.3`). Operations whose `x-version-added` is newer are not generated; raise the version when the service supports a newer OpenSearch release.
+Each distribution is generated with a maximum OpenSearch version (`--max-version`, set per distribution in `java-codegen/build.gradle.kts`: AOS `3.7`, AOSS `3.3`). Operations, properties and `anyOf`/`oneOf`/`allOf` members whose `x-version-added` is newer are not generated; raise the version when the service supports a newer OpenSearch release.
 
 Keep the bundled snapshots byte-identical to the published specifications. Express distribution-specific corrections as code generator overrides (`Overrides.forDistribution` in `java-codegen`) rather than editing the snapshots, so a refresh cannot drop them.
 

@@ -55,6 +55,7 @@ import software.amazon.opensearch.client.json.JsonpMapper;
 import software.amazon.opensearch.client.json.ObjectBuilderDeserializer;
 import software.amazon.opensearch.client.json.ObjectDeserializer;
 import software.amazon.opensearch.client.json.PlainJsonSerializable;
+import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilderBase;
@@ -76,11 +77,8 @@ public class SemanticProperty
     @Nullable
     private final SemanticDenseEmbeddingConfig denseEmbeddingConfig;
 
-    @Nullable
+    @Nonnull
     private final String modelId;
-
-    @Nullable
-    private final SemanticModelSelection modelSelection;
 
     @Nullable
     private final String rawFieldType;
@@ -105,8 +103,7 @@ public class SemanticProperty
     private SemanticProperty(Builder builder) {
         this.chunking = builder.chunking;
         this.denseEmbeddingConfig = builder.denseEmbeddingConfig;
-        this.modelId = builder.modelId;
-        this.modelSelection = builder.modelSelection;
+        this.modelId = ApiTypeHelper.requireNonNull(builder.modelId, this, "modelId");
         this.rawFieldType = builder.rawFieldType;
         this.searchModelId = builder.searchModelId;
         this.semanticFieldSearchAnalyzer = builder.semanticFieldSearchAnalyzer;
@@ -144,19 +141,11 @@ public class SemanticProperty
     }
 
     /**
-     * API name: {@code model_id}
+     * Required - API name: {@code model_id}
      */
-    @Nullable
+    @Nonnull
     public final String modelId() {
         return this.modelId;
-    }
-
-    /**
-     * API name: {@code model_selection}
-     */
-    @Nullable
-    public final SemanticModelSelection modelSelection() {
-        return this.modelSelection;
     }
 
     /**
@@ -229,15 +218,8 @@ public class SemanticProperty
             this.denseEmbeddingConfig.serialize(generator, mapper);
         }
 
-        if (this.modelId != null) {
-            generator.writeKey("model_id");
-            generator.write(this.modelId);
-        }
-
-        if (this.modelSelection != null) {
-            generator.writeKey("model_selection");
-            this.modelSelection.serialize(generator, mapper);
-        }
+        generator.writeKey("model_id");
+        generator.write(this.modelId);
 
         if (this.rawFieldType != null) {
             generator.writeKey("raw_field_type");
@@ -291,10 +273,7 @@ public class SemanticProperty
         private JsonData chunking;
         @Nullable
         private SemanticDenseEmbeddingConfig denseEmbeddingConfig;
-        @Nullable
         private String modelId;
-        @Nullable
-        private SemanticModelSelection modelSelection;
         @Nullable
         private String rawFieldType;
         @Nullable
@@ -314,7 +293,6 @@ public class SemanticProperty
             this.chunking = o.chunking;
             this.denseEmbeddingConfig = o.denseEmbeddingConfig;
             this.modelId = o.modelId;
-            this.modelSelection = o.modelSelection;
             this.rawFieldType = o.rawFieldType;
             this.searchModelId = o.searchModelId;
             this.semanticFieldSearchAnalyzer = o.semanticFieldSearchAnalyzer;
@@ -327,7 +305,6 @@ public class SemanticProperty
             this.chunking = o.chunking;
             this.denseEmbeddingConfig = o.denseEmbeddingConfig;
             this.modelId = o.modelId;
-            this.modelSelection = o.modelSelection;
             this.rawFieldType = o.rawFieldType;
             this.searchModelId = o.searchModelId;
             this.semanticFieldSearchAnalyzer = o.semanticFieldSearchAnalyzer;
@@ -371,29 +348,12 @@ public class SemanticProperty
         }
 
         /**
-         * API name: {@code model_id}
+         * Required - API name: {@code model_id}
          */
         @Nonnull
-        public final Builder modelId(@Nullable String value) {
+        public final Builder modelId(String value) {
             this.modelId = value;
             return this;
-        }
-
-        /**
-         * API name: {@code model_selection}
-         */
-        @Nonnull
-        public final Builder modelSelection(@Nullable SemanticModelSelection value) {
-            this.modelSelection = value;
-            return this;
-        }
-
-        /**
-         * API name: {@code model_selection}
-         */
-        @Nonnull
-        public final Builder modelSelection(Function<SemanticModelSelection.Builder, ObjectBuilder<SemanticModelSelection>> fn) {
-            return modelSelection(fn.apply(new SemanticModelSelection.Builder()).build());
         }
 
         /**
@@ -488,7 +448,6 @@ public class SemanticProperty
         op.add(Builder::chunking, JsonData._DESERIALIZER, "chunking");
         op.add(Builder::denseEmbeddingConfig, SemanticDenseEmbeddingConfig._DESERIALIZER, "dense_embedding_config");
         op.add(Builder::modelId, JsonpDeserializer.stringDeserializer(), "model_id");
-        op.add(Builder::modelSelection, SemanticModelSelection._DESERIALIZER, "model_selection");
         op.add(Builder::rawFieldType, JsonpDeserializer.stringDeserializer(), "raw_field_type");
         op.add(Builder::searchModelId, JsonpDeserializer.stringDeserializer(), "search_model_id");
         op.add(Builder::semanticFieldSearchAnalyzer, JsonpDeserializer.stringDeserializer(), "semantic_field_search_analyzer");
@@ -504,8 +463,7 @@ public class SemanticProperty
         int result = 17;
         result = 31 * result + Objects.hashCode(this.chunking);
         result = 31 * result + Objects.hashCode(this.denseEmbeddingConfig);
-        result = 31 * result + Objects.hashCode(this.modelId);
-        result = 31 * result + Objects.hashCode(this.modelSelection);
+        result = 31 * result + this.modelId.hashCode();
         result = 31 * result + Objects.hashCode(this.rawFieldType);
         result = 31 * result + Objects.hashCode(this.searchModelId);
         result = 31 * result + Objects.hashCode(this.semanticFieldSearchAnalyzer);
@@ -522,8 +480,7 @@ public class SemanticProperty
         SemanticProperty other = (SemanticProperty) o;
         return Objects.equals(this.chunking, other.chunking)
             && Objects.equals(this.denseEmbeddingConfig, other.denseEmbeddingConfig)
-            && Objects.equals(this.modelId, other.modelId)
-            && Objects.equals(this.modelSelection, other.modelSelection)
+            && this.modelId.equals(other.modelId)
             && Objects.equals(this.rawFieldType, other.rawFieldType)
             && Objects.equals(this.searchModelId, other.searchModelId)
             && Objects.equals(this.semanticFieldSearchAnalyzer, other.semanticFieldSearchAnalyzer)

@@ -257,7 +257,7 @@ public class CodeGenerator {
         @Nullable Semver maxVersion
     ) throws ApiSpecificationParseException {
         var spec = OpenApiSpecification.retrieve(location);
-        spec = SpecificationRewriter.rewrite(spec, overrides);
+        spec = SpecificationRewriter.rewrite(spec, overrides, maxVersion);
         var transformer = new SpecTransformer(OPERATION_MATCHER, overrides, modelPackage, rootClientName, maxVersion);
         transformer.visit(spec);
         return transformer.getRoot();
