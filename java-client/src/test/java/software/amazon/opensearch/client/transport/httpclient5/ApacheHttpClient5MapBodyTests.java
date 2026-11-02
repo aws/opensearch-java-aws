@@ -16,30 +16,31 @@ package software.amazon.opensearch.client.transport.httpclient5;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Collections;
 import org.apache.hc.core5.http.HttpHost;
 import org.junit.Test;
 import software.amazon.opensearch.client.aos.ltr.CreateFeatureRequest;
-import software.amazon.opensearch.client.aos.security.CreateActionGroupsRequest;
+import software.amazon.opensearch.client.aos.ltr.CreateFeaturesetRequest;
 import software.amazon.opensearch.client.json.JsonData;
 import software.amazon.opensearch.client.transport.HttpTransportTestServer;
 import software.amazon.opensearch.client.transport.endpoints.SimpleEndpoint;
 
 public class ApacheHttpClient5MapBodyTests {
     @Test
-    public void sendsMapBodyForCreateActionGroups() throws Exception {
-        CreateActionGroupsRequest request = CreateActionGroupsRequest.of(
-            r -> r.body("my_group", g -> g.allowedActions("indices:data/read/*").description("read"))
+    public void sendsFreeFormBodyForCreateFeatureset() throws Exception {
+        CreateFeaturesetRequest request = CreateFeaturesetRequest.of(
+            r -> r.id("my_set").body("featureset", JsonData.of(Collections.singletonMap("name", "my_set")))
         );
         HttpTransportTestServer.CapturedRequest captured = send(
             request,
-            ((SimpleEndpoint<CreateActionGroupsRequest, ?>) CreateActionGroupsRequest._ENDPOINT).withResponseDeserializer(
+            ((SimpleEndpoint<CreateFeaturesetRequest, ?>) CreateFeaturesetRequest._ENDPOINT).withResponseDeserializer(
                 JsonData._DESERIALIZER
             )
         );
 
         assertEquals("PUT", captured.method);
-        assertEquals("/_plugins/_security/api/actiongroups", captured.path);
-        assertEquals("{\"my_group\":{\"allowed_actions\":[\"indices:data/read/*\"],\"description\":\"read\"}}", captured.body);
+        assertEquals("/_ltr/_featureset/my_set", captured.path);
+        assertEquals("{\"featureset\":{\"name\":\"my_set\"}}", captured.body);
     }
 
     @Test

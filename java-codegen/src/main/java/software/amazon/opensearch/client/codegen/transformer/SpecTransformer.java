@@ -30,11 +30,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.semver4j.Semver;
 import software.amazon.opensearch.client.codegen.CodegenSettings;
 import software.amazon.opensearch.client.codegen.model.ArrayShape;
 import software.amazon.opensearch.client.codegen.model.DelegatedShape;
@@ -86,6 +88,9 @@ public class SpecTransformer {
     private final Namespace root;
     @Nonnull
     private final Map<OpenApiSchema, Shape> visitedSchemas = new ConcurrentHashMap<>();
+    // Operations added after this version are not available on the target distribution and are skipped.
+    @Nullable
+    private final Semver maxVersion;
 
     public SpecTransformer(@Nonnull Matcher<OperationGroup> matcher, @Nonnull Overrides overrides) {
         this(matcher, overrides, CodegenSettings.DEFAULT_MODEL_PACKAGE, CodegenSettings.DEFAULT_ROOT_CLIENT_NAME);
@@ -97,6 +102,17 @@ public class SpecTransformer {
         @Nonnull String rootPackageName,
         @Nonnull String rootClientName
     ) {
+        this(matcher, overrides, rootPackageName, rootClientName, null);
+    }
+
+    public SpecTransformer(
+        @Nonnull Matcher<OperationGroup> matcher,
+        @Nonnull Overrides overrides,
+        @Nonnull String rootPackageName,
+        @Nonnull String rootClientName,
+        @Nullable Semver maxVersion
+    ) {
+        this.maxVersion = maxVersion;
         this.matcher = Objects.requireNonNull(matcher, "matcher must not be null");
         this.overrides = Objects.requireNonNull(overrides, "overrides must not be null");
         this.typeMapper = new TypeMapper(this, overrides);
@@ -124,7 +140,9 @@ public class SpecTransformer {
                     .stream()
                     .flatMap(m -> m.values().stream())
                     .filter(
-                        o -> !o.isIgnorable() && o.getDeprecation().map(d -> d.getVersion().isGreaterThan(Versions.V1_0_0)).orElse(true)
+                        o -> !o.isIgnorable()
+                            && o.getDeprecation().map(d -> d.getVersion().isGreaterThan(Versions.V1_0_0)).orElse(true)
+                            && isAvailable(o)
                     )
                     .map(o -> Pair.of(p, o))
             )
@@ -146,6 +164,22 @@ public class SpecTransformer {
                 .orElseThrow(() -> new IllegalStateException("Schema not found: " + pointer));
             visit(schema);
         });
+    }
+
+    private boolean isAvailable(@Nonnull OpenApiOperation operation) {
+        if (maxVersion == null) {
+            return true;
+        }
+        var available = operation.getVersionAdded().map(v -> !Versions.coerce(v).isGreaterThan(maxVersion)).orElse(true);
+        if (!available) {
+            LOGGER.info(
+                "Skipping operation {} added in {} (after {})",
+                operation.getOperationGroup(),
+                operation.getVersionAdded().orElseThrow(),
+                maxVersion
+            );
+        }
+        return available;
     }
 
     private void visit(@Nonnull OperationGroup group, @Nonnull List<Pair<OpenApiPath, OpenApiOperation>> variants) {

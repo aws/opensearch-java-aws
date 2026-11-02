@@ -65,7 +65,9 @@ fun registerDistributionClientTask(
     distribution: String,
     specificationFileName: String,
     modelPackage: String,
-    clientName: String
+    clientName: String,
+    // Highest OpenSearch version the distribution supports; operations added later are not generated.
+    maxVersion: String
 ) {
     tasks.register<JavaExec>(taskName) {
         group = "code generation"
@@ -96,7 +98,8 @@ fun registerDistributionClientTask(
             "--distribution", distribution,
             "--runtime-package", "software.amazon.opensearch.client",
             "--model-package", modelPackage,
-            "--client-name", clientName
+            "--client-name", clientName,
+            "--max-version", maxVersion
         )
     }
 }
@@ -106,7 +109,8 @@ registerDistributionClientTask(
     "aos",
     "opensearch-openapi-aos.yaml",
     "software.amazon.opensearch.client.aos",
-    "OpenSearchAos"
+    "OpenSearchAos",
+    "3.7"
 )
 
 registerDistributionClientTask(
@@ -114,7 +118,8 @@ registerDistributionClientTask(
     "aoss",
     "opensearch-openapi-aoss.yaml",
     "software.amazon.opensearch.client.aoss",
-    "OpenSearchAoss"
+    "OpenSearchAoss",
+    "3.3"
 )
 
 tasks.register("generateClients") {
