@@ -30,11 +30,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.semver4j.Semver;
 import software.amazon.opensearch.client.codegen.CodegenSettings;
 import software.amazon.opensearch.client.codegen.model.ArrayShape;
 import software.amazon.opensearch.client.codegen.model.DelegatedShape;
@@ -86,6 +88,9 @@ public class SpecTransformer {
     private final Namespace root;
     @Nonnull
     private final Map<OpenApiSchema, Shape> visitedSchemas = new ConcurrentHashMap<>();
+    // Operations added after this version are not available on the target distribution and are skipped.
+    @Nullable
+    private final Semver maxVersion;
 
     public SpecTransformer(@Nonnull Matcher<OperationGroup> matcher, @Nonnull Overrides overrides) {
         this(matcher, overrides, CodegenSettings.DEFAULT_MODEL_PACKAGE, CodegenSettings.DEFAULT_ROOT_CLIENT_NAME);
@@ -97,6 +102,17 @@ public class SpecTransformer {
         @Nonnull String rootPackageName,
         @Nonnull String rootClientName
     ) {
+        this(matcher, overrides, rootPackageName, rootClientName, null);
+    }
+
+    public SpecTransformer(
+        @Nonnull Matcher<OperationGroup> matcher,
+        @Nonnull Overrides overrides,
+        @Nonnull String rootPackageName,
+        @Nonnull String rootClientName,
+        @Nullable Semver maxVersion
+    ) {
+        this.maxVersion = maxVersion;
         this.matcher = Objects.requireNonNull(matcher, "matcher must not be null");
         this.overrides = Objects.requireNonNull(overrides, "overrides must not be null");
         this.typeMapper = new TypeMapper(this, overrides);
@@ -124,7 +140,9 @@ public class SpecTransformer {
                     .stream()
                     .flatMap(m -> m.values().stream())
                     .filter(
-                        o -> !o.isIgnorable() && o.getDeprecation().map(d -> d.getVersion().isGreaterThan(Versions.V1_0_0)).orElse(true)
+                        o -> !o.isIgnorable()
+                            && o.getDeprecation().map(d -> d.getVersion().isGreaterThan(Versions.V1_0_0)).orElse(true)
+                            && isAvailable(o)
                     )
                     .map(o -> Pair.of(p, o))
             )
@@ -146,6 +164,18 @@ public class SpecTransformer {
                 .orElseThrow(() -> new IllegalStateException("Schema not found: " + pointer));
             visit(schema);
         });
+    }
+
+    private boolean isAvailable(@Nonnull OpenApiOperation operation) {
+        return isAvailable("operation " + operation.getOperationGroup(), operation.getVersionAdded().map(Versions::coerce));
+    }
+
+    private boolean isAvailable(@Nonnull String what, @Nonnull Optional<Semver> versionAdded) {
+        if (maxVersion == null || versionAdded.isEmpty() || !versionAdded.get().isGreaterThan(maxVersion)) {
+            return true;
+        }
+        LOGGER.info("Skipping {} added in {} (after {})", what, versionAdded.get(), maxVersion);
+        return false;
     }
 
     private void visit(@Nonnull OperationGroup group, @Nonnull List<Pair<OpenApiPath, OpenApiOperation>> variants) {
@@ -190,6 +220,12 @@ public class SpecTransformer {
         }
 
         requestShape.setResponseType(responseType);
+    }
+
+    // An object body that only declares `additionalProperties` (e.g. a map of names to definitions) has no body fields to
+    // generate, so it is delegated to a single Map-typed body field instead of being dropped.
+    private static boolean isMapBody(OpenApiSchema schema) {
+        return !schema.has$ref() && !schema.hasProperties() && schema.hasAdditionalProperties();
     }
 
     private static Stream<OpenApiParameter> getAllRelevantParameters(OpenApiPath path, OpenApiOperation operation, In in) {
@@ -312,7 +348,9 @@ public class SpecTransformer {
             .flatMap(c -> c.get(MimeType.Json))
             .flatMap(OpenApiMediaType::getSchema)
             .ifPresent(s -> {
-                if ((s.has$ref() && s.hasTitle()) || !s.getSingleType().map(OpenApiSchemaType.Object::equals).orElse(false)) {
+                if ((s.has$ref() && s.hasTitle())
+                    || !s.getSingleType().map(OpenApiSchemaType.Object::equals).orElse(false)
+                    || isMapBody(s)) {
                     var name = s.getTitle().orElse("body");
                     shape.setDelegatedBodyField(name, typeMapper.mapType(s));
                 } else {
@@ -614,9 +652,13 @@ public class SpecTransformer {
         final var required = schema.getRequired().orElseThrow();
 
         final var overrides = this.overrides.getSchema(schema.getPointer());
+        final var schemaPointer = schema.getPointer();
 
         properties.forEach((k, v) -> {
             if (superShape != null && superShape.hasBodyFieldWithWireName(k)) {
+                return;
+            }
+            if (!isAvailable("property " + schemaPointer + "/" + k, v.getVersionAdded())) {
                 return;
             }
 

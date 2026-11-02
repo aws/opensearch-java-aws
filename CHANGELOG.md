@@ -7,6 +7,10 @@ data-plane clients for Amazon OpenSearch Service (AOS) and Amazon OpenSearch
 Serverless (AOSS).
 
 ### Added
+- Code generator: skip operations, properties and combinator members whose `x-version-added` is newer than the distribution supports (`--max-version`; AOS `3.7`, AOSS `3.3`). Leaving out a newer `anyOf`/`oneOf` member also keeps the fields it would have made optional required.
+- Add a weekly refresh job to the `Validate AWS Generated Sources` workflow (also runnable manually) that refreshes the bundled AOS and AOSS specs from api-spec.opensearch.org, regenerates the clients and opens an `autocut` pull request, mirroring the upstream opensearch-java `update_spec` job.
+- Refresh the bundled AOS and AOSS spec snapshots (published 2026-10-29) and regenerate the clients: `MatchOnlyTextProperty` gains `analyzer`, `search_analyzer`, `boost`, `fielddata` and the other supported text parameters (the AOS/AOSS counterpart of upstream [opensearch-java#2217](https://github.com/opensearch-project/opensearch-java/pull/2217)).
+- Code generator: support per-distribution overrides. The AOS corrections that make `NodeAttributes.attributes`/`transportAddress` and `Segment.attributes`/`compound`/`version` optional ([#29](https://github.com/aws/opensearch-java-aws/pull/29)) are now AOS overrides instead of edits to the bundled snapshot, which stays byte-identical to the published spec.
 - Add `search_pipeline` to AOS and AOSS `_msearch` sub-request bodies (`MultisearchBody.searchPipeline`); previously the field could not be set and was dropped when a body was deserialized and re-serialized (ported from upstream [opensearch-java#2206](https://github.com/opensearch-project/opensearch-java/pull/2206)).
 - Add `FieldValue.FIRST` and `FieldValue.LAST` constants for the `_first` and `_last` sort values to the AOS and AOSS clients (ported from upstream [opensearch-java#2189](https://github.com/opensearch-project/opensearch-java/pull/2189)).
 - Pinned each input spec with a committed `<spec>.sha256` checksum, verified before generating — the same approach OpenSearch core uses for its `<jar>.sha1` dependency pins. The `code-generation` workflow now runs on pull requests and fails if regenerating from the committed specs drifts from the committed output ([#35](https://github.com/aws/opensearch-java-aws/pull/35)).
@@ -17,6 +21,7 @@ Serverless (AOSS).
 - `Build Distributions` CI workflow that compiles the AOS and AOSS clients and runs their unit tests across JDK 21 and 25.
 
 ### Dependencies
+- Add `org.snakeyaml:snakeyaml-engine` `3.2` to the code generator for YAML 1.2 spec parsing.
 - Bump Jackson to `2.22.4` / `3.2.4` and the test-only `io.github.classgraph:classgraph` to `5.0.0` (ported from upstream [opensearch-java#2231](https://github.com/opensearch-project/opensearch-java/pull/2231), [#2228](https://github.com/opensearch-project/opensearch-java/pull/2228)).
 - Bumped Spotless to 8.10.4 and the code generator's `spotless-lib-extra` to 4.10.4, so the Eclipse JDT formatter resolves from Maven Central instead of the Eclipse P2 update site in both the build's formatting check and the code generator ([#48](https://github.com/aws/opensearch-java-aws/pull/48)).
 - Pin AWS SDK dependencies to `2.57.1`; consumers can override the version with their AWS SDK BOM.
@@ -44,12 +49,16 @@ Serverless (AOSS).
 ### Deprecated
 
 ### Removed
+- Remove APIs and fields newer than the distribution supports: AOS `tasks.delete` (OpenSearch 3.9) and `indices.modifyDataStream` (3.8), and `RestoreSnapshotRequest.attachToDataStream` (3.8) for AOS and AOSS. The refreshed specs' `cluster.describeSettings`, AOS `security.createActionGroups`/`createRoleMappings` (3.10) and `SemanticProperty.modelSelection` (3.9) are likewise not generated.
 - The snapshot publishing path: the `publish-snapshots.yml` workflow and the remote `Snapshots` publishing repository in `java-client/build.gradle.kts`. This fork's up/downstream consumers do not integrate against snapshots, so the only publishing path is the signed Maven Central release. Local snapshot builds still work via the `localRepo` repository.
 - The inherited `Backport` workflow (`.github/workflows/backport.yml`) and the upstream Jenkins release pipeline (`jenkins/release.jenkinsFile`), both dead scaffolding from upstream opensearch-java: the backport job was guarded to `opensearch-project/opensearch-java` so it never ran here (this fork backports manually per `RELEASING.md`), and the Jenkins file targets the opensearch.org build system this fork does not use.
 - Inherited OpenSearch OSS client sources under `org.opensearch.client.opensearch` and the generated OSS output in `src/generated/java`, which this fork does not ship.
 - The gRPC transport module (`java-client-grpc`), its samples, and the gRPC integration-test path.
 
 ### Fixed
+- Code generator: generate a required `Map`-typed `body` for request bodies that are objects with only `additionalProperties`. These bodies were dropped, so seven AOS `ltr` create/update requests sent no body.
+- Code generator: accept `--input` paths without a URI scheme again (resolved against the working directory), which the YAML 1.2 loader had broken.
+- Code generator: parse specs with the YAML 1.2 core schema, so plain scalars such as `no`, `yes`, `NO` and `YES` stay strings. The distribution specs are now emitted without quotes on these values, which the YAML 1.1 parser read as booleans, failing generation or turning enum constants such as `AllocationExplainDecision.No("NO")` into `False("false")`.
 - Code generator: flatten `properties` declared next to an `allOf` combinator, so the generated AOS and AOSS `TermsLookup` now includes `index`, `path`, `routing` and `store` (ported from upstream [opensearch-java#2239](https://github.com/opensearch-project/opensearch-java/pull/2239)).
 - Code generator: model nested sub-aggregations on single-bucket aggregates (`SingleBucketAggregateBase`), and map multi-member `allOf` schemas to their last member instead of failing with a `NullPointerException` (ported from upstream [opensearch-java#1957](https://github.com/opensearch-project/opensearch-java/pull/1957), [#2238](https://github.com/opensearch-project/opensearch-java/pull/2238)).
 - `JsonData._DESERIALIZER` reads the value at the current parser event instead of advancing past it, and the `Requests.JsonBodyBuilder.method` null check now reports `method cannot be null` (ported from upstream [opensearch-java#1957](https://github.com/opensearch-project/opensearch-java/pull/1957), [#2229](https://github.com/opensearch-project/opensearch-java/pull/2229)).

@@ -31,6 +31,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
@@ -38,6 +39,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.semver4j.Semver;
 import software.amazon.opensearch.client.codegen.exceptions.ApiSpecificationParseException;
 import software.amazon.opensearch.client.codegen.exceptions.RenderException;
 import software.amazon.opensearch.client.codegen.model.Namespace;
@@ -47,6 +49,7 @@ import software.amazon.opensearch.client.codegen.openapi.rewriter.SpecificationR
 import software.amazon.opensearch.client.codegen.renderer.ShapeRenderingContext;
 import software.amazon.opensearch.client.codegen.transformer.SpecTransformer;
 import software.amazon.opensearch.client.codegen.transformer.overrides.Overrides;
+import software.amazon.opensearch.client.codegen.utils.Versions;
 import software.amazon.opensearch.client.codegen.utils.matcher.Matcher;
 
 public class CodeGenerator {
@@ -150,6 +153,12 @@ public class CodeGenerator {
             .argName("PACKAGE")
             .hasArg()
             .build();
+        var maxVersionOpt = Option.builder()
+            .longOpt("max-version")
+            .desc("Skip operations added after this version (x-version-added), e.g. the highest version the distribution supports")
+            .argName("VERSION")
+            .hasArg()
+            .build();
         var clientNameOpt = Option.builder()
             .longOpt("client-name")
             .desc("The generated root client class prefix, without Client or AsyncClient")
@@ -170,6 +179,7 @@ public class CodeGenerator {
             .addOption(runtimePackageOpt)
             .addOption(modelPackageOpt)
             .addOption(clientNameOpt)
+            .addOption(maxVersionOpt)
             .addOption(helpOpt);
 
         var cliParser = new DefaultParser();
@@ -199,6 +209,7 @@ public class CodeGenerator {
                 cli.getOptionValue(clientNameOpt, CodegenSettings.DEFAULT_ROOT_CLIENT_NAME),
                 "root client name"
             );
+            var maxVersion = cli.hasOption(maxVersionOpt) ? Versions.coerce(cli.getOptionValue(maxVersionOpt)) : null;
             CodegenSettings.configureTypePackages(runtimePackage, modelPackage);
 
             LOGGER.info("Specification Location: {}", specLocation);
@@ -208,8 +219,9 @@ public class CodeGenerator {
             LOGGER.info("Runtime Package: {}", runtimePackage);
             LOGGER.info("Model Package: {}", modelPackage);
             LOGGER.info("Root Client Name: {}", rootClientName);
+            LOGGER.info("Max Version: {}", maxVersion);
 
-            Namespace root = parseSpec(specLocation, modelPackage, rootClientName);
+            Namespace root = parseSpec(specLocation, Overrides.forDistribution(distribution), modelPackage, rootClientName, maxVersion);
 
             cleanDirectory(outputDir);
 
@@ -237,10 +249,16 @@ public class CodeGenerator {
         }
     }
 
-    private static Namespace parseSpec(URI location, String modelPackage, String rootClientName) throws ApiSpecificationParseException {
+    private static Namespace parseSpec(
+        URI location,
+        Overrides overrides,
+        String modelPackage,
+        String rootClientName,
+        @Nullable Semver maxVersion
+    ) throws ApiSpecificationParseException {
         var spec = OpenApiSpecification.retrieve(location);
-        spec = SpecificationRewriter.rewrite(spec, Overrides.OVERRIDES);
-        var transformer = new SpecTransformer(OPERATION_MATCHER, Overrides.OVERRIDES, modelPackage, rootClientName);
+        spec = SpecificationRewriter.rewrite(spec, overrides, maxVersion);
+        var transformer = new SpecTransformer(OPERATION_MATCHER, overrides, modelPackage, rootClientName, maxVersion);
         transformer.visit(spec);
         return transformer.getRoot();
     }

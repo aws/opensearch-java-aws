@@ -16,10 +16,15 @@ package software.amazon.opensearch.client.codegen.openapi;
 
 import static software.amazon.opensearch.client.codegen.utils.Functional.ifNonnull;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.parser.OpenAPIV3Parser;
 import io.swagger.v3.parser.core.models.ParseOptions;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -31,6 +36,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.snakeyaml.engine.v2.api.Load;
+import org.snakeyaml.engine.v2.api.LoadSettings;
+import org.snakeyaml.engine.v2.schema.CoreSchema;
 import software.amazon.opensearch.client.codegen.exceptions.ApiSpecificationParseException;
 import software.amazon.opensearch.client.codegen.utils.Clone;
 import software.amazon.opensearch.client.codegen.utils.Maps;
@@ -42,14 +50,26 @@ public final class OpenApiSpecification extends OpenApiElement<OpenApiSpecificat
     private static final Logger LOGGER = LogManager.getLogger();
     private static final ParseOptions PARSE_OPTIONS = new ParseOptions();
     private static final OpenAPIV3Parser PARSER = new OpenAPIV3Parser();
+    // The parser reads YAML with YAML 1.1 rules, which turn plain scalars such as `no`, `yes` and `y`
+    // into booleans. Specs are emitted as YAML 1.2, where those are strings, so load them with the
+    // YAML 1.2 core schema and hand the parser JSON instead.
+    private static final LoadSettings YAML_SETTINGS = LoadSettings.builder()
+        .setSchema(new CoreSchema())
+        .setCodePointLimit(Integer.MAX_VALUE)
+        .build();
+    private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
     private static final Map<URI, OpenApiSpecification> SPECS = new HashMap<>();
 
     public static OpenApiSpecification retrieve(URI location) {
+        // A bare path such as `--input spec.yaml` has no scheme; resolve it against the working directory.
+        if (!location.isAbsolute()) {
+            location = Path.of(location.getPath()).toAbsolutePath().normalize().toUri();
+        }
         if (SPECS.containsKey(location)) {
             return SPECS.get(location);
         }
         LOGGER.info("Parsing spec: {}", location);
-        var result = PARSER.readLocation(location.toString(), null, PARSE_OPTIONS);
+        var result = PARSER.readContents(readAsJson(location), null, PARSE_OPTIONS);
         var openApi = result.getOpenAPI();
         if (openApi == null) {
             throw new ApiSpecificationParseException("Unable to parse spec: " + location, result.getMessages());
@@ -57,6 +77,20 @@ public final class OpenApiSpecification extends OpenApiElement<OpenApiSpecificat
         var spec = new OpenApiSpecification(location, openApi);
         SPECS.put(location, spec);
         return spec;
+    }
+
+    private static String readAsJson(URI location) {
+        Object document;
+        try (InputStream in = location.toURL().openStream()) {
+            document = new Load(YAML_SETTINGS).loadFromInputStream(in);
+        } catch (IOException e) {
+            throw new ApiSpecificationParseException("Unable to read spec: " + location, e);
+        }
+        try {
+            return JSON_MAPPER.writeValueAsString(document);
+        } catch (JsonProcessingException e) {
+            throw new ApiSpecificationParseException("Unable to convert spec to JSON: " + location, e);
+        }
     }
 
     @Nonnull

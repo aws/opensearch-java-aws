@@ -65,7 +65,9 @@ fun registerDistributionClientTask(
     distribution: String,
     specificationFileName: String,
     modelPackage: String,
-    clientName: String
+    clientName: String,
+    // Highest OpenSearch version the distribution supports; operations added later are not generated.
+    maxVersion: String
 ) {
     tasks.register<JavaExec>(taskName) {
         group = "code generation"
@@ -96,7 +98,8 @@ fun registerDistributionClientTask(
             "--distribution", distribution,
             "--runtime-package", "software.amazon.opensearch.client",
             "--model-package", modelPackage,
-            "--client-name", clientName
+            "--client-name", clientName,
+            "--max-version", maxVersion
         )
     }
 }
@@ -106,7 +109,8 @@ registerDistributionClientTask(
     "aos",
     "opensearch-openapi-aos.yaml",
     "software.amazon.opensearch.client.aos",
-    "OpenSearchAos"
+    "OpenSearchAos",
+    "3.7"
 )
 
 registerDistributionClientTask(
@@ -114,7 +118,8 @@ registerDistributionClientTask(
     "aoss",
     "opensearch-openapi-aoss.yaml",
     "software.amazon.opensearch.client.aoss",
-    "OpenSearchAoss"
+    "OpenSearchAoss",
+    "3.3"
 )
 
 tasks.register("generateClients") {
@@ -198,6 +203,8 @@ tasks.register("updateSpecShas") {
 val verifySpecChecksums = tasks.register("verifySpecChecksums") {
     group = "verification"
     description = "Verifies the AOS and AOSS distribution specs match their committed SHA-256 pins."
+    // A refresh runs `downloadLatestSpecs` and the client generation tasks in one build; check the new pins.
+    mustRunAfter("downloadLatestSpecs")
     inputs.files(distributionSpecFiles.map { file("${projectDir}/$it") })
     inputs.files(distributionSpecFiles.map { shaFileFor(it) })
     doLast {
@@ -270,6 +277,9 @@ tasks.build {
 dependencies {
     // Apache 2.0
     implementation("io.swagger.parser.v3", "swagger-parser", "2.1.22")
+
+    // Apache 2.0
+    implementation("org.snakeyaml", "snakeyaml-engine", "3.2")
 
     // (New) BSD
     implementation("com.samskivert", "jmustache", "1.16")
