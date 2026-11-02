@@ -233,6 +233,12 @@ public class TypeMapper {
             return mapType(allOf.get(0));
         }
 
+        if (allOf.size() > 1) {
+            // Later allOf members specialize earlier ones, so the last member is the most specific type,
+            // e.g. a generic `Buckets` narrowed to a concrete bucket type in each multi-bucket aggregate.
+            return mapType(allOf.get(allOf.size() - 1));
+        }
+
         throw new UnsupportedOperationException("Can not get type name for allOf: " + allOf);
     }
 

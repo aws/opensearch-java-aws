@@ -105,6 +105,7 @@ import software.amazon.opensearch.client.transport.httpclient5.internal.Node;
 import software.amazon.opensearch.client.transport.httpclient5.internal.NodeSelector;
 import software.amazon.opensearch.client.transport.httpclient5.internal.NodeState;
 import software.amazon.opensearch.client.util.MissingRequiredPropertyException;
+import software.amazon.opensearch.client.util.NoCopyByteArrayOutputStream;
 
 /**
  * Apache HttpClient 5 based client transport.
@@ -579,7 +580,7 @@ public class ApacheHttpClient5Transport implements OpenSearchTransport {
         final HttpUriRequestBase clientReq = new HttpUriRequestBase(method, uri);
         if (endpoint.hasRequestBody(request)) {
             // Request has a body and must implement JsonpSerializable or NdJsonpSerializable
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            NoCopyByteArrayOutputStream baos = new NoCopyByteArrayOutputStream();
 
             ContentType contentType = JsonContentType;
             if (request instanceof NdJsonpSerializable) {
@@ -592,7 +593,7 @@ public class ApacheHttpClient5Transport implements OpenSearchTransport {
                 generator.close();
             }
 
-            addRequestBody(clientReq, new ByteArrayEntity(baos.toByteArray(), contentType));
+            addRequestBody(clientReq, new ByteArrayEntity(baos.array(), 0, baos.size(), contentType));
         }
 
         setHeaders(clientReq, options.headers());

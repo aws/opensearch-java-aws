@@ -106,6 +106,9 @@ public class MultisearchBody implements PlainJsonSerializable {
     @Nullable
     private SourceConfig source;
 
+    @Nullable
+    private final String searchPipeline;
+
     private final Map<String, ScriptField> scriptFields;
 
     @Nullable
@@ -152,6 +155,7 @@ public class MultisearchBody implements PlainJsonSerializable {
         this.suggest = builder.suggest;
         this.highlight = builder.highlight;
         this.source = builder.source;
+        this.searchPipeline = builder.searchPipeline;
         this.scriptFields = ApiTypeHelper.unmodifiable(builder.scriptFields);
         this.seqNoPrimaryTerm = builder.seqNoPrimaryTerm;
         this.storedFields = ApiTypeHelper.unmodifiable(builder.storedFields);
@@ -269,6 +273,16 @@ public class MultisearchBody implements PlainJsonSerializable {
     @Nullable
     public final SourceConfig source() {
         return this.source;
+    }
+
+    /**
+     * Customizable sequence of processing stages applied to search queries.
+     * <p>
+     * API name: {@code search_pipeline}
+     */
+    @Nullable
+    public final String searchPipeline() {
+        return this.searchPipeline;
     }
 
     public final Map<String, ScriptField> scriptFields() {
@@ -477,6 +491,12 @@ public class MultisearchBody implements PlainJsonSerializable {
 
         }
 
+        if (this.searchPipeline != null) {
+            generator.writeKey("search_pipeline");
+            generator.write(this.searchPipeline);
+
+        }
+
         if (ApiTypeHelper.isDefined(this.scriptFields)) {
             generator.writeKey("script_fields");
             generator.writeStartObject();
@@ -631,6 +651,9 @@ public class MultisearchBody implements PlainJsonSerializable {
 
         @Nullable
         private SourceConfig source;
+
+        @Nullable
+        private String searchPipeline;
 
         private Map<String, ScriptField> scriptFields;
 
@@ -871,6 +894,16 @@ public class MultisearchBody implements PlainJsonSerializable {
          */
         public final Builder source(Function<SourceConfig.Builder, ObjectBuilder<SourceConfig>> fn) {
             return this.source(fn.apply(new SourceConfig.Builder()).build());
+        }
+
+        /**
+         * Customizable sequence of processing stages applied to search queries.
+         * <p>
+         * API name: {@code search_pipeline}
+         */
+        public final Builder searchPipeline(@Nullable String value) {
+            this.searchPipeline = value;
+            return this;
         }
 
         /**
@@ -1172,6 +1205,7 @@ public class MultisearchBody implements PlainJsonSerializable {
         op.add(Builder::suggest, Suggester._DESERIALIZER, "suggest");
         op.add(Builder::highlight, Highlight._DESERIALIZER, "highlight");
         op.add(Builder::source, SourceConfig._DESERIALIZER, "_source");
+        op.add(Builder::searchPipeline, JsonpDeserializer.stringDeserializer(), "search_pipeline");
         op.add(Builder::scriptFields, JsonpDeserializer.stringMapDeserializer(ScriptField._DESERIALIZER), "script_fields");
         op.add(Builder::seqNoPrimaryTerm, JsonpDeserializer.booleanDeserializer(), "seq_no_primary_term");
         op.add(Builder::storedFields, JsonpDeserializer.arrayDeserializer(JsonpDeserializer.stringDeserializer()), "stored_fields");
