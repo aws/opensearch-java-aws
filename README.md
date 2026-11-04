@@ -64,7 +64,7 @@ Run the default mapper tests and the Jackson 3 tests on the build JDK:
 The generated local artifact is:
 
 ```text
-java-client/build/libs/java-client-0.1.0-SNAPSHOT.jar
+java-client/build/libs/java-client-0.2.0-SNAPSHOT.jar
 ```
 
 ### Depending on the published artifact
@@ -162,7 +162,7 @@ transport needs:
 
 ```kotlin
 dependencies {
-    implementation(files("libs/java-client-0.1.0-SNAPSHOT.jar"))
+    implementation(files("libs/java-client-0.2.0-SNAPSHOT.jar"))
 
     implementation(platform("software.amazon.awssdk:bom:<aws-sdk-version>"))
     implementation("software.amazon.awssdk:sdk-core")

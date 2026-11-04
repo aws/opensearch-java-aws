@@ -1,0 +1,63 @@
+name: Dependabot PR
+
+# Add the CHANGELOG entry that the Changelog Verifier requires to Dependabot pull requests.
+# Workflows triggered by Dependabot only see Dependabot secrets, so BOT_TOKEN must also be
+# stored as a Dependabot secret.
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  changelog:
+    name: Add the CHANGELOG entry
+    # Run for pull requests that Dependabot opened in this repository. The bot's own push
+    # triggers this job again, but the entry is then present and nothing is pushed.
+    if: >-
+      github.event.pull_request.user.login == 'dependabot[bot]'
+      && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    concurrency:
+      group: dependabot-pr-${{ github.event.pull_request.number }}
+      cancel-in-progress: false
+    steps:
+      - name: Checkout the pull request branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: false
+
+      - name: Resolve the unreleased version
+        id: version
+        run: |
+          set -euo pipefail
+          version="$(sed -n 's/^systemProp\.version *= *//p' gradle.properties)"
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::systemProp.version '$version' is not MAJOR.MINOR.PATCH"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Update the CHANGELOG
+        uses: dangoslen/dependabot-changelog-helper@291c8cb629d7cd7b57ea065782c435ec2bedb138 # v4.3.0
+        with:
+          version: Unreleased ${{ steps.version.outputs.version }}
+
+      - name: Commit and push as opensearch-aws-client-bot
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- CHANGELOG.md; then
+            echo "CHANGELOG.md already has the entry."
+            exit 0
+          fi
+          git config user.name opensearch-aws-client-bot
+          git config user.email 346743461+opensearch-aws-client-bot@users.noreply.github.com
+          git commit --signoff --message "Update changelog" -- CHANGELOG.md
+          # Push with the bot token, not GITHUB_TOKEN, so the push triggers the pull request checks again.
+          git push "https://x-access-token:${BOT_TOKEN}@github.com/${REPOSITORY}.git" "HEAD:refs/heads/${HEAD_REF}"
