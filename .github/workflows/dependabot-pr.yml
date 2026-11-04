@@ -5,7 +5,9 @@ name: Dependabot PR
 # stored as a Dependabot secret.
 on:
   pull_request:
-    types: [opened, reopened, synchronize]
+    # The changelog helper only acts on pull requests labeled `dependabot`. Dependabot can add
+    # its labels after opening the pull request, so also run when a label is added.
+    types: [opened, reopened, synchronize, labeled]
 
 permissions:
   contents: read
@@ -15,9 +17,11 @@ jobs:
     name: Add the CHANGELOG entry
     # Run for pull requests that Dependabot opened in this repository. The bot's own push
     # triggers this job again, but the entry is then present and nothing is pushed.
+    # `skip-changelog` pull requests (GitHub Actions updates) need no entry.
     if: >-
       github.event.pull_request.user.login == 'dependabot[bot]'
       && github.event.pull_request.head.repo.full_name == github.repository
+      && !contains(github.event.pull_request.labels.*.name, 'skip-changelog')
     runs-on: ubuntu-latest
     concurrency:
       group: dependabot-pr-${{ github.event.pull_request.number }}
@@ -44,6 +48,8 @@ jobs:
         uses: dangoslen/dependabot-changelog-helper@291c8cb629d7cd7b57ea065782c435ec2bedb138 # v4.3.0
         with:
           version: Unreleased ${{ steps.version.outputs.version }}
+          # Explicit: the helper also requires this label when activationLabels is empty.
+          activationLabels: dependabot
 
       - name: Commit and push as opensearch-aws-client-bot
         env:
@@ -58,6 +64,8 @@ jobs:
           fi
           git config user.name opensearch-aws-client-bot
           git config user.email 346743461+opensearch-aws-client-bot@users.noreply.github.com
-          git commit --signoff --message "Update changelog" -- CHANGELOG.md
+          # [dependabot skip] lets Dependabot keep rebasing the pull request and force-push over this
+          # commit; the job then adds the entry again.
+          git commit --signoff --message "Update changelog [dependabot skip]" -- CHANGELOG.md
           # Push with the bot token, not GITHUB_TOKEN, so the push triggers the pull request checks again.
           git push "https://x-access-token:${BOT_TOKEN}@github.com/${REPOSITORY}.git" "HEAD:refs/heads/${HEAD_REF}"

@@ -69,9 +69,8 @@ java-client/build/libs/java-client-0.2.0-SNAPSHOT.jar
 
 ### Depending on the published artifact
 
-The Maven coordinate is `software.amazon.opensearch:opensearch-java`. No release
-has been published yet, so the snippets below describe the published layout
-rather than something you can resolve today.
+The Maven coordinate is `software.amazon.opensearch:opensearch-java`, published to
+Maven Central. The latest release is `0.1.0`.
 
 The AWS SDK artifacts needed by the SigV4 transport are published as an
 **optional feature** rather than as ordinary transitive dependencies, because the
