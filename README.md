@@ -61,17 +61,14 @@ Run the default mapper tests and the Jackson 3 tests on the build JDK:
 ./gradlew :java-client:unitTest
 ```
 
-The generated local artifact is:
-
-```text
-java-client/build/libs/java-client-0.1.0-SNAPSHOT.jar
-```
+The generated local artifact is `java-client/build/libs/java-client-<version>-SNAPSHOT.jar`,
+where `<version>` is `systemProp.version` in [gradle.properties](gradle.properties).
 
 ### Depending on the published artifact
 
-The Maven coordinate is `software.amazon.opensearch:opensearch-java`. No release
-has been published yet, so the snippets below describe the published layout
-rather than something you can resolve today.
+The Maven coordinate is `software.amazon.opensearch:opensearch-java`, published to
+[Maven Central](https://central.sonatype.com/artifact/software.amazon.opensearch/opensearch-java),
+which lists the latest release.
 
 The AWS SDK artifacts needed by the SigV4 transport are published as an
 **optional feature** rather than as ordinary transitive dependencies, because the
@@ -162,7 +159,7 @@ transport needs:
 
 ```kotlin
 dependencies {
-    implementation(files("libs/java-client-0.1.0-SNAPSHOT.jar"))
+    implementation(files("libs/java-client-<version>-SNAPSHOT.jar"))
 
     implementation(platform("software.amazon.awssdk:bom:<aws-sdk-version>"))
     implementation("software.amazon.awssdk:sdk-core")

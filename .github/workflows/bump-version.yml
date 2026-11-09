@@ -1,0 +1,91 @@
+name: Bump Version
+
+# After a release, open a pull request that moves main to the next development version.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      released_version:
+        description: Released version (defaults to systemProp.version in gradle.properties)
+        required: false
+      next_version:
+        description: Next version (defaults to the next minor version)
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  bump:
+    name: Open the next-version pull request
+    # Pre-releases (for example v0.2.0-rc1) leave main unchanged.
+    if: github.repository == 'aws/opensearch-java-aws' && !github.event.release.prerelease
+    runs-on: ubuntu-latest
+    concurrency:
+      group: bump-version
+      cancel-in-progress: false
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Resolve the released and next versions
+        id: versions
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          INPUT_RELEASED: ${{ inputs.released_version }}
+          INPUT_NEXT: ${{ inputs.next_version }}
+        run: |
+          set -euo pipefail
+          if [ -n "${RELEASE_TAG:-}" ]; then
+            released="${RELEASE_TAG#v}"
+          elif [ -n "${INPUT_RELEASED:-}" ]; then
+            released="$INPUT_RELEASED"
+          else
+            released="$(sed -n 's/^systemProp\.version *= *//p' gradle.properties)"
+          fi
+          if [[ ! "$released" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Released version '$released' is not MAJOR.MINOR.PATCH"
+            exit 1
+          fi
+          if [ -n "${INPUT_NEXT:-}" ]; then
+            next="$INPUT_NEXT"
+          else
+            IFS=. read -r major minor _ <<< "$released"
+            next="$major.$((minor + 1)).0"
+          fi
+          echo "released=$released" >> "$GITHUB_OUTPUT"
+          echo "next=$next" >> "$GITHUB_OUTPUT"
+
+      - name: Update gradle.properties, CHANGELOG.md and USER_GUIDE.md
+        env:
+          RELEASED: ${{ steps.versions.outputs.released }}
+          NEXT: ${{ steps.versions.outputs.next }}
+        run: python3 .ci/prepare-next-version.py "$RELEASED" "$NEXT" "$(date -u +%F)"
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          # The bot token, unlike GITHUB_TOKEN, lets the pull request trigger CI.
+          token: ${{ secrets.BOT_TOKEN }}
+          add-paths: |
+            gradle.properties
+            CHANGELOG.md
+            USER_GUIDE.md
+          commit-message: Bump version to ${{ steps.versions.outputs.next }}
+          committer: opensearch-aws-client-bot <346743461+opensearch-aws-client-bot@users.noreply.github.com>
+          author: opensearch-aws-client-bot <346743461+opensearch-aws-client-bot@users.noreply.github.com>
+          signoff: true
+          branch: bump-version/${{ steps.versions.outputs.next }}
+          base: main
+          title: Bump version to ${{ steps.versions.outputs.next }}
+          body: |
+            ${{ steps.versions.outputs.released }} is released. Move `main` to the next development version:
+
+            - `systemProp.version` is now `${{ steps.versions.outputs.next }}`, so builds produce `${{ steps.versions.outputs.next }}-SNAPSHOT`.
+            - The `${{ steps.versions.outputs.released }}` CHANGELOG section is dated, and an empty `[Unreleased ${{ steps.versions.outputs.next }}]` section is added.
+            - USER_GUIDE.md depends on `${{ steps.versions.outputs.released }}`.
+          delete-branch: true

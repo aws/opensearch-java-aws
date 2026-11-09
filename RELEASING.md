@@ -14,16 +14,16 @@ fork.
 
 ## Project status
 
-This project is a **pre-release prototype** (version `0.1.0`). Publishing uses the
-vanniktech `gradle-maven-publish-plugin`, which uploads to the Central Portal for
-manual publication. The live upload and team publishing credentials have not yet
-been validated.
+Releases are published to Maven Central, and `main` tracks the next version in
+[gradle.properties](gradle.properties). Publishing uses the vanniktech
+`gradle-maven-publish-plugin`, which uploads to the Central Portal for manual
+publication.
 
 ## Versioning
 
 The version lives in `systemProp.version` in [gradle.properties](gradle.properties)
-(currently `0.1.0`). Only the `VERSION` environment variable produces a release
-version:
+and is the version of the next release. Only the `VERSION` environment variable
+produces a release version:
 
 ```kotlin
 version = System.getenv("VERSION") ?: System.getProperty("version") + "-SNAPSHOT"
@@ -129,6 +129,21 @@ Publish the signing public key to a keyserver accepted by Sonatype, such as
    abandon a release instead, **Drop** the deployment.
 5. Confirm that a consuming Maven or Gradle project can resolve the artifacts
    from Maven Central, then publish the draft GitHub release.
+6. Publishing the GitHub release runs the
+   [Bump Version workflow](.github/workflows/bump-version.yml). As
+   `opensearch-aws-client-bot`, it opens a pull request that sets
+   `systemProp.version` to the next minor version (for example `0.1.0` to `0.2.0`,
+   so builds produce `0.2.0-SNAPSHOT`), dates the released CHANGELOG section, and
+   adds an empty `[Unreleased <next>]` section. It also points the dependency
+   snippets in [USER_GUIDE.md](USER_GUIDE.md) at the released version. Review and
+   merge it. To choose another version, run the workflow manually with
+   `next_version` set.
+
+   A patch release (for example `0.1.1` while `main` is at `0.2.0`) leaves
+   `systemProp.version` and CHANGELOG.md unchanged, because `main` is already at
+   the next minor version; the pull request only updates USER_GUIDE.md, and only if
+   no newer release is shown there. Pre-releases (for example `v0.2.0-rc1`) do not
+   run the workflow.
 
 ### Verifying artifacts locally
 
@@ -141,7 +156,7 @@ Maven Central without it fails.
 ```
 
 Inspect the publication under
-`build/repository/software/amazon/opensearch/opensearch-java/0.1.0-SNAPSHOT/`.
+`build/repository/software/amazon/opensearch/opensearch-java/<version>-SNAPSHOT/`.
 It must include the library, sources, and Javadoc JARs, POM, and Gradle module
 metadata.
 
@@ -157,7 +172,7 @@ Keep the unreleased section of [CHANGELOG.md](CHANGELOG.md) in this shape, movin
 entries under the matching heading:
 
 ```markdown
-## [Unreleased 0.1.0]
+## [Unreleased x.y.z]
 ### Added
 ### Dependencies
 ### Changed
@@ -167,5 +182,8 @@ entries under the matching heading:
 ### Security
 ```
 
-When a version is released, replace the `## [Unreleased x.y]` heading with the
-released version and date.
+When a version is released, the Bump Version workflow replaces the
+`## [Unreleased x.y.z]` heading with the released version and date and adds a new
+unreleased section. For Dependabot pull requests, the
+[Dependabot PR workflow](.github/workflows/dependabot-pr.yml) adds the
+`### Dependencies` entry.

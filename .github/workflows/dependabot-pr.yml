@@ -1,0 +1,145 @@
+name: Dependabot PR
+
+# Update Dependabot pull requests so that the pull request checks pass:
+# - add the CHANGELOG entry that the Changelog Verifier requires;
+# - add the new dependency checksums to gradle/verification-metadata.xml.
+#
+# The `update` job runs the Gradle build from the pull request branch, so it gets no token.
+# The `push` job never runs that code; it commits the two files that `update` produced and
+# pushes them with BOT_TOKEN. Workflows triggered by Dependabot only see Dependabot secrets,
+# so BOT_TOKEN must also be stored as a Dependabot secret.
+on:
+  pull_request:
+    # The changelog helper only acts on pull requests labeled `dependabot`. Dependabot can add
+    # its labels after opening the pull request, so also run when a label is added.
+    types: [opened, reopened, synchronize, labeled]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dependabot-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: Update CHANGELOG and verification metadata
+    # Run for pull requests that Dependabot opened in this repository. The bot's own push
+    # triggers this workflow again, but nothing changes then and nothing is pushed.
+    # `skip-changelog` pull requests (GitHub Actions updates) change no Gradle dependencies.
+    if: >-
+      github.event.pull_request.user.login == 'dependabot[bot]'
+      && github.event.pull_request.head.repo.full_name == github.repository
+      && contains(github.event.pull_request.labels.*.name, 'dependabot')
+      && !contains(github.event.pull_request.labels.*.name, 'skip-changelog')
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.diff.outputs.changed }}
+    steps:
+      - name: Checkout the pull request
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Resolve the unreleased version
+        id: version
+        run: |
+          set -euo pipefail
+          version="$(sed -n 's/^systemProp\.version *= *//p' gradle.properties)"
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::systemProp.version '$version' is not MAJOR.MINOR.PATCH"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Update the CHANGELOG
+        uses: dangoslen/dependabot-changelog-helper@291c8cb629d7cd7b57ea065782c435ec2bedb138 # v4.3.0
+        with:
+          version: Unreleased ${{ steps.version.outputs.version }}
+          # Explicit: the helper also requires this label when activationLabels is empty.
+          activationLabels: dependabot
+
+      - name: Update the dependency verification metadata
+        # resolveDependencies resolves every configuration of every project, including the
+        # build script classpaths, so the new checksums cover java-client, java-codegen and samples.
+        run: ./gradlew --no-daemon --write-verification-metadata sha256 resolveDependencies
+
+      - name: Check for changes
+        id: diff
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- CHANGELOG.md gradle/verification-metadata.xml; then
+            echo "CHANGELOG.md and gradle/verification-metadata.xml are up to date."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git diff --stat -- CHANGELOG.md gradle/verification-metadata.xml
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload the updated files
+        if: steps.diff.outputs.changed == 'true'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: dependabot-pr-update
+          path: |
+            CHANGELOG.md
+            gradle/verification-metadata.xml
+          if-no-files-found: error
+          retention-days: 1
+
+  push:
+    name: Push the update as opensearch-aws-client-bot
+    needs: update
+    if: needs.update.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the pull request branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: false
+
+      - name: Download the updated files
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: dependabot-pr-update
+          path: ${{ runner.temp }}/dependabot-pr-update
+
+      - name: Commit and push
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          REPOSITORY: ${{ github.repository }}
+          UPDATE_DIR: ${{ runner.temp }}/dependabot-pr-update
+        run: |
+          set -euo pipefail
+          # The files were generated from HEAD_SHA. If the branch has moved since, skip; the
+          # new head triggers this workflow again.
+          if [ "$(git rev-parse HEAD)" != "$HEAD_SHA" ]; then
+            echo "The branch moved past $HEAD_SHA; skipping."
+            exit 0
+          fi
+          # Copy only the two expected files.
+          cp "$UPDATE_DIR/CHANGELOG.md" CHANGELOG.md
+          cp "$UPDATE_DIR/gradle/verification-metadata.xml" gradle/verification-metadata.xml
+          if git diff --quiet -- CHANGELOG.md gradle/verification-metadata.xml; then
+            echo "Nothing to push."
+            exit 0
+          fi
+          git config user.name opensearch-aws-client-bot
+          git config user.email 346743461+opensearch-aws-client-bot@users.noreply.github.com
+          # [dependabot skip] lets Dependabot keep rebasing the pull request and force-push over this
+          # commit; this workflow then updates the files again.
+          git commit --signoff \
+            --message "Update changelog and dependency verification metadata [dependabot skip]" \
+            -- CHANGELOG.md gradle/verification-metadata.xml
+          # Push with the bot token, not GITHUB_TOKEN, so the push triggers the pull request checks again.
+          git push "https://x-access-token:${BOT_TOKEN}@github.com/${REPOSITORY}.git" "HEAD:refs/heads/${HEAD_REF}"

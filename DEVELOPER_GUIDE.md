@@ -62,6 +62,24 @@ Do not manually edit generated AOS or AOSS source files. Update the API specific
 
 The build runs on JDK 21 or newer, while the generated Java client targets Java 8 bytecode.
 
+## Dependency verification
+
+Gradle verifies every downloaded artifact against the SHA-256 checksums in
+[gradle/verification-metadata.xml](gradle/verification-metadata.xml). After adding or
+upgrading a dependency or plugin, add its checksums:
+
+~~~bash
+./gradlew --no-daemon --write-verification-metadata sha256 resolveDependencies
+~~~
+
+`resolveDependencies` resolves every configuration of `java-client`, `java-codegen` and
+`samples`, plus the build script classpaths. Commit the updated metadata with the
+dependency change. Gradle does not remove entries for versions that are no longer used.
+
+The Dependabot PR workflow runs the same command on Dependabot pull requests. When
+reviewing one, check that the metadata diff only adds the upgraded artifacts and their
+new transitive dependencies, all from the expected groups.
+
 ## Samples
 
 Samples target Java 8 and use the Jackson 2 mapper. Gradle requires JDK 21 or newer;
@@ -77,6 +95,31 @@ Real AOS and AOSS tests are opt-in:
 ~~~
 
 Provide endpoints and credentials through environment variables or the AWS SDK default credential provider chain. Never commit credentials, passwords, endpoints intended to remain private, or temporary resource identifiers.
+
+## Automation bot
+
+Two workflows act as the `opensearch-aws-client-bot` GitHub user, so that their pushes
+and pull requests trigger the pull request checks (pushes made with `GITHUB_TOKEN` do not):
+
+- [Bump Version](.github/workflows/bump-version.yml): after a GitHub release is published,
+  opens a pull request that moves `main` to the next development version.
+- [Dependabot PR](.github/workflows/dependabot-pr.yml): adds the `### Dependencies`
+  CHANGELOG entry and the new dependency checksums to Dependabot pull requests labeled
+  `dependabot`. Its Gradle run gets no token; a separate job commits the two files and
+  pushes them as the bot.
+
+The bot has write access to this repository only. Its fine-grained personal access token,
+scoped to `aws/opensearch-java-aws` with `Contents` and `Pull requests` read and write, is
+stored as `BOT_TOKEN` twice, because workflows triggered by Dependabot only see Dependabot
+secrets:
+
+~~~bash
+gh secret set BOT_TOKEN -R aws/opensearch-java-aws                  # Actions secret
+gh secret set BOT_TOKEN -R aws/opensearch-java-aws --app dependabot # Dependabot secret
+~~~
+
+The token expires after 90 days. Generate a new one as the bot before then and update both
+secrets.
 
 ## Formatting
 
