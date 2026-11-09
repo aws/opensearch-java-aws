@@ -22,6 +22,8 @@ Usage: prepare-next-version.py <released-version> <next-version> [<release-date>
 - CHANGELOG.md: "## [Unreleased <released-version>]" becomes
   "## [<released-version>] - <release-date>", and an empty
   "## [Unreleased <next-version>]" section is added above it.
+- USER_GUIDE.md: the opensearch-java dependency snippets use <released-version>,
+  unless they already show a newer release.
 
 Running it again for the same versions changes nothing.
 """
@@ -63,6 +65,35 @@ def bump_changelog(path: Path, released: str, next_version: str, date: str) -> b
     return True
 
 
+def version_tuple(version: str) -> tuple:
+    return tuple(map(int, version.split(".")))
+
+
+def bump_user_guide(path: Path, released: str) -> bool:
+    text = path.read_text()
+    patterns = [
+        re.compile(r"(<artifactId>opensearch-java</artifactId>\s*<version>)([^<]+)(</version>)"),
+        re.compile(r"(software\.amazon\.opensearch:opensearch-java:)([^'\"\s]+)(['\"])"),
+    ]
+    found = False
+    for pattern in patterns:
+        for match in pattern.finditer(text):
+            found = True
+            current = match.group(2)
+            # Never move the guide back, for example when patching an older release line.
+            if VERSION.match(current) and version_tuple(current) > version_tuple(released):
+                return False
+    if not found:
+        sys.exit(f"{path}: opensearch-java dependency snippets not found")
+    updated = text
+    for pattern in patterns:
+        updated = pattern.sub(lambda m: m.group(1) + released + m.group(3), updated)
+    if updated == text:
+        return False
+    path.write_text(updated)
+    return True
+
+
 def main(argv):
     if len(argv) not in (3, 4):
         sys.exit(__doc__)
@@ -71,7 +102,7 @@ def main(argv):
     for name, value in (("released version", released), ("next version", next_version)):
         if not VERSION.match(value):
             sys.exit(f"Invalid {name} '{value}': expected MAJOR.MINOR.PATCH")
-    if tuple(map(int, next_version.split("."))) <= tuple(map(int, released.split("."))):
+    if version_tuple(next_version) <= version_tuple(released):
         sys.exit(f"Next version {next_version} must be greater than {released}")
     if not re.match(r"^\d{4}-\d{2}-\d{2}$", date):
         sys.exit(f"Invalid release date '{date}': expected YYYY-MM-DD")
@@ -79,6 +110,7 @@ def main(argv):
     root = Path(__file__).resolve().parent.parent
     changed = bump_gradle_properties(root / "gradle.properties", released, next_version)
     changed |= bump_changelog(root / "CHANGELOG.md", released, next_version, date)
+    changed |= bump_user_guide(root / "USER_GUIDE.md", released)
     print(f"{'Updated' if changed else 'Already at'} {next_version} (released {released})")
 
 

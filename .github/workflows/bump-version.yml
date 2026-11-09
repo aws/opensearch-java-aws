@@ -19,7 +19,8 @@ permissions:
 jobs:
   bump:
     name: Open the next-version pull request
-    if: github.repository == 'aws/opensearch-java-aws'
+    # Pre-releases (for example v0.2.0-rc1) leave main unchanged.
+    if: github.repository == 'aws/opensearch-java-aws' && !github.event.release.prerelease
     runs-on: ubuntu-latest
     concurrency:
       group: bump-version
@@ -59,7 +60,7 @@ jobs:
           echo "released=$released" >> "$GITHUB_OUTPUT"
           echo "next=$next" >> "$GITHUB_OUTPUT"
 
-      - name: Update gradle.properties and CHANGELOG.md
+      - name: Update gradle.properties, CHANGELOG.md and USER_GUIDE.md
         env:
           RELEASED: ${{ steps.versions.outputs.released }}
           NEXT: ${{ steps.versions.outputs.next }}
@@ -73,6 +74,7 @@ jobs:
           add-paths: |
             gradle.properties
             CHANGELOG.md
+            USER_GUIDE.md
           commit-message: Bump version to ${{ steps.versions.outputs.next }}
           committer: opensearch-aws-client-bot <346743461+opensearch-aws-client-bot@users.noreply.github.com>
           author: opensearch-aws-client-bot <346743461+opensearch-aws-client-bot@users.noreply.github.com>
@@ -85,4 +87,5 @@ jobs:
 
             - `systemProp.version` is now `${{ steps.versions.outputs.next }}`, so builds produce `${{ steps.versions.outputs.next }}-SNAPSHOT`.
             - The `${{ steps.versions.outputs.released }}` CHANGELOG section is dated, and an empty `[Unreleased ${{ steps.versions.outputs.next }}]` section is added.
+            - USER_GUIDE.md depends on `${{ steps.versions.outputs.released }}`.
           delete-branch: true

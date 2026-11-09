@@ -14,7 +14,7 @@ fork.
 
 ## Project status
 
-`0.1.0` is published to Maven Central, and `main` tracks the next version in
+Releases are published to Maven Central, and `main` tracks the next version in
 [gradle.properties](gradle.properties). Publishing uses the vanniktech
 `gradle-maven-publish-plugin`, which uploads to the Central Portal for manual
 publication.
@@ -134,9 +134,16 @@ Publish the signing public key to a keyserver accepted by Sonatype, such as
    `opensearch-aws-client-bot`, it opens a pull request that sets
    `systemProp.version` to the next minor version (for example `0.1.0` to `0.2.0`,
    so builds produce `0.2.0-SNAPSHOT`), dates the released CHANGELOG section, and
-   adds an empty `[Unreleased <next>]` section. Review and merge it. To choose
-   another version, for example a patch release, run the workflow manually with
+   adds an empty `[Unreleased <next>]` section. It also points the dependency
+   snippets in [USER_GUIDE.md](USER_GUIDE.md) at the released version. Review and
+   merge it. To choose another version, run the workflow manually with
    `next_version` set.
+
+   A patch release (for example `0.1.1` while `main` is at `0.2.0`) leaves
+   `systemProp.version` and CHANGELOG.md unchanged, because `main` is already at
+   the next minor version; the pull request only updates USER_GUIDE.md, and only if
+   no newer release is shown there. Pre-releases (for example `v0.2.0-rc1`) do not
+   run the workflow.
 
 ### Verifying artifacts locally
 
@@ -149,7 +156,7 @@ Maven Central without it fails.
 ```
 
 Inspect the publication under
-`build/repository/software/amazon/opensearch/opensearch-java/0.1.0-SNAPSHOT/`.
+`build/repository/software/amazon/opensearch/opensearch-java/<version>-SNAPSHOT/`.
 It must include the library, sources, and Javadoc JARs, POM, and Gradle module
 metadata.
 
@@ -165,7 +172,7 @@ Keep the unreleased section of [CHANGELOG.md](CHANGELOG.md) in this shape, movin
 entries under the matching heading:
 
 ```markdown
-## [Unreleased 0.2.0]
+## [Unreleased x.y.z]
 ### Added
 ### Dependencies
 ### Changed

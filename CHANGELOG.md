@@ -3,7 +3,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased 0.2.0]
 ### Added
-- Add the `Bump Version` workflow, which opens a pull request moving `main` to the next development version after a GitHub release is published, and the `Dependabot PR` workflow, which adds the CHANGELOG entry to Dependabot pull requests. Both run as `opensearch-aws-client-bot` so that their changes trigger the pull request checks.
+- Add the `Bump Version` workflow, which opens a pull request moving `main` to the next development version after a GitHub release is published, and the `Dependabot PR` workflow, which adds the CHANGELOG entry and dependency verification checksums to Dependabot pull requests. Both run as `opensearch-aws-client-bot` so that their changes trigger the pull request checks.
 ### Dependencies
 ### Changed
 ### Deprecated
