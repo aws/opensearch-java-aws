@@ -7,6 +7,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Add `THIRD-PARTY-NOTICES.txt` and the Amazon license header to the codegen templates and build scripts ([#65](https://github.com/aws/opensearch-java-aws/pull/65))
 ### Dependencies
 - Bump `com.fasterxml.jackson.core:jackson-databind` from 2.22.2 to 2.22.4 ([#62](https://github.com/aws/opensearch-java-aws/pull/62))
+- Bump `io.github.classgraph:classgraph` from 5.0.0 to 6.0.2 ([#63](https://github.com/aws/opensearch-java-aws/pull/63))
 ### Changed
 ### Deprecated
 ### Removed
