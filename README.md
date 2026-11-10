@@ -401,4 +401,4 @@ This project is licensed under the Apache License 2.0. See
 
 ## Copyright
 
-Copyright OpenSearch Contributors. See [NOTICE.txt](NOTICE.txt).
+Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved. See [NOTICE.txt](NOTICE.txt) and [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt).
