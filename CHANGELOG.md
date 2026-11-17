@@ -9,6 +9,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Bump `com.fasterxml.jackson.core:jackson-databind` from 2.22.2 to 2.22.4 ([#62](https://github.com/aws/opensearch-java-aws/pull/62))
 - Bump `io.github.classgraph:classgraph` from 5.0.0 to 6.0.2 ([#72](https://github.com/aws/opensearch-java-aws/pull/72))
 - Bump `com.github.jk1.dependency-license-report` from 3.1.4 to 3.1.5 ([#67](https://github.com/aws/opensearch-java-aws/pull/67))
+- Bump `tools.jackson.core:jackson-core` from 3.2.4 to 3.3.0 ([#77](https://github.com/aws/opensearch-java-aws/pull/77))
 ### Changed
 ### Deprecated
 ### Removed
