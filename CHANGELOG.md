@@ -6,7 +6,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Add the `Bump Version` workflow, which opens a pull request moving `main` to the next development version after a GitHub release is published, and the `Dependabot PR` workflow, which adds the CHANGELOG entry and dependency verification checksums to Dependabot pull requests. Both run as `opensearch-aws-client-bot` so that their changes trigger the pull request checks ([#64](https://github.com/aws/opensearch-java-aws/pull/64)).
 - Add `THIRD-PARTY-NOTICES.txt` and the Amazon license header to the codegen templates and build scripts ([#65](https://github.com/aws/opensearch-java-aws/pull/65))
 ### Dependencies
-- Bump `com.fasterxml.jackson.core:jackson-databind` from 2.22.2 to 2.22.4 ([#62](https://github.com/aws/opensearch-java-aws/pull/62))
+- Bump `com.fasterxml.jackson.core:jackson-databind` from 2.22.2 to 2.23.0 ([#62](https://github.com/aws/opensearch-java-aws/pull/62), [#74](https://github.com/aws/opensearch-java-aws/pull/74))
 - Bump `io.github.classgraph:classgraph` from 5.0.0 to 6.0.2 ([#72](https://github.com/aws/opensearch-java-aws/pull/72))
 - Bump `com.github.jk1.dependency-license-report` from 3.1.4 to 3.1.5 ([#67](https://github.com/aws/opensearch-java-aws/pull/67))
 ### Changed
