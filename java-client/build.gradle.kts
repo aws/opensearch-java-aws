@@ -318,7 +318,7 @@ dependencies {
     val awsSdkVersion = "2.57.1"
     val jacksonVersion = "2.22.4"
     val jacksonDatabindVersion = "2.22.4"
-    val jackson3Version = "3.2.4"
+    val jackson3Version = "3.3.0"
     val jackson3DatabindVersion = "3.2.4"
     val log4jVersion = "2.26.1"
 
