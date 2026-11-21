@@ -11,6 +11,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Bump `com.github.jk1.dependency-license-report` from 3.1.4 to 3.1.5 ([#67](https://github.com/aws/opensearch-java-aws/pull/67))
 - Bump `tools.jackson.core:jackson-core` from 3.2.4 to 3.3.0 ([#77](https://github.com/aws/opensearch-java-aws/pull/77))
 - Bump `tools.jackson.core:jackson-databind` from 3.2.4 to 3.3.0 ([#75](https://github.com/aws/opensearch-java-aws/pull/75))
+- Bump `org.junit:junit-bom` from 5.14.4 to 6.1.3 ([#3](https://github.com/aws/opensearch-java-aws/pull/3))
 ### Changed
 ### Deprecated
 ### Removed
