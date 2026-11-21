@@ -39,7 +39,7 @@ dependencies {
     runtimeOnly("org.apache.logging.log4j:log4j-core:$log4jVersion")
     runtimeOnly("org.apache.logging.log4j:log4j-slf4j2-impl:$log4jVersion")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.23.0")
-    val awsSdkVersion = "2.57.1"
+    val awsSdkVersion = "2.59.3"
     implementation("software.amazon.awssdk:sdk-core:$awsSdkVersion")
     implementation("software.amazon.awssdk:auth:$awsSdkVersion")
     implementation("software.amazon.awssdk:http-auth-aws:$awsSdkVersion")
