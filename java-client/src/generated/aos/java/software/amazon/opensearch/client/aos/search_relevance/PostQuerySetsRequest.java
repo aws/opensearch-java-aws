@@ -60,6 +60,7 @@ import software.amazon.opensearch.client.json.ObjectDeserializer;
 import software.amazon.opensearch.client.json.PlainJsonSerializable;
 import software.amazon.opensearch.client.transport.Endpoint;
 import software.amazon.opensearch.client.transport.endpoints.SimpleEndpoint;
+import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ToCopyableBuilder;
@@ -79,7 +80,7 @@ public final class PostQuerySetsRequest extends RequestBase
     @Nullable
     private final String description;
 
-    @Nullable
+    @Nonnull
     private final String name;
 
     @Nullable
@@ -88,14 +89,18 @@ public final class PostQuerySetsRequest extends RequestBase
     @Nullable
     private final String sampling;
 
+    @Nullable
+    private final String ubiQueriesIndex;
+
     // ---------------------------------------------------------------------------------------------
 
     private PostQuerySetsRequest(Builder builder) {
         super(builder);
         this.description = builder.description;
-        this.name = builder.name;
+        this.name = ApiTypeHelper.requireNonNull(builder.name, this, "name");
         this.querySetSize = builder.querySetSize;
         this.sampling = builder.sampling;
+        this.ubiQueriesIndex = builder.ubiQueriesIndex;
     }
 
     public static PostQuerySetsRequest of(Function<PostQuerySetsRequest.Builder, ObjectBuilder<PostQuerySetsRequest>> fn) {
@@ -111,9 +116,9 @@ public final class PostQuerySetsRequest extends RequestBase
     }
 
     /**
-     * API name: {@code name}
+     * Required - API name: {@code name}
      */
-    @Nullable
+    @Nonnull
     public final String name() {
         return this.name;
     }
@@ -135,6 +140,17 @@ public final class PostQuerySetsRequest extends RequestBase
     }
 
     /**
+     * The name of the UBI queries index to sample from.
+     * <p>
+     * API name: {@code ubiQueriesIndex}
+     * </p>
+     */
+    @Nullable
+    public final String ubiQueriesIndex() {
+        return this.ubiQueriesIndex;
+    }
+
+    /**
      * Serialize this object to JSON.
      */
     @Override
@@ -150,10 +166,8 @@ public final class PostQuerySetsRequest extends RequestBase
             generator.write(this.description);
         }
 
-        if (this.name != null) {
-            generator.writeKey("name");
-            generator.write(this.name);
-        }
+        generator.writeKey("name");
+        generator.write(this.name);
 
         if (this.querySetSize != null) {
             generator.writeKey("querySetSize");
@@ -163,6 +177,11 @@ public final class PostQuerySetsRequest extends RequestBase
         if (this.sampling != null) {
             generator.writeKey("sampling");
             generator.write(this.sampling);
+        }
+
+        if (this.ubiQueriesIndex != null) {
+            generator.writeKey("ubiQueriesIndex");
+            generator.write(this.ubiQueriesIndex);
         }
     }
 
@@ -185,12 +204,13 @@ public final class PostQuerySetsRequest extends RequestBase
     public static class Builder extends RequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, PostQuerySetsRequest> {
         @Nullable
         private String description;
-        @Nullable
         private String name;
         @Nullable
         private Integer querySetSize;
         @Nullable
         private String sampling;
+        @Nullable
+        private String ubiQueriesIndex;
 
         public Builder() {}
 
@@ -200,6 +220,7 @@ public final class PostQuerySetsRequest extends RequestBase
             this.name = o.name;
             this.querySetSize = o.querySetSize;
             this.sampling = o.sampling;
+            this.ubiQueriesIndex = o.ubiQueriesIndex;
         }
 
         private Builder(Builder o) {
@@ -208,6 +229,7 @@ public final class PostQuerySetsRequest extends RequestBase
             this.name = o.name;
             this.querySetSize = o.querySetSize;
             this.sampling = o.sampling;
+            this.ubiQueriesIndex = o.ubiQueriesIndex;
         }
 
         @Override
@@ -232,10 +254,10 @@ public final class PostQuerySetsRequest extends RequestBase
         }
 
         /**
-         * API name: {@code name}
+         * Required - API name: {@code name}
          */
         @Nonnull
-        public final Builder name(@Nullable String value) {
+        public final Builder name(String value) {
             this.name = value;
             return this;
         }
@@ -255,6 +277,18 @@ public final class PostQuerySetsRequest extends RequestBase
         @Nonnull
         public final Builder sampling(@Nullable String value) {
             this.sampling = value;
+            return this;
+        }
+
+        /**
+         * The name of the UBI queries index to sample from.
+         * <p>
+         * API name: {@code ubiQueriesIndex}
+         * </p>
+         */
+        @Nonnull
+        public final Builder ubiQueriesIndex(@Nullable String value) {
+            this.ubiQueriesIndex = value;
             return this;
         }
 
@@ -287,6 +321,7 @@ public final class PostQuerySetsRequest extends RequestBase
         op.add(Builder::name, JsonpDeserializer.stringDeserializer(), "name");
         op.add(Builder::querySetSize, JsonpDeserializer.integerDeserializer(), "querySetSize");
         op.add(Builder::sampling, JsonpDeserializer.stringDeserializer(), "sampling");
+        op.add(Builder::ubiQueriesIndex, JsonpDeserializer.stringDeserializer(), "ubiQueriesIndex");
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -314,9 +349,10 @@ public final class PostQuerySetsRequest extends RequestBase
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.description);
-        result = 31 * result + Objects.hashCode(this.name);
+        result = 31 * result + this.name.hashCode();
         result = 31 * result + Objects.hashCode(this.querySetSize);
         result = 31 * result + Objects.hashCode(this.sampling);
+        result = 31 * result + Objects.hashCode(this.ubiQueriesIndex);
         return result;
     }
 
@@ -326,8 +362,9 @@ public final class PostQuerySetsRequest extends RequestBase
         if (o == null || this.getClass() != o.getClass()) return false;
         PostQuerySetsRequest other = (PostQuerySetsRequest) o;
         return Objects.equals(this.description, other.description)
-            && Objects.equals(this.name, other.name)
+            && this.name.equals(other.name)
             && Objects.equals(this.querySetSize, other.querySetSize)
-            && Objects.equals(this.sampling, other.sampling);
+            && Objects.equals(this.sampling, other.sampling)
+            && Objects.equals(this.ubiQueriesIndex, other.ubiQueriesIndex);
     }
 }

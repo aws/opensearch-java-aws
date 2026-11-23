@@ -43,17 +43,16 @@
 package software.amazon.opensearch.client.aos.ism;
 
 import jakarta.json.stream.JsonGenerator;
-import java.util.Objects;
 import java.util.function.Function;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import software.amazon.opensearch.client.json.JsonpDeserializable;
 import software.amazon.opensearch.client.json.JsonpDeserializer;
 import software.amazon.opensearch.client.json.JsonpMapper;
 import software.amazon.opensearch.client.json.ObjectBuilderDeserializer;
 import software.amazon.opensearch.client.json.ObjectDeserializer;
 import software.amazon.opensearch.client.json.PlainJsonSerializable;
+import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilderBase;
@@ -65,21 +64,17 @@ import software.amazon.opensearch.client.util.ToCopyableBuilder;
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
 public class ActionSnapshot implements PlainJsonSerializable, ToCopyableBuilder<ActionSnapshot.Builder, ActionSnapshot> {
 
-    @Nullable
-    private final Boolean includeGlobalState;
-
-    @Nullable
+    @Nonnull
     private final String repository;
 
-    @Nullable
+    @Nonnull
     private final String snapshot;
 
     // ---------------------------------------------------------------------------------------------
 
     private ActionSnapshot(Builder builder) {
-        this.includeGlobalState = builder.includeGlobalState;
-        this.repository = builder.repository;
-        this.snapshot = builder.snapshot;
+        this.repository = ApiTypeHelper.requireNonNull(builder.repository, this, "repository");
+        this.snapshot = ApiTypeHelper.requireNonNull(builder.snapshot, this, "snapshot");
     }
 
     public static ActionSnapshot of(Function<ActionSnapshot.Builder, ObjectBuilder<ActionSnapshot>> fn) {
@@ -87,34 +82,23 @@ public class ActionSnapshot implements PlainJsonSerializable, ToCopyableBuilder<
     }
 
     /**
-     * Whether to include the global state in the snapshot.
-     * <p>
-     * API name: {@code include_global_state}
-     * </p>
-     */
-    @Nullable
-    public final Boolean includeGlobalState() {
-        return this.includeGlobalState;
-    }
-
-    /**
-     * The repository to store the snapshot.
+     * Required - The repository to store the snapshot.
      * <p>
      * API name: {@code repository}
      * </p>
      */
-    @Nullable
+    @Nonnull
     public final String repository() {
         return this.repository;
     }
 
     /**
-     * The name of the snapshot.
+     * Required - The name of the snapshot.
      * <p>
      * API name: {@code snapshot}
      * </p>
      */
-    @Nullable
+    @Nonnull
     public final String snapshot() {
         return this.snapshot;
     }
@@ -130,20 +114,11 @@ public class ActionSnapshot implements PlainJsonSerializable, ToCopyableBuilder<
     }
 
     protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
-        if (this.includeGlobalState != null) {
-            generator.writeKey("include_global_state");
-            generator.write(this.includeGlobalState);
-        }
+        generator.writeKey("repository");
+        generator.write(this.repository);
 
-        if (this.repository != null) {
-            generator.writeKey("repository");
-            generator.write(this.repository);
-        }
-
-        if (this.snapshot != null) {
-            generator.writeKey("snapshot");
-            generator.write(this.snapshot);
-        }
+        generator.writeKey("snapshot");
+        generator.write(this.snapshot);
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -163,23 +138,17 @@ public class ActionSnapshot implements PlainJsonSerializable, ToCopyableBuilder<
      * Builder for {@link ActionSnapshot}.
      */
     public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, ActionSnapshot> {
-        @Nullable
-        private Boolean includeGlobalState;
-        @Nullable
         private String repository;
-        @Nullable
         private String snapshot;
 
         public Builder() {}
 
         private Builder(ActionSnapshot o) {
-            this.includeGlobalState = o.includeGlobalState;
             this.repository = o.repository;
             this.snapshot = o.snapshot;
         }
 
         private Builder(Builder o) {
-            this.includeGlobalState = o.includeGlobalState;
             this.repository = o.repository;
             this.snapshot = o.snapshot;
         }
@@ -191,37 +160,25 @@ public class ActionSnapshot implements PlainJsonSerializable, ToCopyableBuilder<
         }
 
         /**
-         * Whether to include the global state in the snapshot.
-         * <p>
-         * API name: {@code include_global_state}
-         * </p>
-         */
-        @Nonnull
-        public final Builder includeGlobalState(@Nullable Boolean value) {
-            this.includeGlobalState = value;
-            return this;
-        }
-
-        /**
-         * The repository to store the snapshot.
+         * Required - The repository to store the snapshot.
          * <p>
          * API name: {@code repository}
          * </p>
          */
         @Nonnull
-        public final Builder repository(@Nullable String value) {
+        public final Builder repository(String value) {
             this.repository = value;
             return this;
         }
 
         /**
-         * The name of the snapshot.
+         * Required - The name of the snapshot.
          * <p>
          * API name: {@code snapshot}
          * </p>
          */
         @Nonnull
-        public final Builder snapshot(@Nullable String value) {
+        public final Builder snapshot(String value) {
             this.snapshot = value;
             return this;
         }
@@ -251,7 +208,6 @@ public class ActionSnapshot implements PlainJsonSerializable, ToCopyableBuilder<
     );
 
     protected static void setupActionSnapshotDeserializer(ObjectDeserializer<ActionSnapshot.Builder> op) {
-        op.add(Builder::includeGlobalState, JsonpDeserializer.booleanDeserializer(), "include_global_state");
         op.add(Builder::repository, JsonpDeserializer.stringDeserializer(), "repository");
         op.add(Builder::snapshot, JsonpDeserializer.stringDeserializer(), "snapshot");
     }
@@ -259,9 +215,8 @@ public class ActionSnapshot implements PlainJsonSerializable, ToCopyableBuilder<
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + Objects.hashCode(this.includeGlobalState);
-        result = 31 * result + Objects.hashCode(this.repository);
-        result = 31 * result + Objects.hashCode(this.snapshot);
+        result = 31 * result + this.repository.hashCode();
+        result = 31 * result + this.snapshot.hashCode();
         return result;
     }
 
@@ -270,8 +225,6 @@ public class ActionSnapshot implements PlainJsonSerializable, ToCopyableBuilder<
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         ActionSnapshot other = (ActionSnapshot) o;
-        return Objects.equals(this.includeGlobalState, other.includeGlobalState)
-            && Objects.equals(this.repository, other.repository)
-            && Objects.equals(this.snapshot, other.snapshot);
+        return this.repository.equals(other.repository) && this.snapshot.equals(other.snapshot);
     }
 }

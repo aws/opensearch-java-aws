@@ -43,17 +43,16 @@
 package software.amazon.opensearch.client.aos.ism;
 
 import jakarta.json.stream.JsonGenerator;
-import java.util.Objects;
 import java.util.function.Function;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import software.amazon.opensearch.client.json.JsonpDeserializable;
 import software.amazon.opensearch.client.json.JsonpDeserializer;
 import software.amazon.opensearch.client.json.JsonpMapper;
 import software.amazon.opensearch.client.json.ObjectBuilderDeserializer;
 import software.amazon.opensearch.client.json.ObjectDeserializer;
 import software.amazon.opensearch.client.json.PlainJsonSerializable;
+import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilderBase;
@@ -65,13 +64,12 @@ import software.amazon.opensearch.client.util.ToCopyableBuilder;
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
 public class ActionReplicaCount implements PlainJsonSerializable, ToCopyableBuilder<ActionReplicaCount.Builder, ActionReplicaCount> {
 
-    @Nullable
-    private final Number numberOfReplicas;
+    private final int numberOfReplicas;
 
     // ---------------------------------------------------------------------------------------------
 
     private ActionReplicaCount(Builder builder) {
-        this.numberOfReplicas = builder.numberOfReplicas;
+        this.numberOfReplicas = ApiTypeHelper.requireNonNull(builder.numberOfReplicas, this, "numberOfReplicas");
     }
 
     public static ActionReplicaCount of(Function<ActionReplicaCount.Builder, ObjectBuilder<ActionReplicaCount>> fn) {
@@ -79,13 +77,12 @@ public class ActionReplicaCount implements PlainJsonSerializable, ToCopyableBuil
     }
 
     /**
-     * The number of replicas to set.
+     * Required - The number of replicas to set.
      * <p>
      * API name: {@code number_of_replicas}
      * </p>
      */
-    @Nullable
-    public final Number numberOfReplicas() {
+    public final int numberOfReplicas() {
         return this.numberOfReplicas;
     }
 
@@ -100,10 +97,8 @@ public class ActionReplicaCount implements PlainJsonSerializable, ToCopyableBuil
     }
 
     protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
-        if (this.numberOfReplicas != null) {
-            generator.writeKey("number_of_replicas");
-            generator.write(this.numberOfReplicas.doubleValue());
-        }
+        generator.writeKey("number_of_replicas");
+        generator.write(this.numberOfReplicas);
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -123,8 +118,7 @@ public class ActionReplicaCount implements PlainJsonSerializable, ToCopyableBuil
      * Builder for {@link ActionReplicaCount}.
      */
     public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, ActionReplicaCount> {
-        @Nullable
-        private Number numberOfReplicas;
+        private Integer numberOfReplicas;
 
         public Builder() {}
 
@@ -143,13 +137,13 @@ public class ActionReplicaCount implements PlainJsonSerializable, ToCopyableBuil
         }
 
         /**
-         * The number of replicas to set.
+         * Required - The number of replicas to set.
          * <p>
          * API name: {@code number_of_replicas}
          * </p>
          */
         @Nonnull
-        public final Builder numberOfReplicas(@Nullable Number value) {
+        public final Builder numberOfReplicas(int value) {
             this.numberOfReplicas = value;
             return this;
         }
@@ -179,13 +173,13 @@ public class ActionReplicaCount implements PlainJsonSerializable, ToCopyableBuil
     );
 
     protected static void setupActionReplicaCountDeserializer(ObjectDeserializer<ActionReplicaCount.Builder> op) {
-        op.add(Builder::numberOfReplicas, JsonpDeserializer.numberDeserializer(), "number_of_replicas");
+        op.add(Builder::numberOfReplicas, JsonpDeserializer.integerDeserializer(), "number_of_replicas");
     }
 
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + Objects.hashCode(this.numberOfReplicas);
+        result = 31 * result + Integer.hashCode(this.numberOfReplicas);
         return result;
     }
 
@@ -194,6 +188,6 @@ public class ActionReplicaCount implements PlainJsonSerializable, ToCopyableBuil
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         ActionReplicaCount other = (ActionReplicaCount) o;
-        return Objects.equals(this.numberOfReplicas, other.numberOfReplicas);
+        return this.numberOfReplicas == other.numberOfReplicas;
     }
 }

@@ -470,6 +470,27 @@ public class OpenSearchSearchRelevanceAsyncClient extends ApiClient<OpenSearchTr
         return judgmentsSearch(fn.apply(new JudgmentsSearchRequest.Builder()).build(), tDocumentClass);
     }
 
+    // ----- Endpoint: search_relevance.patch_experiment
+
+    /**
+     * Partially updates an experiment's name or description.
+     */
+    public CompletableFuture<PatchExperimentResponse> patchExperiment(PatchExperimentRequest request) throws IOException,
+        OpenSearchException {
+        return this.transport.performRequestAsync(request, PatchExperimentRequest._ENDPOINT, this.transportOptions);
+    }
+
+    /**
+     * Partially updates an experiment's name or description.
+     *
+     * @param fn a function that initializes a builder to create the {@link PatchExperimentRequest}
+     */
+    public final CompletableFuture<PatchExperimentResponse> patchExperiment(
+        Function<PatchExperimentRequest.Builder, ObjectBuilder<PatchExperimentRequest>> fn
+    ) throws IOException, OpenSearchException {
+        return patchExperiment(fn.apply(new PatchExperimentRequest.Builder()).build());
+    }
+
     // ----- Endpoint: search_relevance.post_query_sets
 
     /**
@@ -488,13 +509,6 @@ public class OpenSearchSearchRelevanceAsyncClient extends ApiClient<OpenSearchTr
         Function<PostQuerySetsRequest.Builder, ObjectBuilder<PostQuerySetsRequest>> fn
     ) throws IOException, OpenSearchException {
         return postQuerySets(fn.apply(new PostQuerySetsRequest.Builder()).build());
-    }
-
-    /**
-     * Creates a new query set by sampling queries from the user behavior data.
-     */
-    public final CompletableFuture<PostQuerySetsResponse> postQuerySets() throws IOException, OpenSearchException {
-        return postQuerySets(new PostQuerySetsRequest.Builder().build());
     }
 
     // ----- Endpoint: search_relevance.post_scheduled_experiments
@@ -518,13 +532,6 @@ public class OpenSearchSearchRelevanceAsyncClient extends ApiClient<OpenSearchTr
         return postScheduledExperiments(fn.apply(new PostScheduledExperimentsRequest.Builder()).build());
     }
 
-    /**
-     * Creates a scheduled experiment.
-     */
-    public final CompletableFuture<PostScheduledExperimentsResponse> postScheduledExperiments() throws IOException, OpenSearchException {
-        return postScheduledExperiments(new PostScheduledExperimentsRequest.Builder().build());
-    }
-
     // ----- Endpoint: search_relevance.put_experiments
 
     /**
@@ -543,13 +550,6 @@ public class OpenSearchSearchRelevanceAsyncClient extends ApiClient<OpenSearchTr
         Function<PutExperimentsRequest.Builder, ObjectBuilder<PutExperimentsRequest>> fn
     ) throws IOException, OpenSearchException {
         return putExperiments(fn.apply(new PutExperimentsRequest.Builder()).build());
-    }
-
-    /**
-     * Creates an experiment.
-     */
-    public final CompletableFuture<PutExperimentsResponse> putExperiments() throws IOException, OpenSearchException {
-        return putExperiments(new PutExperimentsRequest.Builder().build());
     }
 
     // ----- Endpoint: search_relevance.put_judgments
@@ -572,13 +572,6 @@ public class OpenSearchSearchRelevanceAsyncClient extends ApiClient<OpenSearchTr
         return putJudgments(fn.apply(new PutJudgmentsRequest.Builder()).build());
     }
 
-    /**
-     * Creates a judgment.
-     */
-    public final CompletableFuture<PutJudgmentsResponse> putJudgments() throws IOException, OpenSearchException {
-        return putJudgments(new PutJudgmentsRequest.Builder().build());
-    }
-
     // ----- Endpoint: search_relevance.put_query_sets
 
     /**
@@ -597,13 +590,6 @@ public class OpenSearchSearchRelevanceAsyncClient extends ApiClient<OpenSearchTr
         Function<PutQuerySetsRequest.Builder, ObjectBuilder<PutQuerySetsRequest>> fn
     ) throws IOException, OpenSearchException {
         return putQuerySets(fn.apply(new PutQuerySetsRequest.Builder()).build());
-    }
-
-    /**
-     * Creates a new query set by uploading manually.
-     */
-    public final CompletableFuture<PutQuerySetsResponse> putQuerySets() throws IOException, OpenSearchException {
-        return putQuerySets(new PutQuerySetsRequest.Builder().build());
     }
 
     // ----- Endpoint: search_relevance.put_search_configurations
@@ -625,13 +611,6 @@ public class OpenSearchSearchRelevanceAsyncClient extends ApiClient<OpenSearchTr
         Function<PutSearchConfigurationsRequest.Builder, ObjectBuilder<PutSearchConfigurationsRequest>> fn
     ) throws IOException, OpenSearchException {
         return putSearchConfigurations(fn.apply(new PutSearchConfigurationsRequest.Builder()).build());
-    }
-
-    /**
-     * Creates a search configuration.
-     */
-    public final CompletableFuture<PutSearchConfigurationsResponse> putSearchConfigurations() throws IOException, OpenSearchException {
-        return putSearchConfigurations(new PutSearchConfigurationsRequest.Builder().build());
     }
 
     // ----- Endpoint: search_relevance.query_sets_search

@@ -70,11 +70,15 @@ public final class RemovePolicyRequest extends RequestBase implements ToCopyable
     @Nonnull
     private final List<String> index;
 
+    @Nullable
+    private final String type;
+
     // ---------------------------------------------------------------------------------------------
 
     private RemovePolicyRequest(Builder builder) {
         super(builder);
         this.index = ApiTypeHelper.unmodifiable(builder.index);
+        this.type = builder.type;
     }
 
     public static RemovePolicyRequest of(Function<RemovePolicyRequest.Builder, ObjectBuilder<RemovePolicyRequest>> fn) {
@@ -91,6 +95,17 @@ public final class RemovePolicyRequest extends RequestBase implements ToCopyable
     @Nonnull
     public final List<String> index() {
         return this.index;
+    }
+
+    /**
+     * The type of the index metadata provider.
+     * <p>
+     * API name: {@code type}
+     * </p>
+     */
+    @Nullable
+    public final String type() {
+        return this.type;
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -112,17 +127,21 @@ public final class RemovePolicyRequest extends RequestBase implements ToCopyable
     public static class Builder extends RequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, RemovePolicyRequest> {
         @Nullable
         private List<String> index;
+        @Nullable
+        private String type;
 
         public Builder() {}
 
         private Builder(RemovePolicyRequest o) {
             super(o);
             this.index = _listCopy(o.index);
+            this.type = o.type;
         }
 
         private Builder(Builder o) {
             super(o);
             this.index = _listCopy(o.index);
+            this.type = o.type;
         }
 
         @Override
@@ -172,6 +191,18 @@ public final class RemovePolicyRequest extends RequestBase implements ToCopyable
         }
 
         /**
+         * The type of the index metadata provider.
+         * <p>
+         * API name: {@code type}
+         * </p>
+         */
+        @Nonnull
+        public final Builder type(@Nullable String value) {
+            this.type = value;
+            return this;
+        }
+
+        /**
          * Builds a {@link RemovePolicyRequest}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -186,6 +217,14 @@ public final class RemovePolicyRequest extends RequestBase implements ToCopyable
     }
 
     // ---------------------------------------------------------------------------------------------
+
+    @Override
+    protected void applyQueryParameters(@Nonnull Map<String, String> params) {
+        super.applyQueryParameters(params);
+        if (this.type != null) {
+            params.put("type", this.type);
+        }
+    }
 
     /**
      * Endpoint "{@code ism.remove_policy}".
@@ -228,6 +267,7 @@ public final class RemovePolicyRequest extends RequestBase implements ToCopyable
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.index);
+        result = 31 * result + Objects.hashCode(this.type);
         return result;
     }
 
@@ -236,6 +276,6 @@ public final class RemovePolicyRequest extends RequestBase implements ToCopyable
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         RemovePolicyRequest other = (RemovePolicyRequest) o;
-        return Objects.equals(this.index, other.index);
+        return Objects.equals(this.index, other.index) && Objects.equals(this.type, other.type);
     }
 }

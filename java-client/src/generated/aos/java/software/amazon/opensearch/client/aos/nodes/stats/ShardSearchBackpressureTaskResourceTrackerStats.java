@@ -77,12 +77,16 @@ public class ShardSearchBackpressureTaskResourceTrackerStats
     @Nullable
     private final ShardSearchBackpressureTaskResourceTrackerHeapUsageTrackerStats heapUsageTracker;
 
+    @Nullable
+    private final ShardSearchBackpressureTaskResourceTrackerNativeMemoryUsageTrackerStats nativeMemoryUsageTracker;
+
     // ---------------------------------------------------------------------------------------------
 
     private ShardSearchBackpressureTaskResourceTrackerStats(Builder builder) {
         this.cpuUsageTracker = builder.cpuUsageTracker;
         this.elapsedTimeTracker = builder.elapsedTimeTracker;
         this.heapUsageTracker = builder.heapUsageTracker;
+        this.nativeMemoryUsageTracker = builder.nativeMemoryUsageTracker;
     }
 
     public static ShardSearchBackpressureTaskResourceTrackerStats of(
@@ -116,6 +120,14 @@ public class ShardSearchBackpressureTaskResourceTrackerStats
     }
 
     /**
+     * API name: {@code native_memory_usage_tracker}
+     */
+    @Nullable
+    public final ShardSearchBackpressureTaskResourceTrackerNativeMemoryUsageTrackerStats nativeMemoryUsageTracker() {
+        return this.nativeMemoryUsageTracker;
+    }
+
+    /**
      * Serialize this object to JSON.
      */
     @Override
@@ -139,6 +151,11 @@ public class ShardSearchBackpressureTaskResourceTrackerStats
         if (this.heapUsageTracker != null) {
             generator.writeKey("heap_usage_tracker");
             this.heapUsageTracker.serialize(generator, mapper);
+        }
+
+        if (this.nativeMemoryUsageTracker != null) {
+            generator.writeKey("native_memory_usage_tracker");
+            this.nativeMemoryUsageTracker.serialize(generator, mapper);
         }
     }
 
@@ -167,6 +184,8 @@ public class ShardSearchBackpressureTaskResourceTrackerStats
         private ShardSearchBackpressureTaskResourceTrackerElapsedTimeTrackerStats elapsedTimeTracker;
         @Nullable
         private ShardSearchBackpressureTaskResourceTrackerHeapUsageTrackerStats heapUsageTracker;
+        @Nullable
+        private ShardSearchBackpressureTaskResourceTrackerNativeMemoryUsageTrackerStats nativeMemoryUsageTracker;
 
         public Builder() {}
 
@@ -174,12 +193,14 @@ public class ShardSearchBackpressureTaskResourceTrackerStats
             this.cpuUsageTracker = o.cpuUsageTracker;
             this.elapsedTimeTracker = o.elapsedTimeTracker;
             this.heapUsageTracker = o.heapUsageTracker;
+            this.nativeMemoryUsageTracker = o.nativeMemoryUsageTracker;
         }
 
         private Builder(Builder o) {
             this.cpuUsageTracker = o.cpuUsageTracker;
             this.elapsedTimeTracker = o.elapsedTimeTracker;
             this.heapUsageTracker = o.heapUsageTracker;
+            this.nativeMemoryUsageTracker = o.nativeMemoryUsageTracker;
         }
 
         @Override
@@ -252,6 +273,31 @@ public class ShardSearchBackpressureTaskResourceTrackerStats
         }
 
         /**
+         * API name: {@code native_memory_usage_tracker}
+         */
+        @Nonnull
+        public final Builder nativeMemoryUsageTracker(
+            @Nullable ShardSearchBackpressureTaskResourceTrackerNativeMemoryUsageTrackerStats value
+        ) {
+            this.nativeMemoryUsageTracker = value;
+            return this;
+        }
+
+        /**
+         * API name: {@code native_memory_usage_tracker}
+         */
+        @Nonnull
+        public final Builder nativeMemoryUsageTracker(
+            Function<
+                ShardSearchBackpressureTaskResourceTrackerNativeMemoryUsageTrackerStats.Builder,
+                ObjectBuilder<ShardSearchBackpressureTaskResourceTrackerNativeMemoryUsageTrackerStats>> fn
+        ) {
+            return nativeMemoryUsageTracker(
+                fn.apply(new ShardSearchBackpressureTaskResourceTrackerNativeMemoryUsageTrackerStats.Builder()).build()
+            );
+        }
+
+        /**
          * Builds a {@link ShardSearchBackpressureTaskResourceTrackerStats}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -289,6 +335,11 @@ public class ShardSearchBackpressureTaskResourceTrackerStats
             ShardSearchBackpressureTaskResourceTrackerHeapUsageTrackerStats._DESERIALIZER,
             "heap_usage_tracker"
         );
+        op.add(
+            Builder::nativeMemoryUsageTracker,
+            ShardSearchBackpressureTaskResourceTrackerNativeMemoryUsageTrackerStats._DESERIALIZER,
+            "native_memory_usage_tracker"
+        );
     }
 
     @Override
@@ -297,6 +348,7 @@ public class ShardSearchBackpressureTaskResourceTrackerStats
         result = 31 * result + Objects.hashCode(this.cpuUsageTracker);
         result = 31 * result + Objects.hashCode(this.elapsedTimeTracker);
         result = 31 * result + Objects.hashCode(this.heapUsageTracker);
+        result = 31 * result + Objects.hashCode(this.nativeMemoryUsageTracker);
         return result;
     }
 
@@ -307,6 +359,7 @@ public class ShardSearchBackpressureTaskResourceTrackerStats
         ShardSearchBackpressureTaskResourceTrackerStats other = (ShardSearchBackpressureTaskResourceTrackerStats) o;
         return Objects.equals(this.cpuUsageTracker, other.cpuUsageTracker)
             && Objects.equals(this.elapsedTimeTracker, other.elapsedTimeTracker)
-            && Objects.equals(this.heapUsageTracker, other.heapUsageTracker);
+            && Objects.equals(this.heapUsageTracker, other.heapUsageTracker)
+            && Objects.equals(this.nativeMemoryUsageTracker, other.nativeMemoryUsageTracker);
     }
 }

@@ -69,11 +69,15 @@ public final class CountRequest extends CatRequestBase implements ToCopyableBuil
     @Nonnull
     private final List<String> index;
 
+    @Nullable
+    private final Integer limit;
+
     // ---------------------------------------------------------------------------------------------
 
     private CountRequest(Builder builder) {
         super(builder);
         this.index = ApiTypeHelper.unmodifiable(builder.index);
+        this.limit = builder.limit;
     }
 
     public static CountRequest of(Function<CountRequest.Builder, ObjectBuilder<CountRequest>> fn) {
@@ -90,6 +94,17 @@ public final class CountRequest extends CatRequestBase implements ToCopyableBuil
     @Nonnull
     public final List<String> index() {
         return this.index;
+    }
+
+    /**
+     * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+     * <p>
+     * API name: {@code limit}
+     * </p>
+     */
+    @Nullable
+    public final Integer limit() {
+        return this.limit;
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -111,17 +126,21 @@ public final class CountRequest extends CatRequestBase implements ToCopyableBuil
     public static class Builder extends CatRequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, CountRequest> {
         @Nullable
         private List<String> index;
+        @Nullable
+        private Integer limit;
 
         public Builder() {}
 
         private Builder(CountRequest o) {
             super(o);
             this.index = _listCopy(o.index);
+            this.limit = o.limit;
         }
 
         private Builder(Builder o) {
             super(o);
             this.index = _listCopy(o.index);
+            this.limit = o.limit;
         }
 
         @Override
@@ -171,6 +190,18 @@ public final class CountRequest extends CatRequestBase implements ToCopyableBuil
         }
 
         /**
+         * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+         * <p>
+         * API name: {@code limit}
+         * </p>
+         */
+        @Nonnull
+        public final Builder limit(@Nullable Integer value) {
+            this.limit = value;
+            return this;
+        }
+
+        /**
          * Builds a {@link CountRequest}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -185,6 +216,14 @@ public final class CountRequest extends CatRequestBase implements ToCopyableBuil
     }
 
     // ---------------------------------------------------------------------------------------------
+
+    @Override
+    protected void applyQueryParameters(@Nonnull Map<String, String> params) {
+        super.applyQueryParameters(params);
+        if (this.limit != null) {
+            params.put("limit", String.valueOf(this.limit));
+        }
+    }
 
     /**
      * Endpoint "{@code cat.count}".
@@ -227,6 +266,7 @@ public final class CountRequest extends CatRequestBase implements ToCopyableBuil
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.index);
+        result = 31 * result + Objects.hashCode(this.limit);
         return result;
     }
 
@@ -235,6 +275,6 @@ public final class CountRequest extends CatRequestBase implements ToCopyableBuil
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         CountRequest other = (CountRequest) o;
-        return Objects.equals(this.index, other.index);
+        return Objects.equals(this.index, other.index) && Objects.equals(this.limit, other.limit);
     }
 }

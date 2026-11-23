@@ -115,7 +115,7 @@ public class Hit<TDocument> implements PlainJsonSerializable, ToCopyableBuilder<
     private final String routing;
 
     @Nullable
-    private final Double score;
+    private final Float score;
 
     @Nullable
     private final Long seqNo;
@@ -206,7 +206,10 @@ public class Hit<TDocument> implements PlainJsonSerializable, ToCopyableBuilder<
     }
 
     /**
+     * Elasticsearch-only field: not present in OpenSearch server responses.
+     * <p>
      * API name: {@code ignored_field_values}
+     * </p>
      */
     @Nonnull
     public final Map<String, List<String>> ignoredFieldValues() {
@@ -285,7 +288,7 @@ public class Hit<TDocument> implements PlainJsonSerializable, ToCopyableBuilder<
      * API name: {@code _score}
      */
     @Nullable
-    public final Double score() {
+    public final Float score() {
         return this.score;
     }
 
@@ -534,7 +537,7 @@ public class Hit<TDocument> implements PlainJsonSerializable, ToCopyableBuilder<
         @Nullable
         private String routing;
         @Nullable
-        private Double score;
+        private Float score;
         @Nullable
         private Long seqNo;
         @Nullable
@@ -709,7 +712,10 @@ public class Hit<TDocument> implements PlainJsonSerializable, ToCopyableBuilder<
         }
 
         /**
+         * Elasticsearch-only field: not present in OpenSearch server responses.
+         * <p>
          * API name: {@code ignored_field_values}
+         * </p>
          *
          * <p>
          * Adds all elements of <code>map</code> to <code>ignoredFieldValues</code>.
@@ -722,7 +728,10 @@ public class Hit<TDocument> implements PlainJsonSerializable, ToCopyableBuilder<
         }
 
         /**
+         * Elasticsearch-only field: not present in OpenSearch server responses.
+         * <p>
          * API name: {@code ignored_field_values}
+         * </p>
          *
          * <p>
          * Adds an entry to <code>ignoredFieldValues</code>.
@@ -880,7 +889,7 @@ public class Hit<TDocument> implements PlainJsonSerializable, ToCopyableBuilder<
          * API name: {@code _score}
          */
         @Nonnull
-        public final Builder<TDocument> score(@Nullable Double value) {
+        public final Builder<TDocument> score(@Nullable Float value) {
             this.score = value;
             return this;
         }
@@ -1019,7 +1028,7 @@ public class Hit<TDocument> implements PlainJsonSerializable, ToCopyableBuilder<
         op.add(Builder::node, JsonpDeserializer.stringDeserializer(), "_node");
         op.add(Builder::primaryTerm, JsonpDeserializer.longDeserializer(), "_primary_term");
         op.add(Builder::routing, JsonpDeserializer.stringDeserializer(), "_routing");
-        op.add(Builder::score, JsonpDeserializer.doubleDeserializer(), "_score");
+        op.add(Builder::score, JsonpDeserializer.floatDeserializer(), "_score");
         op.add(Builder::seqNo, JsonpDeserializer.longDeserializer(), "_seq_no");
         op.add(Builder::shard, JsonpDeserializer.stringDeserializer(), "_shard");
         op.add(Builder::sort, JsonpDeserializer.arrayDeserializer(FieldValue._DESERIALIZER), "sort");

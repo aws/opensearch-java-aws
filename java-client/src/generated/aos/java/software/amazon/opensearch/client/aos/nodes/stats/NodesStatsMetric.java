@@ -79,9 +79,15 @@ public enum NodesStatsMetric implements JsonEnum {
 
     Jvm("jvm"),
 
+    NativeAllocator("native_allocator"),
+
+    NativeMemory("native_memory"),
+
     Os("os"),
 
     Process("process"),
+
+    RemoteStore("remote_store"),
 
     Repositories("repositories"),
 

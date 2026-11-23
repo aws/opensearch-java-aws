@@ -70,10 +70,10 @@ import software.amazon.opensearch.client.util.ToCopyableBuilder;
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
 public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.Builder, Policy> {
 
-    @Nullable
+    @Nonnull
     private final String defaultState;
 
-    @Nullable
+    @Nonnull
     private final String description;
 
     @Nullable
@@ -83,13 +83,13 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
     private final List<IsmTemplate> ismTemplate;
 
     @Nullable
-    private final Integer lastUpdatedTime;
+    private final Long lastUpdatedTime;
 
     @Nullable
     private final String policyId;
 
     @Nullable
-    private final Number schemaVersion;
+    private final Long schemaVersion;
 
     @Nonnull
     private final List<States> states;
@@ -97,14 +97,14 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
     // ---------------------------------------------------------------------------------------------
 
     private Policy(Builder builder) {
-        this.defaultState = builder.defaultState;
-        this.description = builder.description;
+        this.defaultState = ApiTypeHelper.requireNonNull(builder.defaultState, this, "defaultState");
+        this.description = ApiTypeHelper.requireNonNull(builder.description, this, "description");
         this.errorNotification = builder.errorNotification;
         this.ismTemplate = ApiTypeHelper.unmodifiable(builder.ismTemplate);
         this.lastUpdatedTime = builder.lastUpdatedTime;
         this.policyId = builder.policyId;
         this.schemaVersion = builder.schemaVersion;
-        this.states = ApiTypeHelper.unmodifiable(builder.states);
+        this.states = ApiTypeHelper.unmodifiableRequired(builder.states, this, "states");
     }
 
     public static Policy of(Function<Policy.Builder, ObjectBuilder<Policy>> fn) {
@@ -112,23 +112,23 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
     }
 
     /**
-     * The default state an index is in.
+     * Required - The default state an index is in.
      * <p>
      * API name: {@code default_state}
      * </p>
      */
-    @Nullable
+    @Nonnull
     public final String defaultState() {
         return this.defaultState;
     }
 
     /**
-     * The description of the policy.
+     * Required - The description of the policy.
      * <p>
      * API name: {@code description}
      * </p>
      */
-    @Nullable
+    @Nonnull
     public final String description() {
         return this.description;
     }
@@ -162,7 +162,7 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
      * </p>
      */
     @Nullable
-    public final Integer lastUpdatedTime() {
+    public final Long lastUpdatedTime() {
         return this.lastUpdatedTime;
     }
 
@@ -184,12 +184,12 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
      * </p>
      */
     @Nullable
-    public final Number schemaVersion() {
+    public final Long schemaVersion() {
         return this.schemaVersion;
     }
 
     /**
-     * The list of states for the index to transition between.
+     * Required - The list of states for the index to transition between.
      * <p>
      * API name: {@code states}
      * </p>
@@ -210,15 +210,11 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
     }
 
     protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
-        if (this.defaultState != null) {
-            generator.writeKey("default_state");
-            generator.write(this.defaultState);
-        }
+        generator.writeKey("default_state");
+        generator.write(this.defaultState);
 
-        if (this.description != null) {
-            generator.writeKey("description");
-            generator.write(this.description);
-        }
+        generator.writeKey("description");
+        generator.write(this.description);
 
         if (this.errorNotification != null) {
             generator.writeKey("error_notification");
@@ -246,17 +242,15 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
 
         if (this.schemaVersion != null) {
             generator.writeKey("schema_version");
-            generator.write(this.schemaVersion.doubleValue());
+            generator.write(this.schemaVersion);
         }
 
-        if (ApiTypeHelper.isDefined(this.states)) {
-            generator.writeKey("states");
-            generator.writeStartArray();
-            for (States item0 : this.states) {
-                item0.serialize(generator, mapper);
-            }
-            generator.writeEnd();
+        generator.writeKey("states");
+        generator.writeStartArray();
+        for (States item0 : this.states) {
+            item0.serialize(generator, mapper);
         }
+        generator.writeEnd();
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -276,21 +270,18 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
      * Builder for {@link Policy}.
      */
     public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, Policy> {
-        @Nullable
         private String defaultState;
-        @Nullable
         private String description;
         @Nullable
         private ErrorNotification errorNotification;
         @Nullable
         private List<IsmTemplate> ismTemplate;
         @Nullable
-        private Integer lastUpdatedTime;
+        private Long lastUpdatedTime;
         @Nullable
         private String policyId;
         @Nullable
-        private Number schemaVersion;
-        @Nullable
+        private Long schemaVersion;
         private List<States> states;
 
         public Builder() {}
@@ -324,25 +315,25 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
         }
 
         /**
-         * The default state an index is in.
+         * Required - The default state an index is in.
          * <p>
          * API name: {@code default_state}
          * </p>
          */
         @Nonnull
-        public final Builder defaultState(@Nullable String value) {
+        public final Builder defaultState(String value) {
             this.defaultState = value;
             return this;
         }
 
         /**
-         * The description of the policy.
+         * Required - The description of the policy.
          * <p>
          * API name: {@code description}
          * </p>
          */
         @Nonnull
-        public final Builder description(@Nullable String value) {
+        public final Builder description(String value) {
             this.description = value;
             return this;
         }
@@ -424,7 +415,7 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
          * </p>
          */
         @Nonnull
-        public final Builder lastUpdatedTime(@Nullable Integer value) {
+        public final Builder lastUpdatedTime(@Nullable Long value) {
             this.lastUpdatedTime = value;
             return this;
         }
@@ -448,13 +439,13 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
          * </p>
          */
         @Nonnull
-        public final Builder schemaVersion(@Nullable Number value) {
+        public final Builder schemaVersion(@Nullable Long value) {
             this.schemaVersion = value;
             return this;
         }
 
         /**
-         * The list of states for the index to transition between.
+         * Required - The list of states for the index to transition between.
          * <p>
          * API name: {@code states}
          * </p>
@@ -470,7 +461,7 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
         }
 
         /**
-         * The list of states for the index to transition between.
+         * Required - The list of states for the index to transition between.
          * <p>
          * API name: {@code states}
          * </p>
@@ -486,7 +477,7 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
         }
 
         /**
-         * The list of states for the index to transition between.
+         * Required - The list of states for the index to transition between.
          * <p>
          * API name: {@code states}
          * </p>
@@ -529,23 +520,23 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
         op.add(Builder::description, JsonpDeserializer.stringDeserializer(), "description");
         op.add(Builder::errorNotification, ErrorNotification._DESERIALIZER, "error_notification");
         op.add(Builder::ismTemplate, JsonpDeserializer.arrayDeserializer(IsmTemplate._DESERIALIZER), "ism_template");
-        op.add(Builder::lastUpdatedTime, JsonpDeserializer.integerDeserializer(), "last_updated_time");
+        op.add(Builder::lastUpdatedTime, JsonpDeserializer.longDeserializer(), "last_updated_time");
         op.add(Builder::policyId, JsonpDeserializer.stringDeserializer(), "policy_id");
-        op.add(Builder::schemaVersion, JsonpDeserializer.numberDeserializer(), "schema_version");
+        op.add(Builder::schemaVersion, JsonpDeserializer.longDeserializer(), "schema_version");
         op.add(Builder::states, JsonpDeserializer.arrayDeserializer(States._DESERIALIZER), "states");
     }
 
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + Objects.hashCode(this.defaultState);
-        result = 31 * result + Objects.hashCode(this.description);
+        result = 31 * result + this.defaultState.hashCode();
+        result = 31 * result + this.description.hashCode();
         result = 31 * result + Objects.hashCode(this.errorNotification);
         result = 31 * result + Objects.hashCode(this.ismTemplate);
         result = 31 * result + Objects.hashCode(this.lastUpdatedTime);
         result = 31 * result + Objects.hashCode(this.policyId);
         result = 31 * result + Objects.hashCode(this.schemaVersion);
-        result = 31 * result + Objects.hashCode(this.states);
+        result = 31 * result + this.states.hashCode();
         return result;
     }
 
@@ -554,13 +545,13 @@ public class Policy implements PlainJsonSerializable, ToCopyableBuilder<Policy.B
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         Policy other = (Policy) o;
-        return Objects.equals(this.defaultState, other.defaultState)
-            && Objects.equals(this.description, other.description)
+        return this.defaultState.equals(other.defaultState)
+            && this.description.equals(other.description)
             && Objects.equals(this.errorNotification, other.errorNotification)
             && Objects.equals(this.ismTemplate, other.ismTemplate)
             && Objects.equals(this.lastUpdatedTime, other.lastUpdatedTime)
             && Objects.equals(this.policyId, other.policyId)
             && Objects.equals(this.schemaVersion, other.schemaVersion)
-            && Objects.equals(this.states, other.states);
+            && this.states.equals(other.states);
     }
 }

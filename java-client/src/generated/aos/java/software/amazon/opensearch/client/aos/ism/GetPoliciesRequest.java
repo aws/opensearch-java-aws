@@ -44,10 +44,13 @@ package software.amazon.opensearch.client.aos.ism;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import software.amazon.opensearch.client.aos._types.RequestBase;
+import software.amazon.opensearch.client.aos._types.SortOrder;
 import software.amazon.opensearch.client.errors.ErrorResponse;
 import software.amazon.opensearch.client.transport.Endpoint;
 import software.amazon.opensearch.client.transport.endpoints.SimpleEndpoint;
@@ -63,14 +66,89 @@ import software.amazon.opensearch.client.util.ToCopyableBuilder;
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
 public final class GetPoliciesRequest extends RequestBase implements ToCopyableBuilder<GetPoliciesRequest.Builder, GetPoliciesRequest> {
 
+    @Nullable
+    private final Integer from;
+
+    @Nullable
+    private final String queryString;
+
+    @Nullable
+    private final Integer size;
+
+    @Nullable
+    private final String sortField;
+
+    @Nullable
+    private final SortOrder sortOrder;
+
     // ---------------------------------------------------------------------------------------------
 
     private GetPoliciesRequest(Builder builder) {
         super(builder);
+        this.from = builder.from;
+        this.queryString = builder.queryString;
+        this.size = builder.size;
+        this.sortField = builder.sortField;
+        this.sortOrder = builder.sortOrder;
     }
 
     public static GetPoliciesRequest of(Function<GetPoliciesRequest.Builder, ObjectBuilder<GetPoliciesRequest>> fn) {
         return fn.apply(new Builder()).build();
+    }
+
+    /**
+     * The starting index of the policies to return.
+     * <p>
+     * API name: {@code from}
+     * </p>
+     */
+    @Nullable
+    public final Integer from() {
+        return this.from;
+    }
+
+    /**
+     * A query string that filters the policies.
+     * <p>
+     * API name: {@code queryString}
+     * </p>
+     */
+    @Nullable
+    public final String queryString() {
+        return this.queryString;
+    }
+
+    /**
+     * The number of policies to return.
+     * <p>
+     * API name: {@code size}
+     * </p>
+     */
+    @Nullable
+    public final Integer size() {
+        return this.size;
+    }
+
+    /**
+     * The field to sort the policies by.
+     * <p>
+     * API name: {@code sortField}
+     * </p>
+     */
+    @Nullable
+    public final String sortField() {
+        return this.sortField;
+    }
+
+    /**
+     * The sort order of the policies.
+     * <p>
+     * API name: {@code sortOrder}
+     * </p>
+     */
+    @Nullable
+    public final SortOrder sortOrder() {
+        return this.sortOrder;
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -90,15 +168,35 @@ public final class GetPoliciesRequest extends RequestBase implements ToCopyableB
      * Builder for {@link GetPoliciesRequest}.
      */
     public static class Builder extends RequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, GetPoliciesRequest> {
+        @Nullable
+        private Integer from;
+        @Nullable
+        private String queryString;
+        @Nullable
+        private Integer size;
+        @Nullable
+        private String sortField;
+        @Nullable
+        private SortOrder sortOrder;
 
         public Builder() {}
 
         private Builder(GetPoliciesRequest o) {
             super(o);
+            this.from = o.from;
+            this.queryString = o.queryString;
+            this.size = o.size;
+            this.sortField = o.sortField;
+            this.sortOrder = o.sortOrder;
         }
 
         private Builder(Builder o) {
             super(o);
+            this.from = o.from;
+            this.queryString = o.queryString;
+            this.size = o.size;
+            this.sortField = o.sortField;
+            this.sortOrder = o.sortOrder;
         }
 
         @Override
@@ -110,6 +208,66 @@ public final class GetPoliciesRequest extends RequestBase implements ToCopyableB
         @Override
         @Nonnull
         protected Builder self() {
+            return this;
+        }
+
+        /**
+         * The starting index of the policies to return.
+         * <p>
+         * API name: {@code from}
+         * </p>
+         */
+        @Nonnull
+        public final Builder from(@Nullable Integer value) {
+            this.from = value;
+            return this;
+        }
+
+        /**
+         * A query string that filters the policies.
+         * <p>
+         * API name: {@code queryString}
+         * </p>
+         */
+        @Nonnull
+        public final Builder queryString(@Nullable String value) {
+            this.queryString = value;
+            return this;
+        }
+
+        /**
+         * The number of policies to return.
+         * <p>
+         * API name: {@code size}
+         * </p>
+         */
+        @Nonnull
+        public final Builder size(@Nullable Integer value) {
+            this.size = value;
+            return this;
+        }
+
+        /**
+         * The field to sort the policies by.
+         * <p>
+         * API name: {@code sortField}
+         * </p>
+         */
+        @Nonnull
+        public final Builder sortField(@Nullable String value) {
+            this.sortField = value;
+            return this;
+        }
+
+        /**
+         * The sort order of the policies.
+         * <p>
+         * API name: {@code sortOrder}
+         * </p>
+         */
+        @Nonnull
+        public final Builder sortOrder(@Nullable SortOrder value) {
+            this.sortOrder = value;
             return this;
         }
 
@@ -128,6 +286,26 @@ public final class GetPoliciesRequest extends RequestBase implements ToCopyableB
     }
 
     // ---------------------------------------------------------------------------------------------
+
+    @Override
+    protected void applyQueryParameters(@Nonnull Map<String, String> params) {
+        super.applyQueryParameters(params);
+        if (this.from != null) {
+            params.put("from", String.valueOf(this.from));
+        }
+        if (this.queryString != null) {
+            params.put("queryString", this.queryString);
+        }
+        if (this.size != null) {
+            params.put("size", String.valueOf(this.size));
+        }
+        if (this.sortField != null) {
+            params.put("sortField", this.sortField);
+        }
+        if (this.sortOrder != null) {
+            params.put("sortOrder", this.sortOrder.jsonValue());
+        }
+    }
 
     /**
      * Endpoint "{@code ism.get_policies}".
@@ -151,6 +329,11 @@ public final class GetPoliciesRequest extends RequestBase implements ToCopyableB
     @Override
     public int hashCode() {
         int result = 17;
+        result = 31 * result + Objects.hashCode(this.from);
+        result = 31 * result + Objects.hashCode(this.queryString);
+        result = 31 * result + Objects.hashCode(this.size);
+        result = 31 * result + Objects.hashCode(this.sortField);
+        result = 31 * result + Objects.hashCode(this.sortOrder);
         return result;
     }
 
@@ -158,6 +341,11 @@ public final class GetPoliciesRequest extends RequestBase implements ToCopyableB
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
-        return true;
+        GetPoliciesRequest other = (GetPoliciesRequest) o;
+        return Objects.equals(this.from, other.from)
+            && Objects.equals(this.queryString, other.queryString)
+            && Objects.equals(this.size, other.size)
+            && Objects.equals(this.sortField, other.sortField)
+            && Objects.equals(this.sortOrder, other.sortOrder);
     }
 }

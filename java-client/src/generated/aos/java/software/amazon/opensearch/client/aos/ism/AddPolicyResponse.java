@@ -74,7 +74,7 @@ public class AddPolicyResponse implements PlainJsonSerializable, ToCopyableBuild
     private final Boolean failures;
 
     @Nullable
-    private final Number updatedIndices;
+    private final Integer updatedIndices;
 
     // ---------------------------------------------------------------------------------------------
 
@@ -117,7 +117,7 @@ public class AddPolicyResponse implements PlainJsonSerializable, ToCopyableBuild
      * </p>
      */
     @Nullable
-    public final Number updatedIndices() {
+    public final Integer updatedIndices() {
         return this.updatedIndices;
     }
 
@@ -148,7 +148,7 @@ public class AddPolicyResponse implements PlainJsonSerializable, ToCopyableBuild
 
         if (this.updatedIndices != null) {
             generator.writeKey("updated_indices");
-            generator.write(this.updatedIndices.doubleValue());
+            generator.write(this.updatedIndices);
         }
     }
 
@@ -174,7 +174,7 @@ public class AddPolicyResponse implements PlainJsonSerializable, ToCopyableBuild
         @Nullable
         private Boolean failures;
         @Nullable
-        private Number updatedIndices;
+        private Integer updatedIndices;
 
         public Builder() {}
 
@@ -262,7 +262,7 @@ public class AddPolicyResponse implements PlainJsonSerializable, ToCopyableBuild
          * </p>
          */
         @Nonnull
-        public final Builder updatedIndices(@Nullable Number value) {
+        public final Builder updatedIndices(@Nullable Integer value) {
             this.updatedIndices = value;
             return this;
         }
@@ -294,7 +294,7 @@ public class AddPolicyResponse implements PlainJsonSerializable, ToCopyableBuild
     protected static void setupAddPolicyResponseDeserializer(ObjectDeserializer<AddPolicyResponse.Builder> op) {
         op.add(Builder::failedIndices, JsonpDeserializer.arrayDeserializer(FailedIndex._DESERIALIZER), "failed_indices");
         op.add(Builder::failures, JsonpDeserializer.booleanDeserializer(), "failures");
-        op.add(Builder::updatedIndices, JsonpDeserializer.numberDeserializer(), "updated_indices");
+        op.add(Builder::updatedIndices, JsonpDeserializer.integerDeserializer(), "updated_indices");
     }
 
     @Override

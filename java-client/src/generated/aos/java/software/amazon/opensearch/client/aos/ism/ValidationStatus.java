@@ -40,30 +40,29 @@
 // THIS CODE IS GENERATED. MANUAL EDITS WILL BE LOST.
 //----------------------------------------------------
 
-package software.amazon.opensearch.client.aoss.core.search;
+package software.amazon.opensearch.client.aos.ism;
 
 import javax.annotation.Generated;
 import software.amazon.opensearch.client.json.JsonEnum;
 import software.amazon.opensearch.client.json.JsonpDeserializable;
 
-// typedef: core.search.TotalHitsRelation
+// typedef: ism.ValidationStatus
 
+/**
+ * The validation status.
+ */
 @JsonpDeserializable
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
-public enum TotalHitsRelation implements JsonEnum {
-    /**
-     * Accurate.
-     */
-    Eq("eq"),
+public enum ValidationStatus implements JsonEnum {
+    Failed("failed"),
 
-    /**
-     * Lower bound, including returned events or sequences.
-     */
-    Gte("gte");
+    Passed("passed"),
+
+    ReValidating("re_validating");
 
     private final String jsonValue;
 
-    TotalHitsRelation(String jsonValue) {
+    ValidationStatus(String jsonValue) {
         this.jsonValue = jsonValue;
     }
 
@@ -71,5 +70,5 @@ public enum TotalHitsRelation implements JsonEnum {
         return this.jsonValue;
     }
 
-    public static final JsonEnum.Deserializer<TotalHitsRelation> _DESERIALIZER = new JsonEnum.Deserializer<>(TotalHitsRelation.values());
+    public static final JsonEnum.Deserializer<ValidationStatus> _DESERIALIZER = new JsonEnum.Deserializer<>(ValidationStatus.values());
 }

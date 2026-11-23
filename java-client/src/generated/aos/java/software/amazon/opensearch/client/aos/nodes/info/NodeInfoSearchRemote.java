@@ -43,16 +43,17 @@
 package software.amazon.opensearch.client.aos.nodes.info;
 
 import jakarta.json.stream.JsonGenerator;
+import java.util.Objects;
 import java.util.function.Function;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import software.amazon.opensearch.client.json.JsonpDeserializable;
 import software.amazon.opensearch.client.json.JsonpDeserializer;
 import software.amazon.opensearch.client.json.JsonpMapper;
 import software.amazon.opensearch.client.json.ObjectBuilderDeserializer;
 import software.amazon.opensearch.client.json.ObjectDeserializer;
 import software.amazon.opensearch.client.json.PlainJsonSerializable;
-import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilderBase;
@@ -67,13 +68,13 @@ import software.amazon.opensearch.client.util.ToCopyableBuilder;
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoSearchRemote implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoSearchRemote.Builder, NodeInfoSearchRemote> {
 
-    @Nonnull
+    @Nullable
     private final String connect;
 
     // ---------------------------------------------------------------------------------------------
 
     private NodeInfoSearchRemote(Builder builder) {
-        this.connect = ApiTypeHelper.requireNonNull(builder.connect, this, "connect");
+        this.connect = builder.connect;
     }
 
     public static NodeInfoSearchRemote of(Function<NodeInfoSearchRemote.Builder, ObjectBuilder<NodeInfoSearchRemote>> fn) {
@@ -81,12 +82,12 @@ public class NodeInfoSearchRemote implements PlainJsonSerializable, ToCopyableBu
     }
 
     /**
-     * Required - The remote connection settings.
+     * The remote connection settings.
      * <p>
      * API name: {@code connect}
      * </p>
      */
-    @Nonnull
+    @Nullable
     public final String connect() {
         return this.connect;
     }
@@ -102,8 +103,10 @@ public class NodeInfoSearchRemote implements PlainJsonSerializable, ToCopyableBu
     }
 
     protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
-        generator.writeKey("connect");
-        generator.write(this.connect);
+        if (this.connect != null) {
+            generator.writeKey("connect");
+            generator.write(this.connect);
+        }
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -123,6 +126,7 @@ public class NodeInfoSearchRemote implements PlainJsonSerializable, ToCopyableBu
      * Builder for {@link NodeInfoSearchRemote}.
      */
     public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, NodeInfoSearchRemote> {
+        @Nullable
         private String connect;
 
         public Builder() {}
@@ -142,13 +146,13 @@ public class NodeInfoSearchRemote implements PlainJsonSerializable, ToCopyableBu
         }
 
         /**
-         * Required - The remote connection settings.
+         * The remote connection settings.
          * <p>
          * API name: {@code connect}
          * </p>
          */
         @Nonnull
-        public final Builder connect(String value) {
+        public final Builder connect(@Nullable String value) {
             this.connect = value;
             return this;
         }
@@ -184,7 +188,7 @@ public class NodeInfoSearchRemote implements PlainJsonSerializable, ToCopyableBu
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + this.connect.hashCode();
+        result = 31 * result + Objects.hashCode(this.connect);
         return result;
     }
 
@@ -193,6 +197,6 @@ public class NodeInfoSearchRemote implements PlainJsonSerializable, ToCopyableBu
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         NodeInfoSearchRemote other = (NodeInfoSearchRemote) o;
-        return this.connect.equals(other.connect);
+        return Objects.equals(this.connect, other.connect);
     }
 }

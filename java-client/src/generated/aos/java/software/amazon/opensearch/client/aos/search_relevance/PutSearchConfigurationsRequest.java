@@ -60,6 +60,7 @@ import software.amazon.opensearch.client.json.ObjectDeserializer;
 import software.amazon.opensearch.client.json.PlainJsonSerializable;
 import software.amazon.opensearch.client.transport.Endpoint;
 import software.amazon.opensearch.client.transport.endpoints.SimpleEndpoint;
+import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ToCopyableBuilder;
@@ -82,7 +83,7 @@ public final class PutSearchConfigurationsRequest extends RequestBase
     @Nullable
     private final String index;
 
-    @Nullable
+    @Nonnull
     private final String name;
 
     @Nullable
@@ -97,7 +98,7 @@ public final class PutSearchConfigurationsRequest extends RequestBase
         super(builder);
         this.description = builder.description;
         this.index = builder.index;
-        this.name = builder.name;
+        this.name = ApiTypeHelper.requireNonNull(builder.name, this, "name");
         this.query = builder.query;
         this.searchPipeline = builder.searchPipeline;
     }
@@ -125,9 +126,9 @@ public final class PutSearchConfigurationsRequest extends RequestBase
     }
 
     /**
-     * API name: {@code name}
+     * Required - API name: {@code name}
      */
-    @Nullable
+    @Nonnull
     public final String name() {
         return this.name;
     }
@@ -169,10 +170,8 @@ public final class PutSearchConfigurationsRequest extends RequestBase
             generator.write(this.index);
         }
 
-        if (this.name != null) {
-            generator.writeKey("name");
-            generator.write(this.name);
-        }
+        generator.writeKey("name");
+        generator.write(this.name);
 
         if (this.query != null) {
             generator.writeKey("query");
@@ -208,7 +207,6 @@ public final class PutSearchConfigurationsRequest extends RequestBase
         private String description;
         @Nullable
         private String index;
-        @Nullable
         private String name;
         @Nullable
         private String query;
@@ -266,10 +264,10 @@ public final class PutSearchConfigurationsRequest extends RequestBase
         }
 
         /**
-         * API name: {@code name}
+         * Required - API name: {@code name}
          */
         @Nonnull
-        public final Builder name(@Nullable String value) {
+        public final Builder name(String value) {
             this.name = value;
             return this;
         }
@@ -351,7 +349,7 @@ public final class PutSearchConfigurationsRequest extends RequestBase
         int result = 17;
         result = 31 * result + Objects.hashCode(this.description);
         result = 31 * result + Objects.hashCode(this.index);
-        result = 31 * result + Objects.hashCode(this.name);
+        result = 31 * result + this.name.hashCode();
         result = 31 * result + Objects.hashCode(this.query);
         result = 31 * result + Objects.hashCode(this.searchPipeline);
         return result;
@@ -364,7 +362,7 @@ public final class PutSearchConfigurationsRequest extends RequestBase
         PutSearchConfigurationsRequest other = (PutSearchConfigurationsRequest) o;
         return Objects.equals(this.description, other.description)
             && Objects.equals(this.index, other.index)
-            && Objects.equals(this.name, other.name)
+            && this.name.equals(other.name)
             && Objects.equals(this.query, other.query)
             && Objects.equals(this.searchPipeline, other.searchPipeline);
     }

@@ -40,36 +40,18 @@
 // THIS CODE IS GENERATED. MANUAL EDITS WILL BE LOST.
 //----------------------------------------------------
 
-package software.amazon.opensearch.client.aos.core.search;
+package software.amazon.opensearch.client.aos.ism;
 
 import javax.annotation.Generated;
-import software.amazon.opensearch.client.json.JsonEnum;
-import software.amazon.opensearch.client.json.JsonpDeserializable;
 
-// typedef: core.search.TotalHitsRelation
-
-@JsonpDeserializable
+/**
+ * Base interface for {@link ActionAliasAction} variants.
+ */
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
-public enum TotalHitsRelation implements JsonEnum {
-    /**
-     * Accurate.
-     */
-    Eq("eq"),
+public interface ActionAliasActionVariant {
+    ActionAliasAction.Kind _actionAliasActionKind();
 
-    /**
-     * Lower bound, including returned events or sequences.
-     */
-    Gte("gte");
-
-    private final String jsonValue;
-
-    TotalHitsRelation(String jsonValue) {
-        this.jsonValue = jsonValue;
+    default ActionAliasAction toActionAliasAction() {
+        return new ActionAliasAction(this);
     }
-
-    public String jsonValue() {
-        return this.jsonValue;
-    }
-
-    public static final JsonEnum.Deserializer<TotalHitsRelation> _DESERIALIZER = new JsonEnum.Deserializer<>(TotalHitsRelation.values());
 }

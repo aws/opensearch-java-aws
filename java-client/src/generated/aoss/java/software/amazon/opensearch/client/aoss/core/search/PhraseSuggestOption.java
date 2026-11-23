@@ -72,7 +72,7 @@ public class PhraseSuggestOption implements PlainJsonSerializable, ToCopyableBui
     @Nullable
     private final String highlighted;
 
-    private final double score;
+    private final float score;
 
     @Nonnull
     private final String text;
@@ -109,7 +109,7 @@ public class PhraseSuggestOption implements PlainJsonSerializable, ToCopyableBui
     /**
      * Required - API name: {@code score}
      */
-    public final double score() {
+    public final float score() {
         return this.score;
     }
 
@@ -170,7 +170,7 @@ public class PhraseSuggestOption implements PlainJsonSerializable, ToCopyableBui
         private Boolean collateMatch;
         @Nullable
         private String highlighted;
-        private Double score;
+        private Float score;
         private String text;
 
         public Builder() {}
@@ -217,7 +217,7 @@ public class PhraseSuggestOption implements PlainJsonSerializable, ToCopyableBui
          * Required - API name: {@code score}
          */
         @Nonnull
-        public final Builder score(double value) {
+        public final Builder score(float value) {
             this.score = value;
             return this;
         }
@@ -258,7 +258,7 @@ public class PhraseSuggestOption implements PlainJsonSerializable, ToCopyableBui
     protected static void setupPhraseSuggestOptionDeserializer(ObjectDeserializer<PhraseSuggestOption.Builder> op) {
         op.add(Builder::collateMatch, JsonpDeserializer.booleanDeserializer(), "collate_match");
         op.add(Builder::highlighted, JsonpDeserializer.stringDeserializer(), "highlighted");
-        op.add(Builder::score, JsonpDeserializer.doubleDeserializer(), "score");
+        op.add(Builder::score, JsonpDeserializer.floatDeserializer(), "score");
         op.add(Builder::text, JsonpDeserializer.stringDeserializer(), "text");
     }
 
@@ -267,7 +267,7 @@ public class PhraseSuggestOption implements PlainJsonSerializable, ToCopyableBui
         int result = 17;
         result = 31 * result + Objects.hashCode(this.collateMatch);
         result = 31 * result + Objects.hashCode(this.highlighted);
-        result = 31 * result + Double.hashCode(this.score);
+        result = 31 * result + Float.hashCode(this.score);
         result = 31 * result + this.text.hashCode();
         return result;
     }

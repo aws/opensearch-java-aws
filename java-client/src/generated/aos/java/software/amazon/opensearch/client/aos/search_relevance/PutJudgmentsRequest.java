@@ -89,10 +89,16 @@ public final class PutJudgmentsRequest extends RequestBase
     private final String description;
 
     @Nullable
+    private final String endDate;
+
+    @Nullable
     private final Boolean ignoreFailure;
 
     @Nonnull
     private final List<Map<String, JsonData>> judgmentRatings;
+
+    @Nullable
+    private final LLMJudgmentRatingType llmJudgmentRatingType;
 
     @Nullable
     private final Integer maxRank;
@@ -100,8 +106,14 @@ public final class PutJudgmentsRequest extends RequestBase
     @Nullable
     private final String modelId;
 
-    @Nullable
+    @Nonnull
     private final String name;
+
+    @Nullable
+    private final Boolean overwriteCache;
+
+    @Nullable
+    private final String promptTemplate;
 
     @Nullable
     private final String querySetId;
@@ -113,7 +125,16 @@ public final class PutJudgmentsRequest extends RequestBase
     private final Integer size;
 
     @Nullable
+    private final String startDate;
+
+    @Nullable
+    private final Integer tokenLimit;
+
+    @Nonnull
     private final String type;
+
+    @Nullable
+    private final String ubiEventsIndex;
 
     // ---------------------------------------------------------------------------------------------
 
@@ -122,15 +143,22 @@ public final class PutJudgmentsRequest extends RequestBase
         this.clickModel = builder.clickModel;
         this.contextFields = ApiTypeHelper.unmodifiable(builder.contextFields);
         this.description = builder.description;
+        this.endDate = builder.endDate;
         this.ignoreFailure = builder.ignoreFailure;
         this.judgmentRatings = ApiTypeHelper.unmodifiable(builder.judgmentRatings);
+        this.llmJudgmentRatingType = builder.llmJudgmentRatingType;
         this.maxRank = builder.maxRank;
         this.modelId = builder.modelId;
-        this.name = builder.name;
+        this.name = ApiTypeHelper.requireNonNull(builder.name, this, "name");
+        this.overwriteCache = builder.overwriteCache;
+        this.promptTemplate = builder.promptTemplate;
         this.querySetId = builder.querySetId;
         this.searchConfigurationList = ApiTypeHelper.unmodifiable(builder.searchConfigurationList);
         this.size = builder.size;
-        this.type = builder.type;
+        this.startDate = builder.startDate;
+        this.tokenLimit = builder.tokenLimit;
+        this.type = ApiTypeHelper.requireNonNull(builder.type, this, "type");
+        this.ubiEventsIndex = builder.ubiEventsIndex;
     }
 
     public static PutJudgmentsRequest of(Function<PutJudgmentsRequest.Builder, ObjectBuilder<PutJudgmentsRequest>> fn) {
@@ -162,7 +190,21 @@ public final class PutJudgmentsRequest extends RequestBase
     }
 
     /**
+     * The end of the UBI events date range (inclusive).
+     * <p>
+     * API name: {@code endDate}
+     * </p>
+     */
+    @Nullable
+    public final String endDate() {
+        return this.endDate;
+    }
+
+    /**
+     * Whether to continue when individual documents fail to be rated. Defaults to <code>false</code>.
+     * <p>
      * API name: {@code ignoreFailure}
+     * </p>
      */
     @Nullable
     public final Boolean ignoreFailure() {
@@ -175,6 +217,14 @@ public final class PutJudgmentsRequest extends RequestBase
     @Nonnull
     public final List<Map<String, JsonData>> judgmentRatings() {
         return this.judgmentRatings;
+    }
+
+    /**
+     * API name: {@code llmJudgmentRatingType}
+     */
+    @Nullable
+    public final LLMJudgmentRatingType llmJudgmentRatingType() {
+        return this.llmJudgmentRatingType;
     }
 
     /**
@@ -194,11 +244,35 @@ public final class PutJudgmentsRequest extends RequestBase
     }
 
     /**
-     * API name: {@code name}
+     * Required - API name: {@code name}
      */
-    @Nullable
+    @Nonnull
     public final String name() {
         return this.name;
+    }
+
+    /**
+     * Deprecated and ignored. The global judgment cache was removed; use <code>existingJudgments</code> to reuse ratings or the
+     * <code>_retry</code> endpoint to re-score failed documents.
+     * <p>
+     * API name: {@code overwriteCache}
+     * </p>
+     */
+    @Nullable
+    public final Boolean overwriteCache() {
+        return this.overwriteCache;
+    }
+
+    /**
+     * The prompt template to use. Must contain a <code>{{hits}}</code> or <code>{{results}}</code> placeholder and a
+     * <code>{{queryText}}</code> or <code>{{searchText}}</code> placeholder. A default template is used when omitted.
+     * <p>
+     * API name: {@code promptTemplate}
+     * </p>
+     */
+    @Nullable
+    public final String promptTemplate() {
+        return this.promptTemplate;
     }
 
     /**
@@ -226,11 +300,44 @@ public final class PutJudgmentsRequest extends RequestBase
     }
 
     /**
-     * API name: {@code type}
+     * The start of the UBI events date range (inclusive).
+     * <p>
+     * API name: {@code startDate}
+     * </p>
      */
     @Nullable
+    public final String startDate() {
+        return this.startDate;
+    }
+
+    /**
+     * The maximum number of tokens allowed for the LLM prompt. Defaults to 4000.
+     * <p>
+     * API name: {@code tokenLimit}
+     * </p>
+     */
+    @Nullable
+    public final Integer tokenLimit() {
+        return this.tokenLimit;
+    }
+
+    /**
+     * Required - API name: {@code type}
+     */
+    @Nonnull
     public final String type() {
         return this.type;
+    }
+
+    /**
+     * The name of the UBI events index to source click data from.
+     * <p>
+     * API name: {@code ubiEventsIndex}
+     * </p>
+     */
+    @Nullable
+    public final String ubiEventsIndex() {
+        return this.ubiEventsIndex;
     }
 
     /**
@@ -263,6 +370,11 @@ public final class PutJudgmentsRequest extends RequestBase
             generator.write(this.description);
         }
 
+        if (this.endDate != null) {
+            generator.writeKey("endDate");
+            generator.write(this.endDate);
+        }
+
         if (this.ignoreFailure != null) {
             generator.writeKey("ignoreFailure");
             generator.write(this.ignoreFailure);
@@ -284,6 +396,11 @@ public final class PutJudgmentsRequest extends RequestBase
             generator.writeEnd();
         }
 
+        if (this.llmJudgmentRatingType != null) {
+            generator.writeKey("llmJudgmentRatingType");
+            this.llmJudgmentRatingType.serialize(generator, mapper);
+        }
+
         if (this.maxRank != null) {
             generator.writeKey("maxRank");
             generator.write(this.maxRank);
@@ -294,9 +411,17 @@ public final class PutJudgmentsRequest extends RequestBase
             generator.write(this.modelId);
         }
 
-        if (this.name != null) {
-            generator.writeKey("name");
-            generator.write(this.name);
+        generator.writeKey("name");
+        generator.write(this.name);
+
+        if (this.overwriteCache != null) {
+            generator.writeKey("overwriteCache");
+            generator.write(this.overwriteCache);
+        }
+
+        if (this.promptTemplate != null) {
+            generator.writeKey("promptTemplate");
+            generator.write(this.promptTemplate);
         }
 
         if (this.querySetId != null) {
@@ -318,9 +443,22 @@ public final class PutJudgmentsRequest extends RequestBase
             generator.write(this.size);
         }
 
-        if (this.type != null) {
-            generator.writeKey("type");
-            generator.write(this.type);
+        if (this.startDate != null) {
+            generator.writeKey("startDate");
+            generator.write(this.startDate);
+        }
+
+        if (this.tokenLimit != null) {
+            generator.writeKey("tokenLimit");
+            generator.write(this.tokenLimit);
+        }
+
+        generator.writeKey("type");
+        generator.write(this.type);
+
+        if (this.ubiEventsIndex != null) {
+            generator.writeKey("ubiEventsIndex");
+            generator.write(this.ubiEventsIndex);
         }
     }
 
@@ -348,15 +486,22 @@ public final class PutJudgmentsRequest extends RequestBase
         @Nullable
         private String description;
         @Nullable
+        private String endDate;
+        @Nullable
         private Boolean ignoreFailure;
         @Nullable
         private List<Map<String, JsonData>> judgmentRatings;
         @Nullable
+        private LLMJudgmentRatingType llmJudgmentRatingType;
+        @Nullable
         private Integer maxRank;
         @Nullable
         private String modelId;
-        @Nullable
         private String name;
+        @Nullable
+        private Boolean overwriteCache;
+        @Nullable
+        private String promptTemplate;
         @Nullable
         private String querySetId;
         @Nullable
@@ -364,7 +509,12 @@ public final class PutJudgmentsRequest extends RequestBase
         @Nullable
         private Integer size;
         @Nullable
+        private String startDate;
+        @Nullable
+        private Integer tokenLimit;
         private String type;
+        @Nullable
+        private String ubiEventsIndex;
 
         public Builder() {}
 
@@ -373,15 +523,22 @@ public final class PutJudgmentsRequest extends RequestBase
             this.clickModel = o.clickModel;
             this.contextFields = _listCopy(o.contextFields);
             this.description = o.description;
+            this.endDate = o.endDate;
             this.ignoreFailure = o.ignoreFailure;
             this.judgmentRatings = _listCopy(o.judgmentRatings);
+            this.llmJudgmentRatingType = o.llmJudgmentRatingType;
             this.maxRank = o.maxRank;
             this.modelId = o.modelId;
             this.name = o.name;
+            this.overwriteCache = o.overwriteCache;
+            this.promptTemplate = o.promptTemplate;
             this.querySetId = o.querySetId;
             this.searchConfigurationList = _listCopy(o.searchConfigurationList);
             this.size = o.size;
+            this.startDate = o.startDate;
+            this.tokenLimit = o.tokenLimit;
             this.type = o.type;
+            this.ubiEventsIndex = o.ubiEventsIndex;
         }
 
         private Builder(Builder o) {
@@ -389,15 +546,22 @@ public final class PutJudgmentsRequest extends RequestBase
             this.clickModel = o.clickModel;
             this.contextFields = _listCopy(o.contextFields);
             this.description = o.description;
+            this.endDate = o.endDate;
             this.ignoreFailure = o.ignoreFailure;
             this.judgmentRatings = _listCopy(o.judgmentRatings);
+            this.llmJudgmentRatingType = o.llmJudgmentRatingType;
             this.maxRank = o.maxRank;
             this.modelId = o.modelId;
             this.name = o.name;
+            this.overwriteCache = o.overwriteCache;
+            this.promptTemplate = o.promptTemplate;
             this.querySetId = o.querySetId;
             this.searchConfigurationList = _listCopy(o.searchConfigurationList);
             this.size = o.size;
+            this.startDate = o.startDate;
+            this.tokenLimit = o.tokenLimit;
             this.type = o.type;
+            this.ubiEventsIndex = o.ubiEventsIndex;
         }
 
         @Override
@@ -457,7 +621,22 @@ public final class PutJudgmentsRequest extends RequestBase
         }
 
         /**
+         * The end of the UBI events date range (inclusive).
+         * <p>
+         * API name: {@code endDate}
+         * </p>
+         */
+        @Nonnull
+        public final Builder endDate(@Nullable String value) {
+            this.endDate = value;
+            return this;
+        }
+
+        /**
+         * Whether to continue when individual documents fail to be rated. Defaults to <code>false</code>.
+         * <p>
          * API name: {@code ignoreFailure}
+         * </p>
          */
         @Nonnull
         public final Builder ignoreFailure(@Nullable Boolean value) {
@@ -492,6 +671,15 @@ public final class PutJudgmentsRequest extends RequestBase
         }
 
         /**
+         * API name: {@code llmJudgmentRatingType}
+         */
+        @Nonnull
+        public final Builder llmJudgmentRatingType(@Nullable LLMJudgmentRatingType value) {
+            this.llmJudgmentRatingType = value;
+            return this;
+        }
+
+        /**
          * API name: {@code maxRank}
          */
         @Nonnull
@@ -510,11 +698,37 @@ public final class PutJudgmentsRequest extends RequestBase
         }
 
         /**
-         * API name: {@code name}
+         * Required - API name: {@code name}
          */
         @Nonnull
-        public final Builder name(@Nullable String value) {
+        public final Builder name(String value) {
             this.name = value;
+            return this;
+        }
+
+        /**
+         * Deprecated and ignored. The global judgment cache was removed; use <code>existingJudgments</code> to reuse ratings or the
+         * <code>_retry</code> endpoint to re-score failed documents.
+         * <p>
+         * API name: {@code overwriteCache}
+         * </p>
+         */
+        @Nonnull
+        public final Builder overwriteCache(@Nullable Boolean value) {
+            this.overwriteCache = value;
+            return this;
+        }
+
+        /**
+         * The prompt template to use. Must contain a <code>{{hits}}</code> or <code>{{results}}</code> placeholder and a
+         * <code>{{queryText}}</code> or <code>{{searchText}}</code> placeholder. A default template is used when omitted.
+         * <p>
+         * API name: {@code promptTemplate}
+         * </p>
+         */
+        @Nonnull
+        public final Builder promptTemplate(@Nullable String value) {
+            this.promptTemplate = value;
             return this;
         }
 
@@ -563,11 +777,47 @@ public final class PutJudgmentsRequest extends RequestBase
         }
 
         /**
-         * API name: {@code type}
+         * The start of the UBI events date range (inclusive).
+         * <p>
+         * API name: {@code startDate}
+         * </p>
          */
         @Nonnull
-        public final Builder type(@Nullable String value) {
+        public final Builder startDate(@Nullable String value) {
+            this.startDate = value;
+            return this;
+        }
+
+        /**
+         * The maximum number of tokens allowed for the LLM prompt. Defaults to 4000.
+         * <p>
+         * API name: {@code tokenLimit}
+         * </p>
+         */
+        @Nonnull
+        public final Builder tokenLimit(@Nullable Integer value) {
+            this.tokenLimit = value;
+            return this;
+        }
+
+        /**
+         * Required - API name: {@code type}
+         */
+        @Nonnull
+        public final Builder type(String value) {
             this.type = value;
+            return this;
+        }
+
+        /**
+         * The name of the UBI events index to source click data from.
+         * <p>
+         * API name: {@code ubiEventsIndex}
+         * </p>
+         */
+        @Nonnull
+        public final Builder ubiEventsIndex(@Nullable String value) {
+            this.ubiEventsIndex = value;
             return this;
         }
 
@@ -599,15 +849,19 @@ public final class PutJudgmentsRequest extends RequestBase
         op.add(Builder::clickModel, JsonpDeserializer.stringDeserializer(), "clickModel");
         op.add(Builder::contextFields, JsonpDeserializer.arrayDeserializer(JsonpDeserializer.stringDeserializer()), "contextFields");
         op.add(Builder::description, JsonpDeserializer.stringDeserializer(), "description");
+        op.add(Builder::endDate, JsonpDeserializer.stringDeserializer(), "endDate");
         op.add(Builder::ignoreFailure, JsonpDeserializer.booleanDeserializer(), "ignoreFailure");
         op.add(
             Builder::judgmentRatings,
             JsonpDeserializer.arrayDeserializer(JsonpDeserializer.stringMapDeserializer(JsonData._DESERIALIZER)),
             "judgmentRatings"
         );
+        op.add(Builder::llmJudgmentRatingType, LLMJudgmentRatingType._DESERIALIZER, "llmJudgmentRatingType");
         op.add(Builder::maxRank, JsonpDeserializer.integerDeserializer(), "maxRank");
         op.add(Builder::modelId, JsonpDeserializer.stringDeserializer(), "modelId");
         op.add(Builder::name, JsonpDeserializer.stringDeserializer(), "name");
+        op.add(Builder::overwriteCache, JsonpDeserializer.booleanDeserializer(), "overwriteCache");
+        op.add(Builder::promptTemplate, JsonpDeserializer.stringDeserializer(), "promptTemplate");
         op.add(Builder::querySetId, JsonpDeserializer.stringDeserializer(), "querySetId");
         op.add(
             Builder::searchConfigurationList,
@@ -615,7 +869,10 @@ public final class PutJudgmentsRequest extends RequestBase
             "searchConfigurationList"
         );
         op.add(Builder::size, JsonpDeserializer.integerDeserializer(), "size");
+        op.add(Builder::startDate, JsonpDeserializer.stringDeserializer(), "startDate");
+        op.add(Builder::tokenLimit, JsonpDeserializer.integerDeserializer(), "tokenLimit");
         op.add(Builder::type, JsonpDeserializer.stringDeserializer(), "type");
+        op.add(Builder::ubiEventsIndex, JsonpDeserializer.stringDeserializer(), "ubiEventsIndex");
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -645,15 +902,22 @@ public final class PutJudgmentsRequest extends RequestBase
         result = 31 * result + Objects.hashCode(this.clickModel);
         result = 31 * result + Objects.hashCode(this.contextFields);
         result = 31 * result + Objects.hashCode(this.description);
+        result = 31 * result + Objects.hashCode(this.endDate);
         result = 31 * result + Objects.hashCode(this.ignoreFailure);
         result = 31 * result + Objects.hashCode(this.judgmentRatings);
+        result = 31 * result + Objects.hashCode(this.llmJudgmentRatingType);
         result = 31 * result + Objects.hashCode(this.maxRank);
         result = 31 * result + Objects.hashCode(this.modelId);
-        result = 31 * result + Objects.hashCode(this.name);
+        result = 31 * result + this.name.hashCode();
+        result = 31 * result + Objects.hashCode(this.overwriteCache);
+        result = 31 * result + Objects.hashCode(this.promptTemplate);
         result = 31 * result + Objects.hashCode(this.querySetId);
         result = 31 * result + Objects.hashCode(this.searchConfigurationList);
         result = 31 * result + Objects.hashCode(this.size);
-        result = 31 * result + Objects.hashCode(this.type);
+        result = 31 * result + Objects.hashCode(this.startDate);
+        result = 31 * result + Objects.hashCode(this.tokenLimit);
+        result = 31 * result + this.type.hashCode();
+        result = 31 * result + Objects.hashCode(this.ubiEventsIndex);
         return result;
     }
 
@@ -665,14 +929,21 @@ public final class PutJudgmentsRequest extends RequestBase
         return Objects.equals(this.clickModel, other.clickModel)
             && Objects.equals(this.contextFields, other.contextFields)
             && Objects.equals(this.description, other.description)
+            && Objects.equals(this.endDate, other.endDate)
             && Objects.equals(this.ignoreFailure, other.ignoreFailure)
             && Objects.equals(this.judgmentRatings, other.judgmentRatings)
+            && Objects.equals(this.llmJudgmentRatingType, other.llmJudgmentRatingType)
             && Objects.equals(this.maxRank, other.maxRank)
             && Objects.equals(this.modelId, other.modelId)
-            && Objects.equals(this.name, other.name)
+            && this.name.equals(other.name)
+            && Objects.equals(this.overwriteCache, other.overwriteCache)
+            && Objects.equals(this.promptTemplate, other.promptTemplate)
             && Objects.equals(this.querySetId, other.querySetId)
             && Objects.equals(this.searchConfigurationList, other.searchConfigurationList)
             && Objects.equals(this.size, other.size)
-            && Objects.equals(this.type, other.type);
+            && Objects.equals(this.startDate, other.startDate)
+            && Objects.equals(this.tokenLimit, other.tokenLimit)
+            && this.type.equals(other.type)
+            && Objects.equals(this.ubiEventsIndex, other.ubiEventsIndex);
     }
 }

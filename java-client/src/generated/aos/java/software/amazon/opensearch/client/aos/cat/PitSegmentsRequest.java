@@ -81,6 +81,9 @@ public final class PitSegmentsRequest extends CatRequestBase
     @Nullable
     private final Bytes bytes;
 
+    @Nullable
+    private final Integer limit;
+
     @Nonnull
     private final List<String> pitId;
 
@@ -89,6 +92,7 @@ public final class PitSegmentsRequest extends CatRequestBase
     private PitSegmentsRequest(Builder builder) {
         super(builder);
         this.bytes = builder.bytes;
+        this.limit = builder.limit;
         this.pitId = ApiTypeHelper.unmodifiableRequired(builder.pitId, this, "pitId");
     }
 
@@ -105,6 +109,17 @@ public final class PitSegmentsRequest extends CatRequestBase
     @Nullable
     public final Bytes bytes() {
         return this.bytes;
+    }
+
+    /**
+     * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+     * <p>
+     * API name: {@code limit}
+     * </p>
+     */
+    @Nullable
+    public final Integer limit() {
+        return this.limit;
     }
 
     /**
@@ -153,6 +168,8 @@ public final class PitSegmentsRequest extends CatRequestBase
     public static class Builder extends CatRequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, PitSegmentsRequest> {
         @Nullable
         private Bytes bytes;
+        @Nullable
+        private Integer limit;
         private List<String> pitId;
 
         public Builder() {}
@@ -160,12 +177,14 @@ public final class PitSegmentsRequest extends CatRequestBase
         private Builder(PitSegmentsRequest o) {
             super(o);
             this.bytes = o.bytes;
+            this.limit = o.limit;
             this.pitId = _listCopy(o.pitId);
         }
 
         private Builder(Builder o) {
             super(o);
             this.bytes = o.bytes;
+            this.limit = o.limit;
             this.pitId = _listCopy(o.pitId);
         }
 
@@ -190,6 +209,18 @@ public final class PitSegmentsRequest extends CatRequestBase
         @Nonnull
         public final Builder bytes(@Nullable Bytes value) {
             this.bytes = value;
+            return this;
+        }
+
+        /**
+         * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+         * <p>
+         * API name: {@code limit}
+         * </p>
+         */
+        @Nonnull
+        public final Builder limit(@Nullable Integer value) {
+            this.limit = value;
             return this;
         }
 
@@ -255,6 +286,9 @@ public final class PitSegmentsRequest extends CatRequestBase
         if (this.bytes != null) {
             params.put("bytes", this.bytes.jsonValue());
         }
+        if (this.limit != null) {
+            params.put("limit", String.valueOf(this.limit));
+        }
     }
 
     /**
@@ -280,6 +314,7 @@ public final class PitSegmentsRequest extends CatRequestBase
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.bytes);
+        result = 31 * result + Objects.hashCode(this.limit);
         result = 31 * result + this.pitId.hashCode();
         return result;
     }
@@ -289,6 +324,6 @@ public final class PitSegmentsRequest extends CatRequestBase
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         PitSegmentsRequest other = (PitSegmentsRequest) o;
-        return Objects.equals(this.bytes, other.bytes) && this.pitId.equals(other.pitId);
+        return Objects.equals(this.bytes, other.bytes) && Objects.equals(this.limit, other.limit) && this.pitId.equals(other.pitId);
     }
 }
