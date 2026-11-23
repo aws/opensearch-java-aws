@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -27,11 +28,13 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semver4j.Semver;
+import software.amazon.opensearch.client.codegen.openapi.JsonPointer;
 import software.amazon.opensearch.client.codegen.openapi.MimeType;
 import software.amazon.opensearch.client.codegen.openapi.OpenApiMediaType;
 import software.amazon.opensearch.client.codegen.openapi.OpenApiRequestBody;
@@ -50,15 +53,28 @@ public final class ObjectFlatteningVisitor extends OpenApiVisitorBase {
     // Combinator members added after this version are left out, so they contribute neither properties nor requirements.
     @Nullable
     private final Semver maxVersion;
+    // A Java class cannot extend a base that is also used directly, because both would implement ToCopyableBuilder.
+    @Nonnull
+    private final Set<JsonPointer> concretelyReferenced;
 
     public ObjectFlatteningVisitor(@Nonnull Overrides overrides, @Nonnull OpenApiWalker walker) {
         this(overrides, walker, null);
     }
 
     public ObjectFlatteningVisitor(@Nonnull Overrides overrides, @Nonnull OpenApiWalker walker, @Nullable Semver maxVersion) {
+        this(overrides, walker, maxVersion, Set.of());
+    }
+
+    public ObjectFlatteningVisitor(
+        @Nonnull Overrides overrides,
+        @Nonnull OpenApiWalker walker,
+        @Nullable Semver maxVersion,
+        @Nonnull Set<JsonPointer> concretelyReferenced
+    ) {
         this.overrides = Objects.requireNonNull(overrides, "overrides cannot be null");
         this.walker = Objects.requireNonNull(walker, "walker cannot be null");
         this.maxVersion = maxVersion;
+        this.concretelyReferenced = Objects.requireNonNull(concretelyReferenced, "concretelyReferenced cannot be null");
     }
 
     private boolean isAvailable(@Nonnull OpenApiSchema member) {
@@ -87,12 +103,44 @@ public final class ObjectFlatteningVisitor extends OpenApiVisitorBase {
     @Nonnull
     @Override
     public OpenApiSchema visitSchemaEnd(@Nonnull OpenApiSchema schema) {
-        processSchema(schema, false);
+        processSchema(schema, extendsConcretelyReferencedSchema(schema));
         return schema;
     }
 
+    private boolean extendsConcretelyReferencedSchema(OpenApiSchema schema) {
+        if (!schema.getPointer().isDirectChildOf(OpenApiSchema.COMPONENTS_SCHEMAS)) {
+            return false;
+        }
+        var base = schema.get$extends().map(OpenApiSchema::resolve).orElse(null);
+        return base != null
+            && concretelyReferenced.contains(base.getPointer())
+            && !reachesTypeParameter(base, Collections.newSetFromMap(new IdentityHashMap<>()));
+    }
+
+    private static boolean reachesTypeParameter(OpenApiSchema schema, Set<OpenApiSchema> seen) {
+        if (!seen.add(schema)) {
+            return false;
+        }
+        if (schema.isGenericTypeParameter()) {
+            return true;
+        }
+        if (schema.has$ref()) {
+            return reachesTypeParameter(schema.resolve(), seen);
+        }
+        return Stream.of(
+            schema.getAllOf().stream().flatMap(List::stream),
+            schema.getAnyOf().stream().flatMap(List::stream),
+            schema.getOneOf().stream().flatMap(List::stream),
+            schema.getItems().stream(),
+            schema.getPropertyNames().stream(),
+            schema.getAdditionalProperties().stream(),
+            schema.getProperties().stream().flatMap(m -> m.values().stream()),
+            schema.get$extends().stream()
+        ).flatMap(Function.identity()).anyMatch(s -> reachesTypeParameter(s, seen));
+    }
+
     private void processSchema(OpenApiSchema schema, boolean flatten$extends) {
-        if (schema.has$ref() || !schema.isObject() || schema.isTaggedUnion()) {
+        if (schema.has$ref() || !schema.isObject() || (schema.isTaggedUnion() && !flatten$extends)) {
             return;
         }
 
