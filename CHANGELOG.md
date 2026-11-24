@@ -13,6 +13,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Bump `tools.jackson.core:jackson-databind` from 3.2.4 to 3.3.0 ([#75](https://github.com/aws/opensearch-java-aws/pull/75))
 - Bump `awsSdkVersion` from 2.57.1 to 2.59.3 ([#69](https://github.com/aws/opensearch-java-aws/pull/69))
 - Bump `org.junit:junit-bom` from 5.14.4 to 6.1.3 ([#3](https://github.com/aws/opensearch-java-aws/pull/3))
+- Bump `gradle-wrapper` from 9.8.2 to 9.9.2 ([#82](https://github.com/aws/opensearch-java-aws/pull/82))
 ### Changed
 ### Deprecated
 ### Removed
