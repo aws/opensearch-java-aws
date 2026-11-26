@@ -329,7 +329,7 @@ dependencies {
     api("org.apache.httpcomponents.client5:httpclient5:5.6.5") {
       exclude(group = "org.apache.httpcomponents.core5")
     }
-    api("org.apache.httpcomponents.core5:httpcore5:5.4.4")
+    api("org.apache.httpcomponents.core5:httpcore5:5.5")
     api("org.apache.httpcomponents.core5:httpcore5-h2:5.4.4")
 
     // Apache 2.0
