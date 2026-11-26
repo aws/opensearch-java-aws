@@ -15,6 +15,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Bump `org.junit:junit-bom` from 5.14.4 to 6.1.3 ([#3](https://github.com/aws/opensearch-java-aws/pull/3))
 - Bump `gradle-wrapper` from 9.8.2 to 9.9.2 ([#82](https://github.com/aws/opensearch-java-aws/pull/82))
 - Bump `org.apache.httpcomponents.core5:httpcore5` from 5.4.4 to 5.5 ([#83](https://github.com/aws/opensearch-java-aws/pull/83))
+- Bump `org.apache.httpcomponents.core5:httpcore5-h2` from 5.4.4 to 5.5 ([#81](https://github.com/aws/opensearch-java-aws/pull/81))
 ### Changed
 - Sync the latest OpenSearch API specs and fix code generation for the new shapes ([#78](https://github.com/aws/opensearch-java-aws/pull/78))
 ### Deprecated
