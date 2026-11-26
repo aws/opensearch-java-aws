@@ -66,13 +66,13 @@ public class UploadStatsTotal implements PlainJsonSerializable, ToCopyableBuilde
 
     private final long duration;
 
-    private final int failed;
+    private final long failed;
 
-    private final int requestCount;
+    private final long requestCount;
 
-    private final int success;
+    private final long success;
 
-    private final int upload;
+    private final long upload;
 
     // ---------------------------------------------------------------------------------------------
 
@@ -89,7 +89,10 @@ public class UploadStatsTotal implements PlainJsonSerializable, ToCopyableBuilde
     }
 
     /**
-     * Required - API name: {@code duration}
+     * Required - Total duration in milliseconds.
+     * <p>
+     * API name: {@code duration}
+     * </p>
      */
     public final long duration() {
         return this.duration;
@@ -101,7 +104,7 @@ public class UploadStatsTotal implements PlainJsonSerializable, ToCopyableBuilde
      * API name: {@code failed}
      * </p>
      */
-    public final int failed() {
+    public final long failed() {
         return this.failed;
     }
 
@@ -111,7 +114,7 @@ public class UploadStatsTotal implements PlainJsonSerializable, ToCopyableBuilde
      * API name: {@code request_count}
      * </p>
      */
-    public final int requestCount() {
+    public final long requestCount() {
         return this.requestCount;
     }
 
@@ -121,7 +124,7 @@ public class UploadStatsTotal implements PlainJsonSerializable, ToCopyableBuilde
      * API name: {@code success}
      * </p>
      */
-    public final int success() {
+    public final long success() {
         return this.success;
     }
 
@@ -131,7 +134,7 @@ public class UploadStatsTotal implements PlainJsonSerializable, ToCopyableBuilde
      * API name: {@code upload}
      * </p>
      */
-    public final int upload() {
+    public final long upload() {
         return this.upload;
     }
 
@@ -180,10 +183,10 @@ public class UploadStatsTotal implements PlainJsonSerializable, ToCopyableBuilde
      */
     public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, UploadStatsTotal> {
         private Long duration;
-        private Integer failed;
-        private Integer requestCount;
-        private Integer success;
-        private Integer upload;
+        private Long failed;
+        private Long requestCount;
+        private Long success;
+        private Long upload;
 
         public Builder() {}
 
@@ -210,7 +213,10 @@ public class UploadStatsTotal implements PlainJsonSerializable, ToCopyableBuilde
         }
 
         /**
-         * Required - API name: {@code duration}
+         * Required - Total duration in milliseconds.
+         * <p>
+         * API name: {@code duration}
+         * </p>
          */
         @Nonnull
         public final Builder duration(long value) {
@@ -225,7 +231,7 @@ public class UploadStatsTotal implements PlainJsonSerializable, ToCopyableBuilde
          * </p>
          */
         @Nonnull
-        public final Builder failed(int value) {
+        public final Builder failed(long value) {
             this.failed = value;
             return this;
         }
@@ -237,7 +243,7 @@ public class UploadStatsTotal implements PlainJsonSerializable, ToCopyableBuilde
          * </p>
          */
         @Nonnull
-        public final Builder requestCount(int value) {
+        public final Builder requestCount(long value) {
             this.requestCount = value;
             return this;
         }
@@ -249,7 +255,7 @@ public class UploadStatsTotal implements PlainJsonSerializable, ToCopyableBuilde
          * </p>
          */
         @Nonnull
-        public final Builder success(int value) {
+        public final Builder success(long value) {
             this.success = value;
             return this;
         }
@@ -261,7 +267,7 @@ public class UploadStatsTotal implements PlainJsonSerializable, ToCopyableBuilde
          * </p>
          */
         @Nonnull
-        public final Builder upload(int value) {
+        public final Builder upload(long value) {
             this.upload = value;
             return this;
         }
@@ -292,20 +298,20 @@ public class UploadStatsTotal implements PlainJsonSerializable, ToCopyableBuilde
 
     protected static void setupUploadStatsTotalDeserializer(ObjectDeserializer<UploadStatsTotal.Builder> op) {
         op.add(Builder::duration, JsonpDeserializer.longDeserializer(), "duration");
-        op.add(Builder::failed, JsonpDeserializer.integerDeserializer(), "failed");
-        op.add(Builder::requestCount, JsonpDeserializer.integerDeserializer(), "request_count");
-        op.add(Builder::success, JsonpDeserializer.integerDeserializer(), "success");
-        op.add(Builder::upload, JsonpDeserializer.integerDeserializer(), "upload");
+        op.add(Builder::failed, JsonpDeserializer.longDeserializer(), "failed");
+        op.add(Builder::requestCount, JsonpDeserializer.longDeserializer(), "request_count");
+        op.add(Builder::success, JsonpDeserializer.longDeserializer(), "success");
+        op.add(Builder::upload, JsonpDeserializer.longDeserializer(), "upload");
     }
 
     @Override
     public int hashCode() {
         int result = 17;
         result = 31 * result + Long.hashCode(this.duration);
-        result = 31 * result + Integer.hashCode(this.failed);
-        result = 31 * result + Integer.hashCode(this.requestCount);
-        result = 31 * result + Integer.hashCode(this.success);
-        result = 31 * result + Integer.hashCode(this.upload);
+        result = 31 * result + Long.hashCode(this.failed);
+        result = 31 * result + Long.hashCode(this.requestCount);
+        result = 31 * result + Long.hashCode(this.success);
+        result = 31 * result + Long.hashCode(this.upload);
         return result;
     }
 

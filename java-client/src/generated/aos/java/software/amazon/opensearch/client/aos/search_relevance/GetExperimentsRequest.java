@@ -71,11 +71,15 @@ public final class GetExperimentsRequest extends RequestBase
     @Nullable
     private final String experimentId;
 
+    @Nullable
+    private final String queryText;
+
     // ---------------------------------------------------------------------------------------------
 
     private GetExperimentsRequest(Builder builder) {
         super(builder);
         this.experimentId = builder.experimentId;
+        this.queryText = builder.queryText;
     }
 
     public static GetExperimentsRequest of(Function<GetExperimentsRequest.Builder, ObjectBuilder<GetExperimentsRequest>> fn) {
@@ -91,6 +95,17 @@ public final class GetExperimentsRequest extends RequestBase
     @Nullable
     public final String experimentId() {
         return this.experimentId;
+    }
+
+    /**
+     * A query text for visualizing experiment results. Accepted but currently does not change the response.
+     * <p>
+     * API name: {@code query_text}
+     * </p>
+     */
+    @Nullable
+    public final String queryText() {
+        return this.queryText;
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -112,17 +127,21 @@ public final class GetExperimentsRequest extends RequestBase
     public static class Builder extends RequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, GetExperimentsRequest> {
         @Nullable
         private String experimentId;
+        @Nullable
+        private String queryText;
 
         public Builder() {}
 
         private Builder(GetExperimentsRequest o) {
             super(o);
             this.experimentId = o.experimentId;
+            this.queryText = o.queryText;
         }
 
         private Builder(Builder o) {
             super(o);
             this.experimentId = o.experimentId;
+            this.queryText = o.queryText;
         }
 
         @Override
@@ -150,6 +169,18 @@ public final class GetExperimentsRequest extends RequestBase
         }
 
         /**
+         * A query text for visualizing experiment results. Accepted but currently does not change the response.
+         * <p>
+         * API name: {@code query_text}
+         * </p>
+         */
+        @Nonnull
+        public final Builder queryText(@Nullable String value) {
+            this.queryText = value;
+            return this;
+        }
+
+        /**
          * Builds a {@link GetExperimentsRequest}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -164,6 +195,14 @@ public final class GetExperimentsRequest extends RequestBase
     }
 
     // ---------------------------------------------------------------------------------------------
+
+    @Override
+    protected void applyQueryParameters(@Nonnull Map<String, String> params) {
+        super.applyQueryParameters(params);
+        if (this.queryText != null) {
+            params.put("query_text", this.queryText);
+        }
+    }
 
     /**
      * Endpoint "{@code search_relevance.get_experiments}".
@@ -216,6 +255,7 @@ public final class GetExperimentsRequest extends RequestBase
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.experimentId);
+        result = 31 * result + Objects.hashCode(this.queryText);
         return result;
     }
 
@@ -224,6 +264,6 @@ public final class GetExperimentsRequest extends RequestBase
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         GetExperimentsRequest other = (GetExperimentsRequest) o;
-        return Objects.equals(this.experimentId, other.experimentId);
+        return Objects.equals(this.experimentId, other.experimentId) && Objects.equals(this.queryText, other.queryText);
     }
 }

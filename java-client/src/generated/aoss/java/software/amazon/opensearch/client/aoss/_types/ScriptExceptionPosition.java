@@ -40,56 +40,80 @@
 // THIS CODE IS GENERATED. MANUAL EDITS WILL BE LOST.
 //----------------------------------------------------
 
-package software.amazon.opensearch.client.aos.ism;
+package software.amazon.opensearch.client.aoss._types;
 
 import jakarta.json.stream.JsonGenerator;
-import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import software.amazon.opensearch.client.json.JsonData;
 import software.amazon.opensearch.client.json.JsonpDeserializable;
 import software.amazon.opensearch.client.json.JsonpDeserializer;
 import software.amazon.opensearch.client.json.JsonpMapper;
 import software.amazon.opensearch.client.json.ObjectBuilderDeserializer;
 import software.amazon.opensearch.client.json.ObjectDeserializer;
 import software.amazon.opensearch.client.json.PlainJsonSerializable;
-import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilderBase;
 import software.amazon.opensearch.client.util.ToCopyableBuilder;
 
-// typedef: ism.ActionTimeout
+// typedef: _types.ScriptExceptionPosition
 
+/**
+ * The location of the error within the script source.
+ */
 @JsonpDeserializable
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
-public class ActionTimeout implements PlainJsonSerializable, ToCopyableBuilder<ActionTimeout.Builder, ActionTimeout> {
+public class ScriptExceptionPosition
+    implements
+        PlainJsonSerializable,
+        ToCopyableBuilder<ScriptExceptionPosition.Builder, ScriptExceptionPosition> {
 
-    @Nonnull
-    private final Map<String, JsonData> timeout;
+    @Nullable
+    private final Integer end;
+
+    @Nullable
+    private final Integer offset;
+
+    @Nullable
+    private final Integer start;
 
     // ---------------------------------------------------------------------------------------------
 
-    private ActionTimeout(Builder builder) {
-        this.timeout = ApiTypeHelper.unmodifiable(builder.timeout);
+    private ScriptExceptionPosition(Builder builder) {
+        this.end = builder.end;
+        this.offset = builder.offset;
+        this.start = builder.start;
     }
 
-    public static ActionTimeout of(Function<ActionTimeout.Builder, ObjectBuilder<ActionTimeout>> fn) {
+    public static ScriptExceptionPosition of(Function<ScriptExceptionPosition.Builder, ObjectBuilder<ScriptExceptionPosition>> fn) {
         return fn.apply(new Builder()).build();
     }
 
     /**
-     * The timeout configuration for the action.
-     * <p>
-     * API name: {@code timeout}
-     * </p>
+     * API name: {@code end}
      */
-    @Nonnull
-    public final Map<String, JsonData> timeout() {
-        return this.timeout;
+    @Nullable
+    public final Integer end() {
+        return this.end;
+    }
+
+    /**
+     * API name: {@code offset}
+     */
+    @Nullable
+    public final Integer offset() {
+        return this.offset;
+    }
+
+    /**
+     * API name: {@code start}
+     */
+    @Nullable
+    public final Integer start() {
+        return this.start;
     }
 
     /**
@@ -103,14 +127,19 @@ public class ActionTimeout implements PlainJsonSerializable, ToCopyableBuilder<A
     }
 
     protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
-        if (ApiTypeHelper.isDefined(this.timeout)) {
-            generator.writeKey("timeout");
-            generator.writeStartObject();
-            for (Map.Entry<String, JsonData> item0 : this.timeout.entrySet()) {
-                generator.writeKey(item0.getKey());
-                item0.getValue().serialize(generator, mapper);
-            }
-            generator.writeEnd();
+        if (this.end != null) {
+            generator.writeKey("end");
+            generator.write(this.end);
+        }
+
+        if (this.offset != null) {
+            generator.writeKey("offset");
+            generator.write(this.offset);
+        }
+
+        if (this.start != null) {
+            generator.writeKey("start");
+            generator.write(this.start);
         }
     }
 
@@ -128,20 +157,28 @@ public class ActionTimeout implements PlainJsonSerializable, ToCopyableBuilder<A
     }
 
     /**
-     * Builder for {@link ActionTimeout}.
+     * Builder for {@link ScriptExceptionPosition}.
      */
-    public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, ActionTimeout> {
+    public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, ScriptExceptionPosition> {
         @Nullable
-        private Map<String, JsonData> timeout;
+        private Integer end;
+        @Nullable
+        private Integer offset;
+        @Nullable
+        private Integer start;
 
         public Builder() {}
 
-        private Builder(ActionTimeout o) {
-            this.timeout = _mapCopy(o.timeout);
+        private Builder(ScriptExceptionPosition o) {
+            this.end = o.end;
+            this.offset = o.offset;
+            this.start = o.start;
         }
 
         private Builder(Builder o) {
-            this.timeout = _mapCopy(o.timeout);
+            this.end = o.end;
+            this.offset = o.offset;
+            this.start = o.start;
         }
 
         @Override
@@ -151,69 +188,68 @@ public class ActionTimeout implements PlainJsonSerializable, ToCopyableBuilder<A
         }
 
         /**
-         * The timeout configuration for the action.
-         * <p>
-         * API name: {@code timeout}
-         * </p>
-         *
-         * <p>
-         * Adds all elements of <code>map</code> to <code>timeout</code>.
-         * </p>
+         * API name: {@code end}
          */
         @Nonnull
-        public final Builder timeout(Map<String, JsonData> map) {
-            this.timeout = _mapPutAll(this.timeout, map);
+        public final Builder end(@Nullable Integer value) {
+            this.end = value;
             return this;
         }
 
         /**
-         * The timeout configuration for the action.
-         * <p>
-         * API name: {@code timeout}
-         * </p>
-         *
-         * <p>
-         * Adds an entry to <code>timeout</code>.
-         * </p>
+         * API name: {@code offset}
          */
         @Nonnull
-        public final Builder timeout(String key, JsonData value) {
-            this.timeout = _mapPut(this.timeout, key, value);
+        public final Builder offset(@Nullable Integer value) {
+            this.offset = value;
             return this;
         }
 
         /**
-         * Builds a {@link ActionTimeout}.
+         * API name: {@code start}
+         */
+        @Nonnull
+        public final Builder start(@Nullable Integer value) {
+            this.start = value;
+            return this;
+        }
+
+        /**
+         * Builds a {@link ScriptExceptionPosition}.
          *
          * @throws NullPointerException if some of the required fields are null.
          */
         @Override
         @Nonnull
-        public ActionTimeout build() {
+        public ScriptExceptionPosition build() {
             _checkSingleUse();
 
-            return new ActionTimeout(this);
+            return new ScriptExceptionPosition(this);
         }
     }
 
     // ---------------------------------------------------------------------------------------------
 
     /**
-     * Json deserializer for {@link ActionTimeout}
+     * Json deserializer for {@link ScriptExceptionPosition}
      */
-    public static final JsonpDeserializer<ActionTimeout> _DESERIALIZER = ObjectBuilderDeserializer.lazy(
+    public static final JsonpDeserializer<ScriptExceptionPosition> _DESERIALIZER = ObjectBuilderDeserializer.lazy(
         Builder::new,
-        ActionTimeout::setupActionTimeoutDeserializer
+        ScriptExceptionPosition::setupScriptExceptionPositionDeserializer
     );
 
-    protected static void setupActionTimeoutDeserializer(ObjectDeserializer<ActionTimeout.Builder> op) {
-        op.add(Builder::timeout, JsonpDeserializer.stringMapDeserializer(JsonData._DESERIALIZER), "timeout");
+    protected static void setupScriptExceptionPositionDeserializer(ObjectDeserializer<ScriptExceptionPosition.Builder> op) {
+        op.add(Builder::end, JsonpDeserializer.integerDeserializer(), "end");
+        op.add(Builder::offset, JsonpDeserializer.integerDeserializer(), "offset");
+        op.add(Builder::start, JsonpDeserializer.integerDeserializer(), "start");
     }
 
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + Objects.hashCode(this.timeout);
+        result = 31 * result + Objects.hashCode(this.end);
+        result = 31 * result + Objects.hashCode(this.offset);
+        result = 31 * result + Objects.hashCode(this.start);
         return result;
     }
 
@@ -221,7 +257,7 @@ public class ActionTimeout implements PlainJsonSerializable, ToCopyableBuilder<A
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
-        ActionTimeout other = (ActionTimeout) o;
-        return Objects.equals(this.timeout, other.timeout);
+        ScriptExceptionPosition other = (ScriptExceptionPosition) o;
+        return Objects.equals(this.end, other.end) && Objects.equals(this.offset, other.offset) && Objects.equals(this.start, other.start);
     }
 }

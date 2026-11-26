@@ -71,7 +71,7 @@ public class GetPoliciesResponse implements PlainJsonSerializable, ToCopyableBui
     private final List<PolicyWithMetadata> policies;
 
     @Nullable
-    private final Number totalPolicies;
+    private final Integer totalPolicies;
 
     // ---------------------------------------------------------------------------------------------
 
@@ -102,7 +102,7 @@ public class GetPoliciesResponse implements PlainJsonSerializable, ToCopyableBui
      * </p>
      */
     @Nullable
-    public final Number totalPolicies() {
+    public final Integer totalPolicies() {
         return this.totalPolicies;
     }
 
@@ -128,7 +128,7 @@ public class GetPoliciesResponse implements PlainJsonSerializable, ToCopyableBui
 
         if (this.totalPolicies != null) {
             generator.writeKey("total_policies");
-            generator.write(this.totalPolicies.doubleValue());
+            generator.write(this.totalPolicies);
         }
     }
 
@@ -152,7 +152,7 @@ public class GetPoliciesResponse implements PlainJsonSerializable, ToCopyableBui
         @Nullable
         private List<PolicyWithMetadata> policies;
         @Nullable
-        private Number totalPolicies;
+        private Integer totalPolicies;
 
         public Builder() {}
 
@@ -226,7 +226,7 @@ public class GetPoliciesResponse implements PlainJsonSerializable, ToCopyableBui
          * </p>
          */
         @Nonnull
-        public final Builder totalPolicies(@Nullable Number value) {
+        public final Builder totalPolicies(@Nullable Integer value) {
             this.totalPolicies = value;
             return this;
         }
@@ -257,7 +257,7 @@ public class GetPoliciesResponse implements PlainJsonSerializable, ToCopyableBui
 
     protected static void setupGetPoliciesResponseDeserializer(ObjectDeserializer<GetPoliciesResponse.Builder> op) {
         op.add(Builder::policies, JsonpDeserializer.arrayDeserializer(PolicyWithMetadata._DESERIALIZER), "policies");
-        op.add(Builder::totalPolicies, JsonpDeserializer.numberDeserializer(), "total_policies");
+        op.add(Builder::totalPolicies, JsonpDeserializer.integerDeserializer(), "total_policies");
     }
 
     @Override

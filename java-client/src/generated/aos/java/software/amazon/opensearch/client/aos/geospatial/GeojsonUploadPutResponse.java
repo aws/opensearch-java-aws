@@ -43,9 +43,12 @@
 package software.amazon.opensearch.client.aos.geospatial;
 
 import jakarta.json.stream.JsonGenerator;
+import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import software.amazon.opensearch.client.json.JsonpDeserializable;
 import software.amazon.opensearch.client.json.JsonpDeserializer;
 import software.amazon.opensearch.client.json.JsonpMapper;
@@ -71,6 +74,9 @@ public class GeojsonUploadPutResponse
 
     private final int failure;
 
+    @Nonnull
+    private final List<UploadFailure> failures;
+
     private final int success;
 
     private final long took;
@@ -82,6 +88,7 @@ public class GeojsonUploadPutResponse
     private GeojsonUploadPutResponse(Builder builder) {
         this.errors = ApiTypeHelper.requireNonNull(builder.errors, this, "errors");
         this.failure = ApiTypeHelper.requireNonNull(builder.failure, this, "failure");
+        this.failures = ApiTypeHelper.unmodifiable(builder.failures);
         this.success = ApiTypeHelper.requireNonNull(builder.success, this, "success");
         this.took = ApiTypeHelper.requireNonNull(builder.took, this, "took");
         this.total = ApiTypeHelper.requireNonNull(builder.total, this, "total");
@@ -109,6 +116,17 @@ public class GeojsonUploadPutResponse
      */
     public final int failure() {
         return this.failure;
+    }
+
+    /**
+     * Details of individual feature upload failures. Only present when errors is true.
+     * <p>
+     * API name: {@code failures}
+     * </p>
+     */
+    @Nonnull
+    public final List<UploadFailure> failures() {
+        return this.failures;
     }
 
     /**
@@ -155,6 +173,15 @@ public class GeojsonUploadPutResponse
         generator.writeKey("failure");
         generator.write(this.failure);
 
+        if (ApiTypeHelper.isDefined(this.failures)) {
+            generator.writeKey("failures");
+            generator.writeStartArray();
+            for (UploadFailure item0 : this.failures) {
+                item0.serialize(generator, mapper);
+            }
+            generator.writeEnd();
+        }
+
         generator.writeKey("success");
         generator.write(this.success);
 
@@ -184,6 +211,8 @@ public class GeojsonUploadPutResponse
     public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, GeojsonUploadPutResponse> {
         private Boolean errors;
         private Integer failure;
+        @Nullable
+        private List<UploadFailure> failures;
         private Integer success;
         private Long took;
         private Integer total;
@@ -193,6 +222,7 @@ public class GeojsonUploadPutResponse
         private Builder(GeojsonUploadPutResponse o) {
             this.errors = o.errors;
             this.failure = o.failure;
+            this.failures = _listCopy(o.failures);
             this.success = o.success;
             this.took = o.took;
             this.total = o.total;
@@ -201,6 +231,7 @@ public class GeojsonUploadPutResponse
         private Builder(Builder o) {
             this.errors = o.errors;
             this.failure = o.failure;
+            this.failures = _listCopy(o.failures);
             this.success = o.success;
             this.took = o.took;
             this.total = o.total;
@@ -234,6 +265,53 @@ public class GeojsonUploadPutResponse
         public final Builder failure(int value) {
             this.failure = value;
             return this;
+        }
+
+        /**
+         * Details of individual feature upload failures. Only present when errors is true.
+         * <p>
+         * API name: {@code failures}
+         * </p>
+         *
+         * <p>
+         * Adds all elements of <code>list</code> to <code>failures</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder failures(List<UploadFailure> list) {
+            this.failures = _listAddAll(this.failures, list);
+            return this;
+        }
+
+        /**
+         * Details of individual feature upload failures. Only present when errors is true.
+         * <p>
+         * API name: {@code failures}
+         * </p>
+         *
+         * <p>
+         * Adds one or more values to <code>failures</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder failures(UploadFailure value, UploadFailure... values) {
+            this.failures = _listAdd(this.failures, value, values);
+            return this;
+        }
+
+        /**
+         * Details of individual feature upload failures. Only present when errors is true.
+         * <p>
+         * API name: {@code failures}
+         * </p>
+         *
+         * <p>
+         * Adds a value to <code>failures</code> using a builder lambda.
+         * </p>
+         */
+        @Nonnull
+        public final Builder failures(Function<UploadFailure.Builder, ObjectBuilder<UploadFailure>> fn) {
+            return failures(fn.apply(new UploadFailure.Builder()).build());
         }
 
         /**
@@ -296,6 +374,7 @@ public class GeojsonUploadPutResponse
     protected static void setupGeojsonUploadPutResponseDeserializer(ObjectDeserializer<GeojsonUploadPutResponse.Builder> op) {
         op.add(Builder::errors, JsonpDeserializer.booleanDeserializer(), "errors");
         op.add(Builder::failure, JsonpDeserializer.integerDeserializer(), "failure");
+        op.add(Builder::failures, JsonpDeserializer.arrayDeserializer(UploadFailure._DESERIALIZER), "failures");
         op.add(Builder::success, JsonpDeserializer.integerDeserializer(), "success");
         op.add(Builder::took, JsonpDeserializer.longDeserializer(), "took");
         op.add(Builder::total, JsonpDeserializer.integerDeserializer(), "total");
@@ -306,6 +385,7 @@ public class GeojsonUploadPutResponse
         int result = 17;
         result = 31 * result + Boolean.hashCode(this.errors);
         result = 31 * result + Integer.hashCode(this.failure);
+        result = 31 * result + Objects.hashCode(this.failures);
         result = 31 * result + Integer.hashCode(this.success);
         result = 31 * result + Long.hashCode(this.took);
         result = 31 * result + Integer.hashCode(this.total);
@@ -319,6 +399,7 @@ public class GeojsonUploadPutResponse
         GeojsonUploadPutResponse other = (GeojsonUploadPutResponse) o;
         return this.errors == other.errors
             && this.failure == other.failure
+            && Objects.equals(this.failures, other.failures)
             && this.success == other.success
             && this.took == other.took
             && this.total == other.total;

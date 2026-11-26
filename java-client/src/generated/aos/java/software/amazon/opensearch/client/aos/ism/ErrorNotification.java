@@ -43,13 +43,12 @@
 package software.amazon.opensearch.client.aos.ism;
 
 import jakarta.json.stream.JsonGenerator;
-import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import software.amazon.opensearch.client.json.JsonData;
+import software.amazon.opensearch.client.aos._types.Script;
 import software.amazon.opensearch.client.json.JsonpDeserializable;
 import software.amazon.opensearch.client.json.JsonpDeserializer;
 import software.amazon.opensearch.client.json.JsonpMapper;
@@ -64,6 +63,9 @@ import software.amazon.opensearch.client.util.ToCopyableBuilder;
 
 // typedef: ism.ErrorNotification
 
+/**
+ * The error notification configuration. Requires exactly one of <code>destination</code> or <code>channel</code>.
+ */
 @JsonpDeserializable
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
 public class ErrorNotification implements PlainJsonSerializable, ToCopyableBuilder<ErrorNotification.Builder, ErrorNotification> {
@@ -75,14 +77,14 @@ public class ErrorNotification implements PlainJsonSerializable, ToCopyableBuild
     private final ErrorNotificationDestination destination;
 
     @Nonnull
-    private final Map<String, JsonData> messageTemplate;
+    private final Script messageTemplate;
 
     // ---------------------------------------------------------------------------------------------
 
     private ErrorNotification(Builder builder) {
         this.channel = builder.channel;
         this.destination = builder.destination;
-        this.messageTemplate = ApiTypeHelper.unmodifiable(builder.messageTemplate);
+        this.messageTemplate = ApiTypeHelper.requireNonNull(builder.messageTemplate, this, "messageTemplate");
     }
 
     public static ErrorNotification of(Function<ErrorNotification.Builder, ObjectBuilder<ErrorNotification>> fn) {
@@ -106,13 +108,10 @@ public class ErrorNotification implements PlainJsonSerializable, ToCopyableBuild
     }
 
     /**
-     * The template for error notification messages.
-     * <p>
-     * API name: {@code message_template}
-     * </p>
+     * Required - API name: {@code message_template}
      */
     @Nonnull
-    public final Map<String, JsonData> messageTemplate() {
+    public final Script messageTemplate() {
         return this.messageTemplate;
     }
 
@@ -137,15 +136,8 @@ public class ErrorNotification implements PlainJsonSerializable, ToCopyableBuild
             this.destination.serialize(generator, mapper);
         }
 
-        if (ApiTypeHelper.isDefined(this.messageTemplate)) {
-            generator.writeKey("message_template");
-            generator.writeStartObject();
-            for (Map.Entry<String, JsonData> item0 : this.messageTemplate.entrySet()) {
-                generator.writeKey(item0.getKey());
-                item0.getValue().serialize(generator, mapper);
-            }
-            generator.writeEnd();
-        }
+        generator.writeKey("message_template");
+        this.messageTemplate.serialize(generator, mapper);
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -169,21 +161,20 @@ public class ErrorNotification implements PlainJsonSerializable, ToCopyableBuild
         private Channel channel;
         @Nullable
         private ErrorNotificationDestination destination;
-        @Nullable
-        private Map<String, JsonData> messageTemplate;
+        private Script messageTemplate;
 
         public Builder() {}
 
         private Builder(ErrorNotification o) {
             this.channel = o.channel;
             this.destination = o.destination;
-            this.messageTemplate = _mapCopy(o.messageTemplate);
+            this.messageTemplate = o.messageTemplate;
         }
 
         private Builder(Builder o) {
             this.channel = o.channel;
             this.destination = o.destination;
-            this.messageTemplate = _mapCopy(o.messageTemplate);
+            this.messageTemplate = o.messageTemplate;
         }
 
         @Override
@@ -227,35 +218,20 @@ public class ErrorNotification implements PlainJsonSerializable, ToCopyableBuild
         }
 
         /**
-         * The template for error notification messages.
-         * <p>
-         * API name: {@code message_template}
-         * </p>
-         *
-         * <p>
-         * Adds all elements of <code>map</code> to <code>messageTemplate</code>.
-         * </p>
+         * Required - API name: {@code message_template}
          */
         @Nonnull
-        public final Builder messageTemplate(Map<String, JsonData> map) {
-            this.messageTemplate = _mapPutAll(this.messageTemplate, map);
+        public final Builder messageTemplate(Script value) {
+            this.messageTemplate = value;
             return this;
         }
 
         /**
-         * The template for error notification messages.
-         * <p>
-         * API name: {@code message_template}
-         * </p>
-         *
-         * <p>
-         * Adds an entry to <code>messageTemplate</code>.
-         * </p>
+         * Required - API name: {@code message_template}
          */
         @Nonnull
-        public final Builder messageTemplate(String key, JsonData value) {
-            this.messageTemplate = _mapPut(this.messageTemplate, key, value);
-            return this;
+        public final Builder messageTemplate(Function<Script.Builder, ObjectBuilder<Script>> fn) {
+            return messageTemplate(fn.apply(new Script.Builder()).build());
         }
 
         /**
@@ -285,7 +261,7 @@ public class ErrorNotification implements PlainJsonSerializable, ToCopyableBuild
     protected static void setupErrorNotificationDeserializer(ObjectDeserializer<ErrorNotification.Builder> op) {
         op.add(Builder::channel, Channel._DESERIALIZER, "channel");
         op.add(Builder::destination, ErrorNotificationDestination._DESERIALIZER, "destination");
-        op.add(Builder::messageTemplate, JsonpDeserializer.stringMapDeserializer(JsonData._DESERIALIZER), "message_template");
+        op.add(Builder::messageTemplate, Script._DESERIALIZER, "message_template");
     }
 
     @Override
@@ -293,7 +269,7 @@ public class ErrorNotification implements PlainJsonSerializable, ToCopyableBuild
         int result = 17;
         result = 31 * result + Objects.hashCode(this.channel);
         result = 31 * result + Objects.hashCode(this.destination);
-        result = 31 * result + Objects.hashCode(this.messageTemplate);
+        result = 31 * result + this.messageTemplate.hashCode();
         return result;
     }
 
@@ -304,6 +280,6 @@ public class ErrorNotification implements PlainJsonSerializable, ToCopyableBuild
         ErrorNotification other = (ErrorNotification) o;
         return Objects.equals(this.channel, other.channel)
             && Objects.equals(this.destination, other.destination)
-            && Objects.equals(this.messageTemplate, other.messageTemplate);
+            && this.messageTemplate.equals(other.messageTemplate);
     }
 }

@@ -61,6 +61,7 @@ import software.amazon.opensearch.client.json.ObjectDeserializer;
 import software.amazon.opensearch.client.json.PlainJsonSerializable;
 import software.amazon.opensearch.client.transport.Endpoint;
 import software.amazon.opensearch.client.transport.endpoints.SimpleEndpoint;
+import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ToCopyableBuilder;
@@ -80,16 +81,15 @@ public final class PutExperimentsRequest extends RequestBase
     @Nullable
     private final JsonData judgmentList;
 
-    @Nullable
+    @Nonnull
     private final String querySetId;
 
-    @Nullable
+    @Nonnull
     private final JsonData searchConfigurationList;
 
-    @Nullable
-    private final Integer size;
+    private final int size;
 
-    @Nullable
+    @Nonnull
     private final String type;
 
     // ---------------------------------------------------------------------------------------------
@@ -97,10 +97,10 @@ public final class PutExperimentsRequest extends RequestBase
     private PutExperimentsRequest(Builder builder) {
         super(builder);
         this.judgmentList = builder.judgmentList;
-        this.querySetId = builder.querySetId;
-        this.searchConfigurationList = builder.searchConfigurationList;
-        this.size = builder.size;
-        this.type = builder.type;
+        this.querySetId = ApiTypeHelper.requireNonNull(builder.querySetId, this, "querySetId");
+        this.searchConfigurationList = ApiTypeHelper.requireNonNull(builder.searchConfigurationList, this, "searchConfigurationList");
+        this.size = ApiTypeHelper.requireNonNull(builder.size, this, "size");
+        this.type = ApiTypeHelper.requireNonNull(builder.type, this, "type");
     }
 
     public static PutExperimentsRequest of(Function<PutExperimentsRequest.Builder, ObjectBuilder<PutExperimentsRequest>> fn) {
@@ -116,33 +116,32 @@ public final class PutExperimentsRequest extends RequestBase
     }
 
     /**
-     * API name: {@code querySetId}
+     * Required - API name: {@code querySetId}
      */
-    @Nullable
+    @Nonnull
     public final String querySetId() {
         return this.querySetId;
     }
 
     /**
-     * API name: {@code searchConfigurationList}
+     * Required - API name: {@code searchConfigurationList}
      */
-    @Nullable
+    @Nonnull
     public final JsonData searchConfigurationList() {
         return this.searchConfigurationList;
     }
 
     /**
-     * API name: {@code size}
+     * Required - API name: {@code size}
      */
-    @Nullable
-    public final Integer size() {
+    public final int size() {
         return this.size;
     }
 
     /**
-     * API name: {@code type}
+     * Required - API name: {@code type}
      */
-    @Nullable
+    @Nonnull
     public final String type() {
         return this.type;
     }
@@ -163,25 +162,17 @@ public final class PutExperimentsRequest extends RequestBase
             this.judgmentList.serialize(generator, mapper);
         }
 
-        if (this.querySetId != null) {
-            generator.writeKey("querySetId");
-            generator.write(this.querySetId);
-        }
+        generator.writeKey("querySetId");
+        generator.write(this.querySetId);
 
-        if (this.searchConfigurationList != null) {
-            generator.writeKey("searchConfigurationList");
-            this.searchConfigurationList.serialize(generator, mapper);
-        }
+        generator.writeKey("searchConfigurationList");
+        this.searchConfigurationList.serialize(generator, mapper);
 
-        if (this.size != null) {
-            generator.writeKey("size");
-            generator.write(this.size);
-        }
+        generator.writeKey("size");
+        generator.write(this.size);
 
-        if (this.type != null) {
-            generator.writeKey("type");
-            generator.write(this.type);
-        }
+        generator.writeKey("type");
+        generator.write(this.type);
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -203,13 +194,9 @@ public final class PutExperimentsRequest extends RequestBase
     public static class Builder extends RequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, PutExperimentsRequest> {
         @Nullable
         private JsonData judgmentList;
-        @Nullable
         private String querySetId;
-        @Nullable
         private JsonData searchConfigurationList;
-        @Nullable
         private Integer size;
-        @Nullable
         private String type;
 
         public Builder() {}
@@ -254,37 +241,37 @@ public final class PutExperimentsRequest extends RequestBase
         }
 
         /**
-         * API name: {@code querySetId}
+         * Required - API name: {@code querySetId}
          */
         @Nonnull
-        public final Builder querySetId(@Nullable String value) {
+        public final Builder querySetId(String value) {
             this.querySetId = value;
             return this;
         }
 
         /**
-         * API name: {@code searchConfigurationList}
+         * Required - API name: {@code searchConfigurationList}
          */
         @Nonnull
-        public final Builder searchConfigurationList(@Nullable JsonData value) {
+        public final Builder searchConfigurationList(JsonData value) {
             this.searchConfigurationList = value;
             return this;
         }
 
         /**
-         * API name: {@code size}
+         * Required - API name: {@code size}
          */
         @Nonnull
-        public final Builder size(@Nullable Integer value) {
+        public final Builder size(int value) {
             this.size = value;
             return this;
         }
 
         /**
-         * API name: {@code type}
+         * Required - API name: {@code type}
          */
         @Nonnull
-        public final Builder type(@Nullable String value) {
+        public final Builder type(String value) {
             this.type = value;
             return this;
         }
@@ -346,10 +333,10 @@ public final class PutExperimentsRequest extends RequestBase
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.judgmentList);
-        result = 31 * result + Objects.hashCode(this.querySetId);
-        result = 31 * result + Objects.hashCode(this.searchConfigurationList);
-        result = 31 * result + Objects.hashCode(this.size);
-        result = 31 * result + Objects.hashCode(this.type);
+        result = 31 * result + this.querySetId.hashCode();
+        result = 31 * result + this.searchConfigurationList.hashCode();
+        result = 31 * result + Integer.hashCode(this.size);
+        result = 31 * result + this.type.hashCode();
         return result;
     }
 
@@ -359,9 +346,9 @@ public final class PutExperimentsRequest extends RequestBase
         if (o == null || this.getClass() != o.getClass()) return false;
         PutExperimentsRequest other = (PutExperimentsRequest) o;
         return Objects.equals(this.judgmentList, other.judgmentList)
-            && Objects.equals(this.querySetId, other.querySetId)
-            && Objects.equals(this.searchConfigurationList, other.searchConfigurationList)
-            && Objects.equals(this.size, other.size)
-            && Objects.equals(this.type, other.type);
+            && this.querySetId.equals(other.querySetId)
+            && this.searchConfigurationList.equals(other.searchConfigurationList)
+            && this.size == other.size
+            && this.type.equals(other.type);
     }
 }

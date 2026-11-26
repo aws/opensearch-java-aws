@@ -267,6 +267,8 @@ tasks.withType<Jar> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    // The generator runs without assertions, and the Eclipse formatter trips its own internal ones on some generic classes.
+    jvmArgs("-da:org.eclipse.jdt.internal.formatter...")
     testLogging {
         events("passed", "skipped", "failed")
     }

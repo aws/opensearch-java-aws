@@ -43,9 +43,12 @@
 package software.amazon.opensearch.client.aos.cluster.allocation_explain;
 
 import jakarta.json.stream.JsonGenerator;
+import java.util.Objects;
 import java.util.function.Function;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import software.amazon.opensearch.client.aos._types.ErrorCause;
 import software.amazon.opensearch.client.json.JsonpDeserializable;
 import software.amazon.opensearch.client.json.JsonpDeserializer;
 import software.amazon.opensearch.client.json.JsonpMapper;
@@ -75,8 +78,8 @@ public class AllocationStore implements PlainJsonSerializable, ToCopyableBuilder
 
     private final boolean matchingSyncId;
 
-    @Nonnull
-    private final String storeException;
+    @Nullable
+    private final ErrorCause storeException;
 
     // ---------------------------------------------------------------------------------------------
 
@@ -86,7 +89,7 @@ public class AllocationStore implements PlainJsonSerializable, ToCopyableBuilder
         this.inSync = ApiTypeHelper.requireNonNull(builder.inSync, this, "inSync");
         this.matchingSizeInBytes = ApiTypeHelper.requireNonNull(builder.matchingSizeInBytes, this, "matchingSizeInBytes");
         this.matchingSyncId = ApiTypeHelper.requireNonNull(builder.matchingSyncId, this, "matchingSyncId");
-        this.storeException = ApiTypeHelper.requireNonNull(builder.storeException, this, "storeException");
+        this.storeException = builder.storeException;
     }
 
     public static AllocationStore of(Function<AllocationStore.Builder, ObjectBuilder<AllocationStore>> fn) {
@@ -130,10 +133,13 @@ public class AllocationStore implements PlainJsonSerializable, ToCopyableBuilder
     }
 
     /**
-     * Required - API name: {@code store_exception}
+     * The exception raised when the node failed to open the shard's on-disk index.
+     * <p>
+     * API name: {@code store_exception}
+     * </p>
      */
-    @Nonnull
-    public final String storeException() {
+    @Nullable
+    public final ErrorCause storeException() {
         return this.storeException;
     }
 
@@ -163,8 +169,10 @@ public class AllocationStore implements PlainJsonSerializable, ToCopyableBuilder
         generator.writeKey("matching_sync_id");
         generator.write(this.matchingSyncId);
 
-        generator.writeKey("store_exception");
-        generator.write(this.storeException);
+        if (this.storeException != null) {
+            generator.writeKey("store_exception");
+            this.storeException.serialize(generator, mapper);
+        }
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -189,7 +197,8 @@ public class AllocationStore implements PlainJsonSerializable, ToCopyableBuilder
         private Boolean inSync;
         private Long matchingSizeInBytes;
         private Boolean matchingSyncId;
-        private String storeException;
+        @Nullable
+        private ErrorCause storeException;
 
         public Builder() {}
 
@@ -263,12 +272,26 @@ public class AllocationStore implements PlainJsonSerializable, ToCopyableBuilder
         }
 
         /**
-         * Required - API name: {@code store_exception}
+         * The exception raised when the node failed to open the shard's on-disk index.
+         * <p>
+         * API name: {@code store_exception}
+         * </p>
          */
         @Nonnull
-        public final Builder storeException(String value) {
+        public final Builder storeException(@Nullable ErrorCause value) {
             this.storeException = value;
             return this;
+        }
+
+        /**
+         * The exception raised when the node failed to open the shard's on-disk index.
+         * <p>
+         * API name: {@code store_exception}
+         * </p>
+         */
+        @Nonnull
+        public final Builder storeException(Function<ErrorCause.Builder, ObjectBuilder<ErrorCause>> fn) {
+            return storeException(fn.apply(new ErrorCause.Builder()).build());
         }
 
         /**
@@ -301,7 +324,7 @@ public class AllocationStore implements PlainJsonSerializable, ToCopyableBuilder
         op.add(Builder::inSync, JsonpDeserializer.booleanDeserializer(), "in_sync");
         op.add(Builder::matchingSizeInBytes, JsonpDeserializer.longDeserializer(), "matching_size_in_bytes");
         op.add(Builder::matchingSyncId, JsonpDeserializer.booleanDeserializer(), "matching_sync_id");
-        op.add(Builder::storeException, JsonpDeserializer.stringDeserializer(), "store_exception");
+        op.add(Builder::storeException, ErrorCause._DESERIALIZER, "store_exception");
     }
 
     @Override
@@ -312,7 +335,7 @@ public class AllocationStore implements PlainJsonSerializable, ToCopyableBuilder
         result = 31 * result + Boolean.hashCode(this.inSync);
         result = 31 * result + Long.hashCode(this.matchingSizeInBytes);
         result = 31 * result + Boolean.hashCode(this.matchingSyncId);
-        result = 31 * result + this.storeException.hashCode();
+        result = 31 * result + Objects.hashCode(this.storeException);
         return result;
     }
 
@@ -326,6 +349,6 @@ public class AllocationStore implements PlainJsonSerializable, ToCopyableBuilder
             && this.inSync == other.inSync
             && this.matchingSizeInBytes == other.matchingSizeInBytes
             && this.matchingSyncId == other.matchingSyncId
-            && this.storeException.equals(other.storeException);
+            && Objects.equals(this.storeException, other.storeException);
     }
 }

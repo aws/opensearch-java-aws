@@ -91,6 +91,9 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
     @Nonnull
     private final List<String> index;
 
+    @Nullable
+    private final Integer limit;
+
     @Deprecated
     @Nullable
     private final Time masterTimeout;
@@ -111,6 +114,7 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
         this.health = builder.health;
         this.includeUnloadedSegments = builder.includeUnloadedSegments;
         this.index = ApiTypeHelper.unmodifiable(builder.index);
+        this.limit = builder.limit;
         this.masterTimeout = builder.masterTimeout;
         this.pri = builder.pri;
         this.time = builder.time;
@@ -188,6 +192,17 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
     }
 
     /**
+     * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+     * <p>
+     * API name: {@code limit}
+     * </p>
+     */
+    @Nullable
+    public final Integer limit() {
+        return this.limit;
+    }
+
+    /**
      * The amount of time allowed to establish a connection to the cluster manager node.
      * <p>
      * API name: {@code master_timeout}
@@ -251,6 +266,8 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
         @Nullable
         private List<String> index;
         @Nullable
+        private Integer limit;
+        @Nullable
         private Time masterTimeout;
         @Nullable
         private Boolean pri;
@@ -267,6 +284,7 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
             this.health = o.health;
             this.includeUnloadedSegments = o.includeUnloadedSegments;
             this.index = _listCopy(o.index);
+            this.limit = o.limit;
             this.masterTimeout = o.masterTimeout;
             this.pri = o.pri;
             this.time = o.time;
@@ -280,6 +298,7 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
             this.health = o.health;
             this.includeUnloadedSegments = o.includeUnloadedSegments;
             this.index = _listCopy(o.index);
+            this.limit = o.limit;
             this.masterTimeout = o.masterTimeout;
             this.pri = o.pri;
             this.time = o.time;
@@ -423,6 +442,18 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
         }
 
         /**
+         * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+         * <p>
+         * API name: {@code limit}
+         * </p>
+         */
+        @Nonnull
+        public final Builder limit(@Nullable Integer value) {
+            this.limit = value;
+            return this;
+        }
+
+        /**
          * The amount of time allowed to establish a connection to the cluster manager node.
          * <p>
          * API name: {@code master_timeout}
@@ -505,6 +536,9 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
         if (this.includeUnloadedSegments != null) {
             params.put("include_unloaded_segments", String.valueOf(this.includeUnloadedSegments));
         }
+        if (this.limit != null) {
+            params.put("limit", String.valueOf(this.limit));
+        }
         if (this.masterTimeout != null) {
             params.put("master_timeout", this.masterTimeout._toJsonString());
         }
@@ -562,6 +596,7 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
         result = 31 * result + Objects.hashCode(this.health);
         result = 31 * result + Objects.hashCode(this.includeUnloadedSegments);
         result = 31 * result + Objects.hashCode(this.index);
+        result = 31 * result + Objects.hashCode(this.limit);
         result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.pri);
         result = 31 * result + Objects.hashCode(this.time);
@@ -579,6 +614,7 @@ public final class IndicesRequest extends CatRequestBase implements ToCopyableBu
             && Objects.equals(this.health, other.health)
             && Objects.equals(this.includeUnloadedSegments, other.includeUnloadedSegments)
             && Objects.equals(this.index, other.index)
+            && Objects.equals(this.limit, other.limit)
             && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.pri, other.pri)
             && Objects.equals(this.time, other.time);

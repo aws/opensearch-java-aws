@@ -71,6 +71,9 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
     @Nullable
     private final Time clusterManagerTimeout;
 
+    @Nullable
+    private final Integer limit;
+
     @Deprecated
     @Nullable
     private final Time masterTimeout;
@@ -86,6 +89,7 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
     private ThreadPoolRequest(Builder builder) {
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
+        this.limit = builder.limit;
         this.masterTimeout = builder.masterTimeout;
         this.size = builder.size;
         this.threadPoolPatterns = ApiTypeHelper.unmodifiable(builder.threadPoolPatterns);
@@ -104,6 +108,17 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
     @Nullable
     public final Time clusterManagerTimeout() {
         return this.clusterManagerTimeout;
+    }
+
+    /**
+     * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+     * <p>
+     * API name: {@code limit}
+     * </p>
+     */
+    @Nullable
+    public final Integer limit() {
+        return this.limit;
     }
 
     /**
@@ -160,6 +175,8 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
         @Nullable
         private Time clusterManagerTimeout;
         @Nullable
+        private Integer limit;
+        @Nullable
         private Time masterTimeout;
         @Nullable
         private Integer size;
@@ -171,6 +188,7 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
         private Builder(ThreadPoolRequest o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.limit = o.limit;
             this.masterTimeout = o.masterTimeout;
             this.size = o.size;
             this.threadPoolPatterns = _listCopy(o.threadPoolPatterns);
@@ -179,6 +197,7 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
         private Builder(Builder o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.limit = o.limit;
             this.masterTimeout = o.masterTimeout;
             this.size = o.size;
             this.threadPoolPatterns = _listCopy(o.threadPoolPatterns);
@@ -217,6 +236,18 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
         @Nonnull
         public final Builder clusterManagerTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
             return clusterManagerTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
+         * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+         * <p>
+         * API name: {@code limit}
+         * </p>
+         */
+        @Nonnull
+        public final Builder limit(@Nullable Integer value) {
+            this.limit = value;
+            return this;
         }
 
         /**
@@ -310,6 +341,9 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.limit != null) {
+            params.put("limit", String.valueOf(this.limit));
+        }
         if (this.masterTimeout != null) {
             params.put("master_timeout", this.masterTimeout._toJsonString());
         }
@@ -359,6 +393,7 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
+        result = 31 * result + Objects.hashCode(this.limit);
         result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.size);
         result = 31 * result + Objects.hashCode(this.threadPoolPatterns);
@@ -371,6 +406,7 @@ public final class ThreadPoolRequest extends CatRequestBase implements ToCopyabl
         if (o == null || this.getClass() != o.getClass()) return false;
         ThreadPoolRequest other = (ThreadPoolRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && Objects.equals(this.limit, other.limit)
             && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.size, other.size)
             && Objects.equals(this.threadPoolPatterns, other.threadPoolPatterns);

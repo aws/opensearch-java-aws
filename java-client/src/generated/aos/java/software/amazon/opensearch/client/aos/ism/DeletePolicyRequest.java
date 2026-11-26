@@ -44,9 +44,12 @@ package software.amazon.opensearch.client.aos.ism;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import software.amazon.opensearch.client.aos._types.Refresh;
 import software.amazon.opensearch.client.aos._types.RequestBase;
 import software.amazon.opensearch.client.errors.ErrorResponse;
 import software.amazon.opensearch.client.transport.Endpoint;
@@ -67,11 +70,15 @@ public final class DeletePolicyRequest extends RequestBase implements ToCopyable
     @Nonnull
     private final String policyId;
 
+    @Nullable
+    private final Refresh refresh;
+
     // ---------------------------------------------------------------------------------------------
 
     private DeletePolicyRequest(Builder builder) {
         super(builder);
         this.policyId = ApiTypeHelper.requireNonNull(builder.policyId, this, "policyId");
+        this.refresh = builder.refresh;
     }
 
     public static DeletePolicyRequest of(Function<DeletePolicyRequest.Builder, ObjectBuilder<DeletePolicyRequest>> fn) {
@@ -84,6 +91,17 @@ public final class DeletePolicyRequest extends RequestBase implements ToCopyable
     @Nonnull
     public final String policyId() {
         return this.policyId;
+    }
+
+    /**
+     * Whether to refresh the affected shards to make this operation visible to search. Default is <code>true</code>.
+     * <p>
+     * API name: {@code refresh}
+     * </p>
+     */
+    @Nullable
+    public final Refresh refresh() {
+        return this.refresh;
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -104,17 +122,21 @@ public final class DeletePolicyRequest extends RequestBase implements ToCopyable
      */
     public static class Builder extends RequestBase.AbstractBuilder<Builder> implements CopyableBuilder<Builder, DeletePolicyRequest> {
         private String policyId;
+        @Nullable
+        private Refresh refresh;
 
         public Builder() {}
 
         private Builder(DeletePolicyRequest o) {
             super(o);
             this.policyId = o.policyId;
+            this.refresh = o.refresh;
         }
 
         private Builder(Builder o) {
             super(o);
             this.policyId = o.policyId;
+            this.refresh = o.refresh;
         }
 
         @Override
@@ -139,6 +161,18 @@ public final class DeletePolicyRequest extends RequestBase implements ToCopyable
         }
 
         /**
+         * Whether to refresh the affected shards to make this operation visible to search. Default is <code>true</code>.
+         * <p>
+         * API name: {@code refresh}
+         * </p>
+         */
+        @Nonnull
+        public final Builder refresh(@Nullable Refresh value) {
+            this.refresh = value;
+            return this;
+        }
+
+        /**
          * Builds a {@link DeletePolicyRequest}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -153,6 +187,14 @@ public final class DeletePolicyRequest extends RequestBase implements ToCopyable
     }
 
     // ---------------------------------------------------------------------------------------------
+
+    @Override
+    protected void applyQueryParameters(@Nonnull Map<String, String> params) {
+        super.applyQueryParameters(params);
+        if (this.refresh != null) {
+            params.put("refresh", this.refresh.jsonValue());
+        }
+    }
 
     /**
      * Endpoint "{@code ism.delete_policy}".
@@ -182,6 +224,7 @@ public final class DeletePolicyRequest extends RequestBase implements ToCopyable
     public int hashCode() {
         int result = 17;
         result = 31 * result + this.policyId.hashCode();
+        result = 31 * result + Objects.hashCode(this.refresh);
         return result;
     }
 
@@ -190,6 +233,6 @@ public final class DeletePolicyRequest extends RequestBase implements ToCopyable
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         DeletePolicyRequest other = (DeletePolicyRequest) o;
-        return this.policyId.equals(other.policyId);
+        return this.policyId.equals(other.policyId) && Objects.equals(this.refresh, other.refresh);
     }
 }

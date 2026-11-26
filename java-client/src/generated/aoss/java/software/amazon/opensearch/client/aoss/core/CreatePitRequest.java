@@ -65,7 +65,7 @@ import software.amazon.opensearch.client.util.ToCopyableBuilder;
 // typedef: _global.create_pit.Request
 
 /**
- * Creates point in time context.
+ * Creates point in time context. Delete the PIT when done. Until then it counts against <code>search.max_open_pit_context</code>.
  */
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
 public final class CreatePitRequest extends RequestBase implements ToCopyableBuilder<CreatePitRequest.Builder, CreatePitRequest> {
@@ -184,7 +184,8 @@ public final class CreatePitRequest extends RequestBase implements ToCopyableBui
     }
 
     /**
-     * Required - Specify the keep alive for point in time.
+     * Required - Specify the keep alive for point in time. Each search against the PIT restarts it, and a search cannot shorten it. It
+     * cannot exceed the <code>point_in_time.max_keep_alive</code> cluster setting (24 hours by default).
      * <p>
      * API name: {@code keep_alive}
      * </p>
@@ -404,7 +405,8 @@ public final class CreatePitRequest extends RequestBase implements ToCopyableBui
         }
 
         /**
-         * Required - Specify the keep alive for point in time.
+         * Required - Specify the keep alive for point in time. Each search against the PIT restarts it, and a search cannot shorten it. It
+         * cannot exceed the <code>point_in_time.max_keep_alive</code> cluster setting (24 hours by default).
          * <p>
          * API name: {@code keep_alive}
          * </p>
@@ -416,7 +418,8 @@ public final class CreatePitRequest extends RequestBase implements ToCopyableBui
         }
 
         /**
-         * Required - Specify the keep alive for point in time.
+         * Required - Specify the keep alive for point in time. Each search against the PIT restarts it, and a search cannot shorten it. It
+         * cannot exceed the <code>point_in_time.max_keep_alive</code> cluster setting (24 hours by default).
          * <p>
          * API name: {@code keep_alive}
          * </p>

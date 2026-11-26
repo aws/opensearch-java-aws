@@ -48,12 +48,14 @@ import java.util.function.Function;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import software.amazon.opensearch.client.aos._types.Time;
 import software.amazon.opensearch.client.json.JsonpDeserializable;
 import software.amazon.opensearch.client.json.JsonpDeserializer;
 import software.amazon.opensearch.client.json.JsonpMapper;
 import software.amazon.opensearch.client.json.ObjectBuilderDeserializer;
 import software.amazon.opensearch.client.json.ObjectDeserializer;
 import software.amazon.opensearch.client.json.PlainJsonSerializable;
+import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilderBase;
@@ -66,19 +68,18 @@ import software.amazon.opensearch.client.util.ToCopyableBuilder;
 public class ActionRetry implements PlainJsonSerializable, ToCopyableBuilder<ActionRetry.Builder, ActionRetry> {
 
     @Nullable
-    private final String backoff;
+    private final ActionRetryBackoff backoff;
+
+    private final long count;
 
     @Nullable
-    private final Integer count;
-
-    @Nullable
-    private final String delay;
+    private final Time delay;
 
     // ---------------------------------------------------------------------------------------------
 
     private ActionRetry(Builder builder) {
         this.backoff = builder.backoff;
-        this.count = builder.count;
+        this.count = ApiTypeHelper.requireNonNull(builder.count, this, "count");
         this.delay = builder.delay;
     }
 
@@ -87,24 +88,20 @@ public class ActionRetry implements PlainJsonSerializable, ToCopyableBuilder<Act
     }
 
     /**
-     * The backoff strategy for retries.
-     * <p>
      * API name: {@code backoff}
-     * </p>
      */
     @Nullable
-    public final String backoff() {
+    public final ActionRetryBackoff backoff() {
         return this.backoff;
     }
 
     /**
-     * The number of retry attempts.
+     * Required - The number of retry attempts.
      * <p>
      * API name: {@code count}
      * </p>
      */
-    @Nullable
-    public final Integer count() {
+    public final long count() {
         return this.count;
     }
 
@@ -115,7 +112,7 @@ public class ActionRetry implements PlainJsonSerializable, ToCopyableBuilder<Act
      * </p>
      */
     @Nullable
-    public final String delay() {
+    public final Time delay() {
         return this.delay;
     }
 
@@ -132,17 +129,15 @@ public class ActionRetry implements PlainJsonSerializable, ToCopyableBuilder<Act
     protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
         if (this.backoff != null) {
             generator.writeKey("backoff");
-            generator.write(this.backoff);
+            this.backoff.serialize(generator, mapper);
         }
 
-        if (this.count != null) {
-            generator.writeKey("count");
-            generator.write(this.count);
-        }
+        generator.writeKey("count");
+        generator.write(this.count);
 
         if (this.delay != null) {
             generator.writeKey("delay");
-            generator.write(this.delay);
+            this.delay.serialize(generator, mapper);
         }
     }
 
@@ -164,11 +159,10 @@ public class ActionRetry implements PlainJsonSerializable, ToCopyableBuilder<Act
      */
     public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, ActionRetry> {
         @Nullable
-        private String backoff;
+        private ActionRetryBackoff backoff;
+        private Long count;
         @Nullable
-        private Integer count;
-        @Nullable
-        private String delay;
+        private Time delay;
 
         public Builder() {}
 
@@ -191,25 +185,22 @@ public class ActionRetry implements PlainJsonSerializable, ToCopyableBuilder<Act
         }
 
         /**
-         * The backoff strategy for retries.
-         * <p>
          * API name: {@code backoff}
-         * </p>
          */
         @Nonnull
-        public final Builder backoff(@Nullable String value) {
+        public final Builder backoff(@Nullable ActionRetryBackoff value) {
             this.backoff = value;
             return this;
         }
 
         /**
-         * The number of retry attempts.
+         * Required - The number of retry attempts.
          * <p>
          * API name: {@code count}
          * </p>
          */
         @Nonnull
-        public final Builder count(@Nullable Integer value) {
+        public final Builder count(long value) {
             this.count = value;
             return this;
         }
@@ -221,9 +212,20 @@ public class ActionRetry implements PlainJsonSerializable, ToCopyableBuilder<Act
          * </p>
          */
         @Nonnull
-        public final Builder delay(@Nullable String value) {
+        public final Builder delay(@Nullable Time value) {
             this.delay = value;
             return this;
+        }
+
+        /**
+         * The delay between retry attempts.
+         * <p>
+         * API name: {@code delay}
+         * </p>
+         */
+        @Nonnull
+        public final Builder delay(Function<Time.Builder, ObjectBuilder<Time>> fn) {
+            return delay(fn.apply(new Time.Builder()).build());
         }
 
         /**
@@ -251,16 +253,16 @@ public class ActionRetry implements PlainJsonSerializable, ToCopyableBuilder<Act
     );
 
     protected static void setupActionRetryDeserializer(ObjectDeserializer<ActionRetry.Builder> op) {
-        op.add(Builder::backoff, JsonpDeserializer.stringDeserializer(), "backoff");
-        op.add(Builder::count, JsonpDeserializer.integerDeserializer(), "count");
-        op.add(Builder::delay, JsonpDeserializer.stringDeserializer(), "delay");
+        op.add(Builder::backoff, ActionRetryBackoff._DESERIALIZER, "backoff");
+        op.add(Builder::count, JsonpDeserializer.longDeserializer(), "count");
+        op.add(Builder::delay, Time._DESERIALIZER, "delay");
     }
 
     @Override
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.backoff);
-        result = 31 * result + Objects.hashCode(this.count);
+        result = 31 * result + Long.hashCode(this.count);
         result = 31 * result + Objects.hashCode(this.delay);
         return result;
     }
@@ -270,8 +272,6 @@ public class ActionRetry implements PlainJsonSerializable, ToCopyableBuilder<Act
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         ActionRetry other = (ActionRetry) o;
-        return Objects.equals(this.backoff, other.backoff)
-            && Objects.equals(this.count, other.count)
-            && Objects.equals(this.delay, other.delay);
+        return Objects.equals(this.backoff, other.backoff) && this.count == other.count && Objects.equals(this.delay, other.delay);
     }
 }

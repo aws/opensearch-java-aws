@@ -43,6 +43,7 @@
 package software.amazon.opensearch.client.aos.nodes.info;
 
 import jakarta.json.stream.JsonGenerator;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 import javax.annotation.Generated;
@@ -54,6 +55,7 @@ import software.amazon.opensearch.client.json.JsonpMapper;
 import software.amazon.opensearch.client.json.ObjectBuilderDeserializer;
 import software.amazon.opensearch.client.json.ObjectDeserializer;
 import software.amazon.opensearch.client.json.PlainJsonSerializable;
+import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilderBase;
@@ -68,8 +70,8 @@ import software.amazon.opensearch.client.util.ToCopyableBuilder;
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
 public class NodeInfoDiscovery implements PlainJsonSerializable, ToCopyableBuilder<NodeInfoDiscovery.Builder, NodeInfoDiscovery> {
 
-    @Nullable
-    private final String seedHosts;
+    @Nonnull
+    private final List<String> seedHosts;
 
     @Nullable
     private final String type;
@@ -77,7 +79,7 @@ public class NodeInfoDiscovery implements PlainJsonSerializable, ToCopyableBuild
     // ---------------------------------------------------------------------------------------------
 
     private NodeInfoDiscovery(Builder builder) {
-        this.seedHosts = builder.seedHosts;
+        this.seedHosts = ApiTypeHelper.unmodifiable(builder.seedHosts);
         this.type = builder.type;
     }
 
@@ -91,8 +93,8 @@ public class NodeInfoDiscovery implements PlainJsonSerializable, ToCopyableBuild
      * API name: {@code seed_hosts}
      * </p>
      */
-    @Nullable
-    public final String seedHosts() {
+    @Nonnull
+    public final List<String> seedHosts() {
         return this.seedHosts;
     }
 
@@ -118,9 +120,13 @@ public class NodeInfoDiscovery implements PlainJsonSerializable, ToCopyableBuild
     }
 
     protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
-        if (this.seedHosts != null) {
+        if (ApiTypeHelper.isDefined(this.seedHosts)) {
             generator.writeKey("seed_hosts");
-            generator.write(this.seedHosts);
+            generator.writeStartArray();
+            for (String item0 : this.seedHosts) {
+                generator.write(item0);
+            }
+            generator.writeEnd();
         }
 
         if (this.type != null) {
@@ -147,19 +153,19 @@ public class NodeInfoDiscovery implements PlainJsonSerializable, ToCopyableBuild
      */
     public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, NodeInfoDiscovery> {
         @Nullable
-        private String seedHosts;
+        private List<String> seedHosts;
         @Nullable
         private String type;
 
         public Builder() {}
 
         private Builder(NodeInfoDiscovery o) {
-            this.seedHosts = o.seedHosts;
+            this.seedHosts = _listCopy(o.seedHosts);
             this.type = o.type;
         }
 
         private Builder(Builder o) {
-            this.seedHosts = o.seedHosts;
+            this.seedHosts = _listCopy(o.seedHosts);
             this.type = o.type;
         }
 
@@ -174,10 +180,30 @@ public class NodeInfoDiscovery implements PlainJsonSerializable, ToCopyableBuild
          * <p>
          * API name: {@code seed_hosts}
          * </p>
+         *
+         * <p>
+         * Adds all elements of <code>list</code> to <code>seedHosts</code>.
+         * </p>
          */
         @Nonnull
-        public final Builder seedHosts(@Nullable String value) {
-            this.seedHosts = value;
+        public final Builder seedHosts(List<String> list) {
+            this.seedHosts = _listAddAll(this.seedHosts, list);
+            return this;
+        }
+
+        /**
+         * The configured seed hosts for node discovery.
+         * <p>
+         * API name: {@code seed_hosts}
+         * </p>
+         *
+         * <p>
+         * Adds one or more values to <code>seedHosts</code>.
+         * </p>
+         */
+        @Nonnull
+        public final Builder seedHosts(String value, String... values) {
+            this.seedHosts = _listAdd(this.seedHosts, value, values);
             return this;
         }
 
@@ -218,7 +244,7 @@ public class NodeInfoDiscovery implements PlainJsonSerializable, ToCopyableBuild
     );
 
     protected static void setupNodeInfoDiscoveryDeserializer(ObjectDeserializer<NodeInfoDiscovery.Builder> op) {
-        op.add(Builder::seedHosts, JsonpDeserializer.stringDeserializer(), "seed_hosts");
+        op.add(Builder::seedHosts, JsonpDeserializer.arrayDeserializer(JsonpDeserializer.stringDeserializer()), "seed_hosts");
         op.add(Builder::type, JsonpDeserializer.stringDeserializer(), "type");
     }
 

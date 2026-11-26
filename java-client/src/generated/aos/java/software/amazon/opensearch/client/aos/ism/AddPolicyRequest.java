@@ -84,12 +84,16 @@ public final class AddPolicyRequest extends RequestBase
     @Nonnull
     private final String policyId;
 
+    @Nullable
+    private final String type;
+
     // ---------------------------------------------------------------------------------------------
 
     private AddPolicyRequest(Builder builder) {
         super(builder);
         this.index = ApiTypeHelper.unmodifiable(builder.index);
         this.policyId = ApiTypeHelper.requireNonNull(builder.policyId, this, "policyId");
+        this.type = builder.type;
     }
 
     public static AddPolicyRequest of(Function<AddPolicyRequest.Builder, ObjectBuilder<AddPolicyRequest>> fn) {
@@ -117,6 +121,17 @@ public final class AddPolicyRequest extends RequestBase
     @Nonnull
     public final String policyId() {
         return this.policyId;
+    }
+
+    /**
+     * The type of the index metadata provider.
+     * <p>
+     * API name: {@code type}
+     * </p>
+     */
+    @Nullable
+    public final String type() {
+        return this.type;
     }
 
     /**
@@ -154,6 +169,8 @@ public final class AddPolicyRequest extends RequestBase
         @Nullable
         private List<String> index;
         private String policyId;
+        @Nullable
+        private String type;
 
         public Builder() {}
 
@@ -161,12 +178,14 @@ public final class AddPolicyRequest extends RequestBase
             super(o);
             this.index = _listCopy(o.index);
             this.policyId = o.policyId;
+            this.type = o.type;
         }
 
         private Builder(Builder o) {
             super(o);
             this.index = _listCopy(o.index);
             this.policyId = o.policyId;
+            this.type = o.type;
         }
 
         @Override
@@ -228,6 +247,18 @@ public final class AddPolicyRequest extends RequestBase
         }
 
         /**
+         * The type of the index metadata provider.
+         * <p>
+         * API name: {@code type}
+         * </p>
+         */
+        @Nonnull
+        public final Builder type(@Nullable String value) {
+            this.type = value;
+            return this;
+        }
+
+        /**
          * Builds a {@link AddPolicyRequest}.
          *
          * @throws NullPointerException if some of the required fields are null.
@@ -256,6 +287,14 @@ public final class AddPolicyRequest extends RequestBase
     }
 
     // ---------------------------------------------------------------------------------------------
+
+    @Override
+    protected void applyQueryParameters(@Nonnull Map<String, String> params) {
+        super.applyQueryParameters(params);
+        if (this.type != null) {
+            params.put("type", this.type);
+        }
+    }
 
     /**
      * Endpoint "{@code ism.add_policy}".
@@ -299,6 +338,7 @@ public final class AddPolicyRequest extends RequestBase
         int result = 17;
         result = 31 * result + Objects.hashCode(this.index);
         result = 31 * result + this.policyId.hashCode();
+        result = 31 * result + Objects.hashCode(this.type);
         return result;
     }
 
@@ -307,6 +347,6 @@ public final class AddPolicyRequest extends RequestBase
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         AddPolicyRequest other = (AddPolicyRequest) o;
-        return Objects.equals(this.index, other.index) && this.policyId.equals(other.policyId);
+        return Objects.equals(this.index, other.index) && this.policyId.equals(other.policyId) && Objects.equals(this.type, other.type);
     }
 }

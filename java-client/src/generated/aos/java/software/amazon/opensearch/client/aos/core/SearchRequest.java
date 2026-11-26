@@ -72,6 +72,7 @@ import software.amazon.opensearch.client.aos.core.search.Rescore;
 import software.amazon.opensearch.client.aos.core.search.SourceConfig;
 import software.amazon.opensearch.client.aos.core.search.Suggester;
 import software.amazon.opensearch.client.aos.core.search.TrackHits;
+import software.amazon.opensearch.client.aos.search_pipeline.SearchPipelineRef;
 import software.amazon.opensearch.client.errors.ErrorResponse;
 import software.amazon.opensearch.client.json.JsonData;
 import software.amazon.opensearch.client.json.JsonpDeserializable;
@@ -226,7 +227,7 @@ public final class SearchRequest extends RequestBase
     private final List<FieldValue> searchAfter;
 
     @Nullable
-    private final String searchPipeline;
+    private final SearchPipelineRef searchPipeline;
 
     @Nullable
     private final SearchType searchType;
@@ -820,13 +821,10 @@ public final class SearchRequest extends RequestBase
     }
 
     /**
-     * Customizable sequence of processing stages applied to search queries.
-     * <p>
      * API name: {@code search_pipeline}
-     * </p>
      */
     @Nullable
-    public final String searchPipeline() {
+    public final SearchPipelineRef searchPipeline() {
         return this.searchPipeline;
     }
 
@@ -1133,7 +1131,7 @@ public final class SearchRequest extends RequestBase
 
         if (this.searchPipeline != null) {
             generator.writeKey("search_pipeline");
-            generator.write(this.searchPipeline);
+            this.searchPipeline.serialize(generator, mapper);
         }
 
         if (this.seqNoPrimaryTerm != null) {
@@ -1321,7 +1319,7 @@ public final class SearchRequest extends RequestBase
         @Nullable
         private List<FieldValue> searchAfter;
         @Nullable
-        private String searchPipeline;
+        private SearchPipelineRef searchPipeline;
         @Nullable
         private SearchType searchType;
         @Nullable
@@ -2418,15 +2416,20 @@ public final class SearchRequest extends RequestBase
         }
 
         /**
-         * Customizable sequence of processing stages applied to search queries.
-         * <p>
          * API name: {@code search_pipeline}
-         * </p>
          */
         @Nonnull
-        public final Builder searchPipeline(@Nullable String value) {
+        public final Builder searchPipeline(@Nullable SearchPipelineRef value) {
             this.searchPipeline = value;
             return this;
+        }
+
+        /**
+         * API name: {@code search_pipeline}
+         */
+        @Nonnull
+        public final Builder searchPipeline(Function<SearchPipelineRef.Builder, ObjectBuilder<SearchPipelineRef>> fn) {
+            return searchPipeline(fn.apply(new SearchPipelineRef.Builder()).build());
         }
 
         /**
@@ -2744,7 +2747,7 @@ public final class SearchRequest extends RequestBase
         op.add(Builder::rescore, JsonpDeserializer.arrayDeserializer(Rescore._DESERIALIZER), "rescore");
         op.add(Builder::scriptFields, JsonpDeserializer.stringMapDeserializer(ScriptField._DESERIALIZER), "script_fields");
         op.add(Builder::searchAfter, JsonpDeserializer.arrayDeserializer(FieldValue._DESERIALIZER), "search_after");
-        op.add(Builder::searchPipeline, JsonpDeserializer.stringDeserializer(), "search_pipeline");
+        op.add(Builder::searchPipeline, SearchPipelineRef._DESERIALIZER, "search_pipeline");
         op.add(Builder::seqNoPrimaryTerm, JsonpDeserializer.booleanDeserializer(), "seq_no_primary_term");
         op.add(Builder::size, JsonpDeserializer.integerDeserializer(), "size");
         op.add(Builder::slice, SlicedScroll._DESERIALIZER, "slice");

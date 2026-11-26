@@ -77,6 +77,9 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
     @Nonnull
     private final List<String> index;
 
+    @Nullable
+    private final Integer limit;
+
     @Deprecated
     @Nullable
     private final Time masterTimeout;
@@ -88,6 +91,7 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
         this.bytes = builder.bytes;
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.index = ApiTypeHelper.unmodifiable(builder.index);
+        this.limit = builder.limit;
         this.masterTimeout = builder.masterTimeout;
     }
 
@@ -130,6 +134,17 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
     }
 
     /**
+     * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+     * <p>
+     * API name: {@code limit}
+     * </p>
+     */
+    @Nullable
+    public final Integer limit() {
+        return this.limit;
+    }
+
+    /**
      * The amount of time allowed to establish a connection to the cluster manager node.
      * <p>
      * API name: {@code master_timeout}
@@ -165,6 +180,8 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
         @Nullable
         private List<String> index;
         @Nullable
+        private Integer limit;
+        @Nullable
         private Time masterTimeout;
 
         public Builder() {}
@@ -174,6 +191,7 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
             this.bytes = o.bytes;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.index = _listCopy(o.index);
+            this.limit = o.limit;
             this.masterTimeout = o.masterTimeout;
         }
 
@@ -182,6 +200,7 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
             this.bytes = o.bytes;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.index = _listCopy(o.index);
+            this.limit = o.limit;
             this.masterTimeout = o.masterTimeout;
         }
 
@@ -267,6 +286,18 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
         }
 
         /**
+         * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+         * <p>
+         * API name: {@code limit}
+         * </p>
+         */
+        @Nonnull
+        public final Builder limit(@Nullable Integer value) {
+            this.limit = value;
+            return this;
+        }
+
+        /**
          * The amount of time allowed to establish a connection to the cluster manager node.
          * <p>
          * API name: {@code master_timeout}
@@ -316,6 +347,9 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.limit != null) {
+            params.put("limit", String.valueOf(this.limit));
+        }
         if (this.masterTimeout != null) {
             params.put("master_timeout", this.masterTimeout._toJsonString());
         }
@@ -364,6 +398,7 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
         result = 31 * result + Objects.hashCode(this.bytes);
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.index);
+        result = 31 * result + Objects.hashCode(this.limit);
         result = 31 * result + Objects.hashCode(this.masterTimeout);
         return result;
     }
@@ -376,6 +411,7 @@ public final class SegmentsRequest extends CatRequestBase implements ToCopyableB
         return Objects.equals(this.bytes, other.bytes)
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.index, other.index)
+            && Objects.equals(this.limit, other.limit)
             && Objects.equals(this.masterTimeout, other.masterTimeout);
     }
 }

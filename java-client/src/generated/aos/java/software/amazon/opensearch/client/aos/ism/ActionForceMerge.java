@@ -43,17 +43,16 @@
 package software.amazon.opensearch.client.aos.ism;
 
 import jakarta.json.stream.JsonGenerator;
-import java.util.Objects;
 import java.util.function.Function;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import software.amazon.opensearch.client.json.JsonpDeserializable;
 import software.amazon.opensearch.client.json.JsonpDeserializer;
 import software.amazon.opensearch.client.json.JsonpMapper;
 import software.amazon.opensearch.client.json.ObjectBuilderDeserializer;
 import software.amazon.opensearch.client.json.ObjectDeserializer;
 import software.amazon.opensearch.client.json.PlainJsonSerializable;
+import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilderBase;
@@ -65,13 +64,12 @@ import software.amazon.opensearch.client.util.ToCopyableBuilder;
 @Generated("software.amazon.opensearch.client.codegen.CodeGenerator")
 public class ActionForceMerge implements PlainJsonSerializable, ToCopyableBuilder<ActionForceMerge.Builder, ActionForceMerge> {
 
-    @Nullable
-    private final Integer maxNumSegments;
+    private final int maxNumSegments;
 
     // ---------------------------------------------------------------------------------------------
 
     private ActionForceMerge(Builder builder) {
-        this.maxNumSegments = builder.maxNumSegments;
+        this.maxNumSegments = ApiTypeHelper.requireNonNull(builder.maxNumSegments, this, "maxNumSegments");
     }
 
     public static ActionForceMerge of(Function<ActionForceMerge.Builder, ObjectBuilder<ActionForceMerge>> fn) {
@@ -79,13 +77,12 @@ public class ActionForceMerge implements PlainJsonSerializable, ToCopyableBuilde
     }
 
     /**
-     * The maximum number of segments to merge to.
+     * Required - The maximum number of segments to merge to.
      * <p>
      * API name: {@code max_num_segments}
      * </p>
      */
-    @Nullable
-    public final Integer maxNumSegments() {
+    public final int maxNumSegments() {
         return this.maxNumSegments;
     }
 
@@ -100,10 +97,8 @@ public class ActionForceMerge implements PlainJsonSerializable, ToCopyableBuilde
     }
 
     protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
-        if (this.maxNumSegments != null) {
-            generator.writeKey("max_num_segments");
-            generator.write(this.maxNumSegments);
-        }
+        generator.writeKey("max_num_segments");
+        generator.write(this.maxNumSegments);
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -123,7 +118,6 @@ public class ActionForceMerge implements PlainJsonSerializable, ToCopyableBuilde
      * Builder for {@link ActionForceMerge}.
      */
     public static class Builder extends ObjectBuilderBase implements CopyableBuilder<Builder, ActionForceMerge> {
-        @Nullable
         private Integer maxNumSegments;
 
         public Builder() {}
@@ -143,13 +137,13 @@ public class ActionForceMerge implements PlainJsonSerializable, ToCopyableBuilde
         }
 
         /**
-         * The maximum number of segments to merge to.
+         * Required - The maximum number of segments to merge to.
          * <p>
          * API name: {@code max_num_segments}
          * </p>
          */
         @Nonnull
-        public final Builder maxNumSegments(@Nullable Integer value) {
+        public final Builder maxNumSegments(int value) {
             this.maxNumSegments = value;
             return this;
         }
@@ -185,7 +179,7 @@ public class ActionForceMerge implements PlainJsonSerializable, ToCopyableBuilde
     @Override
     public int hashCode() {
         int result = 17;
-        result = 31 * result + Objects.hashCode(this.maxNumSegments);
+        result = 31 * result + Integer.hashCode(this.maxNumSegments);
         return result;
     }
 
@@ -194,6 +188,6 @@ public class ActionForceMerge implements PlainJsonSerializable, ToCopyableBuilde
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         ActionForceMerge other = (ActionForceMerge) o;
-        return Objects.equals(this.maxNumSegments, other.maxNumSegments);
+        return this.maxNumSegments == other.maxNumSegments;
     }
 }

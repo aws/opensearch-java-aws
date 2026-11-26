@@ -664,6 +664,30 @@ public class OpenApiSchema extends OpenApiRefElement<OpenApiSchema> implements T
         this.isGeneric = isGeneric;
     }
 
+    /**
+     * Whether a {@code $ref} to this schema maps to a reference to its own shape rather than being inlined.
+     */
+    public boolean isMappedAsShapeRef() {
+        if (isEnum()) {
+            return true;
+        }
+        if (isObject()
+            && getProperties().map(Map::isEmpty).orElse(true)
+            && getAdditionalProperties().map(s -> s.getTitle().isEmpty()).orElse(false)) {
+            return false;
+        }
+        if (isInstantiatedGeneric()) {
+            return false;
+        }
+        if (isTaggedUnion()) {
+            return true;
+        }
+        if (isShortcutPropertyObject()) {
+            return true;
+        }
+        return isObject();
+    }
+
     public boolean isInstantiatedGeneric() {
         return this.isInstantiatedGeneric;
     }

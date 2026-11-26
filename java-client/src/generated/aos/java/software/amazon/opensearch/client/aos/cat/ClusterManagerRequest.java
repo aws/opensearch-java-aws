@@ -70,6 +70,9 @@ public final class ClusterManagerRequest extends CatRequestBase
     @Nullable
     private final Time clusterManagerTimeout;
 
+    @Nullable
+    private final Integer limit;
+
     @Deprecated
     @Nullable
     private final Time masterTimeout;
@@ -79,6 +82,7 @@ public final class ClusterManagerRequest extends CatRequestBase
     private ClusterManagerRequest(Builder builder) {
         super(builder);
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
+        this.limit = builder.limit;
         this.masterTimeout = builder.masterTimeout;
     }
 
@@ -95,6 +99,17 @@ public final class ClusterManagerRequest extends CatRequestBase
     @Nullable
     public final Time clusterManagerTimeout() {
         return this.clusterManagerTimeout;
+    }
+
+    /**
+     * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+     * <p>
+     * API name: {@code limit}
+     * </p>
+     */
+    @Nullable
+    public final Integer limit() {
+        return this.limit;
     }
 
     /**
@@ -129,6 +144,8 @@ public final class ClusterManagerRequest extends CatRequestBase
         @Nullable
         private Time clusterManagerTimeout;
         @Nullable
+        private Integer limit;
+        @Nullable
         private Time masterTimeout;
 
         public Builder() {}
@@ -136,12 +153,14 @@ public final class ClusterManagerRequest extends CatRequestBase
         private Builder(ClusterManagerRequest o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.limit = o.limit;
             this.masterTimeout = o.masterTimeout;
         }
 
         private Builder(Builder o) {
             super(o);
             this.clusterManagerTimeout = o.clusterManagerTimeout;
+            this.limit = o.limit;
             this.masterTimeout = o.masterTimeout;
         }
 
@@ -178,6 +197,18 @@ public final class ClusterManagerRequest extends CatRequestBase
         @Nonnull
         public final Builder clusterManagerTimeout(Function<Time.Builder, ObjectBuilder<Time>> fn) {
             return clusterManagerTimeout(fn.apply(new Time.Builder()).build());
+        }
+
+        /**
+         * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+         * <p>
+         * API name: {@code limit}
+         * </p>
+         */
+        @Nonnull
+        public final Builder limit(@Nullable Integer value) {
+            this.limit = value;
+            return this;
         }
 
         /**
@@ -227,6 +258,9 @@ public final class ClusterManagerRequest extends CatRequestBase
         if (this.clusterManagerTimeout != null) {
             params.put("cluster_manager_timeout", this.clusterManagerTimeout._toJsonString());
         }
+        if (this.limit != null) {
+            params.put("limit", String.valueOf(this.limit));
+        }
         if (this.masterTimeout != null) {
             params.put("master_timeout", this.masterTimeout._toJsonString());
         }
@@ -255,6 +289,7 @@ public final class ClusterManagerRequest extends CatRequestBase
     public int hashCode() {
         int result = 17;
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
+        result = 31 * result + Objects.hashCode(this.limit);
         result = 31 * result + Objects.hashCode(this.masterTimeout);
         return result;
     }
@@ -265,6 +300,7 @@ public final class ClusterManagerRequest extends CatRequestBase
         if (o == null || this.getClass() != o.getClass()) return false;
         ClusterManagerRequest other = (ClusterManagerRequest) o;
         return Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
+            && Objects.equals(this.limit, other.limit)
             && Objects.equals(this.masterTimeout, other.masterTimeout);
     }
 }

@@ -16,8 +16,8 @@ package software.amazon.opensearch.client.codegen.transformer;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
@@ -70,7 +70,7 @@ public class TypeMapper {
                 return overriddenMappedType.get();
             }
 
-            if (!shouldKeepRef(schema)) {
+            if (!schema.isMappedAsShapeRef()) {
                 return mapType(schema);
             }
 
@@ -287,8 +287,8 @@ public class TypeMapper {
         var $extends = schema.get$extends().orElseThrow();
         var type = mapType($extends);
         var shape = type.getTargetShape().orElseThrow();
-        var typeParameterDefs = shape.getTypeParameters().getTypeParameterDefinitions();
         var typeParameters = new HashMap<String, TypeRef>();
+        var declaredNames = new LinkedHashSet<String>();
 
         while ($extends != null) {
             $extends = $extends.resolve();
@@ -296,45 +296,33 @@ public class TypeMapper {
             new ZippedOpenApiWalker().walkSchema($extends, schema, new ZippedOpenApiVisitorBase() {
                 @Override
                 public void visitSchemaEnd(@Nullable OpenApiSchema left, @Nullable OpenApiSchema right) {
-                    if (left == null || right == null || !left.isGenericTypeParameter()) {
+                    if (left == null || !left.isGenericTypeParameter()) {
                         return;
                     }
-                    typeParameters.put(getTypeParamName(left.resolve()), mapType(right));
+                    var name = getTypeParamName(left.resolve());
+                    declaredNames.add(name);
+                    if (right != null) {
+                        typeParameters.put(name, mapType(right));
+                    }
                 }
             });
 
             $extends = $extends.get$extends().orElse(null);
         }
 
+        // A shape still being built inside a reference cycle has not registered its type parameters yet.
+        var diamond = shape.getTypeParameters();
+        var typeParameterNames = diamond != null
+            ? Arrays.stream(diamond.getTypeParameterDefinitions()).map(TypeParameterDefinition::getName).collect(Collectors.toList())
+            : List.copyOf(declaredNames);
+
         return shape.getMaterializedType()
             .withTypeParameters(
-                Arrays.stream(typeParameterDefs)
-                    .map(TypeParameterDefinition::getName)
+                typeParameterNames.stream()
                     .map(n -> typeParameters.getOrDefault(n, Types.Client.Json.JsonData))
                     .map(TypeRef::getBoxed)
                     .toArray(TypeRef[]::new)
             );
-    }
-
-    private boolean shouldKeepRef(OpenApiSchema schema) {
-        if (schema.isEnum()) {
-            return true;
-        }
-        if (schema.isObject()
-            && schema.getProperties().map(Map::isEmpty).orElse(true)
-            && schema.getAdditionalProperties().map(s -> s.getTitle().isEmpty()).orElse(false)) {
-            return false;
-        }
-        if (schema.isInstantiatedGeneric()) {
-            return false;
-        }
-        if (schema.isTaggedUnion()) {
-            return true;
-        }
-        if (schema.isShortcutPropertyObject()) {
-            return true;
-        }
-        return schema.isObject();
     }
 
     private static boolean isOneOfSingleAndArray(List<OpenApiSchema> oneOf) {

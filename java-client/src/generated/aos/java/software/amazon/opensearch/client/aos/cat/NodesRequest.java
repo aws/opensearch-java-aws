@@ -76,6 +76,9 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
     @Nullable
     private final Boolean fullId;
 
+    @Nullable
+    private final Integer limit;
+
     @Deprecated
     @Nullable
     private final Time masterTimeout;
@@ -90,6 +93,7 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
         this.bytes = builder.bytes;
         this.clusterManagerTimeout = builder.clusterManagerTimeout;
         this.fullId = builder.fullId;
+        this.limit = builder.limit;
         this.masterTimeout = builder.masterTimeout;
         this.time = builder.time;
     }
@@ -129,6 +133,17 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
     @Nullable
     public final Boolean fullId() {
         return this.fullId;
+    }
+
+    /**
+     * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+     * <p>
+     * API name: {@code limit}
+     * </p>
+     */
+    @Nullable
+    public final Integer limit() {
+        return this.limit;
     }
 
     /**
@@ -179,6 +194,8 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
         @Nullable
         private Boolean fullId;
         @Nullable
+        private Integer limit;
+        @Nullable
         private Time masterTimeout;
         @Nullable
         private TimeUnit time;
@@ -190,6 +207,7 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
             this.bytes = o.bytes;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.fullId = o.fullId;
+            this.limit = o.limit;
             this.masterTimeout = o.masterTimeout;
             this.time = o.time;
         }
@@ -199,6 +217,7 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
             this.bytes = o.bytes;
             this.clusterManagerTimeout = o.clusterManagerTimeout;
             this.fullId = o.fullId;
+            this.limit = o.limit;
             this.masterTimeout = o.masterTimeout;
             this.time = o.time;
         }
@@ -259,6 +278,18 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
         @Nonnull
         public final Builder fullId(@Nullable Boolean value) {
             this.fullId = value;
+            return this;
+        }
+
+        /**
+         * The maximum number of rows to return. Must be greater than 0. Applied after sorting (<code>s</code>).
+         * <p>
+         * API name: {@code limit}
+         * </p>
+         */
+        @Nonnull
+        public final Builder limit(@Nullable Integer value) {
+            this.limit = value;
             return this;
         }
 
@@ -328,6 +359,9 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
         if (this.fullId != null) {
             params.put("full_id", String.valueOf(this.fullId));
         }
+        if (this.limit != null) {
+            params.put("limit", String.valueOf(this.limit));
+        }
         if (this.masterTimeout != null) {
             params.put("master_timeout", this.masterTimeout._toJsonString());
         }
@@ -361,6 +395,7 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
         result = 31 * result + Objects.hashCode(this.bytes);
         result = 31 * result + Objects.hashCode(this.clusterManagerTimeout);
         result = 31 * result + Objects.hashCode(this.fullId);
+        result = 31 * result + Objects.hashCode(this.limit);
         result = 31 * result + Objects.hashCode(this.masterTimeout);
         result = 31 * result + Objects.hashCode(this.time);
         return result;
@@ -374,6 +409,7 @@ public final class NodesRequest extends CatRequestBase implements ToCopyableBuil
         return Objects.equals(this.bytes, other.bytes)
             && Objects.equals(this.clusterManagerTimeout, other.clusterManagerTimeout)
             && Objects.equals(this.fullId, other.fullId)
+            && Objects.equals(this.limit, other.limit)
             && Objects.equals(this.masterTimeout, other.masterTimeout)
             && Objects.equals(this.time, other.time);
     }

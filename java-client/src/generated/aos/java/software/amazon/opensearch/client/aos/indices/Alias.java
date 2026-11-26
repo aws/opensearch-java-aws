@@ -55,6 +55,7 @@ import software.amazon.opensearch.client.json.JsonpMapper;
 import software.amazon.opensearch.client.json.ObjectBuilderDeserializer;
 import software.amazon.opensearch.client.json.ObjectDeserializer;
 import software.amazon.opensearch.client.json.PlainJsonSerializable;
+import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilderBase;
@@ -81,6 +82,9 @@ public class Alias implements PlainJsonSerializable, ToCopyableBuilder<Alias.Bui
     @Nullable
     private final Boolean isWriteIndex;
 
+    @Nonnull
+    private final String key;
+
     @Nullable
     private final String routing;
 
@@ -94,6 +98,7 @@ public class Alias implements PlainJsonSerializable, ToCopyableBuilder<Alias.Bui
         this.indexRouting = builder.indexRouting;
         this.isHidden = builder.isHidden;
         this.isWriteIndex = builder.isWriteIndex;
+        this.key = ApiTypeHelper.requireNonNull(builder.key, this, "key");
         this.routing = builder.routing;
         this.searchRouting = builder.searchRouting;
     }
@@ -141,6 +146,14 @@ public class Alias implements PlainJsonSerializable, ToCopyableBuilder<Alias.Bui
     }
 
     /**
+     * Required - The target key
+     */
+    @Nonnull
+    public final String key() {
+        return this.key;
+    }
+
+    /**
      * API name: {@code routing}
      */
     @Nullable
@@ -167,6 +180,7 @@ public class Alias implements PlainJsonSerializable, ToCopyableBuilder<Alias.Bui
     }
 
     protected void serializeInternal(JsonGenerator generator, JsonpMapper mapper) {
+        generator.writeStartObject(this.key);
         if (this.filter != null) {
             generator.writeKey("filter");
             this.filter.serialize(generator, mapper);
@@ -196,6 +210,7 @@ public class Alias implements PlainJsonSerializable, ToCopyableBuilder<Alias.Bui
             generator.writeKey("search_routing");
             generator.write(this.searchRouting);
         }
+        generator.writeEnd();
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -223,6 +238,7 @@ public class Alias implements PlainJsonSerializable, ToCopyableBuilder<Alias.Bui
         private Boolean isHidden;
         @Nullable
         private Boolean isWriteIndex;
+        private String key;
         @Nullable
         private String routing;
         @Nullable
@@ -235,6 +251,7 @@ public class Alias implements PlainJsonSerializable, ToCopyableBuilder<Alias.Bui
             this.indexRouting = o.indexRouting;
             this.isHidden = o.isHidden;
             this.isWriteIndex = o.isWriteIndex;
+            this.key = o.key;
             this.routing = o.routing;
             this.searchRouting = o.searchRouting;
         }
@@ -244,6 +261,7 @@ public class Alias implements PlainJsonSerializable, ToCopyableBuilder<Alias.Bui
             this.indexRouting = o.indexRouting;
             this.isHidden = o.isHidden;
             this.isWriteIndex = o.isWriteIndex;
+            this.key = o.key;
             this.routing = o.routing;
             this.searchRouting = o.searchRouting;
         }
@@ -305,6 +323,15 @@ public class Alias implements PlainJsonSerializable, ToCopyableBuilder<Alias.Bui
         }
 
         /**
+         * Required - The target key
+         */
+        @Nonnull
+        public final Builder key(String value) {
+            this.key = value;
+            return this;
+        }
+
+        /**
          * API name: {@code routing}
          */
         @Nonnull
@@ -353,6 +380,7 @@ public class Alias implements PlainJsonSerializable, ToCopyableBuilder<Alias.Bui
         op.add(Builder::isWriteIndex, JsonpDeserializer.booleanDeserializer(), "is_write_index");
         op.add(Builder::routing, JsonpDeserializer.stringDeserializer(), "routing");
         op.add(Builder::searchRouting, JsonpDeserializer.stringDeserializer(), "search_routing");
+        op.setKey(Builder::key, JsonpDeserializer.stringDeserializer());
     }
 
     @Override
@@ -362,6 +390,7 @@ public class Alias implements PlainJsonSerializable, ToCopyableBuilder<Alias.Bui
         result = 31 * result + Objects.hashCode(this.indexRouting);
         result = 31 * result + Objects.hashCode(this.isHidden);
         result = 31 * result + Objects.hashCode(this.isWriteIndex);
+        result = 31 * result + this.key.hashCode();
         result = 31 * result + Objects.hashCode(this.routing);
         result = 31 * result + Objects.hashCode(this.searchRouting);
         return result;
@@ -376,6 +405,7 @@ public class Alias implements PlainJsonSerializable, ToCopyableBuilder<Alias.Bui
             && Objects.equals(this.indexRouting, other.indexRouting)
             && Objects.equals(this.isHidden, other.isHidden)
             && Objects.equals(this.isWriteIndex, other.isWriteIndex)
+            && this.key.equals(other.key)
             && Objects.equals(this.routing, other.routing)
             && Objects.equals(this.searchRouting, other.searchRouting);
     }

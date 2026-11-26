@@ -14,8 +14,11 @@
  */
 package software.amazon.opensearch.client.codegen.openapi.rewriter;
 
+import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Stream;
 import javax.annotation.Nonnull;
@@ -29,6 +32,7 @@ import software.amazon.opensearch.client.codegen.openapi.walker.ZippedOpenApiWal
 public final class GenericLabelingVisitor extends OpenApiVisitorBase {
     @Nonnull
     private final OpenApiWalker walker;
+    private boolean changed;
 
     public GenericLabelingVisitor(@Nonnull OpenApiWalker walker) {
         this.walker = Objects.requireNonNull(walker, "walker cannot be null");
@@ -38,9 +42,24 @@ public final class GenericLabelingVisitor extends OpenApiVisitorBase {
         return schema.has$ref() ? walker.walkSchema(schema.resolve(), this) : schema;
     }
 
+    public boolean hasChanged() {
+        return changed;
+    }
+
     @Override
     @Nonnull
     public OpenApiSchema visitSchemaEnd(@Nonnull OpenApiSchema schema) {
+        var wasGeneric = schema.isGeneric();
+        var wasInstantiatedGeneric = schema.isInstantiatedGeneric();
+        var wasGenericTypeParameter = schema.isGenericTypeParameter();
+        label(schema);
+        changed |= wasGeneric != schema.isGeneric()
+            || wasInstantiatedGeneric != schema.isInstantiatedGeneric()
+            || wasGenericTypeParameter != schema.isGenericTypeParameter();
+        return schema;
+    }
+
+    private void label(OpenApiSchema schema) {
         if (schema.has$ref()) {
             var resolved = resolve(schema);
             schema.setIsGeneric(resolved.isGeneric());
@@ -53,7 +72,6 @@ public final class GenericLabelingVisitor extends OpenApiVisitorBase {
             schema.setIsInstantiatedGeneric(isInstantiatedGeneric(schema));
             schema.setIsGeneric(isGeneric(schema));
         }
-        return schema;
     }
 
     private boolean isInstantiatedGeneric(OpenApiSchema schema) {
@@ -77,10 +95,11 @@ public final class GenericLabelingVisitor extends OpenApiVisitorBase {
                 thisPair = true;
             } else if (left.getPointer().getLastKey().map("$extends"::equals).orElse(false)) {
                 return;
-            } else if (!left.isGeneric()) {
-                thisPair = right == null || left.isEquivalentTo(right);
             } else if (right == null) {
-                thisPair = false;
+                // An inherited property only needs binding when the base renders it with a type parameter.
+                thisPair = !rendersTypeParameter(left, Collections.newSetFromMap(new IdentityHashMap<>()));
+            } else if (!left.isGeneric()) {
+                thisPair = left.isEquivalentTo(right);
             } else if (left.isGenericTypeParameter()) {
                 thisPair = true;
             } else if (left.hasOneOf()) {
@@ -97,6 +116,29 @@ public final class GenericLabelingVisitor extends OpenApiVisitorBase {
                 result &= thisPair;
             }
         }
+    }
+
+    // A plain $ref to a generic shape is rendered with JsonData type arguments, so only unbound type parameters count.
+    private static boolean rendersTypeParameter(OpenApiSchema schema, Set<OpenApiSchema> seen) {
+        if (!schema.isGeneric() || !seen.add(schema)) {
+            return false;
+        }
+        if (schema.isGenericTypeParameter()) {
+            return true;
+        }
+        if (schema.has$ref()) {
+            var resolved = schema.resolve();
+            return !resolved.isMappedAsShapeRef() && rendersTypeParameter(resolved, seen);
+        }
+        return Stream.of(
+            schema.getAllOf().stream().flatMap(List::stream),
+            schema.getAnyOf().stream().flatMap(List::stream),
+            schema.getOneOf().stream().flatMap(List::stream),
+            schema.getItems().stream(),
+            schema.getPropertyNames().stream(),
+            schema.getAdditionalProperties().stream(),
+            schema.getProperties().stream().flatMap(m -> m.values().stream())
+        ).flatMap(Function.identity()).anyMatch(s -> rendersTypeParameter(s, seen));
     }
 
     private boolean isGeneric(OpenApiSchema schema) {

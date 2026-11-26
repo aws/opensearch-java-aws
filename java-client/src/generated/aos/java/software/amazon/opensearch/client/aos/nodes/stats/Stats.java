@@ -118,6 +118,9 @@ public class Stats implements PlainJsonSerializable, ToCopyableBuilder<Stats.Bui
     private final String name;
 
     @Nullable
+    private final NativeMemory nativeMemory;
+
+    @Nullable
     private final OperatingSystem os;
 
     @Nullable
@@ -190,6 +193,7 @@ public class Stats implements PlainJsonSerializable, ToCopyableBuilder<Stats.Bui
         this.ip = ApiTypeHelper.unmodifiable(builder.ip);
         this.jvm = builder.jvm;
         this.name = builder.name;
+        this.nativeMemory = builder.nativeMemory;
         this.os = builder.os;
         this.process = builder.process;
         this.remoteStore = builder.remoteStore;
@@ -352,6 +356,17 @@ public class Stats implements PlainJsonSerializable, ToCopyableBuilder<Stats.Bui
     @Nullable
     public final String name() {
         return this.name;
+    }
+
+    /**
+     * Native (off-heap) memory statistics. Always present, regardless of the requested metrics.
+     * <p>
+     * API name: {@code native_memory}
+     * </p>
+     */
+    @Nullable
+    public final NativeMemory nativeMemory() {
+        return this.nativeMemory;
     }
 
     /**
@@ -616,6 +631,11 @@ public class Stats implements PlainJsonSerializable, ToCopyableBuilder<Stats.Bui
             generator.write(this.name);
         }
 
+        if (this.nativeMemory != null) {
+            generator.writeKey("native_memory");
+            this.nativeMemory.serialize(generator, mapper);
+        }
+
         if (this.os != null) {
             generator.writeKey("os");
             this.os.serialize(generator, mapper);
@@ -775,6 +795,8 @@ public class Stats implements PlainJsonSerializable, ToCopyableBuilder<Stats.Bui
         @Nullable
         private String name;
         @Nullable
+        private NativeMemory nativeMemory;
+        @Nullable
         private OperatingSystem os;
         @Nullable
         private Process process;
@@ -830,6 +852,7 @@ public class Stats implements PlainJsonSerializable, ToCopyableBuilder<Stats.Bui
             this.ip = _listCopy(o.ip);
             this.jvm = o.jvm;
             this.name = o.name;
+            this.nativeMemory = o.nativeMemory;
             this.os = o.os;
             this.process = o.process;
             this.remoteStore = o.remoteStore;
@@ -867,6 +890,7 @@ public class Stats implements PlainJsonSerializable, ToCopyableBuilder<Stats.Bui
             this.ip = _listCopy(o.ip);
             this.jvm = o.jvm;
             this.name = o.name;
+            this.nativeMemory = o.nativeMemory;
             this.os = o.os;
             this.process = o.process;
             this.remoteStore = o.remoteStore;
@@ -1260,6 +1284,29 @@ public class Stats implements PlainJsonSerializable, ToCopyableBuilder<Stats.Bui
         public final Builder name(@Nullable String value) {
             this.name = value;
             return this;
+        }
+
+        /**
+         * Native (off-heap) memory statistics. Always present, regardless of the requested metrics.
+         * <p>
+         * API name: {@code native_memory}
+         * </p>
+         */
+        @Nonnull
+        public final Builder nativeMemory(@Nullable NativeMemory value) {
+            this.nativeMemory = value;
+            return this;
+        }
+
+        /**
+         * Native (off-heap) memory statistics. Always present, regardless of the requested metrics.
+         * <p>
+         * API name: {@code native_memory}
+         * </p>
+         */
+        @Nonnull
+        public final Builder nativeMemory(Function<NativeMemory.Builder, ObjectBuilder<NativeMemory>> fn) {
+            return nativeMemory(fn.apply(new NativeMemory.Builder()).build());
         }
 
         /**
@@ -1683,6 +1730,7 @@ public class Stats implements PlainJsonSerializable, ToCopyableBuilder<Stats.Bui
         op.add(Builder::ip, JsonpDeserializer.arrayDeserializer(JsonpDeserializer.stringDeserializer()), "ip");
         op.add(Builder::jvm, Jvm._DESERIALIZER, "jvm");
         op.add(Builder::name, JsonpDeserializer.stringDeserializer(), "name");
+        op.add(Builder::nativeMemory, NativeMemory._DESERIALIZER, "native_memory");
         op.add(Builder::os, OperatingSystem._DESERIALIZER, "os");
         op.add(Builder::process, Process._DESERIALIZER, "process");
         op.add(Builder::remoteStore, RemoteStoreStats._DESERIALIZER, "remote_store");
@@ -1730,6 +1778,7 @@ public class Stats implements PlainJsonSerializable, ToCopyableBuilder<Stats.Bui
         result = 31 * result + Objects.hashCode(this.ip);
         result = 31 * result + Objects.hashCode(this.jvm);
         result = 31 * result + Objects.hashCode(this.name);
+        result = 31 * result + Objects.hashCode(this.nativeMemory);
         result = 31 * result + Objects.hashCode(this.os);
         result = 31 * result + Objects.hashCode(this.process);
         result = 31 * result + Objects.hashCode(this.remoteStore);
@@ -1772,6 +1821,7 @@ public class Stats implements PlainJsonSerializable, ToCopyableBuilder<Stats.Bui
             && Objects.equals(this.ip, other.ip)
             && Objects.equals(this.jvm, other.jvm)
             && Objects.equals(this.name, other.name)
+            && Objects.equals(this.nativeMemory, other.nativeMemory)
             && Objects.equals(this.os, other.os)
             && Objects.equals(this.process, other.process)
             && Objects.equals(this.remoteStore, other.remoteStore)

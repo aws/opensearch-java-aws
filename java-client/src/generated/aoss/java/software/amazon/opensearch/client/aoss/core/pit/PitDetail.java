@@ -54,6 +54,7 @@ import software.amazon.opensearch.client.json.JsonpMapper;
 import software.amazon.opensearch.client.json.ObjectBuilderDeserializer;
 import software.amazon.opensearch.client.json.ObjectDeserializer;
 import software.amazon.opensearch.client.json.PlainJsonSerializable;
+import software.amazon.opensearch.client.util.ApiTypeHelper;
 import software.amazon.opensearch.client.util.CopyableBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilder;
 import software.amazon.opensearch.client.util.ObjectBuilderBase;
@@ -71,7 +72,7 @@ public class PitDetail implements PlainJsonSerializable, ToCopyableBuilder<PitDe
     @Nullable
     private final Long keepAlive;
 
-    @Nullable
+    @Nonnull
     private final String pitId;
 
     // ---------------------------------------------------------------------------------------------
@@ -79,7 +80,7 @@ public class PitDetail implements PlainJsonSerializable, ToCopyableBuilder<PitDe
     private PitDetail(Builder builder) {
         this.creationTime = builder.creationTime;
         this.keepAlive = builder.keepAlive;
-        this.pitId = builder.pitId;
+        this.pitId = ApiTypeHelper.requireNonNull(builder.pitId, this, "pitId");
     }
 
     public static PitDetail of(Function<PitDetail.Builder, ObjectBuilder<PitDetail>> fn) {
@@ -103,9 +104,9 @@ public class PitDetail implements PlainJsonSerializable, ToCopyableBuilder<PitDe
     }
 
     /**
-     * API name: {@code pit_id}
+     * Required - API name: {@code pit_id}
      */
-    @Nullable
+    @Nonnull
     public final String pitId() {
         return this.pitId;
     }
@@ -131,10 +132,8 @@ public class PitDetail implements PlainJsonSerializable, ToCopyableBuilder<PitDe
             generator.write(this.keepAlive);
         }
 
-        if (this.pitId != null) {
-            generator.writeKey("pit_id");
-            generator.write(this.pitId);
-        }
+        generator.writeKey("pit_id");
+        generator.write(this.pitId);
     }
 
     // ---------------------------------------------------------------------------------------------
@@ -158,7 +157,6 @@ public class PitDetail implements PlainJsonSerializable, ToCopyableBuilder<PitDe
         private Long creationTime;
         @Nullable
         private Long keepAlive;
-        @Nullable
         private String pitId;
 
         public Builder() {}
@@ -200,10 +198,10 @@ public class PitDetail implements PlainJsonSerializable, ToCopyableBuilder<PitDe
         }
 
         /**
-         * API name: {@code pit_id}
+         * Required - API name: {@code pit_id}
          */
         @Nonnull
-        public final Builder pitId(@Nullable String value) {
+        public final Builder pitId(String value) {
             this.pitId = value;
             return this;
         }
@@ -243,7 +241,7 @@ public class PitDetail implements PlainJsonSerializable, ToCopyableBuilder<PitDe
         int result = 17;
         result = 31 * result + Objects.hashCode(this.creationTime);
         result = 31 * result + Objects.hashCode(this.keepAlive);
-        result = 31 * result + Objects.hashCode(this.pitId);
+        result = 31 * result + this.pitId.hashCode();
         return result;
     }
 
@@ -254,6 +252,6 @@ public class PitDetail implements PlainJsonSerializable, ToCopyableBuilder<PitDe
         PitDetail other = (PitDetail) o;
         return Objects.equals(this.creationTime, other.creationTime)
             && Objects.equals(this.keepAlive, other.keepAlive)
-            && Objects.equals(this.pitId, other.pitId);
+            && this.pitId.equals(other.pitId);
     }
 }

@@ -75,7 +75,7 @@ public class ExplainPolicyResponse
     private final Map<String, ExplainPolicy> metadata;
 
     @Nullable
-    private final Number totalManagedIndices;
+    private final Integer totalManagedIndices;
 
     // ---------------------------------------------------------------------------------------------
 
@@ -100,7 +100,7 @@ public class ExplainPolicyResponse
      * </p>
      */
     @Nullable
-    public final Number totalManagedIndices() {
+    public final Integer totalManagedIndices() {
         return this.totalManagedIndices;
     }
 
@@ -121,7 +121,7 @@ public class ExplainPolicyResponse
         }
         if (this.totalManagedIndices != null) {
             generator.writeKey("total_managed_indices");
-            generator.write(this.totalManagedIndices.doubleValue());
+            generator.write(this.totalManagedIndices);
         }
     }
 
@@ -145,7 +145,7 @@ public class ExplainPolicyResponse
         @Nullable
         private Map<String, ExplainPolicy> metadata;
         @Nullable
-        private Number totalManagedIndices;
+        private Integer totalManagedIndices;
 
         public Builder() {}
 
@@ -207,7 +207,7 @@ public class ExplainPolicyResponse
          * </p>
          */
         @Nonnull
-        public final Builder totalManagedIndices(@Nullable Number value) {
+        public final Builder totalManagedIndices(@Nullable Integer value) {
             this.totalManagedIndices = value;
             return this;
         }
@@ -237,7 +237,7 @@ public class ExplainPolicyResponse
     );
 
     protected static void setupExplainPolicyResponseDeserializer(ObjectDeserializer<ExplainPolicyResponse.Builder> op) {
-        op.add(Builder::totalManagedIndices, JsonpDeserializer.numberDeserializer(), "total_managed_indices");
+        op.add(Builder::totalManagedIndices, JsonpDeserializer.integerDeserializer(), "total_managed_indices");
         op.setUnknownFieldHandler((builder, name, parser, mapper) -> {
             if (builder.metadata == null) {
                 builder.metadata = new HashMap<>();
